@@ -8,7 +8,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Playfair+Display:900i"
 	rel="stylesheet">
-<link rel="stylesheet" href="assist/css/index.css">
+<link rel="stylesheet" href="resources/vender/css/index.css">
 	<title>YOUR REAL TRIP:-)</title>
 	<script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -52,9 +52,9 @@
 <body style="overflow-x: hidden; overflow-y: hidden">
 	<div>
 		<video id="videobcg" preload="auto" autoplay="autoplay" loop="loop"
-			muted="muted" poster="media/main-image.jpg">
-			<source src="media/main-video.mp4" type="video/mp4">
-			<source src="media/main-video.webm" type="video/webm">
+			muted="muted" poster="resources/media/main-image.jpg">
+			<source src="resources/media/main-video.mp4" type="video/mp4">
+			<source src="resources/media/main-video.webm" type="video/webm">
 			Your browser does not support the video tag.
 		</video>
 		<div class="bubbles">
