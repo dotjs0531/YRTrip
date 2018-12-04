@@ -1,6 +1,6 @@
 package com.yrtrip.app.product;
 
-public class BoardVO {
+public class ProductVO {
 	private int item_id;
 	private String item_name;
 	private int item_price;
