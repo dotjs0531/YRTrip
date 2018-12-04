@@ -1,6 +1,6 @@
 package com.yrtrip.app.notice;
 
-public class NoticeDTO {
+public class NoticeVO {
 	private int nid; //글번호
 	private String ntitle; //글제목
 	private String ncontent;  //글내용
@@ -8,8 +8,8 @@ public class NoticeDTO {
 	private String ndate;  //작성일
 	private String uid;  //작성자
 	
-	public NoticeDTO() { }
-	public NoticeDTO(int nid, String ntitle, String ncontent, int nhit, String ndate, String uid) {
+	public NoticeVO() { }
+	public NoticeVO(int nid, String ntitle, String ncontent, int nhit, String ndate, String uid) {
 		super();
 		this.nid = nid;
 		this.ntitle = ntitle;
