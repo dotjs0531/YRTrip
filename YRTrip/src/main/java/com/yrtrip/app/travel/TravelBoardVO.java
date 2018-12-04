@@ -15,6 +15,8 @@ public class TravelBoardVO {
 	private int tinfoId;
 	private String userId;
 	private int travelWith;
+	private String travelPic;
+	
 	public int getTravelNo() {
 		return travelNo;
 	}
@@ -93,12 +95,11 @@ public class TravelBoardVO {
 	public void setTravelWith(int travelWith) {
 		this.travelWith = travelWith;
 	}
-	@Override
-	public String toString() {
-		return "TravelBoardVO [travelNo=" + travelNo + ", travelperson=" + travelperson + ", travelPay=" + travelPay
-				+ ", travelSche=" + travelSche + ", travelStart=" + travelStart + ", travelTitle=" + travelTitle
-				+ ", travelContent=" + travelContent + ", travelDate=" + travelDate + ", travelHit=" + travelHit
-				+ ", travelLike=" + travelLike + ", tinfoId=" + tinfoId + ", userId=" + userId + ", travelWith="
-				+ travelWith + "]";
+	public String getTravelPic() {
+		return travelPic;
 	}
+	public void setTravelPic(String travelPic) {
+		this.travelPic = travelPic;
+	}
+	
 }
