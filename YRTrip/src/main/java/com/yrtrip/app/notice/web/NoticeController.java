@@ -4,40 +4,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.yrtrip.app.notice.NoticeService;
 import com.yrtrip.app.notice.NoticeVO;
-/*
-@Controller*/
+
+@Controller
 public class NoticeController {
-/*
+
 	@Autowired NoticeService noticeService;
-	
+
 	//전체 조회
-	@RequestMapping("")
+	@RequestMapping("/getNoticeList")
 	public String getNoticeList(Model model, NoticeVO vo) {
-		model.addAttribute("", noticeService.getNoticeList(vo));
-		return "";
+		model.addAttribute("noticeList", noticeService.getNoticeList(vo));
+		return "notice/getNoticeList";
 	}
 	//단건 조회
-	@RequestMapping("")
+	@RequestMapping("/getNotice")
 	public String getNotice(Model model, NoticeVO vo) {
 		model.addAttribute("", noticeService.getNotice(vo));
-		return "";
+		return "notice/getNotice";
 	}
 	
 	//등록폼
-	@RequestMapping("")
+	@RequestMapping(value = "/insertNotice", method = RequestMethod.GET)
 	public String insertNoticeForm() {
-		return "";
+		return "notice/insertNotice";
 	}
 	//등록처리
-	@RequestMapping("")
+	@RequestMapping(value = "/insertNotice", method = RequestMethod.POST)
 	public String insertNotice(NoticeVO vo) {
 		noticeService.insertNotice(vo);
-		return "";
+		return "redirect:getNoticeList";
 	}
-	
+	/*
 	//수정폼
 	@RequestMapping("")
 	public String updateNoticeForm(Model model, NoticeVO vo) {
@@ -50,12 +51,12 @@ public class NoticeController {
 		noticeService.updateNotice(vo);
 		return "";
 	}
-	
+	*/
 	//삭제처리
-	@RequestMapping("")
+	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeVO vo) {
 		noticeService.deleteNotice(vo);
-		return "";
+		return "redirect:getNoticeList";
 	}
-	*/
+	
 }

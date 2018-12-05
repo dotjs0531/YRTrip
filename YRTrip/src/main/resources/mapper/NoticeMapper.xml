@@ -2,4 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
+<select id="getNoticeList" resultType="notice">
+	SELECT  NOTICE_ID,
+			NOTICE_TITLE,
+			NOTICE_CONTENT,
+			NOTICE_HIT,
+			NOTICE_DATE,
+			USER_ID
+	  FROM  NOTICET
+</select>
+<select id="getNotice" parameterType="notice" resultType="notice">
+	SELECT  NOTICE_ID,
+			NOTICE_TITLE,
+			NOTICE_CONTENT,
+			NOTICE_HIT,
+			NOTICE_DATE,
+			USER_ID
+	  FROM  NOTICET
+	 WHERE  NOTICE_ID = #{seq}
+</select>
+<insert id="insertNotice" parameterType="notice">
+	<selectKey keyProperty="id" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(NOTICE_ID),0)+1 FROM NOTICET
+	</selectKey>
+	INSERT INTO NOTICET ( NOTICE_ID,
+						  NOTICE_TITLE,
+						  NOTICE_CONTENT,
+						  NOTICE_HIT,
+						  NOTICE_DATE,
+						  USER_ID )
+				 VALUES ( #{nid},
+				 		  #{ntitle},
+				 		  #{ncontent},
+				 		  0,
+				 		  sysdate,
+				 		  #{uid} )
+</insert>
+<update id="updateNotice" parameterType="notice">
+	UPDATE NOTICET SET NOTICE_TITLE = #{ntitle},
+					   NOTICE_CONTENT = #{ncontent}
+				WHERE  NOTICE_ID = #{nid}
+</update>
+<delete id="deleteNotice" parameterType="int">
+	DELETE  FROM  NOTICET
+			WHERE NOTICE_ID = #{value}
+</delete>
 </mapper> 
