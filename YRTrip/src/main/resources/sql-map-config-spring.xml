@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+	</settings>
+		
+	<!-- Alias 설정 -->
+	<typeAliases>
+		<typeAlias alias="notice" type="com.yrtrip.app.notice.NoticeVO" />
+		<typeAlias alias="partner" type="com.yrtrip.app.notice.PartnerVO" />
+		<typeAlias alias="product" type="com.yrtrip.app.notice.ProductVO" />
+		<typeAlias alias="travel" type="com.yrtrip.app.notice.TravelVO" />
+	</typeAliases>
+	
+</configuration>
