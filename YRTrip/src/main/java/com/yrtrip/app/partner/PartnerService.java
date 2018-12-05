@@ -1,4 +1,4 @@
-package com.yrtrip.app.partner.impl;
+package com.yrtrip.app.partner;
 
 import org.springframework.stereotype.Service;
 

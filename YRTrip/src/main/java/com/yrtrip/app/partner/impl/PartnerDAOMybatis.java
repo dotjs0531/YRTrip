@@ -3,7 +3,7 @@ package com.yrtrip.app.partner.impl;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PartnerDAO {
+public class PartnerDAOMybatis {
 //
 //	private Connection conn = null;
 //	private PreparedStatement pstmt;
