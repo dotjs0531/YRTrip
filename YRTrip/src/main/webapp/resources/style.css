@@ -20,13 +20,13 @@
 
 /*start header area css*/
 .header_area {
-    background: url(resources/img/version-1.jpg) no-repeat center center / cover;
+    background: url(img/version-1.jpg) no-repeat center center / cover;
     position: relative;
 }
 
 .header_area:before {
     /*background: #22313f;*/
-    background-image: url("resources/img/img.jpg");
+    background-image: url("img/img.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
     content: "";
@@ -379,7 +379,7 @@ nav.navbar {
 .couter_up_area {
     height: 330px;
     position: relative;
-    background: url(resources/img/count_up.jpg) no-repeat center center / cover;
+    background: url(img/count_up.jpg) no-repeat center center / cover;
 }
 
 .couter_up_area:before {
