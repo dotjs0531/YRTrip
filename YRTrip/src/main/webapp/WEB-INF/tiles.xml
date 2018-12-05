@@ -11,6 +11,8 @@
 	
 	<definition name="home" template="/WEB-INF/views/home.jsp">
 	</definition>
+	<definition name="main" template="/WEB-INF/views/main.jsp">
+	</definition>
 	
 	<definition name="*/*" extends="mainTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />

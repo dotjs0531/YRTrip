@@ -59,7 +59,7 @@
 		</video>
 		<div class="bubbles">
 			<h1>
-				<a href="getTravelBoardList.do">For Your REAL Trip!</a>
+				<a href="main.html">For Your REAL Trip!</a>
 			</h1>
 		</div>
 	</div>

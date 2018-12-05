@@ -17,7 +17,7 @@
 
 	<!-- static resources (spring dispatcherServlet이 처리하지 않고 바로 넘겨줌)-->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-	<mvc:resources mapping="/images/**" location="/images/" />
+	<!-- <mvc:resources mapping="/images/**" location="/images/" /> -->
 
 	<bean
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
