@@ -34,24 +34,24 @@
                     				<th style="text-align:center">글제목</th>
                     				<th>작성자</th>
                     				<th>작성일</th>
-                    				<th>조회수</th>
+                    				<th>답변여부</th>
                     			</tr>
                     		</thead>
                     		<tbody>
-							<c:forEach items="${noticeList}" var="notice">
+							<c:forEach items="${qnaList}" var="qna">
 								<tr>
-									<td>${notice.noticeId}</td>
-									<td><a style="color:black;" href="./getNotice?noticeId=${notice.noticeId}">${notice.noticeTitle}</a></td>
-									<td>${notice.userName}</td>
-									<td>${notice.noticeDate}</td>
-									<td>${notice.noticeHit}</td>
+									<td>${qna.qnaId}</td>
+									<td><a style="color:black;" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}</a></td>
+									<td>${qna.userName}</td>
+									<td>${qna.qnaDate}</td>
+									<td>${qna.qnaAnswer}</td>
 								</tr>
 							</c:forEach>
                     		</tbody>
                     	</table>
                     	<section >
                         <div class="order-buton" style="padding-top:410px; float:right">
-                            <a href="${pageContext.request.contextPath}/insertNotice">등록</a>
+                            <a href="${pageContext.request.contextPath}/insertQna">등록</a>
                         </div>
                         </section>
                     	<div class="text-center" style="padding-top:460px;">

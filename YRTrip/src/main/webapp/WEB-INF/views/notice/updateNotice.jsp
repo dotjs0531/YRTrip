@@ -18,7 +18,7 @@
                         </div>
                         <ul class=price-list>
                             <li><a href="getNoticeList" style="color:black">공지사항</a></li>
-                            <li><a href="qna_admin.tiles" style="color:black">1:1 문의</a></li>
+                            <li><a href="getQnaList" style="color:black">1:1 문의</a></li>
                         </ul>
                         <div class="order-buton">
                             <a href="#">탈퇴</a>

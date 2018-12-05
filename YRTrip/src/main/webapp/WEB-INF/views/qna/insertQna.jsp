@@ -26,19 +26,19 @@
                     </div>
                 </div>
                 <div class="col-md-offset-1 col-sm-6">
-                <form action="./insertNotice" method="post">
+                <form action="./insertQna" method="post">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
 							<tr>
-								<th colspan="1" style="background-color:#eeeeee; text-align: center;">공지 등록하기</th>
+								<th colspan="1" style="background-color:#eeeeee; text-align: center;">문의 등록하기</th>
 							</tr>		 		
 			 			</thead>
 			 			<tbody>
 			 				<tr>
-			 					<td><input type="text" class="form-control" placeholder="글제목" name="noticeTitle" maxlength="50"></td>
+			 					<td><input type="text" class="form-control" placeholder="글제목" name="qnaTitle" maxlength="50"></td>
 			 				</tr>
 			 				<tr>	
-			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px"></textarea> </td>
+			 					<td><textarea class="form-control" placeholder="글 내용" name="qnaContent" maxlength="2048" style="height:200px"></textarea> </td>
 			 				</tr>
 			 			</tbody>
 			 		</table>

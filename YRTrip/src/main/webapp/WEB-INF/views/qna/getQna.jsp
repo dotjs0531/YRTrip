@@ -1,10 +1,18 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script language="javascript">
+   function del(qid){
+      if(confirm("삭제하시겠습니까?")){
+         location.href = "./deleteQna?qnaId=" + qid;
+      } else { return; }
+   };
+</script>
 </head>
 <body>
     <!--    start about us area-->
@@ -26,31 +34,21 @@
                     </div>
                 </div>
                 <div class="col-md-offset-1 col-sm-6">
-                <form action="./insertNotice" method="post">
-			 		<table class="table table-bordered table-striped" style="text-align:center;">
-			 			<thead>
-							<tr>
-								<th colspan="1" style="background-color:#eeeeee; text-align: center;">공지 등록하기</th>
-							</tr>		 		
-			 			</thead>
-			 			<tbody>
-			 				<tr>
-			 					<td><input type="text" class="form-control" placeholder="글제목" name="noticeTitle" maxlength="50"></td>
-			 				</tr>
-			 				<tr>	
-			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px"></textarea> </td>
-			 				</tr>
-			 			</tbody>
-			 		</table>
-                    <section >
-                        <div style="padding-top:300px; float:right">
-                            <button class="submit-btn">등록</button>
+                    <div class="about_car">
+                    	<br/>
+						<h3 style="color:black">${qna.qnaTitle}</h3>
+						<br/>
+						<strong>작성자</strong>&nbsp;&nbsp;${qna.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${qna.qnaDate} ｜ <strong>답변여부</strong>&nbsp;&nbsp;${qna.qnaAnswer}
+						<hr />
+						${qna.qnaContent}
+						<div class="order-buton" style="padding-top:50px; float:right">
+                            <a href="./updateqnaForm?qnaId=${qna.qnaId}">수정</a>&nbsp;&nbsp;
+                            <button class="submit-btn" onclick="del('${qna.qnaId}')">삭제</button>
                         </div>
-                    </section>
-                    </form>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <!--   end of about us area-->
 </body>
