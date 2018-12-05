@@ -27,10 +27,10 @@ public class PartnerController {
 	}
 
 	// 단건조회
-	@RequestMapping("/getBoard") // http://localhost:8081/app/getBoard
+	@RequestMapping("/getPartnerBoard") // http://localhost:8081/app/getBoard
 	public String getBoard(Model model, PartnerVO vo) {
 		model.addAttribute("board", partnerBoardService.getPartnerBoard(vo)); // vo : 조회할 게시글 번호 넘어가는 것
-		return "board/getBoard";
+		return "board/getPartnerBoard";
 	}
 
 	// 등록폼
@@ -43,7 +43,7 @@ public class PartnerController {
 	@RequestMapping(value = { "insertPartnerBoard" }, method = RequestMethod.POST)
 	public String insertPartnerBoard(PartnerVO vo) { // 커맨드 객체
 		partnerBoardService.insertPartnerBoard(vo); // 등록처
-		return "redirect:getPartnerBoardList"; // 목록요청
+		return "redirect:getBoardList"; // 목록요청
 	}
 
 	// 수정폼

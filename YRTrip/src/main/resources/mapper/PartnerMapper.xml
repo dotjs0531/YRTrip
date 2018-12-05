@@ -2,4 +2,87 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="partner">
+<select id="getPartnerList" resultType="partner">
+	SELECT	PARTNER_ID,
+			PARTNER_TITLE,    
+			PARTNER_CONTENT,  
+			PARTNER_HIT, 
+			PARTNER_DATE,    
+			USER_ID,    
+			TINFO_ID,         
+			PARTNER_PAY,      
+			PARTNER_CLASS,    
+			PARTNER_PERS,   
+			PARTNER_START,    
+			PARTNER_END,   
+			PARTNER_CONDITION
+	FROM	PARTNERT  
+</select>
+
+<select id="getPartner" parameterType="partner" resultType="partner">
+	SELECT	PARTNER_ID,
+			PARTNER_TITLE,    
+			PARTNER_CONTENT,  
+			PARTNER_HIT, 
+			PARTNER_DATE,    
+			USER_ID,    
+			TINFO_ID,         
+			PARTNER_PAY,      
+			PARTNER_CLASS,    
+			PARTNER_PERS,   
+			PARTNER_START,    
+			PARTNER_END,   
+			PARTNER_CONDITION
+	FROM	PARTNERT
+	WHERE	PARTNER_ID = #{seq}
+</select>
+
+<insert id="insertPartner" parameterType="partner">
+	<selectKey keyProperty="id"	resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(PARTNER_ID),0)+1 FROM PARTNERT
+	</selectKey>
+	INSERT INTO PARTNERT (
+			PARTNER_ID,
+			PARTNER_TITLE,    
+			PARTNER_CONTENT,  
+			PARTNER_HIT, 
+			PARTNER_DATE,    
+			USER_ID,    
+			TINFO_ID,         
+			PARTNER_PAY,      
+			PARTNER_CLASS,    
+			PARTNER_PERS,   
+			PARTNER_START,    
+			PARTNER_END,   
+			PARTNER_CONDITION
+			)
+	VALUES (
+			#{partnerno},
+			#{partnertitle},
+			#{partnercontent},
+			0,
+			sysdate,
+			#{partnerpay},
+			#{partnerclass},
+			#{partnerperson},
+			#{partnerstartdate},
+			#{partnerfinishdate},
+			#{partnercondition}
+		)
+</insert>
+<update id="updatePartner" parameterType="partner">
+	UPDATE PARTNERT SET PARTNER_TITLE	= #{partnertitle},
+						PARTNER_CONTENT	= #{partnercontent},
+						PARTNER_PAY		= #{partnerpay},
+						PARTNER_CLASS	= #{partnerclass},
+						PARTNER_PERS	= #{partnerperson},
+						PARTNER_START	= #{partnerstartdate},
+						PARTNER_END		= #{partnerfinishdate},
+						PARTNER_CONDITION = #{partnercondition}
+				WHERE	PARTNER_ID = #{partnerno}
+</update>
+<delete id="deletePartner" parameterType="int">
+	DELETE	FROM PARTNERT
+			WHERE PARTNER_ID = #{partnerno}
+</delete>
 </mapper> 
