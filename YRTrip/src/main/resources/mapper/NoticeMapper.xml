@@ -7,22 +7,24 @@
 			NOTICE_TITLE,
 			NOTICE_CONTENT,
 			NOTICE_HIT,
-			NOTICE_DATE,
-			USER_ID
-	  FROM  NOTICET
+			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE,
+			USER_NAME
+	  FROM  NOTICET N, USERT U
+	  WHERE N.USER_ID = U.USER_ID
+	  ORDER BY NOTICE_ID DESC
 </select>
 <select id="getNotice" parameterType="notice" resultType="notice">
 	SELECT  NOTICE_ID,
 			NOTICE_TITLE,
 			NOTICE_CONTENT,
 			NOTICE_HIT,
-			NOTICE_DATE,
-			USER_ID
-	  FROM  NOTICET
-	 WHERE  NOTICE_ID = #{seq}
+			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE,
+			USER_NAME
+	  FROM  NOTICET N, USERT U
+	 WHERE  N.USER_ID = U.USER_ID AND NOTICE_ID = #{noticeId}
 </select>
 <insert id="insertNotice" parameterType="notice">
-	<selectKey keyProperty="id" resultType="integer" order="BEFORE">
+	<selectKey keyProperty="noticeId" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(NOTICE_ID),0)+1 FROM NOTICET
 	</selectKey>
 	INSERT INTO NOTICET ( NOTICE_ID,
@@ -31,17 +33,17 @@
 						  NOTICE_HIT,
 						  NOTICE_DATE,
 						  USER_ID )
-				 VALUES ( #{nid},
-				 		  #{ntitle},
-				 		  #{ncontent},
+				 VALUES ( #{noticeId},
+				 		  #{noticeTitle},
+				 		  #{noticeContent},
 				 		  0,
 				 		  sysdate,
-				 		  #{uid} )
+				 		  'admin' )
 </insert>
 <update id="updateNotice" parameterType="notice">
-	UPDATE NOTICET SET NOTICE_TITLE = #{ntitle},
-					   NOTICE_CONTENT = #{ncontent}
-				WHERE  NOTICE_ID = #{nid}
+	UPDATE NOTICET SET NOTICE_TITLE = #{noticeTitle},
+					   NOTICE_CONTENT = #{noticeContent}
+				WHERE  NOTICE_ID = #{noticeId}
 </update>
 <delete id="deleteNotice" parameterType="int">
 	DELETE  FROM  NOTICET

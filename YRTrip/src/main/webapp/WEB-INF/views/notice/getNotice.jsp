@@ -6,10 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    <!-- Custom styles for this template -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
+<script language="javascript">
+   function del(nid){
+      if(confirm("삭제하시겠습니까?")){
+         location.href = "./deleteNotice?noticeId=" + nid;
+      } else { return; }
+   };
+</script>
 </head>
 <body>
     <!--    start about us area-->
@@ -22,7 +25,7 @@
                             <h2 style="color:black">고객센터</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="notice.tiles" style="color:black">공지사항</a></li>
+                            <li><a href="getNoticeList" style="color:black">공지사항</a></li>
                             <li><a href="qna_admin.tiles" style="color:black">1:1 문의</a></li>
                         </ul>
                         <div class="order-buton">
@@ -33,21 +36,14 @@
                 <div class="col-md-offset-1 col-sm-6">
                     <div class="about_car">
                     	<br/>
-						<h3 style="color:black"></h3>
+						<h3 style="color:black">${notice.noticeTitle}</h3>
 						<br/>
-						<strong>작성자</strong>&nbsp;&nbsp; ｜ <strong>작성일</strong>&nbsp;&nbsp; ｜ <strong>조회수</strong>&nbsp;&nbsp;
+						<strong>작성자</strong>&nbsp;&nbsp;${notice.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${notice.noticeDate} ｜ <strong>조회수</strong>&nbsp;&nbsp;${notice.noticeHit}
 						<hr />
-							<c:forEach items="${notice_list}" var="dto">
-								<tr>
-									<td>${dto.nid}</td>
-									<td>${dto.ntitle}</td>
-									<td>${dto.uid}</td>
-									<td>${dto.ndate}</td>
-									<td>${dto.nhit}</td>
-								</tr>
-							</c:forEach>
-                        <div class="order-buton" style="padding-top:50px; float:right">
-                            <a href="#">수정</a>&nbsp;&nbsp;<a href="#">삭제</a>
+						${notice.noticeContent}
+						<div class="order-buton" style="padding-top:50px; float:right">
+                            <a href="./updateNoticeForm?noticeId=${notice.noticeId}">수정</a>&nbsp;&nbsp;
+                            <button class="submit-btn" onclick="del('${notice.noticeId}')">삭제</button>
                         </div>
                     </div>
                 </div>

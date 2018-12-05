@@ -23,7 +23,7 @@ public class NoticeController {
 	//단건 조회
 	@RequestMapping("/getNotice")
 	public String getNotice(Model model, NoticeVO vo) {
-		model.addAttribute("", noticeService.getNotice(vo));
+		model.addAttribute("notice", noticeService.getNotice(vo));
 		return "notice/getNotice";
 	}
 	
@@ -38,20 +38,20 @@ public class NoticeController {
 		noticeService.insertNotice(vo);
 		return "redirect:getNoticeList";
 	}
-	/*
+	
 	//수정폼
-	@RequestMapping("")
+	@RequestMapping("/updateNoticeForm")
 	public String updateNoticeForm(Model model, NoticeVO vo) {
-		model.addAttribute("", noticeService.getNotice(vo));
-		return "";
+		model.addAttribute("notice", noticeService.getNotice(vo));
+		return "notice/updateNotice";
 	}
 	//수정처리
-	@RequestMapping("")
+	@RequestMapping("updateNotice")
 	public String updateNotice(NoticeVO vo) {
 		noticeService.updateNotice(vo);
-		return "";
+		return "redirect:getNoticeList";
 	}
-	*/
+	
 	//삭제처리
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeVO vo) {

@@ -26,13 +26,14 @@ public class NoticeDAOMybatis {
 	
 	//삭제
 	public void deleteNotice(NoticeVO vo) {
-		mybatis.update("notice.deleteNotice", vo);
+		mybatis.update("notice.deleteNotice", vo.getNoticeId());
 	}
 	
 	//단건조회
 	public NoticeVO getNotice(NoticeVO vo) {
 		return mybatis.selectOne("notice.getNotice", vo);
 	}
+	
 	//전체조회
 	public List<NoticeVO> getNoticeList(NoticeVO vo) {
 		return mybatis.selectList("notice.getNoticeList", vo);

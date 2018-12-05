@@ -2,15 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%! int nid, nhit; String ntitle, uid, ndate; %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-    <!-- Custom styles for this template -->
-    <link href="resources/css/shop-homepage.css" rel="stylesheet">
-
 </head>
 <body>
     <!--    start about us area-->
@@ -36,7 +31,7 @@
                     		<thead>
                     			<tr>
                     				<th>no.</th>
-                    				<th>글제목</th>
+                    				<th style="text-align:center">글제목</th>
                     				<th>작성자</th>
                     				<th>작성일</th>
                     				<th>조회수</th>
@@ -45,18 +40,18 @@
                     		<tbody>
 							<c:forEach items="${noticeList}" var="notice">
 								<tr>
-									<td>${notice.nid}</td>
-									<td><a href="./getNotice?nid=${notice.nid}">${notice.ntitle}</a></td>
-									<td>${notice.uid}</td>
-									<td>${notice.ndate}</td>
-									<td>${notice.nhit}</td>
+									<td>${notice.noticeId}</td>
+									<td><a style="color:black;" href="./getNotice?noticeId=${notice.noticeId}">${notice.noticeTitle}</a></td>
+									<td>${notice.userName}</td>
+									<td>${notice.noticeDate}</td>
+									<td>${notice.noticeHit}</td>
 								</tr>
 							</c:forEach>
                     		</tbody>
                     	</table>
                     	<section >
                         <div class="order-buton" style="padding-top:410px; float:right">
-                            <a href="insertNotice">등록</a>
+                            <a href="${pageContext.request.contextPath}/insertNotice">등록</a>
                         </div>
                         </section>
                     	<div class="text-center" style="padding-top:460px;">

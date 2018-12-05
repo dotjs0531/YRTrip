@@ -26,7 +26,8 @@
                     </div>
                 </div>
                 <div class="col-md-offset-1 col-sm-6">
-                <form action="./insertNotice" method="post">
+                <form action="./updateNotice" method="post">
+                	<input type="hidden" name="noticeId" value="${notice.noticeId}">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
 							<tr>
@@ -35,10 +36,10 @@
 			 			</thead>
 			 			<tbody>
 			 				<tr>
-			 					<td><input type="text" class="form-control" placeholder="글제목" name="noticeTitle" maxlength="50"></td>
+			 					<td><input type="text" class="form-control" placeholder="글제목" name="noticeTitle" value="${notice.noticeTitle}" maxlength="50"></td>
 			 				</tr>
 			 				<tr>	
-			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px"></textarea> </td>
+			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px">${notice.noticeContent}</textarea> </td>
 			 				</tr>
 			 			</tbody>
 			 		</table>
