@@ -55,7 +55,7 @@
                                     <li class="current-menu-item"><a href="main">홈 <span class="caret"></span></a></li>
                                     <li><a href="getTravelBoardList">여행정보</a></li>
                                     <li><a href="#">동행구하기</a></li>
-                                    <li><a href="#">중고상품</a></li>
+                                    <li><a href="getProductList">중고상품</a></li>
                                 </ul>
                             <!-- /.navbar-collapse -->
                         </nav>
