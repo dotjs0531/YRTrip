@@ -9,67 +9,67 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.yrtrip.app.partner.PartnerBoardService;
+import com.yrtrip.app.partner.PartnerService;
 import com.yrtrip.app.partner.PartnerVO;
 
 @Controller
 public class PartnerController {
 
 	@Autowired
-	PartnerBoardService partnerBoardService;
+	PartnerService partnerService;
 
 	// 전체조회
 	@RequestMapping(value = { "/getPartnerList"}, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
-	public String getPartnerBoardList(Model model, PartnerVO vo) {
-		model.addAttribute("partnerboardList", partnerBoardService.getPartnerBoardList(vo));
-		return "board/getPartnerBoardList";
+	public String getPartnerList(Model model, PartnerVO vo) {
+		model.addAttribute("partner", partnerService.getPartnerList(vo));
+		return "partner/getPartnerList";
 	}
-
+	
 	// 단건조회
 	@RequestMapping("/getPartner") // http://localhost:8081/app/getPartner
-	public String getBoard(Model model, PartnerVO vo) {
-		model.addAttribute("board", partnerBoardService.getPartnerBoard(vo)); // vo : 조회할 게시글 번호 넘어가는 것
-		return "board/getPartnerBoard";
+	public String getPartner(Model model, PartnerVO vo) {
+		model.addAttribute("partner", partnerService.getPartner(vo)); // vo : 조회할 게시글 번호 넘어가는 것
+		return "partner/getPartner";
 	}
 
 	// 등록폼
 	@RequestMapping(value = { "/insertPartnerform" }, method = RequestMethod.GET)
-	public String insertPartnerBoardform() {
-		return "board/insertBoard";
+	public String insertPartnerform() {
+		return "partner/insertPartner";
 	}
 
 	// 등록처리
 	@RequestMapping(value = { "insertPartner" }, method = RequestMethod.POST)
-	public String insertPartnerBoard(PartnerVO vo) { // 커맨드 객체
-		partnerBoardService.insertPartnerBoard(vo); // 등록처
-		return "redirect:getBoardList"; // 목록요청
+	public String insertPartner(PartnerVO vo) { // 커맨드 객체
+		partnerService.insertPartner(vo); // 등록처
+		return "redirect:getPartnerList"; // 목록요청
 	}
 
 	// 수정폼
 	@RequestMapping("/updatePartnerform")
-	public String updateBoardform(Model model, PartnerVO vo) {
-		model.addAttribute("board", partnerBoardService.getPartnerBoard(vo));
-		return "board/updatePartnerBoard";
+	public String updatePartnerform(Model model, PartnerVO vo) {
+		model.addAttribute("partner", partnerService.getPartner(vo));
+		return "partner/updatePartnerForm";
 	}
 
 	// 수정처리
 	@RequestMapping("updatePartner")
-	public String updateBoard(PartnerVO vo) {
-		partnerBoardService.updatePartnerBoard(vo); // 수정처리
-		return "redirect:getBoardList"; // 목록요청
+	public String updatePartner(PartnerVO vo) {
+		partnerService.updatePartner(vo); // 수정처리
+		return "redirect:getPartnerList"; // 목록요청
 	}
 
 	// 삭제처리
 	@RequestMapping("deletePartner")
-	public String deleteBoard(PartnerVO vo) {
-		partnerBoardService.deletePartnerBoard(vo); // 삭제처리
-		return "redirect:getBoardList"; // 목록요청
+	public String deletePartner(PartnerVO vo) {
+		partnerService.deletePartner(vo); // 삭제처리
+		return "redirect:getPartnerList"; // 목록요청
 	}
 
 	// 선택삭제처리
 	@RequestMapping("deletePartnerList")
-	public String deleteBoardList(PartnerVO vo) {
-		partnerBoardService.deletePartnerBoardList(vo); // 삭제처리
-		return "redirect:getBoardList"; // 목록요청
+	public String deletePartnerList(PartnerVO vo) {
+		partnerService.deletePartnerList(vo); // 삭제처리
+		return "redirect:getPartnerList"; // 목록요청
 	}
 }

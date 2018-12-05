@@ -15,37 +15,37 @@ public class PartnerBoardDAOMybatis {
 	private SqlSessionTemplate mybatis;
 	
 	//등록
-	public void insertPartnerBoard(PartnerVO vo) {
+	public void insertPartner(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 등록 기능 처리");
-		mybatis.update("partnerBoard.insertPartnerBoard", vo);	
+		mybatis.update("partner.insertPartner", vo);	
 	}
 	
 	//수정
-	public void updatePartnerBoard(PartnerVO vo) {
+	public void updatePartner(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 수정 기능 처리");
-		mybatis.update("partnerBoard.updatePartnerBoard", vo);	
+		mybatis.update("partner.updatePartner", vo);	
 	}
 	
 	//삭제
-	public void deletePartnerBoard(PartnerVO vo) {
+	public void deletePartner(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 삭제 기능 처리");
-		mybatis.update("partnerBoard.deletePartnerBoard", vo.getPartnerno());	
+		mybatis.update("partner.deletePartner", vo.getPartnerno());	
 	}
 	
 	//선택삭제
-	public void deletePartnerBoardList(PartnerVO vo) {
+	public void deletePartnerList(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 선택삭제 기능 처리");
-		mybatis.update("partnerBoard.deletePartnerBoardList", vo);
+		mybatis.update("partner.deletePartnerList", vo);
 	}
 	
 	//전체조회
-	public List<PartnerVO> getPartnerBoardList(PartnerVO vo) {
+	public List<PartnerVO> getPartnerList(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 전체조회 기능 처리");
-		return mybatis.selectList("partnerBoard.getPartnerBoardList", vo);
+		return mybatis.selectList("partner.getPartnerList", vo);
 	}
 	//단건조회
-	public PartnerVO getPartnerBoard(PartnerVO vo) {
+	public PartnerVO getPartner(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 단건조회 기능 처리");
-		return mybatis.selectOne("partnerBoard.getTravelBoard", vo);
+		return mybatis.selectOne("partner.getPartner", vo);
 	}
 }
