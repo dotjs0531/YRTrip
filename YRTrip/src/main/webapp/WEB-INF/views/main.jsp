@@ -69,6 +69,7 @@
                 </div>
             </div>
         </div>
+        
         <!--   end of logo menu markup     -->
         <!--  start welcome text marup  -->
         <div class="table">

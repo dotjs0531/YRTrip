@@ -3,7 +3,6 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <html class="no-js" lang="">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,7 +70,7 @@
 							<!-- <ul class="nav navbar-nav navbar-right menu"> -->
                             <ul class="nav navbar-nav navbar-right menu navbar-menu-items wow fadeIn">
                                 <li><a href="main.html">홈  <span class="caret"></span></a></li>
-                                <li class="current-menu-item"><a href="#">여행정보</a></li>
+                                <li class="current-menu-item"><a href="getTravelBoardList">여행정보</a></li>
                                 <li><a href="#">동행구하기</a></li>
                                 <li><a href="#">중고상품</a></li>
                             </ul>
