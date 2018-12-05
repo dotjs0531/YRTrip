@@ -14,4 +14,5 @@ public class ProductDAO {
 															+ "item_category, seller_id, item_oderdetail, item_star, "
 															+ "item_pic, item_date, item_condition, item_like) "
 															+ "values()";
+	private final String PRODUCT_LIST = "select ";
 }
