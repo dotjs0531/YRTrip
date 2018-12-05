@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface PartnerBoardService {
 
-	public void insertPartnerBoard(PartnerBoardVO vo);
-	public void updatePartnerBoard(PartnerBoardVO vo);
-	public void deletePartnerBoard(PartnerBoardVO vo);
-	public void deletePartnerBoardList(PartnerBoardVO vo);
-	public PartnerBoardVO getPartnerBoard(PartnerBoardVO vo);
-	public List<PartnerBoardVO> getPartnerBoardList(PartnerBoardVO vo);
+	public void insertPartnerBoard(PartnerVO vo);
+	public void updatePartnerBoard(PartnerVO vo);
+	public void deletePartnerBoard(PartnerVO vo);
+	public void deletePartnerBoardList(PartnerVO vo);
+	public PartnerVO getPartnerBoard(PartnerVO vo);
+	public List<PartnerVO> getPartnerBoardList(PartnerVO vo);
 }

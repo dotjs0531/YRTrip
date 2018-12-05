@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.yrtrip.app.partner.PartnerBoardService;
-import com.yrtrip.app.partner.PartnerBoardVO;
+import com.yrtrip.app.partner.PartnerVO;
 
 @Service
 public class PartnerServiceImpl implements PartnerBoardService {
@@ -14,32 +14,32 @@ public class PartnerServiceImpl implements PartnerBoardService {
 	@Autowired PartnerBoardDAOMybatis dao;
 	
 	@Override
-	public void insertPartnerBoard(PartnerBoardVO vo) {
+	public void insertPartnerBoard(PartnerVO vo) {
 		dao.insertPartnerBoard(vo);
 	}
 
 	@Override
-	public void updatePartnerBoard(PartnerBoardVO vo) {
+	public void updatePartnerBoard(PartnerVO vo) {
 		dao.updatePartnerBoard(vo);
 	}
 
 	@Override
-	public void deletePartnerBoard(PartnerBoardVO vo) {
+	public void deletePartnerBoard(PartnerVO vo) {
 		dao.deletePartnerBoard(vo);
 	}
 
 	@Override
-	public void deletePartnerBoardList(PartnerBoardVO vo) {
+	public void deletePartnerBoardList(PartnerVO vo) {
 		dao.deletePartnerBoardList(vo);
 	}
 
 	@Override
-	public PartnerBoardVO getPartnerBoard(PartnerBoardVO vo) {
+	public PartnerVO getPartnerBoard(PartnerVO vo) {
 		return dao.getPartnerBoard(vo);
 	}
 
 	@Override
-	public List<PartnerBoardVO> getPartnerBoardList(PartnerBoardVO vo) {
+	public List<PartnerVO> getPartnerBoardList(PartnerVO vo) {
 		return dao.getPartnerBoardList(vo);
 	}
 
