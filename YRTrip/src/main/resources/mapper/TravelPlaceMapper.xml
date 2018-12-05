@@ -1,5 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="travelplace">
+<mapper namespace="travelPlace">
+<select id="getTravelPlaceList" resultType="travelPlace">
+	SELECT PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			USER_ID
+	FROM TRAVEL_PLACET
+ 	<where>
+	<choose>
+		<when test="searchCondition != null and searchCondition == 'place_name'">
+			and place_name like '%' || #{searchKeyword} || '%'
+		</when>	
+		<when test="searchCondition != null and searchCondition == 'user_id'">
+			and user_id like '%' || #{searchKeyword} || '%'
+		</when>
+	</choose>
+	</where>
+	<choose>
+		<when test="sortCol != null and sortCol != ''">
+			ORDER BY ${sortCol}
+		</when>
+		<otherwise>
+			ORDER BY PLACE_NO DESC
+		</otherwise>
+	</choose>
+</select>
+
+<insert id="insertTravelPlace" parameterType="travelPlace">
+	<selectKey keyProperty="place_no" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(PLACE_NO),0)+1 FROM TRAVEL_PLACET
+	</selectKey>
+		INSERT INTO TRAVEL_PLACET(PLACE_NO,
+									PLACE_NAME,
+									PLACE_ADDRESS,
+									PLACE_LIKE,
+									PLACE_DATE,
+									PLACE_CONTENT,
+									PLACE_TRAVELBOARDNO,
+									PLACE_PIC,
+									USER_ID)
+		VALUES (#{place_no}, 
+				#{place_name}, 
+				#{place_address}, 
+				#{place_like}, 
+				sysdate, 
+				#{place_content}, 
+				#{place_travelboardno}, 
+				#{place_pic}, 
+				#{user_id})
+</insert>
+
+<update id="updateTravelPlace" parameterType="travelPlace">
+	UPDATE TRAVEL_PLACET 
+	SET PLACE_NAME = #{place_name},
+		PLACE_ADDRESS = #{place_address},
+		PLACE_CONTENT = #{place_content},
+		PLACE_TRAVELBOARDNO = #{place_travelboardno},
+		PLACE_PIC = #{place_pic}
+	WHERE PLACE_NO = #{PLACE_NO}
+</update>
+
+<delete id="deleteTravelPlace" parameterType="int">
+	DELETE FROM TRAVEL_PLACET 
+	WHERE PLACE_NO = #{PLACE_NO}
+</delete>
+
+<delete id="deleteTravelPlaceList" parameterType="list">
+	DELETE FROM TRAVEL_PLACET 
+	<if test="seqList != null and seqList.length>0">
+	WHERE PLACE_NO in
+	<foreach collection="PlaceNoList" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="PlaceNoList == null or not PlaceNoList.length>0">
+		WHERE PLACE_NO = -1
+	</if>
+</delete>
+
+<select id="getTravelPlace" parameterType="travelPlace" resultType="travelPlace">
+	SELECT PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			USER_ID
+	FROM TRAVEL_PLACET 
+	WHERE PLACE_NO = #{place_no}
+</select>
 </mapper> 
