@@ -1,5 +1,132 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="travelboard">
+<mapper namespace="travelBoard">
+
+<select id="getTravelBoardList" resultType="travelBoard">
+	SELECT TRAVEL_NO,
+			TRAVEL_PERSON,
+			TRAVEL_PAY,
+			TRAVEL_SCHE,
+			TRAVEL_START,
+			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
+			TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE,
+			TINFO_ID,
+			USER_ID,
+			TRAVEL_WITH,
+			TRAVEL_PIC
+	FROM TRAVELBOARDT
+ 	<where>
+	<choose>
+		<when test="searchCondition != null and searchCondition == 'user_id'">
+			and user_id like '%' || #{searchKeyword} || '%'
+		</when>	
+		<when test="searchCondition != null and searchCondition == 'tinfo_id'">
+			and tinfo_id like '%' || #{searchKeyword} || '%'
+		</when>	
+		<when test="searchCondition != null and searchCondition == 'travel_title'">
+			and travel_title like '%' || #{searchKeyword} || '%'
+		</when>
+		<when test="searchCondition != null and searchCondition == 'travel_content'">
+			and travel_content like '%' || #{searchKeyword} || '%'
+		</when>
+	</choose>
+	</where>
+	<choose>
+		<when test="sortCol != null and sortCol != ''">
+			ORDER BY ${sortCol}
+		</when>
+		<otherwise>
+			ORDER BY TRAVEL_NO DESC
+		</otherwise>
+	</choose>
+</select>
+
+<insert id="insertTravelBoard" parameterType="travelBoard">
+	<selectKey keyProperty="travel_no" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(TRAVEL_NO),0)+1 FROM TRAVELBOARDT
+	</selectKey>
+		INSERT INTO TRAVELBOARDT(TRAVEL_NO,
+								TRAVEL_PERSON,
+								TRAVEL_PAY,
+								TRAVEL_SCHE,
+								TRAVEL_START,
+								TRAVEL_TITLE,
+								TRAVEL_CONTENT,
+								TRAVEL_DATE,
+								TRAVEL_HIT,
+								TRAVEL_LIKE,
+								TINFO_ID,
+								USER_ID,
+								TRAVEL_WITH,
+								TRAVEL_PIC)
+		VALUES (#{travel_no}, 
+				#{travel_pay}, 
+				#{travel_sche}, 
+				#{travel_start}, 
+				#{travel_title}, 
+				#{travel_content}, 
+				sysdate, 
+				#{travel_hit}, 
+				#{travel_like}, 
+				#{tinfo_id}, 
+				#{user_id}, 
+				#{travel_with}, 
+				#{travel_pic})
+</insert>
+
+<update id="updateTravelBoard" parameterType="travelBoard">
+	UPDATE TRAVELBOARDT 
+	SET TRAVEL_PERSON = #{travel_person}, 
+		TRAVEL_PAY = #{travel_pay},
+		TRAVEL_SCHE = #{travel_sche},
+		TRAVEL_START = #{travel_start},
+		TRAVEL_TITLE = #{travel_title},
+		TRAVEL_CONTENT = #{travel_content},
+		TRAVEL_DATE = #{travel_date},
+		TINFO_ID = #{tinfo_id},
+		TRAVEL_WITH = #{travel_with},
+		TRAVEL_PIC = #{travel_pic}
+	WHERE TRAVEL_NO = #{travel_no}
+</update>
+
+<delete id="deleteTravelBoard" parameterType="int">
+	DELETE FROM TRAVELBOARDT 
+	WHERE TRAVEL_NO = #{travel_no}
+</delete>
+
+<delete id="deleteTravelBoardList" parameterType="list">
+	DELETE FROM TRAVELBOARDT 
+	<if test="seqList != null and seqList.length>0">
+	WHERE TRAVEL_NO in
+	<foreach collection="TravelNoList" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="TravelNoList == null or not TravelNoList.length>0">
+		WHERE TRAVEL_NO = -1
+	</if>
+</delete>
+
+<select id="getTravelBoard" parameterType="travelBoard" resultType="travelBoard">
+	SELECT TRAVEL_NO,
+			TRAVEL_PERSON,
+			TRAVEL_PAY,
+			TRAVEL_SCHE,
+			TRAVEL_START,
+			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
+			TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE,
+			TINFO_ID,
+			USER_ID,
+			TRAVEL_WITH,
+			TRAVEL_PIC
+	FROM TRAVELBOARDT 
+	WHERE TRAVEL_NO = #{travel_no}
+</select>
 </mapper> 

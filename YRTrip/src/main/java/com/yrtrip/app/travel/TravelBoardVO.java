@@ -17,6 +17,11 @@ public class TravelBoardVO {
 	private int travelWith;
 	private String travelPic;
 	
+	private String searchKeyword;
+	private String searchCondition;
+	
+	private String sortCol;
+	
 	public int getTravelNo() {
 		return travelNo;
 	}
@@ -100,6 +105,24 @@ public class TravelBoardVO {
 	}
 	public void setTravelPic(String travelPic) {
 		this.travelPic = travelPic;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSortCol() {
+		return sortCol;
+	}
+	public void setSortCol(String sortCol) {
+		this.sortCol = sortCol;
 	}
 	
 }

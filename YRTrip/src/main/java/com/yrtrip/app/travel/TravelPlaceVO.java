@@ -11,6 +11,12 @@ public class TravelPlaceVO {
 	private int placeTravelBoardNo;
 	private String placePic;
 	private String UserId;
+	
+	private String searchKeyword;
+	private String searchCondition;
+	
+	private String sortCol;
+	
 	public int getPlaceNo() {
 		return placeNo;
 	}
@@ -65,6 +71,23 @@ public class TravelPlaceVO {
 	public void setUserId(String userId) {
 		UserId = userId;
 	}
-	
-	
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSortCol() {
+		return sortCol;
+	}
+	public void setSortCol(String sortCol) {
+		this.sortCol = sortCol;
+	}
+		
 }
