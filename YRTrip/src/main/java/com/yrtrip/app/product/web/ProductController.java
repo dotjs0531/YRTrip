@@ -17,6 +17,6 @@ public class ProductController {
 	@RequestMapping(value= {"/getProductList"}, method=RequestMethod.GET)
 	public String getProductList(Model model, ProductVO vo) {
 		model.addAttribute("getProductList", productService.getProductList(vo));
-		return "products/getProductList";
+		return "product/getProductList";
 	}
 }
