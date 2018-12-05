@@ -7,15 +7,11 @@
 <meta charset="UTF-8">
 <title>여행게시판 목록보기</title>
 <link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<link
 	href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean"
 	rel="stylesheet">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link rel="stylesheet" href="assist/css/getTravelBoardList.css">
 <script>
 	$(document).ready(function() {
 		$('#pinBoot').pinterest_grid({
@@ -164,12 +160,7 @@
 </script>
 </head>
 <body>
-	<form action="#" method="post">
-		<div class="container">
-			<div class="row">
-				<h2>전체 여행기</h2>
-				<hr>
-				<div class="right">
+				<div>
 					<select>
 						<option>정렬</option>
 						<option>최근순</option>
@@ -179,30 +170,21 @@
 					</select><br>
 					<br>
 				</div>
-				<section id="pinBoot">
-					<article class="white-panel">
-						<img src="http://i.imgur.com/sDLIAZD.png" alt="">
-						<h4>
-							<a href="#">여행글제목이야</a>
-						</h4>
-						<p class="right">
-							By <a href="#">글쓴이야</a>
-						</p>
-						<hr>
-						<div class="content">
-							<span class="bottom"><a href="#"><i
-									class="glyphicon glyphicon-share">공유하기</i></a></span> <span class="bottom"><a
-								href="#"><i class="glyphicon glyphicon-heart-empty">좋아요</i></a></span>
-							<span class="bottom"><a href="#"><i
-									class="glyphicon glyphicon-comment">댓글</i></a></span>
-						</div>
-					</article>
-
-				</section>
-
-				<hr>
-			</div>
-		</div>
-	</form>
+				<div>
+				<c:forEach items="${travelBoardList}" var="board">
+				<table border="1">
+				<tr>
+					<td>사진</td>
+					<td>제목</td>
+					<td>글쓴이</td>
+				</tr>
+				<tr>
+					<td>${board.travelPic}</td>
+					<td>${board.travelTitle}</td>
+					<td>${board.userId}</td>
+				</tr>
+</table>
+</c:forEach>
+				</div>
 </body>
 </html>
