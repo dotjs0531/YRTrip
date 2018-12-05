@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fast Delivery</title>
+    <title>YOUR REAL TRIP:-)</title>
     <!--  bootstrap css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <!--  font Awesome Css  -->
@@ -52,10 +52,10 @@
                         <nav class="navbar">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                                 <ul class="nav navbar-nav navbar-right menu">
-                                    <li class="current-menu-item"><a href="main.html">홈 <span class="caret"></span></a></li>
-                                    <li><a href="about.tiles">여행정보</a></li>
-                                    <li><a href="service.tiles">동행구하기</a></li>
-                                    <li><a href="pricing.tiles">중고상품</a></li>
+                                    <li class="current-menu-item"><a href="main.jsp">홈 <span class="caret"></span></a></li>
+                                    <li><a href="#">여행정보</a></li>
+                                    <li><a href="#">동행구하기</a></li>
+                                    <li><a href="#">중고상품</a></li>
                                 </ul>
                             <!-- /.navbar-collapse -->
                         </nav>
@@ -534,7 +534,7 @@
                     <div class="single-footer">
                         <h2>More links</h2>
                         <ul class="list">
-                            <li><a href="notice.tiles">ê³ ê°ì¼í°</a></li>
+                            <li><a href="notice">고객센터</a></li>
                         </ul>
                     </div>
                 </div>
@@ -575,11 +575,11 @@
 	<div class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<!-- remote ajax callì´ ëëìì­ -->
+				<!-- remote ajax call이 되는영역 -->
 				<!-- header -->
 				<div class="modal-header">
-					<!-- ë«ê¸°(x) ë²í¼ -->
-					<button type="button" class="close" data-dismiss="modal">Ã</button>
+					<!-- 닫기(x) 버튼 -->
+					<button type="button" class="close" data-dismiss="modal">×</button>
 				</div>
 
 				<!-- body -->
@@ -603,7 +603,7 @@
 										</div>
 										<div class="form-group">
 											<label for="remember-me" class="text-info"><span>Remember
-													me</span>Â <span><input id="remember-me" name="remember-me"
+													me</span> <span><input id="remember-me" name="remember-me"
 													type="checkbox"></span></label><input type="submit"
 												name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 										</div>

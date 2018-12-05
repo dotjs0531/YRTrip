@@ -59,7 +59,7 @@
 		</video>
 		<div class="bubbles">
 			<h1>
-				<a href="main.html">For Your REAL Trip!</a>
+				<a href="main">For Your REAL Trip!</a>
 			</h1>
 		</div>
 	</div>
