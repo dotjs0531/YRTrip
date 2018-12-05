@@ -109,26 +109,4 @@ public class ProductVO {
 				+ itemStar + ", itemPic=" + itemPic + ", itemDate=" + itemDate + ", itemCondition=" + itemCondition
 				+ ", itemLike=" + itemLike + "]";
 	}
-	
-	public ProductVO(int itemId, String itemName, int itemPrice, int itemEa, String itemContent, String itemMethod,
-			String itemCategory, String sellerId, String itemOrderdetail, int itemStar, String itemPic, String itemDate,
-			String itemCondition, int itemLike) {
-		super();
-		this.itemId = itemId;
-		this.itemName = itemName;
-		this.itemPrice = itemPrice;
-		this.itemEa = itemEa;
-		this.itemContent = itemContent;
-		this.itemMethod = itemMethod;
-		this.itemCategory = itemCategory;
-		this.sellerId = sellerId;
-		this.itemOrderdetail = itemOrderdetail;
-		this.itemStar = itemStar;
-		this.itemPic = itemPic;
-		this.itemDate = itemDate;
-		this.itemCondition = itemCondition;
-		this.itemLike = itemLike;
-	}
-	
-	
 }
