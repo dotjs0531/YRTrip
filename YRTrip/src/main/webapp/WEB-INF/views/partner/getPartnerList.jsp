@@ -97,12 +97,6 @@
                                 </tr>
                             </table>
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
                         <div class="more-jobs">
                             <a href=""> <i class="fa fa-refresh"></i>더 보기</a>
                         </div>
