@@ -15,25 +15,24 @@ public class ProductDAOMybatis {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertProduct(ProductVO vo) {
-		System.out.println("mybatis insertProduct() 기능 처리");
-		mybatis.update("");
+		mybatis.update("product.insertProduct", vo);
 	}
 	
-	public void updateProduct() {
-		// TODO Auto-generated method stub
+	public void updateProduct(ProductVO vo) {
+		mybatis.update("product.insertProduct", vo);
 
 	}
 	
 	public void deleteProduct(ProductVO vo) {
-		
+		mybatis.update("product.insertProduct", vo);
 	}
 	
 	public List<ProductVO> getProductList(ProductVO vo){
-		return null;
+		return mybatis.selectList("product.getProductList", vo);
 	}
 	
 	public ProductVO getProduct(ProductVO vo) {
-		return null;
+		return mybatis.selectOne("product.getProduct", vo);
 	}
 	
 	
