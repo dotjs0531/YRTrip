@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yrtrip.app.notice.NoticeService;
 import com.yrtrip.app.notice.NoticeVO;
-
-@Controller
+/*
+@Controller*/
 public class NoticeController {
-
+/*
 	@Autowired NoticeService noticeService;
 	
 	//전체 조회
@@ -57,5 +57,5 @@ public class NoticeController {
 		noticeService.deleteNotice(vo);
 		return "";
 	}
-	
+	*/
 }

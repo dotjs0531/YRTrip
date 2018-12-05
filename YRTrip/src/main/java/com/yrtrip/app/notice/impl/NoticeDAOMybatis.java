@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.yrtrip.app.notice.NoticeVO;
-
-@Repository
+/*
+@Repository*/
 public class NoticeDAOMybatis {
 	
 	/*@Autowired

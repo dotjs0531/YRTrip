@@ -7,29 +7,31 @@ import org.springframework.stereotype.Service;
 
 import com.yrtrip.app.notice.NoticeService;
 import com.yrtrip.app.notice.NoticeVO;
-
-@Service
+/*
+@Service*/
 public class NoticeServiceImpl implements NoticeService {
 
-	@Autowired NoticeDAOMybatis dao;
+	//@Autowired NoticeDAOMybatis dao;
 	
 	public void insertNotice(NoticeVO vo) {
-		dao.insertNotice(vo);
+		//dao.insertNotice(vo);
 	}
 
 	public void updateNotice(NoticeVO vo) {
-		dao.updateNotice(vo);
+		//dao.updateNotice(vo);
 	}
 
 	public void deleteNotice(NoticeVO vo) {
-		dao.deleteNotice(vo);
+		//dao.deleteNotice(vo);
 	}
 
 	public NoticeVO getNotice(NoticeVO vo) {
-		return dao.getNotice(vo);
+		//return dao.getNotice(vo);
+		return null;
 	}
 
 	public List<NoticeVO> getNoticeList(NoticeVO vo) {
-		return dao.getNoticeList(vo);
+		//return dao.getNoticeList(vo);
+		return null;
 	}
 }

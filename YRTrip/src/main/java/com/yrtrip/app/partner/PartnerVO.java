@@ -3,7 +3,7 @@ package com.yrtrip.app.partner;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PartnerDTO {
+public class PartnerVO {
 	private Integer partnerNo;			//	동행게시판번호
 	private String	partnerTitle;		//	동행게시판제목
 	private Integer PartnerHit;			//	동행게시판조회수

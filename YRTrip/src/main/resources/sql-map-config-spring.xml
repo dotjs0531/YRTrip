@@ -10,9 +10,10 @@
 	<!-- Alias 설정 -->
 	<typeAliases>
 		<typeAlias alias="notice" type="com.yrtrip.app.notice.NoticeVO" />
-		<typeAlias alias="partner" type="com.yrtrip.app.notice.PartnerVO" />
-		<typeAlias alias="product" type="com.yrtrip.app.notice.ProductVO" />
-		<typeAlias alias="travel" type="com.yrtrip.app.notice.TravelVO" />
+		<typeAlias alias="partner" type="com.yrtrip.app.partner.PartnerVO" />
+		<typeAlias alias="product" type="com.yrtrip.app.product.ProductVO" />
+		<typeAlias alias="travelboard" type="com.yrtrip.app.travel.TravelBoardVO" />
+		<typeAlias alias="travelplace" type="com.yrtrip.app.travel.TravelPlaceVO" />
 	</typeAliases>
 	
 </configuration>
