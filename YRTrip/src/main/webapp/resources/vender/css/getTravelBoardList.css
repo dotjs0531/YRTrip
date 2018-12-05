@@ -1,50 +1,82 @@
 @charset "UTF-8";
+/* 검색 */
 
-body {
- background-color:#eee;   
-}    
+/* 목록 */
+#blog-section{margin-top:40px;margin-bottom:80px;}
+.container {
+   width: 80%;
+}
+.content-box{
+	padding-top:100px;
+}
+.content-title{padding:5px;background-color:#fff;}
+.content-title h3 a{font-family: 'East Sea Dokdo';font-size:35px;color:#34495E;text-decoration:none; transition: 0.5s;}
+.content-title h3 a:hover{color:#ff8000; }
+.content-footer{background-color:#f9bf3b;padding:10px;position: relative;}
+.content-footer span a {
+    color: #fff;
+    display: block;
+    padding: 6px 5px;
+    text-decoration: none;
+    transition: 0.5s;
+}
+.content-footer span a:hover{     
+    color:#F39C12;   
+}
+aside{
+	width:22%;
+	margin-right:20px;
+    margin-top: 30px;
+	box-shadow: 1px 4px 16px 3px rgba(199,197,199,1);
+	display:inline-block;}
 
-#pinBoot {
-  position: relative;
-  max-width: 100%;
-  width: 100%;
-}
-img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
-.white-panel {
-  position: absolute;
-  background: white;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
-  padding: 5px;
+aside .content-footer>img {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    margin-right: 10px;
+    border: 2px solid #fff;
 }
 
-.white-panel h4 a {
-  color: #000000;
-  font-family: 'East Sea Dokdo', cursive;
-  font-size: 35px;
-  text-decoration:none;
+.user-ditels {
+    width: 250px;
+    height: 80px;
+    padding-bottom: 20px;
+    position: absolute;
+    border: solid 2px #fff;
+    background-color: #ff8000;
+    right: 25px;
+    display: none;
+    z-index: 1;
 }
-.white-panel:hover {
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
-  margin-top: -5px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
+  
 }
-.bottom {
-font-size: 12px;
-margin-bottom: 5px;
-float: right;
-padding: 0 5px;
+.user-small-img{cursor: pointer;}
+
+.content-footer:hover .user-ditels  {
+    display: block;
 }
-.content {
-line-height:5px;
+
+.content-footer .user-ditels .user-img{width:74px;float: left;}
+.user-full-ditels h3 {
+    color: #fff;
+    display: block;
+    margin: 0px;
+    padding-top: 5px;
+    padding-right: 28px;
+    text-align: right;
 }
-.right {
-font-color:#747474;
-text-align:right;
+.user-full-ditels p{    
+    color: #fff;
+    display: block;
+    margin: 0px;
+     padding-right: 20px;
+    padding-top: 5px;
+   text-align: right;}
+.social-icon {
+    background-color: #fff;
+    margin-top: 10px;
+    padding-right: 20px;
+    text-align: right;
 }
+.social-icon>a{color:#34495E;font-size:15px;text-decoration:none;padding: 5px;}
