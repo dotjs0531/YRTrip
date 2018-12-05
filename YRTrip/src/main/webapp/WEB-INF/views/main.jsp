@@ -52,8 +52,8 @@
                         <nav class="navbar">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                                 <ul class="nav navbar-nav navbar-right menu">
-                                    <li class="current-menu-item"><a href="main.jsp">홈 <span class="caret"></span></a></li>
-                                    <li><a href="#">여행정보</a></li>
+                                    <li class="current-menu-item"><a href="main">홈 <span class="caret"></span></a></li>
+                                    <li><a href="getTravelBoardList">여행정보</a></li>
                                     <li><a href="#">동행구하기</a></li>
                                     <li><a href="#">중고상품</a></li>
                                 </ul>
@@ -534,7 +534,7 @@
                     <div class="single-footer">
                         <h2>More links</h2>
                         <ul class="list">
-                            <li><a href="notice">고객센터</a></li>
+                            <li><a href="getNoticeList">고객센터</a></li>
                         </ul>
                     </div>
                 </div>

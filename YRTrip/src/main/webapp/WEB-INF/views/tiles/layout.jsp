@@ -153,7 +153,7 @@
                     <div class="single-footer">
                         <h2>More links</h2>
                         <ul class="list">
-                            <li><a href="notice/notice.jsp">고객센터</a></li>
+                            <li><a href="getNoticeList">고객센터</a></li>
                         </ul>
                     </div>
                 </div>
