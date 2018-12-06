@@ -128,15 +128,15 @@
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">N ext</span>
+                      <span class="sr-only">Next</span>
                     </a>
                   </div>
                 </div>
               </div>
-              <!-- jasjflskdjfbnbcncnkl -->
+              
               <!-- 오른쪽 아래 -->
               <div class="product-seller-recommended">
-                <h3 class="mb-5">판매자의 다vbxcvm.xcm.vm른 상품 </h3>
+                <h3 class="mb-5">판매자의 다른 상품 </h3>
                 <!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
                 <div class="row">
                   <!-- <div class="recommended-items card-deck"> -->
@@ -144,8 +144,8 @@
                     <div class="card">
                       <img src="https://via.placeholder.com/157x157" class="card-img-top">
                       <div class="card-body">
-                        <h5 class="card-title">판hdjskafhksahk매자 다른 상품 이름1 </h5>
-                        <span class="text-muted">￦ 12,000</span>
+                        <h5 class="card-title">판매자 다른 상품 이름</h5>
+                        <span class="text-muted">${item.itemPrice}</span>
                       </div>
                     </div>
                   </div>
@@ -176,21 +176,21 @@
                   <h2 class="mb-5">제품 기본정보</h2>
                   <dl class="row mb-5">
                     <dt class="col-sm-4">상품명</dt>
-                    <dd class="col-sm-8">유심</dd>
+                    <dd class="col-sm-8">${item.itemName}</dd>
                     <dt class="col-sm-4">가격</dt>
-                    <dd class="col-sm-8">3000</dd>
+                    <dd class="col-sm-8">${item.itemPrice}</dd>
                     <dt class="col-sm-4">수량</dt>
-                    <dd class="col-sm-8">1</dd>
+                    <dd class="col-sm-8">${item.itmeEa}</dd>
                     <dt class="col-sm-4">선호결제방법</dt>
-                    <dd class="col-sm-8">카드결제/현금결제</dd>
+                    <dd class="col-sm-8">${item.itemMethod}</dd>
                     <dt class="col-sm-4">구매가능여부</dt>
-                    <dd class="col-sm-8">구매가능</dd>
+                    <dd class="col-sm-8">${item.itemOrderdetail}</dd>
                     <dt class="col-sm-4">상품상태</dt>
-                    <dd class="col-sm-8">중고</dd>
+                    <dd class="col-sm-8">${item.itemCondition}</dd>
                     <dt class="col-sm-4">작성일</dt>
-                    <dd class="col-sm-8">sysdate</dd>
+                    <dd class="col-sm-8">${item.itemDate}</dd>
                     <dt class="col-sm-4">판매자명</dt>
-                    <dd class="col-sm-8">아이디를 넣어서 링크콜?</dd>
+                    <dd class="col-sm-8">${item.sellerId}</dd>
                   </dl>
                   <h2 class="mb-5">제품 상세 설명</h2>
                   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit nemo reiciendis quisquam a
@@ -210,7 +210,7 @@
                     facere  esse repellat consectetur quos eum, quaerat blanditiis saepe?</p>
                 </div>
                 <div class="product-faq mb-5">
-                  <h2 class="mb-3">Q&A라고 쓰고 큐엔에이라고 읽</h2>
+                  <h2 class="mb-3">Q/A라고 쓰고 큐엔에이라고 읽</h2>
                   <p class="text-muted">판매자에게 상품에 대한 질문을 해보세여!</p>
                   <div class="main-questions d-inline" data-container="body" data-toggle="popover" data-placement="right"
                     data-content="Are you in doubt? these shortcuts can help you!">
