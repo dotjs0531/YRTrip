@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="">
 <head>
@@ -76,12 +77,22 @@
                             </ul>
                         </nav>
                     </div>
+					<c:if test="${empty sessionScope.login}">
                     <div class="col-md-3 col-sm-3 col-xs-4 col-lg-3 signup">
                         <ul class="nav navbar-nav">
                             <li><a href="#" id="popbutton">login</a></li>
                             <li><a href="#">sign up</a></li>
                         </ul>
                     </div>
+                    </c:if>
+					<c:if test="${not empty sessionScope.login}">
+                    <div class="col-md-3 col-sm-3 col-xs-4 col-lg-3 signup">
+                        <ul class="nav navbar-nav">
+                            <li><a href="logout">logout</a></li>
+                            <li><a href="#">${sessionScope.login.userId}</a></li>
+                        </ul>
+                    </div>
+					</c:if>
                 </div>
             </div>
         </div>

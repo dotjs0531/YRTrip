@@ -1221,6 +1221,7 @@ ul.breadcrumbs li {
     border: 1px solid #e3e3e3;
     padding-bottom: 30px;
     padding-top: 30px;
+    width:250px;
 }
 
 .pricing-title > h1 {
