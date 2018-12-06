@@ -21,7 +21,7 @@ public class PartnerController {
 	// 전체조회
 	@RequestMapping(value = { "/getPartnerList"}, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
 	public String getPartnerList(Model model, PartnerVO vo) {
-		model.addAttribute("partner", partnerService.getPartnerList(vo));
+		model.addAttribute("partnerList", partnerService.getPartnerList(vo));
 		return "partner/getPartnerList";
 	}
 	
