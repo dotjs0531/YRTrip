@@ -57,7 +57,7 @@
 					</table>
 					<section>
 							<div class="order-buton" style="padding-top:410px; float:right">
-            				<a href="${pageContext.request.contextPath}/insertPartner">등록</a>
+            				<a href="${pageContext.request.contextPath}/insertPartner">글쓰기</a>
             			</div>
         			</section>
         			<div class="text-center" style="padding-top:460px;">

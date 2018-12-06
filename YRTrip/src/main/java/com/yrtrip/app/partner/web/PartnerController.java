@@ -31,9 +31,9 @@ public class PartnerController {
 		model.addAttribute("partner", partnerService.getPartner(vo)); // vo : 조회할 게시글 번호 넘어가는 것
 		return "partner/getPartner";
 	}
-
+	
 	// 등록폼
-	@RequestMapping(value = { "/insertPartnerform" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/insertPartner", method = RequestMethod.GET)
 	public String insertPartnerform() {
 		return "partner/insertPartner";
 	}
