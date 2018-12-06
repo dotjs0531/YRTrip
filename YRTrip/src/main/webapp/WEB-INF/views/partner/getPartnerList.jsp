@@ -19,7 +19,7 @@
                     	<table class="table table-hover">
 								<!-- 동행구하기 테이블 헤더부분 -->
                             	<thead>
-                            		<tr>                      					
+                            		<tr>
                             			<th>글제목</th>
                             			<th>글쓴이</th>
                             			<th>문화</th>
