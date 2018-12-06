@@ -19,4 +19,7 @@
 	<definition name="*/*/*" extends="mainTemplate">
 		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
 	</definition>
+	<definition name="no/*" template="/WEB-INF/views/tiles/nolayout.jsp">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
 </tiles-definitions>

@@ -15,29 +15,26 @@
 <link rel="stylesheet"
 	href="resources/vender/css/getTravelBoardList.css">
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
+
 </head>
 <body>
+<section class="content-section">
 <!-- 검색창 -->
-    <section class="about_us_area" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
-                    <div class="single-pricing-table">
+<div class="category">
+ <div class="search-box">
                         <div class="pricing-title">
                             <h2 style="color:black">고객센터</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="getNoticeList" style="color:black">공지사항</a></li>
-                            <li><a href="getQnaList" style="color:black">1:1 문의</a></li>
+                            <li><a href="#" style="color:black">전체 여행기</a></li>
+                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="#" style="color:black">베스트 장소</a></li>
                         </ul>
-                        <div class="order-buton">
-                            <a href="#">탈퇴</a>
-                        </div>
                     </div>
-                </div>
-<!-- 리스트 -->
-	<div class="content-box">
+</div>
 
+<!-- 리스트 -->
+	<div class="list-box">
 						<c:forEach items="${travelBoardList}" var="board">
 							<aside>
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
@@ -72,14 +69,11 @@
 											</div>
 
 										</div>
-										<!-- user-detail -->
 									</div>
-									<!-- content-footer -->
 											</aside>
 								</c:forEach>
+
 					</div>
-</div>
-</div>
 </section>
 <!-- js -->
 	<script src="js/jquery-3.1.1.js"></script>
