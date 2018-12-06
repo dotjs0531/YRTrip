@@ -41,7 +41,7 @@
     <section class="header_area" id="home">
         <!--   start logo & menu markup    -->
         <div class="logo_menu" id="sticker">
-            <div class="container" style="padding-bottom:0">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
                         <div class="logo">

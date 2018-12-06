@@ -43,7 +43,7 @@
 
 <section class="about-us">
         <div class="logo_menu" id="sticker" style="background-color:white; box-shadow: 0 0 10px rgba(0,0,0,0.15)">
-            <div class="container" style="padding-bottom:0">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
                         <div class="logo">
@@ -87,7 +87,9 @@
         </div>
     </section>
         
+    <div style="padding-bottom:50px">
 	<tiles:insertAttribute name="content" />
+	</div>
 
 
 	<div class="modal fade">
