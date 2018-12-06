@@ -7,7 +7,7 @@ public class QnaVO {
 	private String userId;		//작성자ID
 	private String userName;	//작성자이름
 	private String qnaDate;		//작성일
-	private String qnaAnwer;	//답변여부
+	private String qnaAnswer;	//답변여부
 	public int getQnaId() {
 		return qnaId;
 	}
@@ -44,16 +44,16 @@ public class QnaVO {
 	public void setQnaDate(String qnaDate) {
 		this.qnaDate = qnaDate;
 	}
-	public String getQnaAnwer() {
-		return qnaAnwer;
+	public String getQnaAnswer() {
+		return qnaAnswer;
 	}
-	public void setQnaAnwer(String qnaAnwer) {
-		this.qnaAnwer = qnaAnwer;
+	public void setQnaAnswer(String qnaAnswer) {
+		this.qnaAnswer = qnaAnswer;
 	}
 	@Override
 	public String toString() {
 		return "QnaVO [qnaId=" + qnaId + ", qnaTitle=" + qnaTitle + ", qnaContent=" + qnaContent + ", userId=" + userId
-				+ ", userName=" + userName + ", qnaDate=" + qnaDate + ", qnaAnwer=" + qnaAnwer + "]";
+				+ ", userName=" + userName + ", qnaDate=" + qnaDate + ", qnaAnswer=" + qnaAnswer + "]";
 	}
 	
 }
