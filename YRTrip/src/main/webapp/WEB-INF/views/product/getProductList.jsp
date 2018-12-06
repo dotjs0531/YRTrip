@@ -9,15 +9,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-
+ 
   <title>상품</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" >
 
   <!-- Custom styles for this template -->
-    <link href="./css/shop-homepage.css" rel="stylesheet">
+    <link href="resources/css/product.css" rel="stylesheet">
 
 </head>
 
@@ -85,12 +85,12 @@
               <div class="thumbnail">
                 <img src="http://tech.firstpost.com/wp-content/uploads/2014/09/Apple_iPhone6_Reuters.jpg" alt="" class="img-fluid">
                 <div class="caption">
-                  <h4 class="pull-right">가격</h4>
-                  <h4><a href="#">상품명</a></h4>
-                  <p>상품설명????</p>
-                  <p>상품상태 넣어야한다</p>
-                  <p>상품카테고리</p>
-                  <p>상품상태</p>
+                  <h4 class="pull-right">${product.itemPrice}</h4>
+                  <h4><a href="#">${product.itemName}</a></h4>
+                  <p>${product.itemContent}</p>
+                  <p>${product.itemOrderdetail}</p>
+                  <p>${product.itemCategory}</p>
+                  <p>${product.itemCondition}</p>
                 </div>
                 <div class="ratings text-center">
                   <p>
@@ -291,7 +291,7 @@
 
   <!-- Bootstrap core JavaScript -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 </body>
 
 </html>

@@ -15,31 +15,31 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void insertProduct(ProductVO vo) {
-		
+		dao.insertProduct(vo);
 	}
 
 	@Override
 	public void updateProduct(ProductVO vo) {
-		// TODO Auto-generated method stub
+		dao.updateProduct(vo);
 
 	}
 
 	@Override
 	public void deleteProduct(ProductVO vo) {
-		// TODO Auto-generated method stub
+		dao.deleteProduct(vo);
 
 	}
 
 	@Override
 	public ProductVO getProduct(ProductVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getProduct(vo);
 	}
 
 	@Override
 	public List<ProductVO> getProductList(ProductVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getProductList(vo);
 	}
 
 }

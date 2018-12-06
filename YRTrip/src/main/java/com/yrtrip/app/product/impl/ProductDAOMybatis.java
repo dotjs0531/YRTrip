@@ -1,5 +1,5 @@
 package com.yrtrip.app.product.impl;
-/*작업덜함*/
+
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,21 +19,19 @@ public class ProductDAOMybatis {
 	}
 	
 	public void updateProduct(ProductVO vo) {
-		mybatis.update("product.insertProduct", vo);
+		mybatis.update("product.updateProduct", vo);
 
 	}
 	
 	public void deleteProduct(ProductVO vo) {
-		mybatis.update("product.insertProduct", vo);
-	}
-	
-	public List<ProductVO> getProductList(ProductVO vo){
-		return mybatis.selectList("product.getProductList", vo);
+		mybatis.update("product.deleteProduct", vo);
 	}
 	
 	public ProductVO getProduct(ProductVO vo) {
 		return mybatis.selectOne("product.getProduct", vo);
 	}
 	
-	
+	public List<ProductVO> getProductList(ProductVO vo){
+		return mybatis.selectList("product.getProductList", vo);
+	}	
 }
