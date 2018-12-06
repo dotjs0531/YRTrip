@@ -228,18 +228,9 @@
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyriddddght &copy; Your
-				Website 2017</p>
-		</div>
-		<!-- /.container -->
-	</footer>
-
 	<!-- Bootstrap core JavaScript -->
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
