@@ -32,6 +32,7 @@ public class ProductDAOMybatis {
 	}
 	
 	public List<ProductVO> getProductList(ProductVO vo){
+		System.out.println("ddd");
 		return mybatis.selectList("product.getProductList", vo);
 	}	
 }

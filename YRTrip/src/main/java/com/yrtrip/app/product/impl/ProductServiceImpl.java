@@ -38,7 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductVO> getProductList(ProductVO vo) {
-		// TODO Auto-generated method stub
+		System.out.println("되고 있음!");
 		return dao.getProductList(vo);
 	}
 
