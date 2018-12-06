@@ -17,10 +17,27 @@
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
 </head>
 <body>
-<section id="blog-section">
-	<div>
-<!-- 게시판 검색창 만들기 -->
-	<div class="container content-box">
+<!-- 검색창 -->
+    <section class="about_us_area" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
+                    <div class="single-pricing-table">
+                        <div class="pricing-title">
+                            <h2 style="color:black">고객센터</h2>
+                        </div>
+                        <ul class=price-list>
+                            <li><a href="getNoticeList" style="color:black">공지사항</a></li>
+                            <li><a href="getQnaList" style="color:black">1:1 문의</a></li>
+                        </ul>
+                        <div class="order-buton">
+                            <a href="#">탈퇴</a>
+                        </div>
+                    </div>
+                </div>
+<!-- 리스트 -->
+	<div class="content-box">
+
 						<c:forEach items="${travelBoardList}" var="board">
 							<aside>
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
@@ -61,9 +78,10 @@
 											</aside>
 								</c:forEach>
 					</div>
-					</div>
-	</section>
-
+</div>
+</div>
+</section>
+<!-- js -->
 	<script src="js/jquery-3.1.1.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script>

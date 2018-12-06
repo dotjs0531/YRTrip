@@ -1,12 +1,16 @@
 @charset "UTF-8";
 /* 검색 */
-
-/* 목록 */
-#blog-section{margin-top:40px;margin-bottom:80px;}
-.container {
-   width: 80%;
+.search-method {
+    float: left;
+    width: 260px;
+    padding-top:100px;
+    display:inline;
 }
-.content-box{
+/* 목록 */
+.cont-section{margin-top:40px;margin-bottom:80px;}
+.content-box {
+    float: right;
+    width: 920px;
 	padding-top:100px;
 }
 .content-title{padding:5px;background-color:#fff;}
