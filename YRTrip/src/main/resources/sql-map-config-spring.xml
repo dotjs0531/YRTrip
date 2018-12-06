@@ -15,6 +15,7 @@
 		<typeAlias alias="travelboard" type="com.yrtrip.app.travel.TravelBoardVO" />
 		<typeAlias alias="travelplace" type="com.yrtrip.app.travel.TravelPlaceVO" />
 		<typeAlias alias="qna" type="com.yrtrip.app.qna.QnaVO" />
+		<typeAlias alias="user" type="com.yrtrip.app.user.UserVO" />
 	</typeAliases>
 	
 </configuration>

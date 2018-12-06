@@ -89,6 +89,7 @@
         
 	<tiles:insertAttribute name="content" />
 
+
 	<div class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -106,16 +107,16 @@
 							class="row justify-content-center align-items-center">
 							<div id="login-column" class="col-md-6">
 								<div id="login-box" class="col-md-12">
-									<form id="login-form" class="form" action="" method="post">
+									<form id="login-form" class="form" action="login" method="post">
 										<h3 class="text-center text-info" style="color:#5f768b;">Login</h3>
 										<div class="form-group">
-											<label for="username" class="text-info" style="color:#5f768b;">Username:</label><br>
-											<input type="text" name="username" id="username"
+											<label for="username" class="text-info" style="color:#5f768b;">UserID:</label><br>
+											<input type="text" name="userId" id="username" value="${user.userId}"
 												class="form-control">
 										</div>
 										<div class="form-group">
 											<label for="password" class="text-info" style="color:#5f768b;">Password:</label><br>
-											<input type="text" name="password" id="password"
+											<input type="text" name="userPw" id="password" value="${user.userPw}"
 												class="form-control">
 										</div>
 										<div class="form-group">
@@ -165,14 +166,10 @@
     <script src="resources/assets/js/waypoints.min.js"></script>
     <script src="resources/assets/js/scripts.js"></script>
     <script type="text/javascript">
-	$(function() {
-	    //setNavigation();
-	    
-		$("#popbutton").click(function() {
-			$('div.modal').modal({
-				remote : 'layer.html'
-			});
-		})
+	$(function(){
+    	$("#popbutton").click(function(){
+        	$('div.modal').modal({remote : 'login.jsp'});
+    	})
 	})/* 
 
 	function setNavigation() {
