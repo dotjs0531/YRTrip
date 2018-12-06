@@ -43,7 +43,7 @@
 
 <section class="about-us">
         <div class="logo_menu" id="sticker" style="background-color:white; box-shadow: 0 0 10px rgba(0,0,0,0.15)">
-            <div class="container">
+            <div class="container" style="padding-bottom:0">
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
                         <div class="logo">
@@ -139,11 +139,9 @@
 		</div>
 	</div>
 	
-	
 		<footer>
 			<tiles:insertAttribute name="footer" />
 		</footer>
-
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
