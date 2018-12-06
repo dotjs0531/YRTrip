@@ -14,7 +14,7 @@
 <body>
 	<!-- 동행 게시판 테이블 부분 -->
 	 <section class="about_us_area" id="about">
-	<div class="container">
+	 <div class="container">
 		<div class="row page-title text-center wow bounce" data-wow-delay="1s">
 			<h2>동행 게시판</h2>
 		</div>
