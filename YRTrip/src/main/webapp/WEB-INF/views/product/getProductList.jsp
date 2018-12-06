@@ -26,12 +26,13 @@
   <title>제품 상세 페이지</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!--  product.bootstrap.min.css 이거 어쩌냐ㅠㅠ -->
+  <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
   <!-- Custom styles for this template -->
-  <link href="./css/shop-homepage.css" rel="stylesheet">
+  <link href="resources/css/product.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz">
   <script>
     var slideIndex = 0;
@@ -46,9 +47,7 @@
       slides[slideIndex - 1].style.display = "block";
       setTimeout(showSlides, 2000); // Change image every 2 seconds
     })
-
-
-  </script>
+    </script>
 </head>
 
 <body>
@@ -129,17 +128,27 @@
                     </a>
                     <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
+                      <span class="sr-only">N ext</span>
                     </a>
                   </div>
                 </div>
               </div>
+              <!-- jasjflskdjfbnbcncnkl -->
               <!-- 오른쪽 아래 -->
               <div class="product-seller-recommended">
-                <h3 class="mb-5">판매자의 다른 상품 </h3>
+                <h3 class="mb-5">판매자의 다vbxcvm.xcm.vm른 상품 </h3>
                 <!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
                 <div class="row">
                   <!-- <div class="recommended-items card-deck"> -->
+                  <div class="col-md-4">
+                    <div class="card">
+                      <img src="https://via.placeholder.com/157x157" class="card-img-top">
+                      <div class="card-body">
+                        <h5 class="card-title">판hdjskafhksahk매자 다른 상품 이름1 </h5>
+                        <span class="text-muted">￦ 12,000</span>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-md-4">
                     <div class="card">
                       <img src="https://via.placeholder.com/157x157" class="card-img-top">
@@ -153,29 +162,12 @@
                     <div class="card">
                       <img src="https://via.placeholder.com/157x157" class="card-img-top">
                       <div class="card-body">
-                        <h5 class="card-title">￦ 12,000</h5>
-                        <span class="text-muted">판매자 다른 상품 이름2</span>
+                        <h5 class="card-title">판매자 다른 상품 이름1 </h5>
+                        <span class="text-muted">￦ 12,000</span>
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4">
-                    <div class="card">
-                      <img src="https://via.placeholder.com/157x157" class="card-img-top">
-                      <div class="card-body">
-                        <h5 class="card-title">￦ 12,000</h5>
-                        <span class="text-muted"><small>판매자 다른 상품 이름3</small></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="card">
-                      <img src="https://via.placeholder.com/157x157" class="card-img-top">
-                      <div class="card-body">
-                        <h5 class="card-title">가격넣기4</h5>
-                        <span class="text-muted"><small>판매자 다른 상품 이름4</small></span>
-                      </div>
-                    </div>
-                  </div>
+            
                   <!-- </div> -->
                 </div>
                 <!-- /.recommended-items-->
@@ -214,8 +206,8 @@
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vel reiciendis voluptatibus
                     assumenda tempora vitae aut adipisci harum, corporis in id perferendis quia repellat
                     reprehenderit temporibus aspernatur ab ullam magni error
-                    consectetur, facilis inventore ipsum, veniam voluptas. Error laboriosam atque quisquam
-                    facere esse repellat consectetur quos eum, quaerat blanditiis saepe?</p>
+                    consectetur, fac  ilis inventore ipsum, veniam voluptas. Error laboriosam atque quisquam
+                    facere  esse repellat consectetur quos eum, quaerat blanditiis saepe?</p>
                 </div>
                 <div class="product-faq mb-5">
                   <h2 class="mb-3">Q&A라고 쓰고 큐엔에이라고 읽</h2>
@@ -268,19 +260,11 @@
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyriddddght &copy; Your Website 2017</p>
-    </div>
-    <!-- /.container -->
+  
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-    crossorigin="anonymous"></script>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
