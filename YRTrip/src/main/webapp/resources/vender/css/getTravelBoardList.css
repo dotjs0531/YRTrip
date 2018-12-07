@@ -13,7 +13,7 @@
 
 .search-box {
 	border:1px solid #e3e3e3;
-	width: 200px;
+	width: 250px;
 	background: #fff;
 	-webkit-transition: all .3s ease-in-out 0s;
 	transition: all .3s ease-in-out 0s;
@@ -21,6 +21,12 @@
 	background: #fff none repeat scroll 0 0;
 	display: inline-block;
 }
+
+.search-title {
+    padding: 10px;
+    position: relative;
+}
+
 
 /* 목록 */
 .list-box {
@@ -68,7 +74,7 @@
 }
 
 .list-box>aside {
-	width: 22%;
+	width: 240px;
 	margin-right: 20px;
 	margin-top: 30px;
 	box-shadow: 1px 4px 16px 3px rgba(199, 197, 199, 1);

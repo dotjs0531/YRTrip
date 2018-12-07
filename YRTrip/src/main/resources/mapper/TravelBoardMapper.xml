@@ -21,16 +21,16 @@
 	FROM TRAVELBOARDT
  	<where>
 	<choose>
-		<when test="searchCondition != null and searchCondition == 'user_id'">
+		<when test="searchCondition != null and searchCondition == 'userId'">
 			and user_id like '%' || #{searchKeyword} || '%'
 		</when>	
-		<when test="searchCondition != null and searchCondition == 'tinfo_id'">
+		<when test="searchCondition != null and searchCondition == 'tinfoId'">
 			and tinfo_id like '%' || #{searchKeyword} || '%'
 		</when>	
-		<when test="searchCondition != null and searchCondition == 'travel_title'">
+		<when test="searchCondition != null and searchCondition == 'travelTitle'">
 			and travel_title like '%' || #{searchKeyword} || '%'
 		</when>
-		<when test="searchCondition != null and searchCondition == 'travel_content'">
+		<when test="searchCondition != null and searchCondition == 'travelContent'">
 			and travel_content like '%' || #{searchKeyword} || '%'
 		</when>
 	</choose>
@@ -63,39 +63,40 @@
 								USER_ID,
 								TRAVEL_WITH,
 								TRAVEL_PIC)
-		VALUES (#{travel_no}, 
-				#{travel_pay}, 
-				#{travel_sche}, 
-				#{travel_start}, 
-				#{travel_title}, 
-				#{travel_content}, 
+		VALUES (#{travelNo}, 
+				#{travelPerson},
+				#{travelPay}, 
+				#{travelSche}, 
+				#{travelStart}, 
+				#{travelTitle}, 
+				#{travelContent}, 
 				sysdate, 
-				#{travel_hit}, 
-				#{travel_like}, 
-				#{tinfo_id}, 
-				#{user_id}, 
-				#{travel_with}, 
-				#{travel_pic})
+				#{travelHit}, 
+				#{travelLike}, 
+				#{tinfoId}, 
+				#{userId}, 
+				#{travelWith}, 
+				#{travelPic})
 </insert>
 
 <update id="updateTravelBoard" parameterType="travelBoard">
 	UPDATE TRAVELBOARDT 
-	SET TRAVEL_PERSON = #{travel_person}, 
-		TRAVEL_PAY = #{travel_pay},
-		TRAVEL_SCHE = #{travel_sche},
-		TRAVEL_START = #{travel_start},
-		TRAVEL_TITLE = #{travel_title},
-		TRAVEL_CONTENT = #{travel_content},
-		TRAVEL_DATE = #{travel_date},
-		TINFO_ID = #{tinfo_id},
-		TRAVEL_WITH = #{travel_with},
-		TRAVEL_PIC = #{travel_pic}
-	WHERE TRAVEL_NO = #{travel_no}
+	SET TRAVEL_PERSON = #{travelPerson}, 
+		TRAVEL_PAY = #{travelPay},
+		TRAVEL_SCHE = #{travelSche},
+		TRAVEL_START = #{travelStart},
+		TRAVEL_TITLE = #{travelTitle},
+		TRAVEL_CONTENT = #{travelContent},
+		TRAVEL_DATE = #{travelDate},
+		TINFO_ID = #{tinfoId},
+		TRAVEL_WITH = #{travelWith},
+		TRAVEL_PIC = #{travelPic}
+	WHERE TRAVEL_NO = #{travelNo}
 </update>
 
 <delete id="deleteTravelBoard" parameterType="int">
 	DELETE FROM TRAVELBOARDT 
-	WHERE TRAVEL_NO = #{travel_no}
+	WHERE TRAVEL_NO = #{travelNo}
 </delete>
 
 <delete id="deleteTravelBoardList" parameterType="list">
@@ -127,6 +128,6 @@
 			TRAVEL_WITH,
 			TRAVEL_PIC
 	FROM TRAVELBOARDT 
-	WHERE TRAVEL_NO = #{travel_no}
+	WHERE TRAVEL_NO = #{travelNo}
 </select>
 </mapper> 

@@ -3,7 +3,7 @@ package com.yrtrip.app.travel;
 public class TravelBoardVO {
 
 	private int travelNo;
-	private int travelperson;
+	private int travelPerson;
 	private int travelPay;
 	private String travelSche;
 	private String travelStart;
@@ -28,11 +28,11 @@ public class TravelBoardVO {
 	public void setTravelNo(int travelNo) {
 		this.travelNo = travelNo;
 	}
-	public int getTravelperson() {
-		return travelperson;
+	public int getTravelPerson() {
+		return travelPerson;
 	}
-	public void setTravelperson(int travelperson) {
-		this.travelperson = travelperson;
+	public void setTravelPerson(int travelPerson) {
+		this.travelPerson = travelPerson;
 	}
 	public int getTravelPay() {
 		return travelPay;

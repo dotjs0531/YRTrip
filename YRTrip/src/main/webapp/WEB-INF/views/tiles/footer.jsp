@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
                     <div class="single-footer clearfix">
-                        <h2>news latters</h2>
+                        <h2>news letters</h2>
                         <input type="text" class="form-control">
                         <input type="submit" class="submt-button" value="submit">
                     </div>
@@ -33,7 +33,7 @@ pageEncoding="UTF-8"%>
         <div class="container">
             <div class="col-xs-12 col-sm-6 col-md-6 text-left">
                 <div class="footer-text">
-                    <p>Copyright 2016, All Rights Reserved</p>
+                    <p>Copyright 2018, All Rights Reserved</p>
                 </div>
             </div>
             <div class="col-xs-12  col-sm-6 col-md-6 text-right">
