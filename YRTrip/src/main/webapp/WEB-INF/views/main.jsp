@@ -64,7 +64,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-4 col-lg-3 signup">
                         <ul class="nav navbar-nav">
                             <li><a href="#" id="popbutton">login</a></li>
-                            <li><a href="#">sign up</a></li>
+                            <li><a href="signup">sign up</a></li>
                         </ul>
                     </div>
                     </c:if>
