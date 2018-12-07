@@ -52,7 +52,7 @@
                         <nav class="navbar">
                             <!-- Collect the nav links, forms, and other content for toggling -->
                                 <ul class="nav navbar-nav navbar-right menu">
-                                    <li class="current-menu-item"><a href="main">홈 <span class="caret"></span></a></li>
+                                    <li class="current-menu-item"><a href="main">홈 </a></li>
                                     <li><a href="getTravelBoardList">여행정보</a></li>
                                     <li><a href="getPartnerList">동행구하기</a></li>
                                     <li><a href="getProductList">중고상품</a></li>

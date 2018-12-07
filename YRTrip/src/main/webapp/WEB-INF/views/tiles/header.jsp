@@ -5,8 +5,36 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+    <!--  jquery.min.js  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <!--    bootstrap.min.js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!--    jquery.sticky.js-->
+    <script src="resources/js/jquery.sticky.js"></script>
+    <!--  owl.carousel.min.js  -->
+    <script src="resources/js/jquery.meanmenu.js"></script>
+    <script src="resources/js/owl.carousel.min.js"></script>
+    <!--  jquery.mb.YTPlayer.min.js   -->
+    <script src="resources/js/jquery.mb.YTPlayer.min.js"></script>
+    <!--    slick.min.js-->
+    <script src="resources/js/slick.min.js"></script>
+    <!--    jquery.nav.js-->
+    <script src="resources/js/jquery.nav.js"></script>
+    <!--jquery waypoints js-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+    <!--    jquery counterup js-->
+    <script src="resources/js/jquery.counterup.min.js"></script>
+    <!--    main.js-->
+    <script src="resources/js/main.js"></script>
+    
+    <!-- Javascript -->
+    <script type="text/javascript">
+	$(function(){
+    	$("#popbutton").click(function(){
+        	$('div#login').modal(true);
+    	})
+	})
+	</script>
 
 </head>
 <body>
@@ -16,14 +44,14 @@
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
                         <div class="logo">
-                            <a href="main.html"><img src="resources/img/logo.png" alt="logo"></a>
+                            <a href="main"><img src="resources/img/logo.png" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-md-6 col-xs-6 col-md-offset-1 col-sm-7 col-lg-offset-1 col-lg-6 mobMenuCol">
                         <nav class="navbar">
 
 							<!-- 검색버튼 부분 -->
-							<ul class="navbar-search navbar-right navbar-search-button">
+							<!-- <ul class="navbar-search navbar-right navbar-search-button">
 								<li><a class="search-button" href="#"><i
 										class="fa fa-search"></i></a></li>
 							</ul>
@@ -34,14 +62,14 @@
 									<input type="text" name="search" placeholder="Search..."
 										class="search form-control">
 								</div>
-							</form>
+							</form> -->
 							
 							<!-- <ul class="nav navbar-nav navbar-right menu"> -->
                             <ul class="nav navbar-nav navbar-right menu navbar-menu-items wow fadeIn">
-                                <li><a href="main.html">홈  <span class="caret"></span></a></li>
+                                <li><a href="main">홈 </a></li>
                                 <li class="current-menu-item"><a href="getTravelBoardList">여행정보</a></li>
-                                <li><a href="#">동행구하기</a></li>
-                                <li><a href="#">중고상품</a></li>
+                                <li><a href="getPartnerList">동행구하기</a></li>
+                                <li><a href="getProductList">중고상품</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -49,7 +77,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-4 col-lg-3 signup">
                         <ul class="nav navbar-nav">
                             <li><a href="#" id="popbutton">login</a></li>
-                            <li><a href="#">sign up</a></li>
+                            <li><a href="signup">sign up</a></li>
                         </ul>
                     </div>
                     </c:if>
@@ -66,7 +94,7 @@
         </div>
     </section>
         
-	<div class="modal fade">
+	<div class="modal fade" id="login">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<!-- remote ajax call이 되는영역 -->

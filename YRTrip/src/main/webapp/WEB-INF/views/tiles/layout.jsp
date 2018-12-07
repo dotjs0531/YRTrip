@@ -18,7 +18,7 @@
     <!--  style css  -->
     <link href="resources/style.css" rel="stylesheet">
 	<!-- CSS -->
-    <link rel="stylesheet" href="resources/assets/css/style.css">
+    <!-- <link rel="stylesheet" href="resources/assets/css/style.css"> -->
 </head>
 <body class="js">
 <div id="wrapper">
@@ -31,15 +31,7 @@
 		<footer>
 			<tiles:insertAttribute name="footer" />
 		</footer>
-</div>       
-    <!-- Javascript -->
-    <script type="text/javascript">
-	$(function(){
-    	$("#popbutton").click(function(){
-        	$('div.modal').modal({remote : 'login.jsp'});
-    	})
-	})
-	</script>
-    </body>
+</div>
+</body>
 
 </html>
