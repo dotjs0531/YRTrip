@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-offset-1 col-sm-6">
+                <div class="col-sm-6">
                     	<table class="table table-hover">
                     		<thead>
                     			<tr>

@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-offset-1 col-sm-6">
+                <div class="col-sm-6">
                 <form action="./updateQna" method="post">
                 	<input type="hidden" name="qnaId" value="${qna.qnaId}">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">

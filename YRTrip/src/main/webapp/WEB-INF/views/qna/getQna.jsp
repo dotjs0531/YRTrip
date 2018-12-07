@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-offset-1 col-sm-6">
+                <div class="col-sm-6">
                     <div class="about_car">
                     	<br/>
 						<h3 style="color:black">${qna.qnaTitle}</h3>

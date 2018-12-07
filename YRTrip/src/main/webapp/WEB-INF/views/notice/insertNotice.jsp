@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-offset-1 col-sm-6">
+                <div class="col-sm-6">
                 <form action="./insertNotice" method="post">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
