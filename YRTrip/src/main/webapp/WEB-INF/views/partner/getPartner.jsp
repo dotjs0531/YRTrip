@@ -5,8 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동행 게시판 상세보기</title>
+<title>동행 게시판 상세 보기</title>
 </head>
 <body>
+	
+
 </body>
 </html>

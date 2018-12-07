@@ -38,7 +38,7 @@
 </select>
 
 <insert id="insertPartner" parameterType="partner">
-	<selectKey keyProperty="id"	resultType="integer" order="BEFORE">
+	<selectKey keyProperty="partnerno"	resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(PARTNER_ID),0)+1 FROM PARTNERT
 	</selectKey>
 	INSERT INTO PARTNERT (
@@ -48,7 +48,7 @@
 			PARTNER_HIT, 
 			PARTNER_DATE,    
 			USER_ID,    
-			TINFO_ID,         
+			TINFO_ID,
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
@@ -62,6 +62,8 @@
 			#{partnercontent},
 			0,
 			sysdate,
+			#{userid},
+			#{tinfoid},
 			#{partnerpay},
 			#{partnerclass},
 			#{partnerperson},

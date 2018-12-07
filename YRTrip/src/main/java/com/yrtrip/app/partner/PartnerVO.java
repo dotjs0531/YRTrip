@@ -95,7 +95,7 @@ public class PartnerVO {
 		return partnerstartdate;
 	}
 
-	public void setPartnerstartDate(String partnerstartdate) {
+	public void setPartnerstartdate(String partnerstartdate) {
 		this.partnerstartdate = partnerstartdate;
 	}
 

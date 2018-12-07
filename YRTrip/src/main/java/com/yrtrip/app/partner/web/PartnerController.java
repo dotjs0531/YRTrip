@@ -33,13 +33,13 @@ public class PartnerController {
 	}
 	
 	// 등록폼
-	@RequestMapping(value = "/insertPartner", method = RequestMethod.GET)
+	@RequestMapping(value = "/insertPartnerForm", method = RequestMethod.GET)
 	public String insertPartnerform() {
 		return "partner/insertPartner";
 	}
 
 	// 등록처리
-	@RequestMapping(value = { "insertPartner" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/insertPartner" }, method = RequestMethod.POST)
 	public String insertPartner(PartnerVO vo) { // 커맨드 객체
 		partnerService.insertPartner(vo); // 등록처
 		return "redirect:getPartnerList"; // 목록요청
