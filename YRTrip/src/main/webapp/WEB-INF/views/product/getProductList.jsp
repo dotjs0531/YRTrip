@@ -114,7 +114,7 @@ $('#product_view').on('show.bs.modal', function (e) {
 										<p>${product.itemOrderdetail}</p>
 										<p>${product.itemCategory}</p>
 										<p>${product.itemCondition}</p>
-										<p class="">${product.itemId}</p>
+										<%-- <p class="">${product.itemId}</p> --%>
 									</div>
 									<div class="ratings text-center">
 										<p>
