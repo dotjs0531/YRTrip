@@ -15,6 +15,11 @@
 	href="resources/vender/css/getTravelBoardList.css">
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
 
+<style>
+.modal-backdrop {
+	z-index: -1;
+}
+</style>
 </head>
 <body>
 <section class="content-section">
