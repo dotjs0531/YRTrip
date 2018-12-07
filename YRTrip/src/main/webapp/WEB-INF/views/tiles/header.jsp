@@ -36,6 +36,11 @@
 	})
 	</script>
 
+<style>
+.modal-backdrop {
+	z-index: -1;
+}
+</style>
 </head>
 <body>
 <section class="about-us">
