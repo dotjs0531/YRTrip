@@ -34,7 +34,7 @@
 			PARTNER_END,   
 			PARTNER_CONDITION
 	FROM	PARTNERT
-	WHERE	PARTNER_ID = #{seq}
+	WHERE	PARTNER_ID = #{partnerno}
 </select>
 
 <insert id="insertPartner" parameterType="partner">

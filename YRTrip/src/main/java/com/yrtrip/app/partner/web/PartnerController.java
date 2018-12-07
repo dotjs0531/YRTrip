@@ -28,7 +28,7 @@ public class PartnerController {
 	// 단건조회
 	@RequestMapping("/getPartner") // http://localhost:8081/app/getPartner
 	public String getPartner(Model model, PartnerVO vo) {
-		model.addAttribute("partner", partnerService.getPartner(vo)); // vo : 조회할 게시글 번호 넘어가는 것
+		model.addAttribute("partner", partnerService.getPartner(vo));	// vo : 조회할 게시글 번호 넘어가는 것
 		return "partner/getPartner";
 	}
 	

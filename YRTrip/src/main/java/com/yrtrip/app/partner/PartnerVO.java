@@ -16,7 +16,7 @@ public class PartnerVO {
 	private String partnerstartdate; // 출발일
 	private String partnerfinishdate; // 도착일
 	private String partnercondition; // 현재 상태
-
+	
 	private String userid; // 글쓴이
 	private String tinfoid; // 여행정보 ID
 
