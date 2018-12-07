@@ -10,29 +10,29 @@ import com.yrtrip.app.product.ProductVO;
 
 @Repository
 public class ProductDAOMybatis {
-	
+
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
+
 	public void insertProduct(ProductVO vo) {
 		mybatis.update("product.insertProduct", vo);
 	}
-	
+
 	public void updateProduct(ProductVO vo) {
 		mybatis.update("product.updateProduct", vo);
-
 	}
-	
+
 	public void deleteProduct(ProductVO vo) {
 		mybatis.update("product.deleteProduct", vo);
 	}
-	
+
 	public ProductVO getProduct(ProductVO vo) {
+		System.out.println("이검댐덕람ㄴ어리ㅓ미린");
 		return mybatis.selectOne("product.getProduct", vo);
 	}
-	
-	public List<ProductVO> getProductList(ProductVO vo){
+
+	public List<ProductVO> getProductList(ProductVO vo) {
 		System.out.println("ddd");
 		return mybatis.selectList("product.getProductList", vo);
-	}	
+	}
 }

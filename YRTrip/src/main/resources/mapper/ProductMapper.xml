@@ -20,6 +20,24 @@
 		FROM ITEMT
 		ORDER BY ITEM_ID
 	</select>
+	<select id="getProduct" resultType="product">
+		 SELECT ITEM_ID,
+				ITEM_NAME,
+				ITEM_PRICE,
+				ITEM_EA,
+				ITEM_CONTENT,
+				ITEM_METHOD,
+				ITEM_CATEGORY,
+				SELLER_ID,
+				ITEM_ORDERDETAIL,
+				ITEM_STAR,
+				ITEM_PIC,
+				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
+				ITEM_CONDITION,
+				ITEM_LIKE
+		FROM ITEMT
+		WHERE ITEM_ID = #{itemId}	
+	</select>
 	
 
 </mapper> 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
@@ -18,4 +19,11 @@ public class ProductController {
 		model.addAttribute("productlist", productService.getProductList(vo));
 		return "product/getProductList";
 	}
+	
+	@RequestMapping("getProduct")
+	@ResponseBody
+	public ProductVO getProduct(ProductVO vo) {
+		return productService.getProduct(vo);
+	}
+	
 }

@@ -6,10 +6,8 @@
 <html lang="kor">
 
 <head>
-
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -17,17 +15,29 @@
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"	rel="stylesheet">
 
 <!-- Custom styles for this template -->
 <link href="resources/css/product.css" rel="stylesheet">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+<script>
+$(function(){
+$('#product_view').on('show.bs.modal', function (e) {
+	  var button = $(event.target) // Button that triggered the modal
+	console.log(event);
+	var param = {itemId : button.attr("id")}
+	$.getJSON("getProduct", param, function(data){
+		var itemId = data.itemId;			
+		console.log(itemId);
+		$("#modal-title").html(itemId);
+		})		
+	});
+})
+</script>
 </head>
 
 <body>
-
 	<!-- Navigation -->
 	<nav></nav>
 
@@ -57,8 +67,7 @@
 				<div id="carouselExampleIndicators" class="carousel slide my-4"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0"
-							class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 					</ol>
@@ -105,15 +114,18 @@
 										<p>${product.itemOrderdetail}</p>
 										<p>${product.itemCategory}</p>
 										<p>${product.itemCondition}</p>
+										<p class="">${product.itemId}</p>
 									</div>
 									<div class="ratings text-center">
 										<p>
+											<!-- ${product.itemStar} 받아서 '별'로 나타내는 거 !!-->
 											<span class="glyphicon glyphicon-star"></span> <span
 												class="glyphicon glyphicon-star"></span> <span
 												class="glyphicon glyphicon-star"></span> <span
 												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> <a href="#">(15
-												reviews)</a>
+												class="glyphicon glyphicon-star"></span> <a href="#">
+												${product.itemStar}<br />(15 reviews)
+											</a>
 										</p>
 									</div>
 									<div class="space-ten"></div>
@@ -121,8 +133,9 @@
 										<button type="button" class="btn btn-primary">
 											<i class="fa fa-shopping-cart"></i> Add To Cart
 										</button>
-										<button type="button" class="btn btn-primary"
-											data-toggle="modal" data-target="#product_view">
+										<button id="${product.itemId}" type="button" 
+											class="btn btn-primary" data-toggle="modal"
+											data-target="#product_view">
 											<i class="fa fa-search"></i> Quick View
 										</button>
 									</div>
@@ -134,13 +147,14 @@
 				</div>
 
 				<!-- 팝업창 -->
+
 				<div class="modal fade product_view" id="product_view">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<a href="#" data-dismiss="modal" class="class pull-left"><span
-									class="glyphicon glyphicon-remove"></span></a>
-								<h3 class="modal-title">상품명</h3>
+								<a href="#" data-dismiss="modal" class="class pull-left">
+								<span class="glyphicon glyphicon-remove"></span></a>
+								<h3 class="modal-title" id="modal-title"></h3>
 							</div>
 							<div class="modal-body">
 								<div class="row">
@@ -151,26 +165,21 @@
 									</div>
 									<div class="col-md-6 product_content">
 										<h4>
-											<span class="pull-right">제품번호: 1231434</span>
+											<span class="pull-right">제품번호:</span>
 										</h4>
 										<div class="rating">
 											<span class="glyphicon glyphicon-star"></span> <span
 												class="glyphicon glyphicon-star"></span> <span
 												class="glyphicon glyphicon-star"></span> <span
 												class="glyphicon glyphicon-star"></span> <span
-												class="glyphicon glyphicon-star"></span> 5.0
+												class="glyphicon glyphicon-star"></span>
 											<!-- rating  -->
 										</div>
-										<p>Lorem Ipsum is simply dummy text of the printing and
-											typesetting industry. Lorem Ipsum has been the industry's
-											standard dummy text ever since the 1500s, when an unknown
-											printer took a galley of type and scrambled it to make a type
-											specimen book.Lorem Ipsum is simply dummy text of the
-											printing and typesetting industry.</p>
+										<p>${product.itemContent}</p>
 										<h3 class="cost">
-											<span class="glyphicon glyphicon-usd"></span> 75.00 <small
+											<span class="glyphicon glyphicon-usd"></span><small
 												class="pre-cost"><span
-												class="glyphicon glyphicon-usd"></span> 60.00</small>
+												class="glyphicon glyphicon-usd"></span></small>
 										</h3>
 										<div class="row">
 											<div class="col-md-4 col-sm-6 col-xs-12">
@@ -220,6 +229,7 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
 			<!-- /.col-lg-9 -->
 		</div>
@@ -230,7 +240,8 @@
 	<!-- Footer -->
 	<!-- Bootstrap core JavaScript -->
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
