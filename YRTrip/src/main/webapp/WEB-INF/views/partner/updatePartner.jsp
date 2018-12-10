@@ -11,6 +11,8 @@
   		if(name=='Others')document.getElementById('div1').innerHTML=' 비용 : <input type="text" name="partnerpay" />';
   		else document.getElementById('div1').innerHTML='';
 	}
+	
+	
 </script>
 </head>
 <body>
@@ -34,8 +36,7 @@
 				</div>
 				<div class="col-md-offset-1 col-sm-6">
 					<form action="./updatePartner" method="post">
-						<table class="table table-bordered table-striped"
-							style="text-align: center;">
+						<table class="table table-bordered table-striped" style="text-align: center;">
 							<thead>
 								<tr>
 									<th colspan="10" style="background-color: #eeeeee; text-align: center;">동행 게시판 글수정</th>
@@ -43,7 +44,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="10">카테고리 >  <select name="partnerclass">
+									<td colspan="10">카테고리 >  <select name="partnerclass" >
     															<option value="여행">여행</option>
     															<option value="문화">문화</option>
     															<option value="맛집">맛집</option>
@@ -53,13 +54,14 @@
     								</td>
 								</tr>
 								<tr>
+									<td><input type="hidden" name="partnerid" value="${partner.partnerid}"></td>
 									<td colspan="1">No.${partner.partnerid}</td>
-									<td colspan="3"><input type="text" class="form-control" placeholder="글제목" name="partnertitle" maxlength="50"></td>
+									<td colspan="3"><input type="text" class="form-control" placeholder="글제목" name="partnertitle" maxlength="50" value="${partner.partnertitle}"></td>
 									<td colspan="3">${partner.userid}</td>
 									<td colspan="3">${partner.partnerdate}</td>
 								</tr>
 								<tr>
-									<td colspan="2">여행지 : 일단보류</td>
+									<td colspan="1">여행지 : 일단보류</td>
 									<td colspan="4">여행 경비 :
     									<select name="partnerpay" id="partnerpay" onchange="showfield(this.options[this.selectedIndex].value)">
                                   			<option value="100000">100,000원대</option>
@@ -71,12 +73,16 @@
 									<div id="div1"></div>
     								</td>
     								<td>인원</td>
-    								<td colspan="4"><select name="partnerpers">
+    								<td colspan="3"><select name="partnerpers">
     									<option value="2">2명</option>
     									<option value="3">3명</option>
     									<option value="4">4명</option>
     									<option value="5">5명</option>
     									<option value="단체">단체</option>
+    								</select></td>
+    								<td colspan="3"><select name="partnercondition">
+    									<option value="진행중">진행중</option>
+    									<option value="모집완료">모집완료</option>
     								</select></td>
 								</tr>
 								<tr>
@@ -91,7 +97,7 @@
 							</tbody>
 						</table>
 						<section>
-							<div>
+							<div  class="order-buton" style="padding-top:500px; float:right">
 								<button class="submit-btn">등록</button>
 								<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
 							</div>

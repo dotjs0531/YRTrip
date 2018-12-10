@@ -104,7 +104,7 @@
 			 				</tbody>
 			 			</table>
                     	<section>
-                    		<div class="order-buton" style="padding-top:410px; float:right">
+                    		<div class="order-buton" style="padding-top:500px; float:right">
                             	<button class="submit-btn">등록</button>
                             	<a href="${pageContext.request.contextPath}/getPartnerList">취소</a>
                         	</div>

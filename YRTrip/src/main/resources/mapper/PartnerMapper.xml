@@ -14,7 +14,7 @@
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
 			TO_CHAR(PARTNER_START, 'MM/DD') PARTNER_START,    
-			TO_CHAR(PARTNER_END, 'MM/DD') PARTNER_END,   
+			TO_CHAR(PARTNER_END, 'MM/DD') PARTNER_END,
 			PARTNER_CONDITION
 	FROM	PARTNERT  
 </select>
@@ -38,7 +38,7 @@
 </select>
 
 <insert id="insertPartner" parameterType="partner">
-	<selectKey keyProperty="partnerno"	resultType="integer" order="BEFORE">
+	<selectKey keyProperty="partnerid"	resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(PARTNER_ID),0)+1 FROM PARTNERT
 	</selectKey>
 	INSERT INTO PARTNERT (
@@ -46,14 +46,14 @@
 			PARTNER_TITLE,    
 			PARTNER_CONTENT,  
 			PARTNER_HIT, 
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,    
+			PARTNER_DATE,    
 			USER_ID,    
 			TINFO_ID,
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_START,    
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_END,   
+			PARTNER_START,    
+			PARTNER_END,   
 			PARTNER_CONDITION
 			)
 	VALUES (
@@ -66,7 +66,7 @@
 			#{tinfoid},
 			#{partnerpay},
 			#{partnerclass},
-			#{partnerperson},
+			#{partnerpers},
 			#{partnerstart},
 			#{partnerend},
 			#{partnercondition}
@@ -78,10 +78,10 @@
 						PARTNER_PAY		= #{partnerpay},
 						PARTNER_CLASS	= #{partnerclass},
 						PARTNER_PERS	= #{partnerpers},
-						TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_START	= #{partnerstart},
-						TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_END		= #{partnerend},
+						PARTNER_START	= #{partnerstart},
+						PARTNER_END		= #{partnerend},
 						PARTNER_CONDITION = #{partnercondition}
-				WHERE	PARTNER_ID = #{partner_id}
+				WHERE	PARTNER_ID = #{partnerid}
 </update>
 <delete id="deletePartner" parameterType="int">
 	DELETE	FROM PARTNERT

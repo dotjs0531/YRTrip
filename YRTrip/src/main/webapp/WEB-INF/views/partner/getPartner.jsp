@@ -65,7 +65,7 @@ function del(partnerid){
 			 				</tbody>
 			 			</table>
                     	<section>
-                    		<div class="order-buton" style="padding-top:410px; float:right">
+                    		<div class="order-buton" style="padding-top:500px; float:right">
                     			<a href="./updatePartnerForm?partnerid=${partner.partnerid}">수정</a>&nbsp;&nbsp;
                     			<button class="submit-btn" onclick="del('${partner.partnerid}')">삭제</button>
                             	<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
