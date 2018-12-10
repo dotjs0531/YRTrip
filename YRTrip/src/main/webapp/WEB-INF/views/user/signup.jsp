@@ -51,7 +51,7 @@ input[type=text], select, input[type=password], input[type=email], input[type=da
     box-sizing: border-box;
     color:black;
 }
-input[type=submit],input[type=boutton] {
+input[type=submit],input[type=button] {
     width: 100%;
     background-color: #f9bf3b;
     color: white;
@@ -108,7 +108,6 @@ input[type=radio]{
     padding: 20px;
 } */
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 $(function(){
 	
@@ -224,7 +223,6 @@ $(function(){
             <div class="row" style="width:600px; margin:0 auto;">
             <h3 style="color:black; text-align:center;">회원가입</h3><br>
             <form action="./signup" method="post">
-            <fieldset>
 				<input type="text" id="userId" name="userId" placeholder="아이디" onblur="ck_id()" required>
 				<span id="MsgId" class="none">유효성체크</span>
 				
@@ -260,8 +258,6 @@ $(function(){
 					<label for="woman" onclick="ck_gender()"> 여자 </label>
 					</span>
 				</div>
-				<span id="MsgGender" class="none">유효성체크</span>
-				
 				<!-- <select id="country" name="country">
 					<option value="australia">20대</option>
 					<option value="canada">30대</option>
@@ -269,7 +265,6 @@ $(function(){
 				</select> -->
 				
 				<br><input type="submit" value="회원가입">
-			</fieldset>
             </form>
             </div>
         </div>

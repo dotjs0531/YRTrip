@@ -85,7 +85,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-4 col-lg-3 signup">
                         <ul class="nav navbar-nav">
                             <li><a href="logout">logout</a></li>
-                            <li><a href="#">${sessionScope.login.userId}</a></li>
+                            <li><a href="./getMyInfo?userId=${sessionScope.login.userId}">${sessionScope.login.userId}</a></li>
                         </ul>
                     </div>
 					</c:if>
