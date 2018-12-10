@@ -48,9 +48,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 </head>
 
 <body>
-	<!-- Navigation -->
-	<nav></nav>
-
+<section class="about_us_area" id="about">
 	<!-- Page Content -->
 	<div class="container">
 
@@ -246,8 +244,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 		<!-- /.row -->
 	</div>
 	<!-- /.container -->
-
-	<!-- Footer -->
+</section>
 	<!-- Bootstrap core JavaScript -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

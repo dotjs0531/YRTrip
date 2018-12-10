@@ -52,9 +52,7 @@
 
 <body>
 
-  <!-- Navigation -->
-  <nav>
-  </nav>
+ <section class="about_us_area" id="about">
 
   <!-- Page Content 전체 바디 -->
   <div class="container">
@@ -243,11 +241,7 @@
     <!-- /.row -->
   </div>
   <!-- /.container 전체 바디끝-->
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-  
-  </footer>
+</section>
 
   <!-- Bootstrap core JavaScript -->
   
