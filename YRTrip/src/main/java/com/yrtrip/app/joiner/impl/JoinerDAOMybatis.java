@@ -17,7 +17,7 @@ public class JoinerDAOMybatis {
 	// 신청
 	public void insertJoiner(JoinerVO vo) {
 		System.out.println("mybatis 동행 신청 기능 처리");
-		mybatis.update("joiner.inserJoiner", vo);
+		mybatis.update("joiner.insertJoiner", vo);
 	}
 
 	// 신청 취소
