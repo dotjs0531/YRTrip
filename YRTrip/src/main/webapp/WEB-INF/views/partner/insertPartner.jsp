@@ -84,19 +84,19 @@
 									<div id="div1"></div>
     								</td>
     								<td>인원</td>
-    								<td><select name="partnerperson">
+    								<td><select name="partnerpers">
     									<option value="2">2명</option>
     									<option value="3">3명</option>
     									<option value="4">4명</option>
     									<option value="5">5명</option>
     									<option value="단체">단체</option>
-    								</select>
+    								</select></td>
 			 					</tr>
 			 					<tr>
 			 						<td>출발일 : </td>
-    								<td colspan="4"><input type="date" id="partnerstartdate" name="partnerstartdate" value="partnerstartdate"></td>
+    								<td colspan="4"><input type="date" id="partnerstart" name="partnerstart" value="partnerstart"></td>
     								<td>도착일 : </td>
-    								<td colspan="4"><input type="date" id="partnerfinishdate" name="partnerfinishdate" value="partnerfinishdate"></td>
+    								<td colspan="4"><input type="date" id="partnerend" name="partnerend" value="partnerend"></td>
 			 					</tr>
 			 					<tr>
 			 						<td colspan="10"><textarea class="form-control" placeholder="글 내용" name="partnercontent" maxlength="2048" style="height:200px"></textarea> </td>

@@ -29,7 +29,7 @@ public class PartnerBoardDAOMybatis {
 	//삭제
 	public void deletePartner(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 삭제 기능 처리");
-		mybatis.update("partner.deletePartner", vo.getPartnerno());	
+		mybatis.update("partner.deletePartner", vo.getPartnerid());	
 	}
 	
 	//선택삭제

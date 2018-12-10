@@ -46,10 +46,10 @@ public class PartnerController {
 	}
 
 	// 수정폼
-	@RequestMapping("/updatePartnerform")
-	public String updatePartnerform(Model model, PartnerVO vo) {
+	@RequestMapping("/updatePartnerForm")
+	public String updatePartnerForm(Model model, PartnerVO vo) {
 		model.addAttribute("partner", partnerService.getPartner(vo));
-		return "partner/updatePartnerForm";
+		return "partner/updatePartner";
 	}
 
 	// 수정처리

@@ -1,10 +1,12 @@
 package com.yrtrip.app.partner;
 
+import java.util.Arrays;
+
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PartnerVO {
-	private Integer	partnerno; // 동행게시판번호
+	private Integer	partnerid; // 동행게시판번호
 	private String	partnertitle; // 동행게시판제목
 	private String	partnercontent;	//동행게시판내용
 	private Integer Partnerhit; // 동행게시판조회수
@@ -12,9 +14,9 @@ public class PartnerVO {
 
 	private String partnerpay; // 동행 비용
 	private String partnerclass; // 동행 문화, 맛집, 여행
-	private String partnerperson; // 동행 인원
-	private String partnerstartdate; // 출발일
-	private String partnerfinishdate; // 도착일
+	private String partnerpers; // 동행 인원
+	private String partnerstart; // 출발일
+	private String partnerend; // 도착일
 	private String partnercondition; // 현재 상태
 	
 	private String userid; // 글쓴이
@@ -27,12 +29,12 @@ public class PartnerVO {
 
 	private String[] seqList; //
 
-	public Integer getPartnerno() {
-		return partnerno;
+	public Integer getPartnerid() {
+		return partnerid;
 	}
 
-	public void setPartnerno(Integer partnerno) {
-		this.partnerno = partnerno;
+	public void setPartnerid(Integer partnerid) {
+		this.partnerid = partnerid;
 	}
 
 	public String getPartnertitle() {
@@ -83,28 +85,28 @@ public class PartnerVO {
 		this.partnerclass = partnerclass;
 	}
 
-	public String getPartnerperson() {
-		return partnerperson;
+	public String getPartnerpers() {
+		return partnerpers;
 	}
 
-	public void setPartnerperson(String partnerperson) {
-		this.partnerperson = partnerperson;
+	public void setPartnerpers(String partnerpers) {
+		this.partnerpers = partnerpers;
 	}
 
-	public String getPartnerstartdate() {
-		return partnerstartdate;
+	public String getPartnerstart() {
+		return partnerstart;
 	}
 
-	public void setPartnerstartdate(String partnerstartdate) {
-		this.partnerstartdate = partnerstartdate;
+	public void setPartnerstart(String partnerstart) {
+		this.partnerstart = partnerstart;
 	}
 
-	public String getPartnerfinishdate() {
-		return partnerfinishdate;
+	public String getPartnerend() {
+		return partnerend;
 	}
 
-	public void setPartnerfinishdate(String partnerfinishdate) {
-		this.partnerfinishdate = partnerfinishdate;
+	public void setPartnerend(String partnerend) {
+		this.partnerend = partnerend;
 	}
 
 	public String getPartnercondition() {
@@ -162,4 +164,16 @@ public class PartnerVO {
 	public void setSeqList(String[] seqList) {
 		this.seqList = seqList;
 	}
+
+	@Override
+	public String toString() {
+		return "PartnerVO [partnerid=" + partnerid + ", partnertitle=" + partnertitle + ", partnercontent="
+				+ partnercontent + ", Partnerhit=" + Partnerhit + ", Partnerdate=" + Partnerdate + ", partnerpay="
+				+ partnerpay + ", partnerclass=" + partnerclass + ", partnerpers=" + partnerpers + ", partnerstart="
+				+ partnerstart + ", partnerend=" + partnerend + ", partnercondition=" + partnercondition + ", userid="
+				+ userid + ", tinfoid=" + tinfoid + ", searchcondition=" + searchcondition + ", searchkeyword="
+				+ searchkeyword + ", sortCol=" + sortCol + ", seqList=" + Arrays.toString(seqList) + "]";
+	}
+
+	
 }

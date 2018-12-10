@@ -43,7 +43,8 @@
 						<tbody>
 							<c:forEach items="${partnerList}" var="partner">
 								<tr>
-									<td><a href="./getPartner?partnerno=${partner.partnerno}">${partner.partnertitle}</a></td>
+									<td>${partner.partnerid}</td>
+									<td><a href="./getPartner?partnerid=${partner.partnerid}">${partner.partnertitle}</a></td>
 									<td>${partner.userid}</td>
 									<td>${partner.partnerclass}</td>
 									<td>${partner.partnerdate}<!-- 여행 경비 넣는 부분 -->
