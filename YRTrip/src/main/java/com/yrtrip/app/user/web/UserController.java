@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,13 +16,13 @@ import com.yrtrip.app.user.UserVO;
 @Controller
 public class UserController {
 
-	@Autowired UserService userservice;
+	@Autowired UserService userService;
 
 	//로그인 처리
 	@RequestMapping("login") //login.jsp의 form action id값과 동일
 	public String login(@ModelAttribute("user") UserVO vo, HttpSession session, HttpServletRequest request) { //model.addAttribute("user", vo)
 		//id 단건 조회
-		UserVO uservo = userservice.getUser(vo);
+		UserVO uservo = userService.getUser(vo);
 
 		//이전 페이지 주소값 저장
 		String context = request.getContextPath();
@@ -43,7 +44,6 @@ public class UserController {
 			return "redirect:"+url; //로그인 성공 후 원래 페이지 호출
 		}
 	}
-	
 	//로그아웃
 	@RequestMapping("logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
@@ -60,17 +60,32 @@ public class UserController {
 	public String signupForm() {
 		return "user/signup";
 	}
-	
 	//회원가입 처리
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(UserVO vo, HttpServletRequest request) {
-		String context = request.getContextPath();
-		String referer = request.getHeader("Referer");
-		String url = referer.substring(referer.indexOf(context)+context.length()+1);
-		
-		userservice.insertUser(vo);
-		return "redirect:"+url;
+		userService.insertUser(vo);
+		return "main";
 	}
 	
+	//마이페이지
+	@RequestMapping("/getMyInfo")
+	public String mypage(Model model, UserVO vo, HttpSession session) {
+		model.addAttribute("user", userService.getUser(vo));
+		return "user/getMyInfo";
+	}
+	//마이페이지 수정
+	@RequestMapping("updateMyInfo")
+	public String updateMyInfo(UserVO vo) {
+		userService.updateUser(vo);
+		return "redirect:getMyInfo";
+	}
 	
+	//탈퇴처리
+	@RequestMapping("/deleteMyInfo")
+	public String deleteMyInfo(HttpSession session, UserVO vo) {
+		session.invalidate(); //세션 무효화
+		userService.deleteUser(vo);
+		
+		return "main";
+	}
 }

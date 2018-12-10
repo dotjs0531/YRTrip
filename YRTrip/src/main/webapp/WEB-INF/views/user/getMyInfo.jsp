@@ -108,15 +108,8 @@ input[type=radio]{
     padding: 20px;
 } */
 </style>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
 $(function(){
-	
-	function ck_id(){
-		var id = document.getElementById("userId");
-		var MsgId = document.getElementById("MsgId");
-
-	}
 	
 	function ck_email(){
 	    var email = document.getElementById("userEmail");
@@ -219,60 +212,78 @@ $(function(){
 </script>
 </head>
 <body>
+    <!--    start about us area-->
     <section class="about_us_area" id="about">
         <div class="container">
-            <div class="row" style="width:600px; margin:0 auto;">
-            <h3 style="color:black; text-align:center;">회원가입</h3><br>
-            <form action="./signup" method="post">
-            <fieldset>
-				<input type="text" id="userId" name="userId" placeholder="아이디" onblur="ck_id()" required>
-				<span id="MsgId" class="none">유효성체크</span>
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
+                    <div class="single-pricing-table">
+                        <div class="pricing-title">
+                            <h2 style="color:black">마이페이지</h2>
+                        </div>
+                        <ul class=price-list>
+                            <li><a href="#" style="color:black">여행정보</a></li>
+                            <li><a href="#" style="color:black">좋아요</a></li>
+                            <li><a href="#" style="color:black">상품</a></li>
+                        </ul>
+                        <div class="order-buton">
+                            <a href="#">탈퇴</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="about_car">
+            		<h3 style="color:black; text-align:center">${user.userId}</h3><br>
+            			<form action="./updateMypage" method="post">
+            			<fieldset>
+							이름 *<input type="text" id="userName" name="userName" value="${user.userName}" onblur="ck_name()" required>
+							<span id="MsgName" class="none">유효성체크</span>
 				
-				<input type="password" id="userPw" name="userPw" placeholder="비밀번호" onblur="ck_pwd()" required>
-				<span id="MsgPw" class="none">유효성체크</span>
+            				비밀번호 *<input type="password" id="userPw" name="userPw" onblur="ck_pwd()" required>
+							<span id="MsgPw" class="none">유효성체크</span>
 				
-				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" onblur="ck_pwd2()">
-				<span id="MsgPwck" class="none">유효성체크</span>
+							비밀번호 확인 *<input type="password" id="userPw_ck" name="userPw_ck" onblur="ck_pwd2()">
+							<span id="MsgPwck" class="none">유효성체크</span>
+							
+							이메일 *<input type="email" id="userEmail" name="userEmail" value="${user.userEmail}" onblur="ck_email()" required>
+							<span id="MsgEmail" class="none">유효성체크</span>
 				
-				<input type="text" id="userName" name="userName" placeholder="이름" onblur="ck_name()" required>
-				<span id="MsgName" class="none">유효성체크</span>
+							연락처 *<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" onblur="" required>
+							<span id="MsgPhone" class="none">유효성체크</span>
 				
-				<input type="email" id="userEmail" name="userEmail" placeholder="이메일 (yedam@yrtrip.com)" onblur="ck_email()" required>
-				<span id="MsgEmail" class="none">유효성체크</span>
+							생년월일 *<input type="date" id="userBirth" name="userBirth" value="${user.userBirth}" required>
+							<span id="MsgBirth" class="none">유효성체크</span>
 				
-				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" onblur="" required>
-				<span id="MsgPhone" class="none">유효성체크</span>
+							주소 <input type="text" id="userAddress" name="userAddress" value="${user.userAddress}">
+							<span id="MsgAddress" class="none">유효성체크</span>
 				
-				<input type="date" id="userBirth" name="userBirth" placeholder="생년월일" required>
-				<span id="MsgBirth" class="none">유효성체크</span>
-				
-				<input type="text" id="userAddress" name="userAddress" placeholder="주소">
-				<span id="MsgAddress" class="none">유효성체크</span>
-				
-				<div id="wrap_gender">
-					<span id="wrap_man" class="gender">
-					<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남">
-					<label for="man"> 남자 </label>
-					</span>
+							성별 *<div id="wrap_gender">
+								<span id="wrap_man" class="gender">
+								<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남">
+								<label for="man"> 남자 </label>
+								</span>
 					
-					<span id="wrap_woman" class="gender no_line">
-					<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여">
-					<label for="woman" onclick="ck_gender()"> 여자 </label>
-					</span>
-				</div>
-				<span id="MsgGender" class="none">유효성체크</span>
+								<span id="wrap_woman" class="gender no_line">
+								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여">
+								<label for="woman" onclick="ck_gender()"> 여자 </label>
+								</span>
+							</div>
+							<span id="MsgGender" class="none">유효성체크</span>
+							
+							은행 <input type="text" id="userBank" name="userBank" value="${user.userBank}">
+							<!-- <span id="MsgBank" class="none">유효성체크</span> -->
 				
-				<!-- <select id="country" name="country">
-					<option value="australia">20대</option>
-					<option value="canada">30대</option>
-					<option value="usa">40대</option>
-				</select> -->
+							계좌번호 <input type="text" id="userAccount" name="userAccount" value="${user.userAccount}">
+							<!-- <span id="MsgAccount" class="none">유효성체크</span> -->
 				
-				<br><input type="submit" value="회원가입">
-			</fieldset>
-            </form>
+							<br><input type="submit" value="회원정보 수정">
+						</fieldset>
+            			</form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    <!--   end of about us area-->
 </body>
 </html>

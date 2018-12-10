@@ -46,7 +46,7 @@
 						USER_PHONE,
 						USER_BIRTH,
 						USER_ADDRESS,
-						USER_EMAIL,
+						USER_EMAIL
 						)
 				VALUES ( #{userId},
 						 #{userPw},
