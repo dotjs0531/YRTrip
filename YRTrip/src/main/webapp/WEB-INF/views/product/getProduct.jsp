@@ -145,7 +145,7 @@
                       <img src="https://via.placeholder.com/157x157" class="card-img-top">
                       <div class="card-body">
                         <h5 class="card-title">판매자 다른 상품 이름</h5>
-                        <span class="text-muted">${item.itemPrice}</span>
+                        <span class="text-muted">￦ 12,000</span>
                       </div>
                     </div>
                   </div>
@@ -176,38 +176,24 @@
                   <h2 class="mb-5">제품 기본정보</h2>
                   <dl class="row mb-5">
                     <dt class="col-sm-4">상품명</dt>
-                    <dd class="col-sm-8">${item.itemName}</dd>
+                    <dd class="col-sm-8">${product.itemName}</dd>
                     <dt class="col-sm-4">가격</dt>
-                    <dd class="col-sm-8">${item.itemPrice}</dd>
+                    <dd class="col-sm-8">${product.itemPrice}</dd>
                     <dt class="col-sm-4">수량</dt>
-                    <dd class="col-sm-8">${item.itmeEa}</dd>
+                    <dd class="col-sm-8">${product.itemEa}</dd>
                     <dt class="col-sm-4">선호결제방법</dt>
-                    <dd class="col-sm-8">${item.itemMethod}</dd>
+                    <dd class="col-sm-8">${product.itemMethod}</dd>
                     <dt class="col-sm-4">구매가능여부</dt>
-                    <dd class="col-sm-8">${item.itemOrderdetail}</dd>
+                    <dd class="col-sm-8">${product.itemOrderdetail}</dd>
                     <dt class="col-sm-4">상품상태</dt>
-                    <dd class="col-sm-8">${item.itemCondition}</dd>
+                    <dd class="col-sm-8">${product.itemCondition}</dd>
                     <dt class="col-sm-4">작성일</dt>
-                    <dd class="col-sm-8">${item.itemDate}</dd>
+                    <dd class="col-sm-8">${product.itemDate}</dd>
                     <dt class="col-sm-4">판매자명</dt>
-                    <dd class="col-sm-8">${item.sellerId}</dd>
+                    <dd class="col-sm-8">${product.sellerId}</dd>
                   </dl>
                   <h2 class="mb-5">제품 상세 설명</h2>
-                  <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit nemo reiciendis quisquam a
-                    quis delectus consectetur ipsa eligendi aliquam earum in vitae voluptate ratione fugiat
-                    similique nostrum debitis dolor, ipsam quo officiis quas
-                    necessitatibus? Magnam eveniet iure, eligendi est ullam consectetur repellat quis
-                    doloremque ad perspiciatis assumenda ducimus distinctio quaerat sit repudiandae illo
-                    praesentium modi dolor. Veritatis aperiam, minima natus assumenda
-                    ipsum voluptatem reprehenderit? Possimus nobis, voluptate, blanditiis, temporibus ad
-                    nostrum corrupti quos corporis voluptas tempora aliquid magnam quia voluptatem rerum odit
-                    fugiat facere necessitatibus adipisci sunt. Veritatis architecto,
-                    perferendis labore sit nobis eaque perspiciatis et iusto, in doloribus est!</p>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus vel reiciendis voluptatibus
-                    assumenda tempora vitae aut adipisci harum, corporis in id perferendis quia repellat
-                    reprehenderit temporibus aspernatur ab ullam magni error
-                    consectetur, fac  ilis inventore ipsum, veniam voluptas. Error laboriosam atque quisquam
-                    facere  esse repellat consectetur quos eum, quaerat blanditiis saepe?</p>
+                  <p>${product.itemContent}</p>
                 </div>
                 <div class="product-faq mb-5">
                   <h2 class="mb-3">Q/A라고 쓰고 큐엔에이라고 읽</h2>

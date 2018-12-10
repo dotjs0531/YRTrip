@@ -14,16 +14,30 @@ public class ProductController {
 	
 	@Autowired ProductService productService;
 	
+	//전체 목록 보기
 	@RequestMapping("/getProductList")
 	public String getProductList(Model model, ProductVO vo) {
 		model.addAttribute("productlist", productService.getProductList(vo));
 		return "product/getProductList";
 	}
-	
-	@RequestMapping("getProduct")
+	//퀵뷰
+	@RequestMapping("getProductAjax")
 	@ResponseBody
 	public ProductVO getProduct(ProductVO vo) {
 		return productService.getProduct(vo);
 	}
+	
+	//상세조회
+	@RequestMapping("getProduct")
+	public String getProduct(Model model, ProductVO vo) {
+		model.addAttribute("product", productService.getProduct(vo));
+		return "product/getProduct";
+	}
+	
+	
+	
+	
+	/////////////////////////////////////////////////////////////
+	
 	
 }

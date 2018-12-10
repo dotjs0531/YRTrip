@@ -7,7 +7,8 @@
 
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -15,25 +16,34 @@
 
 <!-- Bootstrap core CSS -->
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"	rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
+integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<!-- <link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"> -->
+
 
 <!-- Custom styles for this template -->
-<link href="resources/css/product.css" rel="stylesheet">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="resources/css/product.css" rel="stylesheet"> 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
-$(function(){
-$('#product_view').on('show.bs.modal', function (e) {
-	  var button = $(event.target) // Button that triggered the modal
-	console.log(event);
-	var param = {itemId : button.attr("id")}
-	$.getJSON("getProduct", param, function(data){
-		var itemId = data.itemId;			
-		console.log(itemId);
-		$("#modal-title").html(itemId);
-		})		
+	$(function() {
+		$('#product_view').on('show.bs.modal', function(e) {
+			var button = $(event.target) // Button that triggered the modal
+			console.log(event);
+			var param = {
+				itemId : button.attr("id").substr(4)
+			}
+			$.getJSON("getProductAjax", param, function(data) {
+				var itemId = data.itemId;
+				var itemName = data.itemName;
+				console.log(itemId);
+				$("#modal-title").html(itemName);
+			})
+		});
 	});
-})
 </script>
 </head>
 
@@ -50,7 +60,7 @@ $('#product_view').on('show.bs.modal', function (e) {
 
 				<h1 class="my-4">상품</h1>
 				<div class="list-group">
-					<a href="#" class="list-group-item">전체보기</a> <a href="#"
+					<a href="getProductList" class="list-group-item">전체보기</a> <a href="#"
 						class="list-group-item">의류</a> <a href="#" class="list-group-item">잡화</a>
 					<a href="#" class="list-group-item">티켓/쿠폰</a> <a href="#"
 						class="list-group-item">캐리어</a> <a href="#"
@@ -67,7 +77,8 @@ $('#product_view').on('show.bs.modal', function (e) {
 				<div id="carouselExampleIndicators" class="carousel slide my-4"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
-						<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+						<li data-target="#carouselExampleIndicators" data-slide-to="0"
+							class="active"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 					</ol>
@@ -108,13 +119,12 @@ $('#product_view').on('show.bs.modal', function (e) {
 
 										<h4 class="pull-right">${product.itemPrice}</h4>
 										<h4>
-											<a href="#">${product.itemName}</a>
+											<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 										</h4>
 										<p>${product.itemContent}</p>
 										<p>${product.itemOrderdetail}</p>
 										<p>${product.itemCategory}</p>
 										<p>${product.itemCondition}</p>
-										<%-- <p class="">${product.itemId}</p> --%>
 									</div>
 									<div class="ratings text-center">
 										<p>
@@ -133,8 +143,8 @@ $('#product_view').on('show.bs.modal', function (e) {
 										<button type="button" class="btn btn-primary">
 											<i class="fa fa-shopping-cart"></i> Add To Cart
 										</button>
-										<button id="${product.itemId}" type="button" 
-											class="btn btn-primary" data-toggle="modal"
+										<button id="item${product.itemId}"
+										 type="button" class="btn btn-primary" data-toggle="modal"
 											data-target="#product_view">
 											<i class="fa fa-search"></i> Quick View
 										</button>
@@ -152,8 +162,8 @@ $('#product_view').on('show.bs.modal', function (e) {
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<a href="#" data-dismiss="modal" class="class pull-left">
-								<span class="glyphicon glyphicon-remove"></span></a>
+								<a href="#" data-dismiss="modal" class="class pull-left"> <span
+									class="glyphicon glyphicon-remove"></span></a>
 								<h3 class="modal-title" id="modal-title"></h3>
 							</div>
 							<div class="modal-body">
