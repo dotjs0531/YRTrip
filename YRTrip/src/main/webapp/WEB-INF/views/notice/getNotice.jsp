@@ -34,18 +34,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="min-width:700px">
                     <div class="about_car">
                     	<br/>
 						<h3 style="color:black">${notice.noticeTitle}</h3>
 						<br/>
 						<strong>작성자</strong>&nbsp;&nbsp;${notice.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${notice.noticeDate} ｜ <strong>조회수</strong>&nbsp;&nbsp;${notice.noticeHit}
 						<hr />
+						<div style="min-height:200px;">
 						<c:if test="${not empty notice.noticeImg}">
 							<img src="./images/notice/${notice.noticeImg}" />
 						</c:if>
 						${notice.noticeContent}
-						<div class="order-buton" style="padding-top:50px; float:right">
+						</div>
+						<div class="order-buton" style="float:right">
                             <a href="./updateNoticeForm?noticeId=${notice.noticeId}">수정</a>&nbsp;&nbsp;
                             <a onclick="del('${notice.noticeId}')">삭제</a>
                         </div>

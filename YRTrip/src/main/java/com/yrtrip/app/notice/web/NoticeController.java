@@ -62,7 +62,16 @@ public class NoticeController {
 	}
 	//수정처리
 	@RequestMapping("updateNotice")
-	public String updateNotice(NoticeVO vo) {
+	public String updateNotice(NoticeVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/notice");
+
+		MultipartFile noticeImgFile = vo.getNoticeImgFile();
+		if (!noticeImgFile.isEmpty() && noticeImgFile.getSize() > 0) {
+			String filename = noticeImgFile.getOriginalFilename();
+			noticeImgFile.transferTo(new File(path, filename));
+
+		vo.setNoticeImg(filename);
+	}
 		noticeService.updateNotice(vo);
 		return "redirect:getNoticeList";
 	}

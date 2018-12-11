@@ -5,6 +5,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#fileInput").on('change', function(){  // 값이 변경되면
+		if(window.FileReader){  // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else {  // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+		}
+
+		// 추출한 파일명 삽입
+		$("#userfile").val(filename);
+	});
+});
+</script>
+<style>
+input[type=submit] {
+    width: 100%;
+    background-color: #f9bf3b;
+    color: white;
+    padding: 10px 40px;
+    margin: 8px auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
     <!--    start about us area-->
@@ -25,8 +52,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="min-width:700px">
                 <form action="./insertNotice" method="post" enctype="multipart/form-data">
+                	<div style="min-height:380px;">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
 							<tr>
@@ -40,21 +68,40 @@
 			 				<tr>	
 			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px"></textarea> </td>
 			 				</tr>
-			 				<tr>	
-			 					<td><input type="file" name="noticeImgFile"></td>
+			 				<tr>
+			 					<td>
+			 						<input type="file" name="noticeImgFile"
+			 							id="fileInput" data-class-button="btn btn-default"
+										data-class-input="form-control" data-icon-name="fa fa-upload"
+										class="form-control" tabindex="-1" style="position: absolute;
+										clip: rect(0px, 0px, 0px, 0px);">
+									<div class="bootstrap-filestyle input-group">
+										<input type="text" id="userfile" class="form-control"
+											name="userfile" disabled="">
+										<span class="group-span-filestyle input-group-btn" tabindex="0">
+											<label for="fileInput" class="btn btn-default ">
+												<span class="glyphicon fa fa-upload"></span>
+											</label>
+										</span>
+									</div>
+								</td>
 			 				</tr>
 			 			</tbody>
 			 		</table>
+			 		</div>
                     <section >
-                        <div style="padding-top:350px; float:right">
-                            <button class="submit-btn">등록</button>
+                        <div style="float:right">
+                            <input type="submit" value="등록">
                         </div>
                     </section>
                     </form>
                     </div>
                 </div>
             </div>
-    </section>
+
+			
+
+	</section>
     <!--   end of about us area-->
 </body>
 </html>
