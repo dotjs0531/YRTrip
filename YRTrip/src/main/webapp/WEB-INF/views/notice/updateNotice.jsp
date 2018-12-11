@@ -44,8 +44,8 @@
 			 			</tbody>
 			 		</table>
                     <section >
-                        <div style="padding-top:300px; float:right">
-                            <button class="submit-btn">등록</button>
+                        <div style="padding-top:320px; float:right">
+                            <input type="submit" value="수정">
                         </div>
                     </section>
                     </form>

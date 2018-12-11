@@ -31,21 +31,22 @@
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
 							<tr>
-								<th colspan="1" style="background-color:#eeeeee; text-align: center;">공지 등록하기</th>
+								<th colspan="2" style="background-color:#eeeeee; text-align: center;">문의 수정하기</th>
 							</tr>		 		
 			 			</thead>
 			 			<tbody>
 			 				<tr>
-			 					<td><input type="text" class="form-control" placeholder="글제목" name="qnaTitle" value="${qna.qnaTitle}" maxlength="50"></td>
+			 					<td><input type="text" class="form-control" placeholder="글제목" name="qnaTitle" value="${qna.qnaTitle}" maxlength="100" size="100"></td>
+			 					<td><input type="text" class="form-control" readonly="readonly" name="userId" value="${qna.userId}"></td>
 			 				</tr>
 			 				<tr>	
-			 					<td><textarea class="form-control" placeholder="글 내용" name="qnaContent" maxlength="2048" style="height:200px">${qna.qnaContent}</textarea> </td>
+			 					<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="qnaContent" maxlength="1024" style="height:200px">${qna.qnaContent}</textarea> </td>
 			 				</tr>
 			 			</tbody>
 			 		</table>
                     <section >
-                        <div style="padding-top:300px; float:right">
-                            <button class="submit-btn">등록</button>
+                        <div style="padding-top:320px; float:right">
+                            <input type="submit" value="수정">
                         </div>
                     </section>
                     </form>

@@ -47,7 +47,7 @@
 						${notice.noticeContent}
 						<div class="order-buton" style="padding-top:50px; float:right">
                             <a href="./updateNoticeForm?noticeId=${notice.noticeId}">수정</a>&nbsp;&nbsp;
-                            <button class="submit-btn" onclick="del('${notice.noticeId}')">삭제</button>
+                            <a onclick="del('${notice.noticeId}')">삭제</a>
                         </div>
                     </div>
                 </div>

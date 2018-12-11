@@ -47,7 +47,7 @@
 			 		</table>
                     <section >
                         <div style="padding-top:350px; float:right">
-                            <button class="submit-btn">등록</button>
+                            <input type="submit" value="등록">
                         </div>
                     </section>
                     </form>

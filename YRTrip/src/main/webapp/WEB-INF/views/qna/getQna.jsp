@@ -42,8 +42,8 @@
 						<hr />
 						${qna.qnaContent}
 						<div class="order-buton" style="padding-top:50px; float:right">
-                            <a href="./updateqnaForm?qnaId=${qna.qnaId}">수정</a>&nbsp;&nbsp;
-                            <button class="submit-btn" onclick="del('${qna.qnaId}')">삭제</button>
+                            <a href="./updateQnaForm?qnaId=${qna.qnaId}">수정</a>&nbsp;&nbsp;
+                            <a onclick="del('${qna.qnaId}')">삭제</a>
                         </div>
                     </div>
                 </div>

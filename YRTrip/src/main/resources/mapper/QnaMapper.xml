@@ -7,6 +7,7 @@
 			QNA_TITLE,
 			QNA_CONTENT,
 			TO_CHAR(QNA_DATE, 'MM/DD') QNA_DATE,
+			U.USER_ID,
 			USER_NAME,
 			QNA_ANSWER
 	  FROM  QNAT Q, USERT U
@@ -18,6 +19,7 @@
 			QNA_TITLE,
 			QNA_CONTENT,
 			TO_CHAR(QNA_DATE, 'MM/DD') QNA_DATE,
+			U.USER_ID,
 			USER_NAME,
 			QNA_ANSWER
 	  FROM  QNAT Q, USERT U
@@ -30,12 +32,10 @@
 	INSERT INTO  QNAT ( QNA_ID,
 						QNA_TITLE,
 						QNA_CONTENT,
-						QNA_DATE,
 						USER_ID )
 				VALUES ( #{qnaId},
 				 		 #{qnaTitle},
 				 		 #{qnaContent},
-				 		 sysdate,
 				 		 #{userId} )
 </insert>
 <update id="updateQna" parameterType="qna">
