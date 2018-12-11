@@ -33,15 +33,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="min-width:700px">
                     <div class="about_car">
                     	<br/>
 						<h3 style="color:black">${qna.qnaTitle}</h3>
 						<br/>
 						<strong>작성자</strong>&nbsp;&nbsp;${qna.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${qna.qnaDate} ｜ <strong>답변여부</strong>&nbsp;&nbsp;${qna.qnaAnswer}
 						<hr />
+						<div style="min-height:200px;">
 						${qna.qnaContent}
-						<div class="order-buton" style="padding-top:50px; float:right">
+						</div>
+						<div class="order-buton" style="float:right">
                             <a href="./updateQnaForm?qnaId=${qna.qnaId}">수정</a>&nbsp;&nbsp;
                             <a onclick="del('${qna.qnaId}')">삭제</a>
                         </div>

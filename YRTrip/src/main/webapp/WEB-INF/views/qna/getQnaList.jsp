@@ -26,7 +26,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style="min-width:700px">
+                	<div class="table-responsive" style="min-height:420px;">
                     	<table class="table table-hover">
                     		<thead>
                     			<tr>
@@ -49,12 +50,13 @@
 							</c:forEach>
                     		</tbody>
                     	</table>
+                    	</div>
                     	<section >
-                        <div class="order-buton" style="padding-top:410px; float:right">
+                        <div class="order-buton" style="float:right">
                             <a href="${pageContext.request.contextPath}/insertQna">등록</a>
                         </div>
                         </section>
-                    	<div class="text-center" style="padding-top:460px;">
+                    	<div class="text-center" style="padding-top:50px;">
                     		<ul class="pagination">
                     			<li><a href="#">1</a></li>
                     			<li><a href="#">2</a></li>
