@@ -19,7 +19,8 @@
 			NOTICE_CONTENT,
 			NOTICE_HIT,
 			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE,
-			USER_NAME
+			USER_NAME,
+			NOTICE_IMG
 	  FROM  NOTICET N, USERT U
 	 WHERE  N.USER_ID = U.USER_ID AND NOTICE_ID = #{noticeId}
 </select>
@@ -32,13 +33,21 @@
 						  NOTICE_CONTENT,
 						  NOTICE_HIT,
 						  NOTICE_DATE,
-						  USER_ID )
+						  USER_ID 
+		<if test="noticeImg != null and noticeImg != ''">
+						  , NOTICE_IMG
+		</if>
+						 )
 				 VALUES ( #{noticeId},
 				 		  #{noticeTitle},
 				 		  #{noticeContent},
 				 		  0,
 				 		  sysdate,
-				 		  'admin' )
+				 		  'admin'
+		<if test="noticeImg != null and noticeImg != ''">
+						  , #{noticeImg}
+		</if> 
+				 		 )
 </insert>
 <update id="updateNotice" parameterType="notice">
 	UPDATE NOTICET SET NOTICE_TITLE = #{noticeTitle},

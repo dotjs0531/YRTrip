@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script language="javascript">
    function del(nid){
       if(confirm("삭제하시겠습니까?")){
@@ -40,6 +41,9 @@
 						<br/>
 						<strong>작성자</strong>&nbsp;&nbsp;${notice.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${notice.noticeDate} ｜ <strong>조회수</strong>&nbsp;&nbsp;${notice.noticeHit}
 						<hr />
+						<c:if test="${not empty notice.noticeImg}">
+							<img src="./images/notice/${notice.noticeImg}" />
+						</c:if>
 						${notice.noticeContent}
 						<div class="order-buton" style="padding-top:50px; float:right">
                             <a href="./updateNoticeForm?noticeId=${notice.noticeId}">수정</a>&nbsp;&nbsp;

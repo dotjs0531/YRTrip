@@ -187,6 +187,13 @@
 			<version>2.7.2</version>
 		</dependency>
 		
+		<!-- FileUpload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.3</version>
+		</dependency>
+		
 	</dependencies>
     <build>
         <plugins>

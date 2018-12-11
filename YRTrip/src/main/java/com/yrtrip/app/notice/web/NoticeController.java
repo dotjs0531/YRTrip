@@ -1,10 +1,16 @@
 package com.yrtrip.app.notice.web;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.yrtrip.app.notice.NoticeService;
 import com.yrtrip.app.notice.NoticeVO;
@@ -34,7 +40,16 @@ public class NoticeController {
 	}
 	//등록처리
 	@RequestMapping(value = "/insertNotice", method = RequestMethod.POST)
-	public String insertNotice(NoticeVO vo) {
+	public String insertNotice(NoticeVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/notice");
+
+		MultipartFile noticeImgFile = vo.getNoticeImgFile();
+		if (!noticeImgFile.isEmpty() && noticeImgFile.getSize() > 0) {
+			String filename = noticeImgFile.getOriginalFilename();
+			noticeImgFile.transferTo(new File(path, filename));
+
+			vo.setNoticeImg(filename);
+		}
 		noticeService.insertNotice(vo);
 		return "redirect:getNoticeList";
 	}

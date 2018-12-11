@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                <form action="./insertNotice" method="post">
+                <form action="./insertNotice" method="post" enctype="multipart/form-data">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
 							<tr>
@@ -40,10 +40,13 @@
 			 				<tr>	
 			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px"></textarea> </td>
 			 				</tr>
+			 				<tr>	
+			 					<td><input type="file" name="noticeImgFile"></td>
+			 				</tr>
 			 			</tbody>
 			 		</table>
                     <section >
-                        <div style="padding-top:300px; float:right">
+                        <div style="padding-top:350px; float:right">
                             <button class="submit-btn">등록</button>
                         </div>
                     </section>
