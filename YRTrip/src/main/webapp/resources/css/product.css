@@ -7,6 +7,14 @@
 .product_view .modal-dialog{max-width: 800px; width: 100%;}
 .pre-cost{text-decoration: line-through; color: #a5a5a5;}
 .space-ten{padding: 10px 0;}
+.space-five{padding: 5px 0;}
+
+.single-pricing-table {
+    border: 1px solid #e3e3e3;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    width: 250px;
+}
 
 body {
   background-color: #f5f5f5; 

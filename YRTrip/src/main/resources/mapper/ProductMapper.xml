@@ -38,6 +38,37 @@
 		FROM ITEMT
 		WHERE ITEM_ID = #{itemId}	
 	</select>
-	
+	<insert id="insertItem" parameterType="product">
+	<selectKey keyProperty="itemId" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(ITEM_ID),0)+1 FROM ITEMT
+	</selectKey>
+	INSERT INTO ITEMT (
+				ITEM_ID,
+				ITEM_NAME,
+				ITEM_PRICE,
+				ITEM_EA,
+				ITEM_CONTENT,
+				ITEM_METHOD,
+				ITEM_CATEGORY,
+				SELLER_ID,
+				ITEM_ORDERDETAIL,
+				ITEM_PIC,
+				ITEM_DATE,
+				ITEM_CONDITION				 
+				)
+				 VALUES ( #{itemId},
+				 		  #{itemName},
+				 		  #{itemPrice},
+				 		  #{itemEa},
+				 		  #{itemContent},
+				 		  #{itemMethod},
+				 		  #{itemCategory},
+				 		  #{sellerId},
+				 		  #{itemOrderdetail},
+				 		  #{itemPic},
+				 		  sysdate,
+				 		  #{itemCondition}
+				 		 )
+	</insert>
 
 </mapper> 

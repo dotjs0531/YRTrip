@@ -33,7 +33,12 @@ public class ProductController {
 		model.addAttribute("product", productService.getProduct(vo));
 		return "product/getProduct";
 	}
-	
+	//제품등록
+	@RequestMapping("insertProduct")
+	public String insertProduct(Model model, ProductVO vo) {
+		model.addAttribute("product");
+		return "product/insertProduct";
+	}
 	
 	
 	

@@ -14,13 +14,12 @@
 
 <title>상품</title>
 
-<!-- Bootstrap core CSS -->
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" 
 integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<!-- <link
+<link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet"> -->
+	rel="stylesheet">
 
 
 <!-- Custom styles for this template -->
@@ -41,6 +40,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				var itemName = data.itemName;
 				console.log(itemId);
 				$("#modal-title").html(itemName);
+				$("#popup_itemId").html(itemId);
 			})
 		});
 	});
@@ -51,27 +51,33 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <section class="about_us_area" id="about">
 	<!-- Page Content -->
 	<div class="container">
-
-		<div class="row">
-
-			<div class="container col-lg-3">
-
-				<h1 class="my-4">상품</h1>
-				<div class="list-group">
-					<a href="getProductList" class="list-group-item">전체보기</a> <a href="#"
-						class="list-group-item">의류</a> <a href="#" class="list-group-item">잡화</a>
-					<a href="#" class="list-group-item">티켓/쿠폰</a> <a href="#"
-						class="list-group-item">캐리어</a> <a href="#"
-						class="list-group-item">전자기기</a> <a href="#"
-						class="list-group-item">여행도서</a> <a href="#"
-						class="list-group-item">USIM</a> <a href="#"
-						class="list-group-item">기타</a> <a href="#" class="list-group-item">상품요청</a>
-				</div>
+		<div class="row justify-content-between">
+			<div class="col-4">
+				<div class="single-pricing-table">
+                        <div class="pricing-title">
+                            <h2 style="color:black">카테고리</h2>
+                        </div>
+                        <ul class="price-list">
+                        	<li><a href="#" style="color:black">전체보기</a></li>
+                            <li><a href="#" style="color:black">의류</a></li>
+                            <li><a href="#" style="color:black">티켓/쿠폰</a></li>
+                            <li><a href="#" style="color:black">전자기기</a></li>
+                            <li><a href="#" style="color:black">여행도서</a></li>
+                            <li><a href="#" style="color:black">USIM</a></li>
+                            <li><a href="#" style="color:black">기타</a></li>
+                        </ul>
+                        <div class="order-buton">
+	                            <a href="#">상품요청</a>
+	                        </div>
+	                        <div class="order-buton">
+	                            <a href="insertProduct">상품등록</a>
+	                        </div>
+                    </div>
 			</div>
 			<!-- /.col-lg-3 -->
 
 			<!-- 여기서 부터 가운데 창! -->
-			<div class="container col-lg-9">
+			<div class="col-8">
 				<div id="carouselExampleIndicators" class="carousel slide my-4"
 					data-ride="carousel">
 					<ol class="carousel-indicators">
@@ -108,7 +114,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<div class="col-lg-container">
 					<div class="row">
 						<c:forEach items="${productlist}" var="product">
-							<div class="col-md-4">
+							<div class="col-4">
 								<div class="thumbnail">
 									<img
 										src="http://tech.firstpost.com/wp-content/uploads/2014/09/Apple_iPhone6_Reuters.jpg"
@@ -137,14 +143,15 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 										</p>
 									</div>
 									<div class="space-ten"></div>
-									<div class="btn-ground text-center">
-										<button type="button" class="btn btn-primary">
-											<i class="fa fa-shopping-cart"></i> Add To Cart
-										</button>
+									<div class="btn-ground text-center" >
+										<button type="button" class="btn" style="background-color: #f9bf3b; color:white">
+											<i class="fa fa-shopping-cart"></i> Add To Cart</button>
+										<div class="space-five"></div>
+									<div class="space-five"></div>
 										<button id="item${product.itemId}"
-										 type="button" class="btn btn-primary" data-toggle="modal"
+										 type="button" class="btn" style="background-color: #f9bf3b; color:white" data-toggle="modal"
 											data-target="#product_view">
-											<i class="fa fa-search"></i> Quick View
+											<i class="fa fa-search"></i>&nbsp; Quick View
 										</button>
 									</div>
 									<div class="space-ten"></div>
@@ -157,7 +164,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<!-- 팝업창 -->
 
 				<div class="modal fade product_view" id="product_view">
-					<div class="modal-dialog">
+					<div class="modal-dialog" style="padding-top: 50px;">
 						<div class="modal-content">
 							<div class="modal-header">
 								<a href="#" data-dismiss="modal" class="class pull-left"> <span
@@ -173,7 +180,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 									</div>
 									<div class="col-md-6 product_content">
 										<h4>
-											<span class="pull-right">제품번호:</span>
+											<span class="pull-right" id="popup_itemId">제품번호:</span>
 										</h4>
 										<div class="rating">
 											<span class="glyphicon glyphicon-star"></span> <span

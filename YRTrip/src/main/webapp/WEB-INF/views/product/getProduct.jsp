@@ -32,7 +32,8 @@
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"> -->
   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
   <!-- Custom styles for this template -->
-  <link href="resources/css/product.css" rel="stylesheet">
+  <!-- <link href="./css/shop-homepage.css" rel="stylesheet"> -->
+  <!-- <link href="resources/css/product.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz">
   <script>
     var slideIndex = 0;
@@ -60,21 +61,27 @@
     <div class="row">
       <!-- 시작 : 사이드 :  3-->
       <div class="container col-lg-3">
-
-        <h1 class="my-4">상품</h1>
-        <div class="list-group">
-          <a href="#" class="list-group-item">전체보기</a>
-          <a href="#" class="list-group-item">의류</a>
-          <a href="#" class="list-group-item">잡화</a>
-          <a href="#" class="list-group-item">티켓/쿠폰</a>
-          <a href="#" class="list-group-item">캐리어</a>
-          <a href="#" class="list-group-item">전자기기</a>
-          <a href="#" class="list-group-item">여행도서</a>
-          <a href="#" class="list-group-item">USIM</a>
-          <a href="#" class="list-group-item">기타</a>
-          <a href="#" class="list-group-item">상품요청</a>
-        </div>
-      </div>
+					<div class="single-pricing-table">
+						<div class="pricing-title">
+							<h2 style="color: black">카테고리</h2>
+						</div>
+						<ul class="price-list">
+							<li><a href="getProductList" style="color: black">전체보기</a></li>
+							<li><a href="#" style="color: black">의류</a></li>
+							<li><a href="#" style="color: black">티켓/쿠폰</a></li>
+							<li><a href="#" style="color: black">전자기기</a></li>
+							<li><a href="#" style="color: black">여행도서</a></li>
+							<li><a href="#" style="color: black">USIM</a></li>
+							<li><a href="#" style="color: black">기타</a></li>
+						</ul>
+						<div class="order-buton">
+							<a href="#">상품요청</a>
+						</div>
+						<div class="order-buton">
+							<a href="#">상품등록</a>
+						</div>
+					</div>
+				</div>
       <!-- 끝 : 사이드 : 3-->
       <!-- 시작 : 내용 : 9-->
       <div class="container col-lg-9">
@@ -133,6 +140,21 @@
               </div>
               
               <!-- 오른쪽 아래 -->
+               <div class="product-payment-details">
+              <p class="last-sold text-muted"><small>몇개팔렸을까여?</small><small class="pull-right">작성일</small></p>
+              <h4 class="product-title mb-2">상품명 입니다 상품명을 길게 막 적어도 보고 짧게 적어봐도 되는데 걍 막 적어봤습니다</h4>
+              <h2 class="product-price display-2">￦12,000</h2>
+              <p class="mb-0"><i class="fa fa-truck"></i>중고 <small class="pull-right text-success">구매가능</small> </p>
+              <div class="text-muted mb-2"><small>약간의 사용감이 있습니다!</small></div>
+              <!-- 구매가능하면 text-success 
+              구매불가하면 text-danger -->
+
+              <label for="quant">수량</label>
+              <input type="number" name="quantity" min="1" id="quant" class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
+
+              <button class="btn btn-lg btn-block btn-primary">구매하기</button><button class="btn  btn-lg btn-block btn-light">위시리스트</button>
+
+            </div>
               <div class="product-seller-recommended">
                 <h3 class="mb-5">판매자의 다른 상품 </h3>
                 <!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
@@ -217,21 +239,7 @@
                 </div>
               </div>
             </div>
-            <div class="product-payment-details">
-              <p class="last-sold text-muted"><small>몇개팔렸을까여?</small><small class="pull-right">작성일</small></p>
-              <h4 class="product-title mb-2">상품명 입니다 상품명을 길게 막 적어도 보고 짧게 적어봐도 되는데 걍 막 적어봤습니다</h4>
-              <h2 class="product-price display-2">￦12,000</h2>
-              <p class="mb-0"><i class="fa fa-truck"></i>중고 <small class="pull-right text-success">구매가능</small> </p>
-              <div class="text-muted mb-2"><small>약간의 사용감이 있습니다!</small></div>
-              <!-- 구매가능하면 text-success 
-              구매불가하면 text-danger -->
-
-              <label for="quant">수량</label>
-              <input type="number" name="quantity" min="1" id="quant" class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
-
-              <button class="btn btn-lg btn-block btn-primary">구매하기</button><button class="btn  btn-lg btn-block btn-light">위시리스트</button>
-
-            </div>
+           
           </div>
         </div>
 
