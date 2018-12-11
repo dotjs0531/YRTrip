@@ -146,8 +146,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 									<div class="btn-ground text-center" >
 										<button type="button" class="btn" style="background-color: #f9bf3b; color:white">
 											<i class="fa fa-shopping-cart"></i> Add To Cart</button>
-										<div class="space-five"></div>
-									<div class="space-five"></div>
+										<div class="space-two"></div>
 										<button id="item${product.itemId}"
 										 type="button" class="btn" style="background-color: #f9bf3b; color:white" data-toggle="modal"
 											data-target="#product_view">
