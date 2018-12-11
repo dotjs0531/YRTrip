@@ -111,7 +111,6 @@ nav.navbar {
     font-family: 'montserratsemi_bold';
     color: #000;
     text-transform: uppercase;
-    padding-left: 0;
     padding-right: 30px;
     position: relative;
     -webkit-transition: .4s;
