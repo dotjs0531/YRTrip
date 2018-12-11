@@ -35,7 +35,7 @@
                             <li><a href="#" style="color:black">베스트 장소</a></li>
                         </ul>
                         
-                    </div>
+</div>
                         <div>
                         	<form name="search_frm">
 						<div class="form-group">
@@ -52,17 +52,20 @@
 
 						</div>
 								<div>
-								<button type="submit" class="btn btn-warning submit-buton">검색</button>
+								<button type="submit" class="btn btn-warning submit-buton">검색</button><br><br>
 								</div>
 								<input type="hidden" name="sortCol"/>
 							</form>
+                        </div>
+                        <div>
+                        <button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/insertTravelBoardform'">등록</button>
                         </div>
 </div>
 
 <!-- 리스트 -->
 	<div class="list-box">
 						<c:forEach items="${travelBoardList}" var="board">
-							<aside>
+							<article data-travelNo="${board.travelNo}">
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
 									<div class="content-title">
 										<div class="text-center">
@@ -96,7 +99,7 @@
 
 										</div>
 									</div>
-											</aside>
+											</article>
 								</c:forEach>
 
 					</div>

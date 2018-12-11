@@ -46,7 +46,7 @@
 </select>
 
 <insert id="insertTravelBoard" parameterType="travelBoard">
-	<selectKey keyProperty="travel_no" resultType="integer" order="BEFORE">
+	<selectKey keyProperty="travelNo" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(TRAVEL_NO),0)+1 FROM TRAVELBOARDT
 	</selectKey>
 		INSERT INTO TRAVELBOARDT(TRAVEL_NO,
@@ -84,10 +84,9 @@
 	SET TRAVEL_PERSON = #{travelPerson}, 
 		TRAVEL_PAY = #{travelPay},
 		TRAVEL_SCHE = #{travelSche},
-		TRAVEL_START = #{travelStart},
+		TRAVEL_START = TO_DATE(#{travelStart}, 'yyyy-mm-dd hh24:mi:ss'),
 		TRAVEL_TITLE = #{travelTitle},
 		TRAVEL_CONTENT = #{travelContent},
-		TRAVEL_DATE = #{travelDate},
 		TINFO_ID = #{tinfoId},
 		TRAVEL_WITH = #{travelWith},
 		TRAVEL_PIC = #{travelPic}

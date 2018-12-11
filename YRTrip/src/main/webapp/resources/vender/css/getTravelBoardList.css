@@ -73,7 +73,7 @@
 	color: #F39C12;
 }
 
-.list-box>aside {
+.list-box>article {
 	width: 240px;
 	margin-right: 20px;
 	margin-top: 30px;
@@ -81,7 +81,7 @@
 	display: inline-block;
 }
 
-.list-box>aside .content-footer>img {
+.list-box>article .content-footer>img {
 	width: 33px;
 	height: 33px;
 	border-radius: 100%;

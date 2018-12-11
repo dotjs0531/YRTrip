@@ -6,7 +6,6 @@
 <head>
 <title>여행게시판 글 상세보기</title>
 
-<!-- *********************** -->
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -21,14 +20,11 @@
 	z-index: -1;
 }
 </style>
-<!-- *********************** -->
-
 </head>
 <body>
 <section class="content-section">
 
-<!-- *********************** -->
-<!-- 검색창 -->
+<!-- 왼쪽 사이드바 -->
 <div class="category">
  <div class="search-box">
                         <div class="pricing-title">
@@ -59,14 +55,17 @@
 								<div>
 								<button type="submit" class="btn btn-warning submit-buton">검색</button>
 								</div>
-								<input type="hidden" name="sortCol"/>
+								<input type="hidden" name="sortCol"/><br><br>
+								<div>
+								<button class="submit-btn" type="button" onclick="location.href='./insertTravelBoardform'">등록</button>
+								</div>
 							</form>
                         </div>
 </div>
-	<div class="list-box">
-<!-- *********************** -->
 
-	제목사진ㅇㅇㅇㅇ
+<!-- 여행게시글 상세 -->
+	<div class="list-box">
+
 		<table border="1">
 			<tr>
 				<th>사진</th>
@@ -98,7 +97,8 @@
 				<!-- TravelBoardController의 getTravelBoard 메서드에서 travelBoard로 값 넘겨줌 -->
 			</tr>
 		</table>
-		
+		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'">수정</button>
+		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}'">삭제</button>
 		</div>
 		
 	</section>
