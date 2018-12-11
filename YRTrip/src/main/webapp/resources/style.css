@@ -1254,7 +1254,7 @@ ul.breadcrumbs li {
     font-family: 'montserratbold';
     color: #222;
 }
-
+.submit-btn,
 .order-buton > a {
     background: #f9bf3b none repeat scroll 0 0;
     border-radius: 3px;
@@ -1263,17 +1263,6 @@ ul.breadcrumbs li {
     margin-top: 20px;
     padding: 10px 40px;
     text-transform: uppercase;
-}
-
-input[type=submit],input[type=button] {
-    width: 100%;
-    background-color: #f9bf3b;
-    color: white;
-    padding: 10px 40px;
-    margin: 8px auto;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 /*

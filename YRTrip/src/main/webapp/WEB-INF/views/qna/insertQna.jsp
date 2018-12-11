@@ -5,6 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+input[type=submit] {
+    width: 100%;
+    background-color: #f9bf3b;
+    color: white;
+    padding: 10px 40px;
+    margin: 8px auto;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+</style>
 </head>
 <body>
     <!--    start about us area-->
