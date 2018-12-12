@@ -39,20 +39,6 @@ input[type=text], select, input[type=password], input[type=email], input[type=da
     box-sizing: border-box;
     color:black;
 }
-input[type=submit],input[type=boutton] {
-    width: 100%;
-    background-color: #f9bf3b;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px auto;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-input[type=submit]:hover,
-input[type=button]:hover {
-    background-color: #f9bf3b;
-}
 #wrap_gender{
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -257,7 +243,8 @@ input[type=radio]{
 					<option value="usa">40대</option>
 				</select> -->
 				
-				<br><strong><input type="submit" value="회원가입"></strong>
+				<br><strong><input type="submit" class="btn btn-warning" value="회원가입"
+							style="width: 100%; padding: 14px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"></strong>
 			</fieldset>
             </form>
             </div>

@@ -18,72 +18,72 @@ public class UserController {
 
 	@Autowired UserService userService;
 
-	//ë¡œê·¸ì¸ ì²˜ë¦¬
-	@RequestMapping("login") //login.jspì˜ form action idê°’ê³¼ ë™ì¼
+	//·Î±×ÀÎ Ã³¸®
+	@RequestMapping("login") //login.jspÀÇ form action id°ª°ú µ¿ÀÏ
 	public String login(@ModelAttribute("user") UserVO vo, HttpSession session, HttpServletRequest request) { //model.addAttribute("user", vo)
-		//id ë‹¨ê±´ ì¡°íšŒ
+		//id ´Ü°Ç Á¶È¸
 		UserVO uservo = userService.getUser(vo);
 
-		//ì´ì „ í˜ì´ì§€ ì£¼ì†Œê°’ ì €ì¥
+		//ÀÌÀü ÆäÀÌÁö ÁÖ¼Ò°ª ÀúÀå
 		String context = request.getContextPath();
 		String referer = request.getHeader("Referer");
 		String url = referer.substring(referer.indexOf(context)+context.length()+1);
 		
-		//í•´ë‹¹ idê°€ ìˆìœ¼ë©´ íŒ¨ìŠ¤ì›Œë“œ ë¹„êµ
-		if(uservo == null) { //idê°€ ì—†ëŠ”ê²½ìš°
+		//ÇØ´ç id°¡ ÀÖÀ¸¸é ÆĞ½º¿öµå ºñ±³
+		if(uservo == null) { //id°¡ ¾ø´Â°æ¿ì
 			return "redirect:"+url;
-		} else if(!vo.getUserPw().equals(uservo.getUserPw())) { //idì™€ íŒ¨ìŠ¤ì›Œë“œ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ”ê²½ìš°
+		} else if(!vo.getUserPw().equals(uservo.getUserPw())) { //id¿Í ÆĞ½º¿öµå ÀÏÄ¡ÇÏÁö ¾Ê´Â°æ¿ì
 			return "redirect:"+url;
 		} else {
 			session.setAttribute("login", uservo);
 			if(referer != null && !referer.equals("")) 
 				return "redirect:"+url;
 			
-			//if refererì´ nullì´ ì•„ë‹ˆê³  ì´ì „í˜ì´ì§€ê°€ íšŒì›ê°€ì…í˜ì´ì§€, ë¡œê·¸ì•„ì›ƒí˜ì´ì§€, ë¡œê·¸ì¸í˜ì´ì§€ì¸ ê²½ìš°ì—” ë‹¤ë¥¸ í˜ì´ì§€ í˜¸ì¶œ
+			//if refererÀÌ nullÀÌ ¾Æ´Ï°í ÀÌÀüÆäÀÌÁö°¡ È¸¿ø°¡ÀÔÆäÀÌÁö, ·Î±×¾Æ¿ôÆäÀÌÁö, ·Î±×ÀÎÆäÀÌÁöÀÎ °æ¿ì¿£ ´Ù¸¥ ÆäÀÌÁö È£Ãâ
 			
-			return "redirect:"+url; //ë¡œê·¸ì¸ ì„±ê³µ í›„ ì›ë˜ í˜ì´ì§€ í˜¸ì¶œ
+			return "redirect:"+url; //·Î±×ÀÎ ¼º°ø ÈÄ ¿ø·¡ ÆäÀÌÁö È£Ãâ
 		}
 	}
-	//ë¡œê·¸ì•„ì›ƒ
+	//·Î±×¾Æ¿ô
 	@RequestMapping("logout")
 	public String logout(HttpSession session, HttpServletRequest request) {
 		String context = request.getContextPath();
 		String referer = request.getHeader("Referer");
 		String url = referer.substring(referer.indexOf(context)+context.length()+1);
 		
-		session.invalidate(); //ì„¸ì…˜ ë¬´íš¨í™”
+		session.invalidate(); //¼¼¼Ç ¹«È¿È­
 		return "redirect:"+url;
 	}
 	
-	//íšŒì›ê°€ì… í¼
+	//È¸¿ø°¡ÀÔ Æû
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signupForm() {
 		return "user/signup";
 	}
-	//íšŒì›ê°€ì… ì²˜ë¦¬
+	//È¸¿ø°¡ÀÔ Ã³¸®
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signup(UserVO vo, HttpServletRequest request) {
 		userService.insertUser(vo);
 		return "main";
 	}
 	
-	//ë§ˆì´í˜ì´ì§€
+	//¸¶ÀÌÆäÀÌÁö
 	@RequestMapping("/getMyInfo")
 	public String mypage(Model model, UserVO vo, HttpSession session) {
 		model.addAttribute("user", userService.getUser(vo));
 		return "user/getMyInfo";
 	}
-	//ë§ˆì´í˜ì´ì§€ ìˆ˜ì •
+	//¸¶ÀÌÆäÀÌÁö ¼öÁ¤
 	@RequestMapping("updateMyInfo")
 	public String updateMyInfo(UserVO vo) {
 		userService.updateUser(vo);
 		return "redirect:getMyInfo";
 	}
 	
-	//íƒˆí‡´ì²˜ë¦¬
+	//Å»ÅğÃ³¸®
 	@RequestMapping("/deleteMyInfo")
 	public String deleteMyInfo(HttpSession session, UserVO vo) {
-		session.invalidate(); //ì„¸ì…˜ ë¬´íš¨í™”
+		session.invalidate(); //¼¼¼Ç ¹«È¿È­
 		userService.deleteUser(vo);
 		
 		return "main";

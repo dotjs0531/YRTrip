@@ -39,20 +39,6 @@ input[type=text], select, input[type=password], input[type=email], input[type=da
     box-sizing: border-box;
     color:black;
 }
-input[type=submit],input[type=boutton] {
-    width: 100%;
-    background-color: #f9bf3b;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px auto;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-input[type=submit]:hover,
-input[type=button]:hover {
-    background-color: #f9bf3b;
-}
 #wrap_gender{
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -192,6 +178,50 @@ if(man.checked == false && woman.checked == false){
 }
 */
 </script>
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var addr = ''; // 주소 변수
+                var extraRoadAddr = ''; // 참고 항목 변수
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                if(data.userSelectedType === 'R'){
+                
+                	// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                	// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                	if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    	extraRoadAddr += data.bname;
+                	}
+                	// 건물명이 있고, 공동주택일 경우 추가한다.
+                	if(data.buildingName !== '' && data.apartment === 'Y'){
+                   		extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                	}
+                	// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                	if(extraRoadAddr !== ''){
+                    	extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    	addr += extraRoadAddr;
+                	}
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("userAddress").value = addr;
+            }
+        }).open();
+    }
+</script>
 </head>
 <body>
     <!--    start about us area-->
@@ -216,7 +246,8 @@ if(man.checked == false && woman.checked == false){
                 <div class="col-sm-6">
                     <div class="about_car">
             		<h3 style="color:black; text-align:center">${user.userId}</h3><br>
-            			<form action="./updateMypage" method="post">
+            			<form action="./updateMyInfo" method="post">
+            			<input type="hidden" id="userId" value="${user.userId}">
             			<fieldset>
             				
 							이름 *
@@ -256,9 +287,11 @@ if(man.checked == false && woman.checked == false){
 							</div>
 							
 							주소 
-							<div>
-							<input type="text" id="userAddress" name="userAddress" value="${user.userAddress}">
-							<span id="MsgAddress" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							<div class="form-group" style="padding:0">
+							<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:69%">
+							<input type="button" class="btn btn-warning" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" 
+								style="width:30%; padding: 13px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"><br>
+							<input type="text" id="userAddress" name="userAddress" value="${user.userAddress}" placeholder="도로명주소">
 							</div>
 							
 							성별 *
@@ -289,7 +322,8 @@ if(man.checked == false && woman.checked == false){
 							<!-- <span id="MsgAccount" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span> -->
 							</div>
 							
-							<br><strong><input type="submit" value="회원정보 수정"></strong>
+							<br><strong><input type="submit" class="btn btn-warning" value="회원정보 수정"
+										style="width: 100%; padding: 14px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"></strong>
 						</fieldset>
             			</form>
                     </div>
