@@ -26,45 +26,21 @@
 	<section class="content-section">
 
 		<!-- 왼쪽 사이드바 -->
-		<div class="category">
-			<div class="search-box">
-				<div class="pricing-title">
-					<h2 style="color: black">카테고리</h2>
-				</div>
-				<ul class=price-list>
-					<li><a href="#" style="color: black">전체 여행기</a></li>
-					<li><a href="#" style="color: black">베스트 여행기</a></li>
-					<li><a href="#" style="color: black">베스트 장소</a></li>
-				</ul>
-
-			</div>
-			<div>
-				<form name="search_frm">
-					<div class="form-group">
-						<br> <select name="searchCondition"
-							class="form-control select-form">
-							<option selected>선택</option>
-							<option value="userId">작성자</option>
-							<option value="tinfoId">지역명</option>
-							<option value="travelTitle">제목</option>
-							<option value="travelContent">내용</option>
-						</select> <label class="sr-only" for="searchForm">여행게시판 내 검색</label> <input
-							type="text" class="form-control" name="searchKeyword"
-							placeholder="검색할 내용을 입력하세요">
-
-					</div>
-					<div>
-						<button type="submit" class="btn btn-warning submit-buton">검색</button>
-					</div>
-					<input type="hidden" name="sortCol" /><br>
-					<br>
-					<div>
-						<button class="submit-btn" type="button"
-							onclick="location.href='${pageContext.request.contextPath}/insertTravelBoardform'">등록</button>
-					</div>
-				</form>
-			</div>
-		</div>
+<div class="category">
+ <div class="search-box">
+                        <div class="pricing-title">
+                            <h2 style="color:black">카테고리</h2>
+                        </div>
+                        <ul class=price-list>
+                            <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
+                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
+                        </ul>
+	                        <div class="order-buton" style="padding-bottom:30px;">
+	                            <a href="insertTravelBoardform">여행기 등록</a>
+	                        </div>                   
+</div>
+</div>
 
 		<!-- 여행게시글 수정폼 -->
 		<div class="list-box">

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>여행게시판 글 상세보기</title>
+<title>장소게시판 글 상세보기</title>
 
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
@@ -36,47 +36,37 @@
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                        <div class="order-buton" style="padding-bottom:30px;">
-	                            <a href="insertTravelBoardform">여행기 등록</a>
+	                            <a href="insertTravelPlaceform">장소 등록</a>
 	                        </div>                   
 </div>
 </div>
-
-<!-- 여행게시글 상세 -->
+<!-- 장소게시글 상세 -->
 	<div class="list-box">
 
 		<table border="1">
 			<tr>
-				<th>사진</th>
-				<th>제목</th>
-				<th>장소</th>
-				<th>테마</th>
-				<th>인원</th>
-				<th>일정</th>
-				<th>출발일</th>
-				<th>아이디</th>
 				<th>글번호</th>
-				<th>날짜</th>
-				<th>조회수</th>
+				<th>장소명</th>
+				<th>주소</th>
+				<th>작성날짜</th>
 				<th>좋아요</th>
+				<th>내용</th>
+				<th>사진</th>
+				<th>작성자</th>
 			</tr>
 			<tr>
-				<td>${travelBoard.travelPic}</td>
-				<td>${travelBoard.travelTitle}</td>
-				<td>${travelBoard.tinfoId}</td>
-				<td>${travelBoard.travelWith}</td>
-				<td>${travelBoard.travelPerson}</td>
-				<td>${travelBoard.travelSche}</td>
-				<td>${travelBoard.travelStart}</td>
-				<td>${travelBoard.userId}</td>
-				<td>${travelBoard.travelNo}</td>
-				<td>${travelBoard.travelDate}</td>
-				<td>${travelBoard.travelHit}</td>
-				<td>${travelBoard.travelLike}</td>
-				<!-- TravelBoardController의 getTravelBoard 메서드에서 travelBoard로 값 넘겨줌 -->
+				<td>${travelPlace.placeNo}</td>
+				<td>${travelPlace.placeName}</td>
+				<td>${travelPlace.placeAddress}</td>
+				<td>${travelPlace.placeDate}</td>
+				<td>${travelPlace.placeLike}</td>
+				<td>${travelPlace.placeContent}</td>
+				<td>${travelPlace.placePic}</td>
+				<td>${travelPlace.userId}</td>
 			</tr>
 		</table>
-		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'">수정</button>
-		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}'">삭제</button>
+		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelPlaceform?placeNo=${travelPlace.placeNo}'">수정</button>
+		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelPlace?placeNo=${travelPlace.placeNo}'">삭제</button>
 		</div>
 		
 	</section>

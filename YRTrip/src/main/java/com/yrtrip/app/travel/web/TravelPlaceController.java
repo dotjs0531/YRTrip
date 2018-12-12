@@ -15,6 +15,7 @@ public class TravelPlaceController {
 	@Autowired
 	TravelPlaceService travelPlaceService;
 
+//전체조회
 	@RequestMapping(value = { "/getTravelPlaceList", "/getListTravelPlace", "/getTravelPlaces" }, method = RequestMethod.GET)
 	public String getTravelPlaceList(Model model, TravelPlaceVO vo) {
 		model.addAttribute("travelPlaceList", travelPlaceService.getTravelPlaceList(vo));

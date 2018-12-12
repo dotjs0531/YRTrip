@@ -1,5 +1,7 @@
 package com.yrtrip.app.travel;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class TravelBoardVO {
 
 	private int travelNo;
@@ -21,6 +23,8 @@ public class TravelBoardVO {
 	private String searchCondition;
 	
 	private String sortCol;
+	
+	private int    pageUnit;
 	
 	public int getTravelNo() {
 		return travelNo;
@@ -106,23 +110,37 @@ public class TravelBoardVO {
 	public void setTravelPic(String travelPic) {
 		this.travelPic = travelPic;
 	}
+	
+	@JsonIgnore
 	public String getSearchKeyword() {
 		return searchKeyword;
 	}
 	public void setSearchKeyword(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 	}
+	
+	@JsonIgnore
 	public String getSearchCondition() {
 		return searchCondition;
 	}
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
+	
+	@JsonIgnore
 	public String getSortCol() {
 		return sortCol;
 	}
 	public void setSortCol(String sortCol) {
 		this.sortCol = sortCol;
+	}
+	
+	@JsonIgnore
+	public int getPageUnit() {
+		return pageUnit;
+	}
+	public void setPageUnit(int pageUnit) {
+		this.pageUnit = pageUnit;
 	}
 	
 }

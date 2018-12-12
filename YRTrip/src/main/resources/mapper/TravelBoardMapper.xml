@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="travelBoard">
 
-<select id="getTravelBoardList" resultType="travelBoard">
+<select id="getTravelBoardList" resultType="travelBoard" parameterType="travelBoard">
 	SELECT TRAVEL_NO,
 			TRAVEL_PERSON,
 			TRAVEL_PAY,

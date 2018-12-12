@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행게시판 목록보기</title>
+<title>장소게시판 목록보기</title>
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
@@ -23,7 +23,7 @@
 </head>
 <body>
 <section class="content-section">
-<!-- 왼쪽 사이드바 -->
+<!-- 검색창 -->
 <div class="category">
  <div class="search-box">
                         <div class="pricing-title">
@@ -35,20 +35,20 @@
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                        <div class="order-buton" style="padding-bottom:30px;">
-	                            <a href="insertTravelBoardform">여행기 등록</a>
+	                            <a href="insertTravelPlaceform">장소 등록</a>
 	                        </div>                   
 </div>
 </div>
 
-<!-- 여행기 리스트 -->
+<!-- 리스트 -->
 	<div class="list-box">
-						<c:forEach items="${travelBoardList}" var="board">
-							<article data-travelNo="${board.travelNo}">
+						<c:forEach items="${travelPlaceList}" var="board">
+							<article>
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
 									<div class="content-title">
 										<div class="text-center">
 											<h3>
-												<a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a>
+												<a href="getTravelPlace?placeNo=${board.placeNo}">${board.placeName}</a>
 											</h3>
 										</div>
 									</div>
@@ -56,7 +56,7 @@
 										<span style="font-size: 16px; color: #fff;">${board.userId}</span>
 										<span class="pull-right"><a href="#"
 											data-toggle="tooltip" data-placement="right"
-											title="Like"><i class="fa fa-heart"></i> ${board.travelLike}</a>
+											title="Like"><i class="fa fa-heart"></i> ${board.placeLike}</a>
 										</span>
 										<div class="user-ditels">
 											<div class="user-img">

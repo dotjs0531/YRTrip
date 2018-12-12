@@ -15,11 +15,11 @@
 	FROM TRAVEL_PLACET
  	<where>
 	<choose>
-		<when test="searchCondition != null and searchCondition == 'place_name'">
-			and place_name like '%' || #{searchKeyword} || '%'
+		<when test="searchCondition != null and searchCondition == 'placeName'">
+			AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
 		</when>	
-		<when test="searchCondition != null and searchCondition == 'user_id'">
-			and user_id like '%' || #{searchKeyword} || '%'
+		<when test="searchCondition != null and searchCondition == 'userId'">
+			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
 		</when>
 	</choose>
 	</where>
@@ -34,47 +34,45 @@
 </select>
 
 <insert id="insertTravelPlace" parameterType="travelPlace">
-	<selectKey keyProperty="place_no" resultType="integer" order="BEFORE">
+	<selectKey keyProperty="placeNo" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(PLACE_NO),0)+1 FROM TRAVEL_PLACET
 	</selectKey>
 		INSERT INTO TRAVEL_PLACET(PLACE_NO,
 									PLACE_NAME,
 									PLACE_ADDRESS,
-									PLACE_LIKE,
 									PLACE_DATE,
 									PLACE_CONTENT,
 									PLACE_TRAVELBOARDNO,
 									PLACE_PIC,
 									USER_ID)
-		VALUES (#{place_no}, 
-				#{place_name}, 
-				#{place_address}, 
-				#{place_like}, 
+		VALUES (#{placeNo}, 
+				#{placeName}, 
+				#{placeAddress}, 
 				sysdate, 
-				#{place_content}, 
-				#{place_travelboardno}, 
-				#{place_pic}, 
-				#{user_id})
+				#{placeContent}, 
+				#{placeTravelBoardNo}, 
+				#{placePic}, 
+				#{userId})
 </insert>
 
 <update id="updateTravelPlace" parameterType="travelPlace">
 	UPDATE TRAVEL_PLACET 
-	SET PLACE_NAME = #{place_name},
-		PLACE_ADDRESS = #{place_address},
-		PLACE_CONTENT = #{place_content},
-		PLACE_TRAVELBOARDNO = #{place_travelboardno},
-		PLACE_PIC = #{place_pic}
-	WHERE PLACE_NO = #{PLACE_NO}
+	SET PLACE_NAME = #{placeName},
+		PLACE_ADDRESS = #{placeAddress},
+		PLACE_CONTENT = #{placeContent},
+		PLACE_TRAVELBOARDNO = #{placeTravelBoardNo},
+		PLACE_PIC = #{placePic}
+	WHERE PLACE_NO = #{placeNo}
 </update>
 
 <delete id="deleteTravelPlace" parameterType="int">
 	DELETE FROM TRAVEL_PLACET 
-	WHERE PLACE_NO = #{PLACE_NO}
+	WHERE PLACE_NO = #{placeNo}
 </delete>
 
 <delete id="deleteTravelPlaceList" parameterType="list">
 	DELETE FROM TRAVEL_PLACET 
-	<if test="seqList != null and seqList.length>0">
+	<if test="PlaceNoList != null and PlaceNoList.length>0">
 	WHERE PLACE_NO in
 	<foreach collection="PlaceNoList" item="item" open="(" close=")" separator=",">
 		#{item}
@@ -96,6 +94,6 @@
 			PLACE_PIC,
 			USER_ID
 	FROM TRAVEL_PLACET 
-	WHERE PLACE_NO = #{place_no}
+	WHERE PLACE_NO = #{placeNo}
 </select>
 </mapper> 

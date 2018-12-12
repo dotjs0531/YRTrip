@@ -37,23 +37,21 @@
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                        <div class="order-buton" style="padding-bottom:30px;">
-	                            <a href="insertTravelBoardform">여행기 등록</a>
+	                            <a href="insertTravelPlaceform">장소 등록</a>
 	                        </div>                   
 </div>
 </div>
-		<!-- 여행게시글 등록폼 -->
+		
+		<!-- 여행게시글 수정폼 -->
 		<div class="list-box">
-			<form action="./insertTravelBoard" method="post">
-				아이디 : <input type="text" name="userId"><br> 
-				제목 : <input type="text" name="travelTitle"><br> 
-				장소명 : <input type="text" name="tinfoId"><br> 
-				여행테마 : <input type="text" name="travelWith"><br> 
-				메인사진 : <input type="text" name="travelPic"><br> 
-				일정 : <input type="text" name="travelSche"><br> 
-				출발일 : <input type="text" name="travelStart"><br> 
-				경비 : <input type="text" name="travelPay"><br> 
-				인원수 : <input type="text" name="travelPerson"><br> 
-				내용 : <input type="text" name="travelContent"><br>
+			<form action="./updateTravelPlace" method="post">
+			<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
+				장소명 : <input type="text" name="placeName" value="${travelPlace.placeName}"><br> 
+				주소 : <input type="text" name="placeAddress" value="${travelPlace.placeAddress}"><br> 
+				내용 : <input type="text" name="placeContent" value="${travelPlace.placeContent}"><br> 
+				여행게시판번호 : <input type="text" name="placeTravelBoardNo" value="${travelPlace.placeTravelBoardNo}"><br> 
+				사진 : <input type="text" name="placePic" value="${travelPlace.placePic}"><br> 
+				아이디 : <input type="text" name="userId" value="${travelPlace.userId}"><br> 
 				
 				<button class="submit-btn">등록</button>
 			</form>
