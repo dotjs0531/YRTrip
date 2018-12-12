@@ -26,7 +26,7 @@
                             <h2 style="color:black">고객센터</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="getNoticeList" style="color:black">공지사항</a></li>
+                            <li><a href="getNoticeList" style="color:black"><strong>공지사항</strong></a></li>
                             <li><a href="getQnaList" style="color:black">1:1 문의</a></li>
                         </ul>
                         <div class="order-buton">
