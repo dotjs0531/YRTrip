@@ -14,7 +14,7 @@
 </select>
 
 
-<select id="getChatListByRecent" resultType="chat" parameterType="number">
+<select id="getChatListByRecent" resultType="chat">
 	SELECT	CHAT_ID,
 			FROM_ID,
 			TO_ID,
