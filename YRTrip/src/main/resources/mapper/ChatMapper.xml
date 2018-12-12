@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="chat">
+<select id="getChatListByID" resultType="chat">
+	SELECT	CHAT_ID,
+			FROM_ID,
+			TO_ID,
+			CHAT_CONTENT,
+			CHAT_TIME
+	FROM	CHATT
+	WHERE	((FROM_ID = #{fromid} AND TO_ID = #{toid} ) OR (TO_ID = #{toid} AND FROM_ID = #{fromid} ) AND CHAT_ID > #{chat_id})
+	ORDER BY CHAT_TIME
+</select>
+
+
+<select id="getChatListByRecent" resultType="chat" parameterType="number">
+	SELECT	CHAT_ID,
+			FROM_ID,
+			TO_ID,
+			CHAT_CONTENT,
+			CHAT_TIME
+	FROM	CHATT
+	WHERE	((FROM_ID = #{fromid} AND TO_ID = #{toid} ) OR (TO_ID = #{toid} AND FROM_ID = #{fromid} ) AND CHAT_ID > (SELECT MAX(CHAT_ID) - number FROM CHATT))
+	ORDER BY CHAT_TIME
+</select>
+
+<insert id="submit">
+	INSERT INTO CHATT
+	VALUES (NULL, #{fromid}, #{toid}, #{chatcontent}, SYSDATE)
+</insert>
+
+</mapper>
