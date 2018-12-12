@@ -18,12 +18,10 @@ public class NoticeDAOMybatis {
 	public void insertNotice(NoticeVO vo) {
 		mybatis.update("notice.insertNotice", vo);
 	}
-	
 	//수정
 	public void updateNotice(NoticeVO vo) {
 		mybatis.update("notice.updateNotice", vo);
 	}
-	
 	//삭제
 	public void deleteNotice(NoticeVO vo) {
 		mybatis.update("notice.deleteNotice", vo.getNoticeId());
@@ -31,9 +29,9 @@ public class NoticeDAOMybatis {
 	
 	//단건조회
 	public NoticeVO getNotice(NoticeVO vo) {
+		mybatis.update("notice.updateViewCnt", vo);	//조회수 증가
 		return mybatis.selectOne("notice.getNotice", vo);
 	}
-	
 	//전체조회
 	public List<NoticeVO> getNoticeList(NoticeVO vo) {
 		return mybatis.selectList("notice.getNoticeList", vo);

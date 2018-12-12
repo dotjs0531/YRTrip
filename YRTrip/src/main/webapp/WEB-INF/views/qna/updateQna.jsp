@@ -40,7 +40,7 @@ input[type=submit] {
                 <div class="col-sm-6" style="min-width:700px">
                 <form action="./updateQna" method="post">
                 	<input type="hidden" name="qnaId" value="${qna.qnaId}">
-			 		<div style="min-height:380px;">
+			 		<div style="min-height:350px;">
 			 		<table class="table table-bordered table-striped" style="text-align:center;">
 			 			<thead>
 							<tr>

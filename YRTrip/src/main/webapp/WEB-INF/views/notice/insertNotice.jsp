@@ -63,10 +63,10 @@ input[type=submit] {
 			 			</thead>
 			 			<tbody>
 			 				<tr>
-			 					<td><input type="text" class="form-control" placeholder="글제목" name="noticeTitle" maxlength="50"></td>
+			 					<td><input type="text" class="form-control" placeholder="글제목" name="noticeTitle" maxlength="100"></td>
 			 				</tr>
 			 				<tr>	
-			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="2048" style="height:200px"></textarea> </td>
+			 					<td><textarea class="form-control" placeholder="글 내용" name="noticeContent" maxlength="1024" style="height:200px"></textarea> </td>
 			 				</tr>
 			 				<tr>
 			 					<td>

@@ -61,4 +61,9 @@
 	DELETE  FROM  NOTICET
 			WHERE NOTICE_ID = #{value}
 </delete>
+
+<update id="updateViewCnt" parameterType="notice">
+	UPDATE NOTICET  SET   NOTICE_HIT = NOTICE_HIT + 1
+					WHERE NOTICE_ID = #{noticeId}
+</update>
 </mapper> 
