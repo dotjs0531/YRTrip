@@ -35,7 +35,7 @@
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                        <div class="order-buton" style="padding-bottom:30px;">
-	                            <a href="insertTravelBoardform">여행기 등록</a>
+	                            <a id="insertTravelBoardButton">여행기 등록</a>
 	                        </div>                   
 </div>
 </div>
@@ -81,27 +81,99 @@
 								</c:forEach>
 
 					</div>
+					
+<!-- modal body -->					
+					<div class="modal fade" id="insertTravelBoard">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- remote ajax call이 되는영역 -->
+				<!-- header -->
+				<div class="modal-header">
+					<!-- 닫기(x) 버튼 -->
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
+
+				<!-- body -->
+				<div class="modal-body">
+					<div class="container">
+						<div id="login-row"
+							class="row justify-content-center align-items-center">
+							<div id="login-column" class="col-md-6">
+								<div id="login-box" class="col-md-12">
+									<form id="/insertTravelBoardform" class="form" action="./insertTravelBoard" method="post">
+										<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>
+										<div class="form-group">
+											<label for="userId" class="text-info" style="color:#5f768b;">아이디:</label><br>
+											<input type="text" name="userId" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="travelTitle" class="text-info" style="color:#5f768b;">제목:</label><br>
+											<input type="text" name="travelTitle" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="tinfoId" class="text-info" style="color:#5f768b;">여행지:</label><br>
+											<input type="text" name="tinfoId" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="travelWith" class="text-info" style="color:#5f768b;">여행테마:</label><br>
+											<input type="text" name="travelWith" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="travelSche" class="text-info" style="color:#5f768b;">일정:</label><br>
+											<input type="text" name="travelSche" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="travelStart" class="text-info" style="color:#5f768b;">출발일:</label><br>
+											<input type="text" name="travelStart" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="travelPerson" class="text-info" style="color:#5f768b;">인원:</label><br>
+											<input type="text" name="travelPerson" class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="remember-me" class="text-info"></label>
+											<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 <!-- js -->
-	<script>
-		$(document).ready(function() {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
 
-		var acc = document.getElementsByClassName("accordion");
-		var i;
+<script>
+<!-- 유저 tooltip -->
+$(document).ready(function() {
+	$('[data-toggle="tooltip"]').tooltip();
+});
 
-		for (i = 0; i < acc.length; i++) {
-			acc[i].onclick = function() {
-				this.classList.toggle("active");
-				var panel = this.nextElementSibling;
-				if (panel.style.maxHeight) {
-					panel.style.maxHeight = null;
-				} else {
-					panel.style.maxHeight = panel.scrollHeight + "px";
-				}
-			}
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+	acc[i].onclick = function() {
+		this.classList.toggle("active");
+		var panel = this.nextElementSibling;
+		if (panel.style.maxHeight) {
+			panel.style.maxHeight = null;
+		} else {
+			panel.style.maxHeight = panel.scrollHeight + "px";
 		}
+	}
+};
+
+/* 여행등록 modal */
+$(function(){
+	   $("#insertTravelBoardButton").click(function(){
+	    	$('div#insertTravelBoard').modal(true);
+		})
+});
 	</script>
 </body>
 </html>

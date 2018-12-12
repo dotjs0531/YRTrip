@@ -17,7 +17,7 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 	public void insertTravelBoard(TravelBoardVO vo) {
 		dao.insertTravelBoard(vo);
 	}
-
+	
 	@Override
 	public void updateTravelBoard(TravelBoardVO vo) {
 		dao.updateTravelBoard(vo);

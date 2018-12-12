@@ -51,32 +51,24 @@
 	</selectKey>
 		INSERT INTO TRAVELBOARDT(TRAVEL_NO,
 								TRAVEL_PERSON,
-								TRAVEL_PAY,
 								TRAVEL_SCHE,
 								TRAVEL_START,
 								TRAVEL_TITLE,
-								TRAVEL_CONTENT,
 								TRAVEL_DATE,
-								TRAVEL_HIT,
-								TRAVEL_LIKE,
 								TINFO_ID,
 								USER_ID,
-								TRAVEL_WITH,
-								TRAVEL_PIC)
+								TRAVEL_WITH
+								)
 		VALUES (#{travelNo}, 
 				#{travelPerson},
-				#{travelPay}, 
 				#{travelSche}, 
 				#{travelStart}, 
-				#{travelTitle}, 
-				#{travelContent}, 
+				#{travelTitle},  
 				sysdate, 
-				#{travelHit}, 
-				#{travelLike}, 
 				#{tinfoId}, 
 				#{userId}, 
-				#{travelWith}, 
-				#{travelPic})
+				#{travelWith}
+				)
 </insert>
 
 <update id="updateTravelBoard" parameterType="travelBoard">

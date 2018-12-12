@@ -32,17 +32,17 @@ public class TravelBoardController {
 		return "travel/getTravelBoard";
 	}
 
-//등록폼
+//모달 등록폼
 	@RequestMapping(value = { "/insertTravelBoardform" }, method = RequestMethod.GET)
 	public String insertTravelBoardform() {
 		return "travel/insertTravelBoard";
 	}
 
-//등록처리
+//모달 등록처리
 	@RequestMapping(value = { "/insertTravelBoard" }, method = RequestMethod.POST)
 	public String insertTravelBoard(TravelBoardVO vo) { // 커맨드 객체
 		travelBoardService.insertTravelBoard(vo); // 등록처리
-		return "redirect:getTravelBoardList"; // 목록요청
+		return "redirect:insertTravelBoardSecond"; // 목록요청
 	}
 
 //수정폼

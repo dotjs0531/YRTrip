@@ -43,18 +43,10 @@
 </div>
 		<!-- 여행게시글 등록폼 -->
 		<div class="list-box">
-			<form action="./insertTravelBoard" method="post">
-				아이디 : <input type="text" name="userId"><br> 
-				제목 : <input type="text" name="travelTitle"><br> 
-				장소명 : <input type="text" name="tinfoId"><br> 
-				여행테마 : <input type="text" name="travelWith"><br> 
+			<form action="./insertTravelBoardSecond" method="post">
 				메인사진 : <input type="text" name="travelPic"><br> 
-				일정 : <input type="text" name="travelSche"><br> 
-				출발일 : <input type="text" name="travelStart"><br> 
 				경비 : <input type="text" name="travelPay"><br> 
-				인원수 : <input type="text" name="travelPerson"><br> 
 				내용 : <input type="text" name="travelContent"><br>
-				
 				<button class="submit-btn">등록</button>
 			</form>
 		</div>
