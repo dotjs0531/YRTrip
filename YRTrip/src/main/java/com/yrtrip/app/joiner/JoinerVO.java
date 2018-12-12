@@ -8,8 +8,10 @@ public class JoinerVO {
 	private Integer joinnerid;
 	private String joinnerdate;
 	private String userid;
-	private String partnerid;
+	private String partnerid;	// 참조키
 	private String joinnercondition;
+	private Integer	pageUnit;
+	
 	public Integer getJoinnerid() {
 		return joinnerid;
 	}
@@ -41,6 +43,12 @@ public class JoinerVO {
 		this.joinnercondition = joinnercondition;
 	}
 	
+	public Integer getPageUnit() {
+		return pageUnit;
+	}
+	public void setPageUnit(Integer pageUnit) {
+		this.pageUnit = pageUnit;
+	}
 	@Override
 	public String toString() {
 		return "JoinnerVO [joinnerid=" + joinnerid + ", joinnerdate=" + joinnerdate + ", userid=" + userid
