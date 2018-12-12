@@ -5,28 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <style>
-
-.header{ background-color:antiquewhite; height: 100px;}
-
-.main{ margin: 0 auto;
-    width: 40%;
-}
-
-.main h4{ margin: 60px auto;
-text-align: center; font-size: 2em; }
-
 fieldset{
     border: none;
 }
 fieldset > div{ 
     position: relative;
-    margin-bottom: 10px;
 }
 .none{
     display: none;
 }
 .error{ 
-    font-size: 0.8em;
     position: absolute;
     width: auto;
     top: 18px; right: 10px;
@@ -34,12 +22,12 @@ fieldset > div{
     color: red;
 }
 .vaild{
-    font-size: 0.8em;
     position: absolute;
     width: 150px;
     top: 18px; right: 10px;
     text-align: right;
     color: #f9bf3b;
+    font-weight:bold;
 }
 input[type=text], select, input[type=password], input[type=email], input[type=date] {
     width: 100%;
@@ -61,7 +49,8 @@ input[type=submit],input[type=boutton] {
     border-radius: 4px;
     cursor: pointer;
 }
-input[type=submit]:hover,input[type=boutton]:hover {
+input[type=submit]:hover,
+input[type=button]:hover {
     background-color: #f9bf3b;
 }
 #wrap_gender{
@@ -109,106 +98,99 @@ input[type=radio]{
 } */
 </style>
 <script>
-$(function(){
-	
-	function ck_email(){
-	    var email = document.getElementById("userEmail");
-	    var MsgEmail = document.getElementById("MsgEmail");
-	    var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
+function ck_email(){
+    var email = document.getElementById("userEmail");
+    var MsgEmail = document.getElementById("MsgEmail");
+    var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
 
-	    if(!isEmail.test(email.value)){
-	    	MsgEmail.style.display="block";
-	    	MsgEmail.className='error';
-	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
-	        email.focus();
-	        return false;
-	    } else{
-	    	MsgEmail.className='vaild';
-	    	MsgEmail.innerHTML="ok";
-	    }   
+    if(!isEmail.test(email.value)){
+    	MsgEmail.style.display="block";
+    	MsgEmail.className='error';
+    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
+        return false;
+    } else{
+    	MsgEmail.className='vaild';
+    	MsgEmail.innerHTML="ok";
+    }   
+}
+
+function ck_pwd(){
+    var pwd = document.getElementById("userPw");
+    var MsgPw = document.getElementById("MsgPw");
+    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
+    
+    if(!isPwd.test(pwd.value)){
+        MsgPw.style.display="block";
+        MsgPw.className='error';
+        MsgPw.innerHTML="숫자포함 최소 6자리 이상";
+        return false;
+    } else{
+        MsgPw.className='vaild';
+        MsgPw.innerHTML="ok";
+    }   
+}
+
+
+function ck_pwd2(){
+    var pwd_ck = document.getElementById("userPw_ck");
+    var pwd = document.getElementById("userPw").value;
+    var MsgPwck = document.getElementById("MsgPwck");
+    
+    if(pwd_ck.value!=pwd){
+        MsgPwck.style.display="block";
+        MsgPwck.className='error';
+        MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
+        return false;
+    } else{
+        MsgPwck.className='vaild';
+        MsgPwck.innerHTML="ok";
+    }   
+}
+
+
+function ck_name(){
+    var name = document.getElementById("userName");
+    var MsgName = document.getElementById("MsgName");
+    
+    if(name.value==''){
+        MsgName.style.display="block";
+        MsgName.className='error';
+        MsgName.innerHTML="2자 이상 입력하세요.";
+        return false;
+    } else{
+        MsgName.className='vaild';
+        MsgName.innerHTML="ok";
+    }   
+}
+
+
+function ck_gender(){
+	var wrap_gender = document.getElementById("wrap_gender");
+	var man = document.getElementById("man");
+	var woman = document.getElementById("woman");
+	var MsgGender = document.getElementById("userGen");
+
+
+	if(man.checked){
+    	document.getElementById("wrap_man").className='gender_act';
+    	document.getElementById("wrap_woman").className='gender';
 	}
 
-	function ck_pwd(){
-	    var pwd = document.getElementById("userPw");
-	    var MsgPw = document.getElementById("MsgPw");
-	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
-	    
-	    if(!isPwd.test(pwd.value)){
-	        MsgPw.style.display="block";
-	        MsgPw.className='error';
-	        MsgPw.innerHTML="숫자포함 최소 6자리 이상";
-	        pwd.focus();
-	        return false;
-	    } else{
-	        MsgPw.className='vaild';
-	        MsgPw.innerHTML="ok";
-	    }   
+	if(woman.checked){
+    	document.getElementById("wrap_woman").className='gender_act';
+    	document.getElementById("wrap_man").className='gender';
 	}
+}
 
 
-	function ck_pwd2(){
-	    var pwd_ck = document.getElementById("userPw_ck");
-	    var pwd = document.getElementById("userPw").value;
-	    var MsgPwck = document.getElementById("MsgPwck");
-	    
-	    if(pwd_ck.value!=pwd){
-	        MsgPwck.style.display="block";
-	        MsgPwck.className='error';
-	        MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
-	        pwd_ck.focus();
-	        return false;
-	    } else{
-	        MsgPwck.className='vaild';
-	        MsgPwck.innerHTML="ok";
-	    }   
-	}
-
-
-	function ck_name(){
-	    var name = document.getElementById("userName");
-	    var MsgName = document.getElementById("MsgName");
-	    
-	    if(name.value==''){
-	        MsgName.style.display="block";
-	        MsgName.className='error';
-	        MsgName.innerHTML="2자 이상 입력하세요.";
-	        name.focus();
-	        return false;
-	    } else{
-	        MsgName.className='vaild';
-	        MsgName.innerHTML="ok";
-	    }   
-	}
-
-
-	function ck_gender(){
-		var wrap_gender = document.getElementById("wrap_gender");
-		var man = document.getElementById("man");
-		var woman = document.getElementById("woman");
-		var MsgGender = document.getElementById("userGen");
-
-
-		if(man.checked){
-	    	document.getElementById("wrap_man").className='gender_act';
-	    	document.getElementById("wrap_woman").className='gender';
-		}
-
-		if(woman.checked){
-	    	document.getElementById("wrap_woman").className='gender_act';
-	    	document.getElementById("wrap_man").className='gender';
-		}
-	}
-
-
-	/*    
-	if(man.checked == false && woman.checked == false){
-	    MsgGender.style.display="block";
-	    MsgGender.className='error'
-	    MsgGender.innerHTML="필수 정보입니다."        wrap_gender.style.borderColor="red";
-	    return false;
-	}
-	*/
-});
+/*    
+if(man.checked == false && woman.checked == false){
+    MsgGender.style.display="block";
+    MsgGender.className='error'
+    MsgGender.innerHTML="필수 정보입니다."        wrap_gender.style.borderColor="red";
+    return false;
+}
+*/
 </script>
 </head>
 <body>
@@ -236,28 +218,52 @@ $(function(){
             		<h3 style="color:black; text-align:center">${user.userId}</h3><br>
             			<form action="./updateMypage" method="post">
             			<fieldset>
-							이름 *<input type="text" id="userName" name="userName" value="${user.userName}" onblur="ck_name()" required>
-							<span id="MsgName" class="none">유효성체크</span>
-				
-            				비밀번호 *<input type="password" id="userPw" name="userPw" onblur="ck_pwd()" required>
-							<span id="MsgPw" class="none">유효성체크</span>
-				
-							비밀번호 확인 *<input type="password" id="userPw_ck" name="userPw_ck" onblur="ck_pwd2()">
-							<span id="MsgPwck" class="none">유효성체크</span>
+            				
+							이름 *
+							<div>
+							<input type="text" id="userName" name="userName" value="${user.userName}" onblur="ck_name()" required>							
+            				<span id="MsgName" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
 							
-							이메일 *<input type="email" id="userEmail" name="userEmail" value="${user.userEmail}" onblur="ck_email()" required>
-							<span id="MsgEmail" class="none">유효성체크</span>
-				
-							연락처 *<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" onblur="" required>
-							<span id="MsgPhone" class="none">유효성체크</span>
-				
-							생년월일 *<input type="date" id="userBirth" name="userBirth" value="${user.userBirth}" required>
-							<span id="MsgBirth" class="none">유효성체크</span>
-				
-							주소 <input type="text" id="userAddress" name="userAddress" value="${user.userAddress}">
-							<span id="MsgAddress" class="none">유효성체크</span>
-				
-							성별 *<div id="wrap_gender">
+            				비밀번호 *
+            				<div>
+            				<input type="password" id="userPw" name="userPw" onblur="ck_pwd()" required>
+							<span id="MsgPw" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
+							
+							비밀번호 확인 *
+							<div>
+							<input type="password" id="userPw_ck" name="userPw_ck" onblur="ck_pwd2()">
+							<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
+							
+							이메일 *
+							<div>
+							<input type="email" id="userEmail" name="userEmail" value="${user.userEmail}" onblur="ck_email()" required>
+							<span id="MsgEmail" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
+							
+							연락처 *
+							<div>
+							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" onblur="" required>
+							<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
+							
+							생년월일 *
+							<div>
+							<input type="date" id="userBirth" name="userBirth" value="${user.userBirth}" required>
+							<span id="MsgBirth" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
+							
+							주소 
+							<div>
+							<input type="text" id="userAddress" name="userAddress" value="${user.userAddress}">
+							<span id="MsgAddress" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
+							
+							성별 *
+							<div>
+							<div id="wrap_gender">
 								<span id="wrap_man" class="gender">
 								<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남">
 								<label for="man"> 남자 </label>
@@ -268,15 +274,22 @@ $(function(){
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
 								</span>
 							</div>
-							<span id="MsgGender" class="none">유효성체크</span>
+							<span id="MsgGender" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+							</div>
 							
-							은행 <input type="text" id="userBank" name="userBank" value="${user.userBank}">
-							<!-- <span id="MsgBank" class="none">유효성체크</span> -->
-				
-							계좌번호 <input type="text" id="userAccount" name="userAccount" value="${user.userAccount}">
-							<!-- <span id="MsgAccount" class="none">유효성체크</span> -->
-				
-							<br><input type="submit" value="회원정보 수정">
+							은행 
+							<div>
+							<input type="text" id="userBank" name="userBank" value="${user.userBank}">
+							<!-- <span id="MsgBank" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span> -->
+							</div>
+							
+							계좌번호
+							<div>
+							<input type="text" id="userAccount" name="userAccount" value="${user.userAccount}">
+							<!-- <span id="MsgAccount" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span> -->
+							</div>
+							
+							<br><strong><input type="submit" value="회원정보 수정"></strong>
 						</fieldset>
             			</form>
                     </div>

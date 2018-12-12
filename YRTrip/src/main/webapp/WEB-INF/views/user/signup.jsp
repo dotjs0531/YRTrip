@@ -5,28 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <style>
-
-.header{ background-color:antiquewhite; height: 100px;}
-
-.main{ margin: 0 auto;
-    width: 40%;
-}
-
-.main h4{ margin: 60px auto;
-text-align: center; font-size: 2em; }
-
 fieldset{
     border: none;
 }
 fieldset > div{ 
     position: relative;
-    margin-bottom: 10px;
 }
 .none{
     display: none;
 }
 .error{ 
-    font-size: 0.8em;
     position: absolute;
     width: auto;
     top: 18px; right: 10px;
@@ -34,12 +22,12 @@ fieldset > div{
     color: red;
 }
 .vaild{
-    font-size: 0.8em;
     position: absolute;
     width: 150px;
     top: 18px; right: 10px;
     text-align: right;
     color: #f9bf3b;
+    font-weight:bold;
 }
 input[type=text], select, input[type=password], input[type=email], input[type=date] {
     width: 100%;
@@ -51,7 +39,7 @@ input[type=text], select, input[type=password], input[type=email], input[type=da
     box-sizing: border-box;
     color:black;
 }
-input[type=submit],input[type=button] {
+input[type=submit],input[type=boutton] {
     width: 100%;
     background-color: #f9bf3b;
     color: white;
@@ -61,7 +49,8 @@ input[type=submit],input[type=button] {
     border-radius: 4px;
     cursor: pointer;
 }
-input[type=submit]:hover,input[type=boutton]:hover {
+input[type=submit]:hover,
+input[type=button]:hover {
     background-color: #f9bf3b;
 }
 #wrap_gender{
@@ -109,12 +98,9 @@ input[type=radio]{
 } */
 </style>
 <script>
-$(function(){
-	
 	function ck_id(){
 		var id = document.getElementById("userId");
 		var MsgId = document.getElementById("MsgId");
-
 	}
 	
 	function ck_email(){
@@ -126,7 +112,6 @@ $(function(){
 	    	MsgEmail.style.display="block";
 	    	MsgEmail.className='error';
 	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
-	        email.focus();
 	        return false;
 	    } else{
 	    	MsgEmail.className='vaild';
@@ -143,7 +128,6 @@ $(function(){
 	        MsgPw.style.display="block";
 	        MsgPw.className='error';
 	        MsgPw.innerHTML="숫자포함 최소 6자리 이상";
-	        pwd.focus();
 	        return false;
 	    } else{
 	        MsgPw.className='vaild';
@@ -161,7 +145,6 @@ $(function(){
 	        MsgPwck.style.display="block";
 	        MsgPwck.className='error';
 	        MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
-	        pwd_ck.focus();
 	        return false;
 	    } else{
 	        MsgPwck.className='vaild';
@@ -178,7 +161,6 @@ $(function(){
 	        MsgName.style.display="block";
 	        MsgName.className='error';
 	        MsgName.innerHTML="2자 이상 입력하세요.";
-	        name.focus();
 	        return false;
 	    } else{
 	        MsgName.className='vaild';
@@ -214,7 +196,6 @@ $(function(){
 	    return false;
 	}
 	*/
-});
 </script>
 </head>
 <body>
@@ -223,29 +204,41 @@ $(function(){
             <div class="row" style="width:600px; margin:0 auto;">
             <h3 style="color:black; text-align:center;">회원가입</h3><br>
             <form action="./signup" method="post">
+            <fieldset>
+				<div>
 				<input type="text" id="userId" name="userId" placeholder="아이디" onblur="ck_id()" required>
-				<span id="MsgId" class="none">유효성체크</span>
+				<span id="MsgId" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
+				<div>
 				<input type="password" id="userPw" name="userPw" placeholder="비밀번호" onblur="ck_pwd()" required>
-				<span id="MsgPw" class="none">유효성체크</span>
+				<span id="MsgPw" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
+				<div>
 				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" onblur="ck_pwd2()">
-				<span id="MsgPwck" class="none">유효성체크</span>
+				<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
+				<div>
 				<input type="text" id="userName" name="userName" placeholder="이름" onblur="ck_name()" required>
-				<span id="MsgName" class="none">유효성체크</span>
+				<span id="MsgName" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
+				<div>
 				<input type="email" id="userEmail" name="userEmail" placeholder="이메일 (yedam@yrtrip.com)" onblur="ck_email()" required>
-				<span id="MsgEmail" class="none">유효성체크</span>
+				<span id="MsgEmail" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
+				<div>
 				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" onblur="" required>
-				<span id="MsgPhone" class="none">유효성체크</span>
+				<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
+				<div>
 				<input type="date" id="userBirth" name="userBirth" placeholder="생년월일" required>
-				<span id="MsgBirth" class="none">유효성체크</span>
-				
-				<input type="text" id="userAddress" name="userAddress" placeholder="주소">
-				<span id="MsgAddress" class="none">유효성체크</span>
+				<span id="MsgBirth" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
+				</div>
 				
 				<div id="wrap_gender">
 					<span id="wrap_man" class="gender">
@@ -264,7 +257,8 @@ $(function(){
 					<option value="usa">40대</option>
 				</select> -->
 				
-				<br><input type="submit" value="회원가입">
+				<br><strong><input type="submit" value="회원가입"></strong>
+			</fieldset>
             </form>
             </div>
         </div>
