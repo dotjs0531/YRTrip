@@ -4,6 +4,7 @@
 <mapper namespace="travelBoard">
 
 <select id="getTravelBoardList" resultType="travelBoard" parameterType="travelBoard">
+	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	SELECT TRAVEL_NO,
 			TRAVEL_PERSON,
 			TRAVEL_PAY,
@@ -18,6 +19,37 @@
 			USER_ID,
 			TRAVEL_WITH,
 			TRAVEL_PIC
+	FROM TRAVELBOARDT
+ 	<where>
+	<choose>
+		<when test="searchCondition != null and searchCondition == 'userId'">
+			and user_id like '%' || #{searchKeyword} || '%'
+		</when>	
+		<when test="searchCondition != null and searchCondition == 'tinfoId'">
+			and tinfo_id like '%' || #{searchKeyword} || '%'
+		</when>	
+		<when test="searchCondition != null and searchCondition == 'travelTitle'">
+			and travel_title like '%' || #{searchKeyword} || '%'
+		</when>
+		<when test="searchCondition != null and searchCondition == 'travelContent'">
+			and travel_content like '%' || #{searchKeyword} || '%'
+		</when>
+	</choose>
+	</where>
+	<choose>
+		<when test="sortCol != null and sortCol != ''">
+			ORDER BY ${sortCol}
+		</when>
+		<otherwise>
+			ORDER BY TRAVEL_NO DESC
+		</otherwise>
+	</choose>
+			) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 페이징 : 전체 건수 조회 -->
+<select id="getCount" resultType="int">
+	SELECT COUNT(*)
 	FROM TRAVELBOARDT
  	<where>
 	<choose>

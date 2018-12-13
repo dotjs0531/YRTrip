@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +43,18 @@
 
 <!-- 여행기 리스트 -->
 	<div class="list-box">
+	<form name="frm">
+	<select name="searchCondition">
+		<option value="userId">작성자</option>
+		<option value="tinfoId">장소</option>
+		<option value="travelTitle">제목</option>
+		<option value="travelContent">내용</option>
+	</select>
+	<input type="text" name="searchKeyword">
+	<button type="submit">검색</button>
+	<input type="hidden" name="sortCol"/>
+	<input type="hidden" name="page">
+	</form>
 						<c:forEach items="${travelBoardList}" var="board">
 							<article data-travelNo="${board.travelNo}">
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
@@ -79,9 +92,8 @@
 									</div>
 											</article>
 								</c:forEach>
-
 					</div>
-					
+					<my:paging paging="${paging}" jsFunc="go_page"/>
 <!-- modal body -->					
 					<div class="modal fade" id="insertTravelBoard">
 		<div class="modal-dialog">
@@ -174,6 +186,12 @@ $(function(){
 	    	$('div#insertTravelBoard').modal(true);
 		})
 });
+
+/* 페이징 */	
+function go_page(page) {
+		document.frm.page.value=page;
+		document.frm.submit();	//검색폼 submit
+}
 	</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ public interface TravelBoardService {
 	public void deleteTravelBoard(TravelBoardVO vo);
 	public void deleteTravelBoardList(TravelBoardVO vo);
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo);
+	public int getCount(TravelBoardVO vo);
 	public List<TravelBoardVO> getTravelBoardList(TravelBoardVO vo);
 	
 }

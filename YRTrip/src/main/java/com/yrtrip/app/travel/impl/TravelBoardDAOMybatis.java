@@ -43,6 +43,12 @@ public class TravelBoardDAOMybatis {
 		System.out.println("getTravelBoardList() 기능 처리");
 		return sqlSession.selectList("travelBoard.getTravelBoardList", vo);
 	}
+	
+	//건수조회
+	public int getCount(TravelBoardVO vo) {
+		return sqlSession.selectOne("travelBoard.getCount", vo);
+	}
+	
 	//단건조회
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo) {
 		System.out.println("getTravelBoard() 기능 처리");

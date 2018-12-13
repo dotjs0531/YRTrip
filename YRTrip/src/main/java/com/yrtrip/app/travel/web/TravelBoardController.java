@@ -1,14 +1,13 @@
 package com.yrtrip.app.travel.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.travel.TravelBoardService;
 import com.yrtrip.app.travel.TravelBoardVO;
 
@@ -20,10 +19,30 @@ public class TravelBoardController {
 	
 //전체조회
 	@RequestMapping(value = { "/getTravelBoardList", "/getListTravelBoard", "/getTravelBoards" }, method = RequestMethod.GET)
-	public String getTravelBoardList(Model model, TravelBoardVO vo) {
-		model.addAttribute("travelBoardList", travelBoardService.getTravelBoardList(vo));
-		return "travel/getTravelBoardList";
-	}
+	public ModelAndView getTravelBoardList(TravelBoardVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+		//페이징 처리
+				//페이지번호 파라미터
+				if( paging.getPage() == null) {
+					paging.setPage(1); 
+				}
+				
+				//한페이지에 출력할 레코드 건수
+				paging.setPageUnit(12);
+				
+				//first, last 계산
+				vo.setFirst(paging.getFirst());
+				vo.setLast(paging.getLast());
+				
+				//전체 레코드 건수
+				paging.setTotalRecord(travelBoardService.getCount(vo));
+				
+				mv.addObject("paging", paging);
+				
+				mv.addObject("travelBoardList", travelBoardService.getTravelBoardList(vo));
+				mv.setViewName("travel/getTravelBoardList");
+				return mv;
+			}
 
 //단건조회
 	@RequestMapping("/getTravelBoard")
