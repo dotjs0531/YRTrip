@@ -13,6 +13,9 @@ public class NoticeVO {
 	private String userName;  //작성자
 	private String noticeImg;	//이미지 이름
 	private MultipartFile noticeImgFile;	//실제 이미지 파일
+
+	private int first;
+	private int last;
 	
 	public int getNoticeId() {
 		return noticeId;
@@ -62,6 +65,19 @@ public class NoticeVO {
 	}
 	public void setNoticeImgFile(MultipartFile noticeImgFile) {
 		this.noticeImgFile = noticeImgFile;
+	}
+
+	public int getFirst() {
+		return first;
+	}
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
 	}
 	
 	@Override

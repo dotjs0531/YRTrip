@@ -10,6 +10,7 @@
 			USER_GEN,
 			USER_PHONE,
 			USER_BIRTH,
+			USER_POST,
 			USER_ADDRESS,
 			USER_EMAIL,
 			USER_STAR,
@@ -27,6 +28,7 @@
 			USER_GEN,
 			USER_PHONE,
 			USER_BIRTH,
+			USER_POST,
 			USER_ADDRESS,
 			USER_EMAIL,
 			USER_STAR,
@@ -62,6 +64,7 @@
 					 USER_BIRTH = #{userBirth},
 					 USER_EMAIL = #{userEmail}
 		<if test="userAddress != null and userAddress != ''">
+					 , USER_POST = #{userPost}
 					 , USER_ADDRESS = #{userAddress}
 		</if>
 			  WHERE  USER_ID = #{userId}

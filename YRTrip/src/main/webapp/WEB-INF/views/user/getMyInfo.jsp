@@ -121,8 +121,14 @@ function ck_pwd2(){
     var pwd_ck = document.getElementById("userPw_ck");
     var pwd = document.getElementById("userPw").value;
     var MsgPwck = document.getElementById("MsgPwck");
-    
-    if(pwd_ck.value!=pwd){
+    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
+
+    if(!isPwd.test(pwd_ck.value)){
+    	MsgPwck.style.display="block";
+    	MsgPwck.className='error';
+    	MsgPwck.innerHTML="숫자포함 최소 6자리 이상";
+    	pwdckCheck = 0;
+    } else if(pwd_ck.value!=pwd){
         MsgPwck.style.display="block";
         MsgPwck.className='error';
         MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
@@ -137,11 +143,12 @@ function ck_pwd2(){
 function ck_name(){
     var name = document.getElementById("userName");
     var MsgName = document.getElementById("MsgName");
-    
-    if(name.value==''){
+    var isName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*].{1,19}$/
+
+    if(!isName.test(name.value)){
         MsgName.style.display="block";
         MsgName.className='error';
-        MsgName.innerHTML="2자 이상 입력하세요.";
+        MsgName.innerHTML="2~20자의 문자 또는 숫자";
         return false;
     } else{
         MsgName.className='vaild';
@@ -149,6 +156,25 @@ function ck_name(){
     }   
 }
 
+function ck_phone(){
+	var phone = document.getElementById("userPhone");
+	var MsgPhone = document.getElementById("MsgPhone");
+    var isPhone =  /^\d{2,3}-\d{3,4}-\d{4}$/;
+
+    if(!isPhone.test(phone.value)){
+        //$(".signupbtn").prop("disabled", true);
+        MsgPhone.style.display="block";
+        MsgPhone.className='error';
+        MsgPhone.innerHTML="올바른 전화번호 형식이 아닙니다.";
+        phoneCheck = 0;
+        return false;
+    } else{
+        //$(".signupbtn").prop("disabled", false);
+        MsgPhone.className='vaild';
+        MsgPhone.innerHTML="ok";
+        phoneCheck = 1;
+    } 
+}
 
 function ck_gender(){
 	var wrap_gender = document.getElementById("wrap_gender");
@@ -216,7 +242,7 @@ if(man.checked == false && woman.checked == false){
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode;
+                document.getElementById("userPost").value = data.zonecode;
                 document.getElementById("userAddress").value = addr;
             }
         }).open();
@@ -247,7 +273,7 @@ if(man.checked == false && woman.checked == false){
                     <div class="about_car">
             		<h3 style="color:black; text-align:center">${user.userId}</h3><br>
             			<form action="./updateMyInfo" method="post">
-            			<input type="hidden" id="userId" value="${user.userId}">
+            			<input type="hidden" name="userId" value="${user.userId}">
             			<fieldset>
             				
 							이름 *
@@ -276,7 +302,7 @@ if(man.checked == false && woman.checked == false){
 							
 							연락처 *
 							<div>
-							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" onblur="" required>
+							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" onblur="ck_phone()" required>
 							<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
@@ -288,7 +314,7 @@ if(man.checked == false && woman.checked == false){
 							
 							주소 
 							<div class="form-group" style="padding:0">
-							<input type="text" id="sample4_postcode" placeholder="우편번호" style="width:69%">
+							<input type="text" id="userPost" name="userPost" value="${user.userPost}" placeholder="우편번호" style="width:69%">
 							<input type="button" class="btn btn-warning" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" 
 								style="width:30%; padding: 13px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"><br>
 							<input type="text" id="userAddress" name="userAddress" value="${user.userAddress}" placeholder="도로명주소">
@@ -298,12 +324,12 @@ if(man.checked == false && woman.checked == false){
 							<div>
 							<div id="wrap_gender">
 								<span id="wrap_man" class="gender">
-								<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남">
+								<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남" required>
 								<label for="man"> 남자 </label>
 								</span>
 					
 								<span id="wrap_woman" class="gender no_line">
-								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여">
+								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여" required>
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
 								</span>
 							</div>

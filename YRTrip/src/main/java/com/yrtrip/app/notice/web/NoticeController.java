@@ -11,7 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.notice.NoticeService;
 import com.yrtrip.app.notice.NoticeVO;
 
@@ -22,9 +24,25 @@ public class NoticeController {
 
 	//전체 조회
 	@RequestMapping("/getNoticeList")
-	public String getNoticeList(Model model, NoticeVO vo) {
-		model.addAttribute("noticeList", noticeService.getNoticeList(vo));
-		return "notice/getNoticeList";
+	public ModelAndView getNoticeList(NoticeVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+		// 페이징 처리
+		// 페이지번호 파라미터
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		// 시작/마지막 레코드 번호
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		// 전체 건수
+		paging.setTotalRecord(noticeService.getCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("noticeList", noticeService.getNoticeList(vo));
+		mv.setViewName("notice/getNoticeList");
+		return mv;
 	}
 	//단건 조회
 	@RequestMapping("/getNotice")

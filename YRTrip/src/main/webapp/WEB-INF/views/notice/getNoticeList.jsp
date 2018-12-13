@@ -1,11 +1,18 @@
-<%@page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<script>
+	function go_page(page) {
+		document.frm.page.value = page;
+		document.frm.submit();
+	}
+</script>
 </head>
 <body>
     <!--    start about us area-->
@@ -26,6 +33,9 @@
                         </div>
                     </div>
                 </div>
+                <form name="frm">
+					<input type="hidden" name="page"/>
+                </form>
                 <div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive" style="min-height:420px;">
                     	<table class="table table-hover" >
@@ -50,24 +60,18 @@
 							</c:forEach>
                     		</tbody>
                     	</table>
-                    	</div>
-                    	<section >
+                    </div>
+                    <section >
                         <div class="order-buton" style="float:right">
                             <a href="${pageContext.request.contextPath}/insertNotice">등록</a>
                         </div>
-                        </section>
-                    	<div class="text-center" style="padding-top:50px;">
-                    		<ul class="pagination">
-                    			<li><a href="#">1</a></li>
-                    			<li><a href="#">2</a></li>
-                    			<li><a href="#">3</a></li>
-                    			<li><a href="#">4</a></li>
-                    			<li><a href="#">5</a></li>
-                    		</ul>
-                    	</div>
+                    </section>
+                    <div class="text-center" style="padding-top:50px;">
+						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <!--   end of about us area-->
 </body>

@@ -84,24 +84,65 @@ input[type=radio]{
 } */
 </style>
 <script>
-	function ck_id(){
+	var idCheck = 0;
+	var emailCheck = 0;
+	var pwdCheck = 0;
+	var pwdckCheck = 0;
+	var nameCheck = 0;
+	var phoneCheck = 0;
+	//var birthCheck = 0;
+	//var genderCheck = 0;
+	
+ 	function ck_id(){
 		var id = document.getElementById("userId");
 		var MsgId = document.getElementById("MsgId");
+		var isid = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{4,20}$/;
+		
+			$.ajax({
+				data : {
+					userId : id.value
+				},
+				url: "checkId",
+				success : function(data) {
+	                if( !isid.test(id.value) && data=='0') {
+	                    //$(".signupbtn").prop("disabled", true);
+						MsgId.style.display="block";
+					    MsgId.className='error';
+						MsgId.innerHTML = "영문자로 시작하는 4~20자의 영문자 또는 숫자";
+						idCheck = 0;
+					} else if (data == '0'){
+	                    //$(".signupbtn").prop("disabled", false);
+						MsgId.className='vaild';
+					    MsgId.innerHTML="ok";
+					    idCheck = 1;
+					} else if (data == '1') {
+	                    //$(".signupbtn").prop("disabled", true);
+						MsgId.style.display="block";
+						MsgId.className='error';
+						MsgId.innerHTML = "중복된 ID입니다";
+						idCheck = 0;
+					}
+				}
+			});
 	}
-	
+
 	function ck_email(){
 	    var email = document.getElementById("userEmail");
 	    var MsgEmail = document.getElementById("MsgEmail");
 	    var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
 
 	    if(!isEmail.test(email.value)){
+            //$(".signupbtn").prop("disabled", true);
 	    	MsgEmail.style.display="block";
 	    	MsgEmail.className='error';
 	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
+	    	emailCheck = 0;
 	        return false;
 	    } else{
+            //$(".signupbtn").prop("disabled", false);
 	    	MsgEmail.className='vaild';
 	    	MsgEmail.innerHTML="ok";
+	    	emailCheck = 1;
 	    }   
 	}
 
@@ -111,49 +152,86 @@ input[type=radio]{
 	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
 	    
 	    if(!isPwd.test(pwd.value)){
+            //$(".signupbtn").prop("disabled", true);
 	        MsgPw.style.display="block";
 	        MsgPw.className='error';
 	        MsgPw.innerHTML="숫자포함 최소 6자리 이상";
+	        pwdCheck = 0;
 	        return false;
 	    } else{
+            //$(".signupbtn").prop("disabled", false);
 	        MsgPw.className='vaild';
 	        MsgPw.innerHTML="ok";
+	        pwdCheck = 1;
 	    }   
 	}
-
 
 	function ck_pwd2(){
 	    var pwd_ck = document.getElementById("userPw_ck");
 	    var pwd = document.getElementById("userPw").value;
 	    var MsgPwck = document.getElementById("MsgPwck");
-	    
-	    if(pwd_ck.value!=pwd){
+	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
+
+	    if(!isPwd.test(pwd_ck.value)){
+            //$(".signupbtn").prop("disabled", true);
+	    	MsgPwck.style.display="block";
+	    	MsgPwck.className='error';
+	    	MsgPwck.innerHTML="숫자포함 최소 6자리 이상";
+	    	pwdckCheck = 0;
+	    } else if(pwd_ck.value!=pwd){
+            //$(".signupbtn").prop("disabled", true);
 	        MsgPwck.style.display="block";
 	        MsgPwck.className='error';
 	        MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
+	        pwdckCheck = 0;
 	        return false;
 	    } else{
+            //$(".signupbtn").prop("disabled", false);
 	        MsgPwck.className='vaild';
 	        MsgPwck.innerHTML="ok";
+	        pwdckCheck = 1;
 	    }   
 	}
-
 
 	function ck_name(){
 	    var name = document.getElementById("userName");
 	    var MsgName = document.getElementById("MsgName");
+	    var isName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*].{1,19}$/
 	    
-	    if(name.value==''){
+	    if(!isName.test(name.value)){
+            //$(".signupbtn").prop("disabled", true);
 	        MsgName.style.display="block";
 	        MsgName.className='error';
-	        MsgName.innerHTML="2자 이상 입력하세요.";
+	        MsgName.innerHTML="2~20자의 문자 또는 숫자";
+	        nameCheck = 0;
 	        return false;
 	    } else{
+            //$(".signupbtn").prop("disabled", false);
 	        MsgName.className='vaild';
 	        MsgName.innerHTML="ok";
+	        nameCheck = 1;
 	    }   
 	}
+	
+	function ck_phone(){
+		var phone = document.getElementById("userPhone");
+		var MsgPhone = document.getElementById("MsgPhone");
+	    var isPhone =  /^\d{2,3}-\d{3,4}-\d{4}$/;
 
+	    if(!isPhone.test(phone.value)){
+            //$(".signupbtn").prop("disabled", true);
+	        MsgPhone.style.display="block";
+	        MsgPhone.className='error';
+	        MsgPhone.innerHTML="올바른 전화번호 형식이 아닙니다.";
+	        phoneCheck = 0;
+	        return false;
+	    } else{
+            //$(".signupbtn").prop("disabled", false);
+	        MsgPhone.className='vaild';
+	        MsgPhone.innerHTML="ok";
+	        phoneCheck = 1;
+	    } 
+	}
 
 	function ck_gender(){
 		var wrap_gender = document.getElementById("wrap_gender");
@@ -161,12 +239,10 @@ input[type=radio]{
 		var woman = document.getElementById("woman");
 		var MsgGender = document.getElementById("userGen");
 
-
 		if(man.checked){
 	    	document.getElementById("wrap_man").className='gender_act';
 	    	document.getElementById("wrap_woman").className='gender';
 		}
-
 		if(woman.checked){
 	    	document.getElementById("wrap_woman").className='gender_act';
 	    	document.getElementById("wrap_man").className='gender';
@@ -192,32 +268,32 @@ input[type=radio]{
             <form action="./signup" method="post">
             <fieldset>
 				<div>
-				<input type="text" id="userId" name="userId" placeholder="아이디" onblur="ck_id()" required>
+				<input type="text" id="userId" name="userId" placeholder="아이디" oninput="ck_id()" required>
 				<span id="MsgId" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="password" id="userPw" name="userPw" placeholder="비밀번호" onblur="ck_pwd()" required>
+				<input type="password" id="userPw" name="userPw" placeholder="비밀번호" oninput="ck_pwd()" required>
 				<span id="MsgPw" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" onblur="ck_pwd2()">
+				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" oninput="ck_pwd2()">
 				<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="text" id="userName" name="userName" placeholder="이름" onblur="ck_name()" required>
+				<input type="text" id="userName" name="userName" placeholder="이름" oninput="ck_name()" required>
 				<span id="MsgName" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="email" id="userEmail" name="userEmail" placeholder="이메일 (yedam@yrtrip.com)" onblur="ck_email()" required>
+				<input type="email" id="userEmail" name="userEmail" placeholder="이메일 (yedam@yrtrip.com)" oninput="ck_email()" required>
 				<span id="MsgEmail" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" onblur="" required>
+				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" oninput="ck_phone()" required>
 				<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
@@ -228,12 +304,12 @@ input[type=radio]{
 				
 				<div id="wrap_gender">
 					<span id="wrap_man" class="gender">
-					<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남">
+					<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남" required>
 					<label for="man"> 남자 </label>
 					</span>
 					
 					<span id="wrap_woman" class="gender no_line">
-					<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여">
+					<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여" required>
 					<label for="woman" onclick="ck_gender()"> 여자 </label>
 					</span>
 				</div>

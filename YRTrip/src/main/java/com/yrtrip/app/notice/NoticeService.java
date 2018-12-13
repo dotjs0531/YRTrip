@@ -8,4 +8,5 @@ public interface NoticeService {
 	public void deleteNotice(NoticeVO vo);
 	public NoticeVO getNotice(NoticeVO vo);
 	public List<NoticeVO> getNoticeList(NoticeVO vo);
+	public int getCount(NoticeVO vo);
 }

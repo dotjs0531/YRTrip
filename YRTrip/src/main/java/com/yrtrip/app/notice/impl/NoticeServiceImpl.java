@@ -32,4 +32,8 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<NoticeVO> getNoticeList(NoticeVO vo) {
 		return dao.getNoticeList(vo);
 	}
+
+	public int getCount(NoticeVO vo) {
+		return dao.getCount(vo);
+	}
 }

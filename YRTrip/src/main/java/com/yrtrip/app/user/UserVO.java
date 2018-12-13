@@ -7,6 +7,7 @@ public class UserVO {
 	private String userGen;		//성별
 	private String userPhone;	//연락처
 	private String userBirth;	//생년월일
+	private int userPost;		//우편번호(생략가능-구매자일경우 입력)
 	private String userAddress;	//주소(생략가능-구매자일경우 입력)
 	private String userEmail;	//이메일
 	private int userStar;		//판매 평점 -> default:0
@@ -50,6 +51,12 @@ public class UserVO {
 	}
 	public void setUserBirth(String userBirth) {
 		this.userBirth = userBirth;
+	}
+	public int getUserPost() {
+		return userPost;
+	}
+	public void setUserPost(int userPost) {
+		this.userPost = userPost;
 	}
 	public String getUserAddress() {
 		return userAddress;

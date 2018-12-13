@@ -36,4 +36,8 @@ public class NoticeDAOMybatis {
 	public List<NoticeVO> getNoticeList(NoticeVO vo) {
 		return mybatis.selectList("notice.getNoticeList", vo);
 	}
+	//건수 조회
+	public int getCount(NoticeVO vo) {
+		return mybatis.selectOne("notice.getCount", vo);
+	}
 }
