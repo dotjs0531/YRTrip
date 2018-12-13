@@ -78,6 +78,7 @@ public class UserController {
 		return result;
 	}
 	
+	
 	//마이페이지
 	@RequestMapping("/getMyInfo")
 	public String getMyInfo(Model model, UserVO vo, HttpSession session) {
