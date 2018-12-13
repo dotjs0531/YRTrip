@@ -86,9 +86,10 @@ public class UserController {
 	}
 	//마이페이지 수정
 	@RequestMapping("updateMyInfo")
-	public String updateMyInfo(UserVO vo, HttpSession session) {
+	public String updateMyInfo(Model model,UserVO vo, HttpSession session) {
 		userService.updateUser(vo);
-		return "redirect:getMyInfo";
+		model.addAttribute("user", userService.getUser(vo));
+		return "user/getMyInfo";
 	}
 	
 	//탈퇴처리
