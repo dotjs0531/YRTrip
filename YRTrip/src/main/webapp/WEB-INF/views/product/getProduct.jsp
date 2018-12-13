@@ -78,7 +78,7 @@
 							<li><a href="#" style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton">
-							<a href="#">상품요청</a>
+							<a href="#">상품요 청</a>
 						</div>
 						<div class="order-buton">
 							<a href="#">상품등록</a>
