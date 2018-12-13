@@ -1,5 +1,8 @@
 package com.yrtrip.app.chat;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class ChatVO {
 
 	private Integer	chatid;
@@ -7,6 +10,7 @@ public class ChatVO {
 	private String	toid;
 	private String chatcontent;
 	private String Chattime;
+	
 	public Integer getChatid() {
 		return chatid;
 	}

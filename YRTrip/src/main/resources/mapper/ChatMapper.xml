@@ -21,10 +21,9 @@
 			CHAT_CONTENT,
 			CHAT_TIME
 	FROM	CHATT
-	WHERE	((FROM_ID = #{fromid} AND TO_ID = #{toid} ) OR (TO_ID = #{toid} AND FROM_ID = #{fromid} ) AND CHAT_ID > (SELECT MAX(CHAT_ID) - 0 FROM CHATT))
+	WHERE	((FROM_ID = #{fromid} AND TO_ID = #{toid} ) OR (TO_ID = #{toid} AND FROM_ID = #{fromid} ) AND CHAT_ID > (SELECT MAX(CHAT_ID) - ${number} FROM CHATT))
 	ORDER BY CHAT_TIME
 </select>
-
 <insert id="submit">
 	INSERT INTO CHATT
 	VALUES (NULL, #{fromid}, #{toid}, #{chatcontent}, SYSDATE)
