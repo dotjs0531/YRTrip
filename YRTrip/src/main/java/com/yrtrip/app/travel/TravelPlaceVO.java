@@ -14,8 +14,9 @@ public class TravelPlaceVO {
 	
 	private String searchKeyword;
 	private String searchCondition;
-	
 	private String sortCol;
+	private int first;
+	private int last;
 	
 	public int getPlaceNo() {
 		return placeNo;
@@ -88,6 +89,18 @@ public class TravelPlaceVO {
 	}
 	public void setSortCol(String sortCol) {
 		this.sortCol = sortCol;
+	}
+	public int getFirst() {
+		return first;
+	}
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
 	}
 		
 }

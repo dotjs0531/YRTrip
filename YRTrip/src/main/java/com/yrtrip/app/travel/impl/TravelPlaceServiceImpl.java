@@ -38,7 +38,12 @@ public class TravelPlaceServiceImpl implements TravelPlaceService {
 	public TravelPlaceVO getTravelPlace(TravelPlaceVO vo) {
 		return dao.getTravelPlace(vo);
 	}
-
+	
+	@Override
+	public int getCount(TravelPlaceVO vo) {
+		return dao.getCount(vo);
+	}
+	
 	@Override
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo) {
 		return dao.getTravelPlaceList(vo);

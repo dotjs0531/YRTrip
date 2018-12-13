@@ -9,6 +9,7 @@ public interface TravelPlaceService {
 	public void deleteTravelPlace(TravelPlaceVO vo);
 	public void deleteTravelPlaceList(TravelPlaceVO vo);
 	public TravelPlaceVO getTravelPlace(TravelPlaceVO vo);
+	public int getCount(TravelPlaceVO vo);
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo);
 	
 	

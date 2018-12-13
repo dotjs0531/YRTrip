@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.travel.TravelPlaceService;
 import com.yrtrip.app.travel.TravelPlaceVO;
 
@@ -17,9 +19,30 @@ public class TravelPlaceController {
 
 //전체조회
 	@RequestMapping(value = { "/getTravelPlaceList", "/getListTravelPlace", "/getTravelPlaces" }, method = RequestMethod.GET)
-	public String getTravelPlaceList(Model model, TravelPlaceVO vo) {
-		model.addAttribute("travelPlaceList", travelPlaceService.getTravelPlaceList(vo));
-		return "travel/getTravelPlaceList";
+	public ModelAndView getTravelPlaceList(TravelPlaceVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+		
+		//페이징 처리
+		//페이지번호 파라미터
+		if( paging.getPage() == null) {
+			paging.setPage(1); 
+		}
+		
+		//한페이지에 출력할 레코드 건수
+		paging.setPageUnit(12);
+		
+		//first, last 계산
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+		
+		//전체 레코드 건수
+		paging.setTotalRecord(travelPlaceService.getCount(vo));
+		
+		mv.addObject("paging", paging);
+		
+		mv.addObject("travelPlaceList", travelPlaceService.getTravelPlaceList(vo));
+		mv.setViewName("travel/getTravelPlaceList");
+		return mv;
 	}
 
 //단건조회

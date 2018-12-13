@@ -12,8 +12,7 @@
 	rel="stylesheet" id="bootstrap-css">
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="resources/vender/css/getTravelBoardList.css">
+<link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
 
 <style>

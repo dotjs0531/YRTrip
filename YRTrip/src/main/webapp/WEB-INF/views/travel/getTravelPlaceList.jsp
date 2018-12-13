@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
-	href="resources/vender/css/getTravelBoardList.css">
+	href="resources/vender/css/Travel.css">
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
 
 <style>
@@ -42,6 +43,16 @@
 
 <!-- 리스트 -->
 	<div class="list-box">
+	<form name="frm">
+	<select name="searchCondition">
+		<option value="userId">작성자</option>
+		<option value="placeName">장소</option>
+	</select>
+	<input type="text" name="searchKeyword">
+	<button type="submit">검색</button>
+	<input type="hidden" name="sortCol"/>
+	<input type="hidden" name="page">
+	</form>
 						<c:forEach items="${travelPlaceList}" var="board">
 							<article>
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
@@ -79,7 +90,7 @@
 									</div>
 											</article>
 								</c:forEach>
-
+						<my:paging paging="${paging}" jsFunc="go_page"/>
 					</div>
 </section>
 <!-- js -->
@@ -101,6 +112,12 @@
 					panel.style.maxHeight = panel.scrollHeight + "px";
 				}
 			}
+		};
+		
+		/* 페이징 */	
+		function go_page(page) {
+				document.frm.page.value=page;
+				document.frm.submit();	//검색폼 submit
 		}
 	</script>
 </body>

@@ -57,11 +57,11 @@ public class TravelBoardController {
 		return "travel/insertTravelBoard";
 	}
 
-//모달 등록처리
+//모달 등록처리 
 	@RequestMapping(value = { "/insertTravelBoard" }, method = RequestMethod.POST)
 	public String insertTravelBoard(TravelBoardVO vo) { // 커맨드 객체
 		travelBoardService.insertTravelBoard(vo); // 등록처리
-		return "redirect:insertTravelBoardSecond"; // 목록요청
+		return "travel/insertTravelBoard"; // insertTravelBoard.jsp로 이동
 	}
 
 //수정폼
