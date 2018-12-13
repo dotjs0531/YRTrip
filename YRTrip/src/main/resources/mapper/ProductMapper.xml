@@ -38,7 +38,7 @@
 		FROM ITEMT
 		WHERE ITEM_ID = #{itemId}	
 	</select>
-	<insert id="insertItem" parameterType="product">
+	<insert id="insertProduct" parameterType="product">
 	<selectKey keyProperty="itemId" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(ITEM_ID),0)+1 FROM ITEMT
 	</selectKey>
@@ -52,9 +52,9 @@
 				ITEM_CATEGORY,
 				SELLER_ID,
 				ITEM_ORDERDETAIL,
-				ITEM_PIC,
-				ITEM_DATE,
-				ITEM_CONDITION				 
+				<!-- ITEM_PIC, -->
+				ITEM_CONDITION
+				<!-- , ITEM_STAR -->	 
 				)
 				 VALUES ( #{itemId},
 				 		  #{itemName},
@@ -65,10 +65,10 @@
 				 		  #{itemCategory},
 				 		  #{sellerId},
 				 		  #{itemOrderdetail},
-				 		  #{itemPic},
-				 		  sysdate,
+				 		  <!-- #{itemPic}, -->
 				 		  #{itemCondition}
-				 		 )
+				 		  <!-- , #{itemStar} -->				 		  
+				)
 	</insert>
 
 </mapper> 

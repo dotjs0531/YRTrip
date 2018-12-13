@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <meta charset="utf-8">
@@ -10,156 +11,136 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
-<title>제품 올리기</title>
+<title>prototype of insertProduct(view)</title>
 
-<!-- Bootstrap core CSS -->
-<link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- font Awesome-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
+	integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
+	crossorigin="anonymous">
+
+<!-- CSS (부트 + custom)-->
+<!-- 4.0 버전인데 못쓰것다 -->
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous"> -->
+<link href="./resources/css/product.bootstrap.min.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
-
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
-<!-- Custom styles for this template -->
-<!-- <link href="./css/shop-homepage.css" rel="stylesheet"> -->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz">
 <style>
-/* layout.css Style */
-.upload-drop-zone {
-	height: 200px;
-	border-width: 2px;
-	margin-bottom: 20px;
+.space-ten {
+	padding: 10px 0;
 }
 
-/* skin.css Style*/
-.upload-drop-zone {
-	color: #ccc;
-	border-style: dashed;
-	border-color: #ccc;
-	line-height: 200px;
+.space-five {
+	padding: 5px 0;
 }
 
-.upload-drop-zone.drop {
-	color: #222;
-	border-color: #222;
+.space-two {
+	padding: 2px 0;
+}
+
+.space-one {
+	padding: 1px 0;
+}
+
+.quantity-style {
+	text-align: center;
+	min-width: 38px;
+	max-width: 38px;
+}
+
+.quantity-wrapper {
+	width: 38px;
+	position: center;
+}
+
+.col_product {
+	text-align: center;
+}
+
+.share-btn {
+	display: inline-block;
+	color: #ffffff;
+	border: none;
+	padding: 0.5em;
+	width: 4em;
+	box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2);
+	outline: none;
+	text-align: center;
+}
+
+.share-btn:hover {
+	color: #eeeeee;
+}
+
+.share-btn:active {
+	position: relative;
+	top: 2px;
+	box-shadow: none;
+	color: #e2e2e2;
+	outline: none;
+}
+
+.share-btn.twitter {
+	background: #55acee;
+}
+
+.share-btn.google-plus {
+	background: #dd4b39;
+}
+
+.share-btn.facebook {
+	background: #3B5998;
+}
+
+.share-btn.stumbleupon {
+	background: #EB4823;
+}
+
+.share-btn.reddit {
+	background: #ff5700;
+}
+
+.share-btn.linkedin {
+	background: #4875B4;
+}
+
+.share-btn.email {
+	background: #444444;
 }
 </style>
 </head>
+
 <body>
 	<section class="about_us_area" id="about">
-		<div class="container">
-			<div class="row">
-				<div class="container col-lg-3">
-					<div class="single-pricing-table">
-						<div class="pricing-title">
-							<h2 style="color: black">카테고리</h2>
-						</div>
-						<ul class="price-list">
-							<li><a href="getProductList" style="color: black">전체보기</a></li>
-							<li><a href="#" style="color: black">의류</a></li>
-							<li><a href="#" style="color: black">티켓/쿠폰</a></li>
-							<li><a href="#" style="color: black">전자기기</a></li>
-							<li><a href="#" style="color: black">여행도서</a></li>
-							<li><a href="#" style="color: black">USIM</a></li>
-							<li><a href="#" style="color: black">기타</a></li>
-						</ul>
-						<div class="order-buton">
-							<a href="#">상품요청</a>
-						</div>
-						<div class="order-buton">
-							<a href="#">상품등록</a>
-						</div>
-					</div>
-				</div>
-			
-			<!-- 끝 : 사이드 : 3-->
-			<!-- 시작 : 내용 : 9-->
-			<div class="container col-lg-9">
-				<div class="card mb-10">
-					<div class="card-header">
-						<nav class="header-navigation">
-							<a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a>
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#">카테고리를 설정하세요</a></li>
-								<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
-							</ol>
-							<div class="btn-group">
-								<a href="#" class="btn btn-link btn-share">등록 취소</a> <a href="#"
-									class="btn btn-link">등록!!(빨간색으로)</a>
-							</div>
-						</nav>
-					</div>
-					<div class="card-body store-body">
-						<!-- 왼쪽 -->
-						<div class="product-info">
-							<!-- 왼쪽 갤러리(사진들만) -->
-							<div class="product-gallery">
-								<div class="center-block">
-									<div class="upload-drop-zone" id="drop-zone">Just drag
-										and drop files here</div>
-								</div>
-							</div>
-							<!-- 오른쪽 아래 -->
-							<div class="product-seller-recommended">
-								<!-- /.recommended-items-->
-								<div class="product-description mb-5">
-									<h2 class="mb-5">상세설명입력</h2>
-									<div class="upload-drop-zone" id="drop-zone"></div>
-
-								</div>
-							</div>
-							<div class="product-payment-details"></div>
-						</div>
-						<div class="product-payment-details">
-							<h2 class="mb-5">제품 기본정보 입력</h2>
-
-							<table>
-								<tr>
-									<td>상품명</td>
-									<td><input type="text"></td>
-								</tr>
-								<tr>
-									<td>가격</td>
-									<td><input type="text"></td>
-								</tr>
-								<tr>
-									<td>수량</td>
-									<td><input type="text"></td>
-								</tr>
-								<tr>
-									<td>선호결제방법</td>
-									<td><input type="text"></td>
-								</tr>
-								<tr>
-									<td>구매가능여부</td>
-									<td><input type="text"></td>
-								</tr>
-								<tr>
-									<td>상품상태</td>
-									<td><input type="text"></td>
-								</tr>
-							</table>
-							<buttton type="submit">등록!</buttton>
-
-						</div>
-					</div>
-					</div>
-				</div>
-				<!-- 끝 : 내용 : 9-->
-			</div>
-			<!-- /.row -->
-		</div>
-
+	<form action="./insertProduct" method="post">
+		<input type="text" name="itemName" placeholder="제품명" value="테스트명111">
+		<input type="text" name="itemPrice" placeholder="가격" value="12000">
+		<input type="text" name="itemEa" placeholder="개수" value="1">
+		<input type="text" name="itemContent" placeholder="내용" value="테스트1111111">
+		<input type="text" name="itemMethod" placeholder="거래방법" value="현금거래">
+		<input type="text" name="itemCategory" placeholder="카테고리" value="카테고리1">
+		<input type="text" name="sellerId" placeholder="판매자명" value="user1">
+		<input type="text" name="itemOrderdetail" placeholder="구매가능가능" value="구매가능">
+		<!-- <input type="text" name="itemStar" placeholder="라이크"> -->
+		<input type="text" name="itemCondition" placeholder="라이크" value="새상품">
+		<input type="submit" class="btn" value="등록">
+	</form>
+											
 	</section>
 
-
-	<!-- Bootstrap core JavaScript -->
+	<!-- 부트 4 공식 JS-->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
 	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+		crossorigin="anonymous"></script>
 </body>
-
 </html>

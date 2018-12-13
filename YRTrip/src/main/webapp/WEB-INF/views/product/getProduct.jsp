@@ -2,19 +2,22 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="kor">
-<!-- 상품글번호 1
-상품명 유심
-가격 3000
-수량 1 
-상품상세정보 사세여........
-결제방법 카드결제/현금결제/
-카테고리 유심(db에는 카테고리1이렇게 들어가있음)
-판매자 회원아이디(fk) user1
-구매가능여부 구매가능/구매불가
-상품별점 1.5
-상품사진 주소값넣기
-작성날짜 sysdate
-상품상태 : 중고/ 새상품/ 하자있음... -->
+<!-- 
+상품글번호 1 ITEM_ID
+상품명 유심  ITEM_NAME
+가격 3000 ITEM_PRICE
+수량 1 ITEM_EA
+상품상세정보 사세여........ ITEM_CONTENT
+결제방법 카드결제/현금결제/ ITEM_METHOD
+카테고리 유심(db에는 카테고리1이렇게 들어가있음) ITEM_CATEGORY
+판매자 회원아이디(fk) user1 SELLER_ID
+구매가능여부 구매가능/구매불가 ITEM_ORDERDETAIL
+상품별점 0.0-5.0 ITEM_STAR
+상품사진 주소값넣기 ITEM_PIC
+작성날짜 sysdate ITEM_DATE
+상품상태 : 중고/ 새상품/ 하자있음... ITEM_CONDITION
+상품 좋아요 별점 0+ ITEM_LIKE - 위시리스트 -> 좋아요로 바꾸고 좋아요한 목록에서 볼수있도록 
+-->
 
 <head>
 
