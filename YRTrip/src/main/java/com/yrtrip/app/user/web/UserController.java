@@ -38,12 +38,18 @@ public class UserController {
 			return "redirect:"+url;
 		} else {
 			session.setAttribute("login", uservo);
-			if(referer != null && !referer.equals("")) 
+			if(referer != null && !referer.equals("")) {
+				
+				//if referer이 null이 아니고 이전페이지가 회원가입페이지, 로그아웃페이지, 로그인페이지인 경우엔 다른 페이지 호출
+
+				if(url.equals("signup")) {	//이전 페이지가 회원가입페이지일 경우 메인으로
+					return "main";
+				} else {
+					return "redirect:"+url;		//로그인 성공 후 원래 페이지 호출
+				}
+			} else {
 				return "redirect:"+url;
-			
-			//if referer이 null이 아니고 이전페이지가 회원가입페이지, 로그아웃페이지, 로그인페이지인 경우엔 다른 페이지 호출
-			
-			return "redirect:"+url; //로그인 성공 후 원래 페이지 호출
+			}
 		}
 	}
 	//로그아웃
@@ -53,8 +59,18 @@ public class UserController {
 		String referer = request.getHeader("Referer");
 		String url = referer.substring(referer.indexOf(context)+context.length()+1);
 		
+		/*if(url.equals("getMyInfo?userId="+"회원아이디")) {
+			session.invalidate(); //세션 무효화
+			return "main";
+		}
+		else {
+			session.invalidate(); //세션 무효화
+			return "redirect:"+url;
+		}*/
+		
 		session.invalidate(); //세션 무효화
-		return "redirect:"+url;
+		
+		return "main";
 	}
 	
 	//회원가입 폼
@@ -96,8 +112,8 @@ public class UserController {
 	//탈퇴처리
 	@RequestMapping("/deleteMyInfo")
 	public String deleteMyInfo(HttpSession session, UserVO vo) {
-		session.invalidate(); //세션 무효화
 		userService.deleteUser(vo);
+		session.invalidate(); //세션 무효화
 		
 		return "main";
 	}
