@@ -44,12 +44,26 @@ public class ProductController {
 		return "product/insertProduct";
 	}
 	
+	//제품등록처리
 	@RequestMapping(value="/insertProduct", method=RequestMethod.POST)
 	public String insertProduct(ProductVO vo){
 		productService.insertProduct(vo);
 		return "redirect:getProductList";
 	}
 	
+	//제품수정 폼
+	@RequestMapping("updateProduct")
+	public String updateProductForm(Model model, ProductVO vo) {
+		model.addAttribute("product", productService.getProduct(vo));
+		return "product/updateProduct";
+	}
+	
+	/*//제품수정처리
+	@RequestMapping("updateProduct")
+	public String updateProduct(ProductVO vo) {
+		productService.updateProduct(vo);
+		return "redirect:getProduct";
+	}*/
 	
 /*	//제품등록처리
 	@RequestMapping(value="/insertProduct", method=RequestMethod.POST)

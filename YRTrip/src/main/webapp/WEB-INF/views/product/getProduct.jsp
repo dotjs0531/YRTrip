@@ -87,7 +87,7 @@
 				</div>
       <!-- 끝 : 사이드 : 3-->
       <!-- 시작 : 내용 : 9-->
-      <div class="container col-lg-9">
+      <div class="container col-lg-8">
 
         <div class="card mb-10">
           <div class="card-header">

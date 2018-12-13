@@ -114,6 +114,7 @@
 
 <body>
 	<section class="about_us_area" id="about">
+	<a href="./updateProduct" style="color:black">수정하기</a>
 	<form action="./insertProduct" method="post">
 		<input type="text" name="itemName" placeholder="제품명" value="테스트명111">
 		<input type="text" name="itemPrice" placeholder="가격" value="12000">
