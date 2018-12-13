@@ -2,18 +2,35 @@
 <%@ attribute name="paging" type="com.yrtrip.app.Paging" %>
 <%@ attribute name="jsFunc" required="false" type="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<nav aria-label="Page navigation example" style="padding:0 0 0 25%;">
 <c:if test="${empty jsFunc}"> 
 	<c:set var="jsFunc" value="go_page"></c:set>
 </c:if>
-<ul>
-<li>이전
+
+<ul class="pagination justify-content-center">
+<li class="page-item"><a class="page-link" href="#" aria-label="Previous" onclick="${jsFunc}(${paging.startPage -1})">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+</a>
+</li>
+
 <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i">
 	<c:if test="${i != paging.page}">
-		<li><a href="#" onclick="${jsFunc}(${i})">${i}</a>
+		<li class="page-item"><a href="#" onclick="${jsFunc}(${i})">${i}</a>
 	</c:if>
 	<c:if test="${i == paging.page}">
-		<li class="active">${i}
+		<li class="page-item active"> 
+		<a class="page-link" href="#">${i}<span class="sr-only">(current)</span></a>
+		</li>
 	</c:if>
 </c:forEach>
-<li>다음
+
+<li class="page-item">
+<a class="page-link" href="#" aria-label="Next" onclick="${jsFunc}(${paging.endPage + 1})">
+<span aria-hidden="true">&raquo;</span>
+<span class="sr-only">Next</span>
+</a>
+</li>
 </ul>
+</nav>

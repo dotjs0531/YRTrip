@@ -92,8 +92,9 @@
 									</div>
 											</article>
 								</c:forEach>
+								<my:paging paging="${paging}" jsFunc="go_page"/>
 					</div>
-					<my:paging paging="${paging}" jsFunc="go_page"/>
+					
 <!-- modal body -->					
 					<div class="modal fade" id="insertTravelBoard">
 		<div class="modal-dialog">
