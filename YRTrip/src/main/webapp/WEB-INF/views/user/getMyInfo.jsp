@@ -331,6 +331,7 @@ function ck_phone(){
 	            if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
 	        } 
 	    } 
+	    ck_phone();
 	} 
 
 	function RemoveDash2(sNo) { 
@@ -378,7 +379,6 @@ function ck_phone(){
 		var wrap_gender = document.getElementById("wrap_gender");
 		var man = document.getElementById("man");
 		var woman = document.getElementById("woman");
-		var MsgGender = document.getElementById("userGen");
 
 		if (man.checked) {
 			document.getElementById("wrap_man").className = 'gender_act';
@@ -390,18 +390,18 @@ function ck_phone(){
 			document.getElementById("wrap_man").className = 'gender';
 		}
 	}
-
-	/*    
-	 if(man.checked == false && woman.checked == false){
-	 MsgGender.style.display="block";
-	 MsgGender.className='error'
-	 MsgGender.innerHTML="필수 정보입니다."        wrap_gender.style.borderColor="red";
-	 return false;
-	 }
-	 */
+	
+	$(function(){
+		if(!($('input:radio[id=man]').is(':checked')) && !($('input:radio[id=woman]').is(':checked'))){
+		    $(".signupbtn").prop("disabled", true);
+		    $(".signupbtn").css("background-color", "#aaaaaa");
+		} else {
+		    $(".signupbtn").prop("disabled", false);
+		    $(".signupbtn").css("background-color", "#f9bf3b");
+		}
+	});
 </script>
 
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample4_execDaumPostcode() {
@@ -498,7 +498,7 @@ function ck_phone(){
 							
 							연락처 *
 							<div>
-							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" oninput="ck_phone()" onfocus="OnCheckPhone(this)" onKeyup="OnCheckPhone(this)" required maxlength="13"> 
+							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" oninput="OnCheckPhone(this)" required maxlength="13"> 
 							<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
@@ -532,7 +532,6 @@ function ck_phone(){
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
 								</span>
 							</div>
-							<span id="MsgGender" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
 							은행 

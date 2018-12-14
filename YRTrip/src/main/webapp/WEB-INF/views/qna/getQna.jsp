@@ -35,6 +35,29 @@
 				$(div).prependTo("#qnaComment");
 			});
 		});	// end btnAdd click event
+
+		//댓글 수정 이벤트
+		$("#btnUpd").click(function(){
+			var params = $("[name=updateForm]").serialize();
+			$.getJSON("updateQnaComment", params, function(datas){
+				var newDiv = makeCommentView(datas);
+				var oldDiv = $("#c"+datas.qnaId);
+				$("#btnCancel").click();
+				$(newDiv).replaceAll(oldDiv);  // 수정된 DIV를 교체
+			});
+		});
+		
+		//수정폼 이벤트(수정할 댓글밑에 수정폼 보이게 함)
+		$("#commentList").on("click", ".btnUpdFrm", function(){
+			var qnaId = $(this).parent().attr("id").substring(1);
+			//수정할 데이터 입력필드에 셋팅
+			$("#updateForm [name=commentQnaid]").val(commentQnaid);    
+			$("#updateForm [name=commentName]").val($("#c"+seq+">.commentName").text());
+			$("#updateForm [name=commentContent]").val($("#c"+seq+">.commentContent").text());
+			//수정할 댓글밑으로 이동하고 보이게
+			$("#c"+seq).append($('#commentUpdate'));  
+			$('#commentUpdate').show();   
+		});
 		
 		//댓글 삭제 이벤트
 		$("#qnaComment").on("click", ".btnDel", function(){
@@ -115,6 +138,19 @@
 								</form>
 							</div>
 							<!-- 댓글등록끝 -->
+
+							<!-- 댓글수정폼시작 -->
+							<div id="commentUpdate" style="display: none">
+								<form action="" name="updateForm" id="updateForm">
+									<input type="hidden" name="commentQnaid" value="${qna.qnaId}">
+									<input type="hidden" name="userId" value="" /> 이름: <input
+										type="text" name="name" size="10"><br /> 내용:
+									<textarea name="commentContent" cols="20" rows="2"></textarea>
+									<br /> <input type="button" value="등록" id="btnUpd" /> <input
+										type="button" value="취소" id="btnCancel" />
+								</form>
+							</div>
+							<!-- 댓글수정폼끝 -->
 						</div>
                     </div>
                 </div>

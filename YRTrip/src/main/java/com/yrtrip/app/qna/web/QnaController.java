@@ -26,7 +26,6 @@ public class QnaController {
 			paging.setPage(1);
 		}
 
-		paging.setPageUnit(10);
 		// 시작/마지막 레코드 번호
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());

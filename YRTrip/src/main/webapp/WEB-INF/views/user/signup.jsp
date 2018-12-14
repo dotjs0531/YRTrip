@@ -90,8 +90,20 @@ input[type=radio]{
 	var pwdckCheck = 0;
 	var nameCheck = 0;
 	var phoneCheck = 0;
-	//var birthCheck = 0;
-	//var genderCheck = 0;
+	var birthCheck = 0;
+	var genderCheck = 0;
+
+	$(function(){
+		if(!($('input:radio[id=man]').is(':checked')) && !($('input:radio[id=woman]').is(':checked'))){
+		    $(".signupbtn").prop("disabled", true);
+		    $(".signupbtn").css("background-color", "#aaaaaa");
+		    genderCheck = 0;
+		} else {
+		    $(".signupbtn").prop("disabled", false);
+		    $(".signupbtn").css("background-color", "#f9bf3b");
+		    genderCheck = 1;
+		}
+	});
 	
  	function ck_id(){
 		var id = document.getElementById("userId");
@@ -131,15 +143,17 @@ input[type=radio]{
 	    var MsgEmail = document.getElementById("MsgEmail");
 	    var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
 
-	    if(!isEmail.test(email.value)){
-            //$(".signupbtn").prop("disabled", true);
+	    if(email.val=="" || !isEmail.test(email.value)){
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
 	    	MsgEmail.style.display="block";
 	    	MsgEmail.className='error';
 	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
 	    	emailCheck = 0;
 	        return false;
 	    } else{
-            //$(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
 	    	MsgEmail.className='vaild';
 	    	MsgEmail.innerHTML="ok";
 	    	emailCheck = 1;
@@ -151,15 +165,17 @@ input[type=radio]{
 	    var MsgPw = document.getElementById("MsgPw");
 	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
 	    
-	    if(!isPwd.test(pwd.value)){
-            //$(".signupbtn").prop("disabled", true);
+	    if(pwd.val=="" || !isPwd.test(pwd.value)){
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
 	        MsgPw.style.display="block";
 	        MsgPw.className='error';
 	        MsgPw.innerHTML="숫자포함 최소 6자리 이상";
 	        pwdCheck = 0;
 	        return false;
 	    } else{
-            //$(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgPw.className='vaild';
 	        MsgPw.innerHTML="ok";
 	        pwdCheck = 1;
@@ -172,21 +188,24 @@ input[type=radio]{
 	    var MsgPwck = document.getElementById("MsgPwck");
 	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
 
-	    if(!isPwd.test(pwd_ck.value)){
-            //$(".signupbtn").prop("disabled", true);
+	    if(pwd_ck.val=="" || !isPwd.test(pwd_ck.value)){
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
 	    	MsgPwck.style.display="block";
 	    	MsgPwck.className='error';
 	    	MsgPwck.innerHTML="숫자포함 최소 6자리 이상";
 	    	pwdckCheck = 0;
 	    } else if(pwd_ck.value!=pwd){
-            //$(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
 	        MsgPwck.style.display="block";
 	        MsgPwck.className='error';
 	        MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
 	        pwdckCheck = 0;
 	        return false;
 	    } else{
-            //$(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgPwck.className='vaild';
 	        MsgPwck.innerHTML="ok";
 	        pwdckCheck = 1;
@@ -198,15 +217,17 @@ input[type=radio]{
 	    var MsgName = document.getElementById("MsgName");
 	    var isName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*].{1,19}$/
 	    
-	    if(!isName.test(name.value)){
-            //$(".signupbtn").prop("disabled", true);
+	    if(name.val=="" || !isName.test(name.value)){
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
 	        MsgName.style.display="block";
 	        MsgName.className='error';
 	        MsgName.innerHTML="2~20자의 문자 또는 숫자";
 	        nameCheck = 0;
 	        return false;
 	    } else{
-            //$(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgName.className='vaild';
 	        MsgName.innerHTML="ok";
 	        nameCheck = 1;
@@ -218,26 +239,178 @@ input[type=radio]{
 		var MsgPhone = document.getElementById("MsgPhone");
 	    var isPhone =  /^\d{2,3}-\d{3,4}-\d{4}$/;
 
-	    if(!isPhone.test(phone.value)){
-            //$(".signupbtn").prop("disabled", true);
+	    if(phone.val=="" || !isPhone.test(phone.value)){
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
 	        MsgPhone.style.display="block";
 	        MsgPhone.className='error';
 	        MsgPhone.innerHTML="올바른 전화번호 형식이 아닙니다.";
 	        phoneCheck = 0;
 	        return false;
 	    } else{
-            //$(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgPhone.className='vaild';
 	        MsgPhone.innerHTML="ok";
 	        phoneCheck = 1;
 	    } 
 	}
+	
+	function OnCheckPhone(oTa) { 
+	    var oForm = oTa.form ; 
+	    var sMsg = oTa.value ; 
+	    var onlynum = "" ; 
+	    var imsi=0; 
+	    onlynum = RemoveDash2(sMsg);  //하이픈 입력시 자동으로 삭제함 
+	    onlynum =  checkDigit(onlynum);  // 숫자만 입력받게 함 
+	    var retValue = ""; 
 
+	    if(event.keyCode != 12 ) { 
+	        if(onlynum.substring(0,2) == 02) {  // 서울전화번호일 경우  10자리까지만 나타나교 그 이상의 자리수는 자동삭제 
+	                if (GetMsgLen(onlynum) <= 1) oTa.value = onlynum ; 
+	                if (GetMsgLen(onlynum) == 2) oTa.value = onlynum + "-"; 
+	                if (GetMsgLen(onlynum) == 4) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,3) ; 
+	                if (GetMsgLen(onlynum) == 4) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,4) ; 
+	                if (GetMsgLen(onlynum) == 5) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,5) ; 
+	                if (GetMsgLen(onlynum) == 6) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,6) ; 
+	                if (GetMsgLen(onlynum) == 7) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,5) + "-" + onlynum.substring(5,7) ; ; 
+	                if (GetMsgLen(onlynum) == 8) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,6) + "-" + onlynum.substring(6,8) ; 
+	                if (GetMsgLen(onlynum) == 9) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,5) + "-" + onlynum.substring(5,9) ; 
+	                if (GetMsgLen(onlynum) == 10) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,6) + "-" + onlynum.substring(6,10) ; 
+	                if (GetMsgLen(onlynum) == 11) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,6) + "-" + onlynum.substring(6,10) ; 
+	                if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,2) + "-" + onlynum.substring(2,6) + "-" + onlynum.substring(6,10) ; 
+	        } 
+	        if(onlynum.substring(0,2) == 05 ) {  // 05로 시작되는 번호 체크 
+	            if(onlynum.substring(2,3) == 0 ) {  // 050으로 시작되는지 따지기 위한 조건문 
+	                    if (GetMsgLen(onlynum) <= 3) oTa.value = onlynum ; 
+	                    if (GetMsgLen(onlynum) == 4) oTa.value = onlynum + "-"; 
+	                    if (GetMsgLen(onlynum) == 5) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,5) ; 
+	                    if (GetMsgLen(onlynum) == 6) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,6) ; 
+	                    if (GetMsgLen(onlynum) == 7) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,7) ; 
+	                    if (GetMsgLen(onlynum) == 8) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
+	                    if (GetMsgLen(onlynum) == 9) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,7) + "-" + onlynum.substring(7,9) ; ; 
+	                    if (GetMsgLen(onlynum) == 10) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) + "-" + onlynum.substring(8,10) ; 
+	                    if (GetMsgLen(onlynum) == 11) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,7) + "-" + onlynum.substring(7,11) ; 
+	                    if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) + "-" + onlynum.substring(8,12) ; 
+	                    if (GetMsgLen(onlynum) == 13) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) + "-" + onlynum.substring(8,12) ; 
+	          } else { 
+	                if (GetMsgLen(onlynum) <= 2) oTa.value = onlynum ; 
+	                if (GetMsgLen(onlynum) == 3) oTa.value = onlynum + "-"; 
+	                if (GetMsgLen(onlynum) == 4) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,4) ; 
+	                if (GetMsgLen(onlynum) == 5) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,5) ; 
+	                if (GetMsgLen(onlynum) == 6) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) ; 
+	                if (GetMsgLen(onlynum) == 7) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) ; 
+	                if (GetMsgLen(onlynum) == 8) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) + "-" + onlynum.substring(6,8) ; ; 
+	                if (GetMsgLen(onlynum) == 9) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,9) ; 
+	                if (GetMsgLen(onlynum) == 10) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) + "-" + onlynum.substring(6,10) ; 
+	                if (GetMsgLen(onlynum) == 11) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,11) ; 
+	                if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,11) ; 
+	          } 
+	        } 
+
+	        if(onlynum.substring(0,2) == 03 || onlynum.substring(0,2) == 04  || onlynum.substring(0,2) == 06  || onlynum.substring(0,2) == 07  || onlynum.substring(0,2) == 08 ) {  // 서울전화번호가 아닌 번호일 경우(070,080포함 // 050번호가 문제군요) 
+	                if (GetMsgLen(onlynum) <= 2) oTa.value = onlynum ; 
+	                if (GetMsgLen(onlynum) == 3) oTa.value = onlynum + "-"; 
+	                if (GetMsgLen(onlynum) == 4) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,4) ; 
+	                if (GetMsgLen(onlynum) == 5) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,5) ; 
+	                if (GetMsgLen(onlynum) == 6) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) ; 
+	                if (GetMsgLen(onlynum) == 7) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) ; 
+	                if (GetMsgLen(onlynum) == 8) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) + "-" + onlynum.substring(6,8) ; ; 
+	                if (GetMsgLen(onlynum) == 9) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,9) ; 
+	                if (GetMsgLen(onlynum) == 10) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) + "-" + onlynum.substring(6,10) ; 
+	                if (GetMsgLen(onlynum) == 11) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,11) ; 
+	                if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,11) ; 
+
+	        } 
+	        if(onlynum.substring(0,2) == 01) {  //휴대폰일 경우 
+	            if (GetMsgLen(onlynum) <= 2) oTa.value = onlynum ; 
+	            if (GetMsgLen(onlynum) == 3) oTa.value = onlynum + "-"; 
+	            if (GetMsgLen(onlynum) == 4) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,4) ; 
+	            if (GetMsgLen(onlynum) == 5) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,5) ; 
+	            if (GetMsgLen(onlynum) == 6) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) ; 
+	            if (GetMsgLen(onlynum) == 7) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) ; 
+	            if (GetMsgLen(onlynum) == 8) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,8) ; 
+	            if (GetMsgLen(onlynum) == 9) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,9) ; 
+	            if (GetMsgLen(onlynum) == 10) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,6) + "-" + onlynum.substring(6,10) ; 
+	            if (GetMsgLen(onlynum) == 11) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,11) ; 
+	            if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,3) + "-" + onlynum.substring(3,7) + "-" + onlynum.substring(7,11) ; 
+	        } 
+
+	        if(onlynum.substring(0,1) == 1) {  // 1588, 1688등의 번호일 경우 
+	            if (GetMsgLen(onlynum) <= 3) oTa.value = onlynum ; 
+	            if (GetMsgLen(onlynum) == 4) oTa.value = onlynum + "-"; 
+	            if (GetMsgLen(onlynum) == 5) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,5) ; 
+	            if (GetMsgLen(onlynum) == 6) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,6) ; 
+	            if (GetMsgLen(onlynum) == 7) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,7) ; 
+	            if (GetMsgLen(onlynum) == 8) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
+	            if (GetMsgLen(onlynum) == 9) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
+	            if (GetMsgLen(onlynum) == 10) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
+	            if (GetMsgLen(onlynum) == 11) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
+	            if (GetMsgLen(onlynum) == 12) oTa.value = onlynum.substring(0,4) + "-" + onlynum.substring(4,8) ; 
+	        } 
+	    } 
+	    ck_phone();
+	} 
+
+	function RemoveDash2(sNo) { 
+	var reNo = "" 
+	for(var i=0; i<sNo.length; i++) { 
+	    if ( sNo.charAt(i) != "-" ) { 
+	    reNo += sNo.charAt(i) 
+	    } 
+	} 
+	return reNo 
+	} 
+
+	function GetMsgLen(sMsg) { // 0-127 1byte, 128~ 2byte 
+	var count = 0 
+	    for(var i=0; i<sMsg.length; i++) { 
+	        if ( sMsg.charCodeAt(i) > 127 ) { 
+	            count += 2 
+	        } 
+	        else { 
+	            count++ 
+	        } 
+	    } 
+	return count 
+	} 
+
+	function checkDigit(num) { 
+	    var Digit = "1234567890"; 
+	    var string = num; 
+	    var len = string.length 
+	    var retVal = ""; 
+
+	    for (i = 0; i < len; i++) 
+	    { 
+	        if (Digit.indexOf(string.substring(i, i+1)) >= 0) 
+	        { 
+	            retVal = retVal + string.substring(i, i+1); 
+	        } 
+	    } 
+	    return retVal; 
+	} 
+	
+	function ck_birth(){
+		var birth = document.getElementById("userBirth");
+		
+		if(birth.val==""){
+	        $(".signupbtn").prop("disabled", true);
+	        $(".signupbtn").css("background-color", "#aaaaaa");
+	        birthCheck = 0;
+		} else{
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
+	        Msgbirth.className='vaild';
+	        Msgbirth.innerHTML="ok";
+	        birthCheck = 1;
+		}
+	}
+	
 	function ck_gender(){
 		var wrap_gender = document.getElementById("wrap_gender");
 		var man = document.getElementById("man");
 		var woman = document.getElementById("woman");
-		var MsgGender = document.getElementById("userGen");
 
 		if(man.checked){
 	    	document.getElementById("wrap_man").className='gender_act';
@@ -248,16 +421,6 @@ input[type=radio]{
 	    	document.getElementById("wrap_man").className='gender';
 		}
 	}
-
-
-	/*    
-	if(man.checked == false && woman.checked == false){
-	    MsgGender.style.display="block";
-	    MsgGender.className='error'
-	    MsgGender.innerHTML="필수 정보입니다."        wrap_gender.style.borderColor="red";
-	    return false;
-	}
-	*/
 </script>
 </head>
 <body>
@@ -293,12 +456,12 @@ input[type=radio]{
 				</div>
 				
 				<div>
-				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" oninput="ck_phone()" required>
+				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" oninput="OnCheckPhone(this)" required maxlength="13">
 				<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="date" id="userBirth" name="userBirth" placeholder="생년월일" required>
+				<input type="date" id="userBirth" name="userBirth" placeholder="생년월일" oninput="ck_birth()" required>
 				<span id="MsgBirth" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
@@ -319,8 +482,8 @@ input[type=radio]{
 					<option value="usa">40대</option>
 				</select> -->
 				
-				<br><strong><input type="submit" class="btn btn-warning" value="회원가입"
-							style="width: 100%; padding: 14px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"></strong>
+				<br><strong><input type="submit" class="btn btn-warning signupbtn" disabled="disabled" value="회원가입"
+							style="background-color: #aaaaaa; width: 100%; padding: 14px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"></strong>
 			</fieldset>
             </form>
             </div>

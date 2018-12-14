@@ -9,7 +9,7 @@
  			,COMMENT_DATE
  			,COMMENT_QNAID
  	   FROM QNA_COMMENTT
- 	  WHERE QNA_ID = #{qnaId}
+ 	  WHERE COMMENT_QNAID = #{commentQnaid}
  	  ORDER BY COMMENT_ID DESC
 </select>
 <select id="getQnaComment" resultType="qnaComment" parameterType="qnaComment">
@@ -43,8 +43,8 @@
 	DELETE QNA_COMMENTT
 		 <where> 
 		 	<choose>
-		 		<when test="qnaId != null and qnaId != ''">
-		 			QNA_ID = #{qnaId}	
+		 		<when test="commentQnaid != null and commentQnaid != ''">
+		 			COMMENT_QNAID = #{commentQnaid}	
 		 		</when>
 		 		<otherwise>
 		 			COMMENT_ID = #{commentId}

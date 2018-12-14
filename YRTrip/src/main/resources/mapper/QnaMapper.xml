@@ -19,6 +19,7 @@
 	ORDER BY QNA_ID DESC
 </select>
 <select id="getQnaList" resultType="qna">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  QNA_ID,
 			QNA_TITLE,
 			QNA_CONTENT,
@@ -43,6 +44,7 @@
 	  AND Q.USER_ID = U.USER_ID
 	  </where>
 	  ORDER BY QNA_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getQna" parameterType="qna" resultType="qna">
 	SELECT  QNA_ID,
