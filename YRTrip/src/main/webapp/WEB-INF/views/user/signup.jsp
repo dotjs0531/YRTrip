@@ -84,27 +84,6 @@ input[type=radio]{
 } */
 </style>
 <script>
-	var idCheck = 0;
-	var emailCheck = 0;
-	var pwdCheck = 0;
-	var pwdckCheck = 0;
-	var nameCheck = 0;
-	var phoneCheck = 0;
-	var birthCheck = 0;
-	var genderCheck = 0;
-
-	$(function(){
-		if(!($('input:radio[id=man]').is(':checked')) && !($('input:radio[id=woman]').is(':checked'))){
-		    $(".signupbtn").prop("disabled", true);
-		    $(".signupbtn").css("background-color", "#aaaaaa");
-		    genderCheck = 0;
-		} else {
-		    $(".signupbtn").prop("disabled", false);
-		    $(".signupbtn").css("background-color", "#f9bf3b");
-		    genderCheck = 1;
-		}
-	});
-	
  	function ck_id(){
 		var id = document.getElementById("userId");
 		var MsgId = document.getElementById("MsgId");
@@ -143,17 +122,12 @@ input[type=radio]{
 	    var MsgEmail = document.getElementById("MsgEmail");
 	    var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
 
-	    if(email.val=="" || !isEmail.test(email.value)){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+	    if(email.value=="" || !isEmail.test(email.value)){
 	    	MsgEmail.style.display="block";
 	    	MsgEmail.className='error';
 	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
 	    	emailCheck = 0;
-	        return false;
 	    } else{
-	        $(".signupbtn").prop("disabled", false);
-	        $(".signupbtn").css("background-color", "#f9bf3b");
 	    	MsgEmail.className='vaild';
 	    	MsgEmail.innerHTML="ok";
 	    	emailCheck = 1;
@@ -164,18 +138,13 @@ input[type=radio]{
 	    var pwd = document.getElementById("userPw");
 	    var MsgPw = document.getElementById("MsgPw");
 	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
-	    
-	    if(pwd.val=="" || !isPwd.test(pwd.value)){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+
+	    if(pwd.value=="" || !isPwd.test(pwd.value)){
 	        MsgPw.style.display="block";
 	        MsgPw.className='error';
 	        MsgPw.innerHTML="숫자포함 최소 6자리 이상";
 	        pwdCheck = 0;
-	        return false;
 	    } else{
-	        $(".signupbtn").prop("disabled", false);
-	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgPw.className='vaild';
 	        MsgPw.innerHTML="ok";
 	        pwdCheck = 1;
@@ -184,28 +153,21 @@ input[type=radio]{
 
 	function ck_pwd2(){
 	    var pwd_ck = document.getElementById("userPw_ck");
-	    var pwd = document.getElementById("userPw").value;
+	    var pwd = document.getElementById("userPw");
 	    var MsgPwck = document.getElementById("MsgPwck");
 	    var isPwd = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/;
 
-	    if(pwd_ck.val=="" || !isPwd.test(pwd_ck.value)){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+	    if(pwd_ck.value=="" || !isPwd.test(pwd_ck.value)){
 	    	MsgPwck.style.display="block";
 	    	MsgPwck.className='error';
 	    	MsgPwck.innerHTML="숫자포함 최소 6자리 이상";
 	    	pwdckCheck = 0;
-	    } else if(pwd_ck.value!=pwd){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+	    } else if(pwd_ck.value!=pwd.value){
 	        MsgPwck.style.display="block";
 	        MsgPwck.className='error';
 	        MsgPwck.innerHTML="비밀번호가 일치하지 않습니다.";
 	        pwdckCheck = 0;
-	        return false;
 	    } else{
-	        $(".signupbtn").prop("disabled", false);
-	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgPwck.className='vaild';
 	        MsgPwck.innerHTML="ok";
 	        pwdckCheck = 1;
@@ -215,19 +177,15 @@ input[type=radio]{
 	function ck_name(){
 	    var name = document.getElementById("userName");
 	    var MsgName = document.getElementById("MsgName");
-	    var isName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*].{1,19}$/
-	    
-	    if(name.val=="" || !isName.test(name.value)){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+	    var isName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|\*].{1,19}$/;
+
+	    if(name.value=="" || !isName.test(name.value)){
 	        MsgName.style.display="block";
 	        MsgName.className='error';
 	        MsgName.innerHTML="2~20자의 문자 또는 숫자";
 	        nameCheck = 0;
 	        return false;
 	    } else{
-	        $(".signupbtn").prop("disabled", false);
-	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgName.className='vaild';
 	        MsgName.innerHTML="ok";
 	        nameCheck = 1;
@@ -238,25 +196,21 @@ input[type=radio]{
 		var phone = document.getElementById("userPhone");
 		var MsgPhone = document.getElementById("MsgPhone");
 	    var isPhone =  /^\d{2,3}-\d{3,4}-\d{4}$/;
-
-	    if(phone.val=="" || !isPhone.test(phone.value)){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+	    
+	    if(phone.value=="" || !isPhone.test(phone.value)){
 	        MsgPhone.style.display="block";
 	        MsgPhone.className='error';
 	        MsgPhone.innerHTML="올바른 전화번호 형식이 아닙니다.";
 	        phoneCheck = 0;
-	        return false;
 	    } else{
-	        $(".signupbtn").prop("disabled", false);
-	        $(".signupbtn").css("background-color", "#f9bf3b");
 	        MsgPhone.className='vaild';
 	        MsgPhone.innerHTML="ok";
 	        phoneCheck = 1;
 	    } 
 	}
 	
-	function OnCheckPhone(oTa) { 
+	function OnCheckPhone() { 
+		var oTa = document.getElementById("userPhone");
 	    var oForm = oTa.form ; 
 	    var sMsg = oTa.value ; 
 	    var onlynum = "" ; 
@@ -392,22 +346,24 @@ input[type=radio]{
 	} 
 	
 	function ck_birth(){
-		var birth = document.getElementById("userBirth");
-		
-		if(birth.val==""){
-	        $(".signupbtn").prop("disabled", true);
-	        $(".signupbtn").css("background-color", "#aaaaaa");
+		var birth = document.getElementById("userBirth").valueAsDate;
+
+	    if(birth.valueAsDate==""){
 	        birthCheck = 0;
-		} else{
-	        $(".signupbtn").prop("disabled", false);
-	        $(".signupbtn").css("background-color", "#f9bf3b");
-	        Msgbirth.className='vaild';
-	        Msgbirth.innerHTML="ok";
+		} else {
 	        birthCheck = 1;
 		}
 	}
-	
+
 	function ck_gender(){
+		if(!($('input:radio[id=man]').is(':checked')) && !($('input:radio[id=woman]').is(':checked'))){
+		    genderCheck = 0;
+		} else {
+		    genderCheck = 1;
+		}
+	}
+	
+	function gender(){
 		var wrap_gender = document.getElementById("wrap_gender");
 		var man = document.getElementById("man");
 		var woman = document.getElementById("woman");
@@ -421,6 +377,31 @@ input[type=radio]{
 	    	document.getElementById("wrap_man").className='gender';
 		}
 	}
+	
+ 	function ck_signup(){
+		ck_id(); ck_email(); ck_pwd(); ck_pwd2(); ck_name(); ck_phone(); OnCheckPhone(); ck_birth(); ck_gender();
+
+	    if( idCheck!=0 && emailCheck!=0 && pwdCheck!=0 && pwdckCheck!=0 && nameCheck!=0 && birthCheck!=0 && phoneCheck!=0 /* && genderCheck !=0 */){
+	        $(".signupbtn").prop("disabled", false);
+	        $(".signupbtn").css("background-color", "#f9bf3b");
+	    } else {
+	    	$(".signupbtn").prop("disabled", true);
+	    	$(".signupbtn").css("background-color", "#aaaaaa");
+	    }
+	}
+ 	
+ 	$(function(){
+ 	 	var idCheck = 0;
+ 		var emailCheck = 0;
+ 		var pwdCheck = 0;
+ 		var pwdckCheck = 0;
+ 		var nameCheck = 0;
+ 		var phoneCheck = 0;
+ 		var birthCheck = 0;
+ 		var genderCheck = 0;
+ 		
+ 		ck_signup();
+ 	});
 </script>
 </head>
 <body>
@@ -431,48 +412,48 @@ input[type=radio]{
             <form action="./signup" method="post">
             <fieldset>
 				<div>
-				<input type="text" id="userId" name="userId" placeholder="아이디" oninput="ck_id()" required>
+				<input type="text" id="userId" name="userId" placeholder="아이디" oninput="ck_signup()" required>
 				<span id="MsgId" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="password" id="userPw" name="userPw" placeholder="비밀번호" oninput="ck_pwd()" required>
+				<input type="password" id="userPw" name="userPw" placeholder="비밀번호" oninput="ck_signup()" required>
 				<span id="MsgPw" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" oninput="ck_pwd2()">
+				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" oninput="ck_signup()">
 				<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="text" id="userName" name="userName" placeholder="이름" oninput="ck_name()" required>
+				<input type="text" id="userName" name="userName" placeholder="이름" oninput="ck_signup()" required>
 				<span id="MsgName" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="email" id="userEmail" name="userEmail" placeholder="이메일 (yedam@yrtrip.com)" oninput="ck_email()" required>
+				<input type="email" id="userEmail" name="userEmail" placeholder="이메일 (yedam@yrtrip.com)" oninput="ck_signup()" required>
 				<span id="MsgEmail" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" oninput="OnCheckPhone(this)" required maxlength="13">
+				<input type="text" id="userPhone" name="userPhone" placeholder="연락처 (010-0000-0000)" oninput="ck_signup()" required maxlength="13">
 				<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div>
-				<input type="date" id="userBirth" name="userBirth" placeholder="생년월일" oninput="ck_birth()" required>
+				<input type="date" id="userBirth" name="userBirth" placeholder="생년월일" oninput="ck_signup()" required>
 				<span id="MsgBirth" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
 				<div id="wrap_gender">
 					<span id="wrap_man" class="gender">
-					<input type="radio" id="man" name="userGen" onclick="ck_gender()" value="남" required>
+					<input type="radio" id="man" name="userGen" onclick="gender()" value="남" required>
 					<label for="man"> 남자 </label>
 					</span>
 					
 					<span id="wrap_woman" class="gender no_line">
-					<input type="radio" id="woman" name="userGen" onclick="ck_gender()" value="여" required>
+					<input type="radio" id="woman" name="userGen" onclick="gender()" value="여" required>
 					<label for="woman" onclick="ck_gender()"> 여자 </label>
 					</span>
 				</div>
