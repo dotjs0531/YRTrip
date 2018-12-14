@@ -41,39 +41,40 @@
 			var params = $("[name=updateForm]").serialize();
 			$.getJSON("updateQnaComment", params, function(datas){
 				var newDiv = makeCommentView(datas);
-				var oldDiv = $("#c"+datas.qnaId);
+				var oldDiv = $("#c"+datas.commentId);
 				$("#btnCancel").click();
 				$(newDiv).replaceAll(oldDiv);  // 수정된 DIV를 교체
 			});
 		});
 		
 		//수정폼 이벤트(수정할 댓글밑에 수정폼 보이게 함)
-		$("#commentList").on("click", ".btnUpdFrm", function(){
-			var qnaId = $(this).parent().attr("id").substring(1);
+		$("#qnaComment").on("click", ".btnUpdFrm", function(){
+			var commentId = $(this).parent().attr("id").substring(1);
 			//수정할 데이터 입력필드에 셋팅
-			$("#updateForm [name=commentQnaid]").val(commentQnaid);    
-			$("#updateForm [name=commentName]").val($("#c"+seq+">.commentName").text());
-			$("#updateForm [name=commentContent]").val($("#c"+seq+">.commentContent").text());
+			$("#updateForm [name=commentId]").val(commentId);    
+			$("#updateForm [name=userId]").val($("#c"+commentId+">.userId").text());
+			$("#updateForm [name=commentContent]").val($("#c"+commentId+">.commentContent").text());
 			//수정할 댓글밑으로 이동하고 보이게
-			$("#c"+seq).append($('#commentUpdate'));  
+			$("#c"+commentId).append($('#commentUpdate'));  
 			$('#commentUpdate').show();   
 		});
 		
 		//댓글 삭제 이벤트
 		$("#qnaComment").on("click", ".btnDel", function(){
-			var qnaId = $(this).parent().attr("id").substr(1);
+			var commentId_str = $(this).parent().attr("id").substr(1);
+			var commentId = Number(commentId_str);
 			if(confirm("삭제할까요?")) {
-				var params = "qnaId="+ qnaId;  // { seq : seq };
+				var params = "commentId="+ commentId;  // { seq : seq };
 				var url = "deleteQnaComment";
 				$.getJSON(url, params, function(datas){
-					$('#c'+datas.qnaId).remove();
+					$('#c'+datas.commentId).remove();
 				});
 			}
 		});	// end btnDel click event
 
 		function makeCommentView(qnaComment){
 			var div = $("<div>"); 
-			div.attr("id", "c"+qnaComment.qnaId);
+			div.attr("id", "c"+qnaComment.commentId);
 			div.addClass('qnaComment');
 			div[0].qnaComment=qnaComment;  //{id:1,.... }
 			
@@ -143,11 +144,11 @@
 							<div id="commentUpdate" style="display: none">
 								<form action="" name="updateForm" id="updateForm">
 									<input type="hidden" name="commentQnaid" value="${qna.qnaId}">
-									<input type="hidden" name="userId" value="" /> 이름: <input
-										type="text" name="name" size="10"><br /> 내용:
-									<textarea name="commentContent" cols="20" rows="2"></textarea>
-									<br /> <input type="button" value="등록" id="btnUpd" /> <input
-										type="button" value="취소" id="btnCancel" />
+									<input type="hidden" name="commentId" value="" /> 
+									이름: <input type="text" name="userId" size="10"><br />
+									내용: <textarea name="commentContent" cols="20" rows="2"></textarea><br />
+									<input type="button" value="등록" id="btnUpd" />
+									<input type="button" value="취소" id="btnCancel" />
 								</form>
 							</div>
 							<!-- 댓글수정폼끝 -->
