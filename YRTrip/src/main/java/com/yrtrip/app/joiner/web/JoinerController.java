@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yrtrip.app.joiner.JoinerService;
@@ -18,19 +17,21 @@ public class JoinerController {
 	JoinerService joinerService;
 	
 	// 신청 처리
-	@RequestMapping(value = { "/insertJoiner" }, method = RequestMethod.POST)
-	public String insertJoiner(JoinerVO vo) { // 커맨드 객체
+	@RequestMapping("insertJoiner")
+	public JoinerVO insertJoiner(JoinerVO vo) { // 커맨드 객체
 		joinerService.insertJoiner(vo); // 등록 처리
-		return "redirect:getPartnerList"; // 목록요청
+		return joinerService.getJoiner(vo); // 목록요청
 	}
 
 	// 삭제처리
 	@RequestMapping("deleteJoiner")
-	public String deleteJoiner(JoinerVO vo) {
+	@ResponseBody
+	public JoinerVO deleteJoiner(JoinerVO vo) {
 		joinerService.deleteJoiner(vo);	// 삭제처리
-		return "redirect:getPartnerList"; // 목록요청
+		return vo;
 	}
 	
+	// 신청 리스트 출력
 	@RequestMapping("getJoinerList")
 	@ResponseBody
 	public List<JoinerVO> getJoinerList(JoinerVO vo){

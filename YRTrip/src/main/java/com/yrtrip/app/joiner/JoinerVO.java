@@ -5,24 +5,24 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class JoinerVO {
 
-	private Integer joinnerid;
-	private String joinnerdate;
+	private Integer joinerid;
+	private String joinerdate;
 	private String userid;
 	private String partnerid;	// 참조키
-	private String joinnercondition;
+	private String joinercondition;
 	private Integer	pageUnit;
 	
-	public Integer getJoinnerid() {
-		return joinnerid;
+	public Integer getJoinerid() {
+		return joinerid;
 	}
-	public void setJoinnerid(Integer joinnerid) {
-		this.joinnerid = joinnerid;
+	public void setJoinerid(Integer joinerid) {
+		this.joinerid = joinerid;
 	}
-	public String getJoinnerdate() {
-		return joinnerdate;
+	public String getJoinerdate() {
+		return joinerdate;
 	}
-	public void setJoinnerdate(String joinnerdate) {
-		this.joinnerdate = joinnerdate;
+	public void setJoinerdate(String joinerdate) {
+		this.joinerdate = joinerdate;
 	}
 	public String getUserid() {
 		return userid;
@@ -36,24 +36,25 @@ public class JoinerVO {
 	public void setPartnerid(String partnerid) {
 		this.partnerid = partnerid;
 	}
-	public String getJoinnercondition() {
-		return joinnercondition;
+	public String getJoinercondition() {
+		return joinercondition;
 	}
-	public void setJoinnercondition(String joinnercondition) {
-		this.joinnercondition = joinnercondition;
+	public void setJoinercondition(String joinercondition) {
+		this.joinercondition = joinercondition;
 	}
-	
 	public Integer getPageUnit() {
 		return pageUnit;
 	}
 	public void setPageUnit(Integer pageUnit) {
 		this.pageUnit = pageUnit;
 	}
+	
 	@Override
 	public String toString() {
-		return "JoinnerVO [joinnerid=" + joinnerid + ", joinnerdate=" + joinnerdate + ", userid=" + userid
-				+ ", partnerid=" + partnerid + ", joinnercondition=" + joinnercondition + "]";
+		return "JoinerVO [joinerid=" + joinerid + ", joinerdate=" + joinerdate + ", userid=" + userid + ", partnerid="
+				+ partnerid + ", joinercondition=" + joinercondition + ", pageUnit=" + pageUnit + "]";
 	}
+	
 	
 	
 }

@@ -180,15 +180,14 @@
 	};
 
 	//동행 신청 목록 조회
-	// 댓글 목록 조회
-	function loadCommentsList() {
+	function loadJoinerList() {
 		var params = {
-			boardSeq : '${board.seq}'
+			partnerid : '${partner.partnerid}'
 		};
-		$.getJSON("getCommentsList", params, function(datas) {
+		$.getJSON("getJoinerList", params, function(datas) {
 			for (i = 0; i < datas.length; i++) {
-				var div = makeCommentView(datas[i]);
-				$(div).appendTo("#commentsList")
+				var div = makeJoinerView(datas[i]);
+				$(div).appendTo("#joinerList")
 			}
 		});
 	}
@@ -196,11 +195,11 @@
 	$(function() {
 		loadCommentsList();
 		//댓글 삭제 이벤트
-		$("#commentsList").on("click", ".btnDel", function() {
+		$("#joinerList").on("click", ".btnDel", function() {
 			var seq = $(this).parent().attr("id").substr(1);
 			if (confirm("삭제할까요?")) {
 				var params = "seq=" + seq; // { seq : seq };
-				var url = "deleteComments";
+				var url = "deleteJoiner";
 				$.getJSON(url, params, function(datas) {
 					$('#c' + datas.seq).remove();
 				});
@@ -211,37 +210,29 @@
 		$("#btnAdd").click(function() {
 			var params = $("#addForm").serialize();
 			console.log(params);
-			$.getJSON("insertComments", params, function(datas) {
+			$.getJSON("insertJoiner", params, function(datas) {
 				var div = makeCommentView(datas);
-				$(div).prependTo("#commentsList");
+				$(div).prependTo("#joinerList");
 			});
 		}); //end btnAdd clcic event
 	}); //$() end ready event
 
-	function makeCommentView(comment) {
+	function makeJoinerView(joiner) {
 		var div = $("<div>");
-		div.attr("id", "c" + comment.seq);
-		div.addClass('comment');
+		div.attr("id", "c" + joiner.joinerid);
+		div.addClass('joiner');
 		div[0].comment = comment; //{id:1,.... }
 
-		var str = "<strong class='commentName'>작성자 : " + comment.name
-				+ "</strong>   " + "<span class='commentContent'>댓글내용 : "
-				+ comment.content + "</span>   "
-				+ "<button type=\"button\" class=\"btnUpdFrm\">수정</button>"
-				+ "<button type=\"button\" class=\"btnDel\">삭제</button>"
+		var str = "<strong class='partnerName'>동행 신청자 : " + joiner.userid
+				+ "</strong>   " + "<span class='commentContent'>신청일 : "
+				+ joiner.joinerdate + "</span>   "
+				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"
 		div.html(str);
 		return div;
 	}
 </script>
 </head>
 <body>
-	<%
-		String userID = null;
-		if (session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
-		}
-		String toID= null;
-	%>
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="row">
@@ -297,14 +288,39 @@
 					</table>
 					<br>
 					<h3>동행 신청 목록</h3>
+
 					<div id="joinerList"></div>
 					<br>
 					<section>
-						<div class="order-buton" style="padding-top: 500px; float: right">
-							<a href="./updatePartnerForm?partnerid=${partner.partnerid}">수정</a>&nbsp;&nbsp;
-							<button class="submit-btn" onclick="del('${partner.partnerid}')">삭제</button>
-							<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
-						</div>
+						<c:if test="${sessionScope.login.userId eq partner.userid}">
+							<div class="order-buton" style="padding-top: 150px; float: right">
+								<a href="./updatePartnerForm?partnerid=${partner.partnerid}">수정</a>&nbsp;&nbsp;
+								<button class="submit-btn" onclick="del('${partner.partnerid}')">삭제</button>
+								<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
+							</div>
+							<div class="col-md-offset-1 col-sm-6">
+
+								<table class="table table-bordered table-striped"
+									style="text-align: center;">
+									<thead>
+										<tr>
+											<th colspan="10" style="background-color: #eeeeee; text-align: center;">동행신청 리스트</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${joinerList}" var="joiner">
+											<tr>
+												<td>${joiner.userid}</td>
+												<td>${joiner.joinerdate}</td>
+												<td>${joiner.joinercondition}</td>
+											</tr>
+											<!-- 페이징처리 -->
+											<!-- 숨긴 페이징 부분 hide jobs -->
+										</c:forEach>
+									</tbody>
+								</table>
+							</div>
+						</c:if>
 					</section>
 				</div>
 			</div>

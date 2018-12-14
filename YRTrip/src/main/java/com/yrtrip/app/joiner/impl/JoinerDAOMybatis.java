@@ -16,20 +16,21 @@ public class JoinerDAOMybatis {
 
 	// 신청
 	public void insertJoiner(JoinerVO vo) {
-		System.out.println("mybatis 동행 신청 기능 처리");
 		mybatis.update("joiner.insertJoiner", vo);
 	}
 
 	// 신청 취소
 	public void deleteJoiner(JoinerVO vo) {
-		System.out.println("mybatis 동생 신청 취소 기능 처리");
-		mybatis.update("joiner.deleteJoiner", vo.getJoinnerid());
+		mybatis.update("joiner.deleteJoiner", vo.getJoinerid());
 	}
 
 	// 전체조회
 	public List<JoinerVO> getJoinerList(JoinerVO vo) {
-		System.out.println("mybatis 동행 신청 리스트 조회 기능 처리");
 		return mybatis.selectList("joiner.getJoinerList", vo);
+	}
+
+	public JoinerVO getJoinser(JoinerVO vo) {
+		return mybatis.selectOne("joiner.getJoiner", vo);
 	}
 
 }

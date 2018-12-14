@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import com.yrtrip.app.joiner.JoinerService;
 import com.yrtrip.app.joiner.JoinerVO;
 
-@Service
+@Service("joinerService")
 public class JoinerServiceImpl implements JoinerService {
 
 	@Autowired JoinerDAOMybatis dao;
+	
 	@Override
 	public void insertJoiner(JoinerVO vo) {
 		dao.insertJoiner(vo);
@@ -25,6 +26,10 @@ public class JoinerServiceImpl implements JoinerService {
 	@Override
 	public List<JoinerVO> getJoinerList(JoinerVO vo) {
 		return dao.getJoinerList(vo);
+	}
+	@Override
+	public JoinerVO getJoiner(JoinerVO vo) {
+		return dao.getJoinser(vo);
 	}
 
 }
