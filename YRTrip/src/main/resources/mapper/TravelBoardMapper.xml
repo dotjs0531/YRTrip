@@ -97,7 +97,7 @@
 				#{travelStart}, 
 				#{travelTitle},  
 				sysdate, 
-				#{tinfoId}, 
+				#{tinfoId},
 				#{userId}, 
 				#{travelWith}
 				)

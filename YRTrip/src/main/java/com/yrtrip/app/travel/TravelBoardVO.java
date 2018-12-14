@@ -19,6 +19,11 @@ public class TravelBoardVO {
 	private int travelWith;
 	private String travelPic;
 	
+	private int travelInfoId;
+	private String travelInfoCountry;
+	private String travelInfoState;
+	private String travelInfoCity;
+	
 	private String searchKeyword;
 	private String searchCondition;
 	private String sortCol;
@@ -110,6 +115,30 @@ public class TravelBoardVO {
 		this.travelPic = travelPic;
 	}
 	
+	public int getTravelInfoId() {
+		return travelInfoId;
+	}
+	public void setTravelInfoId(int travelInfoId) {
+		this.travelInfoId = travelInfoId;
+	}
+	public String getTravelInfoCountry() {
+		return travelInfoCountry;
+	}
+	public void setTravelInfoCountry(String travelInfoCountry) {
+		this.travelInfoCountry = travelInfoCountry;
+	}
+	public String getTravelInfoState() {
+		return travelInfoState;
+	}
+	public void setTravelInfoState(String travelInfoState) {
+		this.travelInfoState = travelInfoState;
+	}
+	public String getTravelInfoCity() {
+		return travelInfoCity;
+	}
+	public void setTravelInfoCity(String travelInfoCity) {
+		this.travelInfoCity = travelInfoCity;
+	}
 	@JsonIgnore
 	public String getSearchKeyword() {
 		return searchKeyword;

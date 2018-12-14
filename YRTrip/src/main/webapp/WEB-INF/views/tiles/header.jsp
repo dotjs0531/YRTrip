@@ -29,7 +29,7 @@
     
     <!-- Javascript -->
     <script type="text/javascript">
-	$(function(){
+jQuery( document ).ready(function( $ ) {
     	$("#popbutton").click(function(){
         	$('div#login').modal(true);
     	})

@@ -7,12 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>여행게시판 목록보기</title>
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
 
 <style>
@@ -20,6 +19,67 @@
 	z-index: -1;
 }
 </style>
+<script>
+/* 유저 tooltip */
+jQuery( document ).ready(function( $ ) {
+	$('[data-toggle="tooltip"]').tooltip();
+});
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+	acc[i].onclick = function() {
+		this.classList.toggle("active");
+		var panel = this.nextElementSibling;
+		if (panel.style.maxHeight) {
+			panel.style.maxHeight = null;
+		} else {
+			panel.style.maxHeight = panel.scrollHeight + "px";
+		}
+	}
+};
+
+/* 여행등록 modal */
+jQuery( document ).ready(function( $ ) {
+	   $("#insertTravelBoardButton").click(function(){
+	    	$('div#insertTravelBoard').modal(true);
+		})
+});
+
+
+function check(){
+
+	var str = document.getElementById('travelTitle');
+
+	 
+
+	if( str.value == '' || str.value == null ){
+	    alert( '값을 입력해주세요' );
+	    return false;
+	}
+
+	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
+
+	if( special_pattern.test(str.value) == true ){
+	    alert('특수문자는 사용할 수 없습니다.');
+	    return false;
+	}
+
+	alert( '최종 : ' + str.value );
+
+	/*
+	if( str.value.search(/\W|\s/g) > -1 ){
+	    alert( '특수문자 또는 공백을 입력할 수 없습니다.' );
+	    str.focus();
+	    return false;
+	}*/
+
+	}
+
+
+
+	출처: http://imonster.tistory.com/136 [유행에 못 따라가는 웹 개발자 입니다.]
+</script>
 </head>
 <body>
 <section class="content-section">
@@ -94,11 +154,11 @@
 								<my:paging paging="${paging}" jsFunc="go_page"/>
 					</div>
 					
-<!-- modal body -->					
-					<div class="modal fade" id="insertTravelBoard">
+<!-- modal body -->		
+<form id="/insertTravelBoardform" class="form" action="./insertTravelBoard" method="post" name="insertTravelBoardfrm">			
+<div class="modal fade" id="insertTravelBoard">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<!-- remote ajax call이 되는영역 -->
 				<!-- header -->
 				<div class="modal-header">
 					<!-- 닫기(x) 버튼 -->
@@ -112,86 +172,80 @@
 							class="row justify-content-center align-items-center">
 							<div id="login-column" class="col-md-6">
 								<div id="login-box" class="col-md-12">
-									<form id="/insertTravelBoardform" class="form" action="./insertTravelBoard" method="post">
-										<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>
+									
+										<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
+											<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 										<div class="form-group">
-											<label for="userId" class="text-info" style="color:#5f768b;">아이디:</label><br>
-											<input type="text" name="userId" class="form-control">
+											<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
+											<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
 										</div>
 										<div class="form-group">
-											<label for="travelTitle" class="text-info" style="color:#5f768b;">제목:</label><br>
-											<input type="text" name="travelTitle" class="form-control">
+											<label for="tinfoId" class="text-info" style="color:#5f768b;"></label><br>
+											<input type="text" name="tinfoId" class="form-control" placeholder="여행지를 선택하세요. ---> 다중셀렉트바 수정할 것!">
 										</div>
 										<div class="form-group">
-											<label for="tinfoId" class="text-info" style="color:#5f768b;">여행지:</label><br>
-											<input type="text" name="tinfoId" class="form-control">
+											<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
+											<input type="text" name="travelWith" class="form-control" placeholder="여행테마를 선택하세요. ---> 셀렉트바 수정할 것!">
 										</div>
 										<div class="form-group">
-											<label for="travelWith" class="text-info" style="color:#5f768b;">여행테마:</label><br>
-											<input type="text" name="travelWith" class="form-control">
+											<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
+											<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 선택하세요. ---> 셀렉트바 수정할 것!">
 										</div>
 										<div class="form-group">
-											<label for="travelSche" class="text-info" style="color:#5f768b;">일정:</label><br>
-											<input type="text" name="travelSche" class="form-control">
+											<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
+											<input type="text" name="travelStart" class="form-control" id="Datepicker" placeholder="여행 시작일을 선택하세요.">
 										</div>
 										<div class="form-group">
-											<label for="travelStart" class="text-info" style="color:#5f768b;">출발일:</label><br>
-											<input type="text" name="travelStart" class="form-control">
-										</div>
-										<div class="form-group">
-											<label for="travelPerson" class="text-info" style="color:#5f768b;">인원:</label><br>
-											<input type="text" name="travelPerson" class="form-control">
+											<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
+											<input type="text" name="travelPerson" class="form-control" placeholder="함께 여행한 인원을 선택하세요. --->셀렉트바 수정할 것!">
 										</div>
 										<div class="form-group">
 											<label for="remember-me" class="text-info"></label>
 											<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 										</div>
-									</form>
+									
 								</div>
 							</div>
 						</div>
 					</div>
 
 				</div>
+
 			</div>
 		</div>
 	</div>
+</form>
 </section>
 <!-- js -->
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script>
-<!-- 유저 tooltip -->
-$(document).ready(function() {
-	$('[data-toggle="tooltip"]').tooltip();
-});
-
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-	acc[i].onclick = function() {
-		this.classList.toggle("active");
-		var panel = this.nextElementSibling;
-		if (panel.style.maxHeight) {
-			panel.style.maxHeight = null;
-		} else {
-			panel.style.maxHeight = panel.scrollHeight + "px";
-		}
-	}
-};
-
-/* 여행등록 modal */
-$(function(){
-	   $("#insertTravelBoardButton").click(function(){
-	    	$('div#insertTravelBoard').modal(true);
-		})
-});
 
 /* 페이징 */	
 function go_page(page) {
 		document.frm.page.value=page;
 		document.frm.submit();	//검색폼 submit
-}
+};
+
+/* datepicker */
+$(function() {
+    $( "#Datepicker" ).datepicker({   
+    	changeMonth: true, 
+        changeYear: true,
+        nextText: '다음 달',
+        prevText: '이전 달',
+        showButtonPanel: true, 
+        currentText: '오늘 날짜', 
+        closeText: '닫기', 
+        dateFormat: "yymmdd",
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+        maxDate: "+0D",
+        showMonthAfterYear : true,
+        yearRange: "-100:+0"
+    });
+});
 	</script>
 </body>
 </html>
