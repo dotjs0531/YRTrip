@@ -3,12 +3,11 @@
 <%@ attribute name="jsFunc" required="false" type="java.lang.String" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<nav aria-label="Page navigation example" style="padding:50px 0 0 25%;">
 <c:if test="${empty jsFunc}"> 
 	<c:set var="jsFunc" value="go_page"></c:set>
 </c:if>
 
-<ul class="pagination justify-content-center">
+<ul class="pagination justify-content-center" style="display: table; margin-left: auto; margin-right: auto;">
 
 <c:if test="${paging.startPage!=1}">
 <li class="page-item">
@@ -60,4 +59,3 @@
 </c:if>
 
 </ul>
-</nav>

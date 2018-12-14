@@ -151,7 +151,9 @@ function check(){
 									</div>
 											</article>
 								</c:forEach>
-								<my:paging paging="${paging}" jsFunc="go_page"/>
+								<nav aria-label="Page navigation example" style="padding:50px 5% 0 0;">
+									<my:paging paging="${paging}" jsFunc="go_page"/>
+								</nav>
 					</div>
 					
 <!-- modal body -->		
