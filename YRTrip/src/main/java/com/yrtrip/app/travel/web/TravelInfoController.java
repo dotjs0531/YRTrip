@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,10 +19,17 @@ public class TravelInfoController {
 	TravelInfoService travelInfoService;
 	
 	// list 조회 Ajax
-	@RequestMapping(value="/getTravelInfoList", method=RequestMethod.GET)
+	@RequestMapping(value="/getTravelInfoListData", method=RequestMethod.GET)
 	@ResponseBody
-	public List<TravelInfoVO> getTravelInfoList(Model model,TravelInfoVO vo) {
+	public List<TravelInfoVO> getTravelInfoListData(TravelInfoVO vo) {
 		return travelInfoService.getTravelInfoList(vo);
 	}
+
+	@RequestMapping(value="/getTravelInfoList", method=RequestMethod.GET)
+	public String getTravelInfoList(TravelInfoVO vo) {
+		//return travelInfoService.getTravelInfoList(vo);
+		return "travel/getTravelInfoList";
+	}
+
 }
 	

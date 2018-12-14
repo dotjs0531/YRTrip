@@ -35,7 +35,7 @@
 }
 
 .list-box {
-    width: 1100px;
+    width: 900px;
     margin-left: 150px;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .list-box>article {
-	width: 240px;
+	width: 200px;
 	margin-right: 20px;
 	margin-top: 30px;
 	box-shadow: 1px 4px 16px 3px rgba(199, 197, 199, 1);

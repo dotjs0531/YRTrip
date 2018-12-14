@@ -69,20 +69,28 @@ jQuery( document ).ready(function( $ ) {
 
 <!-- 여행기 리스트 -->
 	<div class="list-box">
-	<form name="frm">
-	<select name="searchCondition">
-		<option value="userId">작성자</option>
-		<option value="tinfoId">장소</option>
-		<option value="travelTitle">제목</option>
-		<option value="travelContent">내용</option>
-	</select>
-	<input type="text" name="searchKeyword">
-	<button type="submit">검색</button>
-	<input type="hidden" name="sortCol"/>
-	<input type="hidden" name="page">
+	<!-- 검색 창 & 페이징 처리 -->
+                		<form name="frm" class="form-inline">
+                			<div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
+								
+								<!-- 검색 내용 -->
+													
+								<div style="padding-bottom:5px">
+								<label class="col-sm-2 control-label">국가</label>
+								<input type="text" name="tinfoCountry" class="form-control"><br>
+								<label class="col-sm-2 control-label">주/도</label>
+								<input type="text" name="tinfoState" class="form-control"><br>
+								<label class="col-sm-2 control-label">도시명</label>
+								<input type="text" name="tinfoCity" class="form-control">
+																<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+								</div>
+								
+								<input type="hidden" name="page" />
+								</div>
+							
 	</form>
 						<c:forEach items="${travelBoardList}" var="board">
-							<article data-travelNo="${board.travelNo}">
+							<article>
 									<img src="resources/media/getTBL.PNG" class="img-responsive">
 									<div class="content-title">
 										<div class="text-center">

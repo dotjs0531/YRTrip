@@ -8,47 +8,51 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(function(){
-	//댓글목록조회처리
-	loadTravelInfoList();
 	
-	//댓글목록조회 요청	
-function loadTravelInfoList(){
-	$.getJSON("getTravelInfoList", function(datas){
-		for(i=0; i<datas.length; i++){
-			var tr = makeTravelInfoListView(datas[i]);
-			$(tr).appendTo("#travelInfoList");
-		}
-	});
-} 	// end of loadCommentList
+	var context = '${pageContext.request.contextPath}';
 
-	function makeTravelInfoListView(travelInfo){
-	var tr = $("<tr>"); 
-	tr.addClass('travelInfo');
-	tr[0].travelInfo=travelInfo;  //{id:1,.... }
+	//목록조회 요청
+	//function loadTravelInfoList() {
+		$.getJSON(context + "/getTravelInfoListData", function(datas){
+			console.log("llllllllllllllllllllllllllllllllllll")
+			console.log(datas[0].tinfoId);
+			for(i=0; i<datas.length;i++) {
+				console.log(datas);
+				$("#travelInfoList").append( makeTravelInfoView(datas[i]) );
+			}
+		});
 	
-	var str ="<strong class='tinfoId'>" + travelInfo.tinfoId + "</strong>" 
-	        +"<span class='commentContent'>" + travelInfo.tInfoCountry +"</span>"
-	tr.html(str);
-	return tr;
-} 
-});
+	
+	function makeTravelInfoView(travelInfo){
+		var div = $("<div>"); 
+		div.attr("id", "t"+travelInfo.tinfoId);
+		div.addClass('travelInfo');
+		div[0].travelInfo=travelInfo;  //{id:1,.... }
+		
+		var str ="<strong class='travelInfotinfoId'>" + travelInfo.tinfoId + "</strong>" 
+		        +"<span class='travelInfotinfoCountry'>" + travelInfo.tinfoCountry +"</span>"
+		        +"<span class='travelInfotinfoState'>" + travelInfo.tinfoState +"</span>"
+		        +"<span class='travelInfotinfoCity'>" + travelInfo.tinfoCity +"</span>"
+				+"<button type=\"button\" class=\"btnUpdFrm\">수정</button>"
+				+"<button type=\"button\" class=\"btnDel\">삭제</button>"
+		div.html(str);
+		return div;
+	}
+	
+	//목록 조회
+	loadTravelInfoList(); 
+})
 </script>
 </head>
 <body>
+<h1>getInfoListData....</h1>
+<div id="travelInfo">
 
-<div>목록
-		<table border="1">
-			<thead>
-			<tr>
-				<th>장소번호</th>
-				<th>나라</th>
-				<th>주/도</th>
-				<th>도시명</th>
-			</tr>
-			</thead>
-			<tbody>
-			</tbody>
-		</table>
+<div id="travelInfoList"></div>
+
+
+
+
 </div>
 
 </body>
