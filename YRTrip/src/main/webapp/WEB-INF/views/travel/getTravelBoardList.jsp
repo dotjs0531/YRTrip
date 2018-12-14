@@ -46,39 +46,6 @@ jQuery( document ).ready(function( $ ) {
 		})
 });
 
-
-function check(){
-
-	var str = document.getElementById('travelTitle');
-
-	 
-
-	if( str.value == '' || str.value == null ){
-	    alert( '값을 입력해주세요' );
-	    return false;
-	}
-
-	var special_pattern = /[`~!@#$%^&*|\\\'\";:\/?]/gi;
-
-	if( special_pattern.test(str.value) == true ){
-	    alert('특수문자는 사용할 수 없습니다.');
-	    return false;
-	}
-
-	alert( '최종 : ' + str.value );
-
-	/*
-	if( str.value.search(/\W|\s/g) > -1 ){
-	    alert( '특수문자 또는 공백을 입력할 수 없습니다.' );
-	    str.focus();
-	    return false;
-	}*/
-
-	}
-
-
-
-	출처: http://imonster.tistory.com/136 [유행에 못 따라가는 웹 개발자 입니다.]
 </script>
 </head>
 <body>
@@ -91,7 +58,7 @@ function check(){
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
-                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getTravelInfoList" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                        <div class="order-buton" style="padding-bottom:30px;">
@@ -156,8 +123,7 @@ function check(){
 								</nav>
 					</div>
 					
-<!-- modal body -->		
-<form id="/insertTravelBoardform" class="form" action="./insertTravelBoard" method="post" name="insertTravelBoardfrm">			
+<!-- modal body -->			
 <div class="modal fade" id="insertTravelBoard">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -174,7 +140,7 @@ function check(){
 							class="row justify-content-center align-items-center">
 							<div id="login-column" class="col-md-6">
 								<div id="login-box" class="col-md-12">
-									
+									<form id="/insertTravelBoardform" class="form" action="./insertTravelBoard" method="post">		
 										<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 											<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 										<div class="form-group">
@@ -205,7 +171,7 @@ function check(){
 											<label for="remember-me" class="text-info"></label>
 											<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 										</div>
-									
+									</form>
 								</div>
 							</div>
 						</div>
@@ -216,7 +182,6 @@ function check(){
 			</div>
 		</div>
 	</div>
-</form>
 </section>
 <!-- js -->
 
