@@ -47,10 +47,13 @@
 						</c:if>
 						${notice.noticeContent}
 						</div>
+						
+                    	<c:if test="${sessionScope.login.userGrant eq 'admin'}">
 						<div class="order-buton" style="float:right">
                             <a href="./updateNoticeForm?noticeId=${notice.noticeId}">수정</a>&nbsp;&nbsp;
                             <a onclick="del('${notice.noticeId}')">삭제</a>
                         </div>
+                        </c:if>
                     </div>
                 </div>
             </div>

@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.qna.QnaService;
 import com.yrtrip.app.qna.QnaVO;
 
@@ -15,10 +17,27 @@ public class QnaController {
 	@Autowired QnaService qnaService;
 	
 	//전체 조회
-	@RequestMapping("/getQnaList")
-	public String getQnaList(Model model, QnaVO vo) {
-		model.addAttribute("qnaList", qnaService.getQnaList(vo));
-		return "qna/getQnaList";
+	@RequestMapping(value = "/getQnaList", method = RequestMethod.GET)
+	public ModelAndView getQnaList(QnaVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+		// 페이징 처리
+		// 페이지번호 파라미터
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(10);
+		// 시작/마지막 레코드 번호
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		// 전체 건수
+		paging.setTotalRecord(qnaService.getCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("qnaList", qnaService.getQnaList(vo));
+		mv.setViewName("qna/getQnaList");
+		return mv;
 	}
 	//단건 조회
 	@RequestMapping("/getQna")

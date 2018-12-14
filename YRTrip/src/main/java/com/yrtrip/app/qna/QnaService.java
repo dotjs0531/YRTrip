@@ -8,4 +8,5 @@ public interface QnaService {
 	public void deleteQna(QnaVO vo);
 	public QnaVO getQna(QnaVO vo);
 	public List<QnaVO> getQnaList(QnaVO vo);
+	public int getCount(QnaVO vo);
 }

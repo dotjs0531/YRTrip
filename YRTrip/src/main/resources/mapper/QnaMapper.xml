@@ -2,6 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
+<!-- 전체 건수 조회 -->
+<select id="getCount" resultType="int">
+	SELECT COUNT(*)
+	  FROM QNAT
+	  <where>
+		<choose>
+			<when test="searchCondition != null and searchCondition == 'qnaTitle'">
+				AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>	
+			<when test="searchCondition != null and searchCondition == 'qnaContent'">
+			 	AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
+			</when>
+		</choose>
+	</where>
+	ORDER BY QNA_ID DESC
+</select>
 <select id="getQnaList" resultType="qna">
 	SELECT  QNA_ID,
 			QNA_TITLE,
@@ -11,7 +27,21 @@
 			USER_NAME,
 			QNA_ANSWER
 	  FROM  QNAT Q, USERT U
-	  WHERE Q.USER_ID = U.USER_ID
+	  <where>
+		<choose>
+			<when test="searchCondition != null and searchCondition == 'qnaTitle'">
+				AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>	
+			<when test="searchCondition != null and searchCondition == 'qnaContent'">
+			 	AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			<!-- <when test="searchDateStart != null and searchDateEnd != null">
+    			AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
+    							 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
+			</when> -->
+		</choose>
+	  AND Q.USER_ID = U.USER_ID
+	  </where>
 	  ORDER BY QNA_ID DESC
 </select>
 <select id="getQna" parameterType="qna" resultType="qna">

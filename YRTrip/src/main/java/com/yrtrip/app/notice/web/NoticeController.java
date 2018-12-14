@@ -23,7 +23,7 @@ public class NoticeController {
 	@Autowired NoticeService noticeService;
 
 	//전체 조회
-	@RequestMapping("/getNoticeList")
+	@RequestMapping(value = "/getNoticeList", method = RequestMethod.GET)
 	public ModelAndView getNoticeList(NoticeVO vo, Paging paging) {
 		ModelAndView mv = new ModelAndView();
 		// 페이징 처리

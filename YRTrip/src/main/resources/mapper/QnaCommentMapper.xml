@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qnaComment">
+<select id="getQnaCommentList" resultType="qnaComment" parameterType="qnaComment">
+	SELECT  COMMENT_ID
+ 			,USER_ID
+ 			,COMMENT_CONTENT
+ 			,COMMENT_DATE
+ 			,COMMENT_QNAID
+ 	   FROM QNA_COMMENTT
+ 	  WHERE QNA_ID = #{qnaId}
+ 	  ORDER BY COMMENT_ID DESC
+</select>
+<select id="getQnaComment" resultType="qnaComment" parameterType="qnaComment">
+	SELECT  COMMENT_ID
+ 			,USER_ID
+ 			,COMMENT_CONTENT
+ 			,COMMENT_DATE
+ 			,COMMENT_QNAID
+ 	   FROM QNA_COMMENTT
+ 	  WHERE COMMENT_ID = #{commentId}
+</select>
+
+<insert id="insertQnaComment" parameterType="qnaComment">
+	<selectKey keyProperty="commentId" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(COMMENT_ID), 0)+1 FROM QNA_COMMENTT
+	</selectKey>
+	INSERT INTO QNA_COMMENTT ( COMMENT_ID
+ 							   ,USER_ID
+ 							   ,COMMENT_CONTENT
+ 							   ,COMMENT_QNAID )
+ 					  VALUES ( #{commentId}
+ 					  		   ,#{userId}
+ 					  		   ,#{commentContent}
+ 					  		   ,#{commentQnaid} )
+</insert>
+<update id="updateQnaComment" parameterType="qnaComment">
+	UPDATE QNA_COMMENTT SET COMMENT_CONTENT = #{commentContent}
+	 WHERE COMMENT_ID = #{commentId}
+</update>
+<delete id="deleteQnaComment" parameterType="qnaComment">
+	DELETE QNA_COMMENTT
+		 <where> 
+		 	<choose>
+		 		<when test="qnaId != null and qnaId != ''">
+		 			QNA_ID = #{qnaId}	
+		 		</when>
+		 		<otherwise>
+		 			COMMENT_ID = #{commentId}
+		 		</otherwise>
+		 	</choose>
+		 </where>
+</delete>
+</mapper>

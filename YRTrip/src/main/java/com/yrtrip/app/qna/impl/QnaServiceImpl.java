@@ -33,4 +33,8 @@ public class QnaServiceImpl implements QnaService {
 		return dao.getQnaList(vo);
 	}
 
+	public int getCount(QnaVO vo) {
+		return dao.getCount(vo);
+	}
+
 }

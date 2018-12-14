@@ -14,6 +14,9 @@ public class NoticeVO {
 	private String noticeImg;	//이미지 이름
 	private MultipartFile noticeImgFile;	//실제 이미지 파일
 
+	private String searchCondition;
+	private String searchKeyword;
+	
 	private int first;
 	private int last;
 	
@@ -59,7 +62,7 @@ public class NoticeVO {
 	public void setNoticeImg(String noticeImg) {
 		this.noticeImg = noticeImg;
 	}
-	@JsonIgnore
+
 	public MultipartFile getNoticeImgFile() {
 		return noticeImgFile;
 	}
@@ -67,6 +70,19 @@ public class NoticeVO {
 		this.noticeImgFile = noticeImgFile;
 	}
 
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+	
 	public int getFirst() {
 		return first;
 	}

@@ -5,7 +5,17 @@
 <!-- 전체 건수 조회 -->
 <select id="getCount" resultType="int">
 	SELECT COUNT(*)
-		FROM NOTICET
+	  FROM NOTICET
+	  <where>
+		<choose>
+			<when test="searchCondition != null and searchCondition == 'noticeTitle'">
+				AND NOTICE_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>	
+			<when test="searchCondition != null and searchCondition == 'noticeContent'">
+			 	AND NOTICE_CONTENT LIKE '%' || #{searchKeyword} || '%'
+			</when>
+		</choose>
+		</where>
 		ORDER BY NOTICE_ID DESC
 </select>
 <select id="getNoticeList" resultType="notice">
@@ -17,7 +27,17 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE,
 			USER_NAME
 	  FROM  NOTICET N, USERT U
-	  WHERE N.USER_ID = U.USER_ID
+	  <where>
+		<choose>
+			<when test="searchCondition != null and searchCondition == 'noticeTitle'">
+				AND NOTICE_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>	
+			<when test="searchCondition != null and searchCondition == 'noticeContent'">
+			 	AND NOTICE_CONTENT LIKE '%' || #{searchKeyword} || '%'
+			</when>
+		</choose>
+	  	AND N.USER_ID = U.USER_ID
+	  </where>
 	  ORDER BY NOTICE_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>

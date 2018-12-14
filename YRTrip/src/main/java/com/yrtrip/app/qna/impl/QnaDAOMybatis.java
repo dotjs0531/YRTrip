@@ -37,5 +37,9 @@ public class QnaDAOMybatis {
 	public List<QnaVO> getQnaList(QnaVO vo) {
 		return mybatis.selectList("qna.getQnaList", vo);
 	}
+	//건수 조회
+	public int getCount(QnaVO vo) {
+		return mybatis.selectOne("qna.getCount", vo);
+	}
 
 }

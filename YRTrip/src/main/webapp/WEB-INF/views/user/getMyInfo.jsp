@@ -474,31 +474,31 @@ function ck_phone(){
             				
 							이름 *
 							<div>
-							<input type="text" id="userName" name="userName" value="${user.userName}" onblur="ck_name()" required>							
+							<input type="text" id="userName" name="userName" value="${user.userName}" oninput="ck_name()" required>							
             				<span id="MsgName" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
             				비밀번호 *
             				<div>
-            				<input type="password" id="userPw" name="userPw" value="${user.userPw}" onblur="ck_pwd()" required>
+            				<input type="password" id="userPw" name="userPw" value="${user.userPw}" oninput="ck_pwd()" required>
 							<span id="MsgPw" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
 							비밀번호 확인 *
 							<div>
-							<input type="password" id="userPw_ck" name="userPw_ck" onblur="ck_pwd2()">
+							<input type="password" id="userPw_ck" name="userPw_ck" oninput="ck_pwd2()">
 							<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
 							이메일 *
 							<div>
-							<input type="email" id="userEmail" name="userEmail" value="${user.userEmail}" onblur="ck_email()" required>
+							<input type="email" id="userEmail" name="userEmail" value="${user.userEmail}" oninput="ck_email()" required>
 							<span id="MsgEmail" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
 							연락처 *
 							<div>
-							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" onblur="ck_phone()" onfocus="OnCheckPhone(this)" onKeyup="OnCheckPhone(this)" required maxlength="13"> 
+							<input type="text" id="userPhone" name="userPhone" value="${user.userPhone}" oninput="ck_phone()" onfocus="OnCheckPhone(this)" onKeyup="OnCheckPhone(this)" required maxlength="13"> 
 							<span id="MsgPhone" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							

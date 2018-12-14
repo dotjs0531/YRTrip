@@ -33,11 +33,25 @@
                         </div>
                     </div>
                 </div>
-                <form name="frm">
-					<input type="hidden" name="page"/>
-                </form>
-                <div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:420px;">
+                
+				<div class="col-sm-6" style="min-width:700px">
+                	<div class="table-responsive" style="min-height:450px;">
+                	
+                		<!-- 검색 창 & 페이징 처리 -->
+                		<form name="frm" class="form-inline">
+                			<div class="form-group" style="padding-bottom:10px; float:right">
+								<select name="searchCondition" class="form-control">
+									<option value="noticeTitle">제목
+									<option value="noticeContent">내용
+								</select>
+								<input type="text" name="searchKeyword" class="form-control">
+								<button class="btn btn-warning signupbtn">검색</button>
+								<input type="hidden" name="page" />
+         					</div>
+						</form>
+						<p style="clear:both">
+         				
+         				<!-- 게시글 목록 -->
                     	<table class="table table-hover" >
                     		<thead>
                     			<tr>
@@ -61,12 +75,18 @@
                     		</tbody>
                     	</table>
                     </div>
+                    
+                    <!-- 글 등록 버튼 -->
+                    <c:if test="${sessionScope.login.userGrant eq 'admin'}">
                     <section >
-                        <div class="order-buton" style="float:right">
+                        <div class="order-buton" style="float:right; padding-top:10px;">
                             <a href="${pageContext.request.contextPath}/insertNotice">등록</a>
                         </div>
                     </section>
-                    <div class="text-center" style="padding-top:50px;">
+                    </c:if>
+                    
+                    <!-- 페이지 번호 -->
+                    <div style="padding-top:50px;">
 						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
                 </div>
