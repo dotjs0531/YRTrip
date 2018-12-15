@@ -355,34 +355,35 @@ input[type=radio]{
 		}
 	}
 
-	function ck_gender(){
-		if(!($('input:radio[id=man]').is(':checked')) && !($('input:radio[id=woman]').is(':checked'))){
-		    genderCheck = 0;
-		} else {
-		    genderCheck = 1;
-		}
-	}
-	
-	function gender(){
+	function ck_gender() {
 		var wrap_gender = document.getElementById("wrap_gender");
 		var man = document.getElementById("man");
 		var woman = document.getElementById("woman");
+		
+		var che = $('input:radio[name=userGen]').is(':checked');
 
-		if(man.checked){
-	    	document.getElementById("wrap_man").className='gender_act';
-	    	document.getElementById("wrap_woman").className='gender';
+		if(che){
+			genderCheck = 1;
+			if (man.checked) {
+				document.getElementById("wrap_man").className = 'gender_act';
+				document.getElementById("wrap_woman").className = 'gender';
+			}
+
+			if (woman.checked) {
+				document.getElementById("wrap_woman").className = 'gender_act';
+				document.getElementById("wrap_man").className = 'gender';
+			}
 		}
-		if(woman.checked){
-	    	document.getElementById("wrap_woman").className='gender_act';
-	    	document.getElementById("wrap_man").className='gender';
+		else{
+			genderCheck = 0;
 		}
 	}
 	
  	function ck_signup(){
 		ck_id(); ck_email(); ck_pwd(); ck_pwd2(); ck_name(); ck_phone(); OnCheckPhone(); ck_birth(); ck_gender();
 
-	    if( idCheck!=0 && emailCheck!=0 && pwdCheck!=0 && pwdckCheck!=0 && nameCheck!=0 && birthCheck!=0 && phoneCheck!=0 /* && genderCheck !=0 */){
-	        $(".signupbtn").prop("disabled", false);
+	    if( idCheck!=0 && emailCheck!=0 && pwdCheck!=0 && pwdckCheck!=0 && nameCheck!=0 && birthCheck!=0 && phoneCheck!=0  && genderCheck !=0){
+	    	$(".signupbtn").prop("disabled", false);
 	        $(".signupbtn").css("background-color", "#f9bf3b");
 	    } else {
 	    	$(".signupbtn").prop("disabled", true);
@@ -448,12 +449,12 @@ input[type=radio]{
 				
 				<div id="wrap_gender">
 					<span id="wrap_man" class="gender">
-					<input type="radio" id="man" name="userGen" onclick="gender()" value="남" required>
+					<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="남" required>
 					<label for="man"> 남자 </label>
 					</span>
 					
 					<span id="wrap_woman" class="gender no_line">
-					<input type="radio" id="woman" name="userGen" onclick="gender()" value="여" required>
+					<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="여" required>
 					<label for="woman" onclick="ck_gender()"> 여자 </label>
 					</span>
 				</div>

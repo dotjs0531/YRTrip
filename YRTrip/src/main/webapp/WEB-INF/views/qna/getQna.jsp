@@ -55,7 +55,7 @@
 			$("#updateForm [name=userId]").val($("#c"+commentId+">.userId").text());
 			$("#updateForm [name=commentContent]").val($("#c"+commentId+">.commentContent").text());
 			//수정할 댓글밑으로 이동하고 보이게
-			$("#c"+commentId).append($('#commentUpdate'));  
+			$("#c"+commentId).prepend($('#commentUpdate'));  
 			$('#commentUpdate').show();   
 		});
 		

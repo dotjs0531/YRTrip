@@ -10,7 +10,7 @@
  			,COMMENT_QNAID
  	   FROM QNA_COMMENTT
  	  WHERE COMMENT_QNAID = #{commentQnaid}
- 	  ORDER BY COMMENT_ID DESC
+ 	  ORDER BY COMMENT_ID
 </select>
 <select id="getQnaComment" resultType="qnaComment" parameterType="qnaComment">
 	SELECT  COMMENT_ID
