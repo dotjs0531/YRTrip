@@ -1,43 +1,5 @@
 @charset "UTF-8";
-
-.content-section {
-	padding-top: 100px;
-		display: inline-block;
-}
-/* 카테고리 */
-.category {
-	margin-top: 30px;
-	padding-left: 250px;
-	display: inline-block;
-}
-
-.search-box {
-	border:1px solid #e3e3e3;
-	width: 250px;
-	background: #fff;
-	-webkit-transition: all .3s ease-in-out 0s;
-	transition: all .3s ease-in-out 0s;
-	text-align: center;
-	background: #fff none repeat scroll 0 0;
-	display: inline-block;
-}
-
-.search-title {
-    padding: 10px;
-    position: relative;
-}
-
-
 /* 목록 */
-.list-box {
-	float:right;
-	padding-bottom: 30px;
-}
-
-.list-box {
-    width: 900px;
-    margin-left: 150px;
-}
 
 .content-title {
 	padding: 5px;
@@ -74,15 +36,15 @@
 	color: #F39C12;
 }
 
-.list-box>article {
-	width: 200px;
+article {
+	width: 250px;
 	margin-right: 20px;
 	margin-top: 30px;
 	box-shadow: 1px 4px 16px 3px rgba(199, 197, 199, 1);
 	display: inline-block;
 }
 
-.list-box>article .content-footer>img {
+article .content-footer>img {
 	width: 33px;
 	height: 33px;
 	border-radius: 100%;
