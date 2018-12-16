@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="kor">
 <!-- 
@@ -62,57 +63,187 @@
 <body>
 
 	<section class="about_us_area" id="about">
-
-		<!-- Page Content 전체 바디 -->
 		<div class="container">
-
 			<div class="row">
-				<!-- 시작 : 사이드 :  3-->
 				<div class="container col-lg-3">
 					<div class="single-pricing-table">
 						<div class="pricing-title">
 							<h2 style="color: black">카테고리</h2>
 						</div>
-						<ul class="price-list">
+						<ul class="price-list" id="product_cart_insert">
 							<li><a href="getProductList" style="color: black">전체보기</a></li>
-							<li><a href="#" style="color: black">의류</a></li>
-							<li><a href="#" style="color: black">티켓/쿠폰</a></li>
-							<li><a href="#" style="color: black">전자기기</a></li>
-							<li><a href="#" style="color: black">여행도서</a></li>
-							<li><a href="#" style="color: black">USIM</a></li>
-							<li><a href="#" style="color: black">기타</a></li>
+							<li><a id="pciClothes" onclick="p_cat()" href="#" style="color: black">의류</a></li>
+							<li><a id="pciTicket" onclick="p_cat()" href="#" style="color: black">티켓/쿠폰</a></li>
+							<li><a id="pciElectronic" onclick="p_cat()" href="#" style="color: black">전자기기</a></li>
+							<li><a id="pciBook" onclick="p_cat()" href="#" style="color: black">여행도서</a></li>
+							<li><a id="pciUSIM" onclick="p_cat()" href="#" style="color: black">USIM</a></li>
+							<li><a id="pciETC" onclick="p_cat()" href="#" style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton">
 							<a href="#">상품요청</a>
 						</div>
 						<div class="order-buton">
-							<a href="#">상품등록</a>
+							<a href="insertProduct">상품등록</a>
 						</div>
 					</div>
 				</div>
+
 				<!-- 끝 : 사이드 : 3-->
 				<!-- 시작 : 내용 : 9-->
-				<div class="container col-lg-8">
-
-					<div class="card mb-10">
-						<div class="card-header">
-							<nav></nav>
-						</div>
-						<div class="card-body store-body">
-							<!-- 왼쪽 -->
-							<div class="product-info">
-								<!-- 왼쪽 갤러리(사진들만) -->
-								<div class="product-gallery">
-									<div class="product-gallery-featured">
+				
+				<div class="container col-lg-9">
+					<form action="./updateProduct" method="post">
+						<div class="card mb-10">
+							<div class="card-header">
+								<nav class="header-navigation">
+									<div>
+										<a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a>
+										
+									</div>
+									<ol class="breadcrumb">
+										
+									</ol>
+									<div class="pull-left"><h4>'session값 들고'만의 상품을 공유해줘!</h4></div>
+										<div class="pull-right">
+											<a href="#" class="btn btn-link">모두삭제</a> 
+											<input type="submit" class="btn" value="수정">
+										</div>
+								</nav>
+							</div>
+							<div class="card-body store-body">
+								
+								<!-- 상품명 : -->
+								<div class="row">
+									<div class="col-12 col-md-12">
+										<input type="text" class="form-control is-valid input-lg"
+											name="itemName" placeholder="상품명을 적어주세요" required>
 									</div>
 								</div>
+								<div class="space-five"></div>
+								<!-- 상품사진 drag& drop -->
+								<div class="row">
+									<div class="col-md-8 text-center"><img id="blah" src="http://placehold.it/180" alt="your image" /></div>
+									<!-- 파일 불러오고 명 보여주는건데 4.0에서 들고와서 그런지 안된다.... -->
+									<div class="col-md-4">
+										<div class="row">
+											<input type='file' onchange="readURL(this);" />  											
+  										</div>
+										<div class="row">
+										<input type='file' onchange="readURL(this);" />
+										</div>
+										<div class="row">
+										<input type='file' onchange="readURL(this);" />
+										</div>
+										<div class="row">
+										<input type='file' onchange="readURL(this);" />
+										</div>
+									</div>
+								</div>
+								<div class="space-five"></div>
+								<!-- 가격 : 카테고리 선택시 바로 입력되도록-->
+								<!-- 모바일 및 데스크톱에서 항상 칼럼폭이 50% 입니다. -->
+								<div class="row price_list">
+									<div class="col-6 col-md-4">
+										<h4>카테코리</h4>
+									</div>
+									<div class="col-12 col-md-8">
+										<input type="text" class="form-control mb-5 input-lg"
+											name="itemCategory" id="itemCategory" placeholder="카테고리" required>
+										<div class="invalid-feedback">카테고리 설명</div>
+									</div>
+								</div>
+								<div class="row price_list">
+									<div class="col-6 col-md-4">
+										<h4>가격</h4>
+									</div>
+									<!-- 가격 : 1. 앞에 0으로 시작할시 입력 안되게 2.1원단위 못적게??? -->
+									<div class="col-12 col-md-8">
+										<input type="text" class="form-control mb-5 input-lg"
+											name="itemPrice" placeholder="가격" required>
+										<div class="invalid-feedback">가격을 입력하세요</div>
+									</div>
+								</div>
+								<!-- 수량 : 1.0 막아놓기 -->
+								<div class="row price_list">
+									<div class="col-6 col-md-4">
+										<h4>수량</h4>
+									</div>
+									<div class="col-12 col-md-8">
+										<input type="text" class="form-control mb-5 input-lg"
+											name="itemEa" placeholder="수량" required>
+									</div>
+								</div>
+								<!-- 상품상태 : 하나만 체크 되도록 -->
+								<div class="row">
+									<div class="col-6 col-md-4">
+										<h4>상품상태</h4>
+									</div>
+									<div class="col-12 col-md-8 input-lg">
+										<div class="form-check form-check-inline">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="itemCondition"
+												value="새상품"> 새상품
+											</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="itemCondition"
+												value="약간중고"> 약간중고
+											</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="itemCondition"
+												value="조금중고"> 조금중고
+											</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="radio" name="itemCondition"
+												value="완전중고"> 완전중고
+											</label>
+										</div>
+									</div>
+								</div>
+								<div class="space-five"></div>
+								<!-- 결제방법 : 1.값 두개다 db에 들어갈 수 있도록  -->
+								<div class="row price_list">
+									<div class="col-6 col-md-4">
+										<h4>선호결제방법</h4>
+									</div>
+									<div class="col-12 col-md-8 input-lg">
+										<div class="form-check form-check-inline">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="checkbox" name="itemMethod"
+												value="현금결제"> 현금결제(만나서 결제)
+											</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<label class="form-check-label"> <input
+												class="form-check-input" type="checkbox" name="itemMethod"
+												value="카드결제"> 카드결제
+											</label>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="spcae-five"></div>
+									<h4>제품설명</h4>
+									<textarea name="itemContent" class="form-control col-sm-12"
+										rows="5"></textarea>
+								</div>
+								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
+								<input type="hidden" name="sellerId" value="user1">
+								<!--  구매가능 여부 : 구매가능(defalut)  --> 
+								<input type="hidden" name="itemOrderdetail" value="구매가능">
 							</div>
 						</div>
-						<!-- 끝 : 내용 : 9-->
-					</div>
-					<!-- /.row -->
+					</form>
 				</div>
-				<!-- /.container 전체 바디끝-->
+				<!-- 끝 : 내용 : 9-->
+			</div>
+			<!-- /.row -->
+		</div>
 	</section>
 	<!-- Bootstrap core JavaScript -->
 

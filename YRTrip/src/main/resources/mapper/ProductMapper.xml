@@ -67,8 +67,20 @@
 				 		  #{itemOrderdetail},
 				 		  <!-- #{itemPic}, -->
 				 		  #{itemCondition}
-				 		  <!-- , #{itemStar} -->				 		  
+				 		  <!-- ,  #{itemStar} -->				 		  
 				)
 	</insert>
-
+	<update id="updateProduct" parameterType="product">
+		UPDATE ITEMT SET
+		ITEM_NAME  = #{itemName},
+		ITEM_PRICE = #{itemPrice},
+		ITEM_EA = #{itemEa},
+		ITEM_CONTENT = #{itemContent},
+		ITEM_METHOD = #{itemMethod},
+		ITEM_CATEGORY = #{itemCategory},
+		ITEM_ORDERDETAIL = #{itemOrderdetail},
+		ITEM_CONDITION = #{itemCondition}
+		WHERE ITEM_ID = #{itemId}
+	
+	</update>
 </mapper> 

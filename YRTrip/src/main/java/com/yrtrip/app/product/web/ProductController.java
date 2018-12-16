@@ -52,10 +52,16 @@ public class ProductController {
 	}
 	
 	//제품수정 폼
-	@RequestMapping("updateProduct")
+	@RequestMapping(value="/updateProduct", method=RequestMethod.GET)
 	public String updateProductForm(Model model, ProductVO vo) {
 		model.addAttribute("product", productService.getProduct(vo));
 		return "product/updateProduct";
+	}
+	//제품수정처리
+	@RequestMapping(value="/updateProduct", method = RequestMethod.POST)
+	public String updateProduct(ProductVO vo){
+		productService.updateProduct(vo);
+		return "product/getProductList";
 	}
 	
 	/*//제품수정처리

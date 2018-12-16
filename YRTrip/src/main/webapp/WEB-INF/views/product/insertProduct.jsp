@@ -12,21 +12,12 @@
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
 <title>prototype of insertProduct(view)</title> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- font Awesome-->
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.6.0/css/all.css"
-	integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h"
-	crossorigin="anonymous">
-
-<!-- CSS (부트 + custom)-->
-<!-- 4.0 버전인데 못쓰것다 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
-        crossorigin="anonymous"> -->
-<link href="./resources/css/product.bootstrap.min.css" rel="stylesheet">
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
 <style>
 .space-ten {
 	padding: 10px 0;
@@ -238,19 +229,16 @@ function readURL(input) {
 								<!-- 상품명 : -->
 								<div class="row">
 									<div class="col-12 col-md-12">
-										<input type="text" class="form-control is-valid mb-5 input-lg"
+										<input type="text" class="form-control is-valid input-lg"
 											name="itemName" placeholder="상품명을 적어주세요" required>
 									</div>
 								</div>
 								<div class="space-five"></div>
-								
 								<!-- 상품사진 drag& drop -->
-								
 								<div class="row">
-								
-									<div class="col-12 text-center"><img id="blah" src="http://placehold.it/180" alt="your image" /></div>
+									<div class="col-md-8 text-center"><img id="blah" src="http://placehold.it/180" alt="your image" /></div>
 									<!-- 파일 불러오고 명 보여주는건데 4.0에서 들고와서 그런지 안된다.... -->
-									<div class="col-md-4 text-center">
+									<div class="col-md-4">
 										<div class="row">
 											<input type='file' onchange="readURL(this);" />  											
   										</div>
@@ -265,7 +253,7 @@ function readURL(input) {
 										</div>
 									</div>
 								</div>
-								
+								<div class="space-five"></div>
 								<!-- 가격 : 카테고리 선택시 바로 입력되도록-->
 								<!-- 모바일 및 데스크톱에서 항상 칼럼폭이 50% 입니다. -->
 								<div class="row price_list">
