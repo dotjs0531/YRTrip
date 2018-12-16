@@ -21,7 +21,7 @@
 			$.getJSON("getQnaCommentList", params, function(datas){
 				for(i=0; i<datas.length; i++) {
 					var div = makeCommentView(datas[i]);
-					$(div).prependTo("#qnaComment");
+					$(div).prependTo("#qnaCommentList");
 				}
 			});
 		}	//end loadCommentList event
@@ -32,7 +32,7 @@
 			console.log(params);
 			$.getJSON("insertQnaComment", params, function(datas){
 				var div = makeCommentView(datas)
-				$(div).prependTo("#qnaComment");
+				$(div).prependTo("#qnaCommentList");
 			});
 		});	// end btnAdd click event
 
@@ -73,15 +73,15 @@
 		});	// end btnDel click event
 
 		function makeCommentView(qnaComment){
-			var div = $("<div>"); 
+			var div = $("<div class='form-group'>"); 
 			div.attr("id", "c"+qnaComment.commentId);
-			div.addClass('qnaComment');
-			div[0].qnaComment=qnaComment;  //{id:1,.... }
+			div.addClass('qnaCommentList');
+			div[0].qnaCommentList = qnaComment;  //{id:1,.... }
 			
-			var str ="<strong class='userId'>" + qnaComment.userId + "</strong>" 
-			        +"<span class='qnaContent'>" + qnaComment.commentContent +"</span>"
-					+"<button type=\"button\" class=\"btnUpdFrm\">수정</button>"
-					+"<button type=\"button\" class=\"btnDel\">삭제</button>"
+			var str ="<p/><label class='col-sm-2 control-label'>" + qnaComment.userId + "</label>" 
+			        +"<span class='col-lg-8 qnaContent'>" + qnaComment.commentContent +"</span>"
+					+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">수정</button>"
+					+"<button type=\"button\" class=\"btn btn-default btnDel\">삭제</button>"
 			div.html(str);
 			return div;
 		}
@@ -126,34 +126,49 @@
                             <a onclick="del('${qna.qnaId}')">삭제</a>
                         </div>
                         </c:if>
+                        <p style="clear:both;">
                     </div>
-                    <div class="about_car" id="qnaComment">
-						<div style="min-height:100px;"><hr>
+                    
+                    <div class="about_car" id="qnaComment" style="min-height:100px;">
+                        <hr/>
 							<!-- 댓글등록시작 -->
 							<div id="commentAdd">
 								<form name="addForm" id="addForm">
+								<div class="input-group">
 									<input type="hidden" name="commentQnaid" value="${qna.qnaId}">
-									이름: <input type="text" name="userId" size="10"><br />
-									내용: <textarea name="commentContent" cols="20" rows="2"></textarea><br />
-									<input type="button" value="등록" id="btnAdd" />
+									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+									<input type="text" class="form-control" id="commentContent" name="commentContent" placeholder="내용을 입력하세요">
+									<span class="input-group-btn">
+									<button type="button" class="btn btn-default" id="btnAdd">등록</button>
+									</span>
+								</div>
 								</form>
-							</div>
+							</div><br/>
 							<!-- 댓글등록끝 -->
-
+							
+							<!-- 댓글 목록 -->
+							<div id="qnaCommentList"></div>
+							<!-- 댓글 목록끝 -->
+							
 							<!-- 댓글수정폼시작 -->
 							<div id="commentUpdate" style="display: none">
 								<form action="" name="updateForm" id="updateForm">
+								<div class="form-group">
 									<input type="hidden" name="commentQnaid" value="${qna.qnaId}">
-									<input type="hidden" name="commentId" value="" /> 
-									이름: <input type="text" name="userId" size="10"><br />
-									내용: <textarea name="commentContent" cols="20" rows="2"></textarea><br />
-									<input type="button" value="등록" id="btnUpd" />
-									<input type="button" value="취소" id="btnCancel" />
+									<input type="hidden" name="commentId" value="${qnaComment.commentId}" />
+									<label class='col-sm-2 control-label'>
+									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+										${sessionScope.login.userId}</label>
+									<span class='col-lg-8 qnaContent'>
+									<input type="text" class="form-control" name="commentContent" value="${qnaComment.commentContent}">
+									</span>
+									<button type="button" class="btn btn-default" id="btnUpd">등록</button>
+									<button type="button" class="btn btn-default" id="btnCancel">취소</button>
+								</div>
 								</form>
 							</div>
 							<!-- 댓글수정폼끝 -->
 						</div>
-                    </div>
                 </div>
             </div>
         </div>

@@ -20,6 +20,12 @@ public class UserController {
 
 	@Autowired UserService userService;
 
+	//전체 조회
+	@RequestMapping(value = "/getUserList", method = RequestMethod.GET)
+	public String getUserList(Model model, UserVO vo) {
+		model.addAttribute("userList", userService.getUserList(vo));
+		return "user/getUserList";
+	}
 	//로그인 처리
 	@RequestMapping("login") //login.jsp의 form action id값과 동일
 	public String login(@ModelAttribute("user") UserVO vo, HttpSession session, HttpServletRequest request) { //model.addAttribute("user", vo)
