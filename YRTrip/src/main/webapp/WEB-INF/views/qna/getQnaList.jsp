@@ -61,8 +61,8 @@
 								<!-- 답변여부 -->
 								<div>
 								<label class="col-sm-2 control-label">답변여부</label>
-								<input type="radio" name="searchAnswer" id="complete" class="form-control">완료 &nbsp;
-								<input type="radio" name="searchAnswer" id="incomplete"  class="form-control">미완료
+								<input type="radio" name="qnaAnswer" id="complete" value="완료" class="form-control">완료 &nbsp;
+								<input type="radio" name="qnaAnswer" id="incomplete" value="미완료" class="form-control">미완료
 								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 								</div>
 								

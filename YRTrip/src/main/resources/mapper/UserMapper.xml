@@ -27,7 +27,7 @@
 			USER_NAME,
 			USER_GEN,
 			USER_PHONE,
-			USER_BIRTH,
+			TO_CHAR(USER_BIRTH, 'YYYY-MM-DD') USER_BIRTH,
 			USER_POST,
 			USER_ADDRESS,
 			USER_EMAIL,
@@ -60,6 +60,7 @@
 <update id="updateUser" parameterType="user">
 	UPDATE USERT SET USER_PW = #{userPw},
 					 USER_NAME = #{userName},
+					 USER_GEN = #{userGen},
 					 USER_PHONE = #{userPhone},
 					 USER_BIRTH = #{userBirth},
 					 USER_EMAIL = #{userEmail}

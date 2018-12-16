@@ -13,7 +13,6 @@ public class QnaVO {
 	private String searchKeyword;
 	private String searchDateStart;
 	private String searchDateEnd;
-	private String searchAnswer;
 	
 	private int first;
 	private int last;
@@ -84,12 +83,6 @@ public class QnaVO {
 	}
 	public void setSearchDateEnd(String searchDateEnd) {
 		this.searchDateEnd = searchDateEnd;
-	}
-	public String getSearchAnswer() {
-		return searchAnswer;
-	}
-	public void setSearchAnswer(String searchAnswer) {
-		this.searchAnswer = searchAnswer;
 	}
 	
 	public int getFirst() {

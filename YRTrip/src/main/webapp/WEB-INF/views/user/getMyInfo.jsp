@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,9 +87,9 @@ input[type=radio]{
 } */
 </style>
 <script>
-$(function(){
-	document.getElementById('userBirth').valueAsDate = new Date();		//DB에서 생년월일 값 가져오기 + 유효성 검사
-});
+/* $(function(){
+	document.getElementById('userBirth').valueAsDate = new Date(); //현재 날짜 출력
+}); */
 
 function ck_email(){
     var email = document.getElementById("userEmail");
@@ -533,16 +534,16 @@ function ck_phone(){
 							<input type="text" id="userAddress" name="userAddress" value="${user.userAddress}" placeholder="도로명주소">
 							</div>
 							
-							성별 *
+							성별 * 
 							<div>
 							<div id="wrap_gender">
 								<span id="wrap_man" class="gender">
-								<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" required>
+								<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '남'}">checked</c:if> required>
 								<label for="man"> 남자 </label>
 								</span>
 					
 								<span id="wrap_woman" class="gender no_line">
-								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" required>
+								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '여'}">checked</c:if> required>
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
 								</span>
 							</div>

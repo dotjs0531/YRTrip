@@ -15,6 +15,13 @@
 			 	AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
 			</when>
 		</choose>
+		<if test="qnaAnswer != null">
+			AND QNA_ANSWER LIKE #{qnaAnswer}
+		</if>
+		<!-- <if test="searchDateStart != null and searchDateEnd != null">
+    		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
+    						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
+		</if> -->
 	</where>
 	ORDER BY QNA_ID DESC
 </select>
@@ -36,11 +43,14 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			<when test="searchCondition != null and searchCondition == 'qnaContent'">
 			 	AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
 			</when>
-			<!-- <when test="searchDateStart != null and searchDateEnd != null">
-    			AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
-    							 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
-			</when> -->
 		</choose>
+		<if test="qnaAnswer != null">
+			AND QNA_ANSWER LIKE #{qnaAnswer}
+		</if>
+		<!-- <if test="searchDateStart != null and searchDateEnd != null">
+    		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
+    						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
+		</if> -->
 	  AND Q.USER_ID = U.USER_ID
 	  </where>
 	  ORDER BY QNA_ID DESC
