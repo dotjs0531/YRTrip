@@ -1,15 +1,14 @@
 package com.yrtrip.app.product.web;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
 
@@ -20,9 +19,25 @@ public class ProductController {
 	
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
-	public String getProductList(Model model, ProductVO vo) {
-		model.addAttribute("productlist", productService.getProductList(vo));
-		return "product/getProductList";
+	public ModelAndView getProductList(Paging paging, ProductVO vo) {
+		ModelAndView mv = new ModelAndView();
+		// 페이징 처리
+		// 페이지번호 파라미터
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+		paging.setPageUnit(9);
+		// 시작/마지막 레코드 번호
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+		
+		// 전체 건수
+		paging.setTotalRecord(productService.getCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("productList", productService.getProductList(vo));
+		mv.setViewName("product/getProductList");
+		return mv;
 	}
 	//퀵뷰
 	@RequestMapping("getProductAjax")
@@ -61,38 +76,15 @@ public class ProductController {
 	@RequestMapping(value="/updateProduct", method = RequestMethod.POST)
 	public String updateProduct(ProductVO vo){
 		productService.updateProduct(vo);
-		return "product/getProductList";
-	}
-	
-	/*//제품수정처리
-	@RequestMapping("updateProduct")
-	public String updateProduct(ProductVO vo) {
-		productService.updateProduct(vo);
-		return "redirect:getProduct";
-	}*/
-	
-/*	//제품등록처리
-	@RequestMapping(value="/insertProduct", method=RequestMethod.POST)
-	public String insertProduct(Model model, ProductVO vo) {
-		productService.insertProduct(vo);
-		//return "";//최종 : 제품 등록 후 ..판매자 제품 목록 페이지로
 		return "redirect:getProductList";
-	}*/
-	
-	/*//제품수정처리
-	@RequestMapping("updateProduct")
-	public String updateProduct(Model model, ProductVO vo) {
-		productService.updateProduct(vo);
-		return "redirect:getProductList"; //일단은...
 	}
 	
-	//수정폼 
-	@RequestMapping("/updateProductForm")
-	public String updateProductForm(Model model, ProductVO vo) {
-		model.addAttribute("notice", productService.getProduct(vo));
-		return "product/updateProduct";
-	}*/
-	
+	//제품 단건 삭제
+	@RequestMapping("deleteProduct")
+	public String deleteProdcut(ProductVO vo) {
+		productService.deleteProduct(vo);
+		return "redirect:getProductList";
+	}
 	/////////////////////////////////////////////////////////////
 	
 	

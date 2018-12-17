@@ -42,4 +42,10 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getProductList(vo);
 	}
 
+	@Override
+	public int getCount(ProductVO vo) {
+		// TODO Auto-generated method stub
+		return dao.getCount(vo);
+	}
+
 }

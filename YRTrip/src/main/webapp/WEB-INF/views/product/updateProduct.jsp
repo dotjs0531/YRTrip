@@ -116,7 +116,7 @@
 								<div class="row">
 									<div class="col-12 col-md-12">
 										<input type="text" class="form-control is-valid input-lg"
-											name="itemName" placeholder="상품명을 적어주세요" required>
+											name="itemName" placeholder="상품명을 적어주세요" value="${product.itemName}" required>
 									</div>
 								</div>
 								<div class="space-five"></div>
@@ -148,7 +148,8 @@
 									</div>
 									<div class="col-12 col-md-8">
 										<input type="text" class="form-control mb-5 input-lg"
-											name="itemCategory" id="itemCategory" placeholder="카테고리" required>
+											name="itemCategory" id="itemCategory" value="${product.itemCategory}"
+											placeholder="카테고리" required>
 										<div class="invalid-feedback">카테고리 설명</div>
 									</div>
 								</div>
@@ -159,7 +160,7 @@
 									<!-- 가격 : 1. 앞에 0으로 시작할시 입력 안되게 2.1원단위 못적게??? -->
 									<div class="col-12 col-md-8">
 										<input type="text" class="form-control mb-5 input-lg"
-											name="itemPrice" placeholder="가격" required>
+											name="itemPrice" value="${product.itemPrice}" placeholder="가격" required>
 										<div class="invalid-feedback">가격을 입력하세요</div>
 									</div>
 								</div>
@@ -170,7 +171,7 @@
 									</div>
 									<div class="col-12 col-md-8">
 										<input type="text" class="form-control mb-5 input-lg"
-											name="itemEa" placeholder="수량" required>
+											name="itemEa" value="${product.itemEa}" placeholder="수량" required>
 									</div>
 								</div>
 								<!-- 상품상태 : 하나만 체크 되도록 -->
@@ -230,10 +231,11 @@
 									<div class="spcae-five"></div>
 									<h4>제품설명</h4>
 									<textarea name="itemContent" class="form-control col-sm-12"
-										rows="5"></textarea>
+										rows="5" value="${product.itemContent}"></textarea>
 								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId" value="user1">
+								<input type="hidden" name="itemId" value="${product.itemId}">
 								<!--  구매가능 여부 : 구매가능(defalut)  --> 
 								<input type="hidden" name="itemOrderdetail" value="구매가능">
 							</div>

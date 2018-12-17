@@ -19,6 +19,10 @@ public class ProductVO {
 	private String itemCondition;
 	private int itemLike;
 	
+	//페이징 처리 
+	private int first;
+	private int last; 
+	
 	public int getItemId() {
 		return itemId;
 	}
@@ -108,8 +112,19 @@ public class ProductVO {
 	}
 	public void setItemLike(int itemLike) {
 		this.itemLike = itemLike;
+	}	
+	public int getFirst() {
+		return first;
 	}
-	
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
 	@Override
 	public String toString() {
 		return "ProductVO [itemId=" + itemId + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemEa="

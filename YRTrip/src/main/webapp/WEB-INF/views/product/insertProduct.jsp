@@ -348,8 +348,9 @@ function readURL(input) {
 										rows="5"></textarea>
 								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
-								<input type="hidden" name="sellerId" value="user1">
+								<input type="hidden" name="sellerId" value="user1">								
 								<!--  구매가능 여부 : 구매가능(defalut)  --> 
+										
 								<input type="hidden" name="itemOrderdetail" value="구매가능">
 							</div>
 						</div>

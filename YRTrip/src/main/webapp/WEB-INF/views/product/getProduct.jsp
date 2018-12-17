@@ -87,10 +87,9 @@
 										유심페이지!</li>
 								</ol>
 
-								<div class="btn-group">
-									<a href="#" class="btn btn-link btn-share">공유하기</a> 
-									
+								<div class="btn-group pull-right">
 									<a href="updateProduct?itemId=${product.itemId}" class="btn btn-link">수정하기</a>
+									<a href="deleteProduct?itemId=${product.itemId}" class="btn btn-link btn-share">삭제하기</a> 
 								</div>
 							</nav>
 						</div>
@@ -145,18 +144,16 @@
 									<p class="last-sold text-muted">
 										<small>몇개팔렸을까여?</small><small class="pull-right">작성일</small>
 									</p>
-									<h4 class="product-title mb-2">상품명 입니다 상품명을 길게 막 적어도 보고 짧게
-										적어봐도 되는데 걍 막 적어봤습니다</h4>
-									<h2 class="product-price display-2">￦12,000</h2>
+									<h4 class="product-title mb-2">${product.itemName}</h4>
+									<h2 class="product-price display-2">${product.itemPrice}</h2>
 									<p class="mb-0">
-										<i class="fa fa-truck"></i>중고 <small
-											class="pull-right text-success">구매가능</small>
+										<i class="fa fa-truck"></i>${product.itemCondition} 
+										<small class="pull-right text-success">${product.itemOrderdetail}</small>
 									</p>
 									<div class="text-muted mb-2">
 										<small>약간의 사용감이 있습니다!</small>
 									</div>
-									<!-- 구매가능하면 text-success 
-              구매불가하면 text-danger -->
+									<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
 
 									<label for="quant">수량</label> <input type="number"
 										name="quantity" min="1" id="quant"

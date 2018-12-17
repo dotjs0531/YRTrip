@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yrtrip.app.notice.NoticeVO;
 import com.yrtrip.app.product.ProductVO;
 
 @Repository
@@ -34,5 +35,10 @@ public class ProductDAOMybatis {
 	public List<ProductVO> getProductList(ProductVO vo) {
 		System.out.println("ddd");
 		return mybatis.selectList("product.getProductList", vo);
+	}
+	
+	//건수 조회
+	public int getCount(ProductVO vo) {
+		return mybatis.selectOne("product.getCount", vo);
 	}
 }

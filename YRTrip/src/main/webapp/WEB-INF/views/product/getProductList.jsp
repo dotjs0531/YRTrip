@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -26,7 +27,12 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 <link href="resources/css/product.css" rel="stylesheet"> 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script>
+	function go_page(page) {
+		document.frm.page.value = page;
+		document.frm.submit();
+	}
+</script>
 <script>
 	$(function() {
 		$('#product_view').on('show.bs.modal', function(e) {
@@ -48,6 +54,9 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 </head>
 
 <body>
+<form name="frm" class="form-inline">
+	<input type="hidden" name="page" />
+</form>
 <section class="about_us_area" id="about">
 	<!-- Page Content -->
 	<div class="container">
@@ -113,7 +122,7 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 				<!--상품상세 페이지-->
 				<div class="col-lg-container">
 					<div class="row">
-						<c:forEach items="${productlist}" var="product">
+						<c:forEach items="${productList}" var="product">
 							<div class="col-4">
 								<div class="thumbnail">
 									<img
@@ -243,6 +252,10 @@ integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkz
 						</div>
 					</div>
 				</div>
+				<!-- 페이지 번호 -->
+                    <div style="padding-top:50px;">
+						<my:paging paging="${paging}" jsFunc="go_page" />
+                    </div>
 
 			</div>
 			<!-- /.col-lg-9 -->
