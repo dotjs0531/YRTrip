@@ -8,4 +8,5 @@ public interface ProductService {
 	public void deleteProduct(ProductVO vo);
 	public ProductVO getProduct(ProductVO vo);
 	public List<ProductVO> getProductList(ProductVO vo);
+	public int getCount(ProductVO vo);
 }
