@@ -538,15 +538,18 @@ function ck_phone(){
 							
 							성별 * 
 							<div id="wrap_gender">
+								<span id="wrap_man" class="gender">
 								<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '남'}">checked</c:if> required>
 								<label for="man"> 남자 </label>
+								</span>
 					
+								<span id="wrap_woman" class="gender no_line">
 								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '여'}">checked</c:if> required>
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
+								</span>
 							</div>
 							
-							은행ddddd
-                			<form name="bank" class="form-inline">
+							계좌
 							<div class="form-group">
 							<select name="userBankSelect" id="userBankSelect" class="form-control" oninput="ck_signup()">
 								<option value="SC제일">SC제일
@@ -574,12 +577,7 @@ function ck_phone(){
 								<option value="산림조합">산림조합
 							</select>
 							<input type="hidden" id="userBank" name="userBank" value="${user.userBank}" oninput="ck_signup()">
-							</div>
-							</form>
-							
-							계좌번호
-							<div>
-							<input type="text" id="userAccount" name="userAccount" value="${user.userAccount}">
+							<input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌 번호를 입력해주세요.">
 							</div>
 							
 							<br><strong><input type="submit" class="btn btn-warning signupbtn" disabled="disabled" value="회원정보 수정"
