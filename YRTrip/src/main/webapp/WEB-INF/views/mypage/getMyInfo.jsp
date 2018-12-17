@@ -480,9 +480,12 @@ function ck_phone(){
                             <h2 style="color:black">마이페이지</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}" style="color:black">여행정보</a></li>
-                            <li><a href="#" style="color:black">좋아요</a></li>
-                            <li><a href="#" style="color:black">상품</a></li>
+                            <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
+                            	   style="color:black">여행정보</a></li>
+                            <li><a href="./getMyLikedList?userId=${sessionScope.login.userId}"
+                            	   style="color:black">좋아요</a></li>
+                            <li><a href="./getMyProductList?userId=${sessionScope.login.userId}"
+                            	   style="color:black">상품</a></li>
                         </ul>
                         <div class="order-buton">
                             <a href="#">탈퇴</a>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="mypage">
+<mapper namespace="user">
 
-<select id="getMyTravelList" parameterType="mypage" resultType="mypage">
+<select id="getMyTravelList" parameterType="travelBoard" resultType="travelBoard">
 	SELECT  TRAVEL_NO,
 			TRAVEL_TITLE,
 			TRAVEL_PIC,
@@ -14,5 +14,55 @@
 	  FROM  TRAVELBOARDT
 	  WHERE USER_ID = #{userId}
    ORDER BY TRAVEL_DATE DESC
+</select>
+<select id="getMyPartnerList" parameterType="partner" resultType="partner">
+	SELECT  PARTNER_ID,
+			PARTNER_TITLE,
+			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,
+			USER_ID,
+			PARTNER_CONDITION
+	  FROM  PARTNERT
+	  WHERE USER_ID = #{userid}
+   ORDER BY PARTNER_DATE DESC
+</select>
+<select id="getMyJoinerList" parameterType="joiner" resultType="joiner">
+	SELECT	JOINER_ID,
+			JOINER_DATE,
+			J.USER_ID,
+			J.PARTNER_ID,
+			JOINER_CONDITION
+	FROM	JOINERT J, PARTNERT P
+	WHERE	J.PARTNER_ID = P.PARTNER_ID
+			AND P.PARTNER_ID = #{partnerId}
+			AND JOINER_CONDITION LIKE 'Y'
+   ORDER BY JOINER_DATE DESC
+</select>
+
+<select id="getMyLikedList" parameterType="user" resultType="user">
+
+</select>
+<select id="getMyULikeList" parameterType="user" resultType="user">
+
+</select>
+
+<select id="getMyProductList" parameterType="product" resultType="product">
+	SELECT  ITEM_ID,
+			ITEM_NAME,
+			ITEM_CONTENT,
+			SELLER_ID,
+			ITEM_ORDERDETAIL,
+			ITEM_STAR,
+			ITEM_PIC,
+			ITEM_DATE,
+			ITEM_LIKE
+	   FROM ITEMT
+	  WHERE SELLER_ID = #{userId}
+   ORDER BY ITEM_DATE DESC
+</select>
+<select id="getMyOrderList" parameterType="user" resultType="user">
+
+</select>
+<select id="getMyReviewList" parameterType="user" resultType="user">
+
 </select>
 </mapper>
