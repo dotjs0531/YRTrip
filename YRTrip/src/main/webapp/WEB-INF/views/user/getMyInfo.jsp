@@ -395,6 +395,8 @@ function ck_phone(){
  	function ck_signup(){
 		ck_email(); ck_pwd(); ck_pwd2(); ck_name(); ck_phone(); OnCheckPhone(); ck_birth(); ck_gender();
 
+		document.all.userBank.value = $('#userBankSelect').val();
+		
 	    if( emailCheck!=0 && pwdCheck!=0 && pwdckCheck!=0 && nameCheck!=0 && birthCheck!=0 && phoneCheck!=0  && genderCheck !=0 ){
 	        $(".signupbtn").prop("disabled", false);
 	        $(".signupbtn").css("background-color", "#f9bf3b");
@@ -527,7 +529,7 @@ function ck_phone(){
 							</div>
 							
 							주소 
-							<div class="form-group" style="padding:0">
+							<div class="form-group" style="padding:0; margin:0">
 							<input type="text" id="userPost" name="userPost" value="${user.userPost}" placeholder="우편번호" style="width:69%">
 							<input type="button" class="btn btn-warning" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" 
 								style="width:30%; padding: 13px 20px; margin: 8px auto; border: none; border-radius: 4px; cursor: pointer;"><br>
@@ -535,30 +537,49 @@ function ck_phone(){
 							</div>
 							
 							성별 * 
-							<div>
 							<div id="wrap_gender">
-								<span id="wrap_man" class="gender">
 								<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '남'}">checked</c:if> required>
 								<label for="man"> 남자 </label>
-								</span>
 					
-								<span id="wrap_woman" class="gender no_line">
 								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '여'}">checked</c:if> required>
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
-								</span>
-							</div>
 							</div>
 							
-							은행 
-							<div>
-							<input type="text" id="userBank" name="userBank" value="${user.userBank}">
-							<!-- <span id="MsgBank" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span> -->
+							은행ddddd
+                			<form name="bank" class="form-inline">
+							<div class="form-group">
+							<select name="userBankSelect" id="userBankSelect" class="form-control" oninput="ck_signup()">
+								<option value="SC제일">SC제일
+								<option value="KEB하나">KEB하나
+								<option value="NH농협">NH농협
+								<option value="국민">국민
+								<option value="기업">기업
+								<option value="신한">신한
+								<option value="우리">우리
+								<option value="우체국">우체국
+								<option value="카카오뱅크">카카오뱅크
+								<option value="케이뱅크">케이뱅크
+								<option value="새마을금고">새마을금고
+								<option value="씨티">씨티
+								<option value="산업">산업
+								<option value="경남">경남
+								<option value="광주">광주
+								<option value="대구">대구
+								<option value="부산">부산
+								<option value="전북">전북
+								<option value="제주">제주
+								<option value="신협">신협
+								<option value="수협">수협
+								<option value="상호저축">상호저축
+								<option value="산림조합">산림조합
+							</select>
+							<input type="hidden" id="userBank" name="userBank" value="${user.userBank}" oninput="ck_signup()">
 							</div>
+							</form>
 							
 							계좌번호
 							<div>
 							<input type="text" id="userAccount" name="userAccount" value="${user.userAccount}">
-							<!-- <span id="MsgAccount" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span> -->
 							</div>
 							
 							<br><strong><input type="submit" class="btn btn-warning signupbtn" disabled="disabled" value="회원정보 수정"
