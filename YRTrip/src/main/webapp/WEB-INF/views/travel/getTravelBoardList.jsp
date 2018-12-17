@@ -9,10 +9,11 @@
 <title>여행게시판 목록보기</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" href="resources/vender/css/Travel.css"> -->
+<link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -36,16 +37,53 @@ for (i = 0; i < acc.length; i++) {
 			panel.style.maxHeight = panel.scrollHeight + "px";
 		}
 	}
-};
+}; 
 
 /* 여행등록 modal */
-jQuery( document ).ready(function( $ ) {
+ jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelBoardButton").click(function(){
 	    	$('div#insertTravelBoard').modal(true);
 		})
 });
 
-</script>
+ /* autocomplete */
+ 
+ $(function() {
+     //input id autocomplete
+     var context = '${pageContext.request.contextPath}';
+     $( "#tinfoList").autocomplete({
+      source : function(request, response){
+       $.ajax({
+           type:"post",
+           dataType:"json",
+           url:context + "/getTravelInfoListData",
+           data:{"tinfoList":$("#tinfoList").val()},
+           success:function(data){
+            response($.map(data, function(item){
+             return{
+              label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+              value:item.tinfoId,
+              tinfoId:item.tinfoId
+             }
+            }));
+           },
+
+           error: function(jqxhr, status, error){
+                 alert(jqxhr.statusText + ",  " + status + ",   " + error);
+                alert(jqxhr.status);
+                alert(jqxhr.responseText); 
+           }
+          })
+      },
+      autoFocus:true,
+      matchContains:true,
+      minLength:1,
+      delay:100,
+      select:function(event,ui){
+      },
+     }); 
+   });  
+  </script>
 </head>
 <body>
 <section class="about_us_area" id="about">
@@ -78,12 +116,8 @@ jQuery( document ).ready(function( $ ) {
 								
 								<!-- 검색 내용 -->
 								<div style="padding-bottom:5px">
-									<label class="col-sm-2 control-label">국가</label>
-									<input type="text" name="tinfoCountry" class="form-control"><br>
-									<label class="col-sm-2 control-label">주/도</label>
-									<input type="text" name="tinfoState" class="form-control"><br>
-									<label class="col-sm-2 control-label">도시명</label>
-									<input type="text" name="tinfoCity" class="form-control">
+									<label class="col-sm-2 control-label">어디로 떠나고 싶으신가요?</label>
+									<input type="text" name="searchTinfo" class="form-control" id="tinfoList">
 								
 									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 									<input type="hidden" name="page" />
@@ -93,8 +127,8 @@ jQuery( document ).ready(function( $ ) {
 						</form>
 						
 <!-- 여행기 리스트 -->
-<%--   			<c:forEach items="${travelBoardList}" var="board">
-				<div>
+   			<c:forEach items="${travelBoardList}" var="board">
+				<div class="content-box">
 					<img src="resources/media/getTBL.PNG" class="img-responsive">
 						<div class="content-title">
 							<div class="text-center">
@@ -102,7 +136,7 @@ jQuery( document ).ready(function( $ ) {
 							</div>
 						</div>
 						<div class="content-footer">
-							<span style="font-size: 16px; color: #fff;">${board.userId}</span>
+							<span class="user-info">${board.userId}</span>
 							<span class="pull-right">
 								<a href="#" data-toggle="tooltip" data-placement="right" title="Like">
 								<i class="fa fa-heart"></i> ${board.travelLike}</a>
@@ -111,17 +145,12 @@ jQuery( document ).ready(function( $ ) {
 								<div class="user-img">
 									<img src="resources/media/users.png" class="img-responsive">
 								</div>
-								<span class="user-full-ditels">
-									<h3>${board.userId}</h3>
-								</span>
 								<div class="social-icon">
 									<a href="#"><i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="유저정보"></i></a> 
-									<a href="#"><i class="glyphicon glyphicon-usd" data-toggle="tooltip" data-placement="bottom" title="판매상품"></i></a> 
+									<a href="#"><i class="glyphicon glyphicon-usd" data-toggle="tooltip" data-placement="bottom" title="판매상품"></i></a><br> 
 									<a href="#"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="bottom" title="리뷰"></i></a> 
 									<a href="#"><i class="glyphicon glyphicon-globe" data-toggle="tooltip" data-placement="bottom" title="여행글"></i></a> 
-									<a href="#"><i class="glyphicon glyphicon-transfer" data-toggle="tooltip" data-placement="bottom" title="동행글"></i></a>
 								</div>
-
 							</div>
 						</div>
 					</div>
@@ -130,7 +159,7 @@ jQuery( document ).ready(function( $ ) {
 				<!-- 페이징처리 -->
 				<nav aria-label="Page navigation example" style="padding:50px 5% 0 0;">
 					<my:paging paging="${paging}" jsFunc="go_page"/>
-				</nav>  --%>
+				</nav>
 			</div>	<!-- end of table-responsive -->
 				
 <!-- modal -->			
@@ -198,8 +227,7 @@ jQuery( document ).ready(function( $ ) {
 </section>
 
 <!-- js -->
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script>
 
@@ -210,7 +238,7 @@ function go_page(page) {
 };
 
 /* datepicker */
-$(function() {
+ $(function() {
     $( "#Datepicker" ).datepicker({   
     	changeMonth: true, 
         changeYear: true,
@@ -227,6 +255,6 @@ $(function() {
         yearRange: "-100:+0"
     });
 });
-	</script>
+</script>
 </body>
 </html>

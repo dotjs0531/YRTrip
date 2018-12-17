@@ -9,6 +9,8 @@
 			TINFO_STATE,
 			TINFO_CITY
 	FROM TRAVELINFOT
+	WHERE TINFO_COUNTRY LIKE #{tinfoCountry}||'%'
 	ORDER BY TINFO_COUNTRY
+	
 </select>
 </mapper>

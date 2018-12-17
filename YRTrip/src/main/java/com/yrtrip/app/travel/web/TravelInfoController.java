@@ -15,7 +15,7 @@ import com.yrtrip.app.travel.TravelInfoVO;
 @Controller
 public class TravelInfoController {
 
-	@Autowired
+/*	@Autowired
 	TravelInfoService travelInfoService;
 	
 	// list 조회 Ajax
@@ -28,8 +28,8 @@ public class TravelInfoController {
 	@RequestMapping(value="/getTravelInfoList", method=RequestMethod.GET)
 	public String getTravelInfoList(TravelInfoVO vo) {
 		//return travelInfoService.getTravelInfoList(vo);
-		return "travel/getTravelInfoList";
+		return "travel/getTravelBoardList";
 	}
-
+*/
 }
 	

@@ -14,8 +14,8 @@ public class TravelInfoDAOMybatis {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public List<TravelInfoVO> getTravelInfoList(TravelInfoVO vo) {
+/*	public List<TravelInfoVO> getTravelInfoList(TravelInfoVO vo) {
 		return sqlSession.selectList("travelInfo.getTravelInfoList", vo);
-	}
+	}*/
 	
 }

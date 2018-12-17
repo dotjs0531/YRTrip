@@ -1,5 +1,7 @@
 @charset "UTF-8";
-/* 목록 */
+
+
+목록
 
 .content-title {
 	padding: 5px;
@@ -13,10 +15,12 @@
 	text-decoration: none;
 	transition: 0.5s;
 }
+*/
 
 .content-title h3 a:hover {
 	color: #ff8000;
-}
+} 
+
 
 .content-footer {
 	background-color: #f9bf3b;
@@ -36,15 +40,15 @@
 	color: #F39C12;
 }
 
-article {
-	width: 250px;
-	margin-right: 20px;
-	margin-top: 30px;
+
+.content-box {
+	width: 21%;
+	margin: 30px 10px 0 10px;
 	box-shadow: 1px 4px 16px 3px rgba(199, 197, 199, 1);
 	display: inline-block;
 }
 
-article .content-footer>img {
+.content-box .content-footer>img {
 	width: 33px;
 	height: 33px;
 	border-radius: 100%;
@@ -52,20 +56,20 @@ article .content-footer>img {
 	border: 2px solid #fff;
 }
 
+
 .user-ditels {
-	width: 250px;
-	height: 80px;
-	padding-bottom: 20px;
+	width: 120px;
+	height: 60px;
 	position: absolute;
-	border: solid 2px #fff;
-	background-color: #ff8000;
+	background-color: #fff;
 	right: 25px;
 	display: none;
 	z-index: 1;
 }
 
-}
-.user-small-img {
+.content-footer .user-info {
+	font-size: 16px; 
+	color: #fff;
 	cursor: pointer;
 }
 
@@ -74,33 +78,15 @@ article .content-footer>img {
 }
 
 .content-footer .user-ditels .user-img {
-	width: 74px;
+	width: 56px;
 	float: left;
-}
-
-.user-full-ditels h3 {
-	color: #fff;
 	display: block;
-	margin: 0px;
-	padding-top: 5px;
-	padding-right: 28px;
-	text-align: right;
-}
-
-.user-full-ditels p {
-	color: #fff;
-	display: block;
-	margin: 0px;
-	padding-right: 20px;
-	padding-top: 5px;
-	text-align: right;
 }
 
 .social-icon {
 	background-color: #fff;
 	margin-top: 10px;
-	padding-right: 20px;
-	text-align: right;
+	text-align: center;
 }
 
 .social-icon>a {
@@ -108,4 +94,4 @@ article .content-footer>img {
 	font-size: 15px;
 	text-decoration: none;
 	padding: 5px;
-}
+} */

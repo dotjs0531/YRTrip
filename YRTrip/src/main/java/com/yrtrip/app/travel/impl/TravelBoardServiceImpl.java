@@ -7,8 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.yrtrip.app.travel.TravelBoardService;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.travel.TravelInfoVO;
 
-@Service
+@Service("travelBoardService")
 public class TravelBoardServiceImpl implements TravelBoardService {
 
 	@Autowired TravelBoardDAOMybatis dao;
@@ -46,6 +47,10 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 	@Override
 	public List<TravelBoardVO> getTravelBoardList(TravelBoardVO vo) {
 		return dao.getTravelBoardList(vo);
+	}
+	
+	public List<TravelBoardVO> getTravelInfoList(TravelInfoVO vo) {
+		return dao.getTravelInfoList(vo);
 	}
 	
 }

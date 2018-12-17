@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface TravelInfoService {
 
-	public List<TravelInfoVO> getTravelInfoList(TravelInfoVO vo);
+	//public List<TravelInfoVO> getTravelInfoList(TravelInfoVO vo);
 	
 }

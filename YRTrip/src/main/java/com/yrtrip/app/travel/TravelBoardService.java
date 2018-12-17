@@ -12,5 +12,6 @@ public interface TravelBoardService {
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo);
 	public int getCount(TravelBoardVO vo);
 	public List<TravelBoardVO> getTravelBoardList(TravelBoardVO vo);
+	public List<TravelBoardVO> getTravelInfoList(TravelInfoVO vo);
 	
 }

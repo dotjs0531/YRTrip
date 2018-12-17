@@ -20,22 +20,13 @@
 			TRAVEL_WITH,
 			TRAVEL_PIC
 	FROM TRAVELBOARDT
- 	<where>
+  	<where>
 	<choose>
-		<when test="searchCondition != null and searchCondition == 'userId'">
-			and user_id like '%' || #{searchKeyword} || '%'
-		</when>	
-		<when test="searchCondition != null and searchCondition == 'tinfoId'">
-			and tinfo_id like '%' || #{searchKeyword} || '%'
-		</when>	
-		<when test="searchCondition != null and searchCondition == 'travelTitle'">
-			and travel_title like '%' || #{searchKeyword} || '%'
-		</when>
-		<when test="searchCondition != null and searchCondition == 'travelContent'">
-			and travel_content like '%' || #{searchKeyword} || '%'
+		<when test="searchTinfo != null">
+			and tinfo_id = #{searchCity}
 		</when>
 	</choose>
-	</where>
+	</where> 
 	<choose>
 		<when test="sortCol != null and sortCol != ''">
 			ORDER BY ${sortCol}
@@ -47,23 +38,29 @@
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
+<select id="getTravelInfoList" resultType="travelInfo" parameterType="travelInfo">
+		<if test="tinfoList != null">
+		SELECT distinct(TINFO_COUNTRY), 
+				TINFO_STATE, 
+				TINFO_CITY, 
+				TINFO_ID
+		FROM TRAVELINFOT
+		ORDER BY distinct(TINFO_COUNTRY)
+		</if>
+</select>
+
 <!-- 페이징 : 전체 건수 조회 -->
 <select id="getCount" resultType="int">
 	SELECT COUNT(*)
 	FROM TRAVELBOARDT
  	<where>
 	<choose>
-		<when test="searchCondition != null and searchCondition == 'userId'">
-			and user_id like '%' || #{searchKeyword} || '%'
-		</when>	
-		<when test="searchCondition != null and searchCondition == 'tinfoId'">
-			and tinfo_id like '%' || #{searchKeyword} || '%'
-		</when>	
-		<when test="searchCondition != null and searchCondition == 'travelTitle'">
-			and travel_title like '%' || #{searchKeyword} || '%'
-		</when>
-		<when test="searchCondition != null and searchCondition == 'travelContent'">
-			and travel_content like '%' || #{searchKeyword} || '%'
+				<when test="searchCountry or searchState or searchCity != null">
+			and tinfo_id in (select tinfo_id 
+							 from travelinfot 
+							 where tinfo_country like '%' || #{searchCountry} || '%' 
+							 and tinfo_state like '%' || #{searchState} || '%' 
+							 and tinfo_city like '%' || #{searchCity} || '%')
 		</when>
 	</choose>
 	</where>

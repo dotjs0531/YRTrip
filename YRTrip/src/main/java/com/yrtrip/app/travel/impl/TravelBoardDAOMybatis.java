@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.travel.TravelInfoVO;
 
 @Repository
 public class TravelBoardDAOMybatis {
@@ -53,5 +54,10 @@ public class TravelBoardDAOMybatis {
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo) {
 		System.out.println("getTravelBoard() 기능 처리");
 		return sqlSession.selectOne("travelBoard.getTravelBoard", vo);
+	}
+	
+	//검색 조회
+	public List<TravelBoardVO> getTravelInfoList(TravelInfoVO vo) {
+		return sqlSession.selectList("travelBoard.getTravelInfoList", vo);
 	}
 }

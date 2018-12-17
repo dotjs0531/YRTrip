@@ -1,15 +1,19 @@
 package com.yrtrip.app.travel.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
 import com.yrtrip.app.travel.TravelBoardService;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.travel.TravelInfoVO;
 
 @Controller
 public class TravelBoardController {
@@ -90,6 +94,18 @@ public class TravelBoardController {
 	public String deleteTravelBoardList(TravelBoardVO vo) {
 		travelBoardService.deleteTravelBoardList(vo); // 삭제처리
 		return "redirect:getTravelBoardList"; // 목록요청
+	}
+	
+	// list 조회 Ajax
+	@RequestMapping(value="/getTravelInfoListData", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TravelBoardVO> getTravelInfoListData(TravelInfoVO vo) {
+		return travelBoardService.getTravelInfoList(vo);
+	}
+
+	@RequestMapping(value="/getTravelInfoList", method=RequestMethod.POST)
+	public String getTravelInfoList(TravelInfoVO vo) {
+		return "travel/getTravelBoardList";
 	}
 
 }

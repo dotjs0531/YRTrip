@@ -14,8 +14,6 @@ $(function(){
 	//목록조회 요청
 	//function loadTravelInfoList() {
 		$.getJSON(context + "/getTravelInfoListData", function(datas){
-			console.log("llllllllllllllllllllllllllllllllllll")
-			console.log(datas[0].tinfoId);
 			for(i=0; i<datas.length;i++) {
 				console.log(datas);
 				$("#travelInfoList").append( makeTravelInfoView(datas[i]) );

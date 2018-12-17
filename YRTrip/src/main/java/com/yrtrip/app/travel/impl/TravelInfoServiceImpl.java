@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yrtrip.app.travel.TravelInfoService;
 import com.yrtrip.app.travel.TravelInfoVO;
 
-@Service("travelInfoService")
+/*@Service("travelInfoService")
 public class TravelInfoServiceImpl implements TravelInfoService{
 
 	@Autowired TravelInfoDAOMybatis dao;
@@ -18,3 +18,4 @@ public class TravelInfoServiceImpl implements TravelInfoService{
 	}
 	
 }
+*/
