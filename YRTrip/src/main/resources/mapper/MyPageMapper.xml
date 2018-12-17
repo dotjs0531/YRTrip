@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mypage">
+
+<select id="getMyTravelList" parameterType="mypage" resultType="mypage">
+	SELECT  TRAVEL_NO,
+			TRAVEL_TITLE,
+			TRAVEL_PIC,
+			TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE,
+			USER_ID
+	  FROM  TRAVELBOARDT
+	  WHERE USER_ID = #{userId}
+   ORDER BY TRAVEL_DATE DESC
+</select>
+</mapper>

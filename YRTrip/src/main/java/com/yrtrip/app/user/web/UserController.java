@@ -47,8 +47,7 @@ public class UserController {
 			if(referer != null && !referer.equals("")) {
 				
 				//if referer이 null이 아니고 이전페이지가 회원가입페이지, 로그아웃페이지, 로그인페이지인 경우엔 다른 페이지 호출
-
-				if(url.equals("signup")) {	//이전 페이지가 회원가입페이지일 경우 메인으로
+				if(url.equals("signup") || url.equals("logout")) {	//이전 페이지가 회원가입페이지 or 로그아웃 페이지일 경우 메인으로
 					return "main";
 				} else {
 					return "redirect:"+url;		//로그인 성공 후 원래 페이지 호출
@@ -105,14 +104,14 @@ public class UserController {
 	@RequestMapping("/getMyInfo")
 	public String getMyInfo(Model model, UserVO vo, HttpSession session) {
 		model.addAttribute("user", userService.getUser(vo));
-		return "user/getMyInfo";
+		return "mypage/getMyInfo";
 	}
 	//마이페이지 수정
 	@RequestMapping("updateMyInfo")
 	public String updateMyInfo(Model model,UserVO vo, HttpSession session) {
 		userService.updateUser(vo);
 		model.addAttribute("user", userService.getUser(vo));
-		return "user/getMyInfo";
+		return "mypage/getMyInfo";
 	}
 	
 	//탈퇴처리

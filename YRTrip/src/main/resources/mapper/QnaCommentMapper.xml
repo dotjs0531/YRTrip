@@ -52,4 +52,9 @@
 		 	</choose>
 		 </where>
 </delete>
+<select id="updateQnaAnswer" statementType="CALLABLE" parameterType="qnaComment">
+	{
+		CALL PRO_QNA_ANSWER ( #{commentQnaid} )
+	}
+</select>
 </mapper>

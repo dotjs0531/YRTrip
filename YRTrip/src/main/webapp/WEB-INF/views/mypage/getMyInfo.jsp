@@ -391,11 +391,11 @@ function ck_phone(){
 			genderCheck = 0;
 		}
 	}
-
+	
  	function ck_signup(){
 		ck_email(); ck_pwd(); ck_pwd2(); ck_name(); ck_phone(); OnCheckPhone(); ck_birth(); ck_gender();
 
-		document.all.userBank.value = $('#userBankSelect').val();
+		document.all.userBank.value = $('#userBankSelect').val();	//DB에 select값 넘겨줌
 		
 	    if( emailCheck!=0 && pwdCheck!=0 && pwdckCheck!=0 && nameCheck!=0 && birthCheck!=0 && phoneCheck!=0  && genderCheck !=0 ){
 	        $(".signupbtn").prop("disabled", false);
@@ -414,6 +414,13 @@ function ck_phone(){
  		var phoneCheck = 0;
  		var birthCheck = 0;
  		var genderCheck = 0;
+
+ 		$('#userBankSelect option').each(function(){ //DB에서 가져온 값 select에 출력
+ 			var userBank = document.getElementById("userBank").value;
+ 			if($(this).val() == userBank){
+ 				$(this).attr("selected","selected");
+ 			}
+ 		});
  		
  		ck_signup();
  	});
@@ -473,7 +480,7 @@ function ck_phone(){
                             <h2 style="color:black">마이페이지</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="#" style="color:black">여행정보</a></li>
+                            <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}" style="color:black">여행정보</a></li>
                             <li><a href="#" style="color:black">좋아요</a></li>
                             <li><a href="#" style="color:black">상품</a></li>
                         </ul>
@@ -536,6 +543,7 @@ function ck_phone(){
 							<input type="text" id="userAddress" name="userAddress" value="${user.userAddress}" placeholder="도로명주소">
 							</div>
 							
+							<p/>
 							성별 * 
 							<div id="wrap_gender">
 								<span id="wrap_man" class="gender">
@@ -549,35 +557,37 @@ function ck_phone(){
 								</span>
 							</div>
 							
+							<br/>
 							계좌
-							<div class="form-group">
+							<div class="form-inline">
 							<select name="userBankSelect" id="userBankSelect" class="form-control" oninput="ck_signup()">
-								<option value="SC제일">SC제일
-								<option value="KEB하나">KEB하나
-								<option value="NH농협">NH농협
-								<option value="국민">국민
-								<option value="기업">기업
-								<option value="신한">신한
-								<option value="우리">우리
+								<option value="" <c:if test="${empty user.userBank}">selected</c:if> disabled="disabled">은행 선택</option>
+								<option value="SC제일" >SC제일
+								<option value="KEB하나" >KEB하나
+								<option value="NH농협" >NH농협
+								<option value="국민" >국민
+								<option value="기업" >기업
+								<option value="신한" >신한
+								<option value="우리" >우리
 								<option value="우체국">우체국
-								<option value="카카오뱅크">카카오뱅크
-								<option value="케이뱅크">케이뱅크
-								<option value="새마을금고">새마을금고
-								<option value="씨티">씨티
-								<option value="산업">산업
-								<option value="경남">경남
-								<option value="광주">광주
-								<option value="대구">대구
+								<option value="카카오뱅크" >카카오뱅크
+								<option value="케이뱅크" >케이뱅크
+								<option value="새마을금고" >새마을금고
+								<option value="씨티" >씨티
+								<option value="산업" >산업
+								<option value="경남" >경남
+								<option value="광주" >광주
+								<option value="대구" >대구
 								<option value="부산">부산
-								<option value="전북">전북
-								<option value="제주">제주
-								<option value="신협">신협
-								<option value="수협">수협
-								<option value="상호저축">상호저축
-								<option value="산림조합">산림조합
+								<option value="전북" >전북
+								<option value="제주" >제주
+								<option value="신협" >신협
+								<option value="수협" >수협
+								<option value="상호저축" >상호저축
+								<option value="산림조합" >산림조합
 							</select>
 							<input type="hidden" id="userBank" name="userBank" value="${user.userBank}" oninput="ck_signup()">
-							<input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌 번호를 입력해주세요.">
+							&nbsp;<input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌 번호를 입력해주세요." size="54">
 							</div>
 							
 							<br><strong><input type="submit" class="btn btn-warning signupbtn" disabled="disabled" value="회원정보 수정"

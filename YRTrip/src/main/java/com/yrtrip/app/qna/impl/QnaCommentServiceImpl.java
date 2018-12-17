@@ -34,4 +34,8 @@ public class QnaCommentServiceImpl implements QnaCommentService {
 		return dao.getQnaComment(vo);
 	}
 
+	public void updateQnaAnswer(QnaCommentVO vo) {
+		dao.updateQnaAnswer(vo);
+	}
+
 }

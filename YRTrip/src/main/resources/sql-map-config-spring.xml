@@ -18,6 +18,7 @@
 		<typeAlias alias="qna" type="com.yrtrip.app.qna.QnaVO" />
 		<typeAlias alias="qnaComment" type="com.yrtrip.app.qna.QnaCommentVO"/>
 		<typeAlias alias="user" type="com.yrtrip.app.user.UserVO" />
+		<typeAlias alias="mypage" type="com.yrtrip.app.user.MyPageVO" />
 		<typeAlias alias="joiner" type="com.yrtrip.app.joiner.JoinerVO" />
 		<typeAlias alias="chat" type="com.yrtrip.app.chat.ChatVO" />
 	</typeAliases>

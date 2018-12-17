@@ -68,6 +68,10 @@
 					 , USER_POST = #{userPost}
 					 , USER_ADDRESS = #{userAddress}
 		</if>
+		<if test="userAccount != null and userAccount != ''">
+					 , USER_BANK = #{userBank}
+					 , USER_ACCOUNT = #{userAccount}
+		</if>
 			  WHERE  USER_ID = #{userId}
 </update>
 <delete id="deleteUser" parameterType="user">

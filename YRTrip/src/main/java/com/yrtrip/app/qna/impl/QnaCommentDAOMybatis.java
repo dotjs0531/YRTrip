@@ -34,4 +34,7 @@ public class QnaCommentDAOMybatis {
 		return sqlSession.selectOne("qnaComment.getQnaComment", vo);
 	}
 	
+	public void updateQnaAnswer(QnaCommentVO vo) {
+		sqlSession.update("qnaComment.updateQnaAnswer", vo);
+	}
 }

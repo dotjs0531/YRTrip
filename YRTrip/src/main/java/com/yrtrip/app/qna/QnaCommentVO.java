@@ -37,5 +37,10 @@ public class QnaCommentVO {
 	public void setCommentQnaid(int commentQnaid) {
 		this.commentQnaid = commentQnaid;
 	}
+	@Override
+	public String toString() {
+		return "QnaCommentVO [commentId=" + commentId + ", userId=" + userId + ", commentContent=" + commentContent
+				+ ", commentDate=" + commentDate + ", commentQnaid=" + commentQnaid + "]";
+	}
 	
 }

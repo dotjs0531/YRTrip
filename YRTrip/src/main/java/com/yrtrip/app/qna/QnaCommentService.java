@@ -8,4 +8,5 @@ public interface QnaCommentService {
 	public void deleteQnaComment(QnaCommentVO vo);
 	public List<QnaCommentVO> getQnaCommentList(QnaCommentVO vo);
 	public QnaCommentVO getComment(QnaCommentVO vo);
+	public void updateQnaAnswer(QnaCommentVO vo);
 }

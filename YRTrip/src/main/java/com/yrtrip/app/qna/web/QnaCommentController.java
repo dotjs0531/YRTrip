@@ -21,6 +21,7 @@ public class QnaCommentController {
 	@ResponseBody
 	public QnaCommentVO insertQnaComment(QnaCommentVO vo) {
 		qnaCommentService.insertQnaComment(vo);
+		qnaCommentService.updateQnaAnswer(vo);	//답변 완료
 		return qnaCommentService.getComment(vo);
 	}
 	//답변 수정
@@ -35,6 +36,9 @@ public class QnaCommentController {
 	@ResponseBody
 	public QnaCommentVO deleteQnaComment(QnaCommentVO vo) {
 		qnaCommentService.deleteQnaComment(vo);
+		System.out.println(vo);
+		qnaCommentService.updateQnaAnswer(vo);	//답변 미완료
+		System.out.println(vo);
 		return vo;
 	}
 
