@@ -12,7 +12,7 @@ $(function(){
 	var context = '${pageContext.request.contextPath}';
 
 	//목록조회 요청
-	//function loadTravelInfoList() {
+	function loadTravelInfoList() {
 		$.getJSON(context + "/getTravelInfoListData", function(datas){
 			for(i=0; i<datas.length;i++) {
 				console.log(datas);
@@ -31,8 +31,6 @@ $(function(){
 		        +"<span class='travelInfotinfoCountry'>" + travelInfo.tinfoCountry +"</span>"
 		        +"<span class='travelInfotinfoState'>" + travelInfo.tinfoState +"</span>"
 		        +"<span class='travelInfotinfoCity'>" + travelInfo.tinfoCity +"</span>"
-				+"<button type=\"button\" class=\"btnUpdFrm\">수정</button>"
-				+"<button type=\"button\" class=\"btnDel\">삭제</button>"
 		div.html(str);
 		return div;
 	}

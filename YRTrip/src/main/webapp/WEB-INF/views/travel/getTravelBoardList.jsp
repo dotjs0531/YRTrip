@@ -46,27 +46,27 @@ for (i = 0; i < acc.length; i++) {
 });
 
  /* autocomplete */
-
+/*  $(function() {
+ $("#tinfoList").change(function(){
+  selectedList = "";
+     $("#tinfoList").val("");
+ }); */
  $(function() {
      //input id autocomplete
      var context = '${pageContext.request.contextPath}';
-     $( "#tinfoList").autocomplete({
+     $( "#autocompleteTinfoList").autocomplete({
       source : function(request, response){
        $.ajax({
            type:"post",
            dataType:"json",
            url:context + "/getTravelInfoListData",
-           data:{"tinfoList":$("#tinfoList").val()},
+           data:{"tinfoList":$("#autocompleteTinfoList").val()},
            success:function(data){
             response($.map(data, function(item){
-            	console.log(data);
              return{
               label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
-              value:item.tinfoId,
-              tinfoId:item.tinfoId,
-              tinfoCountry:item.tinfoCountry,
-              tinfoState:item.tinfoState,
-              tinfoCity:item.tinfoCity
+              value:item.tinfoCity,
+              tinfoId:item.tinfoId
              }
             }));
            },
@@ -81,19 +81,21 @@ for (i = 0; i < acc.length; i++) {
       autoFocus:true,
       matchContains:true,
       minLength:1,
-      delay:100,
-      select:function(event,ui){
-    	  $("#tinfoList").val(ui.item.tinfoCity);
-          selectedList = ui.item.tinfoCity;
+      delay:0,
+      select:function(event, ui){
+     	 $("#tinfoList").val(ui.item.value);
+          selectedList = ui.item.tinfoId;
+      	 $("#tinfoListDisp").val(selectedList);
           var flag = false;
-          $("#tinfoList").keydown(function(e){
+          $("#autocompleteTinfoList").keydown(function(e){
            if(e.keyCode == 13){
             if(!flag){
               fn_regist();
              flag = true;
             }
            }
-          });
+          }); 
+           
          },
          focus:function(event, ui){return false;}
         });
@@ -129,14 +131,15 @@ for (i = 0; i < acc.length; i++) {
                 			<div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
 								
 								<!-- 검색 내용 -->
-								<form class="form-inline">
+								<form class="form-inline" name="search">
 								<div style="padding-bottom:5px">
 									<label class="col-sm-2 control-label"></label>
-									<input type="text" name="searchTinfo" class="form-control" id="tinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요.">
-								
+									<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on">
 									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+									<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
 								</div>
 								</form>
+								
 							</div>
 
 						<form name="frm" class="form-inline">
@@ -271,7 +274,7 @@ function go_page(page) {
         showMonthAfterYear : true,
         yearRange: "-100:+0"
     });
-})
+});
 </script>
 </body>
 </html>
