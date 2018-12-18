@@ -34,7 +34,7 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public List<CartVO> getProductList(CartVO vo) {
+	public List<CartVO> getCartList(CartVO vo) {
 		return dao.getCartList(vo);
 	}
 

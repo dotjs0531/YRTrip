@@ -49,45 +49,47 @@
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="py-5 text-center">
-				<h2>장바구니(찜리스트)</h2>
+				<h2>장바구니(찜리스트)${sessionScope.login.userId}</h2>
 				<p class="lead">
 					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
 				</p>
 			</div>
 			<div class="row">
-
+				
 				<div class="col-md-6 center-block order-md-1">
-
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
-						<span class="text-muted">목록</span> <span
-							class="badge badge-secondary badge-pill">3</span>
+						<span class="text-muted">목록</span> 
+						<span class="badge badge-secondary badge-pill">3 이거 숫자</span>
 					</h4>
 					<!-- 내가 사려고 선택한 물건 목록들 c:forEach -->
 
 					<ul class="list-group mb-3">
-						<%-- <c:forEach items="" var=""> --%>
-						<li
-							class="list-group-item d-flex justify-content-between lh-condensed">
+					<c:forEach items="${cartList}" var="cart" varStatus="status">
+						<li class="list-group-item d-flex justify-content-between lh-condensed">
 							<div>
-							<input type=hidden id="itemAva" value="${product.itemOrderdetail}">
-								<h4 class="my-0">${product.itemName}</h4>
-								<small class="text-muted">${product.itemCategory}</small> <br>
-								<small class="text-muted" id="itemCon">${product.itemCondition}</small>
-							</div> <span class="text-muted">￦${product.itemPrice}</span>
+								<input type="hidden" value="${cart.cartId}">
+								<input type=hidden id="itemAva" value="${cart.itemOrderdetail}">
+									<h3 class="my-0">${cart.itemName}</h3>
+									<small class="text-muted">${cart.itemCategory}</small> <br>
+									<small class="text-muted" id="itemCon">${cart.itemCondition}</small> <br>
+									
+							</div> 
+							<span class="text-muted">￦${cart.itemPrice}</span> 
+							<!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
+								<input class="form-control col-md-1" type="text" value="${cart.itemEa}" />
+								<a>수정</a>
 							<div>
 								<!-- if getproduct에서 가져온 itemOrderdetail상태가 구매가능 일때는 색상 : #f9bf3b
               if get~~~~~~~~~~~~~ ITEM_METHOD가 직접판매, 현금결제일때는 : 채팅으로 연결되도록
               	 ~~~~~~~~~~~~~~~~ ITEM_METHOD가 카드결제 	    일때는   : 바로 주문서로  -->
-								<button class="btn btn-lg btn-block"
+								<a class="btn btn-lg btn-block"
 									style="background-color: #f9bf3b; color: white;"
-									id="p_togglebtn">대화하기</button>
-								<button class="btn btn-lg btn-block">취소하기</button>
-
+									id="p_togglebtn">대화하기</a>
+								 <%-- href="./deleteCart?CartId=${cartId}" --%>
+								<a class="btn btn-lg btn-block">취소하기</a>
 							</div>
-
 						</li>
-						<%-- </c:forEach>
- --%>
+					</c:forEach>
 						<!-- 내가 사려고 선택한 물건 목록들 c:forEach 끝-->
 
 

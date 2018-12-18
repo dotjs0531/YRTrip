@@ -3,14 +3,18 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cart">
 <select id="getCartList" resultType="cart">
-		SELECT  CART_ID,
+		SELECT CART_ID,
 				MY_ID,
-				i.ITEM_ID,
-				c.ITEM_EA,
+				c.ITEM_ID as ITEM_ID,
+				c.ITEM_EA as ITEM_EA,
 				CART_DATE,
-				i.ITEM_ORDERDETAIL,
-				
+				ITEM_ORDERDETAIL,
+				ITEM_CATEGORY,
+				ITEM_CONDITION,
+				ITEM_PRICE
 		FROM CART c, ITEMT i
+		WHERE (i.item_id = c.item_id 
+		and MY_ID = #{myId})
 		ORDER BY CART_DATE
 	</select>
 	<select id="getCart" resultType="cart">

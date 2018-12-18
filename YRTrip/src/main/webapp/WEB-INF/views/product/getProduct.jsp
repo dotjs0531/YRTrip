@@ -164,7 +164,10 @@
 										name="quantity" min="1" id="quant"
 										class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 	<div class="order-buton align-content-sm-center">
-									<a class="col btn btn-lg btn-block btn-light" href="./cartProduct?itemId=${product.itemId}">장바구니</a>
+									<!-- 테스터 -->
+									<a class="col btn btn-lg btn-block btn-light" href="./getCartList?myId=${sessionScope.login.userId}">전체 장바구니 보기${sessionScope.login.userId}</a>
+	
+									<a class="col btn btn-lg btn-block btn-light" href="./insertCart">장바구니담기</a>
 									<a class="col btn btn-lg btn-block" >대화하기</a>
 									<a class="btn btn-lg btn-block btn-light" href="./purchasingProduct">구매하기</a>
 									

@@ -7,6 +7,6 @@ public interface CartService {
 	public void updateCart(CartVO vo);
 	public void deleteCart(CartVO vo);
 	public CartVO getCart(CartVO vo);
-	public List<CartVO> getProductList(CartVO vo);
+	public List<CartVO> getCartList(CartVO vo);
 //	public int getCount(CartVO vo);
 }
