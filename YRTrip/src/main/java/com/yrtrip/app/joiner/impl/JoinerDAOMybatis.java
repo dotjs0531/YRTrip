@@ -21,7 +21,7 @@ public class JoinerDAOMybatis {
 
 	// 신청 취소
 	public void deleteJoiner(JoinerVO vo) {
-		mybatis.update("joiner.deleteJoiner", vo.getJoinerid());
+		mybatis.update("joiner.deleteJoiner", vo.getJoinerId());
 	}
 
 	// 전체조회

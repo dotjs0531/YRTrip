@@ -20,15 +20,15 @@
 			JOINER_CONDITION
 			)
 	VALUES (
-			#{joinerid},
+			#{joinerId},
 			sysdate,
-			#{userid},
-			#{partnerid},
-			#{joinercondition}
+			#{userId},
+			#{partnerId},
+			#{joinerCondition}
 		)
 </insert>
 <delete id="deleteJoiner" parameterType="int">
 	DELETE FROM JOINERT
-		  WHERE JINER_ID = #{value}
+		  WHERE JOINER_ID = #{value}
 </delete>
 </mapper>

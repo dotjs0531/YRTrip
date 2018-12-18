@@ -52,10 +52,10 @@ public class JoinerController {
 		
 	
 		for(JoinerVO v : li) {
-			System.out.println(v.getJoinercondition());
+			System.out.println(v.getJoinerCondition());
 		}
 		
-		vo.setPartnerid(request.getParameter("partnerid"));
+		vo.setPartnerId(request.getParameter("partnerid"));
 		
 		model.addAttribute("joinerList", joinerService.getJoinerList(vo));
 		
