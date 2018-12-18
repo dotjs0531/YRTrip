@@ -6,80 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>동행 게시판 글쓰기</title>
-<script>
-	$(document).ready(function() {
-		$.ajax({
-			url : '/app/ajax/getJoinerList',
-			data : {
-				'partnerId' : '${partner.partnerId}'
-			},
-			//type : 'post',
-			dataType : 'json',
-			success : function(data) {
-				alert(data);
-				$('#aads').html(data);
-
-			}
-		});
-	});
-	function del(partnerid) {
-		if (confirm("삭제하시겠습니까?")) {
-			location.href = "./deletePartner?partnerId=" + partnerId;
-		} else {
-			return;
-		}
-	};
-
-	//동행 신청 목록 조회
-	function loadJoinerList() {
-		var params = {
-			partnerid : '${partner.partnerId}'
-		};
-		$.getJSON("getJoinerList", params, function(datas) {
-			for (i = 0; i < datas.length; i++) {
-				var div = JoinerView(datas[i]);
-				$(div).appendTo("#JoinerList")
-			}
-		});
-	}
-	function JoinerView(joiner) {
-		var div = $("<div>");
-		div.attr("id", "c" + joiner.joinerid);
-		div.addClass('joiner');
-		div[0].comment = comment; //{id:1,.... }
-
-		var str = "<strong class='partnerName'>동행 신청자 : " + joiner.userid
-				+ "</strong>   " + "<span class='commentContent'>신청일 : "
-				+ joiner.joinerdate + "</span>   "
-				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"
-		div.html(str);
-		return div;
-	}
-
-	$(function() {
-		loadJoinerList();
-		//동행 신청 취소 이벤트
-		$("#joinerList").on("click", ".btnDel", function() {
-			var seq = $(this).parent().attr("id").substr(1);
-			if (confirm("삭제할까요?")) {
-				var params = "seq=" + seq; // { seq : seq };
-				var url = "deleteJoiner";
-				$.getJSON(url, params, function(datas) {
-					$('#c' + datas.seq).remove();
-				});
-			}
-		});
-		//동행 신청 등록처리
-		$("#btnAdd").click(function() {
-			var params = $("#addForm").serialize();
-			console.log(params);
-			$.getJSON("insertJoiner", params, function(datas) {
-				var div = makeCommentView(datas);
-				$(div).prependTo("#joinerList");
-			});
-		}); //end btnAdd clcic event
-	}); //$() end ready event
-</script>
 </head>
 <body>
 	<section class="about_us_area" id="about">
@@ -103,24 +29,33 @@
 					<div class="container">
 						<div class="row">
 							<h4>테스트용 h4태그</h4>
+							<table class="table table-bordered table-striped" style="text-align: center;">
+						<thead>
+							<tr>
+								<th colspan="10"
+									style="background-color: #eeeeee; text-align: center;">동행 게시판 글쓰기</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
 							<c:forEach items="${joinerList}" var="joiner">
-									<tr>
-										<td>${joiner.joinerId}</td>
-										<td><a href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}</a></td>
-										<td>${partner.userId}</td>
-										<td>${partner.partnerClass}</td>
-										<td>${partner.partnerDate}<!-- 여행 경비 넣는 부분 -->
-										<td>${partner.partnerPay}</td>
-										<td class="tbl-apply"><a href="#">${partner.partnerCondition}</a></td>
-										<td>${partner.partnerHit}</td>
-									</tr>
-								</c:forEach>
+								<tr>
+									<td>${joiner.joinerId}</td>
+									<td>${joiner.joinerDate}</td>
+									<td>${joiner.userId}</td>
+								</tr>
+							</c:forEach>
+							
+						</tbody>
+					</table>
 						</div>
 					</div>
 				<div class="col-md-offset-1 col-sm-6">
-					<table class="table table-bordered table-striped"
-						style="text-align: center;">
-						
+					<table class="table table-bordered table-striped" style="text-align: center;">
 						<thead>
 							<tr>
 								<th colspan="10"
