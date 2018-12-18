@@ -171,6 +171,19 @@
 }
 </style>
 <script>
+	$(document).ready(function(){
+		$.ajax({
+			url : '/app/ajax/getJoinerList',
+			data : {'partnerid':'${partner.partnerid}'},
+			//type : 'post',
+			dataType:'json',
+			success : function(data) {
+				alert(data);
+				$('#aads').html(data);
+				
+			}
+		});
+	});
 	function del(partnerid) {
 		if (confirm("삭제하시겠습니까?")) {
 			location.href = "./deletePartner?partnerid=" + partnerid;
@@ -186,38 +199,12 @@
 		};
 		$.getJSON("getJoinerList", params, function(datas) {
 			for (i = 0; i < datas.length; i++) {
-				var div = makeJoinerView(datas[i]);
+				var div = JoinerView(datas[i]);
 				$(div).appendTo("#joinerList")
 			}
 		});
 	}
-
-	$(function() {
-		loadCommentsList();
-		//댓글 삭제 이벤트
-		$("#joinerList").on("click", ".btnDel", function() {
-			var seq = $(this).parent().attr("id").substr(1);
-			if (confirm("삭제할까요?")) {
-				var params = "seq=" + seq; // { seq : seq };
-				var url = "deleteJoiner";
-				$.getJSON(url, params, function(datas) {
-					$('#c' + datas.seq).remove();
-				});
-			}
-		});
-
-		//댓글 등록처리
-		$("#btnAdd").click(function() {
-			var params = $("#addForm").serialize();
-			console.log(params);
-			$.getJSON("insertJoiner", params, function(datas) {
-				var div = makeCommentView(datas);
-				$(div).prependTo("#joinerList");
-			});
-		}); //end btnAdd clcic event
-	}); //$() end ready event
-
-	function makeJoinerView(joiner) {
+	function JoinerView(joiner) {
 		var div = $("<div>");
 		div.attr("id", "c" + joiner.joinerid);
 		div.addClass('joiner');
@@ -230,6 +217,30 @@
 		div.html(str);
 		return div;
 	}
+
+	$(function() {
+		loadJoinerList();
+		//동행 신청 취소 이벤트
+		$("#joinerList").on("click", ".btnDel", function() {
+			var seq = $(this).parent().attr("id").substr(1);
+			if (confirm("삭제할까요?")) {
+				var params = "seq=" + seq; // { seq : seq };
+				var url = "deleteJoiner";
+				$.getJSON(url, params, function(datas) {
+					$('#c' + datas.seq).remove();
+				});
+			}
+		});
+		//동행 신청 등록처리
+		$("#btnAdd").click(function() {
+			var params = $("#addForm").serialize();
+			console.log(params);
+			$.getJSON("insertJoiner", params, function(datas) {
+				var div = makeCommentView(datas);
+				$(div).prependTo("#joinerList");
+			});
+		}); //end btnAdd clcic event
+	}); //$() end ready event
 </script>
 </head>
 <body>
@@ -299,9 +310,8 @@
 								<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
 							</div>
 							<div class="col-md-offset-1 col-sm-6">
-
-								<table class="table table-bordered table-striped"
-									style="text-align: center;">
+								t<div id="tbl_div"></div>
+								<%-- <table class="table table-bordered table-striped" style="text-align: center;">
 									<thead>
 										<tr>
 											<th colspan="10" style="background-color: #eeeeee; text-align: center;">동행신청 리스트</th>
@@ -318,7 +328,7 @@
 											<!-- 숨긴 페이징 부분 hide jobs -->
 										</c:forEach>
 									</tbody>
-								</table>
+								</table> --%>
 							</div>
 						</c:if>
 					</section>

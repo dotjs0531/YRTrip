@@ -9,7 +9,7 @@
 			J.PARTNER_ID,
 			JOINER_CONDITION
 	FROM	JOINERT J, PARTNERT P
-	WHERE	J.PARTNER_ID = P.PARTNERID	
+	WHERE	J.PARTNER_ID = P.PARTNER_ID	
 </select>
 <insert id="insertJoiner" parameterType="joiner">
 	INSERT INTO JOINER (
