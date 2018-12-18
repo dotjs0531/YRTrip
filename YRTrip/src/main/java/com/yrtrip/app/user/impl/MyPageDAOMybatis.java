@@ -24,6 +24,10 @@ public class MyPageDAOMybatis {
 	public List<TravelBoardVO> getMyTravelList(TravelBoardVO vo)  {
 		return mybatis.selectList("user.getMyTravelList", vo);
 	}
+	public void deleteMyTravelList(TravelBoardVO vo) {
+		mybatis.update("user.deleteMyTravelList", vo);
+	}
+	
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo)  {
 		return mybatis.selectList("user.getMyPartnerList", vo);
 	}

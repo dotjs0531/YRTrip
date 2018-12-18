@@ -44,6 +44,13 @@ public class MyPageController {
 		mv.setViewName("mypage/getMyTravelList");
 		return mv;
 	}
+	@RequestMapping("/deleteMyTravelList")
+	public String deleteMyTravelList(TravelBoardVO vo) {
+		mypageService.deleteMyTravelList(vo);
+		mypageService.getMyTravelList(vo);
+		return "mypage/getMyTravelList";
+	}
+	
 	@RequestMapping("/getMyPartnerList")
 	public String getMyPartnerList(Model model, PartnerVO pvo, JoinerVO jvo) {
 		model.addAttribute("MyPartnerList", mypageService.getMyPartnerList(pvo));

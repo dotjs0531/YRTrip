@@ -23,6 +23,10 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<TravelBoardVO> getMyTravelList(TravelBoardVO vo) {
 		return dao.getMyTravelList(vo);
 	}
+	public void deleteMyTravelList(TravelBoardVO vo) {
+		dao.deleteMyTravelList(vo);
+	}
+	
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo) {
 		return dao.getMyPartnerList(vo);
 	}

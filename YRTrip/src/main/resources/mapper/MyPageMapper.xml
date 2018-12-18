@@ -21,9 +21,23 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			USER_ID
 	  FROM  TRAVELBOARDT
 	  WHERE USER_ID = #{userId}
-   ORDER BY TRAVEL_DATE DESC
+   ORDER BY TRAVEL_NO DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
+<delete id="deleteMyTravelList" parameterType="travelBoard">
+	DELETE  FROM TRAVELBOARDT
+	<if test="travelNoList != null and travelNoList.length > 0">
+		WHERE TRAVEL_NO in
+	<foreach collection="travelNoList" item="item"
+			open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="travelNoList == null or not travelNoList.length > 0">
+		WHERE TRAVEL_NO = -1
+	</if>
+</delete>
+
 <select id="getMyPartnerList" parameterType="partner" resultType="partner">
 	SELECT  PARTNER_ID,
 			PARTNER_TITLE,
@@ -64,7 +78,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			ITEM_DATE,
 			ITEM_LIKE
 	   FROM ITEMT
-	  WHERE SELLER_ID = #{userId}
+	  WHERE SELLER_ID = #{sellerId}
    ORDER BY ITEM_DATE DESC
 </select>
 <select id="getMyOrderList" parameterType="user" resultType="user">
