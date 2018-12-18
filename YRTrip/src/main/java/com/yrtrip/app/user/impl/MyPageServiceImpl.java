@@ -16,7 +16,10 @@ import com.yrtrip.app.user.UserVO;
 public class MyPageServiceImpl implements MyPageService {
 	
 	@Autowired MyPageDAOMybatis dao;
-	
+
+	public int getMyTravelCount(TravelBoardVO vo) {
+		return dao.getMyTravelCount(vo);
+	}
 	public List<TravelBoardVO> getMyTravelList(TravelBoardVO vo) {
 		return dao.getMyTravelList(vo);
 	}

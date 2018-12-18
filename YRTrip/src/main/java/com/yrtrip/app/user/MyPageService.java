@@ -8,6 +8,7 @@ import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.travel.TravelBoardVO;
 
 public interface MyPageService {
+	public int getMyTravelCount(TravelBoardVO vo);
 	public List<TravelBoardVO> getMyTravelList(TravelBoardVO vo);
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo);
 	public List<JoinerVO> getMyJoinerList(JoinerVO vo);

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="like">
+
+<select id="getLikeList" resultType="like">
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			USER_ID
+	  FROM  LIKET
+	  ORDER BY LIKE_NO DESC
+</select>
+<select id="getLike" parameterType="like" resultType="like">
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			USER_ID
+	  FROM  LIKET
+	 WHERE  LIKE_NO = #{likeNo}
+</select>
+
+<insert id="insertLike" parameterType="like">
+	<selectKey keyProperty="likeNo" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(LIKE_NO),0)+1 FROM LIKET
+	</selectKey>
+	INSERT INTO LIKET ( LIKE_NO,
+						LIKE_CATEGORY,
+						LIKE_BOARDID,
+						USER_ID )
+				VALUES ( #{likeNo},
+						 #{likeCategory},
+						 #{likeBoardid},
+						 #{userId} )
+</insert>
+<delete id="deleteLike" parameterType="like">
+	DELETE  FROM  LIKET
+			WHERE LIKE_NO = #{likeNo}
+</delete>
+</mapper>

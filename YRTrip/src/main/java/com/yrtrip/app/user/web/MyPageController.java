@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
@@ -18,15 +21,33 @@ public class MyPageController {
 
 	@Autowired MyPageService mypageService;
 	
-	@RequestMapping("/getMyTravelList")
-	public String getMyTravelList(Model model, TravelBoardVO vo) {
-		model.addAttribute("MyTravelList", mypageService.getMyTravelList(vo));
-		return "mypage/getMyTravelList";
+	@RequestMapping(value = "/getMyTravelList", method = RequestMethod.GET)
+	public ModelAndView getMyTravelList(TravelBoardVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+		// 페이징 처리
+		// 페이지번호 파라미터
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		// 시작/마지막 레코드 번호
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		// 전체 건수
+		paging.setTotalRecord(mypageService.getMyTravelCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("MyTravelList", mypageService.getMyTravelList(vo));
+		mv.setViewName("mypage/getMyTravelList");
+		return mv;
 	}
 	@RequestMapping("/getMyPartnerList")
 	public String getMyPartnerList(Model model, PartnerVO pvo, JoinerVO jvo) {
 		model.addAttribute("MyPartnerList", mypageService.getMyPartnerList(pvo));
-		//model.addAttribute("MyJoinerList", mypageService.getMyJoinerList(jvo));
+		model.addAttribute("MyJoinerList", mypageService.getMyJoinerList(jvo));
 		return "mypage/getMyPartnerList";
 	}
 	

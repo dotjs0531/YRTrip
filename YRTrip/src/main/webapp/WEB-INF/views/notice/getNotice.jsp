@@ -13,6 +13,10 @@
          location.href = "./deleteNotice?noticeId=" + nid;
       } else { return; }
    };
+   
+   function like_func(){
+	   var frm_read = $('#')
+   }
 </script>
 </head>
 <body>
@@ -40,6 +44,20 @@
 						<h3 style="color:black">${notice.noticeTitle}</h3>
 						<br/>
 						<strong>작성자</strong>&nbsp;&nbsp;${notice.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${notice.noticeDate} ｜ <strong>조회수</strong>&nbsp;&nbsp;${notice.noticeHit}
+						
+						<!-- 좋아요 테스트 부분 -->
+						<div style="float:right">
+						<c:choose>
+							<c:when test="${not empty sessionScope.login}">
+								<a href='javascript: like_func();'><img src='./images/dislike.png' id='like_img' width=20></a>
+							</c:when>
+							<c:otherwise>
+								<a href='javascript: login_need();'><img src='./images/dislike.png' width=20></a>
+							</c:otherwise>
+						</c:choose>
+						</div>
+						
+						
 						<hr />
 						<div style="min-height:200px;">
 						<c:if test="${not empty notice.noticeImg}">
