@@ -233,11 +233,17 @@
 									<textarea name="itemContent" class="form-control col-sm-12"
 										rows="5" value="${product.itemContent}"></textarea>
 								</div>
+								<div class="col-6 col-md-4">
+										<h4>상품상태</h4>
+										<input type="text" class="form-control mb-5 input-lg"
+											name="itemCategory" id="itemAvailable" value="${product.itemAvailable}"
+											placeholder="카테고리" required>
+								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId" value="user1">
 								<input type="hidden" name="itemId" value="${product.itemId}">
 								<!--  구매가능 여부 : 구매가능(defalut)  --> 
-								<input type="hidden" name="itemOrderdetail" value="구매가능">
+								
 							</div>
 						</div>
 					</form>

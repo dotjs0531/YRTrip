@@ -4,6 +4,13 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ /* Custom */
+ .space-ten{padding: 10px 0;}
+.space-five{padding: 5px 0;}
+.space-two{padding: 2px 0;}
+.space-one{padding: 1px 0;}
+ 
+ 
 :root { -
 	-blue: #007bff; -
 	-indigo: #6610f2; -

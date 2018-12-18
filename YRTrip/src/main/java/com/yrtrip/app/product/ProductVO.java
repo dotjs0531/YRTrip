@@ -11,7 +11,7 @@ public class ProductVO {
 	private String itemMethod;
 	private String itemCategory;
 	private String sellerId;
-	private String itemOrderdetail;
+	private String itemAvailable;
 	private float itemStar;
 	private String itemPic;
 //	private MultipartFile productImgFile;
@@ -70,12 +70,12 @@ public class ProductVO {
 	}
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
+	}	
+	public String getItemAvailable() {
+		return itemAvailable;
 	}
-	public String getItemOrderdetail() {
-		return itemOrderdetail;
-	}
-	public void setItemOrderdetail(String itemOrderdetail) {
-		this.itemOrderdetail = itemOrderdetail;
+	public void setItemAvailable(String itemAvailable) {
+		this.itemAvailable = itemAvailable;
 	}
 	public float getItemStar() {
 		return itemStar;
@@ -129,7 +129,7 @@ public class ProductVO {
 	public String toString() {
 		return "ProductVO [itemId=" + itemId + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemEa="
 				+ itemEa + ", itemContent=" + itemContent + ", itemMethod=" + itemMethod + ", itemCategory="
-				+ itemCategory + ", sellerId=" + sellerId + ", itemOrderdetail=" + itemOrderdetail + ", itemStar="
+				+ itemCategory + ", sellerId=" + sellerId + ", itemAvailable=" + itemAvailable + ", itemStar="
 				+ itemStar + ", itemPic=" + itemPic + ", itemDate=" + itemDate + ", itemCondition=" + itemCondition
 				+ ", itemLike=" + itemLike + "]";
 	}

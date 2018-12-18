@@ -85,7 +85,17 @@ public class ProductController {
 		productService.deleteProduct(vo);
 		return "redirect:getProductList";
 	}
-	/////////////////////////////////////////////////////////////
+	//주문서 뷰
+	@RequestMapping("/purchasingProduct")
+	public String purchasingProduct(ProductVO vo) {
+		return "product/purchasingProduct";
+	}
 	
+	//장바구니(찜 목록 이랑 비슷)
+	@RequestMapping("/cartProductForm")
+	public String cartProduct(Model model, ProductVO vo) {
+		model.addAttribute("product", productService.getProduct(vo));
+		return "product/cartProduct";
+	}
 	
 }

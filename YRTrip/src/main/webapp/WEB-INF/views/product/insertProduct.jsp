@@ -11,14 +11,24 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
-<title>prototype of insertProduct(view)</title> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>prototype of insertProduct(view)</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
 <style>
+.carousel-control.left, 
+.carousel-control.right 
+{ 
+backround-image:none !important; 
+}
+
 .space-ten {
 	padding: 10px 0;
 }
@@ -101,16 +111,20 @@
 	background: #444444;
 }
 
-#blah{
-align-content: center;
-    width:100%;
-    max-width:600px;
-    height:100%;
-    max-width:400px;
-    
+#blah {
+	align-content: center;
+	width: 100%;
+	max-width: 600px;
+	height: 100%;
+	max-width: 400px;
+}
+#login-row{
+    margin-left: -230px;
+    margin-right: 440px;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 $(function(){
 	$('#product_cart_insert').delegate("a", "click", function(){
@@ -165,12 +179,18 @@ function readURL(input) {
 						</div>
 						<ul class="price-list" id="product_cart_insert">
 							<li><a href="getProductList" style="color: black">전체보기</a></li>
-							<li><a id="pciClothes" onclick="p_cat()" href="#" style="color: black">의류</a></li>
-							<li><a id="pciTicket" onclick="p_cat()" href="#" style="color: black">티켓/쿠폰</a></li>
-							<li><a id="pciElectronic" onclick="p_cat()" href="#" style="color: black">전자기기</a></li>
-							<li><a id="pciBook" onclick="p_cat()" href="#" style="color: black">여행도서</a></li>
-							<li><a id="pciUSIM" onclick="p_cat()" href="#" style="color: black">USIM</a></li>
-							<li><a id="pciETC" onclick="p_cat()" href="#" style="color: black">기타</a></li>
+							<li><a id="pciClothes" onclick="p_cat()" href="#"
+								style="color: black">의류</a></li>
+							<li><a id="pciTicket" onclick="p_cat()" href="#"
+								style="color: black">티켓/쿠폰</a></li>
+							<li><a id="pciElectronic" onclick="p_cat()" href="#"
+								style="color: black">전자기기</a></li>
+							<li><a id="pciBook" onclick="p_cat()" href="#"
+								style="color: black">여행도서</a></li>
+							<li><a id="pciUSIM" onclick="p_cat()" href="#"
+								style="color: black">USIM</a></li>
+							<li><a id="pciETC" onclick="p_cat()" href="#"
+								style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton">
 							<a href="#">상품요청</a>
@@ -183,7 +203,7 @@ function readURL(input) {
 
 				<!-- 끝 : 사이드 : 3-->
 				<!-- 시작 : 내용 : 9-->
-				
+
 				<div class="container col-lg-9">
 					<form action="./insertProduct" method="post">
 						<div class="card mb-10">
@@ -218,11 +238,13 @@ function readURL(input) {
 										<li class="breadcrumb-item"><a href="#">카테고리를 설정하세요</a></li>
 										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
 									</ol>
-									<div class="pull-left"><h4>'session값 들고'만의 상품을 공유해줘!</h4></div>
-										<div class="pull-right">
-											<a href="#" class="btn btn-link">모두삭제</a> 
-											<input type="submit" class="btn" value="등록">
-										</div>
+									<div class="pull-left">
+										<h4>'session값 들고'만의 상품을 공유해줘!</h4>
+									</div>
+									<div class="pull-right">
+										<a href="#" class="btn btn-link" type="reset">모두삭제</a> <input type="submit"
+											class="btn" value="등록">
+									</div>
 								</nav>
 							</div>
 							<div class="card-body store-body">
@@ -236,20 +258,59 @@ function readURL(input) {
 								<div class="space-five"></div>
 								<!-- 상품사진 drag& drop -->
 								<div class="row">
-									<div class="col-md-8 text-center"><img id="blah" src="http://placehold.it/180" alt="your image" /></div>
+									<div class="col-md-8 text-center">
+										<div id="myCarousel" class="carousel slide"
+											data-ride="carousel">
+											<!-- Indicators -->
+											<ol class="carousel-indicators">
+												<li data-target="#myCarousel" data-slide-to="0"
+													class="active"></li>
+												<li data-target="#myCarousel" data-slide-to="1"></li>
+												<li data-target="#myCarousel" data-slide-to="2"></li>
+											</ol>
+											<!-- Wrapper for slides -->
+											<div class="carousel-inner">
+												<div class="item active">
+													<img id="blah" src="https://via.placeholder.com/350x350/ffcf5b"
+														alt="Los Angeles" style="width: 100%;">
+												</div>
+
+												<div class="item">
+													<img id="blah" src="https://via.placeholder.com/350x350/ffcf5b"
+														alt="Chicago" style="width: 100%;">
+												</div>
+
+												<div class="item">
+													<img id="blah" src="https://via.placeholder.com/350x350/ffcf5b"
+														alt="New york" style="width: 100%;">
+												</div>
+											</div>
+											<!-- Left and right controls -->
+											<a class="left carousel-control" href="#myCarousel"
+												data-slide="prev"> <span
+												class="glyphicon glyphicon-chevron-left"></span> <span
+												class="sr-only">Previous</span>
+											</a> <a class="right carousel-control" href="#myCarousel"
+												data-slide="next"> <span
+												class="glyphicon glyphicon-chevron-right"></span> <span
+												class="sr-only">Next</span>
+											</a>
+										</div>
+
+									</div>
 									<!-- 파일 불러오고 명 보여주는건데 4.0에서 들고와서 그런지 안된다.... -->
 									<div class="col-md-4">
 										<div class="row">
-											<input type='file' onchange="readURL(this);" />  											
-  										</div>
-										<div class="row">
-										<input type='file' onchange="readURL(this);" />
+											<input type='file' onchange="readURL(this);" />
 										</div>
 										<div class="row">
-										<input type='file' onchange="readURL(this);" />
+											<input type='file' onchange="readURL(this);" />
 										</div>
 										<div class="row">
-										<input type='file' onchange="readURL(this);" />
+											<input type='file' onchange="readURL(this);" />
+										</div>
+										<div class="row">
+											<input type='file' onchange="readURL(this);" />
 										</div>
 									</div>
 								</div>
@@ -262,7 +323,8 @@ function readURL(input) {
 									</div>
 									<div class="col-12 col-md-8">
 										<input type="text" class="form-control mb-5 input-lg"
-											name="itemCategory" id="itemCategory" placeholder="카테고리" required>
+											name="itemCategory" id="itemCategory" placeholder="카테고리"
+											required>
 										<div class="invalid-feedback">카테고리 설명</div>
 									</div>
 								</div>
@@ -284,8 +346,7 @@ function readURL(input) {
 									</div>
 									<div class="col-12 col-md-8">
 										<input type="number" name="quantity" min="1" name="itemEa"
-											class="form-control mb-5 input-lg"
-											placeholder="1개 이상 선택하세요">
+											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 									</div>
 								</div>
 								<!-- 상품상태 : 하나만 체크 되도록 -->
@@ -348,10 +409,10 @@ function readURL(input) {
 										rows="5"></textarea>
 								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
-								<input type="hidden" name="sellerId" value="user1">								
-								<!--  구매가능 여부 : 구매가능(defalut)  --> 
-										
-								<input type="hidden" name="itemOrderdetail" value="구매가능">
+								<input type="hidden" name="sellerId" value="user1">
+								<!--  구매가능 여부 : 구매가능(defalut)  -->
+
+								<input type="hidden" name="itemAvailable" value="구매가능">
 							</div>
 						</div>
 					</form>

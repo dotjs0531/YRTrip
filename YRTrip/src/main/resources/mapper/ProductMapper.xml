@@ -17,7 +17,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				ITEM_METHOD,
 				ITEM_CATEGORY,
 				SELLER_ID,
-				ITEM_ORDERDETAIL,
+				ITEM_AVAILABLE,
 				ITEM_STAR,
 				ITEM_PIC,
 				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
@@ -36,7 +36,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				ITEM_METHOD,
 				ITEM_CATEGORY,
 				SELLER_ID,
-				ITEM_ORDERDETAIL,
+				ITEM_AVAILABLE,
 				ITEM_STAR,
 				ITEM_PIC,
 				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
@@ -58,7 +58,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				ITEM_METHOD,
 				ITEM_CATEGORY,
 				SELLER_ID,
-				ITEM_ORDERDETAIL,
+				ITEM_AVAILABLE,
 				<!-- ITEM_PIC, -->
 				ITEM_CONDITION
 				<!-- , ITEM_STAR -->	 
@@ -71,7 +71,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				 		  #{itemMethod},
 				 		  #{itemCategory},
 				 		  #{sellerId},
-				 		  #{itemOrderdetail},
+				 		  #{itemAvailable},
 				 		  <!-- #{itemPic}, -->
 				 		  #{itemCondition}
 				 		  <!-- ,  #{itemStar} -->				 		  
@@ -85,7 +85,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		ITEM_CONTENT = #{itemContent},
 		ITEM_METHOD = #{itemMethod},
 		ITEM_CATEGORY = #{itemCategory},
-		ITEM_ORDERDETAIL = #{itemOrderdetail},
+		ITEM_ORDERDETAIL = #{itemAvailable},
 		ITEM_CONDITION = #{itemCondition}
 		WHERE ITEM_ID = #{itemId}
 	
