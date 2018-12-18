@@ -7,6 +7,88 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src='//static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script><script src='//static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script><meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/andreasstorm/pen/deRvMy" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
+
+<style class="cp-pen-styles">html,
+body {
+  height: 100%;
+}
+body {
+  display: grid;
+}
+.check {
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+.check:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34,50,84,0.03);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.check svg {
+  position: relative;
+  z-index: 1;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #c8ccd4;
+  stroke-width: 1.5;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+}
+.check svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+.check svg polyline {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 66;
+}
+.check:hover:before {
+  opacity: 1;
+}
+.check:hover svg {
+  stroke: #4285f4;
+}
+#cbx:checked + .check svg {
+  stroke: #4285f4;
+}
+#cbx:checked + .check svg path {
+  stroke-dashoffset: 60;
+  transition: all 0.3s linear;
+}
+#cbx:checked + .check svg polyline {
+  stroke-dashoffset: 42;
+  transition: all 0.2s linear;
+  transition-delay: 0.15s;
+}
+.checkboxes label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.checkboxes input {
+  vertical-align: middle;
+}
+.checkboxes label span {
+  vertical-align: middle;
+}
+</style>
 </head>
 <body>
 
@@ -41,30 +123,68 @@
                 					<a href="./getMyTravelList?userId=${sessionScope.login.userId}"
                 					   style="color:black;">나의 여행</a></h3></td>
                 				<td style="text-align:center;text-decoration: underline;"><h3>
-                					<a href="./getMyPartnerList?userid=${sessionScope.login.userId}"
+                					<a href="./getMyPartnerList?userId=${sessionScope.login.userId}"
                 					   style="color:black;"><strong>나의 동행</strong></a></h3></td>
                 			</tr>
                 		</table>
             		</div>
             		<p style="clear:both"/><br/>
-                    	<table class="table table-hover" >
-                    		<thead>
-                    			<tr>
-                    				<th>no.</th>
-                    				<th>글제목</th>
-                    				<th>상태</th>
-                    			</tr>
-                    		</thead>
-                    		<tbody>
-							<c:forEach items="${MyPartnerList}" var="partner">
-								<tr>
-									<td>${partner.partnerid}</td>
-									<td>${partner.partnertitle}</td>
-									<td>${partner.partnercondition}</td>
-								</tr>
-							</c:forEach>
-							</tbody>
-						</table>
+            		
+            		<h4>미완료 동행 구하기</h4><br/>
+					<c:forEach items="${MyPartnerList}" var="partner">
+						<c:if test="${partner.partnerCondition eq '미완료'}">
+            				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
+								<h5 class="control-label"><strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</h5><br/>
+								<c:forEach items="${MyJoinerList}" var="joiner">
+									<c:if test="${joiner.partnerId eq partner.partnerId}">
+									<c:if test="${joiner.joinerCondition eq 'Y'}">
+									<div class="checkboxes" style="padding-bottom:10px;">
+										<input type="checkbox" id="cbx" name="userid" value="${joiner.userId}" style="display: none;" class="form-control">
+										<label for="cbx" class="check">
+											<svg width="18px" height="18px" viewBox="0 0 18 18">
+												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+												<polyline points="1 9 7 14 15 4"></polyline>
+											</svg>&nbsp;${joiner.userId}
+										</label>
+									</div>
+									</c:if>
+									</c:if>
+								</c:forEach><br/>
+								<c:if test="${MyJoinerList != null}">
+									<button type="button" class="btn btn-default" style="float:right;">삭제</button>
+								</c:if>
+								<p style="clear:both"/>
+							</div>
+						</c:if>
+					</c:forEach><br/>
+                    
+            		<h4>완료 동행 구하기</h4><br/>
+					<c:forEach items="${MyPartnerList}" var="partner">
+						<c:if test="${partner.partnerCondition eq '완료'}"><hr/>
+            				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
+								<h5 class="control-label"><strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</h5><br/>
+								<c:forEach items="${MyJoinerList}" var="joiner">
+									<c:if test="${joiner.partnerId eq partner.partnerId}">
+									<c:if test="${joiner.joinerCondition eq 'Y'}">
+									<div class="checkboxes" style="padding-bottom:10px;">
+										<input type="checkbox" id="cbx" name="userid" value="${joiner.userId}" style="display: none;" class="form-control">
+										<label for="cbx" class="check">
+											<svg width="18px" height="18px" viewBox="0 0 18 18">
+												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+												<polyline points="1 9 7 14 15 4"></polyline>
+											</svg>&nbsp;${joiner.userId}
+										</label>
+									</div>
+									</c:if>
+									</c:if>
+								</c:forEach><br/>
+								<c:if test="${MyJoinerList != null}">
+									<button type="button" class="btn btn-default" style="float:right;">삭제</button>
+								</c:if>
+								<p style="clear:both"/>
+							</div>
+						</c:if>
+					</c:forEach>
                     </div>
                 </div>
             </div>

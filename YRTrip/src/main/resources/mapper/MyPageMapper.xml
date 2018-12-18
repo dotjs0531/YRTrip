@@ -3,17 +3,26 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 
+<!-- 내가 등록한 여행글 건수 조회 -->
+<select id="getMyTravelCount" parameterType="travelBoard" resultType="int">
+	SELECT COUNT(*)
+	  FROM TRAVELBOARDT
+	 WHERE USER_ID = #{userId}
+</select>
 <select id="getMyTravelList" parameterType="travelBoard" resultType="travelBoard">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  TRAVEL_NO,
 			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
 			TRAVEL_PIC,
-			TRAVEL_DATE,
+			TO_CHAR(TRAVEL_DATE,'YYYY/MM/DD') TRAVEL_DATE,
 			TRAVEL_HIT,
 			TRAVEL_LIKE,
 			USER_ID
 	  FROM  TRAVELBOARDT
 	  WHERE USER_ID = #{userId}
    ORDER BY TRAVEL_DATE DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getMyPartnerList" parameterType="partner" resultType="partner">
 	SELECT  PARTNER_ID,
@@ -22,7 +31,7 @@
 			USER_ID,
 			PARTNER_CONDITION
 	  FROM  PARTNERT
-	  WHERE USER_ID = #{userid}
+	  WHERE USER_ID = #{userId}
    ORDER BY PARTNER_DATE DESC
 </select>
 <select id="getMyJoinerList" parameterType="joiner" resultType="joiner">
@@ -33,8 +42,7 @@
 			JOINER_CONDITION
 	FROM	JOINERT J, PARTNERT P
 	WHERE	J.PARTNER_ID = P.PARTNER_ID
-			AND P.PARTNER_ID = #{partnerId}
-			AND JOINER_CONDITION LIKE 'Y'
+			AND P.USER_ID = #{userId}
    ORDER BY JOINER_DATE DESC
 </select>
 

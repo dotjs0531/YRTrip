@@ -18,6 +18,9 @@ public class MyPageDAOMybatis {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 
+	public int getMyTravelCount(TravelBoardVO vo) {
+		return mybatis.selectOne("user.getMyTravelCount", vo);
+	}
 	public List<TravelBoardVO> getMyTravelList(TravelBoardVO vo)  {
 		return mybatis.selectList("user.getMyTravelList", vo);
 	}
