@@ -57,15 +57,15 @@
 			 					<tr>
 			 						<td colspan="1">글제목 : </td>
 			 						<td colspan="9">
-			 						<input type="text" class="form-control" placeholder="글제목" name="partnertitle" maxlength="50">
-			 						<input type="hidden" name="partnercondition" value="진행중">
-			 						<input type="text" class="form-control" placeholder="임시UserID" name="userid" maxlength="50">
-			 						<input type="text" class="form-control" placeholder="일단 tinfoid" name="tinfoid">
+			 						<input type="text" class="form-control" placeholder="글제목" name="partnerTitle" maxlength="50">
+			 						<input type="hidden" name="partnerCondition" value="진행중">
+			 						<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+			 						<input type="text" class="form-control" placeholder="??TinfoID에는 뭘넣어여?" name="tinfoId">
 			 						</td>
 			 					</tr>
 			 					<tr>
 			 						<td colspan="1">카테고리</td>
-			 						<td colspan="3"><select name="partnerclass">
+			 						<td colspan="3"><select name="partnerClass">
     										<option value="여행">여행</option>
     										<option value="문화">문화</option>
     										<option value="맛집">맛집</option>
@@ -74,7 +74,7 @@
     								</td>
     								<td>비용</td>
     								<td colspan="2">
-    									<select name="partnerpay" id="partnerpay" onchange="showfield(this.options[this.selectedIndex].value)">
+    									<select name="partnerPay" id="partnerPay" onchange="showfield(this.options[this.selectedIndex].value)">
                                   			<option value="100000">100,000</option>
                                   			<option value="100000">200,000</option>
                                   			<option value="100000">300,000</option>
@@ -84,7 +84,7 @@
 									<div id="div1"></div>
     								</td>
     								<td>인원</td>
-    								<td><select name="partnerpers">
+    								<td><select name="partnerPers">
     									<option value="2">2명</option>
     									<option value="3">3명</option>
     									<option value="4">4명</option>
@@ -94,12 +94,12 @@
 			 					</tr>
 			 					<tr>
 			 						<td>출발일 : </td>
-    								<td colspan="4"><input type="date" id="partnerstart" name="partnerstart" value="partnerstart"></td>
+    								<td colspan="4"><input type="date" id="partnerStart" name="partnerStart" value="partnerStart"></td>
     								<td>도착일 : </td>
-    								<td colspan="4"><input type="date" id="partnerend" name="partnerend" value="partnerend"></td>
+    								<td colspan="4"><input type="date" id="partnerEnd" name="partnerEnd" value="partnerEnd"></td>
 			 					</tr>
 			 					<tr>
-			 						<td colspan="10"><textarea class="form-control" placeholder="글 내용" name="partnercontent" maxlength="2048" style="height:200px"></textarea> </td>
+			 						<td colspan="10"><textarea class="form-control" placeholder="글 내용" name="partnerContent" maxlength="2048" style="height:200px"></textarea> </td>
 			 					</tr>
 			 				</tbody>
 			 			</table>

@@ -5,42 +5,41 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class JoinerVO {
 
-	private Integer joinerid;
-	private String joinerdate;
-	private String userid;
-	private String partnerid;	// 참조키
-	private String joinercondition;
+	private Integer joinerId;
+	private String joinerDate;
+	private String userId;
+	private String partnerId;	// 참조키
+	private String joinerCondition;
 	private Integer	pageUnit;
-	
-	public Integer getJoinerid() {
-		return joinerid;
+	public Integer getJoinerId() {
+		return joinerId;
 	}
-	public void setJoinerid(Integer joinerid) {
-		this.joinerid = joinerid;
+	public void setJoinerId(Integer joinerId) {
+		this.joinerId = joinerId;
 	}
-	public String getJoinerdate() {
-		return joinerdate;
+	public String getJoinerDate() {
+		return joinerDate;
 	}
-	public void setJoinerdate(String joinerdate) {
-		this.joinerdate = joinerdate;
+	public void setJoinerDate(String joinerDate) {
+		this.joinerDate = joinerDate;
 	}
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getPartnerid() {
-		return partnerid;
+	public String getPartnerId() {
+		return partnerId;
 	}
-	public void setPartnerid(String partnerid) {
-		this.partnerid = partnerid;
+	public void setPartnerId(String partnerId) {
+		this.partnerId = partnerId;
 	}
-	public String getJoinercondition() {
-		return joinercondition;
+	public String getJoinerCondition() {
+		return joinerCondition;
 	}
-	public void setJoinercondition(String joinercondition) {
-		this.joinercondition = joinercondition;
+	public void setJoinerCondition(String joinerCondition) {
+		this.joinerCondition = joinerCondition;
 	}
 	public Integer getPageUnit() {
 		return pageUnit;
@@ -51,10 +50,8 @@ public class JoinerVO {
 	
 	@Override
 	public String toString() {
-		return "JoinerVO [joinerid=" + joinerid + ", joinerdate=" + joinerdate + ", userid=" + userid + ", partnerid="
-				+ partnerid + ", joinercondition=" + joinercondition + ", pageUnit=" + pageUnit + "]";
+		return "JoinerVO [joinerId=" + joinerId + ", joinerDate=" + joinerDate + ", userId=" + userId + ", partnerId="
+				+ partnerId + ", joinerCondition=" + joinerCondition + ", pageUnit=" + pageUnit + "]";
 	}
-	
-	
 	
 }

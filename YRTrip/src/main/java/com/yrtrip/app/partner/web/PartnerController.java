@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.partner.PartnerService;
 import com.yrtrip.app.partner.PartnerVO;
 
@@ -20,9 +22,22 @@ public class PartnerController {
 
 	// 전체조회
 	@RequestMapping(value = { "/getPartnerList"}, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
-	public String getPartnerList(Model model, PartnerVO vo) {
-		model.addAttribute("partnerList", partnerService.getPartnerList(vo));
-		return "partner/getPartnerList";
+	public ModelAndView getPartnerList(Paging paging, PartnerVO vo) {
+		ModelAndView mv = new ModelAndView();
+		// 페이징
+		if (paging.getPage()==null) {
+			paging.setPage(1);
+		}
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+		
+		paging.setTotalRecord(partnerService.getCount(vo));
+		
+		mv.addObject("paging", paging);
+		mv.addObject("partnerList", partnerService.getPartnerList(vo));
+		mv.setViewName("partner/getPartnerList");
+		return mv;
 	}
 	
 	// 단건조회

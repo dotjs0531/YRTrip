@@ -43,4 +43,8 @@ public class PartnerServiceImpl implements PartnerService {
 		return dao.getPartnerList(vo);
 	}
 
+	@Override
+	public int getCount(PartnerVO vo) {
+		return dao.getCount(vo);
+	}
 }

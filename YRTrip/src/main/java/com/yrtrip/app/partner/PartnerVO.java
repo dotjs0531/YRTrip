@@ -1,179 +1,158 @@
 package com.yrtrip.app.partner;
 
-import java.util.Arrays;
-
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PartnerVO {
-	private Integer	partnerid; // 동행게시판번호
-	private String	partnertitle; // 동행게시판제목
-	private String	partnercontent;	//동행게시판내용
-	private Integer Partnerhit; // 동행게시판조회수
-	private String	Partnerdate; // 동행게시판등록일
+	private Integer	partnerId; // 동행게시판번호
+	private String	partnerTitle; // 동행게시판제목
+	private String	partnerContent;	//동행게시판내용
+	private Integer PartnerHit; // 동행게시판조회수
+	private String	PartnerDate; // 동행게시판등록일
 
-	private String partnerpay; // 동행 비용
-	private String partnerclass; // 동행 문화, 맛집, 여행
-	private String partnerpers; // 동행 인원
-	private String partnerstart; // 출발일
-	private String partnerend; // 도착일
-	private String partnercondition; // 현재 상태
+	private String partnerPay; // 동행 비용
+	private String partnerClass; // 동행 문화, 맛집, 여행
+	private String partnerPers; // 동행 인원
+	private String partnerStart; // 출발일
+	private String partnerEnd; // 도착일
+	private String partnerCondition; // 현재 상태
 	
-	private String userid; // 글쓴이
-	private String tinfoid; // 여행정보 ID
+	private String userId; // 글쓴이
+	private String tinfoId; // 여행정보 ID
 
-	private String searchcondition; //
-	private String searchkeyword; // 검색키워드
-
+	private String searchCondition; //
+	private String searchKeyword; // 검색키워드
+	
 	private String sortCol; // 정렬
 
 	private String[] seqList; //
-
-	public Integer getPartnerid() {
-		return partnerid;
+	private int first;
+	private int last;
+	
+	
+	public Integer getPartnerId() {
+		return partnerId;
 	}
-
-	public void setPartnerid(Integer partnerid) {
-		this.partnerid = partnerid;
+	public void setPartnerId(Integer partnerId) {
+		this.partnerId = partnerId;
 	}
-
-	public String getPartnertitle() {
-		return partnertitle;
+	public String getPartnerTitle() {
+		return partnerTitle;
 	}
-
-	public void setPartnertitle(String partnertitle) {
-		this.partnertitle = partnertitle;
+	public void setPartnerTitle(String partnerTitle) {
+		this.partnerTitle = partnerTitle;
 	}
-
-	public String getPartnercontent() {
-		return partnercontent;
+	public String getPartnerContent() {
+		return partnerContent;
 	}
-
-	public void setPartnercontent(String partnercontent) {
-		this.partnercontent = partnercontent;
+	public void setPartnerContent(String partnerContent) {
+		this.partnerContent = partnerContent;
 	}
-
-	public Integer getPartnerhit() {
-		return Partnerhit;
+	public Integer getPartnerHit() {
+		return PartnerHit;
 	}
-
-	public void setPartnerhit(Integer partnerhit) {
-		Partnerhit = partnerhit;
+	public void setPartnerHit(Integer partnerHit) {
+		PartnerHit = partnerHit;
 	}
-
-	public String getPartnerdate() {
-		return Partnerdate;
+	public String getPartnerDate() {
+		return PartnerDate;
 	}
-
-	public void setPartnerdate(String partnerdate) {
-		Partnerdate = partnerdate;
+	public void setPartnerDate(String partnerDate) {
+		PartnerDate = partnerDate;
 	}
-
-	public String getPartnerpay() {
-		return partnerpay;
+	public String getPartnerPay() {
+		return partnerPay;
 	}
-
-	public void setPartnerpay(String partnerpay) {
-		this.partnerpay = partnerpay;
+	public void setPartnerPay(String partnerPay) {
+		this.partnerPay = partnerPay;
 	}
-
-	public String getPartnerclass() {
-		return partnerclass;
+	public String getPartnerClass() {
+		return partnerClass;
 	}
-
-	public void setPartnerclass(String partnerclass) {
-		this.partnerclass = partnerclass;
+	public void setPartnerClass(String partnerClass) {
+		this.partnerClass = partnerClass;
 	}
-
-	public String getPartnerpers() {
-		return partnerpers;
+	public String getPartnerPers() {
+		return partnerPers;
 	}
-
-	public void setPartnerpers(String partnerpers) {
-		this.partnerpers = partnerpers;
+	public void setPartnerPers(String partnerPers) {
+		this.partnerPers = partnerPers;
 	}
-
-	public String getPartnerstart() {
-		return partnerstart;
+	public String getPartnerStart() {
+		return partnerStart;
 	}
-
-	public void setPartnerstart(String partnerstart) {
-		this.partnerstart = partnerstart;
+	public void setPartnerStart(String partnerStart) {
+		this.partnerStart = partnerStart;
 	}
-
-	public String getPartnerend() {
-		return partnerend;
+	public String getPartnerEnd() {
+		return partnerEnd;
 	}
-
-	public void setPartnerend(String partnerend) {
-		this.partnerend = partnerend;
+	public void setPartnerEnd(String partnerEnd) {
+		this.partnerEnd = partnerEnd;
 	}
-
-	public String getPartnercondition() {
-		return partnercondition;
+	public String getPartnerCondition() {
+		return partnerCondition;
 	}
-
-	public void setPartnercondition(String partnercondition) {
-		this.partnercondition = partnercondition;
+	public void setPartnerCondition(String partnerCondition) {
+		this.partnerCondition = partnerCondition;
 	}
-
-	public String getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
-
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-
-	public String getTinfoid() {
-		return tinfoid;
+	public String getTinfoId() {
+		return tinfoId;
 	}
-
-	public void setTinfoid(String tinfoid) {
-		this.tinfoid = tinfoid;
+	public void setTinfoId(String tinfoId) {
+		this.tinfoId = tinfoId;
 	}
-
-	public String getSearchcondition() {
-		return searchcondition;
+	public String getSearchCondition() {
+		return searchCondition;
 	}
-
-	public void setSearchcondition(String searchcondition) {
-		this.searchcondition = searchcondition;
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
 	}
-
-	public String getSearchkeyword() {
-		return searchkeyword;
+	public String getSearchKeyword() {
+		return searchKeyword;
 	}
-
-	public void setSearchkeyword(String searchkeyword) {
-		this.searchkeyword = searchkeyword;
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
 	}
-
 	public String getSortCol() {
 		return sortCol;
 	}
-
 	public void setSortCol(String sortCol) {
 		this.sortCol = sortCol;
 	}
-
 	public String[] getSeqList() {
 		return seqList;
 	}
-
 	public void setSeqList(String[] seqList) {
 		this.seqList = seqList;
 	}
-
+	public int getFirst() {
+		return first;
+	}
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
+	
 	@Override
 	public String toString() {
-		return "PartnerVO [partnerid=" + partnerid + ", partnertitle=" + partnertitle + ", partnercontent="
-				+ partnercontent + ", Partnerhit=" + Partnerhit + ", Partnerdate=" + Partnerdate + ", partnerpay="
-				+ partnerpay + ", partnerclass=" + partnerclass + ", partnerpers=" + partnerpers + ", partnerstart="
-				+ partnerstart + ", partnerend=" + partnerend + ", partnercondition=" + partnercondition + ", userid="
-				+ userid + ", tinfoid=" + tinfoid + ", searchcondition=" + searchcondition + ", searchkeyword="
-				+ searchkeyword + ", sortCol=" + sortCol + ", seqList=" + Arrays.toString(seqList) + "]";
+		return "PartnerVO [partnerId=" + partnerId + ", partnerTitle=" + partnerTitle + ", partnerContent="
+				+ partnerContent + ", PartnerHit=" + PartnerHit + ", PartnerDate=" + PartnerDate + ", partnerPay="
+				+ partnerPay + ", partnerClass=" + partnerClass + ", partnerPers=" + partnerPers + ", partnerStart="
+				+ partnerStart + ", partnerEnd=" + partnerEnd + ", partnerCondition=" + partnerCondition + ", userId="
+				+ userId + ", tinfoId=" + tinfoId + "]";
 	}
-
+	
 	
 }

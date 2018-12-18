@@ -44,7 +44,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="10">카테고리 >  <select name="partnerclass" >
+									<td colspan="10">카테고리 >  <select name="partnerClass" >
     															<option value="여행">여행</option>
     															<option value="문화">문화</option>
     															<option value="맛집">맛집</option>
@@ -54,16 +54,16 @@
     								</td>
 								</tr>
 								<tr>
-									<td><input type="hidden" name="partnerid" value="${partner.partnerid}"></td>
-									<td colspan="1">No.${partner.partnerid}</td>
-									<td colspan="3"><input type="text" class="form-control" placeholder="글제목" name="partnertitle" maxlength="50" value="${partner.partnertitle}"></td>
-									<td colspan="3">${partner.userid}</td>
-									<td colspan="3">${partner.partnerdate}</td>
+									<td><input type="hidden" name="partnerId" value="${partner.partnerId}"></td>
+									<td colspan="1">No.${partner.partnerId}</td>
+									<td colspan="3"><input type="text" class="form-control" placeholder="글제목" name="partnerTitle" maxlength="50" value="${partner.partnerTitle}"></td>
+									<td colspan="3">${partner.userId}</td>
+									<td colspan="3">${partner.partnerDate}</td>
 								</tr>
 								<tr>
 									<td colspan="1">여행지 : 일단보류</td>
 									<td colspan="4">여행 경비 :
-    									<select name="partnerpay" id="partnerpay" onchange="showfield(this.options[this.selectedIndex].value)">
+    									<select name="partnerpay" id="partnerPay" onchange="showfield(this.options[this.selectedIndex].value)">
                                   			<option value="100000">100,000원대</option>
                                   			<option value="100000">200,000원대</option>
                                   			<option value="100000">300,000원대</option>
@@ -73,14 +73,14 @@
 									<div id="div1"></div>
     								</td>
     								<td>인원</td>
-    								<td colspan="3"><select name="partnerpers">
+    								<td colspan="3"><select name="partnerPers">
     									<option value="2">2명</option>
     									<option value="3">3명</option>
     									<option value="4">4명</option>
     									<option value="5">5명</option>
     									<option value="단체">단체</option>
     								</select></td>
-    								<td colspan="3"><select name="partnercondition">
+    								<td colspan="3"><select name="partnerCondition">
     									<option value="진행중">진행중</option>
     									<option value="모집완료">모집완료</option>
     								</select></td>

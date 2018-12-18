@@ -10,4 +10,5 @@ public interface PartnerService {
 	public void deletePartnerList(PartnerVO vo);
 	public PartnerVO getPartner(PartnerVO vo);
 	public List<PartnerVO> getPartnerList(PartnerVO vo);
+	int getCount(PartnerVO vo);
 }

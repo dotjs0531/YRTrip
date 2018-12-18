@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="partner">
+<select id="getCount" resultType="int">
+	SELECT COUNT(*)
+	  FROM PARTNERT
+	  <where>
+		<choose>
+			<when test="searchCondition != null and searchCondition == 'partnerTitle'">
+				AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>	
+			<when test="searchCondition != null and searchCondition == 'partnerContent'">
+			 	AND PARTNER_CONTENT LIKE '%' || #{searchKeyword} || '%'
+			</when>
+		</choose>
+	</where>
+	ORDER BY PARTNER_ID DESC
+</select>
 <select id="getPartnerList" resultType="partner">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	SELECT	PARTNER_ID,
 			PARTNER_TITLE,    
 			PARTNER_CONTENT,  
@@ -16,7 +32,18 @@
 			TO_CHAR(PARTNER_START, 'MM/DD') PARTNER_START,    
 			TO_CHAR(PARTNER_END, 'MM/DD') PARTNER_END,
 			PARTNER_CONDITION
-	FROM	PARTNERT  
+	FROM	PARTNERT
+	<where>
+		<choose>
+			<when test="searchCondition != null and searchCondition == 'userId'">
+				AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+			</when>	
+			<when test="searchCondition != null and searchCondition == 'partnerTitle'">
+			 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>
+		</choose>
+	  </where>
+			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
 <select id="getPartner" parameterType="partner" resultType="partner">
@@ -34,11 +61,11 @@
 			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_END,   
 			PARTNER_CONDITION
 	FROM	PARTNERT
-	WHERE	PARTNER_ID = #{partnerid}
+	WHERE	PARTNER_ID = #{partnerId}
 </select>
 
 <insert id="insertPartner" parameterType="partner">
-	<selectKey keyProperty="partnerid"	resultType="integer" order="BEFORE">
+	<selectKey keyProperty="partnerId"	resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(PARTNER_ID),0)+1 FROM PARTNERT
 	</selectKey>
 	INSERT INTO PARTNERT (
@@ -57,34 +84,34 @@
 			PARTNER_CONDITION
 			)
 	VALUES (
-			#{partnerid},
-			#{partnertitle},
-			#{partnercontent},
+			#{partnerId},
+			#{partnerTitle},
+			#{partnerContent},
 			0,
 			sysdate,
-			#{userid},
-			#{tinfoid},
-			#{partnerpay},
-			#{partnerclass},
-			#{partnerpers},
-			#{partnerstart},
-			#{partnerend},
-			#{partnercondition}
+			#{userId},
+			#{tinfoId},
+			#{partnerPay},
+			#{partnerClass},
+			#{partnerPers},
+			#{partnerStart},
+			#{partnerEnd},
+			#{partnerCondition}
 		)
 </insert>
 <update id="updatePartner" parameterType="partner">
-	UPDATE PARTNERT SET PARTNER_TITLE	= #{partnertitle},
-						PARTNER_CONTENT	= #{partnercontent},
-						PARTNER_PAY		= #{partnerpay},
-						PARTNER_CLASS	= #{partnerclass},
-						PARTNER_PERS	= #{partnerpers},
-						PARTNER_START	= #{partnerstart},
-						PARTNER_END		= #{partnerend},
-						PARTNER_CONDITION = #{partnercondition}
-				WHERE	PARTNER_ID = #{partnerid}
+	UPDATE PARTNERT SET PARTNER_TITLE	= #{partnerTitle},
+						PARTNER_CONTENT	= #{partnerContent},
+						PARTNER_PAY		= #{partnerPay},
+						PARTNER_CLASS	= #{partnerClass},
+						PARTNER_PERS	= #{partnerPers},
+						PARTNER_START	= #{partnerStart},
+						PARTNER_END		= #{partnerEnd},
+						PARTNER_CONDITION = #{partnerCondition}
+				WHERE	PARTNER_ID = #{partnerId}
 </update>
 <delete id="deletePartner" parameterType="int">
 	DELETE	FROM PARTNERT
-			WHERE PARTNER_ID = #{partnerid}
+			WHERE PARTNER_ID = #{partnerId}
 </delete>
 </mapper> 
