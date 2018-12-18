@@ -22,8 +22,9 @@ public class TravelBoardController {
 	TravelBoardService travelBoardService;
 	
 //전체조회
-	@RequestMapping(value = { "/getTravelBoardList", "/getListTravelBoard", "/getTravelBoards" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/getTravelBoardList"}, method = RequestMethod.GET)
 	public ModelAndView getTravelBoardList(TravelBoardVO vo, Paging paging) {
+		
 		ModelAndView mv = new ModelAndView();
 		//페이징 처리
 				//페이지번호 파라미터
@@ -37,13 +38,16 @@ public class TravelBoardController {
 				//first, last 계산
 				vo.setFirst(paging.getFirst());
 				vo.setLast(paging.getLast());
-				
+				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
+				System.out.println(vo);
 				//전체 레코드 건수
 				paging.setTotalRecord(travelBoardService.getCount(vo));
 				
 				mv.addObject("paging", paging);
 				
 				mv.addObject("travelBoardList", travelBoardService.getTravelBoardList(vo));
+
+				
 				mv.setViewName("travel/getTravelBoardList");
 				return mv;
 			}
@@ -100,6 +104,9 @@ public class TravelBoardController {
 	@RequestMapping(value="/getTravelInfoListData", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TravelBoardVO> getTravelInfoListData(TravelInfoVO vo) {
+		System.out.println("ddddddddddddddddddddddddddddddddddddddddddd");
+		System.out.println(vo);
+		System.out.println("ddddddddddddddddddddddddddddddddddddddddddd");
 		return travelBoardService.getTravelInfoList(vo);
 	}
 

@@ -20,12 +20,10 @@
 			TRAVEL_WITH,
 			TRAVEL_PIC
 	FROM TRAVELBOARDT
-  	<where>
-	<choose>
-		<when test="searchTinfo != null">
-			and tinfo_id = #{searchCity}
-		</when>
-	</choose>
+   	<where>
+		<if test="searchTinfo != null">
+			tinfo_id = #{searchTinfo}
+		</if>
 	</where> 
 	<choose>
 		<when test="sortCol != null and sortCol != ''">
@@ -38,14 +36,20 @@
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
+<!-- 검색 select -->
 <select id="getTravelInfoList" resultType="travelInfo" parameterType="travelInfo">
 		<if test="tinfoList != null">
-		SELECT distinct(TINFO_COUNTRY), 
+		SELECT TINFO_COUNTRY, 
 				TINFO_STATE, 
 				TINFO_CITY, 
 				TINFO_ID
 		FROM TRAVELINFOT
-		ORDER BY distinct(TINFO_COUNTRY)
+	<where>
+		TINFO_COUNTRY LIKE '%' || #{tinfoList} || '%' 
+		OR TINFO_STATE LIKE '%' || #{tinfoList} || '%' 
+		OR TINFO_CITY LIKE '%' || #{tinfoList} || '%'
+	</where>
+			ORDER BY TINFO_COUNTRY
 		</if>
 </select>
 
@@ -53,25 +57,11 @@
 <select id="getCount" resultType="int">
 	SELECT COUNT(*)
 	FROM TRAVELBOARDT
- 	<where>
-	<choose>
-				<when test="searchCountry or searchState or searchCity != null">
-			and tinfo_id in (select tinfo_id 
-							 from travelinfot 
-							 where tinfo_country like '%' || #{searchCountry} || '%' 
-							 and tinfo_state like '%' || #{searchState} || '%' 
-							 and tinfo_city like '%' || #{searchCity} || '%')
-		</when>
-	</choose>
-	</where>
-	<choose>
-		<when test="sortCol != null and sortCol != ''">
-			ORDER BY ${sortCol}
-		</when>
-		<otherwise>
-			ORDER BY TRAVEL_NO DESC
-		</otherwise>
-	</choose>
+<where>
+		<if test="searchTinfo != null">
+			tinfo_id = #{searchTinfo}
+		</if>
+	</where>  
 </select>
 
 <insert id="insertTravelBoard" parameterType="travelBoard">

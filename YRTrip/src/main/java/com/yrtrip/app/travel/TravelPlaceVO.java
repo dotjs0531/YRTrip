@@ -11,6 +11,7 @@ public class TravelPlaceVO {
 	private int placeTravelBoardNo;
 	private String placePic;
 	private String userId;
+	private String placeTitle;
 	
 	private String searchKeyword;
 	private String searchCondition;
@@ -71,6 +72,12 @@ public class TravelPlaceVO {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public String getPlaceTitle() {
+		return placeTitle;
+	}
+	public void setPlaceTitle(String placeTitle) {
+		this.placeTitle = placeTitle;
 	}
 	public String getSearchKeyword() {
 		return searchKeyword;

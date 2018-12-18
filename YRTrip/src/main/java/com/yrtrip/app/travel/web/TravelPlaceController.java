@@ -29,7 +29,7 @@ public class TravelPlaceController {
 		}
 		
 		//한페이지에 출력할 레코드 건수
-		paging.setPageUnit(12);
+		paging.setPageUnit(9);
 		
 		//first, last 계산
 		vo.setFirst(paging.getFirst());

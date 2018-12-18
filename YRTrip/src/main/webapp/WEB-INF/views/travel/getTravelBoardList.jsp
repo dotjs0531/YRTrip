@@ -12,8 +12,7 @@
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -47,7 +46,7 @@ for (i = 0; i < acc.length; i++) {
 });
 
  /* autocomplete */
- 
+
  $(function() {
      //input id autocomplete
      var context = '${pageContext.request.contextPath}';
@@ -60,10 +59,14 @@ for (i = 0; i < acc.length; i++) {
            data:{"tinfoList":$("#tinfoList").val()},
            success:function(data){
             response($.map(data, function(item){
+            	console.log(data);
              return{
               label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
               value:item.tinfoId,
-              tinfoId:item.tinfoId
+              tinfoId:item.tinfoId,
+              tinfoCountry:item.tinfoCountry,
+              tinfoState:item.tinfoState,
+              tinfoCity:item.tinfoCity
              }
             }));
            },
@@ -80,9 +83,21 @@ for (i = 0; i < acc.length; i++) {
       minLength:1,
       delay:100,
       select:function(event,ui){
-      },
-     }); 
-   });  
+    	  $("#tinfoList").val(ui.item.tinfoCity);
+          selectedList = ui.item.tinfoCity;
+          var flag = false;
+          $("#tinfoList").keydown(function(e){
+           if(e.keyCode == 13){
+            if(!flag){
+              fn_regist();
+             flag = true;
+            }
+           }
+          });
+         },
+         focus:function(event, ui){return false;}
+        });
+      });
   </script>
 </head>
 <body>
@@ -98,7 +113,7 @@ for (i = 0; i < acc.length; i++) {
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
-                            <li><a href="./getTravelInfoList" style="color:black">베스트 여행기</a></li>
+                            <li><a href="#" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -111,19 +126,21 @@ for (i = 0; i < acc.length; i++) {
 			<div>
 				<div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive" style="min-height:450px;">
-						<form name="frm" class="form-inline">
                 			<div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
 								
 								<!-- 검색 내용 -->
+								<form class="form-inline">
 								<div style="padding-bottom:5px">
-									<label class="col-sm-2 control-label">어디로 떠나고 싶으신가요?</label>
-									<input type="text" name="searchTinfo" class="form-control" id="tinfoList">
+									<label class="col-sm-2 control-label"></label>
+									<input type="text" name="searchTinfo" class="form-control" id="tinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요.">
 								
 									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
-									<input type="hidden" name="page" />
 								</div>
+								</form>
 							</div>
-							
+
+						<form name="frm" class="form-inline">
+							<input type="hidden" name="page" />
 						</form>
 						
 <!-- 여행기 리스트 -->
@@ -138,7 +155,7 @@ for (i = 0; i < acc.length; i++) {
 						<div class="content-footer">
 							<span class="user-info">${board.userId}</span>
 							<span class="pull-right">
-								<a href="#" data-toggle="tooltip" data-placement="right" title="Like">
+								<a href="#" data-placement="right" title="Like">
 								<i class="fa fa-heart"></i> ${board.travelLike}</a>
 							</span>
 							<div class="user-ditels">
@@ -254,7 +271,7 @@ function go_page(page) {
         showMonthAfterYear : true,
         yearRange: "-100:+0"
     });
-});
+})
 </script>
 </body>
 </html>

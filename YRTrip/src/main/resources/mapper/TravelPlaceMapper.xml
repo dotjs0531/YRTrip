@@ -12,10 +12,14 @@
 			PLACE_CONTENT,
 			PLACE_TRAVELBOARDNO,
 			PLACE_PIC,
-			USER_ID
+			USER_ID,
+			PLACE_TITLE
 	FROM TRAVEL_PLACET
  	<where>
 	<choose>
+		<when test="searchCondition != null and searchCondition == 'placeTitle'">
+			AND PLACE_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</when>	
 		<when test="searchCondition != null and searchCondition == 'placeName'">
 			AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
 		</when>	
@@ -42,6 +46,9 @@
 	FROM TRAVEL_PLACET
 	<where>
 		<choose>
+			<when test="searchCondition != null and searchCondition == 'placeTitle'">
+				AND PLACE_TITLE LIKE '%' || #{searchKeyword} || '%'
+			</when>	
 			<when test="searchCondition != null and searchCondition == 'placeName'">
 				AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
 			</when>	
@@ -71,7 +78,8 @@
 									PLACE_CONTENT,
 									PLACE_TRAVELBOARDNO,
 									PLACE_PIC,
-									USER_ID)
+									USER_ID,
+									PLACE_TITLE)
 		VALUES (#{placeNo}, 
 				#{placeName}, 
 				#{placeAddress}, 
@@ -79,7 +87,8 @@
 				#{placeContent}, 
 				#{placeTravelBoardNo}, 
 				#{placePic}, 
-				#{userId})
+				#{userId}),
+				#{placeTitle}
 </insert>
 
 <update id="updateTravelPlace" parameterType="travelPlace">
@@ -88,7 +97,8 @@
 		PLACE_ADDRESS = #{placeAddress},
 		PLACE_CONTENT = #{placeContent},
 		PLACE_TRAVELBOARDNO = #{placeTravelBoardNo},
-		PLACE_PIC = #{placePic}
+		PLACE_PIC = #{placePic},
+		PLACE_TITLE = #{placeTitle}
 	WHERE PLACE_NO = #{placeNo}
 </update>
 
@@ -119,7 +129,8 @@
 			PLACE_CONTENT,
 			PLACE_TRAVELBOARDNO,
 			PLACE_PIC,
-			USER_ID
+			USER_ID,
+			PLACE_TITLE
 	FROM TRAVEL_PLACET 
 	WHERE PLACE_NO = #{placeNo}
 </select>

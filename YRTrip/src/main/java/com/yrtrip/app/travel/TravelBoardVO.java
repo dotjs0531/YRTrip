@@ -20,9 +20,8 @@ public class TravelBoardVO {
 	private String travelPic;
 	
 	private String searchTinfo;
-	private String searchCountry;
-	private String searchState;
-	private String searchCity;	
+	private String tinfoList;
+	
 	private String sortCol;
 	private int first;
 	private int last;
@@ -113,29 +112,10 @@ public class TravelBoardVO {
 	}
 	
 	@JsonIgnore
-	public String getSearchCountry() {
-		return searchCountry;
-	}
-	public void setSearchCountry(String searchCountry) {
-		this.searchCountry = searchCountry;
-	}
-	public String getSearchState() {
-		return searchState;
-	}
-	public void setSearchState(String searchState) {
-		this.searchState = searchState;
-	}
-	public String getSearchCity() {
-		return searchCity;
-	}
-	public void setSearchCity(String searchCity) {
-		this.searchCity = searchCity;
-	}
-	
-	@JsonIgnore
 	public String getSortCol() {
 		return sortCol;
 	}
+
 	public void setSortCol(String sortCol) {
 		this.sortCol = sortCol;
 	}
@@ -152,6 +132,8 @@ public class TravelBoardVO {
 	public void setLast(int last) {
 		this.last = last;
 	}
+	
+	@JsonIgnore
 	public String getSearchTinfo() {
 		return searchTinfo;
 	}
@@ -159,5 +141,20 @@ public class TravelBoardVO {
 		this.searchTinfo = searchTinfo;
 	}
 	
+	public String getTinfoList() {
+		return tinfoList;
+	}
+	public void setTinfoList(String tinfoList) {
+		this.tinfoList = tinfoList;
+	}
+	@Override
+	public String toString() {
+		return "TravelBoardVO [travelNo=" + travelNo + ", travelPerson=" + travelPerson + ", travelPay=" + travelPay
+				+ ", travelSche=" + travelSche + ", travelStart=" + travelStart + ", travelTitle=" + travelTitle
+				+ ", travelContent=" + travelContent + ", travelDate=" + travelDate + ", travelHit=" + travelHit
+				+ ", travelLike=" + travelLike + ", tinfoId=" + tinfoId + ", userId=" + userId + ", travelWith="
+				+ travelWith + ", travelPic=" + travelPic + ", searchTinfo=" + searchTinfo + ", tinfoList=" + tinfoList
+				+ ", sortCol=" + sortCol + ", first=" + first + ", last=" + last + "]";
+	}
 	
 }

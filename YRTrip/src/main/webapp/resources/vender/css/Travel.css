@@ -1,15 +1,14 @@
 @charset "UTF-8";
 
-
-목록
-
+/* 목록 */
 .content-title {
 	padding: 5px;
+	margin-top:-20px;
+	margin-bottom:-20px;
 	background-color: #fff;
 }
 
 .content-title h3 a {
-	font-family: 'East Sea Dokdo';
 	font-size: 35px;
 	color: #34495E;
 	text-decoration: none;
@@ -23,15 +22,15 @@
 
 
 .content-footer {
-	background-color: #f9bf3b;
-	padding: 10px;
+	background-color: #ffffff;
+	padding: 0 10px 10px 10px;
 	position: relative;
 }
 
 .content-footer span a {
-	color: #fff;
+	color: #ff8000;
 	display: block;
-	padding: 6px 5px;
+	padding: 10px 5px;
 	text-decoration: none;
 	transition: 0.5s;
 }
@@ -42,20 +41,12 @@
 
 
 .content-box {
+	font-family: 'East Sea Dokdo';
 	width: 21%;
 	margin: 30px 10px 0 10px;
 	box-shadow: 1px 4px 16px 3px rgba(199, 197, 199, 1);
 	display: inline-block;
 }
-
-.content-box .content-footer>img {
-	width: 33px;
-	height: 33px;
-	border-radius: 100%;
-	margin-right: 10px;
-	border: 2px solid #fff;
-}
-
 
 .user-ditels {
 	width: 120px;
@@ -68,12 +59,12 @@
 }
 
 .content-footer .user-info {
-	font-size: 16px; 
-	color: #fff;
+	font-size: 25px; 
+	color: #34495E;
 	cursor: pointer;
 }
 
-.content-footer:hover .user-ditels {
+.content-footer span:hover .user-ditels {
 	display: block;
 }
 
