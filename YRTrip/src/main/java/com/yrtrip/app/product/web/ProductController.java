@@ -91,11 +91,11 @@ public class ProductController {
 		return "product/purchasingProduct";
 	}
 	
-	//장바구니(찜 목록 이랑 비슷)
-	@RequestMapping("/cartProductForm")
+	/*//장바구니(찜 목록 이랑 비슷)
+	@RequestMapping("/cartProduct")
 	public String cartProduct(Model model, ProductVO vo) {
 		model.addAttribute("product", productService.getProduct(vo));
 		return "product/cartProduct";
-	}
+	}*/
 	
 }

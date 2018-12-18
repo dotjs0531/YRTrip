@@ -148,7 +148,7 @@
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
 											<p>${product.itemContent}</p>
-											<p>${product.itemAvailable}</p>
+											<p>${product.itemOrderdetail}</p>
 											<p>${product.itemCategory}</p>
 											<p>${product.itemCondition}</p>
 										</div>

@@ -236,7 +236,7 @@
 								<div class="col-6 col-md-4">
 										<h4>상품상태</h4>
 										<input type="text" class="form-control mb-5 input-lg"
-											name="itemCategory" id="itemAvailable" value="${product.itemAvailable}"
+											name="itemCategory" id="itemOrderdetail" value="${product.itemOrderdetail}"
 											placeholder="카테고리" required>
 								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->

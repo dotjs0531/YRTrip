@@ -1,7 +1,5 @@
 package com.yrtrip.app.product;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class ProductVO {
 	private int itemId;
 	private String itemName;
@@ -11,7 +9,7 @@ public class ProductVO {
 	private String itemMethod;
 	private String itemCategory;
 	private String sellerId;
-	private String itemAvailable;
+	private String itemOrderdetail;
 	private float itemStar;
 	private String itemPic;
 //	private MultipartFile productImgFile;
@@ -71,11 +69,11 @@ public class ProductVO {
 	public void setSellerId(String sellerId) {
 		this.sellerId = sellerId;
 	}	
-	public String getItemAvailable() {
-		return itemAvailable;
+	public String getItemOrderdetail() {
+		return itemOrderdetail;
 	}
-	public void setItemAvailable(String itemAvailable) {
-		this.itemAvailable = itemAvailable;
+	public void setItemOrderdetail(String itemOrderdetail) {
+		this.itemOrderdetail = itemOrderdetail;
 	}
 	public float getItemStar() {
 		return itemStar;
@@ -129,7 +127,7 @@ public class ProductVO {
 	public String toString() {
 		return "ProductVO [itemId=" + itemId + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemEa="
 				+ itemEa + ", itemContent=" + itemContent + ", itemMethod=" + itemMethod + ", itemCategory="
-				+ itemCategory + ", sellerId=" + sellerId + ", itemAvailable=" + itemAvailable + ", itemStar="
+				+ itemCategory + ", sellerId=" + sellerId + ", itemAvailable=" + itemOrderdetail + ", itemStar="
 				+ itemStar + ", itemPic=" + itemPic + ", itemDate=" + itemDate + ", itemCondition=" + itemCondition
 				+ ", itemLike=" + itemLike + "]";
 	}

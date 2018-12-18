@@ -13,7 +13,7 @@
 결제방법 카드결제/현금결제/ ITEM_METHOD
 카테고리 유심(db에는 카테고리1이렇게 들어가있음) ITEM_CATEGORY
 판매자 회원아이디(fk) user1 SELLER_ID
-구매가능여부 구매가능/구매불가 ITEM_AVAILABLE
+구매가능여부 구매가능/구매불가 itemOrderdetail
 상품별점 0.0-5.0 ITEM_STAR
 상품사진 주소값넣기 ITEM_PIC
 작성날짜 sysdate ITEM_DATE
@@ -153,7 +153,7 @@
 									<h2 class="product-price display-2">${product.itemPrice}</h2>
 									<p class="mb-0">
 										<i class="fa fa-truck"></i>${product.itemCondition} 
-										<small class="pull-right text-success">${product.itemAvailable}</small>
+										<small class="pull-right text-success">${product.itemOrderdetail}</small>
 									</p>
 									<div class="text-muted mb-2">
 										<small>약간의 사용감이 있습니다!</small>
@@ -163,10 +163,12 @@
 									<label for="quant">수량</label> <input type="number"
 										name="quantity" min="1" id="quant"
 										class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
-
-									<a class="btn btn-lg btn-block btn-primary" href="./cartProduct?itemId=${product.itemId}">구매하기</a>
-									<button class="btn  btn-lg btn-block btn-light">위시리스트</button>
-
+	<div class="order-buton align-content-sm-center">
+									<a class="col btn btn-lg btn-block btn-light" href="./cartProduct?itemId=${product.itemId}">장바구니</a>
+									<a class="col btn btn-lg btn-block" >대화하기</a>
+									<a class="btn btn-lg btn-block btn-light" href="./purchasingProduct">구매하기</a>
+									
+</div>
 								</div>
 								<div class="product-seller-recommended">
 									<h3 class="mb-5">판매자의 다른 상품</h3>
@@ -222,8 +224,7 @@
 											<dt class="col-sm-4">선호결제방법</dt>
 											<dd class="col-sm-8">${product.itemMethod}</dd>
 											<dt class="col-sm-4">구매가능여부</dt>
-											<dd class="col-sm-8">${product.itemAvailable}</dd>
-											<dt class="col-sm-4">상품상태</dt>
+											<dd class="col-sm-8">${product.itemOrderdetail}</dd>											<dt class="col-sm-4">상품상태</dt>
 											<dd class="col-sm-8">${product.itemCondition}</dd>
 											<dt class="col-sm-4">작성일</dt>
 											<dd class="col-sm-8">${product.itemDate}</dd>

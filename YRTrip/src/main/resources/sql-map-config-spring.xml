@@ -20,6 +20,7 @@
 		<typeAlias alias="user" type="com.yrtrip.app.user.UserVO" />
 		<typeAlias alias="joiner" type="com.yrtrip.app.joiner.JoinerVO" />
 		<typeAlias alias="chat" type="com.yrtrip.app.chat.ChatVO" />
+		<typeAlias alias="cart" type="com.yrtrip.app.product.CartVO" />
 	</typeAliases>
 	
 </configuration>

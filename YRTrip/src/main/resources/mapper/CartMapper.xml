@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cart">
+<select id="getCartList" resultType="cart">
+		SELECT  CART_ID,
+				MY_ID,
+				i.ITEM_ID,
+				c.ITEM_EA,
+				CART_DATE,
+				i.ITEM_ORDERDETAIL,
+				
+		FROM CART c, ITEMT i
+		ORDER BY CART_DATE
+	</select>
+	<select id="getCart" resultType="cart">
+		 SELECT CART_ID,
+				MY_ID,
+				ITEM_ID,
+				ITEM_EA,
+				CART_DATE
+		FROM CART
+		WHERE CARD_ID = #{cartId}
+	</select>
+	<insert id="insertCart" parameterType="cart">
+	<selectKey keyProperty="cartId" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(CART_ID),0)+1 FROM CART
+	</selectKey>
+	INSERT INTO CART_ID,
+				MY_ID,
+				ITEM_ID,
+				ITEM_EA,
+				CART_DATE
+				VALUES ( #{cartId},				 		  
+				 		  #{myId},
+				 		  #{itemId},
+				 		  #{itemEa},
+				 		  sysdate
+				)
+	</insert>
+	<update id="updateCart" parameterType="cart">
+		UPDATE CART SET
+				CART_ID = #{cartId}
+				MY_ID = #{myId}
+				ITEM_ID = #{itemId}
+				ITEM_EA = #{itemEa}
+				CART_DATE = sysdate
+					
+	</update>
+	<delete id="deleteCart">
+		DELETE FROM CART
+		WHERE CART_ID = #{cartId} 
+	
+	</delete>
+</mapper> 
