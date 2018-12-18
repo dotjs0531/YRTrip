@@ -157,7 +157,7 @@ body {
             		</div>
             		<p style="clear:both"/><br/>
             		
-            		<h4 style="font-family: 'NanumSquareRoundB'">미완료 동행 구하기</h4><br/>
+            		<h4 style="font-family: 'NanumSquareRoundR'"><strong>미완료 동행 구하기</strong></h4><br/>
 					<c:forEach items="${MyPartnerList}" var="partner">
 						<c:if test="${partner.partnerCondition eq '미완료'}">
             				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
@@ -178,14 +178,14 @@ body {
 									</c:if>
 								</c:forEach><br/>
 								<c:if test="${MyJoinerList != null}">
-									<button type="button" class="btn btn-default" style="float:right;">삭제</button>
+									<button type="button" class="btn btn-default" style="float:right;">취소</button>
 								</c:if>
 								<p style="clear:both"/>
 							</div>
 						</c:if>
 					</c:forEach><br/>
                     
-            		<h4 style="font-family: 'NanumSquareRoundB'">완료 동행 구하기</h4><br/>
+            		<h4 style="font-family: 'NanumSquareRoundR'"><strong>완료 동행 구하기</strong></h4><br/>
 					<c:forEach items="${MyPartnerList}" var="partner">
 						<c:if test="${partner.partnerCondition eq '완료'}"><hr/>
             				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
