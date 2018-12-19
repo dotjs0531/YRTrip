@@ -1,36 +1,29 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>동행 게시판 글쓰기</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-   function showfield(name){
-        if(name=='Others')document.getElementById('div1').innerHTML=' 비용 : <input type="text" name="partnerpay" />';
-        else document.getElementById('div1').innerHTML='';
+<script>
+   function go_sort(sortCol) {
+      document.frm.sortCol.value = sortCol;
+      document.frm.submit();
    }
-   
-   // 직접 입력 방식 선택 
-   $('#partnerpay').change(function(){ $("#partnerpay option:selected").each(function(){
-      if($(this).val()== '1'){ //직접입력일 경우
-         $("#str_email02").val(''); //값 초기화
-         $("#str_email02").attr("disabled",true); //활성화
-      } else { //직접입력이 아닐경우
-         $("#str_email02").val($(this).text()); //선택값 입력
-         $("#str_email02").attr("disabled",false); //비활성화
-         }
-      });
-   });
+   function go_page(page) {
+      document.frm.page.value = page;
+      document.frm.submit();
+   }
 </script>
 </head>
 <body>
    <section class="about_us_area" id="about">
-        <div class="container">
-            <div class="row">
-               <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
+      <div class="container">
+         <div class="row">
+            <!-- 왼쪽 사이드바 -->
+            <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                <div class="single-pricing-table">
                   <div class="pricing-title">
                      <h2 style="color: black">여행목적</h2>
@@ -43,73 +36,63 @@
                      <li><a href="*" style="color: black">교통</a></li>
                      <li><a href="*" style="color: black">숙소</a></li>
                   </ul>
+                  <div class="order-buton" style="padding-bottom: 1px;">
+                     <a href="${pageContext.request.contextPath}/insertPartnerForm">글쓰기</a>
+                  </div>
                </div>
             </div>
-                <div class="col-md-offset-1 col-sm-6">
-                    <form action="./insertPartner" method="post">
-                   <table class="table table-bordered table-striped" style="text-align:center;">
-                      <thead>
+
+            <!-- 검색 창 -->
+            <div class="col-sm-6" style="min-width: 700px">
+               <div class="table-responsive" style="min-height: 450px;">
+                  <!-- 검색 창 & 페이징 처리 -->
+                  <form name="frm" class="form-inline">
+                     <div class="form-group"
+                        style="padding-bottom: 10px; float: right">
+                        <select name="searchCondition" class="form-control">
+                           <option value="userId">글쓴이
+                           <option value="partnerTitle">제목
+                        </select> <input type="text" name="searchKeyword" class="form-control">
+                        <button class="btn btn-warning signupbtn">검색</button>
+                        <input type="hidden" name="page" />
+                     </div>
+                  </form>
+                  <p style="clear: both">
+                     <!-- 동행 게시판 리스트 -->
+                  <table class="table table-hover">
+                     <!-- 동행구하기 테이블 헤더부분 -->
+                     <thead>
                         <tr>
-                           <th colspan="10" style="background-color:#eeeeee; text-align: center;">동행 게시판 글쓰기</th>
+                           <th>글번호</th>
+                           <th>글제목</th>
+                           <th>글쓴이</th>
+                           <th>문화</th>
+                           <th>게시일</th>
+                           <th>여행경비</th>
+                           <th>진행상태</th>
+                           <th>조회수</th>
                         </tr>
-                      </thead>
-                      <tbody>
-                         <tr>
-                            <td colspan="1">글제목 : </td>
-                            <td colspan="9">
-                            <input type="text" class="form-control" placeholder="글제목" name="partnerTitle" maxlength="50">
-                            <input type="hidden" name="partnerCondition" value="진행중">
-                            <input type="hidden" name="userId" value="${sessionScope.login.userId}">
-                            <input type="text" class="form-control" placeholder="??TinfoID에는 뭘넣어여?" name="tinfoId">
-                            </td>
-                         </tr>
-                         <tr>
-                            <td colspan="1">카테고리</td>
-                            <td colspan="3"><select name="partnerClass">
-                                  <option value="여행">여행</option>
-                                  <option value="문화">문화</option>
-                                  <option value="맛집">맛집</option>
-                                  <option value="교통">교통</option>
-                                  <option value="숙소">숙소</option></select>
-                            </td>
-                            <td>비용</td>
-                            <td colspan="2">
-                               <select name="partnerPay" id="partnerPay" onchange="showfield(this.options[this.selectedIndex].value)">
-                                           <option value="100000">100,000</option>
-                                           <option value="100000">200,000</option>
-                                           <option value="100000">300,000</option>
-                                           <option value="100000">400,000</option>
-                                           <option value="Others">직접입력</option>
-                                     </select>               
-                           <div id="div1"></div>
-                            </td>
-                            <td>인원</td>
-                            <td><select name="partnerPers">
-                               <option value="2">2명</option>
-                               <option value="3">3명</option>
-                               <option value="4">4명</option>
-                               <option value="5">5명</option>
-                               <option value="단체">단체</option>
-                            </select></td>
-                         </tr>
-                         <tr>
-                            <td>출발일 : </td>
-                            <td colspan="4"><input type="date" id="partnerStart" name="partnerStart" value="partnerStart"></td>
-                            <td>도착일 : </td>
-                            <td colspan="4"><input type="date" id="partnerEnd" name="partnerEnd" value="partnerEnd"></td>
-                         </tr>
-                         <tr>
-                            <td colspan="10"><textarea class="form-control" placeholder="글 내용" name="partnerContent" maxlength="2048" style="height:200px"></textarea> </td>
-                         </tr>
-                      </tbody>
-                   </table>
-                       <section>
-                          <div class="order-buton" style="padding-top:500px; float:right">
-                               <button class="submit-btn">등록</button>
-                               <a href="${pageContext.request.contextPath}/getPartnerList">취소</a>
-                           </div>
-                       </section>
-                    </form>
+                     </thead>
+                     <tbody>
+                        <c:forEach items="${partnerList}" var="partner">
+                           <tr>
+                              <td>${partner.partnerId}</td>
+                              <td><a href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}</a></td>
+                              <td>${partner.userId}</td>
+                              <td>${partner.partnerClass}</td>
+                              <td>${partner.partnerDate}<!-- 여행 경비 넣는 부분 -->
+                              <td>${partner.partnerPay}</td>
+                              <td class="tbl-apply"><a href="#">${partner.partnerCondition}</a></td>
+                              <td>${partner.partnerHit}</td>
+                           </tr>
+                        </c:forEach>
+                     </tbody>
+                  </table>
+               </div>
+               <!-- 페이지 번호 -->
+               <div style="padding-top: 50px;">
+                  <my:paging paging="${paging}" jsFunc="go_page" />
+               </div>
             </div>
          </div>
       </div>

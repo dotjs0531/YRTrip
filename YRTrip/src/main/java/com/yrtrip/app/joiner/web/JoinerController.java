@@ -24,6 +24,7 @@ public class JoinerController {
    @RequestMapping(value = { "/getJoinerList" }, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
    @ResponseBody
    public List<JoinerVO> getjoinerList(JoinerVO vo) {
+	  System.out.println("이까지와야댐일단");
       vo.setPageUnit(10);
       return joinerService.getJoinerList(vo);
    }

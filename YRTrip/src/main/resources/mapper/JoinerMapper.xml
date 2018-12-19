@@ -11,11 +11,6 @@
             ,J.JOINER_CONDITION
         FROM JOINERT J, PARTNERT P
        WHERE P.PARTNER_ID = #{partnerId}
-        <if test="JOINER_ID != null and JOINER_ID != ''">
-        <![CDATA[ 
-           and JOINER_ID > #{joinerId}
-        ]]>
-        </if>
        ORDER BY JOINER_ID DESC 
        ) B ) A
         <![CDATA[ 
