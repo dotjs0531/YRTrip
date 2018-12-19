@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
+import com.yrtrip.app.product.CartService;
+import com.yrtrip.app.product.CartVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
 
@@ -16,6 +18,7 @@ import com.yrtrip.app.product.ProductVO;
 public class ProductController {
 	
 	@Autowired ProductService productService;
+	@Autowired CartService cartService;
 	
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
@@ -90,12 +93,12 @@ public class ProductController {
 	public String purchasingProduct(ProductVO vo) {
 		return "product/purchasingProduct";
 	}
-	
-	/*//장바구니(찜 목록 이랑 비슷)
-	@RequestMapping("/cartProduct")
-	public String cartProduct(Model model, ProductVO vo) {
-		model.addAttribute("product", productService.getProduct(vo));
-		return "product/cartProduct";
-	}*/
-	
+		
+	//장바구니 폼(찜 목록 이랑 비슷)
+	@RequestMapping("/getCartList")
+	public String getCartListForm(Model model, CartVO vo1) {
+		model.addAttribute("cartList", cartService.getCartList(vo1));
+		//model.addAttribute("product", productService.getProductList(vo2));
+		return "product/getCartList";
+	}
 }

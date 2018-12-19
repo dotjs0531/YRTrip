@@ -1,12 +1,12 @@
 package com.yrtrip.app.product;
 
-public class CartVO {
+public class CartVO extends ProductVO{
 	private int cartId;
 	private String myId;
 	private int itemId;
 	private int itemEa;
 	private String cartDate;
-	
+
 	public int getCartId() {
 		return cartId;
 	}
