@@ -68,23 +68,52 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <!-- 상품 페이지 -->
+<select id="getMyProductCount" parameterType="product" resultType="int">
+	SELECT COUNT(*)
+	  FROM ITEMT
+	 WHERE SELLER_ID = #{sellerId}
+</select>
 <select id="getMyProductList" parameterType="product" resultType="product">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  ITEM_ID,
 			ITEM_NAME,
+			ITEM_PRICE,
 			ITEM_CONTENT,
+			ITEM_CATEGORY,
 			SELLER_ID,
 			ITEM_ORDERDETAIL,
 			ITEM_STAR,
 			ITEM_PIC,
-			ITEM_DATE,
+			TO_CHAR(ITEM_DATE, 'YYYY/MM/DD') ITEM_DATE,
 			ITEM_LIKE
 	   FROM ITEMT
 	  WHERE SELLER_ID = #{sellerId}
-   ORDER BY ITEM_DATE DESC
+   ORDER BY ITEM_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
 <!-- 거래내역 페이지 -->
-<select id="getMyOrderList" parameterType="user" resultType="user">
+<select id="getMyOrderCount" parameterType="order" resultType="int">
+	SELECT COUNT(*)
+	  FROM ORDERV
+	 WHERE BUYER_ID = #{buyerId}
+</select>
+<select id="getMyOrderList" parameterType="order" resultType="order">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT ORDER_ID,
+		   TO_CHAR(ORDER_DATE, 'YYYY/MM/DD') ORDER_DATE,
+		   ORDER_CONDITION,
+		   ORDER_DELIVERY,
+		   ORDER_PRICE,
+		   ORDER_EA,
+		   ITEM_ID,
+		   ITEM_NAME,
+		   ITEM_METHOD,
+		   ITEM_DELIVERYNO
+	  FROM ORDERV
+	 WHERE BUYER_ID = #{buyerId}
+  ORDER BY ORDER_DATE DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
 <!-- 리뷰 페이지 -->

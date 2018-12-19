@@ -1,5 +1,7 @@
 package com.yrtrip.app.user.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
 import com.yrtrip.app.joiner.JoinerVO;
+import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.travel.TravelBoardVO;
@@ -43,9 +46,9 @@ public class MyPageController {
 		return mv;
 	}
 	@RequestMapping("/deleteMyTravelList") //여행정보 선택 삭제
-	public String deleteMyTravelList(TravelBoardVO vo) {
+	public String deleteMyTravelList(Model model, HttpSession session, TravelBoardVO vo) {
 		mypageService.deleteMyTravelList(vo);
-		mypageService.getMyTravelList(vo);
+		model.addAttribute("myTravelList", mypageService.getMyTravelList(vo));
 		return "mypage/getMyTravelList";
 	}
 	
@@ -70,17 +73,47 @@ public class MyPageController {
 	}
 	
 	//상품 페이지
-	@RequestMapping("/getMyProductList")
-	public String getMyProductList(Model model, ProductVO vo) {
-		model.addAttribute("MyProductList", mypageService.getMyProductList(vo));
-		return "mypage/getMyProductList";
+	@RequestMapping(value = "/getMyProductList", method = RequestMethod.GET)
+	public ModelAndView getMyProductList(ProductVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		paging.setTotalRecord(mypageService.getMyProductCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("MyProductList", mypageService.getMyProductList(vo));
+		mv.setViewName("mypage/getMyProductList");
+		return mv;
 	}
-	
+
 	//거래내역 페이지
-	@RequestMapping("/getMyOrderList")
-	public String getMyOrderList(Model model, UserVO vo) {
-		model.addAttribute("MyOrderList", mypageService.getMyOrderList(vo));
-		return "mypage/getMyOrderList";
+	@RequestMapping(value = "/getMyOrderList", method = RequestMethod.GET)
+	public ModelAndView getMyOrderList(OrderVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		paging.setTotalRecord(mypageService.getMyOrderCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("MyOrderList", mypageService.getMyOrderList(vo));
+		mv.setViewName("mypage/getMyOrderList");
+		return mv;
 	}
 	
 	//리뷰 페이지

@@ -8,6 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
 <script src='//static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
 <script src='//static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
 
@@ -158,7 +160,7 @@ body {
                 <div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive">
                 	
-                		<!-- 검색 창 & 페이징 처리 -->
+                		<!-- 페이징 처리 -->
                 		<form name="frm">
 							<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 							<input type="hidden" name="page" />
@@ -215,7 +217,7 @@ body {
 								</div>
 							</c:forEach>
 						</div>
-					<%-- <input type="hidden" name="userId" value="${sessionScope.login.userId}"/> --%>
+					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 					<button class="btn btn-default" style="float:right;">삭제</button>
 					<p style="clear:both"/>
 					</form>

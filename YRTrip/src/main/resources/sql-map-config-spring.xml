@@ -12,6 +12,8 @@
 		<typeAlias alias="notice" type="com.yrtrip.app.notice.NoticeVO" />
 		<typeAlias alias="partner" type="com.yrtrip.app.partner.PartnerVO" />
 		<typeAlias alias="product" type="com.yrtrip.app.product.ProductVO" />
+		<typeAlias alias="order" type="com.yrtrip.app.order.OrderVO" />
+		<!-- <typeAlias alias="review" type="com.yrtrip.app.review.ReviewVO" /> -->
 		<typeAlias alias="travelBoard" type="com.yrtrip.app.travel.TravelBoardVO" />
 		<typeAlias alias="travelPlace" type="com.yrtrip.app.travel.TravelPlaceVO" />
 		<typeAlias alias="travelInfo" type="com.yrtrip.app.travel.TravelInfoVO" />
