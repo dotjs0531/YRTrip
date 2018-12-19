@@ -21,6 +21,7 @@ public class TravelBoardVO {
 	
 	private String searchTinfo;
 	private String tinfoList;
+	private String[] travelNoList;
 	
 	private String sortCol;
 	private int first;
@@ -109,6 +110,14 @@ public class TravelBoardVO {
 	}
 	public void setTravelPic(String travelPic) {
 		this.travelPic = travelPic;
+	}
+	
+	@JsonIgnore
+	public String[] getTravelNoList() {
+		return travelNoList;
+	}
+	public void setTravelNoList(String[] travelNoList) {
+		this.travelNoList = travelNoList;
 	}
 	
 	@JsonIgnore

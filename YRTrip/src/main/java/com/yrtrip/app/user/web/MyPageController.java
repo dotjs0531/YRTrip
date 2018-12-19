@@ -21,22 +21,20 @@ public class MyPageController {
 
 	@Autowired MyPageService mypageService;
 	
+	//여행정보 페이지
 	@RequestMapping(value = "/getMyTravelList", method = RequestMethod.GET)
 	public ModelAndView getMyTravelList(TravelBoardVO vo, Paging paging) {
 		ModelAndView mv = new ModelAndView();
-		// 페이징 처리
-		// 페이지번호 파라미터
+
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
 
 		paging.setPageUnit(4);
 		
-		// 시작/마지막 레코드 번호
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
 
-		// 전체 건수
 		paging.setTotalRecord(mypageService.getMyTravelCount(vo));
 
 		mv.addObject("paging", paging);
@@ -44,13 +42,14 @@ public class MyPageController {
 		mv.setViewName("mypage/getMyTravelList");
 		return mv;
 	}
-	@RequestMapping("/deleteMyTravelList")
+	@RequestMapping("/deleteMyTravelList") //여행정보 선택 삭제
 	public String deleteMyTravelList(TravelBoardVO vo) {
 		mypageService.deleteMyTravelList(vo);
 		mypageService.getMyTravelList(vo);
 		return "mypage/getMyTravelList";
 	}
 	
+	//동행 페이지
 	@RequestMapping("/getMyPartnerList")
 	public String getMyPartnerList(Model model, PartnerVO pvo, JoinerVO jvo) {
 		model.addAttribute("MyPartnerList", mypageService.getMyPartnerList(pvo));
@@ -58,6 +57,7 @@ public class MyPageController {
 		return "mypage/getMyPartnerList";
 	}
 	
+	//좋아요 페이지
 	@RequestMapping("/getMyLikedList")
 	public String getMyLikedList(Model model, UserVO vo) {
 		model.addAttribute("MyLikedList", mypageService.getMyLikedList(vo));
@@ -69,16 +69,21 @@ public class MyPageController {
 		return "mypage/getMyULikeList";
 	}
 	
+	//상품 페이지
 	@RequestMapping("/getMyProductList")
 	public String getMyProductList(Model model, ProductVO vo) {
 		model.addAttribute("MyProductList", mypageService.getMyProductList(vo));
 		return "mypage/getMyProductList";
 	}
+	
+	//거래내역 페이지
 	@RequestMapping("/getMyOrderList")
 	public String getMyOrderList(Model model, UserVO vo) {
 		model.addAttribute("MyOrderList", mypageService.getMyOrderList(vo));
 		return "mypage/getMyOrderList";
 	}
+	
+	//리뷰 페이지
 	@RequestMapping("/getMyReviewList")
 	public String getMyReviewList(Model model, UserVO vo) {
 		model.addAttribute("MyReviewList", mypageService.getMyReviewList(vo));

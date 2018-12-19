@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 
-<!-- 내가 등록한 여행글 건수 조회 -->
+<!-- 여행 페이지 -->
 <select id="getMyTravelCount" parameterType="travelBoard" resultType="int">
 	SELECT COUNT(*)
 	  FROM TRAVELBOARDT
@@ -38,6 +38,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	</if>
 </delete>
 
+<!-- 동행 페이지 -->
 <select id="getMyPartnerList" parameterType="partner" resultType="partner">
 	SELECT  PARTNER_ID,
 			PARTNER_TITLE,
@@ -60,13 +61,13 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
    ORDER BY JOINER_DATE DESC
 </select>
 
+<!-- 좋아요 페이지 -->
 <select id="getMyLikedList" parameterType="user" resultType="user">
-
 </select>
 <select id="getMyULikeList" parameterType="user" resultType="user">
-
 </select>
 
+<!-- 상품 페이지 -->
 <select id="getMyProductList" parameterType="product" resultType="product">
 	SELECT  ITEM_ID,
 			ITEM_NAME,
@@ -81,10 +82,12 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  WHERE SELLER_ID = #{sellerId}
    ORDER BY ITEM_DATE DESC
 </select>
+
+<!-- 거래내역 페이지 -->
 <select id="getMyOrderList" parameterType="user" resultType="user">
-
 </select>
-<select id="getMyReviewList" parameterType="user" resultType="user">
 
+<!-- 리뷰 페이지 -->
+<select id="getMyReviewList" parameterType="user" resultType="user">
 </select>
 </mapper>
