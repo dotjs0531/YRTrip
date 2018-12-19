@@ -11,25 +11,25 @@ import com.yrtrip.app.joiner.JoinerVO;
 @Service("joinerService")
 public class JoinerServiceImpl implements JoinerService {
 
-	@Autowired JoinerDAOMybatis dao;
-	
-	@Override
-	public void insertJoiner(JoinerVO vo) {
-		dao.insertJoiner(vo);
-	}
+   @Autowired JoinerDAOMybatis dao;
+   
+   @Override
+   public void insertJoiner(JoinerVO vo) {
+      dao.insertJoiner(vo);
+   }
 
-	@Override
-	public void deleteJoiner(JoinerVO vo) {
-		dao.deleteJoiner(vo);
-	}
-	
-	@Override
-	public List<JoinerVO> getJoinerList(JoinerVO vo) {
-		return dao.getJoinerList(vo);
-	}
-	@Override
-	public JoinerVO getJoiner(JoinerVO vo) {
-		return dao.getJoinser(vo);
-	}
+   @Override
+   public void deleteJoiner(JoinerVO vo) {
+      dao.deleteJoiner(vo);
+   }
+   
+   @Override
+   public List<JoinerVO> getJoinerList(JoinerVO vo) {
+      return dao.getJoinerList(vo);
+   }
+   @Override
+   public JoinerVO getJoiner(JoinerVO vo) {
+      return dao.getJoiner(vo);
+   }
 
 }

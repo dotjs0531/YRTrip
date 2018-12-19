@@ -2,33 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="joiner">
-<select id="getJoinerList" resultType="joiner">
-	SELECT	JOINER_ID,
-			TO_CHAR(JOINER_DATE,'YY/MM/DD') JOINER_DATE,
-			J.USER_ID,
-			J.PARTNER_ID,
-			JOINER_CONDITION
-	FROM	JOINERT J, PARTNERT P
-	WHERE	J.PARTNER_ID = P.PARTNER_ID	
+<select id="getJoinerList" resultType="joiner" parameterType="joiner">
+   SELECT A.* FROM ( SELECT B.*, ROWNUM RN FROM ( 
+      SELECT J.JOINER_ID             
+            ,J.JOINER_DATE         
+            ,J.USER_ID        
+            ,P.PARTNER_ID
+            ,J.JOINER_CONDITION
+        FROM JOINERT J, PARTNERT P
+       WHERE P.PARTNER_ID = #{partnerId}
+        <if test="JOINER_ID != null and JOINER_ID != ''">
+        <![CDATA[ 
+           and JOINER_ID > #{joinerId}
+        ]]>
+        </if>
+       ORDER BY JOINER_ID DESC 
+       ) B ) A
+        <![CDATA[ 
+       WHERE RN <= #{pageUnit}
+       ]]>
+</select>
+<select id="getJoiner" resultType="joiner" parameterType="joiner"> 
+      SELECT JOINER_ID            
+            ,JOINER_DATE         
+            ,USER_ID  
+            ,PARTNER_ID
+            ,JOINER_CONDITION
+        FROM JOINERT
+       WHERE JOINER_ID = #{joinerId}
 </select>
 <insert id="insertJoiner" parameterType="joiner">
-	INSERT INTO JOINER (
-			JOINER_ID,
-			JOINER_DATE,    
-			USER_ID,    
-			PARTNER_ID
-			JOINER_CONDITION
-			)
-	VALUES (
-			#{joinerId},
-			sysdate,
-			#{userId},
-			#{partnerId},
-			#{joinerCondition}
-		)
+   <selectKey keyProperty="joinerId" resultType="string" order="BEFORE">
+         SELECT NVL(MAX(JOINER_ID),0)+1 FROM JOINERT
+   </selectKey>
+   INSERT INTO JOINER (
+         JOINER_ID,
+         JOINER_DATE,    
+         USER_ID,    
+         PARTNER_ID
+         JOINER_CONDITION
+         )
+   VALUES (
+         #{joinerId},
+         sysdate,
+         #{userId},
+         #{partnerId},
+         #{joinerCondition}
+      )
 </insert>
 <delete id="deleteJoiner" parameterType="int">
-	DELETE FROM JOINERT
-		  WHERE JOINER_ID = #{value}
+   DELETE FROM JOINERT
+        WHERE JOINER_ID = #{value}
 </delete>
 </mapper>
