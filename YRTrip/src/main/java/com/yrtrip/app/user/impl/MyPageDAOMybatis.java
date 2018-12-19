@@ -61,6 +61,9 @@ public class MyPageDAOMybatis {
 	public List<OrderVO> getMyOrderList(OrderVO vo)  {
 		return mybatis.selectList("user.getMyOrderList", vo);
 	}
+	public OrderVO getMyOrder(OrderVO vo) {
+		return mybatis.selectOne("user.getMyOrder", vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {

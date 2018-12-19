@@ -116,6 +116,21 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
   ORDER BY ORDER_DATE DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
+<select id="getMyOrder" parameterType="order" resultType="order">
+	SELECT ORDER_ID,
+		   TO_CHAR(ORDER_DATE, 'YYYY/MM/DD') ORDER_DATE,
+		   ORDER_CONDITION,
+		   ORDER_DELIVERY,
+		   ORDER_PRICE,
+		   ORDER_EA,
+		   ITEM_ID,
+		   ITEM_NAME,
+		   ITEM_METHOD,
+		   ITEM_DELIVERYNO,
+		   BUYER_ID
+	  FROM ORDERV
+	 WHERE ORDER_ID LIKE #{orderId}
+</select>
 
 <!-- 리뷰 페이지 -->
 <select id="getMyReviewCount" parameterType="order" resultType="int">

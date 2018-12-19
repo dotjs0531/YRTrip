@@ -186,7 +186,7 @@ body {
 					</div>
                 	<div>
                 	<form action="deleteMyProductList">
-						<div class="container card">
+						<div class="container card" style="width:100%">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyProductList}" var="product">
 								<div class="column" style="padding-bottom:20px;">

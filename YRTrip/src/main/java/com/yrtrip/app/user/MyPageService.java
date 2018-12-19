@@ -29,8 +29,9 @@ public interface MyPageService {
 	//거래내역
 	public int getMyOrderCount(OrderVO vo);
 	public List<OrderVO> getMyOrderList(OrderVO vo);
+	public OrderVO getMyOrder(OrderVO vo);
 	
 	//리뷰
 	public int getMyReviewCount(OrderVO vo);
-	public List<OrderVO> getMyReviewList(OrderVO vo);		//리뷰 테이블 패키지 추가
+	public List<OrderVO> getMyReviewList(OrderVO vo);
 }

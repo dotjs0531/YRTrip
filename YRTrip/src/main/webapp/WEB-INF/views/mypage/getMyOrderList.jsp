@@ -126,6 +126,26 @@ body {
 		document.frm.page.value = page;
 		document.frm.submit();
 	};
+
+	/* 거래내역 상세보기 modal */
+	/*  jQuery( document ).ready(function( $ ) {
+		   $("#detail").click(function(){
+		    	$('div#getMyOrder').modal(true);
+			})
+	}); */
+		$('#getMyOrder').on('show.bs.modal', function(e) {
+			var button = $(event.target) // Button that triggered the modal
+			console.log(event);
+			var param = {
+				orderId :  button.attr("id")
+			}
+			$.getJSON("getMyOrder", param, function(data) {
+				var orderId = data.orderId;
+				var itemName = data.itemName;
+				$("#orderId").html(orderId);
+				//$("#popup_itemId").html(itemId);
+			})
+		});
 </script>
 
 <script src="//use.typekit.net/xyl8bgh.js"></script>
@@ -186,7 +206,7 @@ body {
 					</div>
                 	<div>
                 	<form action="deleteMyProductList">
-						<div class="container card">
+						<div class="container card" style="width:100%">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyOrderList}" var="order">
 								<div class="column" style="padding-bottom:20px;">
@@ -222,7 +242,7 @@ body {
 													<c:if test="${order.reviewContent != null}">리뷰완료</c:if>
 												</button></p>
 												<div class="post-meta">
-												<button type="button" class="btn btn-default pull-right">상세보기</button>
+												<button type="button" class="btn btn-default pull-right" id="${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
 												<span class="comments" style="font-size:15px; vertical-align: middle;">${order.orderPrice} 원 / ${order.orderEa} 개</span>
 											</div>
 										</div>
@@ -240,6 +260,56 @@ body {
 						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
                     
+<!-- modal -->
+<div class="modal fade getMyOrder" id="getMyOrder">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+
+			<!-- body -->
+			<div class="modal-body">
+				<div class="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<h4 class="text-info" style="color:black;">주문정보</h4><hr/>
+							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+							<table style="width:100%; margin-left:10px">
+								<tr>
+									<td><h5 class="text-info">주문번호</h5></td>
+									<td style="text-align:right;"><h5 class="orderId" id="orderId">20181219-0001</h5></td>
+								</tr>
+								<tr>
+									<td><h5 class="text-info" style="color:#5f768b;">주문일자</h5></td>
+									<td style="text-align:right;"><h5 class="orderDate" id="orderDate">2018/12/19</h5></td>
+								</tr>
+								<tr>
+									<td><h5 class="text-info" style="color:#5f768b;">주문자</h5></td>
+									<td style="text-align:right;"><h5 class="buyerId" id="buyerId">손애선</h5></td>
+								</tr>
+							</table>
+							</div><br/>
+							
+							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">								
+									<div class="form-group">
+										<h4 class="text-info" style="color:black;">주문상품</h4><hr/>
+										<img src="./images/notice/1.jpg" style="width:100px;float: left;" />&nbsp;상품명<br/>&nbsp;개수/가격
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>	<!-- end of modal-body -->
+		</div> <!-- end of modal-content -->
+	</div> 
+</div> <!-- end of modal -->
+
 					</div>
                 </div>
             </div>
