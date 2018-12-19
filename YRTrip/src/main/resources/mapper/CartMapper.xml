@@ -3,14 +3,18 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cart">
 <select id="getCartList" resultType="cart">
-		SELECT  CART_ID,
+		SELECT CART_ID,
 				MY_ID,
-				i.ITEM_ID,
-				c.ITEM_EA,
+				c.ITEM_ID as ITEM_ID,
+				c.ITEM_EA as ITEM_EA,
 				CART_DATE,
-				i.ITEM_ORDERDETAIL,
-				
+				ITEM_ORDERDETAIL,
+				ITEM_CATEGORY,
+				ITEM_CONDITION,
+				ITEM_PRICE
 		FROM CART c, ITEMT i
+		WHERE (i.item_id = c.item_id 
+		and MY_ID = #{myId})
 		ORDER BY CART_DATE
 	</select>
 	<select id="getCart" resultType="cart">
@@ -19,37 +23,35 @@
 				ITEM_ID,
 				ITEM_EA,
 				CART_DATE
-		FROM CART
+		FROM CART c 
 		WHERE CARD_ID = #{cartId}
 	</select>
 	<insert id="insertCart" parameterType="cart">
 	<selectKey keyProperty="cartId" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(CART_ID),0)+1 FROM CART
 	</selectKey>
-	INSERT INTO CART_ID,
+	INSERT INTO CART
+				(CART_ID,
 				MY_ID,
 				ITEM_ID,
 				ITEM_EA,
 				CART_DATE
-				VALUES ( #{cartId},				 		  
-				 		  #{myId},
-				 		  #{itemId},
-				 		  #{itemEa},
-				 		  sysdate
-				)
+	)
+	VALUES ( #{cartId},				 		  
+	 		  #{myId},
+	 		  #{itemId},
+	 		  #{itemEa},
+	 		  sysdate
+	)
 	</insert>
 	<update id="updateCart" parameterType="cart">
 		UPDATE CART SET
-				CART_ID = #{cartId}
-				MY_ID = #{myId}
-				ITEM_ID = #{itemId}
 				ITEM_EA = #{itemEa}
 				CART_DATE = sysdate
-					
+				where MY_ID = #{myId} and item_Id=#{itemId}
 	</update>
 	<delete id="deleteCart">
 		DELETE FROM CART
 		WHERE CART_ID = #{cartId} 
-	
 	</delete>
-</mapper> 
+</mapper>

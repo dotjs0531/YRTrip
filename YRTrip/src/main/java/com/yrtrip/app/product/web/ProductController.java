@@ -53,6 +53,7 @@ public class ProductController {
 	@RequestMapping("/getProduct")
 	public String getProduct(Model model, ProductVO vo) {
 		model.addAttribute("product", productService.getProduct(vo));
+		//model.addAttribute("cartlist", cartService.getCart(vo));
 		return "product/getProduct";
 	}
 	
@@ -84,7 +85,7 @@ public class ProductController {
 	
 	//제품 단건 삭제
 	@RequestMapping("deleteProduct")
-	public String deleteProdcut(ProductVO vo) {
+	public String deleteProduct(ProductVO vo) {
 		productService.deleteProduct(vo);
 		return "redirect:getProductList";
 	}
@@ -96,9 +97,22 @@ public class ProductController {
 		
 	//장바구니 폼(찜 목록 이랑 비슷)
 	@RequestMapping("/getCartList")
-	public String getCartListForm(Model model, CartVO vo1) {
-		model.addAttribute("cartList", cartService.getCartList(vo1));
-		//model.addAttribute("product", productService.getProductList(vo2));
+	public String getCartListForm(Model model, CartVO vo) {
+		model.addAttribute("cartList", cartService.getCartList(vo));
 		return "product/getCartList";
 	}
+	
+	//뷰안에 넣을 컬럼값들이 없으면 뷰에 redirect해도 안나오나...? 그래서 그런건가...
+	//장바구니 insert 처리
+	@RequestMapping("/insertCart")
+	public String insertCart(CartVO vo) {
+		cartService.insertCart(vo);
+		return "product/getCartList";
+	}
+	
+	/*@RequestMapping("/deleteCart")
+	public String deleteCart(CartVO vo) {
+		cartService.deleteCart(vo);
+		return "redirect:getCartList?myId=";
+	}*/
 }

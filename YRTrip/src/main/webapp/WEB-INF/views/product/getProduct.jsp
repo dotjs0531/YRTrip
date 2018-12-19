@@ -36,15 +36,18 @@
 	rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-</head>
 <style>
-#login-row{
-    margin-left: -230px;
-    margin-right: 440px;
+#login-row {
+	margin-left: -230px;
+	margin-right: 440px;
 }
 </style>
-
+<script>
+	$(function() {
+		$('#insertBtn').click()
+	});
+</script>
+</head>
 <body>
 
 	<section class="about_us_area" id="about">
@@ -93,8 +96,10 @@
 								</ol>
 
 								<div class="btn-group pull-right">
-									<a href="updateProduct?itemId=${product.itemId}" class="btn btn-link">수정하기</a>
-									<a href="deleteProduct?itemId=${product.itemId}" class="btn btn-link btn-share">삭제하기</a> 
+									<a href="updateProduct?itemId=${product.itemId}"
+										class="btn btn-link">수정하기</a> <a
+										href="deleteProduct?itemId=${product.itemId}"
+										class="btn btn-link btn-share">삭제하기</a>
 								</div>
 							</nav>
 						</div>
@@ -146,14 +151,15 @@
 
 								<!-- 오른쪽 아래 -->
 								<div class="product-payment-details">
+									<form action="./insertCart" method="post">
 									<p class="last-sold text-muted">
 										<small>몇개팔렸을까여?</small><small class="pull-right">작성일</small>
 									</p>
 									<h4 class="product-title mb-2">${product.itemName}</h4>
 									<h2 class="product-price display-2">${product.itemPrice}</h2>
 									<p class="mb-0">
-										<i class="fa fa-truck"></i>${product.itemCondition} 
-										<small class="pull-right text-success">${product.itemOrderdetail}</small>
+										<i class="fa fa-truck"></i>${product.itemCondition} <small
+											class="pull-right text-success">${product.itemOrderdetail}</small>
 									</p>
 									<div class="text-muted mb-2">
 										<small>약간의 사용감이 있습니다!</small>
@@ -161,17 +167,24 @@
 									<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
 
 									<label for="quant">수량</label> <input type="number"
-										name="quantity" min="1" id="quant"
+										name="itemEa" min="1" id="quant" value=""
 										class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
-	<div class="order-buton align-content-sm-center">
-									<!-- 테스터 -->
-									<a class="col btn btn-lg btn-block btn-light" href="./getCartList?myId=${sessionScope.login.userId}">전체 장바구니 보기${sessionScope.login.userId}</a>
-	
-									<a class="col btn btn-lg btn-block btn-light" href="./insertCart">장바구니담기</a>
-									<a class="col btn btn-lg btn-block" >대화하기</a>
-									<a class="btn btn-lg btn-block btn-light" href="./purchasingProduct">구매하기</a>
+									<!-- </form> -->
+									<div class="order-buton align-content-sm-center">
+										<!-- 테스터 -->
+										<a class="col btn btn-lg btn-block btn-light"
+											href="./getCartList?myId=${sessionScope.login.userId}">
+											전체 장바구니 보기${sessionScope.login.userId}</a>
+											<button class="col btn btn-lg btn-block btn-light" type="submit">장바구니담기</button> 
+											
+											<a class="col btn btn-lg btn-block">대화하기</a>
+										<a class="btn btn-lg btn-block btn-light"
+											href="./purchasingProduct">구매하기</a>
+									</div>
+									<input type="hidden" value="${sessionScope.login.userId}" name="myId">
+									<input type="hidden" value="${product.itemId}" name="itemId">
 									
-</div>
+								</form>
 								</div>
 								<div class="product-seller-recommended">
 									<h3 class="mb-5">판매자의 다른 상품</h3>
@@ -227,7 +240,8 @@
 											<dt class="col-sm-4">선호결제방법</dt>
 											<dd class="col-sm-8">${product.itemMethod}</dd>
 											<dt class="col-sm-4">구매가능여부</dt>
-											<dd class="col-sm-8">${product.itemOrderdetail}</dd>											<dt class="col-sm-4">상품상태</dt>
+											<dd class="col-sm-8">${product.itemOrderdetail}</dd>
+											<dt class="col-sm-4">상품상태</dt>
 											<dd class="col-sm-8">${product.itemCondition}</dd>
 											<dt class="col-sm-4">작성일</dt>
 											<dd class="col-sm-8">${product.itemDate}</dd>
