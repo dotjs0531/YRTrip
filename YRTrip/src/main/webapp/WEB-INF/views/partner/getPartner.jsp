@@ -13,14 +13,19 @@
 		div.attr("id", "c" + joiner.joinerId);
 		div.addClass('joiner');
 		div.joiner = joiner; //{id:1,.... }
-
+		
 		var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
 				+ "</strong>   " + "<span class='joinerDate'>신청일 : "
 				+ joiner.joinerDate + "</span>    "
 				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"
+		alert("ggg");
+		console.log("111");
 		div.html(str);
-
+		console.log("111");
+		console.log(div);
+		alert("ggg");
 		return div;
+		alert("ggg");
 	}
 
 	$(function() {
@@ -33,6 +38,8 @@
 			$.getJSON("getJoinerList", params, function(datas) {
 				for (i = 0; i < datas.length; i++) {
 					var div = JoinerView(datas[i]);
+					console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+					console.log(div);
 					$(div).appendTo("#joinerList");
 				}
 			});
