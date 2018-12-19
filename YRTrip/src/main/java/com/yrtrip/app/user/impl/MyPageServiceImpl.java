@@ -62,7 +62,10 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	//리뷰
-	public List<UserVO> getMyReviewList(UserVO vo) {
+	public int getMyReviewCount(OrderVO vo) {
+		return dao.getMyReviewCount(vo);
+	}
+	public List<OrderVO> getMyReviewList(OrderVO vo) {
 		return dao.getMyReviewList(vo);
 	}
 }

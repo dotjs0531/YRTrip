@@ -118,6 +118,11 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <!-- 리뷰 페이지 -->
+<select id="getMyReviewCount" parameterType="order" resultType="int">
+	SELECT COUNT(*)
+	  FROM REVIEWV
+	 WHERE BUYER_ID = #{buyerId}
+</select>
 <select id="getMyReviewList" parameterType="order" resultType="order">
 	SELECT BUYER_ID,
 		   REVIEW_STAR,

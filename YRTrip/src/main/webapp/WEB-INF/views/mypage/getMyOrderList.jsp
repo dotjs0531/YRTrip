@@ -209,10 +209,21 @@ body {
 										<!-- Post Content-->
 										<div class="post-content">
 											<div class="category">${order.orderDelivery}</div>
+											<h4 class="pull-right">${order.itemMethod}</h4>
 											<h1 class="title"><a href="getProduct?itemId=${order.itemId}" style="color:black">${order.itemName}</a></h1>
-											<div class="post-meta">
-												<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${order.orderEa}</span>
-												<span class="comments"><i class="fa fa-star"></i>&nbsp;${order.orderPrice}</span>
+											<h2 class="sub_title">${order.orderCondition}</h2>
+											<p class="description" align="center">
+												<button type="button" class="btn btn-default">
+													<c:if test="${order.orderCondition eq '결제완료'}">구매확정</c:if>
+													<c:if test="${order.orderCondition eq '거래완료'}">확정완료</c:if>
+												</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<button type="button" class="btn btn-default">
+													<c:if test="${order.reviewContent == null}">리뷰작성</c:if>
+													<c:if test="${order.reviewContent != null}">리뷰완료</c:if>
+												</button></p>
+												<div class="post-meta">
+												<button type="button" class="btn btn-default pull-right">상세보기</button>
+												<span class="comments" style="font-size:15px; vertical-align: middle;">${order.orderPrice} 원 / ${order.orderEa} 개</span>
 											</div>
 										</div>
 									</div>
@@ -220,7 +231,7 @@ body {
 							</c:forEach>
 						</div>
 					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
-					<button class="btn btn-default" style="float:right;">삭제</button>
+					<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
 					<p style="clear:both"/>
 					</form>
 					

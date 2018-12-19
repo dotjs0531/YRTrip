@@ -117,9 +117,24 @@ public class MyPageController {
 	}
 	
 	//리뷰 페이지
-	@RequestMapping("/getMyReviewList")
-	public String getMyReviewList(Model model, UserVO vo) {
-		model.addAttribute("MyReviewList", mypageService.getMyReviewList(vo));
-		return "mypage/getMyReviewList";
+	@RequestMapping(value = "/getMyReviewList", method = RequestMethod.GET)
+	public ModelAndView getMyReviewList(OrderVO vo, Paging paging) {
+		ModelAndView mv = new ModelAndView();
+
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+
+		paging.setTotalRecord(mypageService.getMyReviewCount(vo));
+
+		mv.addObject("paging", paging);
+		mv.addObject("MyReviewList", mypageService.getMyReviewList(vo));
+		mv.setViewName("mypage/getMyReviewList");
+		return mv;
 	}
 }

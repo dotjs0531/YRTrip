@@ -31,5 +31,6 @@ public interface MyPageService {
 	public List<OrderVO> getMyOrderList(OrderVO vo);
 	
 	//리뷰
-	public List<UserVO> getMyReviewList(UserVO vo);		//리뷰 테이블 패키지 추가
+	public int getMyReviewCount(OrderVO vo);
+	public List<OrderVO> getMyReviewList(OrderVO vo);		//리뷰 테이블 패키지 추가
 }
