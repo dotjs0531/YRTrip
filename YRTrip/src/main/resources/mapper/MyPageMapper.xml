@@ -109,7 +109,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   ITEM_ID,
 		   ITEM_NAME,
 		   ITEM_METHOD,
-		   ITEM_DELIVERYNO
+		   ITEM_DELIVERYNO,
+		   BUYER_ID
 	  FROM ORDERV
 	 WHERE BUYER_ID = #{buyerId}
   ORDER BY ORDER_DATE DESC
@@ -117,6 +118,16 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <!-- 리뷰 페이지 -->
-<select id="getMyReviewList" parameterType="user" resultType="user">
+<select id="getMyReviewList" parameterType="order" resultType="order">
+	SELECT BUYER_ID,
+		   REVIEW_STAR,
+		   REVIEW_CONTENT,
+		   TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') REVIEW_DATE,
+		   REVIEW_PIC,
+		   ITEM_NAME,
+		   ORDER_EA
+	  FROM REVIEWV
+	 WHERE BUYER_ID = #{buyerId}
+  ORDER BY REVIEW_DATE DESC
 </select>
 </mapper>

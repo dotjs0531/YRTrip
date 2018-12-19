@@ -1,8 +1,11 @@
 package com.yrtrip.app.order;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.yrtrip.app.product.ProductVO;
 
 public class OrderVO extends ProductVO {
+	//거래내역 테이블
 	private String orderId;			//거래번호(201812**-0001)
 	private String orderDate;		//거래일자
 	private String orderCondition;	//거래상태(결제완료/거래완료/거래취소)
@@ -13,8 +16,12 @@ public class OrderVO extends ProductVO {
 	private String buyerId;			//구매자ID
 	private String itemDeliveryno;	//송장번호(생략가능-배송중일 경우 입력)
 	
-	private int first;
-	private int last;
+	//리뷰 테이블
+	private int reviewStar;					//리뷰 별점
+	private String reviewContent;			//리뷰 내용
+	private String reviewDate;				//리뷰 등록일
+	private String reviewPic;				//리뷰 사진
+	private MultipartFile reviewPicFile;	//실제 이미지 파일
 	
 	public String getOrderId() {
 		return orderId;
@@ -71,17 +78,35 @@ public class OrderVO extends ProductVO {
 		this.itemDeliveryno = itemDeliveryno;
 	}
 	
-	public int getFirst() {
-		return first;
+	public int getReviewStar() {
+		return reviewStar;
 	}
-	public void setFirst(int first) {
-		this.first = first;
+	public void setReviewStar(int reviewStar) {
+		this.reviewStar = reviewStar;
 	}
-	public int getLast() {
-		return last;
+	public String getReviewContent() {
+		return reviewContent;
 	}
-	public void setLast(int last) {
-		this.last = last;
+	public void setReviewContent(String reviewContent) {
+		this.reviewContent = reviewContent;
+	}
+	public String getReviewDate() {
+		return reviewDate;
+	}
+	public void setReviewDate(String reviewDate) {
+		this.reviewDate = reviewDate;
+	}
+	public String getReviewPic() {
+		return reviewPic;
+	}
+	public void setReviewPic(String reviewPic) {
+		this.reviewPic = reviewPic;
+	}
+	public MultipartFile getReviewPicFile() {
+		return reviewPicFile;
+	}
+	public void setReviewPicFile(MultipartFile reviewPicFile) {
+		this.reviewPicFile = reviewPicFile;
 	}
 	
 }
