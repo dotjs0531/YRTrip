@@ -8,8 +8,7 @@
 <title>동행 게시판 글쓰기</title>
 <script>
 	function JoinerView(joiner) {
-		console.log(joiner);
-		var div = $("#joinerList");
+		var div = $("<div class='form-group'>"); 
 		div.attr("id", "c" + joiner.joinerId);
 		div.addClass('joiner');
 		div.joiner = joiner; //{id:1,.... }
@@ -18,14 +17,8 @@
 				+ "</strong>   " + "<span class='joinerDate'>신청일 : "
 				+ joiner.joinerDate + "</span>    "
 				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"
-		alert("ggg");
-		console.log("111");
 		div.html(str);
-		console.log("111");
-		console.log(div);
-		alert("ggg");
 		return div;
-		alert("ggg");
 	}
 
 	$(function() {
@@ -33,13 +26,11 @@
 		loadJoinerList();
 		
 		function loadJoinerList() {
-			console.log("loadJoinerList");
 			var params = { partnerId : '${partner.partnerId}'};
+			console.log(params);
 			$.getJSON("getJoinerList", params, function(datas) {
 				for (i = 0; i < datas.length; i++) {
 					var div = JoinerView(datas[i]);
-					console.log("ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
-					console.log(div);
 					$(div).appendTo("#joinerList");
 				}
 			});
@@ -48,7 +39,6 @@
 		//동행 신청 등록처리
 		$("#btnAdd").click(function() {
 			var params = $("#addForm").serialize();
-			console.log(params);
 			$.getJSON("insertJoiner", params, function(datas) {
 				var div = JoinerView(datas);
 				$(div).prependTo("#joinerList");
@@ -141,7 +131,18 @@
 						<hr/><br/>
 						<!-- 동행 신청  -->
 						<h5>동행 신청 리스트</h5><br/>
-						<div id="joinerList"></div>
+						<div id="joinerList">
+						
+						
+						
+						
+						
+						
+						</div>
+						
+						
+						
+						
 						<div id="joinerAdd" class="order-buton" style="float: right">
 							<form name="addForm" id="addForm">
 									<input type="hidden" name="joinerId" value="${joiner.userId}">
