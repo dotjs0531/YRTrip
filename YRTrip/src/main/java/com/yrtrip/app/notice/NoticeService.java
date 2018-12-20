@@ -9,4 +9,5 @@ public interface NoticeService {
 	public NoticeVO getNotice(NoticeVO vo);
 	public List<NoticeVO> getNoticeList(NoticeVO vo);
 	public int getCount(NoticeVO vo);
+	public void updateViewCnt(NoticeVO vo);
 }

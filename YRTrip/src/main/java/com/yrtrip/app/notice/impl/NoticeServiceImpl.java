@@ -36,4 +36,8 @@ public class NoticeServiceImpl implements NoticeService {
 	public int getCount(NoticeVO vo) {
 		return dao.getCount(vo);
 	}
+
+	public void updateViewCnt(NoticeVO vo) {
+		dao.updateViewCnt(vo);
+	}
 }

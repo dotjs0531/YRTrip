@@ -7,21 +7,19 @@
 	SELECT COUNT(*)
 	  FROM QNAT
 	  <where>
-		<choose>
-			<when test="searchCondition != null and searchCondition == 'qnaTitle'">
-				AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>	
-			<when test="searchCondition != null and searchCondition == 'qnaContent'">
-			 	AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
-			</when>
-		</choose>
+		<if test="searchCondition != null and searchCondition == 'qnaTitle'">
+			AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'qnaContent'">
+			 AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		</if>
 		<if test="qnaAnswer != null">
 			AND QNA_ANSWER LIKE #{qnaAnswer}
 		</if>
-		<!-- <if test="searchDateStart != null and searchDateEnd != null">
+		<if test="searchDateStart != null and searchDateEnd != null">
     		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
     						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
-		</if> -->
+		</if>
 	</where>
 	ORDER BY QNA_ID DESC
 </select>
@@ -36,21 +34,19 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			QNA_ANSWER
 	  FROM  QNAT Q, USERT U
 	  <where>
-		<choose>
-			<when test="searchCondition != null and searchCondition == 'qnaTitle'">
-				AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>	
-			<when test="searchCondition != null and searchCondition == 'qnaContent'">
-			 	AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
-			</when>
-		</choose>
+		<if test="searchCondition != null and searchCondition == 'qnaTitle'">
+			AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'qnaContent'">
+			 AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		</if>
 		<if test="qnaAnswer != null">
 			AND QNA_ANSWER LIKE #{qnaAnswer}
 		</if>
-		<!-- <if test="searchDateStart != null and searchDateEnd != null">
+		<if test="searchDateStart != null and searchDateEnd != null">
     		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
     						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
-		</if> -->
+		</if>
 	  AND Q.USER_ID = U.USER_ID
 	  </where>
 	  ORDER BY QNA_ID DESC

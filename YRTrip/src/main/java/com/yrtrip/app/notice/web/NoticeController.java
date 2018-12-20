@@ -3,7 +3,9 @@ package com.yrtrip.app.notice.web;
 import java.io.File;
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,7 +48,30 @@ public class NoticeController {
 	}
 	//단건 조회
 	@RequestMapping("/getNotice")
-	public String getNotice(Model model, NoticeVO vo) {
+	public String getNotice(Model model, NoticeVO vo, HttpServletRequest req, HttpServletResponse res) {
+		int countCheck = 0;
+		
+		//저장된 쿠키 불러오기
+		Cookie[] cookies = req.getCookies();
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("noticeId"+vo.getNoticeId())){
+					countCheck = 0;
+					break;
+				}else{
+					Cookie cookie = new Cookie("noticeId"+vo.getNoticeHit(), String.valueOf(vo.getNoticeHit()));
+					cookie.setMaxAge(60*60*24);
+					cookie.setPath("/");
+					res.addCookie(cookie);
+					countCheck += 1;
+				}
+			}
+		}
+		//상세정보 조회시 카운트 증가
+		if(countCheck > 0){
+			noticeService.updateViewCnt(vo);
+		}
+		
 		model.addAttribute("notice", noticeService.getNotice(vo));
 		return "notice/getNotice";
 	}

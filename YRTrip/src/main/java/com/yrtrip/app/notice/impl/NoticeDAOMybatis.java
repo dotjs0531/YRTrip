@@ -29,7 +29,6 @@ public class NoticeDAOMybatis {
 	
 	//단건조회
 	public NoticeVO getNotice(NoticeVO vo) {
-		mybatis.update("notice.updateViewCnt", vo);	//조회수 증가
 		return mybatis.selectOne("notice.getNotice", vo);
 	}
 	//전체조회
@@ -39,5 +38,9 @@ public class NoticeDAOMybatis {
 	//건수 조회
 	public int getCount(NoticeVO vo) {
 		return mybatis.selectOne("notice.getCount", vo);
+	}
+	//조회수 증가
+	public void updateViewCnt(NoticeVO vo) {
+		mybatis.update("notice.updateViewCnt", vo);
 	}
 }
