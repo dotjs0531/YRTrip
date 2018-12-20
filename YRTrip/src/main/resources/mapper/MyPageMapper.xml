@@ -177,10 +177,10 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
   ORDER BY REVIEW_DATE DESC
 </select>
 <update id="deleteMyReviewList" parameterType="order">
-	UPDATE  FROM ORDERT SET REVIEW_STAR = NULL,
-							REVIEW_CONTENT = NULL,
-							REVIEW_DATE = NULL,
-							REVIEW_PIC = NULL
-	  				  WHERE ORDER_ID = #{orderId}
+	UPDATE ORDERT SET REVIEW_STAR = NULL,
+					  REVIEW_CONTENT = NULL,
+					  REVIEW_DATE = NULL,
+					  REVIEW_PIC = NULL
+	  			WHERE ORDER_ID = #{orderId}
 </update>
 </mapper>

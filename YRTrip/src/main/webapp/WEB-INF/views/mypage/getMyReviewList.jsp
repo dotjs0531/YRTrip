@@ -104,16 +104,21 @@
                 	
 					<c:forEach items="${MyReviewList}" var="review">
 					<c:forEach items="${MyOrderList}" var="order">
+					<c:if test="${not empty review.reviewContent}">
             			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 							<h5 class="control-label" style="font-family: 'NanumSquareRoundR'"><strong>${order.orderId}</strong> &nbsp;&nbsp; ${review.reviewDate}리뷰작성일</h5><br/>
 								<input type="checkbox" class="cbx" id="${order}" name="userId" value="${order.orderId}" style="display: none;" class="form-control">
 								<a href="getProduct?itemId=${order.itemId}"><img id="img" src="./images/review/Penguins.jpg" style="height:200px" /></a> &nbsp;&nbsp;&nbsp; 
 								${review.reviewContent}리뷰내용<br/>
 							<c:if test="${not empty MyReviewList}">
-								<button onclick="location.href='./deleteMyReviewList?qnaId=${qna.qnaId}'" type="button" class="btn btn-default" style="float:right;">삭제</button>
+							<form action="./deleteMyReviewList" method="post">
+							<input type="hidden" name="orderId" value="${order.orderId}">
+								<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
+							</form>
 							</c:if>
 							<p style="clear:both"/>
 						</div>
+					</c:if>
 					</c:forEach>
 					</c:forEach><br/>
 					
