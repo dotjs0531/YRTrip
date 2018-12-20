@@ -32,7 +32,7 @@
 <button type="button" class="btn-link" onclick="updateCart();">수정</button> */
 $(function(){
 	var select_itemEa = "<input type="text">";
-})
+});
 function go_update(){
 	$('#original_itemEa').empty();
 }
@@ -73,7 +73,7 @@ function go_update(){
 							<!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 							<!-- <form action="./updateCart"> -->
 								<span id="original_itemEa">${cart.itemEa}</span>
-								<a onclick="update_Cart();">수정</a>
+								<button onclick="go_update();">수정</button>
 							<!-- </form> -->
 							<div>
 								<!-- if getproduct에서 가져온 itemOrderdetail상태가 구매가능 일때는 색상 : #f9bf3b
