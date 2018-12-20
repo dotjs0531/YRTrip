@@ -91,6 +91,19 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
    ORDER BY ITEM_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
+<delete id="deleteMyProductList" parameterType="product">
+	DELETE  FROM ITEMT
+	<if test="itemNoList != null and itemNoList.length > 0">
+	  WHERE ITEM_ID in
+	<foreach collection="itemNoList" item="item"
+			open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="itemNoList == null or not itemNoList.length > 0">
+		WHERE ITEM_ID = -1
+	</if>
+</delete>
 
 <!-- 거래내역 페이지 -->
 <select id="getMyOrderCount" parameterType="order" resultType="int">
@@ -129,8 +142,21 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   ITEM_DELIVERYNO,
 		   BUYER_ID
 	  FROM ORDERV
-	 WHERE ORDER_ID LIKE #{orderId}
+	 WHERE ORDER_ID = #{orderId}
 </select>
+<delete id="deleteMyOrderList" parameterType="order">
+	DELETE  FROM ORDERT
+	<if test="orderNoList != null and orderNoList.length > 0">
+	  WHERE ORDER_ID in
+	<foreach collection="orderNoList" item="item"
+			open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="orderNoList == null or not orderNoList.length > 0">
+		WHERE ORDER_ID = -1
+	</if>
+</delete>
 
 <!-- 리뷰 페이지 -->
 <select id="getMyReviewCount" parameterType="order" resultType="int">
@@ -150,4 +176,11 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	 WHERE BUYER_ID = #{buyerId}
   ORDER BY REVIEW_DATE DESC
 </select>
+<update id="deleteMyReviewList" parameterType="order">
+	UPDATE  FROM ORDERT SET REVIEW_STAR = NULL,
+							REVIEW_CONTENT = NULL,
+							REVIEW_DATE = NULL,
+							REVIEW_PIC = NULL
+	  				  WHERE ORDER_ID = #{orderId}
+</update>
 </mapper>

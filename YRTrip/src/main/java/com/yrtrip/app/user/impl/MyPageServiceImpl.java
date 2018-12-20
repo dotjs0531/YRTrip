@@ -52,6 +52,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<ProductVO> getMyProductList(ProductVO vo) {
 		return dao.getMyProductList(vo);
 	}
+	public void deleteMyProductList(ProductVO vo) {
+		dao.deleteMyProductList(vo);
+	}
 	
 	//거래내역
 	public int getMyOrderCount(OrderVO vo) {
@@ -63,6 +66,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public OrderVO getMyOrder(OrderVO vo) {
 		return dao.getMyOrder(vo);
 	}
+	public void deleteMyOrderList(OrderVO vo) {
+		dao.deleteMyOrderList(vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {
@@ -70,5 +76,8 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 	public List<OrderVO> getMyReviewList(OrderVO vo) {
 		return dao.getMyReviewList(vo);
+	}
+	public void deleteMyReviewList(OrderVO vo) {
+		dao.deleteMyReviewList(vo);
 	}
 }

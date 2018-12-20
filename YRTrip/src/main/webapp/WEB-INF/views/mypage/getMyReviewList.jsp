@@ -110,7 +110,7 @@
 								<a href="getProduct?itemId=${order.itemId}"><img id="img" src="./images/review/Penguins.jpg" style="height:200px" /></a> &nbsp;&nbsp;&nbsp; 
 								${review.reviewContent}리뷰내용<br/>
 							<c:if test="${not empty MyReviewList}">
-								<button type="button" class="btn btn-default" style="float:right;">삭제</button>
+								<button onclick="location.href='./deleteMyReviewList?qnaId=${qna.qnaId}'" type="button" class="btn btn-default" style="float:right;">삭제</button>
 							</c:if>
 							<p style="clear:both"/>
 						</div>

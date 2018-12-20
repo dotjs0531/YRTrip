@@ -56,6 +56,7 @@ body {
   stroke-width: 1.5;
   transform: translate3d(0, 0, 0);
   transition: all 0.2s ease;
+  vertical-align: middle;
 }
 .check svg path {
   stroke-dasharray: 60;
@@ -84,9 +85,11 @@ body {
   transition-delay: 0.15s;
 }
 .checkboxes label {
-  display: block;
+  display: inline-block;
   float: left;
+  clear:both;
   padding-right: 10px;
+  padding-bottom:10pz;
   white-space: nowrap;
   vertical-align: middle;
 }
@@ -179,7 +182,7 @@ body {
 									</c:if>
 									</c:if>
 								</c:forEach><br/>
-								<c:if test="${MyJoinerList != null}">
+								<c:if test="${not empty MyJoinerList}">
 									<button type="button" class="btn btn-default" style="float:right;">취소</button>
 								</c:if>
 								<p style="clear:both"/>
@@ -195,22 +198,21 @@ body {
 								<c:forEach items="${MyJoinerList}" var="joiner">
 									<c:if test="${joiner.partnerId eq partner.partnerId}">
 									<c:if test="${joiner.joinerCondition eq 'Y'}">
-									<div class="checkboxes" style="padding-bottom:10px;">
-										<input type="checkbox" class="cbx" id="${joiner}" name="userId" value="${joiner.userId}" style="display: none;" class="form-control">
+									<div class="checkboxes">
+										<input type="checkbox" class="form-control cbx" id="${joiner}" name="userId" value="${joiner.userId}" style="display: none;">
 										<label for="${joiner}" class="check">
 											<svg width="18px" height="18px" viewBox="0 0 18 18">
 												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
 												<polyline points="1 9 7 14 15 4"></polyline>
 											</svg>&nbsp;${joiner.userId}
 										</label>
-									</div>
+									</div><br/>
 									</c:if>
 									</c:if>
 								</c:forEach><br/>
-								<c:if test="${MyJoinerList != null}">
+								<c:if test="${not empty MyJoinerList}">
 									<button type="button" class="btn btn-default" style="float:right;">취소</button>
 								</c:if>
-								<p style="clear:both"/>
 							</div>
 						</c:if>
 					</c:forEach>

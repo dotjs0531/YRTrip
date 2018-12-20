@@ -15,6 +15,8 @@ public class OrderVO extends ProductVO {
 	private int itemId;				//상품ID
 	private String buyerId;			//구매자ID
 	private String itemDeliveryno;	//송장번호(생략가능-배송중일 경우 입력)
+
+	private String[] orderNoList;	//거래내역 선택삭제
 	
 	//리뷰 테이블
 	private int reviewStar;					//리뷰 별점
@@ -76,6 +78,13 @@ public class OrderVO extends ProductVO {
 	}
 	public void setItemDeliveryno(String itemDeliveryno) {
 		this.itemDeliveryno = itemDeliveryno;
+	}
+	
+	public String[] getOrderNoList() {
+		return orderNoList;
+	}
+	public void setOrderNoList(String[] orderNoList) {
+		this.orderNoList = orderNoList;
 	}
 	
 	public int getReviewStar() {

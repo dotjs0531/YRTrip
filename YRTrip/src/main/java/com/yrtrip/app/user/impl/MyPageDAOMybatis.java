@@ -53,6 +53,9 @@ public class MyPageDAOMybatis {
 	public List<ProductVO> getMyProductList(ProductVO vo)  {
 		return mybatis.selectList("user.getMyProductList", vo);
 	}
+	public void deleteMyProductList(ProductVO vo) {
+		mybatis.update("user.deleteMyProductList", vo);
+	}
 	
 	//거래내역
 	public int getMyOrderCount(OrderVO vo) {
@@ -64,6 +67,9 @@ public class MyPageDAOMybatis {
 	public OrderVO getMyOrder(OrderVO vo) {
 		return mybatis.selectOne("user.getMyOrder", vo);
 	}
+	public void deleteMyOrderList(OrderVO vo) {
+		mybatis.update("user.deleteMyOrderList", vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {
@@ -71,5 +77,8 @@ public class MyPageDAOMybatis {
 	}
 	public List<OrderVO> getMyReviewList(OrderVO vo)  {
 		return mybatis.selectList("user.getMyReviewList", vo);
+	}
+	public void deleteMyReviewList(OrderVO vo) {
+		mybatis.update("user.deleteMyReviewList", vo);
 	}
 }

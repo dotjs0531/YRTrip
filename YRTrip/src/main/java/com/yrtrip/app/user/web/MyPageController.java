@@ -27,7 +27,9 @@ public class MyPageController {
 	
 	//여행정보 페이지
 	@RequestMapping(value = "/getMyTravelList", method = RequestMethod.GET)
-	public ModelAndView getMyTravelList(TravelBoardVO vo, Paging paging) {
+	public ModelAndView getMyTravelList(TravelBoardVO vo, Paging paging, HttpSession session) {
+		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+		
 		ModelAndView mv = new ModelAndView();
 
 		if (paging.getPage() == null) {
@@ -47,10 +49,9 @@ public class MyPageController {
 		return mv;
 	}
 	@RequestMapping("/deleteMyTravelList") //여행정보 선택 삭제
-	public String deleteMyTravelList(Model model, HttpSession session, TravelBoardVO vo) {
+	public String deleteMyTravelList(TravelBoardVO vo) {
 		mypageService.deleteMyTravelList(vo);
-		model.addAttribute("myTravelList", mypageService.getMyTravelList(vo));
-		return "mypage/getMyTravelList";
+		return "redirect:getMyTravelList";
 	}
 	
 	//동행 페이지
@@ -75,7 +76,9 @@ public class MyPageController {
 	
 	//상품 페이지
 	@RequestMapping(value = "/getMyProductList", method = RequestMethod.GET)
-	public ModelAndView getMyProductList(ProductVO vo, Paging paging) {
+	public ModelAndView getMyProductList(ProductVO vo, Paging paging, HttpSession session) {
+		vo.setSellerId(((UserVO)session.getAttribute("login")).getUserId());
+		
 		ModelAndView mv = new ModelAndView();
 
 		if (paging.getPage() == null) {
@@ -94,10 +97,17 @@ public class MyPageController {
 		mv.setViewName("mypage/getMyProductList");
 		return mv;
 	}
+	@RequestMapping("/deleteMyProductList") //상품 선택 삭제
+	public String deleteMyProductList(ProductVO vo) {
+		mypageService.deleteMyProductList(vo);
+		return "redirect:getMyProductList";
+	}
 
 	//거래내역 페이지
 	@RequestMapping(value = "/getMyOrderList", method = RequestMethod.GET)
-	public ModelAndView getMyOrderList(OrderVO vo, Paging paging) {
+	public ModelAndView getMyOrderList(OrderVO vo, Paging paging, HttpSession session) {
+		vo.setBuyerId(((UserVO)session.getAttribute("login")).getUserId());
+		
 		ModelAndView mv = new ModelAndView();
 
 		if (paging.getPage() == null) {
@@ -121,10 +131,17 @@ public class MyPageController {
 	public OrderVO getMyOrder(OrderVO vo) {
 		return mypageService.getMyOrder(vo);
 	}
+	@RequestMapping("/deleteMyOrderList") //거래내역 선택 삭제
+	public String deleteMyOrderList(OrderVO vo) {
+		mypageService.deleteMyOrderList(vo);
+		return "redirect:getMyOrderList";
+	}
 	
 	//리뷰 페이지
 	@RequestMapping(value = "/getMyReviewList", method = RequestMethod.GET)
-	public ModelAndView getMyReviewList(OrderVO vo, Paging paging) {
+	public ModelAndView getMyReviewList(OrderVO vo, Paging paging, HttpSession session) {
+		vo.setBuyerId(((UserVO)session.getAttribute("login")).getUserId());
+		
 		ModelAndView mv = new ModelAndView();
 
 		if (paging.getPage() == null) {
@@ -140,7 +157,13 @@ public class MyPageController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("MyReviewList", mypageService.getMyReviewList(vo));
+		mv.addObject("MyOrderList", mypageService.getMyOrderList(vo));
 		mv.setViewName("mypage/getMyReviewList");
 		return mv;
+	}
+	@RequestMapping("/deleteMyReviewList") //리뷰 삭제
+	public String deleteMyReviewList(OrderVO vo) {
+		mypageService.deleteMyReviewList(vo);
+		return "redirect:getMyReviewList";
 	}
 }

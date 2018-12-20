@@ -25,13 +25,16 @@ public interface MyPageService {
 	//상품
 	public int getMyProductCount(ProductVO vo);
 	public List<ProductVO> getMyProductList(ProductVO vo);
+	public void deleteMyProductList(ProductVO vo);
 	
 	//거래내역
 	public int getMyOrderCount(OrderVO vo);
 	public List<OrderVO> getMyOrderList(OrderVO vo);
 	public OrderVO getMyOrder(OrderVO vo);
+	public void deleteMyOrderList(OrderVO vo);
 	
 	//리뷰
 	public int getMyReviewCount(OrderVO vo);
 	public List<OrderVO> getMyReviewList(OrderVO vo);
+	public void deleteMyReviewList(OrderVO vo);
 }
