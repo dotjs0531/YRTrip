@@ -17,6 +17,9 @@ public class ProductVO{
 	private String itemCondition;
 	private int itemLike;
 	
+	//선택삭제
+	private String[] itemNoList;
+	
 	//페이징 처리 
 	private int first;
 	private int last; 
@@ -111,6 +114,14 @@ public class ProductVO{
 	public void setItemLike(int itemLike) {
 		this.itemLike = itemLike;
 	}	
+	
+	public String[] getItemNoList() {
+		return itemNoList;
+	}
+	public void setItemNoList(String[] itemNoList) {
+		this.itemNoList = itemNoList;
+	}
+	
 	public int getFirst() {
 		return first;
 	}
