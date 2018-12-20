@@ -59,8 +59,8 @@ public class NoticeController {
 					countCheck = 0;
 					break;
 				}else{
-					Cookie cookie = new Cookie("noticeId"+vo.getNoticeHit(), String.valueOf(vo.getNoticeHit()));
-					cookie.setMaxAge(60*60*24);
+					Cookie cookie = new Cookie("noticeId"+vo.getNoticeId(), String.valueOf(vo.getNoticeId()));
+					cookie.setMaxAge(60*60*24);	//하루동안 조회수 중복 증가 방지
 					cookie.setPath("/");
 					res.addCookie(cookie);
 					countCheck += 1;

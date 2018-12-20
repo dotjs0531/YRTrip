@@ -90,6 +90,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			WHERE NOTICE_ID = #{value}
 </delete>
 
+<!-- 조회수 증가 -->
 <update id="updateViewCnt" parameterType="notice">
 	UPDATE NOTICET  SET   NOTICE_HIT = NOTICE_HIT + 1
 					WHERE NOTICE_ID = #{noticeId}
