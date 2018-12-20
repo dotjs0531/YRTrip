@@ -28,22 +28,14 @@
 }
 </style>
 <script>
-	/* $(function() {
-		var list = new Array();
-		$(".my-0").html();
-		if($('#itemAva').val()=='구매가능'){
-			if ($('#itemCon').text()=='카드결제') {
-				$('#p_togglebtn').text('결제하기');
-			}
-			else{
-				$('#p_togglebtn').text('대화하기');
-			}
-		}	
-		else {
-			$("#p_togglebtn").removeAttr("style");
-			$('#p_togglebtn').text('구매불가');
-		}
-	}); */
+/* <input class="form-control col-md-1" type="text" value="${cart.itemEa}">
+<button type="button" class="btn-link" onclick="updateCart();">수정</button> */
+$(function(){
+	var select_itemEa = "<input type="text">";
+})
+function go_update(){
+	$('#original_itemEa').empty();
+}
 </script>
 </head>
 
@@ -58,7 +50,7 @@
 			</div>
 			<div class="row">
 				
-				<div class="col-md-6 center-block order-md-1">
+				<div class="col-md-7 center-block order-md-1">
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
 						<span class="text-muted">목록</span> 
 						<span class="badge badge-secondary badge-pill">3 이거 숫자</span>
@@ -75,14 +67,13 @@
 									<h3 class="my-0">${cart.itemName}</h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
-									<small class="text-muted">선택수량:${cart.itemEa}</small> <br>
+									
 							</div> 
 							<span class="text-muted">￦${cart.itemPrice}</span> 
 							<!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 							<!-- <form action="./updateCart"> -->
-								<input type="hidden" value="${cart.cartId}">
-								<input class="form-control col-md-1" type="text" value="${cart.itemEa}">
-								<button type="submit" class="btn-link">수정</button>
+								<span id="original_itemEa">${cart.itemEa}</span>
+								<a onclick="update_Cart();">수정</a>
 							<!-- </form> -->
 							<div>
 								<!-- if getproduct에서 가져온 itemOrderdetail상태가 구매가능 일때는 색상 : #f9bf3b
@@ -102,9 +93,7 @@
 									구매불가
 									</button>
 									</c:otherwise>
-
-									</c:choose>
-									</a>
+								</c:choose>
 								 <%-- href="./deleteCart?CartId=${cartId}" --%>
 								 
 								<a role="button" class="btn btn-lg btn-link" href="./deleteCart?cartId=${cart.cartId}">취소하기</a>
