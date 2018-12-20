@@ -32,7 +32,7 @@ public class UserController {
 	}
 	//로그인 처리
 	@RequestMapping("login") //login.jsp의 form action id값과 동일
-	public String login(@ModelAttribute("user") UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException { //model.addAttribute("user", vo)
+	public void login(@ModelAttribute("user") UserVO vo, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException { //model.addAttribute("user", vo)
 		//id 단건 조회
 		UserVO uservo = userService.getUser(vo);
 
@@ -40,20 +40,18 @@ public class UserController {
 		String context = request.getContextPath();
 		String referer = request.getHeader("Referer");
 		String url = referer.substring(referer.indexOf(context)+context.length()+1);
-		
+
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
 		//해당 id가 있으면 패스워드 비교
 		if(uservo == null) { //id가 없는경우
 			//url = "redirect:"+url;
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
             out.println("<script>alert('로그인 정보를 확인해주세요.'); history.go(-1); </script>");
-            out.flush();
+            
 		} else if(!vo.getUserPw().equals(uservo.getUserPw())) { //id와 패스워드 일치하지 않는경우
 			//url = "redirect:"+url;
-            response.setContentType("text/html; charset=UTF-8");
-            PrintWriter out = response.getWriter();
             out.println("<script>alert('로그인 정보를 확인해주세요.'); history.go(-1); </script>");
-            out.flush();
 		} else {
 			session.setAttribute("login", uservo);
 			if(referer != null && !referer.equals("")) {
@@ -61,15 +59,11 @@ public class UserController {
 				//if referer이 null이 아니고 이전페이지가 회원가입페이지, 로그아웃페이지, 로그인페이지인 경우엔 다른 페이지 호출
 				if(url.equals("signup") || url.equals("logout")) {
 					url = "main";
-				} else {
-					url = "redirect:"+url;		//로그인 성공 후 원래 페이지 호출
-				}
-			} else {
-				url = "redirect:"+url;
-			}
+				} 
+			} 
+			out.println("<script>location.href='"+url+"'; </script>");
 		}
-		
-		return url;
+		out.flush();
 	}
 	//로그아웃
 	@RequestMapping("logout")

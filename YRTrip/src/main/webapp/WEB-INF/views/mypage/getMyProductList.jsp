@@ -226,14 +226,18 @@ body {
 							</c:forEach>
 						</div>
 					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
+					<c:if test="${not empty MyProductList}">
 					<button class="btn btn-default" style="float:right;">삭제</button>
+					</c:if>
 					<p style="clear:both"/>
 					</form>
 					
                     <!-- 페이지 번호 -->
+					<c:if test="${not empty MyProductList}">
                     <div>
 						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
+                    </c:if>
                     
 					</div>
                 </div>

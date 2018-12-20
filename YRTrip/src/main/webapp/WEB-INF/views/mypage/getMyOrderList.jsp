@@ -133,19 +133,27 @@ body {
 		    	$('div#getMyOrder').modal(true);
 			})
 	}); */
+</script>
+<script>
+	$(function() {
 		$('#getMyOrder').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
 			console.log(event);
 			var param = {
-				orderId :  button.attr("id")
+				orderId :  button.attr("id").substr(5)
 			}
 			$.getJSON("getMyOrder", param, function(data) {
 				var orderId = data.orderId;
-				var itemName = data.itemName;
+				var orderDate = data.orderDate;
+				var buyerId = data.buyerId;
+				console.log(orderId);
 				$("#orderId").html(orderId);
+				$("#orderDate").html(orderDate);
+				$("#buyerId").html(buyerId);
 				//$("#popup_itemId").html(itemId);
 			})
 		});
+	});
 </script>
 
 <script src="//use.typekit.net/xyl8bgh.js"></script>
@@ -205,7 +213,7 @@ body {
             			<p style="clear:both"/><br/>
 					</div>
                 	<div>
-                	<form action="deleteMyProductList">
+                	<form action="deleteMyOrderList">
 						<div class="container card" style="width:100%">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyOrderList}" var="order">
@@ -242,7 +250,7 @@ body {
 													<c:if test="${order.reviewContent != null}">리뷰완료</c:if>
 												</button></p>
 												<div class="post-meta">
-												<button type="button" class="btn btn-default pull-right" id="${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
+												<button type="button" class="btn btn-default pull-right" id="order${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
 												<span class="comments" style="font-size:15px; vertical-align: middle;">${order.orderPrice} 원 / ${order.orderEa} 개</span>
 											</div>
 										</div>
@@ -251,17 +259,21 @@ body {
 							</c:forEach>
 						</div>
 					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
-					<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
+					<c:if test="${not empty MyOrderList}">
+						<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
+					</c:if>
 					<p style="clear:both"/>
 					</form>
 					
                     <!-- 페이지 번호 -->
+					<c:if test="${not empty MyOrderList}">
                     <div>
 						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
+                    </c:if>
                     
 <!-- modal -->
-<div class="modal fade getMyOrder" id="getMyOrder">
+<div class="modal fade" id="getMyOrder">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- header -->
@@ -280,15 +292,15 @@ body {
 							<table style="width:100%; margin-left:10px">
 								<tr>
 									<td><h5 class="text-info">주문번호</h5></td>
-									<td style="text-align:right;"><h5 class="orderId" id="orderId">20181219-0001</h5></td>
+									<td style="text-align:right;"><h5 class="orderId" id="orderId"></h5></td>
 								</tr>
 								<tr>
 									<td><h5 class="text-info" style="color:#5f768b;">주문일자</h5></td>
-									<td style="text-align:right;"><h5 class="orderDate" id="orderDate">2018/12/19</h5></td>
+									<td style="text-align:right;"><h5 class="orderDate" id="orderDate"></h5></td>
 								</tr>
 								<tr>
 									<td><h5 class="text-info" style="color:#5f768b;">주문자</h5></td>
-									<td style="text-align:right;"><h5 class="buyerId" id="buyerId">손애선</h5></td>
+									<td style="text-align:right;"><h5 class="buyerId" id="buyerId"></h5></td>
 								</tr>
 							</table>
 							</div><br/>
@@ -318,5 +330,6 @@ body {
     <!--   end of about us area-->
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="resources/js/mypage.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

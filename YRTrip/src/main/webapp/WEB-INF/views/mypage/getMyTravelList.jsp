@@ -181,6 +181,8 @@ body {
             			<p style="clear:both"/><br/>
 					</div>
                 	<div>
+                	
+                	<!-- 선택 삭제 -->
                 	<form action="deleteMyTravelList">
 						<div class="container card" style="width:100%">
 							<!-- Normal Demo-->
@@ -223,9 +225,11 @@ body {
 					</form>
 					
                     <!-- 페이지 번호 -->
+                    <c:if test="${not empty MyTravelList}">
                     <div>
 						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
+                    </c:if>
                     
 					</div>
                 </div>
