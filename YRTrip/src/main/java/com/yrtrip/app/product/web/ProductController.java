@@ -1,10 +1,13 @@
 package com.yrtrip.app.product.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,6 +16,7 @@ import com.yrtrip.app.product.CartService;
 import com.yrtrip.app.product.CartVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.user.UserVO;
 
 @Controller
 public class ProductController {
@@ -97,22 +101,37 @@ public class ProductController {
 		
 	//장바구니 폼(찜 목록 이랑 비슷)
 	@RequestMapping("/getCartList")
-	public String getCartListForm(Model model, CartVO vo) {
+	public String getCartListForm(Model model, CartVO vo, HttpSession session) {		
+		vo.setMyId(((UserVO)session.getAttribute("login")).getUserId());
 		model.addAttribute("cartList", cartService.getCartList(vo));
 		return "product/getCartList";
 	}
+	
+	/*@RequestMapping(value="/getCartList", method=RequestMethod.POST)
+	public String getCartListForm(Model model, CartVO vo, @RequestParam String myId) {
+		model.addAttribute("myId", myId);
+		return "redirect:getCartList";
+	}*/
+	
+	
 	
 	//뷰안에 넣을 컬럼값들이 없으면 뷰에 redirect해도 안나오나...? 그래서 그런건가...
 	//장바구니 insert 처리
 	@RequestMapping("/insertCart")
 	public String insertCart(CartVO vo) {
 		cartService.insertCart(vo);
-		return "product/getCartList";
+		return "redirect:getCartList";
 	}
-	
-	/*@RequestMapping("/deleteCart")
+	//장바구니 수정 처리 : itemEa, cartid,
+	@RequestMapping("/updateCart")
+	public String updateCart(CartVO vo) {
+		cartService.updateCart(vo);
+		return "redirect:getCartList";
+	}
+	//장바구니 삭제 처리 : cartid
+	@RequestMapping("/deleteCart")
 	public String deleteCart(CartVO vo) {
 		cartService.deleteCart(vo);
-		return "redirect:getCartList?myId=";
-	}*/
+		return "redirect:getCartList";
+	}
 }

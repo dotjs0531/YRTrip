@@ -3,8 +3,10 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cart">
 <select id="getCartList" resultType="cart">
-		SELECT CART_ID,
+		SELECT 	ITEM_NAME,
+				CART_ID,
 				MY_ID,
+				ITEM_Method,
 				c.ITEM_ID as ITEM_ID,
 				c.ITEM_EA as ITEM_EA,
 				CART_DATE,
@@ -15,7 +17,7 @@
 		FROM CART c, ITEMT i
 		WHERE (i.item_id = c.item_id 
 		and MY_ID = #{myId})
-		ORDER BY CART_DATE
+		ORDER BY CART_DATE DESC
 	</select>
 	<select id="getCart" resultType="cart">
 		 SELECT CART_ID,
@@ -46,9 +48,9 @@
 	</insert>
 	<update id="updateCart" parameterType="cart">
 		UPDATE CART SET
-				ITEM_EA = #{itemEa}
+				ITEM_EA = #{itemEa},
 				CART_DATE = sysdate
-				where MY_ID = #{myId} and item_Id=#{itemId}
+				where CART_ID=#{cartId}
 	</update>
 	<delete id="deleteCart">
 		DELETE FROM CART

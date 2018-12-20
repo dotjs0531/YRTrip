@@ -43,9 +43,11 @@
 }
 </style>
 <script>
-	$(function() {
-		$('#insertBtn').click()
-	});
+	/* function insertCartbtn(){
+		var s = document.getElementById('myId').value;
+		var url = 'getCartList.jsp?myId=' + encodeURI(s);
+		window.location.href = url;
+	} */
 </script>
 </head>
 <body>
@@ -151,7 +153,7 @@
 
 								<!-- 오른쪽 아래 -->
 								<div class="product-payment-details">
-									<form action="./insertCart" method="post">
+									<form action="./insertCart">
 									<p class="last-sold text-muted">
 										<small>몇개팔렸을까여?</small><small class="pull-right">작성일</small>
 									</p>
@@ -169,20 +171,20 @@
 									<label for="quant">수량</label> <input type="number"
 										name="itemEa" min="1" id="quant" value=""
 										class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
+										<input type="hidden" value="${sessionScope.login.userId}" name="myId">
+									<input type="hidden" value="${product.itemId}" name="itemId">
 									<!-- </form> -->
 									<div class="order-buton align-content-sm-center">
 										<!-- 테스터 -->
-										<a class="col btn btn-lg btn-block btn-light"
+										<a role="button" class="col btn btn-lg btn-block btn-light"
 											href="./getCartList?myId=${sessionScope.login.userId}">
 											전체 장바구니 보기${sessionScope.login.userId}</a>
-											<button class="col btn btn-lg btn-block btn-light" type="submit">장바구니담기</button> 
-											
-											<a class="col btn btn-lg btn-block">대화하기</a>
-										<a class="btn btn-lg btn-block btn-light"
+											<button class="col btn btn-lg btn-block" type="submit">장바구니담기</button>
+											<a role="button" class="col btn btn-lg btn-block">대화하기</a>
+										<a role="button" class="btn btn-lg btn-block btn-light"
 											href="./purchasingProduct">구매하기</a>
 									</div>
-									<input type="hidden" value="${sessionScope.login.userId}" name="myId">
-									<input type="hidden" value="${product.itemId}" name="itemId">
+									
 									
 								</form>
 								</div>

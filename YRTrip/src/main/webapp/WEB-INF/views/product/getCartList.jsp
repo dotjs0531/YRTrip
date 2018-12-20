@@ -28,7 +28,9 @@
 }
 </style>
 <script>
-	$(function() {
+	/* $(function() {
+		var list = new Array();
+		$(".my-0").html();
 		if($('#itemAva').val()=='구매가능'){
 			if ($('#itemCon').text()=='카드결제') {
 				$('#p_togglebtn').text('결제하기');
@@ -41,14 +43,14 @@
 			$("#p_togglebtn").removeAttr("style");
 			$('#p_togglebtn').text('구매불가');
 		}
-	});
+	}); */
 </script>
 </head>
 
 <body class="bg-light">
 	<section class="about_us_area" id="about">
 		<div class="container">
-			<div class="py-5 text-center">
+			<div class="py-5 text-center">	
 				<h2>장바구니(찜리스트)${sessionScope.login.userId}</h2>
 				<p class="lead">
 					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
@@ -65,28 +67,47 @@
 
 					<ul class="list-group mb-3">
 					<c:forEach items="${cartList}" var="cart" varStatus="status">
+					
 						<li class="list-group-item d-flex justify-content-between lh-condensed">
 							<div>
-								<input type="hidden" value="${cart.cartId}">
-								<input type=hidden id="itemAva" value="${cart.itemOrderdetail}">
+								
+								<!-- <label class='col-sm-2 control-label'> 정렬하게 해주는거 -->
 									<h3 class="my-0">${cart.itemName}</h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
-									<small class="text-muted" id="itemCon">${cart.itemCondition}</small> <br>
-									
+									<small class="text-muted">${cart.itemCondition}</small> <br>
+									<small class="text-muted">선택수량:${cart.itemEa}</small> <br>
 							</div> 
 							<span class="text-muted">￦${cart.itemPrice}</span> 
 							<!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
-								<input class="form-control col-md-1" type="text" value="${cart.itemEa}" />
-								<a>수정</a>
+							<!-- <form action="./updateCart"> -->
+								<input type="hidden" value="${cart.cartId}">
+								<input class="form-control col-md-1" type="text" value="${cart.itemEa}">
+								<button type="submit" class="btn-link">수정</button>
+							<!-- </form> -->
 							<div>
 								<!-- if getproduct에서 가져온 itemOrderdetail상태가 구매가능 일때는 색상 : #f9bf3b
               if get~~~~~~~~~~~~~ ITEM_METHOD가 직접판매, 현금결제일때는 : 채팅으로 연결되도록
               	 ~~~~~~~~~~~~~~~~ ITEM_METHOD가 카드결제 	    일때는   : 바로 주문서로  -->
-								<a class="btn btn-lg btn-block"
-									style="background-color: #f9bf3b; color: white;"
-									id="p_togglebtn">대화하기</a>
+								<c:choose>
+									<c:when test="${cart.itemOrderdetail eq '구매가능'}" >
+										<c:choose>											
+											<c:when test="${cart.itemMethod eq '현금결제'}"><button class="btn btn-lg btn-block"	style="background-color: #f9bf3b; color: white;">대화하기</button></c:when>
+											<c:otherwise><button class="btn btn-lg btn-block" style="background-color: #f9bf3b; color: white;">결제하기</button></c:otherwise>
+										
+										</c:choose>
+									</c:when>
+
+									<c:otherwise>
+									<button class="btn btn-lg btn-block btn-light disabled">
+									구매불가
+									</button>
+									</c:otherwise>
+
+									</c:choose>
+									</a>
 								 <%-- href="./deleteCart?CartId=${cartId}" --%>
-								<a class="btn btn-lg btn-block">취소하기</a>
+								 
+								<a role="button" class="btn btn-lg btn-link" href="./deleteCart?cartId=${cart.cartId}">취소하기</a>
 							</div>
 						</li>
 					</c:forEach>
@@ -147,35 +168,20 @@
 						(
 								function() {
 									'use strict';
-
-									window
-											.addEventListener(
-													'load',
-													function() {
-														// Fetch all the forms we want to apply custom Bootstrap validation styles to
-														var forms = document
-																.getElementsByClassName('needs-validation');
-
-														// Loop over them and prevent submission
-														var validation = Array.prototype.filter
-																.call(
-																		forms,
-																		function(
-																				form) {
-																			form
-																					.addEventListener(
-																							'submit',
-																							function(
-																									event) {
-																								if (form
-																										.checkValidity() === false) {
-																									event
-																											.preventDefault();
-																									event
-																											.stopPropagation();
+									window.addEventListener(
+									'load',
+								function() {
+								// Fetch all the forms we want to apply custom Bootstrap validation styles to
+								var forms = document.getElementsByClassName('needs-validation');
+								// Loop over them and prevent submission
+								var validation = Array.prototype.filter.call(
+												forms,
+												function(form) {form.addEventListener('submit',function(event) {
+																							if (form.checkValidity() === false) {
+																									event.preventDefault();
+																									event.stopPropagation();
 																								}
-																								form.classList
-																										.add('was-validated');
+																								form.classList.add('was-validated');
 																							},
 																							false);
 																		});

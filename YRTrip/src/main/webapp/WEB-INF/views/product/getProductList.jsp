@@ -43,9 +43,11 @@
 			$.getJSON("getProductAjax", param, function(data) {
 				var itemId = data.itemId;
 				var itemName = data.itemName;
+				var itemContent = data.itemContent;
 				console.log(itemId);
 				$("#modal-title").html(itemName);
 				$("#popup_itemId").html(itemId);
+				$("#popup_itemContent").html(itemContent);
 			})
 		});
 	});
@@ -168,13 +170,13 @@
 										<div class="btn-ground text-center">
 											<button type="button" class="btn"
 												style="background-color: #f9bf3b; color: white">
-												<i class="fa fa-shopping-cart"></i> Add To Cart
+												<i class="fa fa-shopping-cart"></i> 장바구니
 											</button>
 											<div class="space-two"></div>
 											<button id="item${product.itemId}" type="button" class="btn"
 												style="background-color: #f9bf3b; color: white"
 												data-toggle="modal" data-target="#product_view">
-												<i class="fa fa-search"></i>&nbsp; Quick View
+												<i class="fa fa-search"></i>&nbsp; 퀵 뷰
 											</button>
 										</div>
 										<div class="space-ten"></div>
@@ -203,7 +205,7 @@
 										</div>
 										<div class="col-md-6 product_content">
 											<h4>
-												<span class="pull-right" id="popup_itemId">제품번호:</span>
+												<span class="pull-right" id="popup_itemId"></span>
 											</h4>
 											<div class="rating">
 												<span class="glyphicon glyphicon-star"></span> <span
@@ -213,12 +215,10 @@
 													class="glyphicon glyphicon-star"></span>
 												<!-- rating  -->
 											</div>
-											<p>${product.itemContent}</p>
-											<h3 class="cost">
-												<span class="glyphicon glyphicon-usd"></span><small
-													class="pre-cost"><span
-													class="glyphicon glyphicon-usd"></span></small>
-											</h3>
+											<p></p>
+											<h3> 상세설명 </h3>
+												<div id="popup_itemContent" class="pull-right">
+												</div>
 											<div class="row">
 												<div class="col-md-4 col-sm-6 col-xs-12">
 													<select class="form-control" name="select">
@@ -253,12 +253,10 @@
 											<div class="space-ten"></div>
 											<div class="btn-ground">
 												<button type="button" class="btn btn-primary">
-													<span class="glyphicon glyphicon-shopping-cart"></span> Add
-													To Cart
+													<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니
 												</button>
 												<button type="button" class="btn btn-primary">
-													<span class="glyphicon glyphicon-heart"></span> Add To
-													Wishlist
+													<span class="glyphicon glyphicon-heart"></span> 판매자와 대화
 												</button>
 											</div>
 										</div>
