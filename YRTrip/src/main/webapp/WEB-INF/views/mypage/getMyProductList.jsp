@@ -133,9 +133,10 @@ body {
 		$('#getMyBuyerList').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
 			console.log(event);
-			var param = { itemId :  button.attr("id").substr(5) }
+			var param = { itemId :  button.attr("id").substr(5) };
 			$.getJSON("getMyBuyerList", param, function(datas) {
 				for(i=0; i<datas.legnth; i++) {
+					console.log(datas[i].buyerId);
 					var div = makeBuyerListView(datas[i]);
 					$(div).appendTo("#MyBuyerList");
 				}
@@ -144,11 +145,11 @@ body {
 		
 		function makeBuyerListView(buyer) {
 			var div =$("<div class='form-group'>");
-			div.attr("id", "c"+buyer.buyerList);
-			div.addClass('buyerList');
+			div.attr("id", "c"+buyer.buyerId);
+			div.addClass('MyBuyerList');
 			div[0].buyerList = buyer;
 			
-			var str = "<p/><label class='col-sm-2 control-label'>" + buyer.itemId + "</label>" 
+			var str = "<p/><label class='col-sm-2 control-label'>" + buyer.buyerId + "</label>" 
 	        +"<span class='col-lg-8 qnaContent'>" + buyer.buyerId +"</span>"
 			+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">송장번호등록</button>";
 			div.html(str);
@@ -244,7 +245,7 @@ body {
 											<h2 class="sub_title">${product.itemCategory}</h2>
 											<p class="description">${product.itemContent}</p>
 											<div class="post-meta">
-												<button type="button" class="btn btn-default pull-right" id="buyer${order.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button>
+												<button type="button" class="btn btn-default pull-right" id="buyer${product.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button>
 												<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
 												<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
 											</div>
@@ -259,8 +260,9 @@ body {
 					</c:if>
 					<p style="clear:both"/>
 					</form>
-					<!-- 리뷰작성 페이지 -->			
-					  <!-- 구매자 목록 보기 -->
+					<!-- 리뷰작성 페이지 -->
+					
+					<!-- 구매자 목록 보기 -->
 					<div class="modal fade" id="getMyBuyerList">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -275,11 +277,8 @@ body {
 										<div id="login-row" class="row justify-content-center align-items-center">
 											<div id="login-column" class="col-md-6">
 												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-														<input type="hidden" id="reviewId" name="orderId">
-														<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
-														<div id="MyBuyerList"></div>
-													</div>
+													<h4 class="text-info" style="color:black;">구매자 목록</h4><hr/>
+													<div id="MyBuyerList"></div>
 												</div>
 											</div>
 										</div>
@@ -288,6 +287,7 @@ body {
 							</div> <!-- end of modal-content -->
 						</div> 
 					</div> <!-- end of modal -->
+					
                     <!-- 페이지 번호 -->
 					<c:if test="${not empty MyProductList}">
                     <div>
