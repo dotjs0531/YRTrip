@@ -26,6 +26,7 @@ public interface MyPageService {
 	public int getMyProductCount(ProductVO vo);
 	public List<ProductVO> getMyProductList(ProductVO vo);
 	public void deleteMyProductList(ProductVO vo);
+	public List<OrderVO> getMyBuyerList(OrderVO vo);
 	
 	//거래내역
 	public int getMyOrderCount(OrderVO vo);

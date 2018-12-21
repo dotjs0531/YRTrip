@@ -70,6 +70,9 @@ public class MyPageDAOMybatis {
 	public void deleteMyOrderList(OrderVO vo) {
 		mybatis.update("user.deleteMyOrderList", vo);
 	}
+	public List<OrderVO> getMyBuyerList(OrderVO vo) {
+		return mybatis.selectList("user.getMyBuyerList", vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {

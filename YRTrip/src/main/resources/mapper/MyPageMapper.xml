@@ -104,6 +104,18 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		WHERE ITEM_ID = -1
 	</if>
 </delete>
+<select id="getMyBuyerList" parameterType="order" resultType="order">
+	SELECT BUYER_ID,
+		   ORDER_DATE,
+		   ORDER_CONDITION,
+		   ORDER_DELIVERY,
+		   ORDER_PRICE,
+		   ORDER_EA,
+		   ITEM_DELIVERYNO
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	       AND O.ITEM_ID = #{itemId}
+</select>
 
 <!-- 거래내역 페이지 -->
 <select id="getMyOrderCount" parameterType="order" resultType="int">

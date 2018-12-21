@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
 <!-- 체크박스 -->
 <script src='//static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
@@ -127,7 +128,34 @@ body {
 		document.frm.submit();
 	};
 </script>
-
+<script>
+	$(function() {
+		$('#getMyBuyerList').on('show.bs.modal', function(e) {
+			var button = $(event.target) // Button that triggered the modal
+			console.log(event);
+			var param = { itemId :  button.attr("id").substr(5) }
+			$.getJSON("getMyBuyerList", param, function(datas) {
+				for(i=0; i<datas.legnth; i++) {
+					var div = makeBuyerListView(datas[i]);
+					$(div).appendTo("#MyBuyerList");
+				}
+			})
+		});
+		
+		function makeBuyerListView(buyer) {
+			var div =$("<div class='form-group'>");
+			div.attr("id", "c"+buyer.buyerList);
+			div.addClass('buyerList');
+			div[0].buyerList = buyer;
+			
+			var str = "<p/><label class='col-sm-2 control-label'>" + buyer.itemId + "</label>" 
+	        +"<span class='col-lg-8 qnaContent'>" + buyer.buyerId +"</span>"
+			+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">송장번호등록</button>";
+			div.html(str);
+			return div;
+		};
+	});
+</script>
 <script src="//use.typekit.net/xyl8bgh.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
@@ -160,7 +188,6 @@ body {
                 </div>
                 <div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive">
-                	
                 		<!-- 페이징 처리 -->
                 		<form name="frm">
 							<input type="hidden" name="sellerId" value="${sessionScope.login.userId}"/>
@@ -217,6 +244,7 @@ body {
 											<h2 class="sub_title">${product.itemCategory}</h2>
 											<p class="description">${product.itemContent}</p>
 											<div class="post-meta">
+												<button type="button" class="btn btn-default pull-right" id="buyer${order.itemId}" data-toggle="modal" data-target="getMyBuyerList">구매자 목록</button>
 												<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
 												<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
 											</div>
@@ -231,7 +259,8 @@ body {
 					</c:if>
 					<p style="clear:both"/>
 					</form>
-					
+					<!-- 리뷰작성 페이지 -->			
+
                     <!-- 페이지 번호 -->
 					<c:if test="${not empty MyProductList}">
                     <div>
@@ -243,9 +272,40 @@ body {
                 </div>
             </div>
         </div>
+        
+        <!-- 구매자 목록 보기 -->
+<div class="modal fade" id="getMyBuyerList">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+
+			<!-- body -->
+			<div class="modal-body">
+				<div class="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+									<input type="hidden" id="reviewId" name="orderId">
+									<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
+									<div id="MyBuyerList"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	<!-- end of modal-body -->
+		</div> <!-- end of modal-content -->
+	</div> 
+</div> <!-- end of modal -->
     </section>
     <!--   end of about us area-->
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="resources/js/mypage.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

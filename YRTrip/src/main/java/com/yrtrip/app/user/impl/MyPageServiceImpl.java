@@ -55,6 +55,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public void deleteMyProductList(ProductVO vo) {
 		dao.deleteMyProductList(vo);
 	}
+	public List<OrderVO> getMyBuyerList(OrderVO vo) {
+		return dao.getMyBuyerList(vo);
+	}
 	
 	//거래내역
 	public int getMyOrderCount(OrderVO vo) {

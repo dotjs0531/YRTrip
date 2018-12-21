@@ -2,6 +2,7 @@ package com.yrtrip.app.user.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -107,6 +108,11 @@ public class MyPageController {
 		mypageService.deleteMyProductList(vo);
 		return "redirect:getMyProductList";
 	}
+	@RequestMapping("getMyBuyerList")
+	@ResponseBody
+	public List<OrderVO> getMyBuyerList(OrderVO vo) {	//구매자 목록보기
+		return mypageService.getMyBuyerList(vo);
+	}
 
 	//거래내역 페이지
 	@RequestMapping(value = "/getMyOrderList", method = RequestMethod.GET)
@@ -133,7 +139,7 @@ public class MyPageController {
 	}
 	@RequestMapping("getMyOrder")
 	@ResponseBody
-	public OrderVO getMyOrder(OrderVO vo) {
+	public OrderVO getMyOrder(OrderVO vo) {	//거래내역 상세보기
 		return mypageService.getMyOrder(vo);
 	}
 	@RequestMapping("/deleteMyOrderList") //거래내역 선택 삭제
