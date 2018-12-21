@@ -176,7 +176,34 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	 WHERE BUYER_ID = #{buyerId}
   ORDER BY REVIEW_DATE DESC
 </select>
-<update id="deleteMyReviewList" parameterType="order">
+<select id="getMyReview" parameterType="order" resultType="order">
+	SELECT BUYER_ID,
+		   REVIEW_STAR,
+		   REVIEW_CONTENT,
+		   TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') REVIEW_DATE,
+		   REVIEW_PIC,
+		   ITEM_NAME,
+		   ORDER_EA,
+		   ORDER_ID
+	  FROM REVIEWV
+	 WHERE BUYER_ID = #{buyerId}
+		   AND ORDER_ID = #{orderId}
+  ORDER BY REVIEW_DATE DESC
+</select>
+<update id="insertMyReview" parameterType="order">
+	UPDATE ORDERT SET REVIEW_STAR = #{reviewStar},
+					  REVIEW_CONTENT = #{reviewContent},
+					  REVIEW_DATE = sysdate,
+					  REVIEW_PIC = #{reviewPic}
+	  			WHERE ORDER_ID = #{orderId}
+</update>
+<update id="updateMyReview" parameterType="order">
+	UPDATE ORDERT SET REVIEW_STAR = #{reviewStar},
+					  REVIEW_CONTENT = #{reviewContent},
+					  REVIEW_PIC = #{reviewPic}
+	  			WHERE ORDER_ID = #{orderId}
+</update>
+<update id="deleteMyReview" parameterType="order">
 	UPDATE ORDERT SET REVIEW_STAR = NULL,
 					  REVIEW_CONTENT = NULL,
 					  REVIEW_DATE = NULL,

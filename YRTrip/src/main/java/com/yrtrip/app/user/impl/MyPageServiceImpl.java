@@ -77,7 +77,16 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<OrderVO> getMyReviewList(OrderVO vo) {
 		return dao.getMyReviewList(vo);
 	}
-	public void deleteMyReviewList(OrderVO vo) {
-		dao.deleteMyReviewList(vo);
+	public OrderVO getMyReview(OrderVO vo) {
+		return dao.getMyReview(vo);
+	}
+	public void insertMyReview(OrderVO vo) {
+		dao.insertMyReview(vo);
+	}
+	public void updateMyReview(OrderVO vo) {
+		dao.updateMyReview(vo);
+	}
+	public void deleteMyReview(OrderVO vo) {
+		dao.deleteMyReview(vo);
 	}
 }

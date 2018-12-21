@@ -35,7 +35,7 @@
                 </div>
                 
                 <div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:420px;">
+                	<div class="table-responsive" style="min-height:450px;">
                 	
                 		<!-- 검색 창 & 페이징 처리 -->
                 		<form name="frm" class="form-inline">
@@ -86,7 +86,8 @@
 							<c:forEach items="${qnaList}" var="qna">
 								<tr>
 									<td>${qna.qnaId}</td>
-									<td><a style="color:black;" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}</a></td>
+									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
+										overflow: hidden; width:420px;" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}</a></td>
 									<td>${qna.userName}</td>
 									<td>${qna.qnaDate}</td>
 									<td>${qna.qnaAnswer}</td>
@@ -98,13 +99,13 @@
                     
                     <!-- 글 등록 버튼 -->
                     <section >
-                        <div class="order-buton" style="padding-top:150px;float:right">
+                        <div class="order-buton" style="padding-top:160px;float:right">
                             <a href="${pageContext.request.contextPath}/insertQna">등록</a>
                         </div>
                     </section>
                     
                     <!-- 페이지 번호 -->
-                    <div style="padding-top:200px;">
+                    <div style="padding-top:210px;">
 						<my:paging paging="${paging}" jsFunc="go_page" />
                     </div>
                 </div>

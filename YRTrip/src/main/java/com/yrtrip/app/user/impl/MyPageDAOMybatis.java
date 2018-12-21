@@ -75,10 +75,19 @@ public class MyPageDAOMybatis {
 	public int getMyReviewCount(OrderVO vo) {
 		return mybatis.selectOne("user.getMyReviewCount", vo);
 	}
-	public List<OrderVO> getMyReviewList(OrderVO vo)  {
+	public List<OrderVO> getMyReviewList(OrderVO vo) {
 		return mybatis.selectList("user.getMyReviewList", vo);
 	}
-	public void deleteMyReviewList(OrderVO vo) {
-		mybatis.update("user.deleteMyReviewList", vo);
+	public OrderVO getMyReview(OrderVO vo) {
+		return mybatis.selectOne("user.getMyReview", vo);
+	}
+	public void insertMyReview(OrderVO vo) {
+		mybatis.update("user.insertMyReview", vo);
+	}
+	public void updateMyReview(OrderVO vo) {
+		mybatis.update("user.updateMyReview", vo);
+	}
+	public void deleteMyReview(OrderVO vo) {
+		mybatis.update("user.deleteMyReview", vo);
 	}
 }

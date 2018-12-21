@@ -19,7 +19,7 @@ public class OrderVO extends ProductVO {
 	private String[] orderNoList;	//거래내역 선택삭제
 	
 	//리뷰 테이블
-	private int reviewStar;					//리뷰 별점
+	private float reviewStar;				//리뷰 별점
 	private String reviewContent;			//리뷰 내용
 	private String reviewDate;				//리뷰 등록일
 	private String reviewPic;				//리뷰 사진
@@ -87,10 +87,10 @@ public class OrderVO extends ProductVO {
 		this.orderNoList = orderNoList;
 	}
 	
-	public int getReviewStar() {
+	public float getReviewStar() {
 		return reviewStar;
 	}
-	public void setReviewStar(int reviewStar) {
+	public void setReviewStar(float reviewStar) {
 		this.reviewStar = reviewStar;
 	}
 	public String getReviewContent() {

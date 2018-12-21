@@ -36,5 +36,8 @@ public interface MyPageService {
 	//리뷰
 	public int getMyReviewCount(OrderVO vo);
 	public List<OrderVO> getMyReviewList(OrderVO vo);
-	public void deleteMyReviewList(OrderVO vo);
+	public OrderVO getMyReview(OrderVO vo);
+	public void insertMyReview(OrderVO vo);
+	public void updateMyReview(OrderVO vo);
+	public void deleteMyReview(OrderVO vo);
 }

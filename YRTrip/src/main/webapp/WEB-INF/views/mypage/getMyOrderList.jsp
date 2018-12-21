@@ -10,7 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- 별점 등록부분 -->
+<link href="resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="resources/js/star-rating.js" type="text/javascript"></script>
+    
 <!-- 체크박스 -->
 <script src='//static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
 <script src='//static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
@@ -137,9 +142,16 @@ body {
 <script>
 /* 리뷰등록 modal */
 jQuery( document ).ready(function( $ ) {
-	   $("#insertReviewButton").click(function(){
-	    	$('div#insertReview').modal(true);
-		})
+		$("#fileInput").on('change', function(){  // 값이 변경되면
+			if(window.FileReader){  // modern browser
+				var filename = $(this)[0].files[0].name;
+			} else {  // old IE
+				var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+			}
+
+			// 추출한 파일명 삽입
+			$("#userfile").val(filename);
+		});
 });
 	$(function() {
 		$('#getMyOrder').on('show.bs.modal', function(e) {
@@ -166,6 +178,17 @@ jQuery( document ).ready(function( $ ) {
 				$("#orderEa").html(orderEa+"개");
 				$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 				$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+			})
+		});
+		$('#insertMyReviewForm').on('show.bs.modal', function(e) {
+			var button = $(event.target) // Button that triggered the modal
+			console.log(event);
+			var param = {
+				orderId :  button.attr("id").substr(6)
+			}
+			$.getJSON("getMyOrder", param, function(data) {
+				var orderId = data.orderId;
+				$("#reviewId").val(orderId);
 			})
 		});
 	});
@@ -260,7 +283,7 @@ jQuery( document ).ready(function( $ ) {
 													<c:if test="${order.orderCondition eq '결제완료'}">구매확정</c:if>
 													<c:if test="${order.orderCondition eq '거래완료'}">확정완료</c:if>
 												</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<button type="button" class="btn btn-default" id="insertReviewButton">
+												<button type="button" class="btn btn-default" id="review${order.orderId}" data-toggle="modal" data-target="#insertMyReviewForm">
 													<c:if test="${order.reviewContent == null}">리뷰작성</c:if>
 													<c:if test="${order.reviewContent != null}">리뷰완료</c:if>
 												</button></p>
@@ -377,7 +400,7 @@ jQuery( document ).ready(function( $ ) {
 
 
 <!-- 리뷰작성 페이지 -->			
-<div class="modal fade" id="insertReview">
+<div class="modal fade" id="insertMyReviewForm">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- header -->
@@ -393,15 +416,28 @@ jQuery( document ).ready(function( $ ) {
 						<div id="login-column" class="col-md-6">
 							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
             					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-								<form id="/insertReview" action="./insertReview" method="post" enctype="multipart / form-data">	
-									<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>									
-									<input type="hidden" name="buyerId" class="form-control" value="${sessionScope.login.userId}">
+								<form action="./insertMyReview" method="post" enctype="multipart/form-data">										
+									<input type="hidden" id="reviewId" name="orderId">
+									<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
 									<div class="form-group">
-										<img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" />
+										<!-- <img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" /> -->
 										<!-- 별점 등록 부분 -->
-										<h5 >만족도 : ★★★★★</h5>
+										<input id="input-2" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1">
 										<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요."></textarea>
-										<input multiple="multiple"  type="file" name="filename[]" />
+										<!-- 다중 파일 첨부 -->
+										<!-- <input multiple="multiple"  type="file" name="filename[]" /> -->
+										<!-- 사진 등록 부분 -->
+			 							<input type="file" name="reviewPicFile" id="fileInput" data-class-button="btn btn-default"
+												data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control"
+												tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
+										<div class="bootstrap-filestyle input-group">
+											<input type="text" id="userfile" class="form-control" name="userfile" disabled="">
+											<span class="group-span-filestyle input-group-btn" tabindex="0">
+												<label for="fileInput" class="btn btn-default ">
+													<span class="glyphicon fa fa-upload"></span>
+												</label>
+											</span>
+										</div>
 									</div>
 									<div class="form-group">
 										<input type="submit" class="btn btn-default"  style="float:right;" value="등록">
@@ -429,7 +465,7 @@ jQuery( document ).ready(function( $ ) {
 		</div> <!-- end of modal-content -->
 	</div> 
 </div> <!-- end of modal -->
-
+						</div>
 					</div>
                 </div>
             </div>
@@ -628,5 +664,69 @@ jQuery( document ).ready(function( $ ) {
     }
 </script> -->
 
+    <script>
+        jQuery(document).ready(function () {
+            $("#input-21f").rating({
+                starCaptions: function (val) {
+                    if (val < 3) {
+                        return val;
+                    } else {
+                        return 'high';
+                    }
+                },
+                starCaptionClasses: function (val) {
+                    if (val < 3) {
+                        return 'label label-danger';
+                    } else {
+                        return 'label label-success';
+                    }
+                },
+                hoverOnClear: false
+            });
+            var $inp = $('#rating-input');
+
+            $inp.rating({
+                min: 0,
+                max: 5,
+                step: 1,
+                size: 'lg',
+                showClear: false
+            });
+
+            $('#btn-rating-input').on('click', function () {
+                $inp.rating('refresh', {
+                    showClear: true,
+                    disabled: !$inp.attr('disabled')
+                });
+            });
+
+
+            $('.btn-danger').on('click', function () {
+                $("#kartik").rating('destroy');
+            });
+
+            $('.btn-success').on('click', function () {
+                $("#kartik").rating('create');
+            });
+
+            $inp.on('rating.change', function () {
+                alert($('#rating-input').val());
+            });
+
+
+            $('.rb-rating').rating({
+                'showCaption': true,
+                'stars': '3',
+                'min': '0',
+                'max': '3',
+                'step': '1',
+                'size': 'xs',
+                'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
+            });
+            $("#input-21c").rating({
+                min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
+            });
+        });
+    </script>
 </body>
 </html>

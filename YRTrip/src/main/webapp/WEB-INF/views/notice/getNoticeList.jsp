@@ -35,7 +35,7 @@
                 </div>
                 
 				<div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:450px;">
+                	<div class="table-responsive" style="min-height:500px;">
                 	
                 		<!-- 검색 창 & 페이징 처리 -->
                 		<form name="frm" class="form-inline">
@@ -66,7 +66,9 @@
 							<c:forEach items="${noticeList}" var="notice">
 								<tr>
 									<td>${notice.noticeId}</td>
-									<td><a style="color:black;" href="./getNotice?noticeId=${notice.noticeId}">${notice.noticeTitle}</a></td>
+									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
+										overflow: hidden; width:420px" href="./getNotice?noticeId=${notice.noticeId}">
+											${notice.noticeTitle}</a></td>
 									<td>${notice.userName}</td>
 									<td>${notice.noticeDate}</td>
 									<td>${notice.noticeHit}</td>
@@ -79,7 +81,7 @@
                     <!-- 글 등록 버튼 -->
                     <c:if test="${sessionScope.login.userGrant eq 'admin'}">
                     <section >
-                        <div class="order-buton" style="float:right; padding-top:10px;">
+                        <div class="order-buton" style="float:right; padding-top:15px;">
                             <a href="${pageContext.request.contextPath}/insertNotice">등록</a>
                         </div>
                     </section>

@@ -1,5 +1,9 @@
 package com.yrtrip.app.user.web;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
@@ -161,9 +166,36 @@ public class MyPageController {
 		mv.setViewName("mypage/getMyReviewList");
 		return mv;
 	}
-	@RequestMapping("/deleteMyReviewList") //리뷰 삭제
-	public String deleteMyReviewList(OrderVO vo) {
-		mypageService.deleteMyReviewList(vo);
+	@RequestMapping("insertMyReview") //리뷰 등록
+	public String insertMyReview(Model model, OrderVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		model.addAttribute("MyOrder", mypageService.getMyOrder(vo));
+		
+		String path = request.getSession().getServletContext().getRealPath("/images/review");
+
+		MultipartFile reviewPicFile = vo.getReviewPicFile();
+		if (!reviewPicFile.isEmpty() && reviewPicFile.getSize() > 0) {
+			String filename = reviewPicFile.getOriginalFilename();
+			reviewPicFile.transferTo(new File(path, filename));
+
+			vo.setReviewPic(filename);
+		}
+		mypageService.insertMyReview(vo);
+		return "redirect:getMyReviewList";
+	}
+	@RequestMapping("/getMyReview") //리뷰 조회
+	@ResponseBody
+	public OrderVO getMyReview(OrderVO vo) {
+		return mypageService.getMyReview(vo);
+	}
+	@RequestMapping("updateMyReview") //리뷰 수정
+	public String updateMyReview(Model model, OrderVO vo) {
+		mypageService.updateMyReview(vo);
+		model.addAttribute("MyReview", mypageService.getMyReview(vo));
+		return "redirect:getMyReviewList";
+	}
+	@RequestMapping("/deleteMyReview") //리뷰 삭제
+	public String deleteMyReview(OrderVO vo) {
+		mypageService.deleteMyReview(vo);
 		return "redirect:getMyReviewList";
 	}
 }

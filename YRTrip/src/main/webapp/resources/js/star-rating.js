@@ -588,19 +588,9 @@
     };
 
     $.fn.ratingLocales.en = {
-        defaultCaption: '',
-        starCaptions: {
-            0.5: '',
-            1: '',
-            1.5: '',
-            2: '',
-            2.5: '',
-            3: '',
-            3.5: '',
-            4: '',
-            4.5: '',
-            5: ''
-        },
+            defaultCaption: '{rating} Stars',
+            starCaptions: {
+            },
         clearButtonTitle: 'Clear',
         clearCaption: 'Not Rated'
     };
