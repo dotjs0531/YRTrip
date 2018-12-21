@@ -56,20 +56,20 @@ public class TravelBoardController {
 		return "travel/getTravelBoard";
 	}
 
-//모달 등록폼
+//모달 등록처리
 	@RequestMapping(value = { "/insertTravelBoardform" }, method = RequestMethod.GET)
-	public String insertTravelBoardform() {
-		System.out.println("--------------------------sdgkljgfkljsdgkljdslgkj");
+	public String insertTravelBoardform(TravelBoardVO vo) {
+		travelBoardService.insertTravelBoard(vo);
 		return "travel/insertTravelBoard";
 	}
-
+	
+/*
 //모달 등록처리 
 	@RequestMapping(value = { "insertTravelBoard" }, method = RequestMethod.POST)
-	public String insertTravelBoard(TravelBoardVO vo) { // 커맨드 객체
+	public String insertTravelBoard(TravelBoardVO vo) { // 커맨드 객체		
 		travelBoardService.insertTravelBoard(vo); // 등록처리
-		System.out.println("--------------------------22222222222222222222222222222");
 		return "redirect:insertTravelBoard"; // insertTravelBoard.jsp로 이동
-	}
+	}*/
 
 //수정폼
 	@RequestMapping("/updateTravelBoardform")

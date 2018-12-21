@@ -117,7 +117,9 @@
 .mar-top {
 	margin-top: 15px;
 }
+
 </style>
+
 <script>
 /* 여행등록 modal */
 jQuery( document ).ready(function( $ ) {
@@ -126,10 +128,10 @@ jQuery( document ).ready(function( $ ) {
 		})
 });
 
-/* 여행등록 modal */
+/* 장소 추가 modal */
 jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelPlaceButton").click(function(){
-	    	$('div#insertTravelPlace').modal(true);
+	    	$('div#insertTravelPlaceDomestic').modal(true);
 		})
 });
 </script>
@@ -199,9 +201,16 @@ jQuery( document ).ready(function( $ ) {
 										<h2 class="panel-title">내가 방문한 장소를 등록하세요.</h2>
 									</div>
 										<div class="panel-body">
+										<c:if test="${travelBoard.searchCheckModal} == 'domestic'">
+										<button class="btn btn-sm btn-default" id="insertTravelPlaceButtonDomestic">
+													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 장소 추가</i>
+										</button>
+										</c:if>
+										<c:if test="${travelBoard.searchCheckModal} == 'overseas'">
 										<button class="btn btn-sm btn-default" id="insertTravelPlaceButton">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 장소 추가</i>
-												</button>
+										</button>
+										</c:if>
 										</div>
 								</article>
 
@@ -229,6 +238,71 @@ jQuery( document ).ready(function( $ ) {
 
 						</div>
 						<!-- end of table-responsive -->
+						
+<!-- 장소 추가 modal - domestic -->			
+<div class="modal fade" id="insertTravelPlaceDomestic">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+
+			<!-- body -->
+			<div class="modal-body">
+				<div class="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<div id="login-box" class="col-md-12">
+									<form action="./insertTravelPlace">
+										<div class="panel-body">
+
+										세계지도 지역 클릭 -> 구글API modal(장소명
+											placeName, 주소 placeAddress 입력됨)</div>
+
+										<ul class="list-group">
+											<li class="list-group-item">
+												<div class="form-group">
+													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+												</div>
+											</li>
+											<li class="list-group-item">
+												<div class="form-group">
+													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요.">
+												</div>
+											</li>
+											<li class="list-group-item">
+												<div class="form-group">
+													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요.">
+												</div>
+											</li>
+											<li class="list-group-item">
+												<div class="form-group">
+													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요.">
+												</div>
+											</li>
+											<li class="list-group-item" style="padding-left: 450px;">
+												<button class="btn btn-sm btn-default">
+													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
+												</button>
+											</li>
+										</ul>
+										<input type="hidden" value="${travelBoard.travelNo}" name="${placeTravelBoardNo}">
+									</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	<!-- end of modal-body -->
+		</div> <!-- end of modal-content -->
+	</div> 
+</div> <!-- end of modal -->
+						
 <!-- 장소 추가 modal -->			
 <div class="modal fade" id="insertTravelPlace">
 	<div class="modal-dialog">
@@ -247,6 +321,7 @@ jQuery( document ).ready(function( $ ) {
 							<div id="login-box" class="col-md-12">
 									<form action="./insertTravelPlace">
 										<div class="panel-body">
+
 										세계지도 지역 클릭 -> 구글API modal(장소명
 											placeName, 주소 placeAddress 입력됨)</div>
 
