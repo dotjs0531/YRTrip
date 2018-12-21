@@ -244,7 +244,7 @@ body {
 											<h2 class="sub_title">${product.itemCategory}</h2>
 											<p class="description">${product.itemContent}</p>
 											<div class="post-meta">
-												<button type="button" class="btn btn-default pull-right" id="buyer${order.itemId}" data-toggle="modal" data-target="getMyBuyerList">구매자 목록</button>
+												<button type="button" class="btn btn-default pull-right" id="buyer${order.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button>
 												<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
 												<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
 											</div>
@@ -260,7 +260,34 @@ body {
 					<p style="clear:both"/>
 					</form>
 					<!-- 리뷰작성 페이지 -->			
-
+					  <!-- 구매자 목록 보기 -->
+					<div class="modal fade" id="getMyBuyerList">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- header -->
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+								<!-- body -->
+								<div class="modal-body">
+									<div class="container">
+										<div id="login-row" class="row justify-content-center align-items-center">
+											<div id="login-column" class="col-md-6">
+												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+														<input type="hidden" id="reviewId" name="orderId">
+														<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
+														<div id="MyBuyerList"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	<!-- end of modal-body -->
+							</div> <!-- end of modal-content -->
+						</div> 
+					</div> <!-- end of modal -->
                     <!-- 페이지 번호 -->
 					<c:if test="${not empty MyProductList}">
                     <div>
@@ -272,36 +299,6 @@ body {
                 </div>
             </div>
         </div>
-        
-        <!-- 구매자 목록 보기 -->
-<div class="modal fade" id="getMyBuyerList">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- header -->
-			<div class="modal-header">
-				<!-- 닫기(x) 버튼 -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-
-			<!-- body -->
-			<div class="modal-body">
-				<div class="container">
-					<div id="login-row" class="row justify-content-center align-items-center">
-						<div id="login-column" class="col-md-6">
-							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-									<input type="hidden" id="reviewId" name="orderId">
-									<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
-									<div id="MyBuyerList"></div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>	<!-- end of modal-body -->
-		</div> <!-- end of modal-content -->
-	</div> 
-</div> <!-- end of modal -->
     </section>
     <!--   end of about us area-->
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
