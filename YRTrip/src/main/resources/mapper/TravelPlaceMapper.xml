@@ -99,7 +99,8 @@
 									PLACE_PIC,
 									USER_ID,
 									PLACE_TITLE,
-									PLACE_VISITDATE)
+									PLACE_VISITDATE,
+									PLACE_TRAVELBOARDNO)
 		VALUES (#{placeNo}, 
 				#{placeName}, 
 				#{placeAddress}, 
@@ -108,7 +109,8 @@
 				#{placePic}, 
 				#{userId}),
 				#{placeTitle},
-				#{placeVisitDate})
+				#{placeVisitDate},
+				#{placeTravelBoardNo})
 </insert>
 
 <update id="updateTravelPlace" parameterType="travelPlace">

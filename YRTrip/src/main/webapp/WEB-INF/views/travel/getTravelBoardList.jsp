@@ -197,7 +197,7 @@ $("#autocompleteTinfoList").change(function(){
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a id="insertTravelBoardButton">여행기 등록</a>
+	                        <a id="insertTravelBoardButton">새 여행기 등록</a>
 	                    </div>                   
 				</div>
 			</div>
@@ -339,7 +339,7 @@ $("#autocompleteTinfoList").change(function(){
 										<label class="text-info"></label>
 										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 									</div>
-									<input type="hidden" class="form-control" id="tinfoListDispModal" name="selectedTinfoModal">
+									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>
 						</div>
 					</div>

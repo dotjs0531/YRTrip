@@ -12,6 +12,7 @@ public class TravelPlaceVO {
 	private String placePic;
 	private String userId;
 	private String placeTitle;
+	private String placeVisitDate;
 	
 	private String searchKeyword;
 	private String searchCondition;
@@ -78,6 +79,12 @@ public class TravelPlaceVO {
 	}
 	public void setPlaceTitle(String placeTitle) {
 		this.placeTitle = placeTitle;
+	}
+	public String getPlaceVisitDate() {
+		return placeVisitDate;
+	}
+	public void setPlaceVisitDate(String placeVisitDate) {
+		this.placeVisitDate = placeVisitDate;
 	}
 	public String getSearchKeyword() {
 		return searchKeyword;
