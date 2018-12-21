@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="kor">
 <!-- 
@@ -83,7 +84,7 @@
 				</div>
 				<!-- 끝 : 사이드 : 3-->
 				<!-- 시작 : 내용 : 9-->
-				<div class="container col-lg-8">
+				<div class="container col-lg-9">
 
 					<div class="card mb-10">
 						<div class="card-header">
@@ -150,15 +151,17 @@
 										</div>
 									</div>
 								</div>
-
 								<!-- 오른쪽 아래 -->
 								<div class="product-payment-details">
 									<form action="./insertCart">
 									<p class="last-sold text-muted">
-										<small>몇개팔렸을까여?</small><small class="pull-right">작성일</small>
+										<small>몇개팔렸을까여?</small>
+										<small class="pull-right">작성일</small>
 									</p>
-									<h4 class="product-title mb-2">${product.itemName}</h4>
-									<h2 class="product-price display-2">${product.itemPrice}</h2>
+									<div class="row">
+									<h1 class="col-md-9 product-title display-1 mb-2">${product.itemName}</h1>
+									<h3 class="col-md-3 product-price display-3">￦${product.itemPrice}</h3>
+									</div>
 									<p class="mb-0">
 										<i class="fa fa-truck"></i>${product.itemCondition} <small
 											class="pull-right text-success">${product.itemOrderdetail}</small>
@@ -167,7 +170,6 @@
 										<small>약간의 사용감이 있습니다!</small>
 									</div>
 									<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
-
 									<label for="quant">수량</label> <input type="number"
 										name="itemEa" min="1" id="quant" value=""
 										class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
@@ -265,19 +267,25 @@
 										</div>
 									</div>
 									<div class="product-comments">
-										<h5 class="mb-2">????님의 후기가 필요해요!</h5>
+										<h5 class="mb-2">다른 사람들의 후기를 좀 봐볼까나?</h5>
 										<form action="" class="form-inline mb-5">
 											<textarea name="" id="" cols="50" rows="2"
-												class="form-control mb-4" placeholder="마구마구 써보세여"></textarea>
-											<button class="btn btn-lg-12 btn-primary">질문을해보자</button>
+												class="form-control mb-4" placeholder="후기쓰봐라"></textarea>
+											<button class="btn btn-lg-12 btn-primary">후기를 입력해보세</button>
 										</form>
-										<h5 class="mb-5">최근 댓글</h5>
+										<h5 class="mb-5">!후기!</h5>
+										<c:forEach items="${orderList}" var="order">
 										<ol class="list-unstyled last-questions-list">
-											<li><i class="fa fa-comment"></i> <span>Hello
-													david, can i pay with credit card?</span></li>
-											<li><i class="fa fa-comment"></i> <span>can i
-													send it to another address?</span></li>
+											<li><i class="fa fa-comment"></i> 
+												<span>
+													${order.reviewStar}
+													${order.reviewContent}
+													${order.reviewDate}
+													${order.reviewPic}
+												</span>
+											</li>
 										</ol>
+										</c:forEach>
 									</div>
 								</div>
 							</div>

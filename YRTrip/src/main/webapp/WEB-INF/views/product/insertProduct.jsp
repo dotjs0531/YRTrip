@@ -2,16 +2,14 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
-<title>prototype of insertProduct(view)</title>
+<title>prototype of insertProduct(view)</title><!-- 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -21,12 +19,22 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link href="resources/css/product.bootstrap.min.css" rel="stylesheet"> -->
+
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+
 <style>
-.carousel-control.left, 
-.carousel-control.right 
-{ 
-backround-image:none !important; 
+#login-row {
+	margin-left: -230px;
+	margin-right: 440px;
+}
+.carousel-control.left, .carousel-control.right {
+	backround-image: none !important;
 }
 
 .space-ten {
@@ -118,53 +126,51 @@ backround-image:none !important;
 	height: 100%;
 	max-width: 400px;
 }
-#login-row{
-    margin-left: -230px;
-    margin-right: 440px;
+
+#login-row {
+	margin-left: -230px;
+	margin-right: 440px;
 }
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
+
+
 $(function(){
 	$('#product_cart_insert').delegate("a", "click", function(){
 		$(this).data('clicked', true)
-	})
+	});	
 });
-
 function p_cat(){
-	if($("#pciClothes").data('clicked')){
-		$('#itemCategory').val($('#pciClothes').text());
-	}
-	else if($("#pciTicket").data('clicked')){
-		$('#itemCategory').val($("#pciTicket").text());
-	}
-	else if($("#pciElectronic").data('clicked')){
-		$('#itemCategory').val($("#pciElectronic").text());
-	}
-	else if($("#pciBook").data('clicked')){
-		$('#itemCategory').val($("#pciBook").text());
-	}
-	else if($("#pciUSIM").data('clicked')){
-		$('#itemCategory').val($("#pciUSIM").text());
-	}
-	else if($("#pciETC").data('clicked')){
-		$('#itemCategory').val($("#pciETC").text());
-	}
+	
+		if($("#pciClothes").data('clicked')){
+			$("itemCategory").empty();
+			$('#itemCategory').val($('#pciClothes').text());
+		}
+		else if($("#pciTicket").data('clicked')){
+			$("itemCategory").empty();
+			$('#itemCategory').val($("#pciTicket").text());
+		}
+		else if($("#pciElectronic").data('clicked')){
+			$("itemCategory").empty();
+			$('#itemCategory').val($("#pciElectronic").text());
+		}
+		else if($("#pciBook").data('clicked')){
+			$("itemCategory").empty();
+			$('#itemCategory').val($("#pciBook").text());
+		}
+		else if($("#pciUSIM").data('clicked')){
+			$("itemCategory").empty();
+			$('#itemCategory').val($("#pciUSIM").text());
+		}
+		else if($("#pciETC").data('clicked')){
+			$("itemCategory").empty();
+			$('#itemCategory').val($("#pciETC").text());
+		}
+	
 }
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#blah')
-                .attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
 </script>
 </head>
 
@@ -177,21 +183,23 @@ function readURL(input) {
 						<div class="pricing-title">
 							<h2 style="color: black">카테고리</h2>
 						</div>
+
 						<ul class="price-list" id="product_cart_insert">
-							<li><a href="getProductList" style="color: black">전체보기</a></li>
-							<li><a id="pciClothes" onclick="p_cat()" href="#"
-								style="color: black">의류</a></li>
-							<li><a id="pciTicket" onclick="p_cat()" href="#"
+							<li><a href="getProductList" style="color: blue">선택하세요</a></li>
+							<li><a id="pciClothes" onclick="p_cat();"
+								href="#" style="color: black">의류</a></li>
+							<li><a id="pciTicket" onclick="p_cat();" href="#"
 								style="color: black">티켓/쿠폰</a></li>
-							<li><a id="pciElectronic" onclick="p_cat()" href="#"
+							<li><a id="pciElectronic" onclick="p_cat();" href="#"
 								style="color: black">전자기기</a></li>
-							<li><a id="pciBook" onclick="p_cat()" href="#"
+							<li><a id="pciBook" onclick="p_cat();" href="#"
 								style="color: black">여행도서</a></li>
-							<li><a id="pciUSIM" onclick="p_cat()" href="#"
+							<li><a id="pciUSIM" onclick="p_cat();" href="#"
 								style="color: black">USIM</a></li>
-							<li><a id="pciETC" onclick="p_cat()" href="#"
+							<li><a id="pciETC" onclick="p_cat();" href="#"
 								style="color: black">기타</a></li>
 						</ul>
+
 						<div class="order-buton">
 							<a href="#">상품요청</a>
 						</div>
@@ -239,11 +247,11 @@ function readURL(input) {
 										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
 									</ol>
 									<div class="pull-left">
-										<h4>'session값 들고'만의 상품을 공유해줘!</h4>
+										<h4>${sessionScope.login.userId}만의상품을 공유해보입시더</h4>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-link" type="reset">모두삭제</a> <input type="submit"
-											class="btn" value="등록">
+										<a href="#" class="btn btn-link" type="reset">모두삭제</a> <input
+											type="submit" class="btn" value="등록">
 									</div>
 								</nav>
 							</div>
@@ -271,17 +279,20 @@ function readURL(input) {
 											<!-- Wrapper for slides -->
 											<div class="carousel-inner">
 												<div class="item active">
-													<img id="blah" src="https://via.placeholder.com/350x350/ffcf5b"
+													<img id="blah"
+														src="https://via.placeholder.com/350x350/ffcf5b"
 														alt="Los Angeles" style="width: 100%;">
 												</div>
 
 												<div class="item">
-													<img id="blah" src="https://via.placeholder.com/350x350/ffcf5b"
+													<img id="blah"
+														src="https://via.placeholder.com/350x350/ffcf5b"
 														alt="Chicago" style="width: 100%;">
 												</div>
 
 												<div class="item">
-													<img id="blah" src="https://via.placeholder.com/350x350/ffcf5b"
+													<img id="blah"
+														src="https://via.placeholder.com/350x350/ffcf5b"
 														alt="New york" style="width: 100%;">
 												</div>
 											</div>
@@ -409,10 +420,11 @@ function readURL(input) {
 										rows="5"></textarea>
 								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
-								<input type="hidden" name="sellerId" value="user1">
+								<input type="hidden" name="sellerId"
+									value="${sessionScope.login.userId}">
 								<!--  구매가능 여부 : 구매가능(defalut)  -->
 
-								<input type="hidden" name="itemAvailable" value="구매가능">
+								<input type="hidden" name="itemOrderdetail" value="구매가능">
 							</div>
 						</div>
 					</form>
@@ -424,16 +436,10 @@ function readURL(input) {
 	</section>
 
 	<!-- 부트 4 공식 JS-->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
-		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-		crossorigin="anonymous"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
-		integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
-		crossorigin="anonymous"></script>
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
 </body>
 </html>

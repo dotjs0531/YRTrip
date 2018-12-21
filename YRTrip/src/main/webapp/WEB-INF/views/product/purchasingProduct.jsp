@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="kor">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,15 +10,9 @@
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
 <title>등록 제품 수정에서 가지고 온</title>
-
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz">
-
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <style>
 #login-row {
 	margin-left: -230px;
@@ -50,8 +42,14 @@
                   이름을 입력해주세요
                 </div>
               </div>
-             </div>
-            
+              <div class="col-md-6 mb-3">
+                <label for="userId">회원아이디</label>
+                <input type="text" class="form-control" id="buyerId" placeholder="" value="" required="">
+                <div class="invalid-feedback">
+                  이름을 입력해주세요
+                </div>
+              </div>
+             </div>           
 
             <div class="mb-3">
               <label for="address">주소</label>
@@ -82,21 +80,44 @@
               <label class="custom-control-label" for="save-info">다른 주소를 쓸꺼예요</label>
             </div>
             <hr class="mb-4">
-
-            <h4 class="mb-3">Payment</h4>
+            
+             <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="itemPrice">상품가격</label>
+                <input type="text" class="form-control" id="itemPrice" placeholder="" value="" required="">               
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="itemEa">주문개수</label>
+                <input type="text" class="form-control" id="itemEa" placeholder="" value="" required="">
+              </div>
+             </div> 
+             
+              <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="sellerId">판매자아이디</label>
+                <input type="text" class="form-control" id="sellerId" placeholder="" value="" required="">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="itemMethod">구매가능여부</label>
+                <input type="text" class="form-control" id="itemMethod" placeholder="" value="" required="">
+              </div>
+             </div> 
+            
+			<hr class="mb-4">
+            <h4 class="mb-3">결제방법</h4>
 
             <div class="d-block my-3">
               <div class="custom-control custom-radio">
                 <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required="">
-                <label class="custom-control-label" for="credit">Credit card</label>
+                <label class="custom-control-label" for="credit">현금결제</label>
               </div>
               <div class="custom-control custom-radio">
                 <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="debit">Debit card</label>
+                <label class="custom-control-label" for="debit">카드결제</label>
               </div>
               <div class="custom-control custom-radio">
                 <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required="">
-                <label class="custom-control-label" for="paypal">Paypal</label>
+                <label class="custom-control-label" for="paypal">???</label>
               </div>
             </div>
             <div class="row">
@@ -151,7 +172,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../../assets/js/vendor/popper.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
+import com.yrtrip.app.order.OrderService;
+import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.product.CartService;
 import com.yrtrip.app.product.CartVO;
 import com.yrtrip.app.product.ProductService;
@@ -23,6 +25,7 @@ public class ProductController {
 	
 	@Autowired ProductService productService;
 	@Autowired CartService cartService;
+	@Autowired OrderService orderService;
 	
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
@@ -55,9 +58,9 @@ public class ProductController {
 	
 	//상세조회(폼)
 	@RequestMapping("/getProduct")
-	public String getProduct(Model model, ProductVO vo) {
-		model.addAttribute("product", productService.getProduct(vo));
-		//model.addAttribute("cartlist", cartService.getCart(vo));
+	public String getProduct(Model model, ProductVO vop, OrderVO voo) {
+		model.addAttribute("product", productService.getProduct(vop));
+		model.addAttribute("orderList", orderService.getOrderList(voo));		
 		return "product/getProduct";
 	}
 	

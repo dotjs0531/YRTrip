@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+<select id="getOrderList" resultType="order">
+		select 
+			order_id, 
+			order_date,
+			order_condition, 
+			order_delivery,
+			i.item_price as order_price,
+			i.item_method as item_method,
+			c.item_ea as order_ea,
+			c.item_id as item_id,
+			c.my_Id as buyer_id,
+			item_deliveryNo
+			review_star,
+			review_content,
+			review_date,
+			review_pic
+		from ORDERT o, ITEMT i, CART c
+		where i.item_id=o.item_id
+		and i.item_id=#{itemId}
+		ORDER BY ORDER_DATE DESC
+	</select>
+
+	<select id="getOrder" resultType="order">
+		SELECT
+			o.ITEM_ID as ITEM_ID,
+			ORDER_DATE,
+			review_star,
+			review_content,
+			review_date,
+			review_pic
+		FROM ORDERT o, ITEMT i
+		where i.item_id = o.item_id
+		ORDER BY ORDER_DATE DESC
+	</select>
+
+	<insert id="insertOrder" parameterType="order">
+	INSERT INTO orderT
+				(
+	)
+	VALUES (FUNC_CREATE_ORDER_ID(),
+	 	)
+	</insert>
+	<update id="updateOrder" parameterType="order">
+		UPDATE SET
+				
+	</update>
+	<delete id="deleteOrder">
+		DELETE FROM 
+		WHERE
+		= 
+	</delete>
+</mapper>

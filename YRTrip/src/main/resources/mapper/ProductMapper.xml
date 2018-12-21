@@ -24,7 +24,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				ITEM_CONDITION,
 				ITEM_LIKE
 		FROM ITEMT
-		ORDER BY ITEM_ID
+		ORDER BY ITEM_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 	</select>
 	<select id="getProduct" resultType="product">
