@@ -38,15 +38,12 @@ public class TravelBoardController {
 				//first, last 계산
 				vo.setFirst(paging.getFirst());
 				vo.setLast(paging.getLast());
-				System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaa");
-				System.out.println(vo);
 				//전체 레코드 건수
 				paging.setTotalRecord(travelBoardService.getCount(vo));
 				
 				mv.addObject("paging", paging);
 				
 				mv.addObject("travelBoardList", travelBoardService.getTravelBoardList(vo));
-
 				
 				mv.setViewName("travel/getTravelBoardList");
 				return mv;
@@ -62,14 +59,16 @@ public class TravelBoardController {
 //모달 등록폼
 	@RequestMapping(value = { "/insertTravelBoardform" }, method = RequestMethod.GET)
 	public String insertTravelBoardform() {
+		System.out.println("--------------------------sdgkljgfkljsdgkljdslgkj");
 		return "travel/insertTravelBoard";
 	}
 
 //모달 등록처리 
-	@RequestMapping(value = { "/insertTravelBoard" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "insertTravelBoard" }, method = RequestMethod.POST)
 	public String insertTravelBoard(TravelBoardVO vo) { // 커맨드 객체
 		travelBoardService.insertTravelBoard(vo); // 등록처리
-		return "travel/insertTravelBoard"; // insertTravelBoard.jsp로 이동
+		System.out.println("--------------------------22222222222222222222222222222");
+		return "redirect:insertTravelBoard"; // insertTravelBoard.jsp로 이동
 	}
 
 //수정폼
@@ -86,6 +85,20 @@ public class TravelBoardController {
 		return "redirect:getTravelBoardList"; // 목록요청
 	}
 
+//수정폼
+		@RequestMapping("/updateTravelBoardTwoform")
+		public String updateTravelBoardTwoform(Model model, TravelBoardVO vo) {
+			model.addAttribute("travelBoard", travelBoardService.getTravelBoard(vo));
+			return "travel/updateTravelBoardTwo";
+		}
+
+//수정처리
+		@RequestMapping("updateTravelBoardTwo")
+		public String updateTravelBoardTwo(TravelBoardVO vo) {
+			travelBoardService.updateTravelBoardTwo(vo); // 수정처리
+			return "redirect:getTravelBoardList"; // 목록요청
+		}
+
 //삭제처리
 	@RequestMapping("deleteTravelBoard")
 	public String deleteTravelBoard(TravelBoardVO vo) {
@@ -100,18 +113,29 @@ public class TravelBoardController {
 		return "redirect:getTravelBoardList"; // 목록요청
 	}
 	
-	// list 조회 Ajax
+// list 조회 Ajax
 	@RequestMapping(value="/getTravelInfoListData", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TravelBoardVO> getTravelInfoListData(TravelInfoVO vo) {
-		System.out.println("ddddddddddddddddddddddddddddddddddddddddddd");
+		System.out.println("--------------------------");
 		System.out.println(vo);
-		System.out.println("ddddddddddddddddddddddddddddddddddddddddddd");
 		return travelBoardService.getTravelInfoList(vo);
 	}
 
 	@RequestMapping(value="/getTravelInfoList", method=RequestMethod.POST)
 	public String getTravelInfoList(TravelInfoVO vo) {
+		return "travel/getTravelBoardList";
+	}
+	
+// Modal에서 list 조회 Ajax
+	@RequestMapping(value="/getTravelInfoListModalData", method=RequestMethod.POST)
+	@ResponseBody
+	public List<TravelBoardVO> getTravelInfoListModalData(TravelInfoVO vo) {
+		return travelBoardService.getTravelInfoListModal(vo);
+	}
+
+	@RequestMapping(value="/getTravelInfoListModal", method=RequestMethod.POST)
+	public String getTravelInfoListModal(TravelInfoVO vo) {
 		return "travel/getTravelBoardList";
 	}
 

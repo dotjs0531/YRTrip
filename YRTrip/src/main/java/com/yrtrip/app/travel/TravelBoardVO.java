@@ -9,6 +9,7 @@ public class TravelBoardVO {
 	private int travelPay;
 	private String travelSche;
 	private String travelStart;
+	private String travelEnd;
 	private String travelTitle;
 	private String travelContent;
 	private String travelDate;
@@ -16,12 +17,11 @@ public class TravelBoardVO {
 	private int travelLike;
 	private int tinfoId;
 	private String userId;
-	private int travelWith;
+	private String travelWith;
 	private String travelPic;
 	
+	private String selectedTinfoModal;
 	private String searchTinfo;
-	private String tinfoList;
-	private String[] travelNoList;
 	
 	private String sortCol;
 	private int first;
@@ -56,6 +56,12 @@ public class TravelBoardVO {
 	}
 	public void setTravelStart(String travelStart) {
 		this.travelStart = travelStart;
+	}
+	public String getTravelEnd() {
+		return travelEnd;
+	}
+	public void setTravelEnd(String travelEnd) {
+		this.travelEnd = travelEnd;
 	}
 	public String getTravelTitle() {
 		return travelTitle;
@@ -99,10 +105,10 @@ public class TravelBoardVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getTravelWith() {
+	public String getTravelWith() {
 		return travelWith;
 	}
-	public void setTravelWith(int travelWith) {
+	public void setTravelWith(String travelWith) {
 		this.travelWith = travelWith;
 	}
 	public String getTravelPic() {
@@ -113,14 +119,6 @@ public class TravelBoardVO {
 	}
 	
 	@JsonIgnore
-	public String[] getTravelNoList() {
-		return travelNoList;
-	}
-	public void setTravelNoList(String[] travelNoList) {
-		this.travelNoList = travelNoList;
-	}
-	
-	@JsonIgnore
 	public String getSortCol() {
 		return sortCol;
 	}
@@ -128,13 +126,15 @@ public class TravelBoardVO {
 	public void setSortCol(String sortCol) {
 		this.sortCol = sortCol;
 	}
-	
+	@JsonIgnore
 	public int getFirst() {
 		return first;
 	}
 	public void setFirst(int first) {
 		this.first = first;
 	}
+	
+	@JsonIgnore
 	public int getLast() {
 		return last;
 	}
@@ -143,27 +143,29 @@ public class TravelBoardVO {
 	}
 	
 	@JsonIgnore
+	public String getSelectedTinfoModal() {
+		return selectedTinfoModal;
+	}
+	public void setSelectedTinfoModal(String selectedTinfoModal) {
+		this.selectedTinfoModal = selectedTinfoModal;
+	}
+	
+	@JsonIgnore
 	public String getSearchTinfo() {
 		return searchTinfo;
 	}
+	
 	public void setSearchTinfo(String searchTinfo) {
 		this.searchTinfo = searchTinfo;
 	}
 	
-	public String getTinfoList() {
-		return tinfoList;
-	}
-	public void setTinfoList(String tinfoList) {
-		this.tinfoList = tinfoList;
-	}
 	@Override
 	public String toString() {
 		return "TravelBoardVO [travelNo=" + travelNo + ", travelPerson=" + travelPerson + ", travelPay=" + travelPay
 				+ ", travelSche=" + travelSche + ", travelStart=" + travelStart + ", travelTitle=" + travelTitle
 				+ ", travelContent=" + travelContent + ", travelDate=" + travelDate + ", travelHit=" + travelHit
 				+ ", travelLike=" + travelLike + ", tinfoId=" + tinfoId + ", userId=" + userId + ", travelWith="
-				+ travelWith + ", travelPic=" + travelPic + ", searchTinfo=" + searchTinfo + ", tinfoList=" + tinfoList
-				+ ", sortCol=" + sortCol + ", first=" + first + ", last=" + last + "]";
+				+ travelWith + ", travelPic=" + travelPic + ", selectedTinfoModal=" + selectedTinfoModal
+				+ ", searchTinfo=" + searchTinfo + ", sortCol=" + sortCol + ", first=" + first + ", last=" + last + "]";
 	}
-	
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="travelBoard">
-
+<!-- 전체 조회 -->
 <select id="getTravelBoardList" resultType="travelBoard" parameterType="travelBoard">
 	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	SELECT TRAVEL_NO,
@@ -10,6 +10,7 @@
 			TRAVEL_PAY,
 			TRAVEL_SCHE,
 			TRAVEL_START,
+			TRAVEL_END,
 			TRAVEL_TITLE,
 			TRAVEL_CONTENT,
 			TRAVEL_DATE,
@@ -38,18 +39,41 @@
 
 <!-- 검색 select -->
 <select id="getTravelInfoList" resultType="travelInfo" parameterType="travelInfo">
-		<if test="tinfoList != null">
-		SELECT TINFO_COUNTRY, 
-				TINFO_STATE, 
+		SELECT NVL(TINFO_COUNTRY, ' ') TINFO_COUNTRY, 
+				NVL(TINFO_STATE, ' ') TINFO_STATE, 
 				TINFO_CITY, 
-				TINFO_ID
+				TINFO_ID,
+				TINFO_LOCATION
 		FROM TRAVELINFOT
-	<where>
-		TINFO_COUNTRY LIKE '%' || #{tinfoList} || '%' 
-		OR TINFO_STATE LIKE '%' || #{tinfoList} || '%' 
-		OR TINFO_CITY LIKE '%' || #{tinfoList} || '%'
-	</where>
-			ORDER BY TINFO_COUNTRY
+		<if test="searchCheck == 'overseas'">
+		 WHERE TINFO_LOCATION = 'overseas'
+ 				and (TINFO_COUNTRY LIKE '%' ||#{tinfoList}|| '%' 
+ 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
+		</if>
+		<if test="searchCheck == 'domestic'">
+		 WHERE TINFO_LOCATION = 'domestic'
+ 				and (TINFO_STATE LIKE '%' ||#{tinfoList}|| '%' 
+ 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
+		</if>
+</select>
+
+<!-- Modal 검색 select -->
+<select id="getTravelInfoListModal" resultType="travelInfo" parameterType="travelInfo">
+		SELECT NVL(TINFO_COUNTRY, ' ') TINFO_COUNTRY, 
+				NVL(TINFO_STATE, ' ') TINFO_STATE, 
+				TINFO_CITY, 
+				TINFO_ID,
+				TINFO_LOCATION
+		FROM TRAVELINFOT
+		<if test="searchCheckModal == 'overseas'">
+		 WHERE TINFO_LOCATION = 'overseas'
+ 				and (TINFO_COUNTRY LIKE '%' ||#{tinfoListModal}|| '%' 
+ 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoListModal}|| '%')
+		</if>
+		<if test="searchCheckModal == 'domestic'">
+		 WHERE TINFO_LOCATION = 'domestic'
+ 				and (TINFO_STATE LIKE '%' ||#{tinfoListModal}|| '%' 
+ 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoListModal}|| '%')
 		</if>
 </select>
 
@@ -64,6 +88,7 @@
 	</where>  
 </select>
 
+<!-- 글 등록(Modal) -->
 <insert id="insertTravelBoard" parameterType="travelBoard">
 	<selectKey keyProperty="travelNo" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(TRAVEL_NO),0)+1 FROM TRAVELBOARDT
@@ -72,6 +97,7 @@
 								TRAVEL_PERSON,
 								TRAVEL_SCHE,
 								TRAVEL_START,
+								TRAVEL_END,
 								TRAVEL_TITLE,
 								TRAVEL_DATE,
 								TINFO_ID,
@@ -81,21 +107,24 @@
 		VALUES (#{travelNo}, 
 				#{travelPerson},
 				#{travelSche}, 
-				#{travelStart}, 
+				#{travelStart},
+				#{travelEnd},
 				#{travelTitle},  
 				sysdate, 
-				#{tinfoId},
+				#{selectedTinfoModal},
 				#{userId}, 
 				#{travelWith}
 				)
 </insert>
 
+<!-- 글 수정(getTravelBoardList에서) -->
 <update id="updateTravelBoard" parameterType="travelBoard">
 	UPDATE TRAVELBOARDT 
 	SET TRAVEL_PERSON = #{travelPerson}, 
 		TRAVEL_PAY = #{travelPay},
 		TRAVEL_SCHE = #{travelSche},
 		TRAVEL_START = TO_DATE(#{travelStart}, 'yyyy-mm-dd hh24:mi:ss'),
+		TRAVEL_END = TO_DATE(#{travelEnd}, 'yyyy-mm-dd hh24:mi:ss'),
 		TRAVEL_TITLE = #{travelTitle},
 		TRAVEL_CONTENT = #{travelContent},
 		TINFO_ID = #{tinfoId},
@@ -104,11 +133,22 @@
 	WHERE TRAVEL_NO = #{travelNo}
 </update>
 
+<!-- 업데이트 (insertTravelBoard에서) -->
+<update id="updateTravelBoardTwo" parameterType="travelBoard">
+	UPDATE TRAVELBOARDT 
+	SET TRAVEL_PAY = #{travelPay},
+		TRAVEL_CONTENT = #{travelContent},
+		TRAVEL_PIC = #{travelPic}
+	WHERE TRAVEL_NO = #{travelNo}
+</update>
+
+<!-- 글 삭제(getTravelBoardList에서) -->
 <delete id="deleteTravelBoard" parameterType="int">
 	DELETE FROM TRAVELBOARDT 
 	WHERE TRAVEL_NO = #{travelNo}
 </delete>
 
+<!-- 선택삭제(마이페이지에서) -->
 <delete id="deleteTravelBoardList" parameterType="list">
 	DELETE FROM TRAVELBOARDT 
 	<if test="seqList != null and seqList.length>0">
@@ -128,6 +168,7 @@
 			TRAVEL_PAY,
 			TRAVEL_SCHE,
 			TRAVEL_START,
+			TRAVEL_END,
 			TRAVEL_TITLE,
 			TRAVEL_CONTENT,
 			TRAVEL_DATE,

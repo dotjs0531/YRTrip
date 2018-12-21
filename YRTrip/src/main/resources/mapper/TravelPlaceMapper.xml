@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="travelPlace">
+<!-- 전체 장소 조회 -->
 <select id="getTravelPlaceList" resultType="travelPlace">
 	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	SELECT PLACE_NO,
@@ -13,7 +14,8 @@
 			PLACE_TRAVELBOARDNO,
 			PLACE_PIC,
 			USER_ID,
-			PLACE_TITLE
+			PLACE_TITLE,
+			PLACE_VISITDATE
 	FROM TRAVEL_PLACET
  	<where>
 	<choose>
@@ -37,6 +39,24 @@
 		</otherwise>
 	</choose>
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 여행기 등록시 장소 조회 -->
+<select id="selectTravelPlaceList" resultType="travelPlace">
+	SELECT PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			USER_ID,
+			PLACE_TITLE,
+			PLACE_VISITDATE
+	FROM TRAVEL_PLACET
+	WHERE PLACE_TRAVELBOARDNO = ${travelBoard.travelNo}
+	ORDER BY PLACE_NO DESC
 </select>
 
 
@@ -76,19 +96,19 @@
 									PLACE_ADDRESS,
 									PLACE_DATE,
 									PLACE_CONTENT,
-									PLACE_TRAVELBOARDNO,
 									PLACE_PIC,
 									USER_ID,
-									PLACE_TITLE)
+									PLACE_TITLE,
+									PLACE_VISITDATE)
 		VALUES (#{placeNo}, 
 				#{placeName}, 
 				#{placeAddress}, 
 				sysdate, 
 				#{placeContent}, 
-				#{placeTravelBoardNo}, 
 				#{placePic}, 
 				#{userId}),
-				#{placeTitle}
+				#{placeTitle},
+				#{placeVisitDate})
 </insert>
 
 <update id="updateTravelPlace" parameterType="travelPlace">
@@ -96,9 +116,9 @@
 	SET PLACE_NAME = #{placeName},
 		PLACE_ADDRESS = #{placeAddress},
 		PLACE_CONTENT = #{placeContent},
-		PLACE_TRAVELBOARDNO = #{placeTravelBoardNo},
 		PLACE_PIC = #{placePic},
-		PLACE_TITLE = #{placeTitle}
+		PLACE_TITLE = #{placeTitle},
+		PLACE_VISITDATE = #{placeVisitDate}
 	WHERE PLACE_NO = #{placeNo}
 </update>
 

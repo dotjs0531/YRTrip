@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
-/* 목록 */
+/* 여행기 리스트 */
 .content-title {
 	padding: 5px;
-	margin-top:-20px;
-	margin-bottom:-20px;
+	margin-top: -20px;
+	margin-bottom: -20px;
 	background-color: #fff;
 }
 
@@ -14,12 +14,10 @@
 	text-decoration: none;
 	transition: 0.5s;
 }
-*/
 
 .content-title h3 a:hover {
 	color: #ff8000;
-} 
-
+}
 
 .content-footer {
 	background-color: #ffffff;
@@ -38,7 +36,6 @@
 .content-footer span a:hover {
 	color: #F39C12;
 }
-
 
 .content-box {
 	font-family: 'East Sea Dokdo';
@@ -59,7 +56,7 @@
 }
 
 .content-footer .user-info {
-	font-size: 25px; 
+	font-size: 25px;
 	color: #34495E;
 	cursor: pointer;
 }
@@ -85,4 +82,4 @@
 	font-size: 15px;
 	text-decoration: none;
 	padding: 5px;
-} */
+}

@@ -23,6 +23,11 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 	public void updateTravelBoard(TravelBoardVO vo) {
 		dao.updateTravelBoard(vo);
 	}
+	
+	@Override
+	public void updateTravelBoardTwo(TravelBoardVO vo) {
+		dao.updateTravelBoardTwo(vo);
+	}
 
 	@Override
 	public void deleteTravelBoard(TravelBoardVO vo) {
@@ -49,8 +54,14 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 		return dao.getTravelBoardList(vo);
 	}
 	
+	@Override
 	public List<TravelBoardVO> getTravelInfoList(TravelInfoVO vo) {
 		return dao.getTravelInfoList(vo);
+	}
+	
+	@Override
+	public List<TravelBoardVO> getTravelInfoListModal(TravelInfoVO vo){
+		return dao.getTravelInfoListModal(vo);
 	}
 	
 }

@@ -46,27 +46,29 @@ for (i = 0; i < acc.length; i++) {
 });
 
  /* autocomplete */
-
- $(function() {
-     //input id autocomplete
+ $(document).ready(function(){ 
+    //input id autocomplete
+    var selectedLocation = document.getElementsByName('searchCheck');
+	var searchCheckVal;
+	for(var i=0; i<selectedLocation.length; i++) {
+  	  if(selectedLocation[i].checked) {
+   		 	searchCheckVal = selectedLocation[i].value;
+   		 }
+	}
      var context = '${pageContext.request.contextPath}';
-     $( "#tinfoList").autocomplete({
+     $( "#autocompleteTinfoList").autocomplete({
       source : function(request, response){
        $.ajax({
            type:"post",
            dataType:"json",
            url:context + "/getTravelInfoListData",
-           data:{"tinfoList":$("#tinfoList").val()},
+           data:{"tinfoList":$("#autocompleteTinfoList").val(), "searchCheck":$("[name='searchCheck']:checked").val()},
            success:function(data){
             response($.map(data, function(item){
-            	console.log(data);
              return{
               label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
-              value:item.tinfoId,
-              tinfoId:item.tinfoId,
-              tinfoCountry:item.tinfoCountry,
-              tinfoState:item.tinfoState,
-              tinfoCity:item.tinfoCity
+              value:item.tinfoCity,
+              tinfoId:item.tinfoId
              }
             }));
            },
@@ -80,24 +82,102 @@ for (i = 0; i < acc.length; i++) {
       },
       autoFocus:true,
       matchContains:true,
-      minLength:1,
-      delay:100,
-      select:function(event,ui){
-    	  $("#tinfoList").val(ui.item.tinfoCity);
-          selectedList = ui.item.tinfoCity;
+      minLength:0,
+      delay:0,
+      select:function(event, ui){
+     	 $("#tinfoList").val(ui.item.value);
+          selectedList = ui.item.tinfoId;
+      	 $("#tinfoListDisp").val(selectedList);
           var flag = false;
-          $("#tinfoList").keydown(function(e){
+          $("#autocompleteTinfoList").keydown(function(e){
            if(e.keyCode == 13){
             if(!flag){
               fn_regist();
              flag = true;
             }
            }
-          });
+          }); 
+           
          },
          focus:function(event, ui){return false;}
         });
       });
+ 
+ $(function initSelectdList() {
+$("#autocompleteTinfoList").change(function(){
+	selectedList = "";
+   $("#tinfoList").val("");
+   $("#tinfoListDisp").val("");
+   $('[name=searchTinfoListbox]').val("");
+});
+ });
+
+/* modal 자동완성 */
+ 
+ $(function() {
+     //input id autocomplete
+     var context = '${pageContext.request.contextPath}';
+     $( "#autocompleteTinfoListModal").autocomplete({
+      source : function(request, response){
+       $.ajax({
+           type:"post",
+           dataType:"json",
+           url:context + "/getTravelInfoListModalData",
+           data:{"tinfoListModal":$("#autocompleteTinfoListModal").val(), "searchCheckModal":$("[name='searchCheckModal']:checked").val()},
+           success:function(data){
+            response($.map(data, function(item){
+             return{
+              label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+              value:item.tinfoCity,
+              tinfoId:item.tinfoId
+             }
+            }));
+           },
+
+           error: function(jqxhr, status, error){
+                 alert(jqxhr.statusText + ",  " + status + ",   " + error);
+                alert(jqxhr.status);
+                alert(jqxhr.responseText); 
+           }
+          })
+      },
+      autoFocus:true,
+      matchContains:true,
+      minLength:0,
+      delay:0,
+      select:function(event, ui){
+     	 $("#tinfoListModal").val(ui.item.value);
+          selectedListModal = ui.item.tinfoId;
+      	 $("#tinfoListDispModal").val(selectedListModal);
+          var flag = false;
+          $("#autocompleteTinfoListModal").keydown(function(e){
+           if(e.keyCode == 13){
+            if(!flag){
+              fn_regist();
+             flag = true;
+            }
+           }
+          }); 
+           
+         },
+         focus:function(event, ui){return false;}
+        });
+      });
+ $("#autocompleteTinfoListModal").change(function(){
+		selectedListModal = "";
+	   $("#tinfoListModal").val("");
+	   $("#tinfoListDispModal").val("");
+	   $('[name=searchTinfoListboxModal]').val("");
+	});
+ 
+ /* Modal 여행테마 select */      
+ function selectTravelWith(ele){
+   	 if(ele.value=='alone'){
+   	travelBoardModalfrm.travelPerson.disabled=true;
+    } else {
+ 	travelBoardModalfrm.travelPerson.disabled=false;	   
+    }   
+ }   
   </script>
 </head>
 <body>
@@ -130,11 +210,17 @@ for (i = 0; i < acc.length; i++) {
 								
 								<!-- 검색 내용 -->
 								<form class="form-inline">
+								<div style="padding-bottom:5px; padding-left:17%;">
+									<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+									<label for="domestic">국내</label>
+									<input type="radio" id="overseas" name="searchCheck" value="overseas">
+									<label for="overseas">해외</label>
+								</div>
 								<div style="padding-bottom:5px">
 									<label class="col-sm-2 control-label"></label>
-									<input type="text" name="searchTinfo" class="form-control" id="tinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요.">
-								
+									<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" style="width:350px;" name="searchTinfoListbox">
 									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+									<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
 								</div>
 								</form>
 							</div>
@@ -195,37 +281,65 @@ for (i = 0; i < acc.length; i++) {
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form id="/insertTravelBoardform" class="form" action="./insertTravelBoard" method="post">		
+								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 									<div class="form-group">
 										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
 									</div>
-									<div class="form-group">
-										<label for="tinfoId" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="tinfoId" class="form-control" placeholder="여행지를 선택하세요. ---> 다중셀렉트바 수정할 것!">
+									<div style="padding-bottom:-15px;">
+										<input type="radio" id="modal-domestic" name="searchCheckModal" checked="checked" value="domestic">
+										<label for="domestic">국내</label>
+										<input type="radio" id="modal-overseas" name="searchCheckModal" value="overseas">
+										<label for="overseas">해외</label>
 									</div>
+									<div style="padding-bottom:5px">
+										<label class="col-sm-2 control-label"></label>
+										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
+										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal">
+								</div>
 									<div class="form-group">
 										<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelWith" class="form-control" placeholder="여행테마를 선택하세요. ---> 셀렉트바 수정할 것!">
-									</div>
-									<div class="form-group">
-										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 선택하세요. ---> 셀렉트바 수정할 것!">
-									</div>
-									<div class="form-group">
-										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelStart" class="form-control" id="Datepicker" placeholder="여행 시작일을 선택하세요.">
+										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)">
+										  <option value="" selected>여행테마를 선택하세요.</option>
+										  <option value="alone">나홀로 여행</option>
+										  <option value="friend">친구와 함께</option>
+										  <option value="family">가족과 함께</option>
+										  <option value="couple">연인과 함께</option>
+										  <option value="group">단체여행</option>
+										  <option value="package">패키지여행</option>
+										</select>
 									</div>
 									<div class="form-group">
 										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelPerson" class="form-control" placeholder="함께 여행한 인원을 선택하세요. --->셀렉트바 수정할 것!">
+										<select id="travelPerson" name="travelPerson" class="form-control">
+										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요.</option>
+										  <option value="1">1명</option>
+										  <option value="2">2명</option>
+										  <option value="3">3명</option>
+										  <option value="4">4명</option>
+										  <option value="5">5명</option>
+										  <option value="6">6명 이상</option>
+										</select>
 									</div>
 									<div class="form-group">
-										<label for="remember-me" class="text-info"></label>
+										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
+										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요.">
+									</div>
+									<div class="form-group">
+										<label for="travelEnd" class="text-info" style="color:#5f768b;"></label><br>
+										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요.">
+									</div>
+									<div class="form-group">
+										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
+										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일">
+									</div>
+									<div class="form-group">
+										<label class="text-info"></label>
 										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 									</div>
+									<input type="hidden" class="form-control" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>
 						</div>
 					</div>
@@ -255,8 +369,8 @@ function go_page(page) {
 };
 
 /* datepicker */
- $(function() {
-    $( "#Datepicker" ).datepicker({   
+$(function() {
+    $( ".datePicker" ).datepicker({   
     	changeMonth: true, 
         changeYear: true,
         nextText: '다음 달',
@@ -271,7 +385,7 @@ function go_page(page) {
         showMonthAfterYear : true,
         yearRange: "-100:+0"
     });
-})
+    }); 
 </script>
 </body>
 </html>

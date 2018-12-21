@@ -27,6 +27,12 @@ public class TravelBoardDAOMybatis {
 		sqlSession.update("travelBoard.updateTravelBoard", vo);	
 	}
 	
+	//수정2(등록폼에서)
+	public void updateTravelBoardTwo(TravelBoardVO vo) {
+		System.out.println("updateTravelBoardTwo() 기능 처리");
+		sqlSession.update("travelBoard.updateTravelBoardTwo", vo);	
+	}
+	
 	//삭제
 	public void deleteTravelBoard(TravelBoardVO vo) {
 		System.out.println("deleteTravelBoard() 기능 처리");
@@ -59,5 +65,10 @@ public class TravelBoardDAOMybatis {
 	//검색 조회
 	public List<TravelBoardVO> getTravelInfoList(TravelInfoVO vo) {
 		return sqlSession.selectList("travelBoard.getTravelInfoList", vo);
+	}
+	
+	//모달 등록시 조회
+	public List<TravelBoardVO> getTravelInfoListModal(TravelInfoVO vo) {
+		return sqlSession.selectList("travelBoard.getTravelInfoListModal", vo);
 	}
 }
