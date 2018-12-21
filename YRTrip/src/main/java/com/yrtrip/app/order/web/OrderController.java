@@ -35,7 +35,7 @@ public class OrderController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("orderList", orderService.getOrderList(vo));
-		mv.setViewName("order/getOrderList");
+		mv.setViewName("mypage/getMyOrderList");
 		return mv;
 	}
 	//단건 조회

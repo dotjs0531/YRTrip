@@ -113,8 +113,6 @@ public class ProductController {
 		return "redirect:getCartList";
 	}*/
 	
-	
-	
 	//뷰안에 넣을 컬럼값들이 없으면 뷰에 redirect해도 안나오나...? 그래서 그런건가...
 	//장바구니 insert 처리
 	@RequestMapping("/insertCart")
