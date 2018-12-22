@@ -82,7 +82,7 @@ public class MyPageController {
 	
 	//상품 페이지
 	@RequestMapping(value = "/getMyProductList", method = RequestMethod.GET)
-	public ModelAndView getMyProductList(ProductVO vo, Paging paging, HttpSession session) {
+	public ModelAndView getMyProductList(ProductVO vo, /*OrderVO ovo,*/ Paging paging, HttpSession session) {
 		vo.setSellerId(((UserVO)session.getAttribute("login")).getUserId());
 		
 		ModelAndView mv = new ModelAndView();
@@ -100,6 +100,7 @@ public class MyPageController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("MyProductList", mypageService.getMyProductList(vo));
+		//mv.addObject("MyBuyerList", mypageService.getMyBuyerList(ovo));
 		mv.setViewName("mypage/getMyProductList");
 		return mv;
 	}
@@ -188,15 +189,25 @@ public class MyPageController {
 		mypageService.insertMyReview(vo);
 		return "redirect:getMyReviewList";
 	}
-	@RequestMapping("/getMyReview") //리뷰 조회
+	@RequestMapping("getMyReview") //리뷰 조회
 	@ResponseBody
 	public OrderVO getMyReview(OrderVO vo) {
 		return mypageService.getMyReview(vo);
 	}
 	@RequestMapping("updateMyReview") //리뷰 수정
-	public String updateMyReview(Model model, OrderVO vo) {
-		mypageService.updateMyReview(vo);
+	public String updateMyReview(Model model, OrderVO vo, HttpServletRequest request) throws IllegalStateException, IOException { 
 		model.addAttribute("MyReview", mypageService.getMyReview(vo));
+	
+		String path = request.getSession().getServletContext().getRealPath("/images/review");
+
+		MultipartFile reviewPicFile = vo.getReviewPicFile();
+		if (!reviewPicFile.isEmpty() && reviewPicFile.getSize() > 0) {
+			String filename = reviewPicFile.getOriginalFilename();
+			reviewPicFile.transferTo(new File(path, filename));
+
+			vo.setReviewPic(filename);
+		}
+		mypageService.updateMyReview(vo);
 		return "redirect:getMyReviewList";
 	}
 	@RequestMapping("/deleteMyReview") //리뷰 삭제

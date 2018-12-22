@@ -11,6 +11,7 @@
 <meta charset="UTF-8">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
 <!-- 별점 등록부분 -->
 <link href="resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <!--suppress JSUnresolvedLibraryURL -->
@@ -19,6 +20,13 @@
 <!-- 체크박스 -->
 <script src='//static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
 <script src='//static.codepen.io/assets/editor/live/css_reload-5619dc0905a68b2e6298901de54f73cefe4e079f65a75406858d92924b4938bf.js'></script>
+
+<!-- 다중파일 업로드 -->
+<link href="resources/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="resources/js/fileinput.js" type="text/javascript"></script>
 
 <meta name="robots" content="noindex">
 <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
@@ -34,12 +42,15 @@ body {
 body {
   display: grid;
 }
-#reviewimg { 
+.modal-content{
+  margin-top:70px;
+}
+/* #reviewimg { 
     width: auto; 
     height: auto;
     max-width: 100px;
     max-height: 100px;
-} 
+}  */
 .check {
   cursor: pointer;
   position: relative;
@@ -140,58 +151,58 @@ body {
 	};
 </script>
 <script>
-/* 리뷰등록 modal */
 jQuery( document ).ready(function( $ ) {
-		$("#fileInput").on('change', function(){  // 값이 변경되면
-			if(window.FileReader){  // modern browser
-				var filename = $(this)[0].files[0].name;
-			} else {  // old IE
-				var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
-			}
+	$("#fileInput").on('change', function(){  // 값이 변경되면
+		if(window.FileReader){  // modern browser
+			var filename = $(this)[0].files[0].name;
+		} else {  // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+		}
 
-			// 추출한 파일명 삽입
-			$("#userfile").val(filename);
-		});
+		// 추출한 파일명 삽입
+		$("#userfile").val(filename);
+	});
 });
-	$(function() {
-		$('#getMyOrder').on('show.bs.modal', function(e) {
-			var button = $(event.target) // Button that triggered the modal
-			console.log(event);
-			var param = {
-				orderId :  button.attr("id").substr(5)
-			}
-			$.getJSON("getMyOrder", param, function(data) {
-				var orderId = data.orderId;
-				var orderDate = data.orderDate;
-				var itemDeliveryno = data.itemDeliveryno;
+$(function() {
+	$('#getMyOrder').on('show.bs.modal', function(e) {
+		var button = $(event.target) // Button that triggered the modal
+		console.log(event);
+		var param = {
+			orderId :  button.attr("id").substr(5)
+		}
+		$.getJSON("getMyOrder", param, function(data) {
+			var orderId = data.orderId;
+			var orderDate = data.orderDate;
+			var itemDeliveryno = data.itemDeliveryno;
+			
+			var itemMethod = data.itemMethod;
+			var orderEa = data.orderEa;
+			var orderPrice = data.orderPrice;
+			var totalPrice = orderEa*orderPrice;
 
-				var itemMethod = data.itemMethod;
-				var orderEa = data.orderEa;
-				var orderPrice = data.orderPrice;
-				var totalPrice = orderEa*orderPrice;
+			$("#orderId").html(orderId);
+			$("#orderDate").html(orderDate);
+			$("#itemDeliveryno").html(itemDeliveryno);
 				
-				$("#orderId").html(orderId);
-				$("#orderDate").html(orderDate);
-				$("#itemDeliveryno").html(itemDeliveryno);
+			$("#itemMethod").html(itemMethod);
+			$("#orderEa").html(orderEa+"개");
+			$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+			$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+		})
+	});
+	$('#insertMyReviewForm').on('show.bs.modal', function(e) {
+		var button = $(event.target) // Button that triggered the modal
+		console.log(event);
+		var param = {
+			orderId :  button.attr("id").substr(6)
+		}
+		$.getJSON("getMyReview", param, function(data){
+			var orderId = data.orderId;
 				
-				$("#itemMethod").html(itemMethod);
-				$("#orderEa").html(orderEa+"개");
-				$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
-				$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
-			})
-		});
-		$('#insertMyReviewForm').on('show.bs.modal', function(e) {
-			var button = $(event.target) // Button that triggered the modal
-			console.log(event);
-			var param = {
-				orderId :  button.attr("id").substr(6)
-			}
-			$.getJSON("getMyOrder", param, function(data) {
-				var orderId = data.orderId;
-				$("#reviewId").val(orderId);
-			})
+			$("#reviewId").val(orderId);
 		});
 	});
+});
 </script>
 
 <script src="//use.typekit.net/xyl8bgh.js"></script>
@@ -226,7 +237,6 @@ jQuery( document ).ready(function( $ ) {
                 </div>
                 <div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive">
-                	
                 		<!-- 페이징 처리 -->
                 		<form name="frm">
 							<input type="hidden" name="sellerId" value="${sessionScope.login.userId}"/>
@@ -241,7 +251,7 @@ jQuery( document ).ready(function( $ ) {
                 						   style="color:#666666; font-family: 'NanumSquareRoundB';">나의 상품</a></h2></td>
                 					<td style="text-align:center"><h2>
                 						<a href="./getMyOrderList?buyerId=${sessionScope.login.userId}"
-                						   style="color:black; font-family: 'NanumSquareRoundEB';">나의 거래내역</a></h2></td>
+                						   style="color:black; font-family: 'NanumSquareRoundEB';">나의 구매내역</a></h2></td>
                 					<td style="text-align:center"><h2>
                 						<a href="./getMyReviewList?buyerId=${sessionScope.login.userId}"
                 						   style="color:#666666; font-family: 'NanumSquareRoundB';">나의 리뷰</a></h2></td>
@@ -283,10 +293,14 @@ jQuery( document ).ready(function( $ ) {
 													<c:if test="${order.orderCondition eq '결제완료'}">구매확정</c:if>
 													<c:if test="${order.orderCondition eq '거래완료'}">확정완료</c:if>
 												</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<button type="button" class="btn btn-default" id="review${order.orderId}" data-toggle="modal" data-target="#insertMyReviewForm">
-													<c:if test="${order.reviewContent == null}">리뷰작성</c:if>
-													<c:if test="${order.reviewContent != null}">리뷰완료</c:if>
-												</button></p>
+												<c:if test="${order.reviewContent eq null}">
+													<button type="button" class="btn btn-default" id="review${order.orderId}" 
+															data-toggle="modal" data-target="#insertMyReviewForm">리뷰작성</button>
+												</c:if>
+												<c:if test="${order.reviewContent ne null}">
+													<button type="button" class="btn btn-default">리뷰완료</button>
+												</c:if>
+												</p>
 												<div class="post-meta">
 												<button type="button" class="btn btn-default pull-right" id="order${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
 												<span class="comments" style="font-size:15px; vertical-align: middle;">${order.orderPrice} 원 / ${order.orderEa} 개</span>
@@ -302,6 +316,7 @@ jQuery( document ).ready(function( $ ) {
 					</c:if>
 					<p style="clear:both"/>
 					</form>
+					</div>
 					
                     <!-- 페이지 번호 -->
 					<c:if test="${not empty MyOrderList}">
@@ -310,163 +325,164 @@ jQuery( document ).ready(function( $ ) {
                     </div>
                     </c:if>
                     
-<!-- 거래내역 상세보기 -->
-<div class="modal fade" id="getMyOrder">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- header -->
-			<div class="modal-header">
-				<!-- 닫기(x) 버튼 -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-
-			<!-- body -->
-			<div class="modal-body">
-				<div class="container">
-					<div id="login-row" class="row justify-content-center align-items-center">
-						<div id="login-column" class="col-md-6">
-							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-								<h4 class="text-info" style="color:black;">주문정보</h4><hr/>
-									<table style="width:100%; margin-left:10px">
-										<tr>
-											<td><h5 class="text-info">주문번호</h5></td>
-											<td style="text-align:right;"><h5 id="orderId"></h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">주문일자</h5></td>
-											<td style="text-align:right;"><h5 id="orderDate"></h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">송장번호</h5></td>
-											<td style="text-align:right;"><h5 id="itemDeliveryno"></h5></td>
-										</tr>
-									</table>
+					<!-- 거래내역 상세보기 -->
+					<div class="modal fade" id="getMyOrder">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- header -->
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
 								</div>
-							</div>
-							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-								<h4 class="text-info" style="color:black;">결제정보</h4><hr/>
-									<table style="width:100%; margin-left:10px">
-										<tr>
-											<td><h5 class="text-info">결제수단</h5></td>
-											<td style="text-align:right;"><h5 id="itemMethod"></h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">상품 금액</h5></td>
-											<td style="text-align:right;"><h5 id="orderPrice"></h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">구매 수량</h5></td>
-											<td style="text-align:right;"><h5 id="orderEa"></h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">결제 금액</h5></td>
-											<td style="text-align:right;"><h5 id="totalPrice"></h5></td>
-										</tr>
-									</table>
-								</div>
-							</div>
-							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-								<h4 class="text-info" style="color:black;">배송정보</h4><hr/>
-									<table style="width:100%; margin-left:10px">
-										<tr>
-											<td><h5 class="text-info">수령인</h5></td>
-											<td style="text-align:right;"><h5 id="userName">${sessionScope.login.userName}</h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">연락처</h5></td>
-											<td style="text-align:right;"><h5 id="userPhone">${sessionScope.login.userPhone}</h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">우편번호</h5></td>
-											<td style="text-align:right;"><h5 id="userPost">${sessionScope.login.userPost}</h5></td>
-										</tr>
-										<tr>
-											<td><h5 class="text-info" style="color:#5f768b;">주소</h5></td>
-											<td style="text-align:right;"><h5 id="userAddress">${sessionScope.login.userAddress}</h5></td>
-										</tr>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>	<!-- end of modal-body -->
-		</div> <!-- end of modal-content -->
-	</div> 
-</div> <!-- end of modal -->
-
-
-<!-- 리뷰작성 페이지 -->			
-<div class="modal fade" id="insertMyReviewForm">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- header -->
-			<div class="modal-header">
-				<!-- 닫기(x) 버튼 -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-
-			<!-- body -->
-			<div class="modal-body">
-				<div class="container">
-					<div id="login-row" class="row justify-content-center align-items-center">
-						<div id="login-column" class="col-md-6">
-							<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
-								<form action="./insertMyReview" method="post" enctype="multipart/form-data">										
-									<input type="hidden" id="reviewId" name="orderId">
-									<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
-									<div class="form-group">
-										<!-- <img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" /> -->
-										<!-- 별점 등록 부분 -->
-										<input id="input-2" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1">
-										<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요."></textarea>
-										<!-- 다중 파일 첨부 -->
-										<!-- <input multiple="multiple"  type="file" name="filename[]" /> -->
-										<!-- 사진 등록 부분 -->
-			 							<input type="file" name="reviewPicFile" id="fileInput" data-class-button="btn btn-default"
-												data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control"
-												tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
-										<div class="bootstrap-filestyle input-group">
-											<input type="text" id="userfile" class="form-control" name="userfile" disabled="">
-											<span class="group-span-filestyle input-group-btn" tabindex="0">
-												<label for="fileInput" class="btn btn-default ">
-													<span class="glyphicon fa fa-upload"></span>
-												</label>
-											</span>
+								<!-- body -->
+								<div class="modal-body">
+									<div class="container">
+										<div id="login-row" class="row justify-content-center align-items-center">
+											<div id="login-column" class="col-md-6">
+												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+													<h4 class="text-info" style="color:black;">주문정보</h4><hr/>
+														<table style="width:100%; margin-left:10px">
+															<tr>
+																<td><h5 class="text-info">주문번호</h5></td>
+																<td style="text-align:right;"><h5 id="orderId"></h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">주문일자</h5></td>
+																<td style="text-align:right;"><h5 id="orderDate"></h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">송장번호</h5></td>
+																<td style="text-align:right;"><h5 id="itemDeliveryno"></h5></td>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+													<h4 class="text-info" style="color:black;">결제정보</h4><hr/>
+														<table style="width:100%; margin-left:10px">
+															<tr>
+																<td><h5 class="text-info">결제수단</h5></td>
+																<td style="text-align:right;"><h5 id="itemMethod"></h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">상품 금액</h5></td>
+																<td style="text-align:right;"><h5 id="orderPrice"></h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">구매 수량</h5></td>
+																<td style="text-align:right;"><h5 id="orderEa"></h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">결제 금액</h5></td>
+																<td style="text-align:right;"><h5 id="totalPrice"></h5></td>
+															</tr>
+														</table>
+													</div>
+												</div>
+												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+													<h4 class="text-info" style="color:black;">배송정보</h4><hr/>
+														<table style="width:100%; margin-left:10px">
+															<tr>
+																<td><h5 class="text-info">수령인</h5></td>
+																<td style="text-align:right;"><h5 id="userName">${sessionScope.login.userName}</h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">연락처</h5></td>
+																<td style="text-align:right;"><h5 id="userPhone">${sessionScope.login.userPhone}</h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">우편번호</h5></td>
+																<td style="text-align:right;"><h5 id="userPost">${sessionScope.login.userPost}</h5></td>
+															</tr>
+															<tr>
+																<td><h5 class="text-info" style="color:#5f768b;">주소</h5></td>
+																<td style="text-align:right;"><h5 id="userAddress">${sessionScope.login.userAddress}</h5></td>
+															</tr>
+														</table>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<input type="submit" class="btn btn-default"  style="float:right;" value="등록">
-										<p style="clear:both"/>
+								</div>	<!-- end of modal-body -->
+							</div> <!-- end of modal-content -->
+						</div> 
+					</div> <!-- end of modal -->
+					
+					
+					<!-- 리뷰작성 페이지 -->			
+					<div class="modal fade" id="insertMyReviewForm">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- header -->
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+								<!-- body -->
+								<div class="modal-body">
+									<div class="container">
+										<div id="login-row" class="row justify-content-center align-items-center">
+											<div id="login-column" class="col-md-6">
+												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+													<form action="./insertMyReview" method="post" enctype="multipart/form-data">										
+														<input type="hidden" id="reviewId" name="orderId">
+														<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
+														<div class="form-group">
+															<!-- 사진 미리보기 -->
+															<!-- <img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" /> -->
+															<!-- <div style="width:106px; height:106px; margin-bottom:10px; border-style:dashed; border-width:medium; border-color:#999; float:left">
+																<img id="reviewimg" style="height:200px" />
+															</div> -->
+															<!-- 별점 등록 부분 -->
+															<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1">
+															<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px"></textarea>
+															
+															<!-- 다중 파일 첨부 -->
+															<!-- <input multiple="multiple"  type="file" name="filename[]" /> -->
+															<!-- 사진 등록 부분 -->
+								 							<input type="file" name="reviewPicFile" id="fileInput" data-class-button="btn btn-default"
+																	data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control"
+																	tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
+															<div class="bootstrap-filestyle input-group">
+																<input type="text" id="userfile" class="form-control" name="userfile" disabled="">
+																<span class="group-span-filestyle input-group-btn" tabindex="0">
+																	<label for="fileInput" class="btn btn-default ">
+																		<span class="glyphicon fa fa-upload"></span>
+																	</label>
+																</span>
+															</div>
+															
+															<!-- 다중파일 업로드 -->
+															<div class="container my-4" style="width:100%; padding:0">
+																<div class="form-group">
+															    	<div class="file-loading">
+															        	<input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
+															        </div>
+															    </div>
+															</div>
+															
+														</div>
+														<div class="form-group">
+															<input type="submit" class="btn btn-default"  style="float:right;" value="등록">
+															<p style="clear:both"/>
+														</div>
+													</form>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-								</form>
-							</div>
-						</div>
-								<%-- 
-								<!-- 다중파일 업로드 -->
-								<form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
-        							<table class="table" width="100%" border="1px">
-            							<tbody id="fileTableTbody">
-                							<tr>
-                    							<td id="dropZone">파일을 드래그 하세요</td>
-                							</tr>
-            							</tbody>
-        							</table>
-   							 	</form>
-    							<a href="#" onclick="uploadFile(); return false;" class="btn bg_01">파일 업로드</a>
-    							 --%>
-					</div>
-				</div>
-			</div>	<!-- end of modal-body -->
-		</div> <!-- end of modal-content -->
-	</div> 
-</div> <!-- end of modal -->
-						</div>
-					</div>
+								</div>	<!-- end of modal-body -->
+							</div> <!-- end of modal-content -->
+						</div> 
+					</div> <!-- end of modal -->
+					
+					
                 </div>
             </div>
         </div>
@@ -476,257 +492,21 @@ jQuery( document ).ready(function( $ ) {
 <script src="resources/js/mypage.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<!-- 다중파일 업로드 -->
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
+<!-- 사진 업로드 미리보기 -->
 <!-- <script type="text/javascript">
-    // 파일 리스트 번호
-    var fileIndex = 0;
-    // 등록할 전체 파일 사이즈
-    var totalFileSize = 0;
-    // 파일 리스트
-    var fileList = new Array();
-    // 파일 사이즈 리스트
-    var fileSizeList = new Array();
-    // 등록 가능한 파일 사이즈 MB
-    var uploadSize = 50;
-    // 등록 가능한 총 파일 사이즈 MB
-    var maxUploadSize = 500;
- 
-    $(function (){
-        // 파일 드롭 다운
-        fileDropDown();
-    });
- 
-    // 파일 드롭 다운
-    function fileDropDown(){
-        var dropZone = $("#dropZone");
-        //Drag기능 
-        dropZone.on('dragenter',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            // 드롭다운 영역 css
-            dropZone.css('background-color','#E3F2FC');
-        });
-        dropZone.on('dragleave',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            // 드롭다운 영역 css
-            dropZone.css('background-color','#FFFFFF');
-        });
-        dropZone.on('dragover',function(e){
-            e.stopPropagation();
-            e.preventDefault();
-            // 드롭다운 영역 css
-            dropZone.css('background-color','#E3F2FC');
-        });
-        dropZone.on('drop',function(e){
-            e.preventDefault();
-            // 드롭다운 영역 css
-            dropZone.css('background-color','#FFFFFF');
-            
-            var files = e.originalEvent.dataTransfer.files;
-            if(files != null){
-                if(files.length < 1){
-                    alert("폴더 업로드 불가");
-                    return;
-                }
-                selectFile(files)
-            }else{
-                alert("ERROR");
-            }
-        });
-    }
- 
-    // 파일 선택시
-    function selectFile(fileObject){
-        var files = null;
- 
-        if(fileObject != null){
-            // 파일 Drag 이용하여 등록시
-            files = fileObject;
-        }else{
-            // 직접 파일 등록시
-            files = $('#multipaartFileList_' + fileIndex)[0].files;
-        }
-        
-        // 다중파일 등록
-        if(files != null){
-            for(var i = 0; i < files.length; i++){
-                // 파일 이름
-                var fileName = files[i].name;
-                var fileNameArr = fileName.split("\.");
-                // 확장자
-                var ext = fileNameArr[fileNameArr.length - 1];
-                // 파일 사이즈(단위 :MB)
-                var fileSize = files[i].size / 1024 / 1024;
-                
-                if($.inArray(ext, ['exe', 'bat', 'sh', 'java', 'jsp', 'html', 'js', 'css', 'xml']) >= 0){
-                    // 확장자 체크
-                    alert("등록 불가 확장자");
-                    break;
-                }else if(fileSize > uploadSize){
-                    // 파일 사이즈 체크
-                    alert("용량 초과\n업로드 가능 용량 : " + uploadSize + " MB");
-                    break;
-                }else{
-                    // 전체 파일 사이즈
-                    totalFileSize += fileSize;
-                    
-                    // 파일 배열에 넣기
-                    fileList[fileIndex] = files[i];
-                    
-                    // 파일 사이즈 배열에 넣기
-                    fileSizeList[fileIndex] = fileSize;
- 
-                    // 업로드 파일 목록 생성
-                    addFileList(fileIndex, fileName, fileSize);
- 
-                    // 파일 번호 증가
-                    fileIndex++;
-                }
-            }
-        }else{
-            alert("ERROR");
-        }
-    }
- 
-    // 업로드 파일 목록 생성
-    function addFileList(fIndex, fileName, fileSize){
-        var html = "";
-        html += "<tr id='fileTr_" + fIndex + "'>";
-        html += "    <td class='left' >";
-        html +=         fileName + " / " + fileSize + "MB "  + "<a href='#' onclick='deleteFile(" + fIndex + "); return false;' class='btn small bg_02'>삭제</a>"
-        html += "    </td>"
-        html += "</tr>"
- 
-        $('#fileTableTbody').append(html);
-    }
- 
-    // 업로드 파일 삭제
-    function deleteFile(fIndex){
-        // 전체 파일 사이즈 수정
-        totalFileSize -= fileSizeList[fIndex];
-        // 파일 배열에서 삭제
-        delete fileList[fIndex];
-        // 파일 사이즈 배열 삭제
-        delete fileSizeList[fIndex];
-        // 업로드 파일 테이블 목록에서 삭제
-        $("#fileTr_" + fIndex).remove();
-    }
- 
-    // 파일 등록
-    function uploadFile(){
-        // 등록할 파일 리스트
-        var uploadFileList = Object.keys(fileList);
- 
-        // 파일이 있는지 체크
-        if(uploadFileList.length == 0){
-            // 파일등록 경고창
-            alert("파일이 없습니다.");
-            return;
-        }
-        
-        // 용량을 500MB를 넘을 경우 업로드 불가
-        if(totalFileSize > maxUploadSize){
-            // 파일 사이즈 초과 경고창
-            alert("총 용량 초과\n총 업로드 가능 용량 : " + maxUploadSize + " MB");
-            return;
-        }
-            
-        if(confirm("등록 하시겠습니까?")){
-            // 등록할 파일 리스트를 formData로 데이터 입력
-            var form = $('#uploadForm');
-            var formData = new FormData(form);
-            for(var i = 0; i < uploadFileList.length; i++){
-                formData.append('files', fileList[uploadFileList[i]]);
-            }
-            
-            $.ajax({
-                url:"업로드 경로",
-                data:formData,
-                type:'POST',
-                enctype:'multipart/form-data',
-                processData:false,
-                contentType:false,
-                dataType:'json',
-                cache:false,
-                success:function(result){
-                    if(result.data.length > 0){
-                        alert("성공");
-                        location.reload();
-                    }else{
-                        alert("실패");
-                        location.reload();
-                    }
-                }
-            });
-        }
-    }
+function readURL(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		
+		reader.onload = function(e) {
+			$('#reviewimg').attr('src', e.target.result);
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+$("#fileInput").change(function() {
+	readURL(this);
+});
 </script> -->
-
-    <script>
-        jQuery(document).ready(function () {
-            $("#input-21f").rating({
-                starCaptions: function (val) {
-                    if (val < 3) {
-                        return val;
-                    } else {
-                        return 'high';
-                    }
-                },
-                starCaptionClasses: function (val) {
-                    if (val < 3) {
-                        return 'label label-danger';
-                    } else {
-                        return 'label label-success';
-                    }
-                },
-                hoverOnClear: false
-            });
-            var $inp = $('#rating-input');
-
-            $inp.rating({
-                min: 0,
-                max: 5,
-                step: 1,
-                size: 'lg',
-                showClear: false
-            });
-
-            $('#btn-rating-input').on('click', function () {
-                $inp.rating('refresh', {
-                    showClear: true,
-                    disabled: !$inp.attr('disabled')
-                });
-            });
-
-
-            $('.btn-danger').on('click', function () {
-                $("#kartik").rating('destroy');
-            });
-
-            $('.btn-success').on('click', function () {
-                $("#kartik").rating('create');
-            });
-
-            $inp.on('rating.change', function () {
-                alert($('#rating-input').val());
-            });
-
-
-            $('.rb-rating').rating({
-                'showCaption': true,
-                'stars': '3',
-                'min': '0',
-                'max': '3',
-                'step': '1',
-                'size': 'xs',
-                'starCaptions': {0: 'status:nix', 1: 'status:wackelt', 2: 'status:geht', 3: 'status:laeuft'}
-            });
-            $("#input-21c").rating({
-                min: 0, max: 8, step: 0.5, size: "xl", stars: "8"
-            });
-        });
-    </script>
 </body>
 </html>

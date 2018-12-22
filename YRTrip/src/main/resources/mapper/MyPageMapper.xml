@@ -106,7 +106,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </delete>
 <select id="getMyBuyerList" parameterType="order" resultType="order">
 	SELECT BUYER_ID,
-		   ORDER_DATE,
+		   TO_CHAR(ORDER_DATE, 'YYYY/MM/DD') ORDER_DATE,
 		   ORDER_CONDITION,
 		   ORDER_DELIVERY,
 		   ORDER_PRICE,
@@ -116,6 +116,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 	       AND O.ITEM_ID = #{itemId}
+	       AND I.SELLER_ID = #{sellerId}
 </select>
 
 <!-- 거래내역 페이지 -->
@@ -132,13 +133,15 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   ORDER_DELIVERY,
 		   ORDER_PRICE,
 		   ORDER_EA,
-		   ITEM_ID,
+		   O.ITEM_ID,
 		   ITEM_NAME,
 		   ITEM_METHOD,
 		   ITEM_DELIVERYNO,
+		   REVIEW_CONTENT,
 		   BUYER_ID
-	  FROM ORDERV
-	 WHERE BUYER_ID = #{buyerId}
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	 	   AND BUYER_ID = #{buyerId}
   ORDER BY ORDER_DATE DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
@@ -199,8 +202,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   ORDER_EA,
 		   ORDER_ID
 	  FROM REVIEWV
-	 WHERE BUYER_ID = #{buyerId}
-		   AND ORDER_ID = #{orderId}
+	 WHERE ORDER_ID = #{orderId}
   ORDER BY REVIEW_DATE DESC
 </select>
 <update id="insertMyReview" parameterType="order">

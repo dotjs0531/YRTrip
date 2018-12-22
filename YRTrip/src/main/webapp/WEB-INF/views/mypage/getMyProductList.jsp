@@ -29,6 +29,9 @@ body {
 body {
   display: grid;
 }
+.modal-content{
+  margin-top:70px;
+}
 .check {
   cursor: pointer;
   position: relative;
@@ -133,25 +136,37 @@ body {
 		$('#getMyBuyerList').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
 			console.log(event);
-			var param = { itemId :  button.attr("id").substr(5) };
+			var param = { itemId :  button.attr("id").substr(5),
+						  sellerId : '${sessionScope.login.userId}' };
+			$("#MyBuyerList").empty();
 			$.getJSON("getMyBuyerList", param, function(datas) {
-				for(i=0; i<datas.legnth; i++) {
-					console.log(datas[i].buyerId);
-					var div = makeBuyerListView(datas[i]);
-					$(div).appendTo("#MyBuyerList");
+				for(i=0; i<datas.length; i++) {
+					if(datas[i].orderCondition != '거래취소'){
+						var div = makeBuyerListView(datas[i]);
+						$(div).appendTo("#MyBuyerList");
+					}
 				}
 			})
 		});
 		
 		function makeBuyerListView(buyer) {
-			var div =$("<div class='form-group'>");
+			var div =$("<div>");
 			div.attr("id", "c"+buyer.buyerId);
 			div.addClass('MyBuyerList');
 			div[0].buyerList = buyer;
 			
-			var str = "<p/><label class='col-sm-2 control-label'>" + buyer.buyerId + "</label>" 
-	        +"<span class='col-lg-8 qnaContent'>" + buyer.buyerId +"</span>"
-			+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">송장번호등록</button>";
+			if(buyer.itemDeliveryno == null){
+				 var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
+						+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
+		        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
+						+ "<button type=\"button\" class=\"btn btn-default btnDno\" style='float:right'>송장번호 등록</button></div>"
+						+ "<p style='clear:both'>";
+			} else {
+				 var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
+					+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
+	        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span></div>"
+					+ "<p style='clear:both'>";
+			}
 			div.html(str);
 			return div;
 		};
@@ -203,7 +218,7 @@ body {
                 						   style="color:black; font-family: 'NanumSquareRoundEB';">나의 상품</a></h2></td>
                 					<td style="text-align:center"><h2>
                 						<a href="./getMyOrderList?buyerId=${sessionScope.login.userId}"
-                						   style="color:#666666; font-family: 'NanumSquareRoundB';">나의 거래내역</a></h2></td>
+                						   style="color:#666666; font-family: 'NanumSquareRoundB';">나의 구매내역</a></h2></td>
                 					<td style="text-align:center"><h2>
                 						<a href="./getMyReviewList?buyerId=${sessionScope.login.userId}"
                 						   style="color:#666666; font-family: 'NanumSquareRoundB';">나의 리뷰</a></h2></td>
@@ -260,7 +275,6 @@ body {
 					</c:if>
 					<p style="clear:both"/>
 					</form>
-					<!-- 리뷰작성 페이지 -->
 					
 					<!-- 구매자 목록 보기 -->
 					<div class="modal fade" id="getMyBuyerList">
@@ -277,7 +291,7 @@ body {
 										<div id="login-row" class="row justify-content-center align-items-center">
 											<div id="login-column" class="col-md-6">
 												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-													<h4 class="text-info" style="color:black;">구매자 목록</h4><hr/>
+													<h4 class="text-info" style="color:black; margin:20px 10px; font-family: 'NanumSquareRoundB'">구매자 목록</h4>
 													<div id="MyBuyerList"></div>
 												</div>
 											</div>
