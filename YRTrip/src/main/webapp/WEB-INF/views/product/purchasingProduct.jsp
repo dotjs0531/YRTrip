@@ -37,23 +37,33 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">이름</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                <input type="text" class="form-control" id="firstName"  name="${userPur.userName}" placeholder="" value="${userPur.userName}" required="" disabled>
                 <div class="invalid-feedback">
                   이름을 입력해주세요
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="userId">회원아이디</label>
-                <input type="text" class="form-control" id="buyerId" placeholder="" value="" required="">
+                <input type="text" class="form-control" id="buyerId" name="${userPur.userId}" placeholder="" value="${userPur.userId}" required="" disabled>
                 <div class="invalid-feedback">
                   이름을 입력해주세요
                 </div>
               </div>
-             </div>           
-
+             </div>  
+             <div class="mb-3">  
+				<div class="custom-control custom-radio">
+	              <input type="radio" name="which-address" class="custom-control-input" id="same-address" checked="">
+	              <label class="custom-control-label" for="same-address">저장한 주소와 배달지 주소가 같아요!</label>
+	            </div>
+	            <!-- 주소 리셋해주기 -->
+	            <div class="custom-control custom-radio">
+	              <input type="radio" name="which-address" class="custom-control-input" id="different-address">
+	              <label class="custom-control-label" for="different-address">다른 주소를 쓸꺼예요</label>
+	            </div>
+            </div>
             <div class="mb-3">
               <label for="address">주소</label>
-              <input type="text" class="form-control" id="address" placeholder="시/군/구/동/읍/면/리" required="">
+              <input type="text" class="form-control" id="address" name="${userPur.userAddress}" value="${userPur.userAddress}" placeholder="시/군/구/동/읍/면/리" required="">
               <div class="invalid-feedback">
                 배달될 주소를 입력해주세요 
               </div>
@@ -62,35 +72,31 @@
             <div class="mb-3">
               <label for="address2">상세주소</label>
               <input type="text" class="form-control" id="address2" placeholder="동/호/실/몇층과 같은 상세주소를 입력해주세요" required="">
-            </div>
-            <hr class="mb-4">
+            </div>		
             <div class="mb-3">
               <label for="email">이메일<span class="text-muted">(선택)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <input type="email" class="form-control" value="${userPur.userEmail}" id="email" placeholder="you@example.com">
               <div class="invalid-feedback">
                 배송내역을 이메일로 실시간 알려드립니다 필요시 입력해주세요
               </div>
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="same-address">
-              <label class="custom-control-label" for="same-address">저장한 주소와 배달지 주소가 같아요!</label>
-            </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="save-info">
-              <label class="custom-control-label" for="save-info">다른 주소를 쓸꺼예요</label>
-            </div>
-            <hr class="mb-4">
             
+            <hr class="mb-4">         
+        상품이미지 작게 넣기 60*60정도?
              <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="itemPrice">상품가격</label>
                 <input type="text" class="form-control" id="itemPrice" placeholder="" value="" required="">               
               </div>
-              <div class="col-md-6 mb-3">
-                <label for="itemEa">주문개수</label>
-                <input type="text" class="form-control" id="itemEa" placeholder="" value="" required="">
+               <div class="col-md-5 mb-1">
+                <label for="itemEa" class="ml-4" for="itemEa">주문개수</label>
+                <input type="text" class="col-3 ml-4 form-control" id="itemEa" placeholder="" value="" required="">			
               </div>
-             </div> 
+              <div class="col-md-3 mb-3">
+                <label for="itemTotal">총가격</label>
+                <input type="text" class="form-control" id="itemTotal" placeholder="" value="" required="">
+              </div>
+             </div>
              
               <div class="row">
               <div class="col-md-6 mb-3">

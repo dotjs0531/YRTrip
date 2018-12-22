@@ -18,6 +18,7 @@ import com.yrtrip.app.product.CartService;
 import com.yrtrip.app.product.CartVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.user.UserService;
 import com.yrtrip.app.user.UserVO;
 
 @Controller
@@ -26,7 +27,7 @@ public class ProductController {
 	@Autowired ProductService productService;
 	@Autowired CartService cartService;
 	@Autowired OrderService orderService;
-	
+	@Autowired UserService userService;
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
 	public ModelAndView getProductList(Paging paging, ProductVO vo) {
@@ -60,7 +61,7 @@ public class ProductController {
 	@RequestMapping("/getProduct")
 	public String getProduct(Model model, ProductVO vop, OrderVO voo) {
 		model.addAttribute("product", productService.getProduct(vop));
-		model.addAttribute("orderList", orderService.getOrderList(voo));		
+		model.addAttribute("orderList", orderService.getOrderList(voo));
 		return "product/getProduct";
 	}
 	
@@ -96,13 +97,30 @@ public class ProductController {
 		productService.deleteProduct(vo);
 		return "redirect:getProductList";
 	}
-	//주문서 뷰
-	@RequestMapping("/purchasingProduct")
-	public String purchasingProduct(ProductVO vo) {
+	//주문서 뷰(purchasingProduct.jsp)
+	@RequestMapping("/purchasingProductView")
+	public String purchasingProductForm(ProductVO vo) {
 		return "product/purchasingProduct";
 	}
+	//주문서 입력 처리 : 회원정보 select, 아이템정보 select, cart select
+	@RequestMapping("/purchasingProduct")
+	public String purchasingProduct(Model model, ProductVO vop, CartVO voc, UserVO vou, HttpSession session) {		
+		vou.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+		UserVO uservo = userService.getUser(vou);
 		
-	//장바구니 폼(찜 목록 이랑 비슷)
+		model.addAttribute("product", productService.getProduct(vop));
+		model.addAttribute("cart",cartService.getCart(voc));
+		model.addAttribute("userPur", uservo);
+		return "product/purchasingProduct";
+	}
+		//주문서 수정(은 안되게 하는 걸로...)
+		
+		//주문서 삭제(는 따로 필요없을듯 뒤로가기나 취소 누르면 작성내용 다 사라지는걸루)
+		
+		//주문서 조회(는 주문서 완료후 myPage에서 주문내역에서 볼수 있도록)
+	
+		
+	//장바구니 폼(조회, 찜 목록 이랑 비슷)
 	@RequestMapping("/getCartList")
 	public String getCartListForm(Model model, CartVO vo, HttpSession session) {		
 		vo.setMyId(((UserVO)session.getAttribute("login")).getUserId());
@@ -135,4 +153,7 @@ public class ProductController {
 		cartService.deleteCart(vo);
 		return "redirect:getCartList";
 	}
+	
+	
+  
 }

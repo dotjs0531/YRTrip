@@ -26,7 +26,7 @@
 				ITEM_EA,
 				CART_DATE
 		FROM CART c 
-		WHERE CARD_ID = #{cartId}
+		WHERE CART_ID = #{cartId}
 	</select>
 	<insert id="insertCart" parameterType="cart">
 	<selectKey keyProperty="cartId" resultType="integer" order="BEFORE">

@@ -74,7 +74,7 @@
 									<h3 class="my-0">${cart.itemName}</h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
-
+									<small class="text-muted">${cart.cartId}</small> <br>
 								</div> <span class="text-muted">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<!-- <form action="./updateCart"> --> <span id="original_itemEa">${cart.itemEa}</span>
 								<button type="button" id="go_update">수정</button> <!-- </form> -->
@@ -92,12 +92,12 @@
 										<c:when test="${cart.itemOrderdetail eq '구매가능'}">
 											<c:choose>
 												<c:when test="${cart.itemMethod eq '현금결제'}">
-													<button class="btn btn-lg btn-block"
-														style="background-color: #f9bf3b; color: white;">대화하기</button>
+													<a role="button" class="btn btn-lg btn-block"
+														style="background-color: #f9bf3b; color: white;">대화하기</a>
 												</c:when>
 												<c:otherwise>
-													<button class="btn btn-lg btn-block"
-														style="background-color: #f9bf3b; color: white;">결제하기</button>
+													<a role="button" href="./purchasingProduct?cartId=${cart.cartId}"class="btn btn-lg btn-block"
+														style="background-color: #f9bf3b; color: white;">결제하기</a>
 												</c:otherwise>
 
 											</c:choose>
