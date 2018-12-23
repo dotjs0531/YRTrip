@@ -133,6 +133,7 @@ body {
 </script>
 <script>
 	$(function() {
+		//구매자 목록
 		$('#getMyBuyerList').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
 			console.log(event);
@@ -148,7 +149,6 @@ body {
 				}
 			})
 		});
-		
 		function makeBuyerListView(buyer) {
 			var div =$("<div>");
 			div.attr("id", "c"+buyer.buyerId);
@@ -159,17 +159,40 @@ body {
 				 var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
 						+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
 		        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
-						+ "<button type=\"button\" class=\"btn btn-default btnDno\" style='float:right'>송장번호 등록</button></div>"
+						+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>송장번호 등록</button></div>"
 						+ "<p style='clear:both'>";
 			} else {
 				 var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
 					+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
-	        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span></div>"
+	        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
+					+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>송장번호 수정</button></div>"
 					+ "<p style='clear:both'>";
 			}
 			div.html(str);
 			return div;
 		};
+
+		//송장번호 등록
+		$('#updateDnoForm').on('show.bs.modal', function(e) {
+			var button = $(event.target) // Button that triggered the modal
+			console.log(event);
+			var param = { orderId :  button.attr("id").substr(3) };
+			$.getJSON("getMyOrder", param, function(data) {
+				var orderId = data.orderId;
+				var itemDeliveryno = data.itemDeliveryno;
+				
+				if (data.itemDeliveryno == null) {
+					$("#dnoTitle").html("송장번호 등록");
+					$("#dnoOrderId").val(orderId);
+					$("#updateDno").html("등록");
+				} else {
+					$("#dnoTitle").html("송장번호 수정");
+					$("#dnoOrderId").val(orderId);
+					$("#dno").val(itemDeliveryno);
+					$("#updateDno").html("수정");
+				}
+			})
+		});
 	});
 </script>
 <script src="//use.typekit.net/xyl8bgh.js"></script>
@@ -293,6 +316,41 @@ body {
 												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
 													<h4 class="text-info" style="color:black; margin:20px 10px; font-family: 'NanumSquareRoundB'">구매자 목록</h4>
 													<div id="MyBuyerList"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>	<!-- end of modal-body -->
+							</div> <!-- end of modal-content -->
+						</div> 
+					</div> <!-- end of modal -->
+					
+                    <!-- 송장번호 등록 페이지 -->			
+					<div class="modal fade" id="updateDnoForm">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<!-- header -->
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+								<!-- body -->
+								<div class="modal-body">
+									<div class="container">
+										<div id="login-row" class="row justify-content-center align-items-center">
+											<div id="login-column" class="col-md-6">
+												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%; margin:0 auto">
+													<form action="./updateDno" method="post" enctype="multipart/form-data">										
+														<input type="hidden" id="dnoOrderId" name="orderId">
+														<h4 class="text-info" id="dnoTitle" style="color:black; font-family: 'NanumSquareRoundB'"></h4>
+														<div class="input-group">
+															<input type="text" class="form-control" id="dno" name="itemDeliveryno" style="margin:15px 0 15px 0">
+															<span class="input-group-btn">
+																<button type="submit" class="btn btn-default" id="updateDno" style="float:right;"></button>
+															</span>
+															<p style="clear:both"/>
+														</div>
+													</form>
 												</div>
 											</div>
 										</div>

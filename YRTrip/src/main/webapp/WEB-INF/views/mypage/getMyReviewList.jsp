@@ -10,12 +10,12 @@
 <meta charset="UTF-8">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+  
 <!-- 별점 등록부분 -->
 <link href="resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
 <!--suppress JSUnresolvedLibraryURL -->
 <script src="resources/js/star-rating.js" type="text/javascript"></script>
-   
+ 
 <!-- 다중파일 업로드 -->
 <link href="resources/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
@@ -87,9 +87,10 @@ $(function() {
 			var reviewStar = data.reviewStar;
 			var reviewContent = data.reviewContent;
 			var reviewPic = data.reviewPic;
+			
 			$("#reviewId").val(orderId);
-			//$("#udtreviewStar").val(reviewStar);
-			$(".reviewStar").attr('value', reviewStar);
+			$(".reviewStar").val(reviewStar);
+			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
 			$("#userfile").val(reviewPic);
 			$("#fileInput").val(reviewPic);
@@ -97,6 +98,7 @@ $(function() {
 	});
 });
 </script>
+
 <script src="//use.typekit.net/xyl8bgh.js"></script>
 <script>try{Typekit.load();}catch(e){}</script>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>

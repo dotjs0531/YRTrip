@@ -106,6 +106,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </delete>
 <select id="getMyBuyerList" parameterType="order" resultType="order">
 	SELECT BUYER_ID,
+		   ORDER_ID,
 		   TO_CHAR(ORDER_DATE, 'YYYY/MM/DD') ORDER_DATE,
 		   ORDER_CONDITION,
 		   ORDER_DELIVERY,
@@ -118,6 +119,10 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	       AND O.ITEM_ID = #{itemId}
 	       AND I.SELLER_ID = #{sellerId}
 </select>
+<update id="updateDno" parameterType="order">
+	UPDATE ORDERT SET ITEM_DELIVERYNO = #{itemDeliveryno}
+				WHERE ORDER_ID = #{orderId}
+</update>
 
 <!-- 거래내역 페이지 -->
 <select id="getMyOrderCount" parameterType="order" resultType="int">

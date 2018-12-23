@@ -114,6 +114,11 @@ public class MyPageController {
 	public List<OrderVO> getMyBuyerList(OrderVO vo) {	//구매자 목록보기
 		return mypageService.getMyBuyerList(vo);
 	}
+	@RequestMapping("/updateDno") //구매자 송장번호 등록
+	public String updateDno(OrderVO vo) {
+		mypageService.updateDno(vo);
+		return "redirect:getMyProductList";
+	}
 
 	//거래내역 페이지
 	@RequestMapping(value = "/getMyOrderList", method = RequestMethod.GET)
@@ -195,9 +200,9 @@ public class MyPageController {
 		return mypageService.getMyReview(vo);
 	}
 	@RequestMapping("updateMyReview") //리뷰 수정
-	public String updateMyReview(Model model, OrderVO vo, HttpServletRequest request) throws IllegalStateException, IOException { 
+	public String updateMyReview(Model model, OrderVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
 		model.addAttribute("MyReview", mypageService.getMyReview(vo));
-	
+		
 		String path = request.getSession().getServletContext().getRealPath("/images/review");
 
 		MultipartFile reviewPicFile = vo.getReviewPicFile();

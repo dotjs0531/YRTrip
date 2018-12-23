@@ -73,6 +73,9 @@ public class MyPageDAOMybatis {
 	public List<OrderVO> getMyBuyerList(OrderVO vo) {
 		return mybatis.selectList("user.getMyBuyerList", vo);
 	}
+	public void updateDno(OrderVO vo) {
+		mybatis.update("user.updateDno",vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {
