@@ -8,4 +8,5 @@ public interface JoinerService {
 	public void deleteJoiner(JoinerVO vo);
 	public List<JoinerVO> getJoinerList(JoinerVO vo);
 	public JoinerVO getJoiner(JoinerVO vo);
+	public int getJoinerId(int prtId);
 }

@@ -32,4 +32,11 @@ public class JoinerServiceImpl implements JoinerService {
       return dao.getJoiner(vo);
    }
 
+   @Override
+   public int getJoinerId(int prtId) {
+      return dao.getJoinerId(prtId);
+   }
+
+   
+   
 }

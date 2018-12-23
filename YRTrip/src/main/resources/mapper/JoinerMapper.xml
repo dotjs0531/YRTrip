@@ -7,9 +7,9 @@
              JOINER_DATE,         
              USER_ID,   
              PARTNER_ID,
-             JOINER_CONDITION,
+             JOINER_CONDITION
         FROM JOINERT
-       WHERE PARTNERID = #{partnerId}
+       WHERE PARTNER_ID = #{partnerId}
        ORDER BY JOINER_ID DESC 
 </select>
 <select id="getJoiner" resultType="joiner" parameterType="joiner"> 
@@ -22,14 +22,14 @@
        WHERE JOINER_ID = #{joinerId}
 </select>
 <insert id="insertJoiner" parameterType="joiner">
-   <selectKey keyProperty="joinerId" resultType="string" order="BEFORE">
-         SELECT NVL(MAX(JOINER_ID),0)+1 FROM JOINERT
-   </selectKey>
-   INSERT INTO JOINER (
+   <selectKey keyProperty="joinerId" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(JOINER_ID), 0)+1 FROM JOINERT
+	</selectKey>
+   INSERT INTO JOINERT (
          JOINER_ID,
-         JOINER_DATE,    
-         USER_ID,    
-         PARTNER_ID
+         JOINER_DATE,
+         USER_ID,
+         PARTNER_ID,
          JOINER_CONDITION
          )
    VALUES (

@@ -11,6 +11,7 @@ public class JoinerVO {
 	private String partnerId;	// 참조키
 	private String joinerCondition;
 	private Integer	pageUnit;
+	
 	public Integer getJoinerId() {
 		return joinerId;
 	}

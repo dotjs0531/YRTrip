@@ -33,4 +33,11 @@ public class JoinerDAOMybatis {
       return mybatis.selectOne("joiner.getJoiner", vo);
    }
 
+   public int getJoinerId(int prtId) {
+	      return mybatis.selectOne("joiner.getJoinerId");
+	   }
+   
+   
+   
+   
 }

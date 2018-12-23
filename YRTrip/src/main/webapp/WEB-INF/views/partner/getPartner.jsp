@@ -1,3 +1,4 @@
+<%@page import="com.yrtrip.app.user.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -139,14 +140,13 @@
 						
 						
 						</div>
-						
-						
-						
-						
 						<div id="joinerAdd" class="order-buton" style="float: right">
 							<form name="addForm" id="addForm">
-									<input type="hidden" name="joinerId" value="${joiner.userId}">
-									<input type="hidden" name="" size="10"><br /> <input type="button" value="등록" id="btnAdd" />
+									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+									<input type="hidden" name="partnerId" value="${partner.partnerId}">
+									<input type="hidden" id="joinerCondition" name="joinerCondition" value="참여">
+									<br />
+									<button type="button" class="btn btn-default" id="btnAdd">등록</button>
 							</form>
 						</div>
 						<br/>

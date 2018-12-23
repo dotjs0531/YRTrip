@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
+import com.yrtrip.app.joiner.JoinerService;
 import com.yrtrip.app.partner.PartnerService;
 import com.yrtrip.app.partner.PartnerVO;
 
@@ -20,6 +21,9 @@ public class PartnerController {
 	@Autowired
 	PartnerService partnerService;
 
+	@Autowired
+	JoinerService joinerService;
+	
 	// 전체조회
 	@RequestMapping(value = { "/getPartnerList"}, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
 	public ModelAndView getPartnerList(Paging paging, PartnerVO vo) {
@@ -43,7 +47,7 @@ public class PartnerController {
 	// 단건조회
 	@RequestMapping("/getPartner") // http://localhost:8081/app/getPartner
 	public String getPartner(Model model, PartnerVO vo) {
-		model.addAttribute("partner", partnerService.getPartner(vo));	// vo : 조회할 게시글 번호 넘어가는 것
+		model.addAttribute("partner", partnerService.getPartner(vo));	// vo : 조회할 게시글 번호 넘어가는 것		
 		return "partner/getPartner";
 	}
 	
