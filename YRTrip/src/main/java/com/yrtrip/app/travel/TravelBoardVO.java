@@ -27,6 +27,8 @@ public class TravelBoardVO {
 	private int first;
 	private int last;
 	
+	private String[] travelNoList;
+	
 	public int getTravelNo() {
 		return travelNo;
 	}
@@ -159,6 +161,12 @@ public class TravelBoardVO {
 		this.searchTinfo = searchTinfo;
 	}
 	
+	public String[] getTravelNoList() {
+		return travelNoList;
+	}
+	public void setTravelNoList(String[] travelNoList) {
+		this.travelNoList = travelNoList;
+	}
 	@Override
 	public String toString() {
 		return "TravelBoardVO [travelNo=" + travelNo + ", travelPerson=" + travelPerson + ", travelPay=" + travelPay
