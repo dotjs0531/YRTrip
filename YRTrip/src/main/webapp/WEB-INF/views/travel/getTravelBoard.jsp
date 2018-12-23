@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -162,7 +163,7 @@
     -moz-transition: all 1s;
     -webkit-transition: all 1s;
     transition: all 1s;
-	padding-top: 15vh;
+	padding-top: 5vh;
 }
 
 .son-text:hover {
@@ -176,6 +177,24 @@
 	padding: 15px 45px;
 	font-family: 'Josefin Slab', serif;
 	font-style: italic;
+	opacity: 0.6;
+	border-radius: 30px;
+}
+.text-span {
+	background: #fcfcfc;
+	padding:5px;
+	color: #22313F;
+	font-family: 'Josefin Slab', serif;
+	opacity: 0.6;
+	display:inline;
+	font-size: 0.5em;
+}
+.top-span {
+	padding:5px;
+	color: #ffffff;
+	font-family: 'Josefin Slab', serif;
+	display:inline;
+	font-size: 0.6em;
 }
 </style>
 <script>
@@ -216,27 +235,47 @@ jQuery( document ).ready(function( $ ) {
 <div class="container dad">
   <div class="son-1">
   </div>
+  <span class="top-span">NO : T${travelBoard.travelNo}</span>
+<span class="top-span">작성일자 : ${fn:substring(travelBoard.travelDate, 0, 10)}</span>
+<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
+<span class="top-span" style="fontsize:10px!important;">작성자 : ${travelBoard.userId}</span>
     <p class="son-text">
-    <span class="son-span">${travelBoard.travelTitle}</span><br/><br/></p>
-    <table>
-    <tr>
-    <td>${travelBoard.tinfoId}</td>
-				<td>${travelBoard.travelWith}</td>
-				<td>${travelBoard.travelPerson}</td>
-				<td>${travelBoard.travelSche}</td>
-				<td>${travelBoard.travelStart}</td>
-				<td>${travelBoard.userId}</td>
-				<td>${travelBoard.travelNo}</td>
-				<td>${travelBoard.travelDate}</td>
-				<td>${travelBoard.travelHit}</td>
-				<td>${travelBoard.travelLike}</td></tr>
-				</table>
+    <span class="son-span">${travelBoard.travelTitle}</span>
+    <br/><br/>
+
+<span class="text-span">여행지 : ${travelBoard.tinfoId}</span>
+<span class="text-span">여행테마 : 
+<c:if test="${travelBoard.travelWith == 'alone'}">
+나홀로 여행
+</c:if>
+<c:if test="${travelBoard.travelWith == 'friend'}">
+친구와 함께
+</c:if>
+<c:if test="${travelBoard.travelWith == 'family'}">
+가족과 함께
+</c:if>
+<c:if test="${travelBoard.travelWith == 'couple'}">
+연인과 함께
+</c:if>
+<c:if test="${travelBoard.travelWith == 'group'}">
+단체여행
+</c:if>
+<c:if test="${travelBoard.travelWith == 'package'}">
+패키지여행
+</c:if>
+</span>
+<span class="text-span">여행인원 : ${travelBoard.travelPerson+1}명</span><br>
+<span class="text-span">여행일정 : ${travelBoard.travelSche}</span>
+<span class="text-span">여행기간 : ${fn:substring(travelBoard.travelStart, 0, 10)} ~ ${fn:substring(travelBoard.travelEnd, 0, 10)}</span><br>
+<span class="text-span"><i class="fa fa-heart"></i> ${travelBoard.travelLike}</span>
+</p>
 </div>
 <!-- 장소 리스트 -->
 <div>
 <div class="timeline">
 								<div class="line text-muted"></div>
 								<c:forEach items="${travelPlaceList}" var="place">
+								<c:if test="${travelBoard.travelBoardNo == place.placeTravelBoardNo}">
 									<article class="panel panel-warning">
 
 										<div class="panel-heading icon">
@@ -257,39 +296,10 @@ jQuery( document ).ready(function( $ ) {
 											<small>${place.travelPlaceLike}</small>
 										</div>
 									</article>
+									</c:if>
 								</c:forEach>
 								</div>
-		<table border="1">
-			<tr>
-				<th>사진</th>
-				<th>제목</th>
-				<th>장소</th>
-				<th>테마</th>
-				<th>인원</th>
-				<th>일정</th>
-				<th>출발일</th>
-				<th>아이디</th>
-				<th>글번호</th>
-				<th>날짜</th>
-				<th>조회수</th>
-				<th>좋아요</th>
-			</tr>
-			<tr>
-				<td>${travelBoard.travelPic}</td>
-				<td>${travelBoard.travelTitle}</td>
-				<td>${travelBoard.tinfoId}</td>
-				<td>${travelBoard.travelWith}</td>
-				<td>${travelBoard.travelPerson}</td>
-				<td>${travelBoard.travelSche}</td>
-				<td>${travelBoard.travelStart}</td>
-				<td>${travelBoard.userId}</td>
-				<td>${travelBoard.travelNo}</td>
-				<td>${travelBoard.travelDate}</td>
-				<td>${travelBoard.travelHit}</td>
-				<td>${travelBoard.travelLike}</td>
-				<!-- TravelBoardController의 getTravelBoard 메서드에서 travelBoard로 값 넘겨줌 -->
-			</tr>
-		</table>
+
 		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'">수정</button>
 		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}'">삭제</button>
 		</div>

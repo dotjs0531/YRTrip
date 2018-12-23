@@ -281,9 +281,9 @@ $("#autocompleteTinfoList").change(function(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
+								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
-										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
+										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<div class="form-group">
 										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">

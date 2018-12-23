@@ -20,7 +20,7 @@
 .modal-backdrop {
 	z-index: -1;
 }
-
+/* 장소 리스트 */
 .wrap
 {
   width:100%;
@@ -58,7 +58,6 @@
 }
 .tile .text
 {
-/*   z-index:99; */
   font-color:#fff;
   padding:40px 30px 30px 30px;
   font-family: 'East Sea Dokdo';
@@ -81,7 +80,6 @@
   font-weight:300;
   margin:20px 0 0 0;
   line-height: 25px;
-/*   opacity:0; */
   transform: translateX(-200px);
   transition-delay: 0.2s;
 }
@@ -92,7 +90,6 @@
 }
 .tile:hover
 {
-/*   background-color:#99aeff; */
   box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
   transform:scale(1.05);
   cursor : default;
@@ -119,6 +116,7 @@
     width:400px;
   }
 }
+
 </style>
 </head>
 <body>
@@ -138,7 +136,7 @@
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a id="insertTravelPlaceButton">나만의 장소 등록</a>
+	                        <a href="./insertTravelPlaceform">나만의 장소 등록</a>
 	                    </div>                   
 				</div>
 			</div>
@@ -173,98 +171,16 @@
 					<my:paging paging="${paging}" jsFunc="go_page"/>
 				</nav>
 			</div>	<!-- end of table-responsive -->
-				
-<!-- modal -->			
-<div class="modal fade" id="insertPlaceBoard">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- header -->
-			<div class="modal-header">
-				<!-- 닫기(x) 버튼 -->
-				<button type="button" class="close" data-dismiss="modal">×</button>
-			</div>
-
-			<!-- body -->
-			<div class="modal-body">
-				<div class="container">
-					<div id="login-row" class="row justify-content-center align-items-center">
-						<div id="login-column" class="col-md-6">
-							<div id="login-box" class="col-md-12">
-								<form id="/insertTravelPlaceform" class="form" action="./insertTravelPlace" method="post">		
-									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
-										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
-									<div class="form-group">
-										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
-									</div>
-									<div class="form-group">
-										<label for="tinfoId" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="tinfoId" class="form-control" placeholder="여행지를 선택하세요. ---> 다중셀렉트바 수정할 것!">
-									</div>
-									<div class="form-group">
-										<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelWith" class="form-control" placeholder="여행테마를 선택하세요. ---> 셀렉트바 수정할 것!">
-									</div>
-									<div class="form-group">
-										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 선택하세요. ---> 셀렉트바 수정할 것!">
-									</div>
-									<div class="form-group">
-										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelStart" class="form-control" id="Datepicker" placeholder="여행 시작일을 선택하세요.">
-									</div>
-									<div class="form-group">
-										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelPerson" class="form-control" placeholder="함께 여행한 인원을 선택하세요. --->셀렉트바 수정할 것!">
-									</div>
-									<div class="form-group">
-										<label for="remember-me" class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
-									</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>	<!-- end of modal-body -->
-		</div> <!-- end of modal-content -->
-	</div> 
-</div> <!-- end of modal -->
-
-				</div>
-			</div> <!-- end of list -->
-			
-		</div> <!-- end of row -->
-	</div>	<!-- end of container -->
-</section>
-
-
+				</div></div></div></div></section>
 <!-- js -->
-	<script>
-		$(document).ready(function() {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
-
-		var acc = document.getElementsByClassName("accordion");
-		var i;
-
-		for (i = 0; i < acc.length; i++) {
-			acc[i].onclick = function() {
-				this.classList.toggle("active");
-				var panel = this.nextElementSibling;
-				if (panel.style.maxHeight) {
-					panel.style.maxHeight = null;
-				} else {
-					panel.style.maxHeight = panel.scrollHeight + "px";
-				}
-			}
-		};
-		
+	<script>		
 		/* 페이징 */	
 		function go_page(page) {
 				document.frm.page.value=page;
 				document.frm.submit();	//검색폼 submit
 		}
+		
+
 	</script>
 </body>
 </html>

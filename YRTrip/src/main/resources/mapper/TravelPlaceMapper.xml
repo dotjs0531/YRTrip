@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="travelPlace">
+
 <!-- 전체 장소 조회 -->
 <select id="getTravelPlaceList" resultType="travelPlace">
 	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
@@ -107,7 +108,7 @@
 				sysdate, 
 				#{placeContent}, 
 				#{placePic}, 
-				#{userId}),
+				#{userId},
 				#{placeTitle},
 				#{placeVisitDate},
 				#{placeTravelBoardNo})
@@ -120,7 +121,7 @@
 		PLACE_CONTENT = #{placeContent},
 		PLACE_PIC = #{placePic},
 		PLACE_TITLE = #{placeTitle},
-		PLACE_VISITDATE = #{placeVisitDate}
+		PLACE_VISITDATE = TO_DATE(#{placeVisitDate}, 'yyyy-mm-dd hh24:mi:ss'),
 	WHERE PLACE_NO = #{placeNo}
 </update>
 

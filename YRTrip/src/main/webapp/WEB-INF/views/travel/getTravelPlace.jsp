@@ -20,11 +20,14 @@
 </style>
 </head>
 <body>
-<section class="content-section">
 
-<!-- 왼쪽 사이드바 -->
-<div class="category">
- <div class="search-box">
+<section class="about_us_area" id="about">
+	<div class="container">
+		<div class="row">
+
+			<!-- 왼쪽 사이드바 -->
+			<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
+				<div class="single-pricing-table">
                         <div class="pricing-title">
                             <h2 style="color:black">카테고리</h2>
                         </div>
@@ -33,40 +36,31 @@
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
                         </ul>
-	                        <div class="order-buton" style="padding-bottom:30px;">
-	                            <a href="insertTravelPlaceform">장소 등록</a>
-	                        </div>                   
-</div>
-</div>
-<!-- 장소게시글 상세 -->
-	<div class="list-box">
+	                    <div class="order-buton" style="padding-bottom:30px;">
+	                        <a href="./insertTravelPlaceform">나만의 장소 등록</a>
+	                    </div>                   
+				</div>
+			</div>
 
-		<table border="1">
-			<tr>
-				<th>글번호</th>
-				<th>장소명</th>
-				<th>주소</th>
-				<th>작성날짜</th>
-				<th>좋아요</th>
-				<th>내용</th>
-				<th>사진</th>
-				<th>작성자</th>
-			</tr>
-			<tr>
-				<td>${travelPlace.placeNo}</td>
-				<td>${travelPlace.placeName}</td>
-				<td>${travelPlace.placeAddress}</td>
-				<td>${travelPlace.placeDate}</td>
-				<td>${travelPlace.placeLike}</td>
-				<td>${travelPlace.placeContent}</td>
-				<td>${travelPlace.placePic}</td>
-				<td>${travelPlace.userId}</td>
-			</tr>
-		</table>
+			<!-- 검색 창 -->
+			<div>
+				<div class="col-sm-6" style="min-width:700px">
+                	<div class="table-responsive" style="min-height:450px;">
+						
+<!-- 장소글 -->
+${travelPlace.placeName}
+${travelPlace.placeAddress}
+${travelPlace.placeTitle}
+${travelPlace.placeContent}
+${travelPlace.placePic}
+${travelPlace.placeVisitDate}
+									<div class="form-group">
+										<label for="remember-me" class="text-info"></label>
 		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelPlaceform?placeNo=${travelPlace.placeNo}'">수정</button>
 		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelPlace?placeNo=${travelPlace.placeNo}'">삭제</button>
-		</div>
-		
-	</section>
+									</div>
+
+			</div>	<!-- end of table-responsive -->
+				</div></div></div></div></section>
 </body>
 </html>
