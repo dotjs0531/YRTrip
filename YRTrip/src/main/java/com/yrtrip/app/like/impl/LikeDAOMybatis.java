@@ -23,8 +23,8 @@ public class LikeDAOMybatis {
 		mybatis.update("like.deleteLike", vo.getLikeNo());
 	}
 	
-	//단건조회
-	public LikeVO getLike(LikeVO vo) {
+	//좋아요 여부 조회
+	public int getLike(LikeVO vo) {
 		return mybatis.selectOne("like.getLike", vo);
 	}
 	//전체조회

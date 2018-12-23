@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yrtrip.app.like.LikeService;
 import com.yrtrip.app.like.LikeVO;
@@ -23,10 +24,10 @@ public class LikeController {
 		return "like/getLikeList";
 	}
 	//단건 조회
-	@RequestMapping("/getLike")
-	public String getLike(Model model, LikeVO vo) {
-		model.addAttribute("like", likeService.getLike(vo));
-		return "like/getLike";
+	@RequestMapping("getLike")
+	@ResponseBody
+	public int getLike(LikeVO vo) {
+		return likeService.getLike(vo);
 	}
 	
 	//등록처리

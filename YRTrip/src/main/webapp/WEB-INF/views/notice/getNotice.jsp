@@ -13,10 +13,49 @@
          location.href = "./deleteNotice?noticeId=" + nid;
       } else { return; }
    };
+   function disLike(uId, lC, lBid){
+	   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
+   };
    
-   function like_func(){
-	   var frm_read = $('#')
-   }
+   $(function(){
+	   function likeCondition() {
+		   var params = { userId : '${sessionScope.login.userId}',
+				   		 likeCategory : 'N',
+				   		 likeBoardid :'${notice.noticeId}'
+		   				}
+		   $.getJSON("getLike", params, function(data){
+			   if (!data) {
+				   var div = makeDisLikeBtn();
+					$(div).appendTo("#LikeCondition");
+			   }
+			   else {
+				   var div = makeLikeBtn();
+					$(div).appendTo("#LikeCondition");
+			   }
+		   })
+	   }
+	   function makeDisLikeBtn() {
+			var div =$("<div>");
+			div.addClass('LikeCondition');
+			var str = "<form action='./insertLike' method='post'>"
+						+ "<input type='hidden' name='likeCategory' value='N'>"
+						+ "<input type='hidden' name='likeBoardid' value='${notice.noticeId}'>"
+						+ "<input type='hidden' name='userId' value='${sessionScope.login.userId}'>"
+						+ "<button type='submit' style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+						+ "<img src='./images/dislike.png'></button></form>"
+			div.html(str);
+			return div;
+	   }
+	   function makeLikeBtn() {
+			var div =$("<div>");
+			div.addClass('LikeCondition');
+			var str = "<button onclick=\"disLike('${sessionScope.login.userId}','N','${notice.noticeId}')\" style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+					+ "<img src='./images/like.png'></button>"
+			div.html(str);
+			return div;
+	   }
+	   likeCondition();
+   });
 </script>
 </head>
 <body>
@@ -46,17 +85,14 @@
 						<strong>작성자</strong>&nbsp;&nbsp;${notice.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${notice.noticeDate} ｜ <strong>조회수</strong>&nbsp;&nbsp;${notice.noticeHit}
 						
 						<!-- 좋아요 테스트 부분 -->
-						<div style="float:right">
 						<c:choose>
 							<c:when test="${not empty sessionScope.login}">
-								<a href='javascript: like_func();'><img src='./images/dislike.png' id='like_img' width=20></a>
+								<div id="LikeCondition" style="float:right"></div>
 							</c:when>
 							<c:otherwise>
-								<a href='javascript: login_need();'><img src='./images/dislike.png' width=20></a>
+								<div style="float:right"><img src="./images/dislike.png" width="20px"></div>
 							</c:otherwise>
 						</c:choose>
-						</div>
-						
 						
 						<hr />
 						<div style="min-height:200px;">

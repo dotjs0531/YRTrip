@@ -21,7 +21,7 @@ public class LikeServiceImpl implements LikeService {
 		dao.deleteLike(vo);
 	}
 
-	public LikeVO getLike(LikeVO vo) {
+	public int getLike(LikeVO vo) {
 		return dao.getLike(vo);
 	}
 

@@ -11,13 +11,18 @@
 	  FROM  LIKET
 	  ORDER BY LIKE_NO DESC
 </select>
-<select id="getLike" parameterType="like" resultType="like">
-	SELECT  LIKE_NO,
+<select id="getLike" parameterType="like" resultType="int">
+	SELECT  COUNT(*)
+	  FROM  LIKET
+	 WHERE  LIKE_CATEGORY = #{likeCategory}
+			AND LIKE_BOARDID = #{likeBoardid}
+			AND USER_ID = #{userId}
+<!-- 	SELECT  LIKE_NO,
 			LIKE_CATEGORY,
 			LIKE_BOARDID,
 			USER_ID
 	  FROM  LIKET
-	 WHERE  LIKE_NO = #{likeNo}
+	 WHERE  LIKE_NO = #{likeNo} -->
 </select>
 
 <insert id="insertLike" parameterType="like">
@@ -35,6 +40,8 @@
 </insert>
 <delete id="deleteLike" parameterType="like">
 	DELETE  FROM  LIKET
-			WHERE LIKE_NO = #{likeNo}
+	 		WHERE LIKE_CATEGORY = #{likeCategory}
+				  AND LIKE_BOARDID = #{likeBoardid}
+				  AND USER_ID = #{userId}
 </delete>
 </mapper>
