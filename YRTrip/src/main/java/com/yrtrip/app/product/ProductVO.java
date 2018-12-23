@@ -1,5 +1,7 @@
 package com.yrtrip.app.product;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ProductVO{
 	private int itemId;
 	private String itemName;
@@ -12,7 +14,7 @@ public class ProductVO{
 	private String itemOrderdetail;
 	private float itemStar;
 	private String itemPic;
-//	private MultipartFile productImgFile;
+	private MultipartFile productPicFile;
 	private String itemDate;
 	private String itemCondition;
 	private int itemLike;
@@ -90,12 +92,12 @@ public class ProductVO{
 	public void setItemPic(String itemPic) {
 		this.itemPic = itemPic;
 	}
-//	public MultipartFile getProductImgFile() {
-//		return productImgFile;
-//	}
-//	public void setProductImgFile(MultipartFile productImgFile) {
-//		this.productImgFile = productImgFile;
-//	}
+	public MultipartFile getProductImgFile() {
+		return productPicFile;
+	}
+	public void setProductImgFile(MultipartFile productPicFile) {
+		this.productPicFile = productPicFile;
+	}
 	public String getItemDate() {
 		return itemDate;
 	}

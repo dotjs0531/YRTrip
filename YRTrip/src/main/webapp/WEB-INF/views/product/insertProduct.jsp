@@ -9,7 +9,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
-<title>prototype of insertProduct(view)</title><!-- 
+<title>prototype of insertProduct(view)</title>
+<!-- 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -25,14 +26,26 @@
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
+<!-- <link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"> -->
+<!-- 다중파일 업로드 -->
+<link href="resources/css/fileinput.css" media="all" rel="stylesheet"
+	type="text/css" />
 <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-
+	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+	crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+	crossorigin="anonymous"></script>
+<script src="resources/js/fileinput.js" type="text/javascript"></script>
 <style>
 #login-row {
 	margin-left: -230px;
 	margin-right: 440px;
 }
+
 .carousel-control.left, .carousel-control.right {
 	backround-image: none !important;
 }
@@ -186,8 +199,8 @@ function p_cat(){
 
 						<ul class="price-list" id="product_cart_insert">
 							<li><a href="getProductList" style="color: blue">선택하세요</a></li>
-							<li><a id="pciClothes" onclick="p_cat();"
-								href="#" style="color: black">의류</a></li>
+							<li><a id="pciClothes" onclick="p_cat();" href="#"
+								style="color: black">의류</a></li>
 							<li><a id="pciTicket" onclick="p_cat();" href="#"
 								style="color: black">티켓/쿠폰</a></li>
 							<li><a id="pciElectronic" onclick="p_cat();" href="#"
@@ -247,7 +260,7 @@ function p_cat(){
 										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
 									</ol>
 									<div class="pull-left">
-										<h4>${sessionScope.login.userId}만의상품을 공유해보입시더</h4>
+										<h4>${sessionScope.login.userId}만의상품을공유해보입시더</h4>
 									</div>
 									<div class="pull-right">
 										<a href="#" class="btn btn-link" type="reset">모두삭제</a> <input
@@ -264,64 +277,16 @@ function p_cat(){
 									</div>
 								</div>
 								<div class="space-five"></div>
-								<!-- 상품사진 drag& drop -->
+								<!-- Carousel -->
 								<div class="row">
-									<div class="col-md-8 text-center">
-										<div id="myCarousel" class="carousel slide"
-											data-ride="carousel">
-											<!-- Indicators -->
-											<ol class="carousel-indicators">
-												<li data-target="#myCarousel" data-slide-to="0"
-													class="active"></li>
-												<li data-target="#myCarousel" data-slide-to="1"></li>
-												<li data-target="#myCarousel" data-slide-to="2"></li>
-											</ol>
-											<!-- Wrapper for slides -->
-											<div class="carousel-inner">
-												<div class="item active">
-													<img id="blah"
-														src="https://via.placeholder.com/350x350/ffcf5b"
-														alt="Los Angeles" style="width: 100%;">
-												</div>
-
-												<div class="item">
-													<img id="blah"
-														src="https://via.placeholder.com/350x350/ffcf5b"
-														alt="Chicago" style="width: 100%;">
-												</div>
-
-												<div class="item">
-													<img id="blah"
-														src="https://via.placeholder.com/350x350/ffcf5b"
-														alt="New york" style="width: 100%;">
-												</div>
+											<!-- 다중파일 업로드 -->
+									<div class="container my-4" style="width: 100%; padding: 0">
+										<div class="form-group">
+											<div class="file-loading">
+												<input id="file-5" class="file" type="file" multiple
+													data-preview-file-type="any" data-upload-url="#"
+													data-theme="fas">
 											</div>
-											<!-- Left and right controls -->
-											<a class="left carousel-control" href="#myCarousel"
-												data-slide="prev"> <span
-												class="glyphicon glyphicon-chevron-left"></span> <span
-												class="sr-only">Previous</span>
-											</a> <a class="right carousel-control" href="#myCarousel"
-												data-slide="next"> <span
-												class="glyphicon glyphicon-chevron-right"></span> <span
-												class="sr-only">Next</span>
-											</a>
-										</div>
-
-									</div>
-									<!-- 파일 불러오고 명 보여주는건데 4.0에서 들고와서 그런지 안된다.... -->
-									<div class="col-md-4">
-										<div class="row">
-											<input type='file' onchange="readURL(this);" />
-										</div>
-										<div class="row">
-											<input type='file' onchange="readURL(this);" />
-										</div>
-										<div class="row">
-											<input type='file' onchange="readURL(this);" />
-										</div>
-										<div class="row">
-											<input type='file' onchange="readURL(this);" />
 										</div>
 									</div>
 								</div>
