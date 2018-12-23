@@ -482,7 +482,7 @@ function ck_phone(){
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
                             	   style="color:black">여행정보</a></li>
-                            <li><a href="./getMyLikedList?userId=${sessionScope.login.userId}"
+                            <li><a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
                             	   style="color:black">좋아요</a></li>
                             <li><a href="./getMyProductList?sellerId=${sessionScope.login.userId}"
                             	   style="color:black">상품</a></li>

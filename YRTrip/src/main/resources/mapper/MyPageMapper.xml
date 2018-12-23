@@ -62,10 +62,45 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <!-- 좋아요 페이지 -->
-<select id="getMyLikedList" parameterType="user" resultType="user">
+<select id="getMyLikedCount" parameterType="like" resultType="int">
+	SELECT COUNT(*)
+	  FROM LIKET
+	 WHERE USER_ID = #{userId}
 </select>
-<select id="getMyULikeList" parameterType="user" resultType="user">
+<select id="getMyLikedTravelList" parameterType="like" resultType="like">
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			USER_ID
+	  FROM  LIKET
+	 WHERE  USER_ID = #{userId}
+			AND LIKE_CATEGORY = 'N'		<!-- 나중에 T로 바꾸기 -->
+   ORDER BY LIKE_NO DESC
 </select>
+<select id="getMyLikedPlaceList" parameterType="like" resultType="like">
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			USER_ID
+	  FROM  LIKET
+	 WHERE  USER_ID = #{userId}
+			AND LIKE_CATEGORY = 'P'
+   ORDER BY LIKE_NO DESC
+</select>
+<select id="getMyLikedProductList" parameterType="like" resultType="like">
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			USER_ID
+	  FROM  LIKET
+	 WHERE  USER_ID = #{userId}
+			AND LIKE_CATEGORY = 'I'
+   ORDER BY LIKE_NO DESC
+</select>
+<delete id="deleteMyLiked" parameterType="int">
+	DELETE FROM LIKET
+		  WHERE LIKE_NO = #{value}
+</delete>
 
 <!-- 상품 페이지 -->
 <select id="getMyProductCount" parameterType="product" resultType="int">

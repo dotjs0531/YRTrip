@@ -3,6 +3,7 @@ package com.yrtrip.app.user;
 import java.util.List;
 
 import com.yrtrip.app.joiner.JoinerVO;
+import com.yrtrip.app.like.LikeVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
@@ -19,8 +20,11 @@ public interface MyPageService {
 	public List<JoinerVO> getMyJoinerList(JoinerVO vo);
 	
 	//좋아요
-	public List<UserVO> getMyLikedList(UserVO vo);
-	public List<UserVO> getMyULikeList(UserVO vo);
+	public int getMyLikedCount(LikeVO vo);
+	public List<LikeVO> getMyLikedTravelList(LikeVO vo);
+	public List<LikeVO> getMyLikedPlaceList(LikeVO vo);
+	public List<LikeVO> getMyLikedProductList(LikeVO vo);
+	public void deleteMyLiked(LikeVO vo);
 
 	//상품
 	public int getMyProductCount(ProductVO vo);

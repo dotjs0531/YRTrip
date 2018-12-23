@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yrtrip.app.joiner.JoinerVO;
+import com.yrtrip.app.like.LikeVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
@@ -39,11 +40,20 @@ public class MyPageDAOMybatis {
 	}
 
 	//좋아요
-	public List<UserVO> getMyLikedList(UserVO vo)  {
-		return mybatis.selectList("user.getMyLikedList", vo);
+	public int getMyLikedCount(LikeVO vo) {
+		return mybatis.selectOne("user.getMyLikedCount", vo);
 	}
-	public List<UserVO> getMyULikeList(UserVO vo)  {
-		return mybatis.selectList("user.getMyULikeList", vo);
+	public List<LikeVO> getMyLikedTravelList(LikeVO vo) {
+		return mybatis.selectList("user.getMyLikedTravelList", vo);
+	}
+	public List<LikeVO> getMyLikedPlaceList(LikeVO vo) {
+		return mybatis.selectList("user.getMyLikedPlaceList", vo);
+	}
+	public List<LikeVO> getMyLikedProductList(LikeVO vo) {
+		return mybatis.selectList("user.getMyLikedProductList", vo);
+	}
+	public void deleteMyLiked(LikeVO vo) {
+		mybatis.update("user.deleteMyLiked", vo.getLikeNo());
 	}
 
 	//상품

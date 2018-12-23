@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
 import com.yrtrip.app.joiner.JoinerVO;
+import com.yrtrip.app.like.LikeVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
@@ -69,15 +70,77 @@ public class MyPageController {
 	}
 	
 	//좋아요 페이지
-	@RequestMapping("/getMyLikedList")
-	public String getMyLikedList(Model model, UserVO vo) {
-		model.addAttribute("MyLikedList", mypageService.getMyLikedList(vo));
-		return "mypage/getMyLikedList";
+	@RequestMapping(value = "/getMyLikedTravelList", method = RequestMethod.GET) //여행정보 좋아요
+	public ModelAndView getMyLikedTravelList(LikeVO vo, Paging paging, HttpSession session) {
+		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+
+		ModelAndView mv = new ModelAndView();
+
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+		vo.setLikeCategory("N");
+
+		paging.setTotalRecord(mypageService.getMyLikedCount(vo));
+		
+		mv.addObject("paging", paging);
+		mv.addObject("MyLikedTravelList", mypageService.getMyLikedTravelList(vo));
+		mv.setViewName("mypage/getMyLikedTravelList");
+		return mv;
 	}
-	@RequestMapping("/getMyULikeList")
-	public String getMyULikeList(Model model, UserVO vo) {
-		model.addAttribute("MyULikeList", mypageService.getMyULikeList(vo));
-		return "mypage/getMyULikeList";
+	@RequestMapping(value = "/getMyLikedPlaceList", method = RequestMethod.GET) //여행지 좋아요
+	public ModelAndView getMyLikedPlaceList(LikeVO vo, Paging paging, HttpSession session) {
+		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+
+		ModelAndView mv = new ModelAndView();
+		
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+		vo.setLikeCategory("P");
+
+		paging.setTotalRecord(mypageService.getMyLikedCount(vo));
+		
+		mv.addObject("paging", paging);
+		mv.addObject("MyLikedPlaceList", mypageService.getMyLikedPlaceList(vo));
+		return mv;
+	}
+	@RequestMapping(value = "/getMyLikedProductList", method = RequestMethod.GET) //상품 좋아요
+	public ModelAndView getMyLikedProductList(LikeVO vo, Paging paging, HttpSession session) {
+		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+
+		ModelAndView mv = new ModelAndView();
+		
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(4);
+		
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+		vo.setLikeCategory("I");
+
+		paging.setTotalRecord(mypageService.getMyLikedCount(vo));
+		
+		mv.addObject("paging", paging);
+		mv.addObject("MyLikedProductList", mypageService.getMyLikedProductList(vo));
+		return mv;
+	}
+	@RequestMapping("/deleteMyLiked") //좋아요 삭제
+	public String deleteMyLiked(LikeVO vo) {
+		mypageService.deleteMyLiked(vo);
+		return "redirect:getMyLikedList";
 	}
 	
 	//상품 페이지

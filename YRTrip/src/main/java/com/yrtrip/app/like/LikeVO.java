@@ -6,6 +6,12 @@ public class LikeVO {
 	private String likeCategory;	//카테고리(여행지P or 여행정보T or 상품I)
 	private int likeBoardid;		//좋아요 받은 게시글 번호
 	
+	//선택삭제
+	private String[] likeNoList;
+	
+	private int first;
+	private int last;
+	
 	public int getLikeNo() {
 		return likeNo;
 	}
@@ -29,6 +35,26 @@ public class LikeVO {
 	}
 	public void setLikeBoardid(int likeBoardid) {
 		this.likeBoardid = likeBoardid;
+	}
+	
+	public String[] getLikeNoList() {
+		return likeNoList;
+	}
+	public void setLikeNoList(String[] likeNoList) {
+		this.likeNoList = likeNoList;
+	}
+	
+	public int getFirst() {
+		return first;
+	}
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
 	}
 	
 }
