@@ -113,6 +113,7 @@ public class MyPageController {
 		
 		mv.addObject("paging", paging);
 		mv.addObject("MyLikedPlaceList", mypageService.getMyLikedPlaceList(vo));
+		mv.setViewName("mypage/getMyLikedPlaceList");
 		return mv;
 	}
 	@RequestMapping(value = "/getMyLikedProductList", method = RequestMethod.GET) //상품 좋아요
@@ -135,12 +136,13 @@ public class MyPageController {
 		
 		mv.addObject("paging", paging);
 		mv.addObject("MyLikedProductList", mypageService.getMyLikedProductList(vo));
+		mv.setViewName("mypage/getMyLikedProductList");
 		return mv;
 	}
 	@RequestMapping("/deleteMyLiked") //좋아요 삭제
 	public String deleteMyLiked(LikeVO vo) {
 		mypageService.deleteMyLiked(vo);
-		return "redirect:getMyLikedList";
+		return "redirect:getMyLikedTravelList";
 	}
 	
 	//상품 페이지

@@ -20,7 +20,7 @@ public class LikeDAOMybatis {
 	}
 	//삭제
 	public void deleteLike(LikeVO vo) {
-		mybatis.update("like.deleteLike", vo.getLikeNo());
+		mybatis.update("like.deleteLike", vo);
 	}
 	
 	//좋아요 여부 조회
