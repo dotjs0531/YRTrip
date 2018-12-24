@@ -8,7 +8,11 @@ public interface LikeService {
 	public int getLike(LikeVO vo);
 	public List<LikeVO> getLikeList(LikeVO vo);
 	
-	public void updateTLikeCnt(LikeVO vo);
-	public void updatePLikeCnt(LikeVO vo);
-	public void updateILikeCnt(LikeVO vo);
+	public void plusTLikeCnt(LikeVO vo);
+	public void plusPLikeCnt(LikeVO vo);
+	public void plusILikeCnt(LikeVO vo);
+	
+	public void minusTLikeCnt(LikeVO vo);
+	public void minusPLikeCnt(LikeVO vo);
+	public void minusILikeCnt(LikeVO vo);
 }

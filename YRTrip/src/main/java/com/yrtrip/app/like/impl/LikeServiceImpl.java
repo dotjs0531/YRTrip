@@ -16,27 +16,33 @@ public class LikeServiceImpl implements LikeService {
 	public void insertLike(LikeVO vo) {
 		dao.insertLike(vo);
 	}
-
 	public void deleteLike(LikeVO vo) {
 		dao.deleteLike(vo);
 	}
-
 	public int getLike(LikeVO vo) {
 		return dao.getLike(vo);
 	}
-
 	public List<LikeVO> getLikeList(LikeVO vo) {
 		return dao.getLikeList(vo);
 	}
 
-	public void updateTLikeCnt(LikeVO vo) {
-		dao.updateTLikeCnt(vo);
+	public void plusTLikeCnt(LikeVO vo) {
+		dao.plusTLikeCnt(vo);
 	}
-	public void updatePLikeCnt(LikeVO vo) {
-		dao.updatePLikeCnt(vo);
+	public void plusPLikeCnt(LikeVO vo) {
+		dao.plusPLikeCnt(vo);
 	}
-	public void updateILikeCnt(LikeVO vo) {
-		dao.updateILikeCnt(vo);
+	public void plusILikeCnt(LikeVO vo) {
+		dao.plusILikeCnt(vo);
 	}
-
+	
+	public void minusTLikeCnt(LikeVO vo) {
+		dao.minusTLikeCnt(vo);
+	}
+	public void minusPLikeCnt(LikeVO vo) {
+		dao.minusPLikeCnt(vo);
+	}
+	public void minusILikeCnt(LikeVO vo) {
+		dao.minusILikeCnt(vo);
+	}
 }

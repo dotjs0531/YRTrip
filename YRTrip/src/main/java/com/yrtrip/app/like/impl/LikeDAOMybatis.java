@@ -36,14 +36,24 @@ public class LikeDAOMybatis {
 	}
 
 	//좋아요 개수 증가
-	public void updateTLikeCnt(LikeVO vo) {
-		mybatis.update("like.updateTLikeCnt", vo);
+	public void plusTLikeCnt(LikeVO vo) {
+		mybatis.update("like.plusTLikeCnt", vo);
 	}
-	public void updatePLikeCnt(LikeVO vo) {
-		mybatis.update("like.updatePLikeCnt", vo);
+	public void plusPLikeCnt(LikeVO vo) {
+		mybatis.update("like.plusPLikeCnt", vo);
 	}
-	public void updateILikeCnt(LikeVO vo) {
-		mybatis.update("like.updateILikeCnt", vo);
+	public void plusILikeCnt(LikeVO vo) {
+		mybatis.update("like.plusILikeCnt", vo);
 	}
-
+	
+	//좋아요 개수 감소
+	public void minusTLikeCnt(LikeVO vo) {
+		mybatis.update("like.minusTLikeCnt", vo);
+	}
+	public void minusPLikeCnt(LikeVO vo) {
+		mybatis.update("like.minusPLikeCnt", vo);
+	}
+	public void minusILikeCnt(LikeVO vo) {
+		mybatis.update("like.minusILikeCnt", vo);
+	}
 }

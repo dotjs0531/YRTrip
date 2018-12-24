@@ -46,16 +46,30 @@
 </delete>
 
 <!-- 좋아요 수 증가 -->
-<update id="updateTLikeCnt" parameterType="like">
+<update id="plusTLikeCnt" parameterType="like">
 	UPDATE TRAVELBOARDT SET TRAVEL_LIKE = TRAVEL_LIKE + 1
 					  WHERE TRAVEL_NO = #{likeBoardid}
 </update>
-<update id="updatePLikeCnt" parameterType="like">
+<update id="plusPLikeCnt" parameterType="like">
 	UPDATE TRAVEL_PLACET SET PLACE_LIKE = PLACE_LIKE + 1
 					   WHERE PLACE_NO = #{likeBoardid}
 </update>
-<update id="updateILikeCnt" parameterType="like">
+<update id="plusILikeCnt" parameterType="like">
 	UPDATE ITEMT SET ITEM_LIKE = ITEM_LIKE + 1
+			   WHERE ITEM_ID = #{likeBoardid}
+</update>
+
+<!-- 좋아요 수 감소 -->
+<update id="minusTLikeCnt" parameterType="like">
+	UPDATE TRAVELBOARDT SET TRAVEL_LIKE = TRAVEL_LIKE - 1
+					  WHERE TRAVEL_NO = #{likeBoardid}
+</update>
+<update id="minusPLikeCnt" parameterType="like">
+	UPDATE TRAVEL_PLACET SET PLACE_LIKE = PLACE_LIKE - 1
+					   WHERE PLACE_NO = #{likeBoardid}
+</update>
+<update id="minusILikeCnt" parameterType="like">
+	UPDATE ITEMT SET ITEM_LIKE = ITEM_LIKE - 1
 			   WHERE ITEM_ID = #{likeBoardid}
 </update>
 </mapper>

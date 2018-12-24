@@ -41,12 +41,13 @@ public class LikeController {
 		
 		likeService.insertLike(vo);
 		
+		//좋아요 개수 증가
 		if (vo.getLikeCategory().equals("T")) {
-			likeService.updateTLikeCnt(vo);
+			likeService.plusTLikeCnt(vo);
 		} else if (vo.getLikeCategory().equals("P")) {
-			likeService.updatePLikeCnt(vo);
+			likeService.plusPLikeCnt(vo);
 		} else if (vo.getLikeCategory().equals("I")) {
-			likeService.updateILikeCnt(vo);
+			likeService.plusILikeCnt(vo);
 		}
 		
 		return "redirect:"+url;
@@ -62,6 +63,16 @@ public class LikeController {
 		String url = referer.substring(referer.indexOf(context)+context.length()+1);
 		
 		likeService.deleteLike(vo);
+		
+		//좋아요 개수 감소
+		if (vo.getLikeCategory().equals("T")) {
+			likeService.minusTLikeCnt(vo);
+		} else if (vo.getLikeCategory().equals("P")) {
+			likeService.minusPLikeCnt(vo);
+		} else if (vo.getLikeCategory().equals("I")) {
+			likeService.minusILikeCnt(vo);
+		}
+		
 		return "redirect:"+url;
 	}
 }
