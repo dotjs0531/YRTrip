@@ -283,7 +283,6 @@ $("#autocompleteTinfoList").change(function(){
 							<div id="login-box" class="col-md-12">
 								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
-										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<div class="form-group">
 										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
@@ -339,6 +338,7 @@ $("#autocompleteTinfoList").change(function(){
 										<label class="text-info"></label>
 										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 									</div>
+									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>
 						</div>

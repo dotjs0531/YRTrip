@@ -1,10 +1,13 @@
 package com.yrtrip.app.travel.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
@@ -44,7 +47,23 @@ public class TravelPlaceController {
 		mv.setViewName("travel/getTravelPlaceList");
 		return mv;
 	}
+	
+//등록처리 ajax
+	@RequestMapping(value= {"/insertTravelPlaceAjax"}, method = RequestMethod.POST)
+	@ResponseBody
+	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
+		travelPlaceService.insertTravelPlace(vo);
+		return travelPlaceService.getTravelPlace(vo);
+	}
 
+//선택조회 ajax
+	@RequestMapping(value= {"/insertTravelPlaceAjax"}, method = RequestMethod.POST)
+	@ResponseBody
+	public List<TravelPlaceVO> getTravelPlaceListAjax(TravelPlaceVO vo){
+		return travelPlaceService.getTravelPlaceList(vo);
+	}
+	
+	
 //단건조회
 	@RequestMapping("/getTravelPlace")
 	public String getTravelPlace(Model model, TravelPlaceVO vo) {

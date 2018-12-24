@@ -87,7 +87,7 @@ public class TravelBoardController {
 		travelBoardService.updateTravelBoard(vo); 
 		return "redirect:getTravelBoardList";
 	}
-
+	
 //삭제
 	@RequestMapping("deleteTravelBoard")
 	public String deleteTravelBoard(TravelBoardVO vo) {

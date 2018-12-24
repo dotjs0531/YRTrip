@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,12 +144,6 @@
     z-index: -1;
 }
 
-.dad:hover > .son-1 {
-    -moz-transform: scale(2,2);
-    -webkit-transform: scale(2,2);
-    transform: scale(2,2);    
-}
-
 .son-text {
     color: #fcfcfc;
 	font-size: 2em;
@@ -160,11 +155,6 @@
     -webkit-transition: all 1s;
     transition: all 1s;
 	padding-top: 5vh;
-}
-
-.son-text:hover {
-	background-color: #22313F;
-	opacity: 0.7;
 }
 
 .son-span {
@@ -192,22 +182,43 @@
 	display:inline;
 	font-size: 0.6em;
 }
+.update-input{
+width:50px; 
+background-color:#fff; 
+}
 </style>
 
 <script>
-/* 여행등록 modal */
+
 jQuery( document ).ready(function( $ ) {
+		/* 여행등록 modal */
 	   $("#insertTravelBoardButton").click(function(){
 	    	$('div#insertTravelBoard').modal(true);
-		})
-});
-
-/* 장소 추가 modal */
-jQuery( document ).ready(function( $ ) {
+		});
+	   /* 장소 추가 modal */
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
 		});
+	   $("#insertBTN").click(function(){
+		   var param = $("#placeAjaxData").serialize();
+	    	$.ajax({
+	    		
+	    		url: "insertTravelPlaceAjax",
+	    		type: "post",
+	    		dataType: "JSON",
+	    		data: param,
+	    		success: function(data){
+	    			console.log(data);
+	    			
+	    		}
+	    		
+	    	})
+		});
+	   
+
 });
+
+
 </script>
 </head>
 <body>
@@ -217,7 +228,7 @@ jQuery( document ).ready(function( $ ) {
 			<div class="row">
 
 				<!-- 왼쪽 사이드바 -->
-							<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
+				<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
 				<div class="single-pricing-table">
                         <div class="pricing-title">
                             <h2 style="color:black">카테고리</h2>
@@ -233,13 +244,196 @@ jQuery( document ).ready(function( $ ) {
 				</div>
 			</div>
 
-				<!-- 여행기 등록 폼 -->
+				<!-- 여행기 수정 폼 -->
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
+						
+						<!-- 여행기 정보 -->				
+						<div class="container dad">
+							<div class="son-1">
+							</div>
+							<span class="top-span">T${travelBoard.travelNo}</span>
+							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
+							<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
+							<div style="padding-right:10px;">
+							<button class="btn btn-sm btn-warning" style="float:right;">
+											<i class="fa fa-camera"> 메인사진 수정</i>
+							</button>
+							</div>
+							<p class="son-text">
+								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" ></span><br/><br/>
+								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input"></span>
+								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
+																	 <select id="travelWith" name="travelWith">
+																		  <option value="alone" selected>나홀로 여행</option>
+																		  <option value="friend">친구와 함께</option>
+																		  <option value="family">가족과 함께</option>
+																		  <option value="couple">연인과 함께</option>
+																		  <option value="group">단체여행</option>
+																		  <option value="package">패키지여행</option>
+																		</select>
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'friend'}">
+																	 <select id="travelWith" name="travelWith">
+																		  <option value="alone">나홀로 여행</option>
+																		  <option value="friend" selected>친구와 함께</option>
+																		  <option value="family">가족과 함께</option>
+																		  <option value="couple">연인과 함께</option>
+																		  <option value="group">단체여행</option>
+																		  <option value="package">패키지여행</option>
+																		</select>
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'family'}">
+																	 <select id="travelWith" name="travelWith">
+																		  <option value="alone">나홀로 여행</option>
+																		  <option value="friend">친구와 함께</option>
+																		  <option value="family" selected>가족과 함께</option>
+																		  <option value="couple">연인과 함께</option>
+																		  <option value="group">단체여행</option>
+																		  <option value="package">패키지여행</option>
+																		</select>
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'couple'}">
+																	 <select id="travelWith" name="travelWith">
+																		  <option value="alone">나홀로 여행</option>
+																		  <option value="friend">친구와 함께</option>
+																		  <option value="family">가족과 함께</option>
+																		  <option value="couple" selected>연인과 함께</option>
+																		  <option value="group">단체여행</option>
+																		  <option value="package">패키지여행</option>
+																		</select>
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'group'}">
+																	 <select id="travelWith" name="travelWith">
+																		  <option value="alone">나홀로 여행</option>
+																		  <option value="friend">친구와 함께</option>
+																		  <option value="family">가족과 함께</option>
+																		  <option value="couple">연인과 함께</option>
+																		  <option value="group" selected>단체여행</option>
+																		  <option value="package">패키지여행</option>
+																		</select>
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'package'}">
+																	 <select id="travelWith" name="travelWith">
+																		  <option value="alone">나홀로 여행</option>
+																		  <option value="friend">친구와 함께</option>
+																		  <option value="family">가족과 함께</option>
+																		  <option value="couple">연인과 함께</option>
+																		  <option value="group">단체여행</option>
+																		  <option value="package" selected>패키지여행</option>
+																		</select>
+																</c:if>
+								</span> <br>
+								<span class="text-span"> ${sessionScope.login.userName}님과 함께한 여행인원 : 
+									<c:if test="${travelBoard.travelPerson == '0'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0" selected>0명</option>
+											  <option value="1">1명</option>
+											  <option value="2">2명</option>
+											  <option value="3">3명</option>
+											  <option value="4">4명</option>
+											  <option value="5">5명</option>
+											  <option value="6">6명 이상</option>
+										</select>
+									</c:if>	
+									<c:if test="${travelBoard.travelPerson == '1'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0">0명</option>
+											  <option value="1" selected>1명</option>
+											  <option value="2">2명</option>
+											  <option value="3">3명</option>
+											  <option value="4">4명</option>
+											  <option value="5">5명</option>
+											  <option value="6">6명 이상</option>
+										</select>
+									</c:if>	
+									<c:if test="${travelBoard.travelPerson == '2'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0">0명</option>
+											  <option value="1">1명</option>
+											  <option value="2" selected>2명</option>
+											  <option value="3">3명</option>
+											  <option value="4">4명</option>
+											  <option value="5">5명</option>
+											  <option value="6">6명 이상</option>
+										</select>
+									</c:if>	
+									<c:if test="${travelBoard.travelPerson == '3'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0">0명</option>
+											  <option value="1">1명</option>
+											  <option value="2" >2명</option>
+											  <option value="3" selected>3명</option>
+											  <option value="4">4명</option>
+											  <option value="5">5명</option>
+											  <option value="6">6명 이상</option>
+										</select>
+									</c:if>	
+									<c:if test="${travelBoard.travelPerson == '4'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0" >0명</option>
+											  <option value="1">1명</option>
+											  <option value="2">2명</option>
+											  <option value="3">3명</option>
+											  <option value="4" selected>4명</option>
+											  <option value="5">5명</option>
+											  <option value="6">6명 이상</option>
+										</select>
+									</c:if>	
+									<c:if test="${travelBoard.travelPerson == '5'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0">0명</option>
+											  <option value="1">1명</option>
+											  <option value="2">2명</option>
+											  <option value="3">3명</option>
+											  <option value="4">4명</option>
+											  <option value="5" selected>5명</option>
+											  <option value="6">6명 이상</option>
+										</select>
+									</c:if>	
+									<c:if test="${travelBoard.travelPerson == '6'}">
+										<select id="travelPerson" name="travelPerson">
+											  <option value="0">0명</option>
+											  <option value="1">1명</option>
+											  <option value="2">2명</option>
+											  <option value="3">3명</option>
+											  <option value="4">4명</option>
+											  <option value="5">5명</option>
+											  <option value="6" selected>6명 이상</option>
+										</select>
+									</c:if>	
+								</span><br>
+								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input">원</span>
+								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input"></span>
+								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;"> ~ 
+																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;">
+								</span><br>
+							</p>
+
+						</div>
 							<!-- 타임라인 -->
+							<div style="padding-top:10px;">
 							<div class="timeline">
 								<div class="line text-muted"></div>
+																<article class="panel panel-default">
+											<div class="panel-heading icon">
+												<i class="glyphicon glyphicon glyphicon glyphicon-user"></i>
+											</div>
+	
+											<div class="panel-heading">
+												<h2 class="panel-title">${travelBoard.userId}</h2>
+											</div>
+	
+											<div class="panel-body">
+												<textarea class="form-control" rows="3" id="travelContent">${travelBoard.travelContent}</textarea>
+											</div>
+											
+											<div class="panel-footer">
+												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
+												<small>${travelBoard.travelLike}</small>
+											</div>
+								</article>
 								<c:forEach items="${travelPlaceList}" var="place">
 									<article class="panel panel-warning">
 
@@ -264,6 +458,9 @@ jQuery( document ).ready(function( $ ) {
 								</c:forEach>
 
 								<div class="separator text-muted"></div>
+								<div id="showPlace">
+								
+								</div>
 								<!-- 장소 추가 -->
 								<article class="panel panel-success">
 
@@ -274,37 +471,19 @@ jQuery( document ).ready(function( $ ) {
 									<div class="panel-heading">
 										<h2 class="panel-title">내가 방문한 장소를 등록하세요.</h2>
 									</div>
-										<div class="panel-body">
-										<button class="btn btn-sm btn-default" id="insertTravelPlaceButton">
-													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 장소 추가</i>
-										</button>
-										</div>
+									<div class="panel-body">
+									<button class="btn btn-sm btn-default" id="insertTravelPlaceButton">
+												<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 장소 추가</i>
+									</button>
+									</div>
 								</article>
 
 							</div>
-
-							<!-- 여행기 업데이트 -->
-							<div class="panel">
-								<div class="panel-body">
-								<form action="./updateTravelBoardTwoform" method="get">
-									<textarea class="form-control" rows="2"
-										placeholder="여행에 대한 간단한 소개글을 작성해주세요:-)" name="travelContent"></textarea>
-									<br>
-									<textarea class="form-control" rows="1" placeholder="여행 총 경비를 입력해주세요." name="travelPay"></textarea>
-									<div class="mar-top clearfix">
-										<button class="btn btn-sm btn-warning pull-right" type="submit">
-											<i class="fa fa-pencil fa-fw"></i>등록하기
-										</button>
-										<button class="btn btn-sm btn-warning">
-											<i class="fa fa-camera"> 메인사진 업로드</i>
-										</button>
-									</div>
-									</form>
-								</div>
 							</div>
-
-						</div>
-						<!-- end of table-responsive -->
+																	<button class="btn btn-sm btn-warning pull-right" type="submit">
+											<i class="fa fa-pencil fa-fw"></i>수정완료하기
+										</button>
+						</div><!-- end of table-responsive -->
 						
 <!-- 장소 추가 modal -->			
 <div class="modal fade" id="insertTravelPlace">
@@ -322,43 +501,37 @@ jQuery( document ).ready(function( $ ) {
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace">
+									<form action="./insertTravelPlace" id="placeAjaxData" method="post">
 										<div class="panel-body">
-
-										세계지도 지역 클릭 -> 구글API modal(장소명
-											placeName, 주소 placeAddress 입력됨)</div>
-
-										<ul class="list-group">
-											<li class="list-group-item">
+												<div class="form-group">
+													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeName" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+												</div>
+												<div class="form-group">
+													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeAddress" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+												</div>
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
 												</div>
-											</li>
-											<li class="list-group-item">
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요.">
 												</div>
-											</li>
-											<li class="list-group-item">
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요.">
 												</div>
-											</li>
-											<li class="list-group-item">
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요.">
 												</div>
-											</li>
-											<li class="list-group-item" style="padding-left: 450px;">
 												<button class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
 												</button>
-											</li>
-										</ul>
+											</div>
+										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" value="${travelBoard.travelNo}" name="${placeTravelBoardNo}">
 									</form>
 						</div>
@@ -442,7 +615,7 @@ jQuery( document ).ready(function( $ ) {
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 									</div>
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>

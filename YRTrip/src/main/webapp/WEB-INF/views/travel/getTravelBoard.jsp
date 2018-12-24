@@ -204,6 +204,51 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#insertTravelBoard').modal(true);
 		})
 });
+
+/* 좋아요 */
+function disLike(uId, lC, lBid){
+	   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
+};
+
+$(function(){
+	   function likeCondition() {
+		   var params = { userId : '${sessionScope.login.userId}',
+				   		 likeCategory : 'T',
+				   		 likeBoardid :'${travelBoard.travelNo}'
+		   				}
+		   $.getJSON("getLike", params, function(data){
+			   if (!data) {
+				   var div = makeDisLikeBtn();
+					$(div).appendTo("#LikeCondition");
+			   }
+			   else {
+				   var div = makeLikeBtn();
+					$(div).appendTo("#LikeCondition");
+			   }
+		   })
+	   }
+	   function makeDisLikeBtn() {
+			var div =$("<div>");
+			div.addClass('LikeCondition');
+			var str = "<form action='./insertLike' method='post'>"
+						+ "<input type='hidden' name='likeCategory' value='T'>"
+						+ "<input type='hidden' name='likeBoardid' value='${travelBoard.travelNo}'>"
+						+ "<input type='hidden' name='userId' value='${sessionScope.login.userId}'>"
+						+ "<button type='submit' style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+						+ "<img src='./images/dislike.png'></button></form>"
+			div.html(str);
+			return div;
+	   }
+	   function makeLikeBtn() {
+			var div =$("<div>");
+			div.addClass('LikeCondition');
+			var str = "<button onclick=\"disLike('${sessionScope.login.userId}','T','${travelBoard.travelNo}')\" style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+					+ "<img src='./images/like.png'></button>"
+			div.html(str);
+			return div;
+	   }
+	   likeCondition();
+});
 </script>
 </head>
 <body>
@@ -270,10 +315,10 @@ jQuery( document ).ready(function( $ ) {
 
 						</div>
 						<!-- 장소 리스트 -->
-						<div>
+						<div style="padding:10px;">
 							<div class="timeline">
 								<div class="line text-muted"></div>
-								<article class="panel panel-warning">
+								<article class="panel panel-default">
 											<div class="panel-heading icon">
 												<i class="glyphicon glyphicon glyphicon glyphicon-user"></i>
 											</div>
@@ -287,24 +332,34 @@ jQuery( document ).ready(function( $ ) {
 											</div>
 											
 											<div class="panel-footer">
-												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
-												<small>${travelBoard.travelLike}</small>
+											<c:choose>
+												<c:when test="${not empty sessionScope.login}">
+													<div id="LikeCondition"></div>
+												</c:when>
+												<c:otherwise>
+													<img src="./images/dislike.png" width="20px">
+												</c:otherwise>
+											</c:choose>
 											</div>
 								</article>
 									<c:forEach items="${travelPlace}" var="place">
 										<article class="panel panel-warning">
-	
+
 											<div class="panel-heading icon">
 												<i class="glyphicon glyphicon glyphicon-map-marker"></i>
+												<p style="margin:-5px; background-color:#fff;">${fn:substring(place.placeVisitDate, 0, 4)}</p>
+												<p style="margin:-15px;background-color:#fff;">${fn:substring(place.placeVisitDate, 5, 7)}</p>
+												<p style="background-color:#fff;">${fn:substring(place.placeVisitDate, 8, 10)}</p>
 											</div>
-	
+											
 											<div class="panel-heading">
-												<h2 class="panel-title">${place.placeTitle}</h2>
+												<h2 class="panel-title" style="display:inline;">${place.placeName}</h2>
 											</div>
 	
 											<div class="panel-body">
-												<img class="img-responsive img-rounded"
-													src="//placehold.it/350x150" />
+												<h2 class="panel-title">${place.placeTitle}</h2>
+												<img class="img-responsive img-rounded" src="//placehold.it/350x150" />
+												<p>${place.placeContent}</p>
 											</div>
 	
 											<div class="panel-footer">
@@ -314,8 +369,10 @@ jQuery( document ).ready(function( $ ) {
 										</article>
 										</c:forEach>
 								</div>
-								<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'">수정</button>
-								<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}'">삭제</button>
+								<div class="order-buton">
+								<a href="${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}">수정</a>
+								<a href="${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}">삭제</a>
+								</div>
 							</div>
 						</div>	<!-- end of table-responsive -->
 				
