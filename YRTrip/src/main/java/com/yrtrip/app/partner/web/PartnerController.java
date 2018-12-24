@@ -1,5 +1,9 @@
 package com.yrtrip.app.partner.web;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +50,30 @@ public class PartnerController {
 	
 	// 단건조회
 	@RequestMapping("/getPartner") // http://localhost:8081/app/getPartner
-	public String getPartner(Model model, PartnerVO vo) {
+	public String getPartner(Model model, PartnerVO vo, HttpServletRequest req, HttpServletResponse res) {
+		int countCheck = 0;
+		
+		//저장된 쿠키 불러오기
+				Cookie[] cookies = req.getCookies();
+				if (cookies != null) {
+					for (int i = 0; i < cookies.length; i++) {
+						if(cookies[i].getName().equals("partnerId"+vo.getPartnerId())){
+							countCheck = 0;
+							break;
+						}else{
+							Cookie cookie = new Cookie("partnerId"+vo.getPartnerId(), String.valueOf(vo.getPartnerId()));
+							cookie.setMaxAge(60*60*24);	//하루동안 조회수 중복 증가 방지
+							cookie.setPath("/");
+							res.addCookie(cookie);
+							countCheck += 1;
+						}
+					}
+				}
+				//상세정보 조회시 카운트 증가
+				if(countCheck > 0){
+					partnerService.updateViewCnt(vo);
+				}
+		
 		model.addAttribute("partner", partnerService.getPartner(vo));	// vo : 조회할 게시글 번호 넘어가는 것		
 		return "partner/getPartner";
 	}

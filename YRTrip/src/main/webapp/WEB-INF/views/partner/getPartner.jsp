@@ -24,10 +24,10 @@
 				+ joiner.joinerDate + "</span>"
 				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"			
 		}else if(userId == partnerId){
-			if(joiner.joinerCondition = 'N'){
+			if(joiner.joinerCondition == 'N'){
 				var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
-				+ "</strong>   " + "<span class='joinerDate'>신청일 : "
-				+ joiner.joinerDate + "</span>"
+				+ "</strong>   " + "<span class='joinerDate'>신청일 : " + joiner.joinerDate + "</span>"
+				+ "<span class='joinerCondition'> 현재상태 : " + joiner.joinerCondition + "</span>"
 				+  "<button type=\"button\" class=\"btnChange\">수락 하기</button>"
 			}else{
 				var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
@@ -63,6 +63,7 @@
 		$("#btnAdd").click(function() {
 			var partnerId = '${partner.userId}';
 			var userId =  '${sessionScope.login.userId}';
+			
 			if(userId==partnerId ){
 				alert("글쓴이는 동행 신청을 할 수 없습니다.")
 			} else{
@@ -87,19 +88,36 @@
 				});
 			}
 		});
-		
-		$("joinerList").on("click", ".btnChange", function(){
-			if($(this).attr('data-click-state') == 1) {
-				$(this).attr('data-click-state', 0)
-				$(this).css('background-color', 'red')
-			} else {
-				$(this).attr('data-click-state', 1)
-				$(this).css('background-color', 'orange')
-			}
+		//동행 신청 수락 처리
+		$("#joinerList").on("click", ".btnChange", function(){
+			console.log(this);
+			
+			var a = $("#joinerList").val();
+			console.log(a);
+			
+			$.ajax({
+				url: "/closeJoiner",
+				
+				type: "POST",
+				
+				data: {Condition : ""},
+				
+				success: function(data){
+					console.log(data);
+					data = JSON.toString(data);
+		            var a = date
+		            var a = data
+		            if($(this).attr('data-click-state') == 1) {
+		    			$(this).attr('data-click-state', 0)
+		    			$(this).css('background-color', 'red')
+		    		} else {
+		    			$(this).attr('data-click-state', 1)
+		    			$(this).css('background-color', 'orange')
+		    		}
+				}
+				});
+			});
 		});
-		
-		
-	}); //$() end ready event
 
 	function del(partnerid) {
 		if (confirm("삭제하시겠습니까?")) {
@@ -121,11 +139,11 @@
 						</div>
 						<ul class=price-list>
 							<li><a href="getPartnerList" style="color: black">전체보기</a></li>
-							<li><a href="#" style="color: black">여행</a></li>
-							<li><a href="#" style="color: black">문화</a></li>
-							<li><a href="#" style="color: black">맛집</a></li>
-							<li><a href="#" style="color: black">교통</a></li>
-							<li><a href="#" style="color: black">숙소</a></li>
+							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=여행&page=" style="color: black">여행</a></li>
+							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=문화&page=" style="color: black">문화</a></li>
+							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=맛집&page=" style="color: black">맛집</a></li>
+							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=교통&page=" style="color: black">교통</a></li>
+							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=숙소&page=" style="color: black">숙소</a></li>
 						</ul>
 					</div>
 				</div>
@@ -165,10 +183,17 @@
 					</div>
 					<c:if test="${sessionScope.login.userId eq partner.userId}">
 							<div class="order-buton" style="float: right">
+								<c:if test="${partner.partnerCondition eq '완료'}">
+									<a href="./updatePartnerForm?partnerId=${partner.partnerId}">수정</a>
+									<button class="submit-btn" onclick="del('${partner.partnerId}')">삭제</button>
+									<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
+								</c:if>
+								<c:if test="${partner.partnerCondition eq '미완료'}">
 								<a href="./closePartner?partnerId=${partner.partnerId}">완료하기</a>
-								<a href="./updatePartnerForm?partnerId=${partner.partnerId}">수정</a>
-								<button class="submit-btn" onclick="del('${partner.partnerId}')">삭제</button>
-								<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
+									<a href="./updatePartnerForm?partnerId=${partner.partnerId}">수정</a>
+									<button class="submit-btn" onclick="del('${partner.partnerId}')">삭제</button>
+									<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
+								</c:if>
 							</div>
 					</c:if>
 						<hr/><br/>
@@ -180,7 +205,7 @@
 								<c:if test="${sessionScope.login.userId != partner.userId}">
 									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<input type="hidden" name="partnerId" value="${partner.partnerId}">
-									<input type="hidden" id="joinerCondition" name="joinerCondition" value="참여">
+									<input type="hidden" id="joinerCondition" name="joinerCondition" value="Y">
 									<br />
 									<button type="button" class="btn btn-default" id="btnAdd">신청</button>
 								</c:if>

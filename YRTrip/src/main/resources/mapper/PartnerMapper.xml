@@ -7,9 +7,13 @@
 	  FROM PARTNERT
 	  <where>
 		<choose>
+			<when test="searchClass != null and searchClass== 'partnerClass'">
+				AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
+			</when>
+			
 			<when test="searchCondition != null and searchCondition == 'partnerTitle'">
 				AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>	
+			</when>
 			<when test="searchCondition != null and searchCondition == 'partnerContent'">
 			 	AND PARTNER_CONTENT LIKE '%' || #{searchKeyword} || '%'
 			</when>
@@ -35,6 +39,9 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	FROM	PARTNERT
 	<where>
 		<choose>
+			<when test="searchClass != null and searchClass == 'partnerClass'">
+				AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
+			</when>
 			<when test="searchCondition != null and searchCondition == 'userId'">
 				AND USER_ID LIKE '%' || #{searchKeyword} || '%'
 			</when>	
@@ -106,12 +113,17 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 						PARTNER_CLASS	= #{partnerClass},
 						PARTNER_PERS	= #{partnerPers},
 						PARTNER_START	= #{partnerStart},
-						PARTNER_END		= #{partnerEnd},
-						PARTNER_CONDITION = #{partnerCondition}
+						PARTNER_END		= #{partnerEnd}
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
+
+<!-- 애선씨꺼 조회수 check -->
+<update id="updateViewCnt" parameterType="partner">
+	UPDATE PARTNERT SET PARTNER_HIT = PARTNER_HIT + 1
+					WHERE PARTNER_ID = #{partnerId}
+</update>
 <update id="closePartner" parameterType="partner">
-	UPDATE PARTNERT SET PARTNER_CONDITION = #{partnerCondition}
+	UPDATE PARTNERT SET PARTNER_CONDITION = '완료'
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
 <delete id="deletePartner" parameterType="int">

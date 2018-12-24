@@ -21,6 +21,7 @@ public class PartnerVO {
 	private String tinfoId; // 여행정보 ID
 
 	private String searchCondition; //
+	private String searchClass;
 	private String searchKeyword; // 검색키워드
 	
 	private String sortCol; // 정렬
@@ -107,6 +108,12 @@ public class PartnerVO {
 	}
 	public void setTinfoId(String tinfoId) {
 		this.tinfoId = tinfoId;
+	}
+	public String getSearchClass() {
+		return searchClass;
+	}
+	public void setSearchClass(String searchClass) {
+		this.searchClass = searchClass;
 	}
 	public String getSearchCondition() {
 		return searchCondition;

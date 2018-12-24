@@ -12,4 +12,6 @@ public interface PartnerService {
 	public List<PartnerVO> getPartnerList(PartnerVO vo);
 	public int getCount(PartnerVO vo);
 	public void closePartner(PartnerVO vo);
+	public void updateViewCnt(PartnerVO vo);
+	
 }

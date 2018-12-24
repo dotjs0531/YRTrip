@@ -58,4 +58,7 @@ public class PartnerBoardDAOMybatis {
 	public int getCount(PartnerVO vo) {
 		return mybatis.selectOne("partner.getCount", vo);
 	}
+	public void updateViewCnt(PartnerVO vo) {
+		mybatis.update("partner.updateViewCnt", vo);
+	}
 }

@@ -46,9 +46,9 @@ public class JoinerController {
    }
 
    // 수락 처리
-   @RequestMapping("change1Joiner")
+   @RequestMapping("closeJoiner")
    @ResponseBody
-   public JoinerVO change1joiner(JoinerVO vo) {
+   public JoinerVO closeJoiner(JoinerVO vo) {
 	   joinerService.updateJoiner(vo);
 	   return vo;
    }

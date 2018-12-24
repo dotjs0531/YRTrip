@@ -44,4 +44,8 @@
    DELETE FROM JOINERT
         WHERE JOINER_ID = #{value}
 </delete>
+<update id="closeJoiner" parameterType="joiner">
+	UPDATE PARTNERT SET PARTNER_CONDITION = '수락하기'
+				WHERE	PARTNER_ID = #{partnerId}
+</update>
 </mapper>
