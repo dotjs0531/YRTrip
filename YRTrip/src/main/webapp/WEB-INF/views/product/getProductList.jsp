@@ -33,6 +33,7 @@
 	}
 </script>
 <script>
+	
 	$(function() {
 		$('#product_view').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
@@ -48,17 +49,15 @@
 				$("#modal-title").html(itemName);
 				$("#popup_itemId").html(itemId);
 				$("#popup_itemContent").html(itemContent);
-			})
-		});
+			})		
 	});
 </script>
 
 <style>
-#login-row{
-    margin-left: -230px;
-    margin-right: 440px;
+#login-row {
+	margin-left: -230px;
+	margin-right: 440px;
 }
-
 </style>
 </head>
 
@@ -105,20 +104,21 @@
 							<li data-target="#myCarousel" data-slide-to="2"></li>
 						</ol>
 						<!-- Wrapper for slides -->
+
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://placehold.it/900x350"
-									alt="Los Angeles" style="width: 100%;">
+								<img src="http://placehold.it/900x350" alt="Los Angeles"
+									style="width: 100%;">
 							</div>
 
 							<div class="item">
-								<img src="http://placehold.it/900x350"
-									alt="Chicago" style="width: 100%;">
+								<img src="http://placehold.it/900x350" alt="Chicago"
+									style="width: 100%;">
 							</div>
 
 							<div class="item">
-								<img src="http://placehold.it/900x350"
-									alt="New york" style="width: 100%;">
+								<img src="http://placehold.it/900x350" alt="New york"
+									style="width: 100%;">
 							</div>
 						</div>
 						<!-- Left and right controls -->
@@ -137,7 +137,7 @@
 					<div class="col-lg-container">
 						<div class="row">
 							<c:forEach items="${productList}" var="product">
-							
+								
 								<div class="col-4">
 									<div class="thumbnail">
 										<img
@@ -149,7 +149,8 @@
 											<h4>
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
-											<p>${product.itemContent}</p>
+
+											<div class="space-ten"></div>
 											<p>${product.itemOrderdetail}</p>
 											<p>${product.itemCategory}</p>
 											<p>${product.itemCondition}</p>
@@ -216,9 +217,8 @@
 												<!-- rating  -->
 											</div>
 											<p></p>
-											<h3> 상세설명 </h3>
-												<div id="popup_itemContent" class="pull-right">
-												</div>
+											<h3>상세설명</h3>
+											<div id="popup_itemContent" class="pull-right"></div>
 											<div class="row">
 												<div class="col-md-4 col-sm-6 col-xs-12">
 													<select class="form-control" name="select">
@@ -253,7 +253,8 @@
 											<div class="space-ten"></div>
 											<div class="btn-ground">
 												<button type="button" class="btn btn-primary">
-													<span class="glyphicon glyphicon-shopping-cart"></span> 장바구니
+													<span class="glyphicon glyphicon-shopping-cart"></span>
+													장바구니
 												</button>
 												<button type="button" class="btn btn-primary">
 													<span class="glyphicon glyphicon-heart"></span> 판매자와 대화

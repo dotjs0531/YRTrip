@@ -181,7 +181,13 @@ function p_cat(){
 			$("itemCategory").empty();
 			$('#itemCategory').val($("#pciETC").text());
 		}
-	
+
+	/* 버튼 클릭시 reset */
+	function insert_reset(){
+		$( "form" ).submit(function( event ) {
+			  event.preventDefault();
+			});
+	}
 }
 
 </script>
@@ -226,7 +232,7 @@ function p_cat(){
 				<!-- 시작 : 내용 : 9-->
 
 				<div class="container col-lg-9">
-					<form action="./insertProduct" method="post">
+					<form action="./insertProduct" method="post" enctype="multipart/form-data">
 						<div class="card mb-10">
 							<div class="card-header">
 								<nav class="header-navigation">
@@ -263,7 +269,7 @@ function p_cat(){
 										<h4>${sessionScope.login.userId}만의상품을공유해보입시더</h4>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-link" type="reset">모두삭제</a> <input
+										<button onclick="insert_reset();" class="btn btn-link" type="reset" >모두삭제</button> <input
 											type="submit" class="btn" value="등록">
 									</div>
 								</nav>
@@ -283,7 +289,7 @@ function p_cat(){
 									<div class="container my-4" style="width: 100%; padding: 0">
 										<div class="form-group">
 											<div class="file-loading">
-												<input id="file-5" class="file" type="file" multiple
+												<input multiple="multiple" id="file-5" name="productPicFile" class="file" type="file" multiple
 													data-preview-file-type="any" data-upload-url="#"
 													data-theme="fas">
 											</div>
@@ -388,8 +394,6 @@ function p_cat(){
 								<input type="hidden" name="sellerId"
 									value="${sessionScope.login.userId}">
 								<!--  구매가능 여부 : 구매가능(defalut)  -->
-
-								<input type="hidden" name="itemOrderdetail" value="구매가능">
 							</div>
 						</div>
 					</form>

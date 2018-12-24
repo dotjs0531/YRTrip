@@ -32,6 +32,8 @@
 	/* <input class="form-control col-md-1" type="text" value="${cart.itemEa}">
 	 <button type="button" class="btn-link" onclick="updateCart();">수정</button> */
 	$(function() {
+		var cart_total= $(".cartId").length;
+		$(".cart_total").html(cart_total);
 		
 		$('#go_update').click(function(){
 			var new_itemEa = '<input type=\"text\" id=\"update_btn\" value=\"${cart.itemEa}\">';
@@ -59,7 +61,7 @@
 				<div class="col-md-7 center-block order-md-1">
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
 						<span class="text-muted">목록</span> <span
-							class="badge badge-secondary badge-pill">3 이거 숫자</span>
+							class="badge badge-secondary badge-pill cart_total"></span>
 					</h4>
 					<!-- 내가 사려고 선택한 물건 목록들 c:forEach -->
 
@@ -74,7 +76,7 @@
 									<h3 class="my-0">${cart.itemName}</h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
-									<small class="text-muted">${cart.cartId}</small> <br>
+									<small class="text-muted cartId">${cart.cartId}</small> <br>
 								</div> <span class="text-muted">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<!-- <form action="./updateCart"> --> <span id="original_itemEa">${cart.itemEa}</span>
 								<button type="button" id="go_update">수정</button> <!-- </form> -->

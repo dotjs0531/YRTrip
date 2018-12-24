@@ -20,13 +20,18 @@
 		ORDER BY CART_DATE DESC
 	</select>
 	<select id="getCart" resultType="cart">
-		 SELECT CART_ID,
+		SELECT CART_ID,
 				MY_ID,
-				ITEM_ID,
-				ITEM_EA,
+				i.ITEM_ID as ITEM_ID,
+				i.ITEM_PRICE as ITEM_PRICE,
+				c.ITEM_EA as ITEM_EA,
+				i.ITEM_METHOD as ITEM_METHOD,
+				i.ITEM_ORDERDETAIL as ITEM_ORDERDETAIL,
+				SELLER_ID,
 				CART_DATE
-		FROM CART c 
-		WHERE CART_ID = #{cartId}
+		FROM CART c, ITEMT i
+		WHERE (CART_ID = #{cartId}
+		and i.ITEM_ID = c.ITEM_ID)
 	</select>
 	<insert id="insertCart" parameterType="cart">
 	<selectKey keyProperty="cartId" resultType="integer" order="BEFORE">

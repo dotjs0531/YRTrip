@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="kor">
 <!-- 
@@ -49,6 +49,58 @@
 		var url = 'getCartList.jsp?myId=' + encodeURI(s);
 		window.location.href = url;
 	} */
+	
+	function disLike(uId, lC, lBid) {
+		location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC
+				+ "&likeBoardid=" + lBid;
+	};
+	/* 좋아요 */
+	$(function(){
+		var carousel_class_init = "active";	
+		var carousel_ea = $("div#itemC").length;
+		console.log(carousel_ea);
+		for(i=0; i<1; i++){
+			$("#itemC").addClass(carousel_class_init);
+		}	
+		
+		function likeCondition() {
+			var params = {
+				userId : '${sessionScope.login.userId}',
+				likeCategory : 'I',
+				likeBoardid : '${product.itemId}'
+			}
+			$.getJSON("getLike", params, function(data) {
+				if (!data) {
+					var div = makeDisLikeBtn();
+					$(div).appendTo("#LikeCondition");
+				} else {
+					var div = makeLikeBtn();
+					$(div).appendTo("#LikeCondition");
+				}
+			})
+		}
+		function makeDisLikeBtn() {
+			var div = $("<div>");
+			div.addClass('LikeCondition');
+			var str = "<form action='./insertLike' method='post'>"
+					+ "<input type='hidden' name='likeCategory' value='I'>"
+					+ "<input type='hidden' name='likeBoardid' value='${product.itemId}'>"
+					+ "<input type='hidden' name='userId' value='${sessionScope.login.userId}'>"
+					+ "<button type='submit' style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+					+ "<img src='./images/dislike.png'></button></form>"
+			div.html(str);
+			return div;
+		}
+		function makeLikeBtn() {
+			var div = $("<div>");
+			div.addClass('LikeCondition');
+			var str = "<button onclick=\"disLike('${sessionScope.login.userId}','I','${product.itemId}')\" style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+					+ "<img src='./images/like.png'></button>"
+			div.html(str);
+			return div;
+		}
+		likeCondition();
+	});
 </script>
 </head>
 <body>
@@ -84,13 +136,21 @@
 				</div>
 				<!-- 끝 : 사이드 : 3-->
 				<!-- 시작 : 내용 : 9-->
-				<div class="container col-lg-9">
-
+				<div class="container col-lg-9">					
 					<div class="card mb-10">
 						<div class="card-header">
 							<nav class="header-navigation">
 								<a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a>
-
+								<c:choose>
+									<c:when test="${not empty sessionScope.login}">
+										<div id="LikeCondition" style="float: right"></div>
+									</c:when>
+									<c:otherwise>
+										<div style="float: right">
+											<img src="./images/dislike.png" width="20px">
+										</div>
+									</c:otherwise>
+								</c:choose>
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">유심</a></li>
 									<li class="breadcrumb-item"><a href="#">유심</a></li>
@@ -109,6 +169,7 @@
 						<div class="card-body store-body">
 							<!-- 왼쪽 -->
 							<div class="product-info">
+								
 								<!-- 왼쪽 갤러리(사진들만) -->
 								<div class="product-gallery">
 									<div class="product-gallery-featured">
@@ -121,24 +182,19 @@
 												<li data-target="#myCarousel" data-slide-to="1"></li>
 												<li data-target="#myCarousel" data-slide-to="2"></li>
 											</ol>
-											<!-- Wrapper for slides -->
+												<!-- 사진넣는부분 -->
 											<div class="carousel-inner">
-												<div class="item active">
-													<img src="https://via.placeholder.com/350x350/ffcf5b"
-														alt="Los Angeles" style="width: 100%;">
-												</div>
-
-												<div class="item">
-													<img src="https://via.placeholder.com/350x350/ffcf5b"
-														alt="Chicago" style="width: 100%;">
-												</div>
-
-												<div class="item">
-													<img src="https://via.placeholder.com/350x350/ffcf5b"
-														alt="New york" style="width: 100%;">
-												</div>
+												<c:set var="productPicFile"
+													value="${fn:split(product.itemPic, ',')}" />
+												<c:forEach items="${productPicFile}" var="pic">
+												<div id="itemC" class="item">
+													<img class="img-responsive center-block" id="img" src="./images/product/${pic}"
+														style="height: 600px;" />
+												</div>												
+												</c:forEach>
 											</div>
-											<!-- Left and right controls -->
+											
+											<!--왼쪽 / 오른쪽 화살표-->
 											<a class="left carousel-control" href="#myCarousel"
 												data-slide="prev"> <span
 												class="glyphicon glyphicon-chevron-left"></span> <span
@@ -154,41 +210,41 @@
 								<!-- 오른쪽 아래 -->
 								<div class="product-payment-details">
 									<form action="./insertCart">
-									<p class="last-sold text-muted">
-										<small>몇개팔렸을까여?</small>
-										<small class="pull-right">작성일</small>
-									</p>
-									<div class="row">
-									<h1 class="col-md-9 product-title display-1 mb-2">${product.itemName}</h1>
-									<h3 class="col-md-3 product-price display-3">￦${product.itemPrice}</h3>
-									</div>
-									<p class="mb-0">
-										<i class="fa fa-truck"></i>${product.itemCondition} <small
-											class="pull-right text-success">${product.itemOrderdetail}</small>
-									</p>
-									<div class="text-muted mb-2">
-										<small>약간의 사용감이 있습니다!</small>
-									</div>
-									<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
-									<label for="quant">수량</label> <input type="number"
-										name="itemEa" min="1" id="quant" value=""
-										class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
-										<input type="hidden" value="${sessionScope.login.userId}" name="myId">
-									<input type="hidden" value="${product.itemId}" name="itemId">
-									<!-- </form> -->
-									<div class="order-buton align-content-sm-center">
-										<!-- 테스터 -->
-										<a role="button" class="col btn btn-lg btn-block btn-light"
-											href="./getCartList?myId=${sessionScope.login.userId}">
-											전체 장바구니 보기${sessionScope.login.userId}</a>
+										<p class="last-sold text-muted">
+											<small>몇개팔렸을까여?</small> <small class="pull-right">작성일</small>
+										</p>
+										<div class="row">
+											<h1 class="col-md-9 product-title display-1 mb-2">${product.itemName}</h1>
+											<h3 class="col-md-3 product-price display-3">￦${product.itemPrice}</h3>
+										</div>
+										<p class="mb-0">
+											<i class="fa fa-truck"></i>${product.itemCondition} <small
+												class="pull-right text-success">${product.itemOrderdetail}</small>
+										</p>
+										<div class="text-muted mb-2">
+											<small>약간의 사용감이 있습니다!</small>
+										</div>
+										<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
+										<label for="quant">수량</label> <input type="number"
+											name="itemEa" min="1" id="quant" value=""
+											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
+										<input type="hidden" value="${sessionScope.login.userId}"
+											name="myId"> <input type="hidden"
+											value="${product.itemId}" name="itemId">
+										<!-- </form> -->
+										<div class="order-buton align-content-sm-center">
+											<!-- 테스터 -->
+											<a role="button" class="col btn btn-lg btn-block btn-light"
+												href="./getCartList?myId=${sessionScope.login.userId}">
+												전체 장바구니 보기${sessionScope.login.userId}</a>
 											<button class="col btn btn-lg btn-block" type="submit">장바구니담기</button>
-											<a role="button" class="col btn btn-lg btn-block">대화하기</a>
-										<a role="button" class="btn btn-lg btn-block btn-light"
-											href="./purchasingProduct">구매하기</a>
-									</div>
-									
-									
-								</form>
+											<a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
+												role="button" class="btn btn-lg btn-block btn-light"
+												href="./purchasingProduct">구매하기</a>
+										</div>
+
+
+									</form>
 								</div>
 								<div class="product-seller-recommended">
 									<h3 class="mb-5">판매자의 다른 상품</h3>
@@ -270,21 +326,16 @@
 										<h5 class="mb-2">다른 사람들의 후기를 좀 봐볼까나?</h5>
 										<form action="" class="form-inline mb-5">
 											<textarea name="" id="" cols="50" rows="2"
-												class="form-control mb-4" placeholder="후기쓰봐라"></textarea>
+												class="form-control mb-4" placeholder="후기후기후기"></textarea>
 											<button class="btn btn-lg-12 btn-primary">후기를 입력해보세</button>
 										</form>
 										<h5 class="mb-5">!후기!</h5>
 										<c:forEach items="${orderList}" var="order">
-										<ol class="list-unstyled last-questions-list">
-											<li><i class="fa fa-comment"></i> 
-												<span>
-													${order.reviewStar}
-													${order.reviewContent}
-													${order.reviewDate}
-													${order.reviewPic}
-												</span>
-											</li>
-										</ol>
+											<ol class="list-unstyled last-questions-list">
+												<li><i class="fa fa-comment"></i> <span>
+														${order.reviewStar} ${order.reviewContent}
+														${order.reviewDate} ${order.reviewPic} </span></li>
+											</ol>
 										</c:forEach>
 									</div>
 								</div>

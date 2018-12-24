@@ -237,13 +237,17 @@
 										<h4>상품상태</h4>
 										<input type="text" class="form-control mb-5 input-lg"
 											name="itemCategory" id="itemOrderdetail" value="${product.itemOrderdetail}"
-											placeholder="카테고리" required>
+											placeholder="상품상태" required>
+								</div>
+								<div class="col-6 col-md-4">
+										<h4>구매가능여부</h4>
+										<input type="text" class="form-control mb-5 input-lg"
+											name="itemCategory" id="itemCondition" value="${product.itemCondition}"
+											placeholder="구매가능여부" required>
 								</div>
 								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId" value="user1">
 								<input type="hidden" name="itemId" value="${product.itemId}">
-								<!--  구매가능 여부 : 구매가능(defalut)  --> 
-								
 							</div>
 						</div>
 					</form>

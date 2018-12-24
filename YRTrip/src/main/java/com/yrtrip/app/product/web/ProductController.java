@@ -1,7 +1,10 @@
 package com.yrtrip.app.product.web;
 
+import java.awt.font.TextLayout.CaretPolicy;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -77,17 +80,35 @@ public class ProductController {
 	
 	//제품등록처리
 	@RequestMapping(value="/insertProduct", method=RequestMethod.POST)
-	public String insertProduct(Model model, ProductVO vo, HttpServletRequest request) throws IllegalStateException, IOException{
+	public String insertProduct(Model model, ProductVO vo, HttpServletRequest request, MultipartFile[] productPicFile) throws IllegalStateException, IOException{
+
+		
 		
 		String path = request.getSession().getServletContext().getRealPath("/images/product");
 		
-		MultipartFile productPicFile = vo.getProductImgFile();
-		if (!productPicFile.isEmpty() && productPicFile.getSize() > 0) {
-			String filename = productPicFile.getOriginalFilename();
-			productPicFile.transferTo(new File(path, filename));
-
-			vo.setItemPic(filename);
+		String fileOriginName = "";
+		String fileMultiName = "";
+		
+		for(int i=0; i<productPicFile.length; i++) {
+			fileOriginName = productPicFile[i].getOriginalFilename();
+			System.out.println("기존 파일명 : " + fileOriginName);
+			SimpleDateFormat formatter = new SimpleDateFormat("YYMMDD_"+i);
+			Calendar now = Calendar.getInstance();
+			
+			String extension = fileOriginName.split("\\.")[1];
+			
+			fileOriginName = formatter.format(now.getTime())+"."+extension;
+			System.out.println("변경된 파일명 : "+fileOriginName);
+			
+			File f = new File(path+"\\"+fileOriginName);
+			productPicFile[i].transferTo(f);
+			if(i==0) {fileMultiName += fileOriginName;}
+			else {fileMultiName += "," +fileOriginName;}
+			
 		}
+		System.out.println(fileMultiName);
+		vo.setItemPic(fileMultiName);
+
 		productService.insertProduct(vo);
 		return "redirect:getProductList";
 	}
@@ -97,12 +118,15 @@ public class ProductController {
 	public String updateProductForm(Model model, ProductVO vo) {
 		model.addAttribute("product", productService.getProduct(vo));
 		return "product/updateProduct";
+		
 	}
 	//제품수정처리
 	@RequestMapping(value="/updateProduct", method = RequestMethod.POST)
 	public String updateProduct(ProductVO vo){
 		productService.updateProduct(vo);
-		return "redirect:getProductList";
+		return "redirect:getProductList"; 
+		//자기 상품페이지 화면으로 가기~
+		//자기가 올린 상품페이지 바로 보여주는게 좋을까
 	}
 	
 	//제품 단건 삭제
@@ -118,12 +142,15 @@ public class ProductController {
 	}
 	//주문서 입력 처리 : 회원정보 select, 아이템정보 select, cart select
 	@RequestMapping("/purchasingProduct")
-	public String purchasingProduct(Model model, ProductVO vop, CartVO voc, UserVO vou, HttpSession session) {		
+	public String purchasingProduct(Model model, CartVO voc, UserVO vou, HttpSession session) {		
+		
 		vou.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 		UserVO uservo = userService.getUser(vou);
 		
-		model.addAttribute("product", productService.getProduct(vop));
-		model.addAttribute("cart",cartService.getCart(voc));
+		voc.getCartId();
+		System.out.println(voc.getCartId());
+		
+		model.addAttribute("cart", cartService.getCart(voc));
 		model.addAttribute("userPur", uservo);
 		return "product/purchasingProduct";
 	}

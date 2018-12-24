@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -14,11 +15,27 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <style>
-#login-row {
-	margin-left: -230px;
-	margin-right: 440px;
-}
+	#login-row {
+		margin-left: -230px;
+		margin-right: 440px;
+	}
 </style>
+<script>
+	$(function(){
+		var address_origin = $("#address").val();
+		var item_total = $("#itemPrice").text() * $("#itemEa").text();
+		$("#different-address").click(function(){
+			$("#address").val('');
+		});
+		$("#same-address").click(function(){
+			$("#address").val(address_origin);
+		});
+		
+		$("#itemTotal").html(item_total);
+		
+		/* sellerid = buyid 일때 막아놓기 */
+	});
+</script>
 </head>
 
 <body class="bg-light">
@@ -53,12 +70,12 @@
              <div class="mb-3">  
 				<div class="custom-control custom-radio">
 	              <input type="radio" name="which-address" class="custom-control-input" id="same-address" checked="">
-	              <label class="custom-control-label" for="same-address">저장한 주소와 배달지 주소가 같아요!</label>
+	              <label class="custom-control-label address" for="same-address">저장한 주소와 배달지 주소가 같아요!</label>
 	            </div>
 	            <!-- 주소 리셋해주기 -->
 	            <div class="custom-control custom-radio">
 	              <input type="radio" name="which-address" class="custom-control-input" id="different-address">
-	              <label class="custom-control-label" for="different-address">다른 주소를 쓸꺼예요</label>
+	              <label class="custom-control-label address" for="different-address">다른 주소를 쓸꺼예요</label>
 	            </div>
             </div>
             <div class="mb-3">
@@ -82,30 +99,45 @@
             </div>
             
             <hr class="mb-4">         
+            <h4 class="mb-3">상품정보</h4>
         상품이미지 작게 넣기 60*60정도?
              <div class="row">
-              <div class="col-md-4 mb-3">
-                <label for="itemPrice">상품가격</label>
-                <input type="text" class="form-control" id="itemPrice" placeholder="" value="" required="">               
-              </div>
-               <div class="col-md-5 mb-1">
-                <label for="itemEa" class="ml-4" for="itemEa">주문개수</label>
-                <input type="text" class="col-3 ml-4 form-control" id="itemEa" placeholder="" value="" required="">			
-              </div>
               <div class="col-md-3 mb-3">
-                <label for="itemTotal">총가격</label>
-                <input type="text" class="form-control" id="itemTotal" placeholder="" value="" required="">
+                <label for="itemPrice">상품가격</label>
+                <div id="itemPrice">${cart.itemPrice}</div>              
               </div>
+              
+              <div class="col-md-1 mb-3 mt-4">
+                <div id="">*</div>
+              </div>
+              
+               <div class="col-md-3 mb-3">
+                <label for="itemEa" class="" for="itemEa">주문개수</label>
+                <div id="itemEa">${cart.itemEa}</div>
+              </div>
+              
+              <div class="col-md-1 mb-3 mt-4">
+                <div id="">=</div>
+              </div>
+              
+              <div class="col-md-4 mb-3">
+                <label for="itemTotal">총가격</label>
+	                <div id="itemTotal"></div>
+              </div>	
              </div>
              
               <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="sellerId">판매자아이디</label>
-                <input type="text" class="form-control" id="sellerId" placeholder="" value="" required="">
+                <input type="text" class="form-control" id="sellerId" placeholder="" value="${cart.sellerId}" required="" disabled>
               </div>
-              <div class="col-md-6 mb-3">
+              <div class="col-md-4 mb-3">
+                <label for="itemMethod">선호결제</label>
+                <div id="itemMethod">${cart.itemMethod}</div>
+              </div>
+              <div class="col-md-4 mb-3">
                 <label for="itemMethod">구매가능여부</label>
-                <input type="text" class="form-control" id="itemMethod" placeholder="" value="" required="">
+                <div class="text-success" id="itemOrderdetail">${cart.itemOrderdetail}</div>
               </div>
              </div> 
             
@@ -126,7 +158,7 @@
                 <label class="custom-control-label" for="paypal">???</label>
               </div>
             </div>
-            <div class="row">
+           <!--  <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="cc-name">Name on card</label>
                 <input type="text" class="form-control" id="cc-name" placeholder="" required="">
@@ -158,7 +190,7 @@
                   Security code required
                 </div>
               </div>
-            </div>
+            </div> -->
             <hr class="mb-4">
             <button class="btn btn-lg btn-block" style="background-color: #f9bf3b; color: white;" type="submit">주문하기!!</button>
           </form>

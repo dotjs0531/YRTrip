@@ -94,10 +94,11 @@ public class ProductVO extends LikeVO{
 	public void setItemPic(String itemPic) {
 		this.itemPic = itemPic;
 	}
-	public MultipartFile[] getProductImgFile() {
+	
+	public MultipartFile[] getProductPicFile() {
 		return productPicFile;
 	}
-	public void setProductImgFile(MultipartFile[] productPicFile) {
+	public void setProductPicFile(MultipartFile[] productPicFile) {
 		this.productPicFile = productPicFile;
 	}
 	public String getItemDate() {
