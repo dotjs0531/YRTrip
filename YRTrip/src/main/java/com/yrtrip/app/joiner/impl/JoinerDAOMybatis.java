@@ -23,6 +23,11 @@ public class JoinerDAOMybatis {
    public void deleteJoiner(JoinerVO vo) {
       mybatis.delete("joiner.deleteJoiner", vo.getJoinerId());
    }
+   
+   // 수락 하기
+   public void updateJoiner(JoinerVO vo) {
+	   mybatis.update("joiner.updateJoiner", vo);
+   }
 
    // 전체조회
    public List<JoinerVO> getJoinerList(JoinerVO vo) {
@@ -32,12 +37,6 @@ public class JoinerDAOMybatis {
    public JoinerVO getJoiner(JoinerVO vo) {
       return mybatis.selectOne("joiner.getJoiner", vo);
    }
-
-   public int getJoinerId(int prtId) {
-	      return mybatis.selectOne("joiner.getJoinerId");
-	   }
-   
-   
    
    
 }

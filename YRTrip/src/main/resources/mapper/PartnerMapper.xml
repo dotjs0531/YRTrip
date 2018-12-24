@@ -110,6 +110,10 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 						PARTNER_CONDITION = #{partnerCondition}
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
+<update id="closePartner" parameterType="partner">
+	UPDATE PARTNERT SET PARTNER_CONDITION = #{partnerCondition}
+				WHERE	PARTNER_ID = #{partnerId}
+</update>
 <delete id="deletePartner" parameterType="int">
 	DELETE	FROM PARTNERT
 			WHERE PARTNER_ID = #{partnerId}

@@ -26,6 +26,12 @@ public class PartnerBoardDAOMybatis {
 		mybatis.update("partner.updatePartner", vo);	
 	}
 	
+	//마감 처리
+		public void closePartner(PartnerVO vo) {
+		System.out.println("mybatis 동행게시판 마감 처리");
+		mybatis.update("partner.closePartner", vo);
+	}
+		
 	//삭제
 	public void deletePartner(PartnerVO vo) {
 		System.out.println("mybatis 동행게시판 삭제 기능 처리");
@@ -48,7 +54,6 @@ public class PartnerBoardDAOMybatis {
 		System.out.println("mybatis 동행게시판 단건조회 기능 처리");
 		return mybatis.selectOne("partner.getPartner", vo);
 	}
-	
 	// 페이징 처리 건수 조회
 	public int getCount(PartnerVO vo) {
 		return mybatis.selectOne("partner.getCount", vo);

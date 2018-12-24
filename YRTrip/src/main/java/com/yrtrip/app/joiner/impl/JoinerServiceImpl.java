@@ -24,19 +24,17 @@ public class JoinerServiceImpl implements JoinerService {
    }
    
    @Override
+   public void updateJoiner(JoinerVO vo) {
+	   dao.updateJoiner(vo);
+   }
+   
+   @Override
    public List<JoinerVO> getJoinerList(JoinerVO vo) {
       return dao.getJoinerList(vo);
    }
    @Override
    public JoinerVO getJoiner(JoinerVO vo) {
       return dao.getJoiner(vo);
-   }
-
-   @Override
-   public int getJoinerId(int prtId) {
-      return dao.getJoinerId(prtId);
-   }
-
-   
+   }   
    
 }

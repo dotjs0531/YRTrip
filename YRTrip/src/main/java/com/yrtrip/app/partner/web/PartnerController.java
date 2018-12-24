@@ -70,6 +70,13 @@ public class PartnerController {
 		model.addAttribute("partner", partnerService.getPartner(vo));
 		return "partner/updatePartner";
 	}
+	// 마감처리
+	@RequestMapping("/closePartner")
+	public String closePartner(PartnerVO vo) {
+		System.out.println("마감 처리");
+		partnerService.closePartner(vo);
+		return "redirect:getPartnerList";
+	}
 
 	// 수정처리
 	@RequestMapping("updatePartner")

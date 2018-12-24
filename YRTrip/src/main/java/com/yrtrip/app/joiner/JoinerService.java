@@ -6,7 +6,7 @@ public interface JoinerService {
 
 	public void insertJoiner(JoinerVO vo);
 	public void deleteJoiner(JoinerVO vo);
+	public void updateJoiner(JoinerVO vo);
 	public List<JoinerVO> getJoinerList(JoinerVO vo);
 	public JoinerVO getJoiner(JoinerVO vo);
-	public int getJoinerId(int prtId);
 }

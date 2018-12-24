@@ -27,6 +27,10 @@ public class PartnerServiceImpl implements PartnerService {
 	public void deletePartner(PartnerVO vo) {
 		dao.deletePartner(vo);
 	}
+	@Override
+	public void closePartner(PartnerVO vo) {
+		dao.closePartner(vo);
+	}
 
 	@Override
 	public void deletePartnerList(PartnerVO vo) {

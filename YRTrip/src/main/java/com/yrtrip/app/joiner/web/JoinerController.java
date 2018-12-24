@@ -45,6 +45,13 @@ public class JoinerController {
       return vo;
    }
 
+   // 수락 처리
+   @RequestMapping("change1Joiner")
+   @ResponseBody
+   public JoinerVO change1joiner(JoinerVO vo) {
+	   joinerService.updateJoiner(vo);
+	   return vo;
+   }
    @RequestMapping(value = { "/ajax/getJoinerList" }, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
    public String getajaxjoinerList(Model model, JoinerVO vo, HttpServletRequest request) {
 

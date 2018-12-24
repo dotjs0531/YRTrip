@@ -14,14 +14,36 @@
 		div.addClass('joiner');
 		div.joiner = joiner; //{id:1,.... }
 		
+		var userId =  '${sessionScope.login.userId}';
+		console.log(userId);
+		var partnerId = '${partner.userId}';
+		
+		if(userId == joiner.userId){
 		var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
 				+ "</strong>   " + "<span class='joinerDate'>신청일 : "
-				+ joiner.joinerDate + "</span>    "
-				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"
+				+ joiner.joinerDate + "</span>"
+				+ "<button type=\"button\" class=\"btnDel\">신청취소</button>"			
+		}else if(userId == partnerId){
+			if(joiner.joinerCondition = 'N'){
+				var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
+				+ "</strong>   " + "<span class='joinerDate'>신청일 : "
+				+ joiner.joinerDate + "</span>"
+				+  "<button type=\"button\" class=\"btnChange\">수락 하기</button>"
+			}else{
+				var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
+				+ "</strong>   " + "<span class='joinerDate'>신청일 : "
+				+ joiner.joinerDate + "</span>"
+				+  "<button type=\"button\" class=\"btnChange\">수락 취소</button>"
+			}
+		}else{
+			var str = "<strong class='joinerName'>동행 신청자 : " + joiner.userId
+			+ "</strong>   " + "<span class='joinerDate'>신청일 : "
+			+ joiner.joinerDate + "</span>"
+		}
 		div.html(str);
 		return div;
 	}
-
+	
 	$(function() {
 		//동행 신청 목록 조회	
 		loadJoinerList();
@@ -39,24 +61,44 @@
 		
 		//동행 신청 등록처리
 		$("#btnAdd").click(function() {
+			var partnerId = '${partner.userId}';
+			var userId =  '${sessionScope.login.userId}';
+			if(userId==partnerId ){
+				alert("글쓴이는 동행 신청을 할 수 없습니다.")
+			} else{
 			var params = $("#addForm").serialize();
 			$.getJSON("insertJoiner", params, function(datas) {
 				var div = JoinerView(datas);
 				$(div).prependTo("#joinerList");
 			});
+		}
+			
+			
 		}); //end btnAdd clcic event
 		
 		//동행 신청 취소처리
 		$("#joinerList").on("click", ".btnDel", function() {
 			var joinerId = $(this).parent().attr("id").substr(1);
-			if (confirm("삭제할까요?")) {
-				var params = "joinerId=" + joinerId; // { seq : seq };
+			if (confirm("신청취소?")) {
+				var params = "joinerId=" + joinerId; 
 				var url = "deleteJoiner";
 				$.getJSON(url, params, function(datas) {
 					$('#c' + datas.joinerId).remove();
 				});
 			}
 		});
+		
+		$("joinerList").on("click", ".btnChange", function(){
+			if($(this).attr('data-click-state') == 1) {
+				$(this).attr('data-click-state', 0)
+				$(this).css('background-color', 'red')
+			} else {
+				$(this).attr('data-click-state', 1)
+				$(this).css('background-color', 'orange')
+			}
+		});
+		
+		
 	}); //$() end ready event
 
 	function del(partnerid) {
@@ -118,35 +160,30 @@
 								<tr>
 									<td colspan="10" style="min-height:200px;">${partner.partnerContent}</td>
 								</tr>
-								<c:if test="${sessionScope.login.userId eq partner.userId}">
-									<div class="order-buton" style="float: right">
-										<a href="./updatePartnerForm?partnerId=${partner.partnerId}">수정</a>&nbsp;&nbsp;
-										<button class="submit-btn" onclick="del('${partner.partnerId}')">삭제</button>
-										<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
-									</div>
-								</c:if>
 							</tbody>
 						</table>
 					</div>
-					<div class="about_car" id="joinerList" style="min-height:100px;">
+					<c:if test="${sessionScope.login.userId eq partner.userId}">
+							<div class="order-buton" style="float: right">
+								<a href="./closePartner?partnerId=${partner.partnerId}">완료하기</a>
+								<a href="./updatePartnerForm?partnerId=${partner.partnerId}">수정</a>
+								<button class="submit-btn" onclick="del('${partner.partnerId}')">삭제</button>
+								<a href="${pageContext.request.contextPath}/getPartnerList">뒤로가기</a>
+							</div>
+					</c:if>
 						<hr/><br/>
 						<!-- 동행 신청  -->
 						<h5>동행 신청 리스트</h5><br/>
-						<div id="joinerList">
-						
-						
-						
-						
-						
-						
-						</div>
+						<div class="about_car" id="joinerList" style="min-height:100px;">
 						<div id="joinerAdd" class="order-buton" style="float: right">
 							<form name="addForm" id="addForm">
+								<c:if test="${sessionScope.login.userId != partner.userId}">
 									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<input type="hidden" name="partnerId" value="${partner.partnerId}">
 									<input type="hidden" id="joinerCondition" name="joinerCondition" value="참여">
 									<br />
-									<button type="button" class="btn btn-default" id="btnAdd">등록</button>
+									<button type="button" class="btn btn-default" id="btnAdd">신청</button>
+								</c:if>
 							</form>
 						</div>
 						<br/>
