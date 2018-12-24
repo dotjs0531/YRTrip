@@ -199,6 +199,7 @@ jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
 		});
+	   /* 장소추가 list Ajax */
 	   $("#insertBTN").click(function(){
 		   var param = $("#placeAjaxData").serialize();
 	    	$.ajax({
@@ -207,18 +208,26 @@ jQuery( document ).ready(function( $ ) {
 	    		type: "post",
 	    		dataType: "JSON",
 	    		data: param,
-	    		success: function(data){
-	    			console.log(data);
-	    			
-	    		}
-	    		
-	    	})
-		});
-	   
-
+	    		success: insertTravelPlaceListResult
+	    		});
+	    	});
+	    	
 });
-
-
+	   
+   function insertTravelPlaceListResult(data) {
+		console.log(data);
+		$("tbody").empty();
+		$.each(data,function(idx,item){
+			$('<tr>')
+			.append($('<td>').html(item.seq))
+			.append($('<td>').html(item.title))
+			.append($('<td>').html(item.writer))
+			.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
+			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
+			.append($('<input type=\'hidden\' id=\'hidden_seq\'>').val(item.seq))
+			.appendTo('tbody');
+		});//each
+	}//boardListResult	   
 </script>
 </head>
 <body>
