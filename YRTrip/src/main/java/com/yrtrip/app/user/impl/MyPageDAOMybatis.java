@@ -39,6 +39,9 @@ public class MyPageDAOMybatis {
 	public List<JoinerVO> getMyJoinerList(JoinerVO vo)  {
 		return mybatis.selectList("user.getMyJoinerList", vo);
 	}
+	public void cancleMyJoinerList(JoinerVO vo) {
+		mybatis.update("user.cancleMyJoinerList", vo);
+	}
 
 	//좋아요
 	public int getMyLikedCount(LikeVO vo) {

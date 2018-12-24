@@ -19,6 +19,7 @@ public interface MyPageService {
 	//동행
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo);
 	public List<JoinerVO> getMyJoinerList(JoinerVO vo);
+	public void cancleMyJoinerList(JoinerVO vo);
 	
 	//좋아요
 	public int getMyLikedCount(LikeVO vo);

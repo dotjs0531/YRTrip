@@ -11,6 +11,9 @@ public class JoinerVO {
 	private String partnerId;	// 참조키
 	private String joinerCondition;
 	private Integer	pageUnit;
+
+	//선택삭제
+	private String[] joinerNoList;
 	
 	public Integer getJoinerId() {
 		return joinerId;
@@ -47,6 +50,13 @@ public class JoinerVO {
 	}
 	public void setPageUnit(Integer pageUnit) {
 		this.pageUnit = pageUnit;
+	}
+	
+	public String[] getJoinerNoList() {
+		return joinerNoList;
+	}
+	public void setJoinerNoList(String[] joinerNoList) {
+		this.joinerNoList = joinerNoList;
 	}
 	
 	@Override

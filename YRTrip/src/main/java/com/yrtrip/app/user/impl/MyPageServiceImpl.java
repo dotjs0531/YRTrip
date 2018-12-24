@@ -38,6 +38,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<JoinerVO> getMyJoinerList(JoinerVO vo) {
 		return dao.getMyJoinerList(vo);
 	}
+	public void cancleMyJoinerList(JoinerVO vo) {
+		dao.cancleMyJoinerList(vo);
+	}
 
 	//좋아요
 	public int getMyLikedCount(LikeVO vo) {

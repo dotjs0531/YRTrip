@@ -60,6 +60,19 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			AND P.USER_ID = #{userId}
    ORDER BY JOINER_DATE DESC
 </select>
+<update id="cancleMyJoinerList" parameterType="joiner">
+	UPDATE JOINERT SET JOINER_CONDITION = 'N'
+	<if test="joinerNoList != null and joinerNoList.length > 0">
+		WHERE USER_ID in
+	<foreach collection="joinerNoList" item="item"
+			open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="joinerNoList == null or not joinerNoList.length > 0">
+		WHERE USER_ID = -1
+	</if>
+</update>
 
 <!-- 좋아요 페이지 -->
 <select id="getMyLikedCount" parameterType="like" resultType="int">

@@ -175,7 +175,6 @@ $(function() {
 					</c:forEach>
 					</c:forEach><br/>
 					
-					
                     <!-- 페이지 번호 -->
 					<c:if test="${not empty MyReviewList}">
                     <div>

@@ -67,10 +67,20 @@ public class MyPageController {
 	
 	//동행 페이지
 	@RequestMapping("/getMyPartnerList")
-	public String getMyPartnerList(Model model, PartnerVO pvo, JoinerVO jvo) {
-		model.addAttribute("MyPartnerList", mypageService.getMyPartnerList(pvo));
-		model.addAttribute("MyJoinerList", mypageService.getMyJoinerList(jvo));
-		return "mypage/getMyPartnerList";
+	public ModelAndView getMyPartnerList(PartnerVO pvo, JoinerVO jvo, HttpSession session) {
+		pvo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+
+		ModelAndView mv = new ModelAndView();
+		
+		mv.addObject("MyPartnerList", mypageService.getMyPartnerList(pvo));
+		mv.addObject("MyJoinerList", mypageService.getMyJoinerList(jvo));
+		mv.setViewName("mypage/getMyPartnerList");
+		return mv;
+	}
+	@RequestMapping("/cancleMyJoinerList") //동행자 수락취소
+	public String cancleMyJoinerList(JoinerVO vo) {
+		mypageService.cancleMyJoinerList(vo);
+		return "redirect:getMyPartnerList";
 	}
 	
 	//좋아요 페이지
@@ -142,11 +152,6 @@ public class MyPageController {
 		mv.addObject("MyLikedProductList", mypageService.getMyLikedProductList(vo));
 		mv.setViewName("mypage/getMyLikedProductList");
 		return mv;
-	}
-	@RequestMapping("/deleteMyLiked") //좋아요 삭제
-	public String deleteMyLiked(LikeVO vo) {
-		mypageService.deleteMyLiked(vo);
-		return "redirect:getMyLikedTravelList";
 	}
 	
 	//상품 페이지

@@ -166,53 +166,64 @@ body {
 					<c:forEach items="${MyPartnerList}" var="partner">
 						<c:if test="${partner.partnerCondition eq '미완료'}">
             				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
-								<h5 class="control-label"><strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</h5><br/>
-								<c:forEach items="${MyJoinerList}" var="joiner">
-									<c:if test="${joiner.partnerId eq partner.partnerId}">
-									<c:if test="${joiner.joinerCondition eq 'Y'}">
-									<div class="checkboxes" style="padding-bottom:10px;">
-										<input type="checkbox" class="cbx" id="${joiner}" name="userId" value="${joiner.userId}" style="display: none;" class="form-control">
-										<label for="${joiner}" class="check">
-											<svg width="18px" height="18px" viewBox="0 0 18 18">
-												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-												<polyline points="1 9 7 14 15 4"></polyline>
-											</svg>&nbsp;${joiner.userId}
-										</label>
-									</div>
+								<h5 class="control-label"><a href="getPartner?partnerId=${partner.partnerId}" style="color:black; text-decoration:none !important">
+									<strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</a></h5><br/>
+								
+								<!-- 선택 수락취소 -->
+								<form action="cancleMyJoinerList">
+									<c:forEach items="${MyJoinerList}" var="joiner">
+										<c:if test="${joiner.partnerId eq partner.partnerId}">
+										<c:if test="${joiner.joinerCondition eq 'Y'}">
+										<div class="checkboxes" style="padding-bottom:10px;">
+											<input type="checkbox" class="cbx" id="${joiner.userId}" name="joinerNoList" value="${joiner.userId}" style="display: none;" class="form-control">
+											<label for="${joiner.userId}" class="check">
+												<svg width="18px" height="18px" viewBox="0 0 18 18">
+													<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+													<polyline points="1 9 7 14 15 4"></polyline>
+												</svg>&nbsp;${joiner.userId}
+											</label>
+										</div>
+										</c:if>
+										</c:if>
+									</c:forEach><br/>
+									<c:if test="${not empty MyJoinerList}">
+										<button type="button" class="btn btn-default" style="float:right;">취소</button>
 									</c:if>
-									</c:if>
-								</c:forEach><br/>
-								<c:if test="${not empty MyJoinerList}">
-									<button type="button" class="btn btn-default" style="float:right;">취소</button>
-								</c:if>
 								<p style="clear:both"/>
+								</form>
 							</div>
 						</c:if>
 					</c:forEach><br/>
                     
             		<h4 style="font-family: 'NanumSquareRoundR'"><strong>완료 동행 구하기</strong></h4><br/>
 					<c:forEach items="${MyPartnerList}" var="partner">
-						<c:if test="${partner.partnerCondition eq '완료'}"><hr/>
+						<c:if test="${partner.partnerCondition eq '완료'}">
             				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
-								<h5 class="control-label"><strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</h5><br/>
-								<c:forEach items="${MyJoinerList}" var="joiner">
-									<c:if test="${joiner.partnerId eq partner.partnerId}">
-									<c:if test="${joiner.joinerCondition eq 'Y'}">
-									<div class="checkboxes">
-										<input type="checkbox" class="form-control cbx" id="${joiner}" name="userId" value="${joiner.userId}" style="display: none;">
-										<label for="${joiner}" class="check">
-											<svg width="18px" height="18px" viewBox="0 0 18 18">
-												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-												<polyline points="1 9 7 14 15 4"></polyline>
-											</svg>&nbsp;${joiner.userId}
-										</label>
-									</div><br/>
+								<h5 class="control-label"><a href="getPartner?partnerId=${partner.partnerId}" style="color:black; text-decoration:none !important">
+									<strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</a></h5><br/>
+								
+								<!-- 선택 수락취소 -->
+								<form action="./cancleMyJoinerList">
+									<c:forEach items="${MyJoinerList}" var="joiner">
+										<c:if test="${joiner.partnerId eq partner.partnerId}">
+										<c:if test="${joiner.joinerCondition eq 'Y'}">
+										<div class="checkboxes" style="padding-bottom:10px;">
+											<input type="checkbox" class="cbx" id="${joiner.userId}" name="joinerNoList" value="${joiner.userId}" style="display: none;" class="form-control">
+											<label for="${joiner.userId}" class="check">
+												<svg width="18px" height="18px" viewBox="0 0 18 18">
+													<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+													<polyline points="1 9 7 14 15 4"></polyline>
+												</svg>&nbsp;${joiner.userId}
+											</label>
+										</div>
+										</c:if>
+										</c:if>
+									</c:forEach><br/>
+									<c:if test="${not empty MyJoinerList}">
+										<button type="submit" class="btn btn-default" style="float:right;">취소</button>
 									</c:if>
-									</c:if>
-								</c:forEach><br/>
-								<c:if test="${not empty MyJoinerList}">
-									<button type="button" class="btn btn-default" style="float:right;">취소</button>
-								</c:if>
+								<p style="clear:both"/>
+								</form>
 							</div>
 						</c:if>
 					</c:forEach>
