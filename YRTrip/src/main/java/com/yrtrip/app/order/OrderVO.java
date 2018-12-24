@@ -23,7 +23,7 @@ public class OrderVO extends ProductVO {
 	private String reviewContent;			//리뷰 내용
 	private String reviewDate;				//리뷰 등록일
 	private String reviewPic;				//리뷰 사진
-	private MultipartFile reviewPicFile;	//실제 이미지 파일
+	private MultipartFile[] reviewPicFile;	//실제 이미지 파일(다중파일 업로드)
 	
 	public String getOrderId() {
 		return orderId;
@@ -111,10 +111,10 @@ public class OrderVO extends ProductVO {
 	public void setReviewPic(String reviewPic) {
 		this.reviewPic = reviewPic;
 	}
-	public MultipartFile getReviewPicFile() {
+	public MultipartFile[] getReviewPicFile() {
 		return reviewPicFile;
 	}
-	public void setReviewPicFile(MultipartFile reviewPicFile) {
+	public void setReviewPicFile(MultipartFile[] reviewPicFile) {
 		this.reviewPicFile = reviewPicFile;
 	}
 	

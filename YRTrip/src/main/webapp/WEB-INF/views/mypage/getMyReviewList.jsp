@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
@@ -63,7 +64,7 @@
 	};
 </script>
 <script>
-jQuery( document ).ready(function( $ ) {
+/* jQuery( document ).ready(function( $ ) {
 	$("#fileInput").on('change', function(){  // 값이 변경되면
 		if(window.FileReader){  // modern browser
 			var filename = $(this)[0].files[0].name;
@@ -74,7 +75,7 @@ jQuery( document ).ready(function( $ ) {
 		// 추출한 파일명 삽입
 		$("#userfile").val(filename);
 	});
-});
+}); */
 $(function() {
 	$('#updateMyReviewForm').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
@@ -92,8 +93,6 @@ $(function() {
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
-			$("#userfile").val(reviewPic);
-			$("#fileInput").val(reviewPic);
 		});
 	});
 });
@@ -160,7 +159,10 @@ $(function() {
             			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 							<h5 class="control-label" style="font-family: 'NanumSquareRoundR'"><strong>${order.orderId}</strong> &nbsp;&nbsp; ${review.reviewDate}</h5><br/>
 							<input type="checkbox" class="cbx" id="${order}" name="userId" value="${order.orderId}" style="display: none;" class="form-control">
-							<a href="getProduct?itemId=${order.itemId}"><img id="img" src="./images/review/${review.reviewPic}" style="height:200px" /></a>
+							<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')}"/>
+							<c:forEach items="${reviewPicname}" var="pic">
+								<a href="getProduct?itemId=${order.itemId}"><img id="img" src="./images/review/${pic}" style="height:200px" /></a>
+							</c:forEach>
 							<!-- 별점 표시 부분 -->
 							<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
 								   value="${review.reviewStar}" style="" disabled>
@@ -210,13 +212,11 @@ $(function() {
 														<div class="form-group">
 															<!-- <img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" /> -->
 															<!-- 별점 등록 부분 -->
-															<input name="reviewStar" class="rating rating-loading reviewStar" data-min="0" data-max="5" data-step="0.1" value="">
+															<input name="reviewStar" class="rating rating-loading reviewStar" data-min="0" data-max="5" data-step="0.1" >
 															<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px"></textarea>
 															
-															<!-- 다중 파일 첨부 -->
-															<!-- <input multiple="multiple"  type="file" name="filename[]" /> -->
 															<!-- 사진 등록 부분 -->
-								 							<input type="file" name="reviewPicFile" id="fileInput" data-class-button="btn btn-default"
+								 							<!-- <input type="file" name="reviewPicFile" id="fileInput" data-class-button="btn btn-default"
 																	data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control"
 																	tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
 															<div class="bootstrap-filestyle input-group">
@@ -226,13 +226,13 @@ $(function() {
 																		<span class="glyphicon fa fa-upload"></span>
 																	</label>
 																</span>
-															</div>
+															</div> -->
 															
 															<!-- 다중파일 업로드 -->
 															<div class="container my-4" style="width:100%; padding:0">
 																<div class="form-group">
 															    	<div class="file-loading">
-															        	<input id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
+															        	<input multiple="multiple" id="file-5" class="file" type="file" name="reviewPicFile" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
 															        </div>
 															    </div>
 															</div>
