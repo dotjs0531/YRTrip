@@ -33,7 +33,7 @@
 	}
 </script>
 <script>
-	
+	/* 자기혼자 빨간줄이었다 오류있는지 확인 */
 	$(function() {
 		$('#product_view').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
@@ -49,7 +49,8 @@
 				$("#modal-title").html(itemName);
 				$("#popup_itemId").html(itemId);
 				$("#popup_itemContent").html(itemContent);
-			})		
+			})
+		}
 	});
 </script>
 
@@ -146,7 +147,7 @@
 										<div class="caption">
 
 											<h4 class="pull-right">￦${product.itemPrice}</h4>
-											<h4>
+											<h4 class="text-truncate">
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
 

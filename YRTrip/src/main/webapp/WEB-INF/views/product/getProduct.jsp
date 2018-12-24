@@ -56,12 +56,18 @@
 	};
 	/* 좋아요 */
 	$(function(){
+		/* 캐러셀 div class 계속 변경 시키는 스크립트 */
 		var carousel_class_init = "active";	
 		var carousel_ea = $("div#itemC").length;
 		console.log(carousel_ea);
 		for(i=0; i<1; i++){
 			$("#itemC").addClass(carousel_class_init);
 		}	
+
+		if($("#itemOrderdetail_class").text() == '구매불가'){
+			$("#itemOrderdetail_class").removeClass("text-success").addClass("text-danger")
+		}
+				
 		
 		function likeCondition() {
 			var params = {
@@ -214,12 +220,12 @@
 											<small>몇개팔렸을까여?</small> <small class="pull-right">작성일</small>
 										</p>
 										<div class="row">
-											<h1 class="col-md-9 product-title display-1 mb-2">${product.itemName}</h1>
-											<h3 class="col-md-3 product-price display-3">￦${product.itemPrice}</h3>
+											<h1 class="col-md-8 product-title display-1">${product.itemName}</h1>
+											<h1 class="col-md-4 product-price display-1">￦${product.itemPrice}</h1>
 										</div>
 										<p class="mb-0">
-											<i class="fa fa-truck"></i>${product.itemCondition} <small
-												class="pull-right text-success">${product.itemOrderdetail}</small>
+											<i class="fa fa-truck"></i>${product.itemCondition}
+											<small id="itemOrderdetail_class" class="pull-right text-success">${product.itemOrderdetail}</small>
 										</p>
 										<div class="text-muted mb-2">
 											<small>약간의 사용감이 있습니다!</small>
