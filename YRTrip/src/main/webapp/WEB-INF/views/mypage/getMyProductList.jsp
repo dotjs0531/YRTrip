@@ -279,7 +279,8 @@ body {
 												<c:if test="${product.itemOrderdetail eq '구매불가'}">판매완료</c:if>
 											</div>
 											<h4 class="pull-right">￦${product.itemPrice}</h4>
-											<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black">${product.itemName}</a></h1>
+											<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; 
+												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:140px">${product.itemName}</a></h1>
 											<h2 class="sub_title">${product.itemCategory}</h2>
 											<p class="description">${product.itemContent}</p>
 											<div class="post-meta">

@@ -115,7 +115,8 @@
 									<!-- Post Content-->
 									<div class="post-content">
 										<div class="category">Photos</div>
-										<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black">${travel.travelTitle}</a></h1>
+										<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; 
+											text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:140px">${travel.travelTitle}</a></h1>
 										<h2 class="sub_title">${travel.travelDate}</h2>
 										<p class="description">${travel.travelContent}</p>
 										<div class="post-meta">

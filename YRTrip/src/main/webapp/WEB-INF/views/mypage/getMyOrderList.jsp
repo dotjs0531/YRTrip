@@ -274,7 +274,8 @@ $(function() {
 										<div class="post-content">
 											<div class="category">${order.orderDelivery}</div>
 											<h4 class="pull-right">${order.itemMethod}</h4>
-											<h1 class="title"><a href="getProduct?itemId=${order.itemId}" style="color:black">${order.itemName}</a></h1>
+											<h1 class="title"><a href="getProduct?itemId=${order.itemId}" style="color:black; display: inline-block; 
+												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:130px">${order.itemName}</a></h1>
 											<h2 class="sub_title">${order.orderCondition}</h2>
 											<p class="description" align="center">
 												<button type="button" class="btn btn-default">
