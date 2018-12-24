@@ -64,18 +64,6 @@
 	};
 </script>
 <script>
-/* jQuery( document ).ready(function( $ ) {
-	$("#fileInput").on('change', function(){  // 값이 변경되면
-		if(window.FileReader){  // modern browser
-			var filename = $(this)[0].files[0].name;
-		} else {  // old IE
-			var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
-		}
-
-		// 추출한 파일명 삽입
-		$("#userfile").val(filename);
-	});
-}); */
 $(function() {
 	$('#updateMyReviewForm').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
@@ -88,11 +76,16 @@ $(function() {
 			var reviewStar = data.reviewStar;
 			var reviewContent = data.reviewContent;
 			var reviewPic = data.reviewPic;
+			//var picName = reviewPic.split(',');
 			
 			$("#reviewId").val(orderId);
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
+			/* for (var i in picName) {
+				$(".file-caption-info").html(picName[i]);
+				$(".file-caption-info").html(picName[i]);
+			} */
 		});
 	});
 });
@@ -215,24 +208,11 @@ $(function() {
 															<input name="reviewStar" class="rating rating-loading reviewStar" data-min="0" data-max="5" data-step="0.1" >
 															<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px"></textarea>
 															
-															<!-- 사진 등록 부분 -->
-								 							<!-- <input type="file" name="reviewPicFile" id="fileInput" data-class-button="btn btn-default"
-																	data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control"
-																	tabindex="-1" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
-															<div class="bootstrap-filestyle input-group">
-																<input type="text" id="userfile" class="form-control" name="userfile" disabled="">
-																<span class="group-span-filestyle input-group-btn" tabindex="0">
-																	<label for="fileInput" class="btn btn-default ">
-																		<span class="glyphicon fa fa-upload"></span>
-																	</label>
-																</span>
-															</div> -->
-															
 															<!-- 다중파일 업로드 -->
 															<div class="container my-4" style="width:100%; padding:0">
 																<div class="form-group">
 															    	<div class="file-loading">
-															        	<input multiple="multiple" id="file-5" class="file" type="file" name="reviewPicFile" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
+															        	<input multiple="multiple" name="reviewPicFile" id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
 															        </div>
 															    </div>
 															</div>

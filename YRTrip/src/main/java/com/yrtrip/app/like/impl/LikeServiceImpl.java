@@ -29,4 +29,14 @@ public class LikeServiceImpl implements LikeService {
 		return dao.getLikeList(vo);
 	}
 
+	public void updateTLikeCnt(LikeVO vo) {
+		dao.updateTLikeCnt(vo);
+	}
+	public void updatePLikeCnt(LikeVO vo) {
+		dao.updatePLikeCnt(vo);
+	}
+	public void updateILikeCnt(LikeVO vo) {
+		dao.updateILikeCnt(vo);
+	}
+
 }

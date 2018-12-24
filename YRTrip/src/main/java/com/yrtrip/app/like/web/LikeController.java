@@ -40,6 +40,15 @@ public class LikeController {
 		String url = referer.substring(referer.indexOf(context)+context.length()+1);
 		
 		likeService.insertLike(vo);
+		
+		if (vo.getLikeCategory().equals("T")) {
+			likeService.updateTLikeCnt(vo);
+		} else if (vo.getLikeCategory().equals("P")) {
+			likeService.updatePLikeCnt(vo);
+		} else if (vo.getLikeCategory().equals("I")) {
+			likeService.updateILikeCnt(vo);
+		}
+		
 		return "redirect:"+url;
 	}
 	

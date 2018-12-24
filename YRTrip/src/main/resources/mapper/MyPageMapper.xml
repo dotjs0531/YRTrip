@@ -67,35 +67,75 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM LIKET
 	 WHERE USER_ID = #{userId}
 </select>
-<select id="getMyLikedTravelList" parameterType="like" resultType="like">
+<select id="getMyLikedTravelList" parameterType="travelBoard" resultType="travelBoard">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  LIKE_NO,
 			LIKE_CATEGORY,
 			LIKE_BOARDID,
-			USER_ID
-	  FROM  LIKET
-	 WHERE  USER_ID = #{userId}
-			AND LIKE_CATEGORY = 'N'		<!-- 나중에 T로 바꾸기 -->
+			L.USER_ID,
+			TRAVEL_NO,
+			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
+			TRAVEL_PIC,
+			TO_CHAR(TRAVEL_DATE,'YYYY/MM/DD') TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE
+	  FROM  LIKET L, TRAVELBOARDT T
+	 WHERE  L.USER_ID = #{userId}
+			AND L.LIKE_CATEGORY = 'T'
+			AND L.LIKE_BOARDID = T.TRAVEL_NO
    ORDER BY LIKE_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
-<select id="getMyLikedPlaceList" parameterType="like" resultType="like">
+<select id="getMyLikedPlaceList" parameterType="travelPlace" resultType="travelPlace">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  LIKE_NO,
 			LIKE_CATEGORY,
 			LIKE_BOARDID,
-			USER_ID
-	  FROM  LIKET
-	 WHERE  USER_ID = #{userId}
-			AND LIKE_CATEGORY = 'P'
+			L.USER_ID,
+			PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			PLACE_TITLE,
+			PLACE_VISITDATE
+	  FROM  LIKET L, TRAVEL_PLACET P
+	 WHERE  L.USER_ID = #{userId}
+			AND L.LIKE_CATEGORY = 'P'
+			AND L.LIKE_BOARDID = P.PLACE_NO
    ORDER BY LIKE_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
-<select id="getMyLikedProductList" parameterType="like" resultType="like">
+<select id="getMyLikedProductList" parameterType="product" resultType="product">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  LIKE_NO,
 			LIKE_CATEGORY,
 			LIKE_BOARDID,
-			USER_ID
-	  FROM  LIKET
-	 WHERE  USER_ID = #{userId}
+			L.USER_ID,
+			ITEM_ID,
+			ITEM_NAME,
+			ITEM_PRICE,
+			ITEM_EA,
+			ITEM_CONTENT,
+			ITEM_METHOD,
+			ITEM_CATEGORY,
+			SELLER_ID,
+			ITEM_ORDERDETAIL,
+			ITEM_STAR,
+			ITEM_PIC,
+			TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
+			ITEM_CONDITION,
+			ITEM_LIKE
+	  FROM  LIKET L, ITEMT I
+	 WHERE  L.USER_ID = #{userId}
 			AND LIKE_CATEGORY = 'I'
+			AND L.LIKE_BOARDID = I.ITEM_ID
    ORDER BY LIKE_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <delete id="deleteMyLiked" parameterType="int">
 	DELETE FROM LIKET

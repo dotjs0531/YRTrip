@@ -26,6 +26,7 @@ import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.travel.TravelPlaceVO;
 import com.yrtrip.app.user.MyPageService;
 import com.yrtrip.app.user.UserVO;
 
@@ -74,7 +75,7 @@ public class MyPageController {
 	
 	//좋아요 페이지
 	@RequestMapping(value = "/getMyLikedTravelList", method = RequestMethod.GET) //여행정보 좋아요
-	public ModelAndView getMyLikedTravelList(LikeVO vo, Paging paging, HttpSession session) {
+	public ModelAndView getMyLikedTravelList(TravelBoardVO vo, Paging paging, HttpSession session) {
 		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 
 		ModelAndView mv = new ModelAndView();
@@ -87,7 +88,7 @@ public class MyPageController {
 		
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
-		vo.setLikeCategory("N");
+		vo.setLikeCategory("T");
 
 		paging.setTotalRecord(mypageService.getMyLikedCount(vo));
 		
@@ -97,7 +98,7 @@ public class MyPageController {
 		return mv;
 	}
 	@RequestMapping(value = "/getMyLikedPlaceList", method = RequestMethod.GET) //여행지 좋아요
-	public ModelAndView getMyLikedPlaceList(LikeVO vo, Paging paging, HttpSession session) {
+	public ModelAndView getMyLikedPlaceList(TravelPlaceVO vo, Paging paging, HttpSession session) {
 		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 
 		ModelAndView mv = new ModelAndView();
@@ -120,7 +121,7 @@ public class MyPageController {
 		return mv;
 	}
 	@RequestMapping(value = "/getMyLikedProductList", method = RequestMethod.GET) //상품 좋아요
-	public ModelAndView getMyLikedProductList(LikeVO vo, Paging paging, HttpSession session) {
+	public ModelAndView getMyLikedProductList(ProductVO vo, Paging paging, HttpSession session) {
 		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 
 		ModelAndView mv = new ModelAndView();
@@ -281,22 +282,36 @@ public class MyPageController {
 	public OrderVO getMyReview(OrderVO vo) {
 		return mypageService.getMyReview(vo);
 	}
-	/*@RequestMapping("updateMyReview") //리뷰 수정
-	public String updateMyReview(Model model, OrderVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+	@RequestMapping("updateMyReview") //리뷰 수정
+	public String updateMyReview(Model model, OrderVO vo, MultipartHttpServletRequest request, MultipartFile[] reviewPicFile) throws IllegalStateException, IOException {
 		model.addAttribute("MyReview", mypageService.getMyReview(vo));
-		
+
 		String path = request.getSession().getServletContext().getRealPath("/images/review");
-
-		MultipartFile reviewPicFile = vo.getReviewPicFile();
-		if (!reviewPicFile.isEmpty() && reviewPicFile.getSize() > 0) {
-			String filename = reviewPicFile.getOriginalFilename();
-			reviewPicFile.transferTo(new File(path, filename));
-
-			vo.setReviewPic(filename);
+		String fileOriginName = "";
+		String fileMultiName = "";
+		
+		for(int i=0;i<reviewPicFile.length; i++) {
+			fileOriginName = reviewPicFile[i].getOriginalFilename();
+			System.out.println("기존 파일명 : " + fileOriginName);
+			SimpleDateFormat formatter = new SimpleDateFormat("YYMMDD_"+i);
+			Calendar now = Calendar.getInstance();
+			
+			String extension = fileOriginName.split("\\.")[1];
+			
+			fileOriginName = formatter.format(now.getTime())+"."+extension;
+			System.out.println("변경된 파일명 : "+fileOriginName);
+			
+			File f = new File(path+"\\"+fileOriginName);
+			reviewPicFile[i].transferTo(f);
+			if(i==0) {fileMultiName += fileOriginName;}
+			else {fileMultiName += "," +fileOriginName;}
 		}
+		
+		vo.setReviewPic(fileMultiName);
+
 		mypageService.updateMyReview(vo);
 		return "redirect:getMyReviewList";
-	}*/
+	}
 	@RequestMapping("/deleteMyReview") //리뷰 삭제
 	public String deleteMyReview(OrderVO vo) {
 		mypageService.deleteMyReview(vo);

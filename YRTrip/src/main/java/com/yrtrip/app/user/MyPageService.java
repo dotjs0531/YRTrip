@@ -8,6 +8,7 @@ import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.travel.TravelPlaceVO;
 
 public interface MyPageService {
 	//여행
@@ -21,9 +22,9 @@ public interface MyPageService {
 	
 	//좋아요
 	public int getMyLikedCount(LikeVO vo);
-	public List<LikeVO> getMyLikedTravelList(LikeVO vo);
-	public List<LikeVO> getMyLikedPlaceList(LikeVO vo);
-	public List<LikeVO> getMyLikedProductList(LikeVO vo);
+	public List<TravelBoardVO> getMyLikedTravelList(TravelBoardVO vo);
+	public List<TravelPlaceVO> getMyLikedPlaceList(TravelPlaceVO vo);
+	public List<ProductVO> getMyLikedProductList(ProductVO vo);
 	public void deleteMyLiked(LikeVO vo);
 
 	//상품

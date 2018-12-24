@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.yrtrip.app.like.LikeVO;
+import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.travel.TravelPlaceVO;
 
 @Repository
 public class LikeDAOMybatis {
@@ -30,6 +33,17 @@ public class LikeDAOMybatis {
 	//전체조회
 	public List<LikeVO> getLikeList(LikeVO vo) {
 		return mybatis.selectList("like.getLikeList", vo);
+	}
+
+	//좋아요 개수 증가
+	public void updateTLikeCnt(LikeVO vo) {
+		mybatis.update("like.updateTLikeCnt", vo);
+	}
+	public void updatePLikeCnt(LikeVO vo) {
+		mybatis.update("like.updatePLikeCnt", vo);
+	}
+	public void updateILikeCnt(LikeVO vo) {
+		mybatis.update("like.updateILikeCnt", vo);
 	}
 
 }
