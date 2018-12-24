@@ -118,6 +118,80 @@
 	margin-top: 15px;
 }
 
+.dad {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+}
+
+.dad > .son-1 {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    -moz-transition: all 5s;
+    -webkit-transition: all 5s;
+    transition: all 5s;
+    -moz-transform: scale(1,1);
+    -webkit-transform: scale(1,1);
+    transform: scale(1,1);
+    background-image: url("https://bufiles.blob.core.windows.net/co3634/zooming_effect/zooming_bg_1.jpg");
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    z-index: -1;
+}
+
+.dad:hover > .son-1 {
+    -moz-transform: scale(2,2);
+    -webkit-transform: scale(2,2);
+    transform: scale(2,2);    
+}
+
+.son-text {
+    color: #fcfcfc;
+	font-size: 2em;
+	font-family: 'Josefin Slab', serif;
+	text-align: center;
+	width: 100%;
+	height: 300px;
+    -moz-transition: all 1s;
+    -webkit-transition: all 1s;
+    transition: all 1s;
+	padding-top: 5vh;
+}
+
+.son-text:hover {
+	background-color: #22313F;
+	opacity: 0.7;
+}
+
+.son-span {
+	background: #fcfcfc;
+	color: #22313F;
+	padding: 15px 45px;
+	font-family: 'Josefin Slab', serif;
+	font-style: italic;
+	opacity: 0.6;
+	border-radius: 30px;
+}
+.text-span {
+	background: #fcfcfc;
+	padding:5px;
+	color: #22313F;
+	font-family: 'Josefin Slab', serif;
+	opacity: 0.6;
+	display:inline;
+	font-size: 0.5em;
+}
+.top-span {
+	padding:5px;
+	color: #ffffff;
+	font-family: 'Josefin Slab', serif;
+	display:inline;
+	font-size: 0.6em;
+}
 </style>
 
 <script>

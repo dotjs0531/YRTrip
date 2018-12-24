@@ -174,7 +174,7 @@
 .son-span {
 	background: #fcfcfc;
 	color: #22313F;
-	padding: 15px 45px;
+	padding: 5px 45px;
 	font-family: 'Josefin Slab', serif;
 	font-style: italic;
 	opacity: 0.6;
@@ -231,79 +231,93 @@ jQuery( document ).ready(function( $ ) {
 			<div>
 				<div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive" style="min-height:450px;">
-<!-- 여행기 정보 -->				
-<div class="container dad">
-  <div class="son-1">
-  </div>
-  <span class="top-span">NO : T${travelBoard.travelNo}</span>
-<span class="top-span">작성일자 : ${fn:substring(travelBoard.travelDate, 0, 10)}</span>
-<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
-<span class="top-span" style="fontsize:10px!important;">작성자 : ${travelBoard.userId}</span>
-    <p class="son-text">
-    <span class="son-span">${travelBoard.travelTitle}</span>
-    <br/><br/>
+						
+						<!-- 여행기 정보 -->				
+						<div class="container dad">
+							<div class="son-1">
+							</div>
+							<span class="top-span">NO : T${travelBoard.travelNo}</span>
+							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
+							<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
+							
+							<p class="son-text">
+								<span class="son-span">${travelBoard.travelTitle}</span><br/><br/>
+								<span class="text-span">여행지 : ${travelBoard.tinfoId}</span>
+								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
+																	나홀로 여행
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'friend'}">
+																	친구와 함께
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'family'}">
+																	가족과 함께
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'couple'}">
+																	연인과 함께
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'group'}">
+																	단체여행
+																</c:if>
+																<c:if test="${travelBoard.travelWith == 'package'}">
+																	패키지여행
+																</c:if>
+								</span><br>
+								<span class="text-span">여행인원 : ${travelBoard.travelPerson+1}명</span>
+								<span class="text-span">여행경비 : ${travelBoard.travelPay}원</span>
+								<span class="text-span">여행일정 : ${travelBoard.travelSche}</span>
+								<span class="text-span">여행기간 : ${fn:substring(travelBoard.travelStart, 0, 10)} ~ ${fn:substring(travelBoard.travelEnd, 0, 10)}</span><br>
+							</p>
 
-<span class="text-span">여행지 : ${travelBoard.tinfoId}</span>
-<span class="text-span">여행테마 : 
-<c:if test="${travelBoard.travelWith == 'alone'}">
-나홀로 여행
-</c:if>
-<c:if test="${travelBoard.travelWith == 'friend'}">
-친구와 함께
-</c:if>
-<c:if test="${travelBoard.travelWith == 'family'}">
-가족과 함께
-</c:if>
-<c:if test="${travelBoard.travelWith == 'couple'}">
-연인과 함께
-</c:if>
-<c:if test="${travelBoard.travelWith == 'group'}">
-단체여행
-</c:if>
-<c:if test="${travelBoard.travelWith == 'package'}">
-패키지여행
-</c:if>
-</span>
-<span class="text-span">여행인원 : ${travelBoard.travelPerson+1}명</span><br>
-<span class="text-span">여행일정 : ${travelBoard.travelSche}</span>
-<span class="text-span">여행기간 : ${fn:substring(travelBoard.travelStart, 0, 10)} ~ ${fn:substring(travelBoard.travelEnd, 0, 10)}</span><br>
-<span class="text-span"><i class="fa fa-heart"></i> ${travelBoard.travelLike}</span>
-</p>
-</div>
-<!-- 장소 리스트 -->
-<div>
-<div class="timeline">
+						</div>
+						<!-- 장소 리스트 -->
+						<div>
+							<div class="timeline">
 								<div class="line text-muted"></div>
-								<c:forEach items="${travelPlaceList}" var="place">
-								<c:if test="${travelBoard.travelBoardNo == place.placeTravelBoardNo}">
-									<article class="panel panel-warning">
-
-										<div class="panel-heading icon">
-											<i class="glyphicon glyphicon glyphicon-map-marker"></i>
-										</div>
-
-										<div class="panel-heading">
-											<h2 class="panel-title">${place.travelPlaceTitle}</h2>
-										</div>
-
-										<div class="panel-body">
-											<img class="img-responsive img-rounded"
-												src="//placehold.it/350x150" />
-										</div>
-
-										<div class="panel-footer">
-											<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
-											<small>${place.travelPlaceLike}</small>
-										</div>
-									</article>
-									</c:if>
-								</c:forEach>
+								<article class="panel panel-warning">
+											<div class="panel-heading icon">
+												<i class="glyphicon glyphicon glyphicon glyphicon-user"></i>
+											</div>
+	
+											<div class="panel-heading">
+												<h2 class="panel-title">${travelBoard.userId}</h2>
+											</div>
+	
+											<div class="panel-body">
+												${travelBoard.travelContent}
+											</div>
+											
+											<div class="panel-footer">
+												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
+												<small>${travelBoard.travelLike}</small>
+											</div>
+								</article>
+									<c:forEach items="${travelPlace}" var="place">
+										<article class="panel panel-warning">
+	
+											<div class="panel-heading icon">
+												<i class="glyphicon glyphicon glyphicon-map-marker"></i>
+											</div>
+	
+											<div class="panel-heading">
+												<h2 class="panel-title">${place.placeTitle}</h2>
+											</div>
+	
+											<div class="panel-body">
+												<img class="img-responsive img-rounded"
+													src="//placehold.it/350x150" />
+											</div>
+	
+											<div class="panel-footer">
+												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
+												<small>${place.placeLike}</small>
+											</div>
+										</article>
+										</c:forEach>
 								</div>
-
-		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'">수정</button>
-		<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}'">삭제</button>
-		</div>
-			</div>	<!-- end of table-responsive -->
+								<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'">수정</button>
+								<button class="submit-btn" type="button" onclick="location.href='${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}'">삭제</button>
+							</div>
+						</div>	<!-- end of table-responsive -->
 				
 <!-- modal -->			
 <div class="modal fade" id="insertTravelBoard">

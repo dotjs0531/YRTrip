@@ -1,8 +1,9 @@
 package com.yrtrip.app.travel;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yrtrip.app.like.LikeVO;
 
-public class TravelBoardVO {
+public class TravelBoardVO  extends LikeVO {
 
 	private int travelNo;
 	private int travelPerson;

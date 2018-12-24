@@ -181,4 +181,21 @@
 	FROM TRAVELBOARDT 
 	WHERE TRAVEL_NO = #{travelNo}
 </select>
+<select id="getTravelPlaceList" parameterType="travelPlace" resultType="travelPlace">
+	SELECT PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			P.PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			P.USER_ID,
+			PLACE_TITLE,
+			PLACE_VISITDATE
+	FROM TRAVEL_PLACET P, TRAVELBOARDT B
+	WHERE P.PLACE_TRAVELBOARDNO = B.TRAVEL_NO
+ 		  AND B.TRAVEL_NO = #{travelNo}
+	ORDER BY PLACE_NO DESC
+</select>
 </mapper> 

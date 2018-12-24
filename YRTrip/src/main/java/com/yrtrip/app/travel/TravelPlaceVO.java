@@ -1,6 +1,8 @@
 package com.yrtrip.app.travel;
 
-public class TravelPlaceVO {
+import com.yrtrip.app.like.LikeVO;
+
+public class TravelPlaceVO extends LikeVO {
 
 	private int placeNo;
 	private String placeName;
@@ -13,6 +15,7 @@ public class TravelPlaceVO {
 	private String userId;
 	private String placeTitle;
 	private String placeVisitDate;
+	private String TravelNo;
 	
 	private String searchKeyword;
 	private String searchCondition;
@@ -115,6 +118,12 @@ public class TravelPlaceVO {
 	}
 	public void setLast(int last) {
 		this.last = last;
+	}
+	public String getTravelNo() {
+		return TravelNo;
+	}
+	public void setTravelNo(String travelNo) {
+		TravelNo = travelNo;
 	}
 		
 }

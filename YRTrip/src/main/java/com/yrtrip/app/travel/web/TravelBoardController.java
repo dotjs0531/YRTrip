@@ -14,31 +14,33 @@ import com.yrtrip.app.Paging;
 import com.yrtrip.app.travel.TravelBoardService;
 import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.travel.TravelInfoVO;
+import com.yrtrip.app.travel.TravelPlaceService;
+import com.yrtrip.app.travel.TravelPlaceVO;
 
 @Controller
 public class TravelBoardController {
 
 	@Autowired
 	TravelBoardService travelBoardService;
+	TravelPlaceService travelPlaceService;
 	
-//�쟾泥댁“�쉶
+	//전체조회
 	@RequestMapping(value = { "/getTravelBoardList"}, method = RequestMethod.GET)
 	public ModelAndView getTravelBoardList(TravelBoardVO vo, Paging paging) {
 		
 		ModelAndView mv = new ModelAndView();
-		//�럹�씠吏� 泥섎━
-				//�럹�씠吏�踰덊샇 �뙆�씪誘명꽣
+		// 페이징 처리
+				// 페이지번호 파라미터
 				if( paging.getPage() == null) {
 					paging.setPage(1); 
 				}
-				
-				//�븳�럹�씠吏��뿉 異쒕젰�븷 �젅肄붾뱶 嫄댁닔
+
 				paging.setPageUnit(12);
 				
-				//first, last 怨꾩궛
+				// 시작/마지막 레코드 번호
 				vo.setFirst(paging.getFirst());
 				vo.setLast(paging.getLast());
-				//�쟾泥� �젅肄붾뱶 嫄댁닔
+				// 전체 건수
 				paging.setTotalRecord(travelBoardService.getCount(vo));
 				
 				mv.addObject("paging", paging);
@@ -49,14 +51,15 @@ public class TravelBoardController {
 				return mv;
 			}
 
-//�떒嫄댁“�쉶
+	//상세조회
 	@RequestMapping("/getTravelBoard")
-	public String getTravelBoard(Model model, TravelBoardVO vo) {
+	public String getTravelBoard(Model model, TravelBoardVO vo, TravelPlaceVO pvo) {
 		model.addAttribute("travelBoard", travelBoardService.getTravelBoard(vo));
+		model.addAttribute("travelPlace", travelBoardService.getTravelPlaceList(pvo));
 		return "travel/getTravelBoard";
 	}
 
-//紐⑤떖 �벑濡앹쿂由�
+	//등록처리
 	@RequestMapping(value = { "/insertTravelBoardform" }, method = RequestMethod.POST)
 	public String insertTravelBoardform(TravelBoardVO vo) {
 		travelBoardService.insertTravelBoard(vo);
@@ -71,49 +74,35 @@ public class TravelBoardController {
 		return "redirect:insertTravelBoard"; // insertTravelBoard.jsp濡� �씠�룞
 	}*/
 
-//�닔�젙�뤌
+//수정폼
 	@RequestMapping("/updateTravelBoardform")
 	public String updateTravelBoardform(Model model, TravelBoardVO vo) {
 		model.addAttribute("travelBoard", travelBoardService.getTravelBoard(vo));
 		return "travel/updateTravelBoard";
 	}
 
-//�닔�젙泥섎━
+//수정처리
 	@RequestMapping("updateTravelBoard")
 	public String updateTravelBoard(TravelBoardVO vo) {
-		travelBoardService.updateTravelBoard(vo); // �닔�젙泥섎━
-		return "redirect:getTravelBoardList"; // 紐⑸줉�슂泥�
+		travelBoardService.updateTravelBoard(vo); 
+		return "redirect:getTravelBoardList";
 	}
 
-//�닔�젙�뤌
-		@RequestMapping("/updateTravelBoardTwoform")
-		public String updateTravelBoardTwoform(Model model, TravelBoardVO vo) {
-			model.addAttribute("travelBoard", travelBoardService.getTravelBoard(vo));
-			return "travel/updateTravelBoardTwo";
-		}
-
-//�닔�젙泥섎━
-		@RequestMapping("updateTravelBoardTwo")
-		public String updateTravelBoardTwo(TravelBoardVO vo) {
-			travelBoardService.updateTravelBoardTwo(vo); // �닔�젙泥섎━
-			return "redirect:getTravelBoardList"; // 紐⑸줉�슂泥�
-		}
-
-//�궘�젣泥섎━
+//삭제
 	@RequestMapping("deleteTravelBoard")
 	public String deleteTravelBoard(TravelBoardVO vo) {
 		travelBoardService.deleteTravelBoard(vo); // �궘�젣泥섎━
 		return "redirect:getTravelBoardList"; // 紐⑸줉�슂泥�
 	}
 
-//�꽑�깮�궘�젣泥섎━
+//선택삭제
 	@RequestMapping("deleteTravelBoardList")
 	public String deleteTravelBoardList(TravelBoardVO vo) {
 		travelBoardService.deleteTravelBoardList(vo); // �궘�젣泥섎━
 		return "redirect:getTravelBoardList"; // 紐⑸줉�슂泥�
 	}
 	
-// list 議고쉶 Ajax
+// travelinfot list Ajax
 	@RequestMapping(value="/getTravelInfoListData", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TravelBoardVO> getTravelInfoListData(TravelInfoVO vo) {
@@ -127,7 +116,7 @@ public class TravelBoardController {
 		return "travel/getTravelBoardList";
 	}
 	
-// Modal�뿉�꽌 list 議고쉶 Ajax
+// Modal travelinfot list Ajax
 	@RequestMapping(value="/getTravelInfoListModalData", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TravelBoardVO> getTravelInfoListModalData(TravelInfoVO vo) {

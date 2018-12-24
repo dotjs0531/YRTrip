@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.travel.TravelInfoVO;
+import com.yrtrip.app.travel.TravelPlaceVO;
 
 @Repository
 public class TravelBoardDAOMybatis {
@@ -60,6 +61,9 @@ public class TravelBoardDAOMybatis {
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo) {
 		System.out.println("getTravelBoard() 기능 처리");
 		return sqlSession.selectOne("travelBoard.getTravelBoard", vo);
+	}
+	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo) {
+		return sqlSession.selectList("travelBoard.getTravelPlaceList", vo);
 	}
 	
 	//검색 조회
