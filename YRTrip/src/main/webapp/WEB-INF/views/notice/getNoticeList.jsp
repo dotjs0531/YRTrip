@@ -7,6 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 게시글 사진 첨부 표시 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+a { text-decoration:none !important; }
+a:hover { color:white }
+</style>
 <script>
 	function go_page(page) {
 		document.frm.page.value = page;
@@ -35,7 +41,7 @@
                 </div>
                 
 				<div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:500px;">
+                	<div class="table-responsive" style="min-height:450px;">
                 	
                 		<!-- 검색 창 & 페이징 처리 -->
                 		<form name="frm" class="form-inline">
@@ -58,20 +64,21 @@
                     				<th>no.</th>
                     				<th style="text-align:center">글제목</th>
                     				<th>작성자</th>
-                    				<th>작성일</th>
-                    				<th>조회수</th>
+                    				<th style="text-align:center">작성일</th>
+                    				<th style="text-align:center">조회수</th>
                     			</tr>
                     		</thead>
                     		<tbody>
 							<c:forEach items="${noticeList}" var="notice">
 								<tr>
-									<td>${notice.noticeId}</td>
-									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
-										overflow: hidden; width:420px" href="./getNotice?noticeId=${notice.noticeId}">
-											${notice.noticeTitle}</a></td>
+									<td style="text-align:center">${notice.noticeId}</td>
+									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+										width:420px; vertical-align:middle" href="./getNotice?noticeId=${notice.noticeId}">${notice.noticeTitle}
+										<!-- 게시글 사진 첨부 표시 -->
+										<c:if test="${not empty notice.noticeImg}"><span class="glyphicon glyphicon-picture"></span></c:if></a></td>
 									<td>${notice.userName}</td>
-									<td>${notice.noticeDate}</td>
-									<td>${notice.noticeHit}</td>
+									<td style="text-align:center">${notice.noticeDate}</td>
+									<td style="text-align:center">${notice.noticeHit}</td>
 								</tr>
 							</c:forEach>
                     		</tbody>

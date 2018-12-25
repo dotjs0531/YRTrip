@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+
+<!-- 여행 페이지 -->
+<select id="getYourTravelCount" parameterType="travelBoard" resultType="int">
+	SELECT COUNT(*)
+	  FROM TRAVELBOARDT
+	 WHERE USER_ID = #{userId}
+</select>
+<select id="getYourTravelList" parameterType="travelBoard" resultType="travelBoard">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  TRAVEL_NO,
+			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
+			TRAVEL_PIC,
+			TO_CHAR(TRAVEL_DATE,'YYYY/MM/DD') TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE,
+			USER_ID
+	  FROM  TRAVELBOARDT
+	  WHERE USER_ID = #{userId}
+   ORDER BY TRAVEL_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 동행 페이지 -->
+<select id="getYourPartnerCount" parameterType="travelBoard" resultType="int">
+	SELECT COUNT(*)
+	  FROM PARTNERT
+	 WHERE USER_ID = #{userId}
+</select>
+<select id="getYourPartnerList" parameterType="partner" resultType="partner">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  PARTNER_ID,
+			PARTNER_TITLE,
+			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,
+			USER_ID,
+			PARTNER_CONDITION
+	  FROM  PARTNERT
+	  WHERE USER_ID = #{userId}
+   ORDER BY PARTNER_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 좋아요 페이지 -->
+<select id="getYourLikedCount" parameterType="like" resultType="int">
+	SELECT COUNT(*)
+	  FROM LIKET
+	 WHERE USER_ID = #{userId}
+</select>
+<select id="getYourLikedTravelList" parameterType="travelBoard" resultType="travelBoard">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			L.USER_ID,
+			TRAVEL_NO,
+			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
+			TRAVEL_PIC,
+			TO_CHAR(TRAVEL_DATE,'YYYY/MM/DD') TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE
+	  FROM  LIKET L, TRAVELBOARDT T
+	 WHERE  L.USER_ID = #{userId}
+			AND L.LIKE_CATEGORY = 'T'
+			AND L.LIKE_BOARDID = T.TRAVEL_NO
+   ORDER BY LIKE_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+<select id="getYourLikedPlaceList" parameterType="travelPlace" resultType="travelPlace">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			L.USER_ID,
+			PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			PLACE_TITLE,
+			PLACE_VISITDATE
+	  FROM  LIKET L, TRAVEL_PLACET P
+	 WHERE  L.USER_ID = #{userId}
+			AND L.LIKE_CATEGORY = 'P'
+			AND L.LIKE_BOARDID = P.PLACE_NO
+   ORDER BY LIKE_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+<select id="getYourLikedProductList" parameterType="product" resultType="product">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  LIKE_NO,
+			LIKE_CATEGORY,
+			LIKE_BOARDID,
+			L.USER_ID,
+			ITEM_ID,
+			ITEM_NAME,
+			ITEM_PRICE,
+			ITEM_EA,
+			ITEM_CONTENT,
+			ITEM_METHOD,
+			ITEM_CATEGORY,
+			SELLER_ID,
+			ITEM_ORDERDETAIL,
+			ITEM_STAR,
+			ITEM_PIC,
+			TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
+			ITEM_CONDITION,
+			ITEM_LIKE
+	  FROM  LIKET L, ITEMT I
+	 WHERE  L.USER_ID = #{userId}
+			AND LIKE_CATEGORY = 'I'
+			AND L.LIKE_BOARDID = I.ITEM_ID
+   ORDER BY LIKE_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 상품 페이지 -->
+<select id="getYourProductCount" parameterType="product" resultType="int">
+	SELECT COUNT(*)
+	  FROM ITEMT
+	 WHERE SELLER_ID = #{sellerId}
+</select>
+<select id="getYourProductList" parameterType="product" resultType="product">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  ITEM_ID,
+			ITEM_NAME,
+			ITEM_PRICE,
+			ITEM_CONTENT,
+			ITEM_CATEGORY,
+			SELLER_ID,
+			ITEM_ORDERDETAIL,
+			ITEM_STAR,
+			ITEM_PIC,
+			TO_CHAR(ITEM_DATE, 'YYYY/MM/DD') ITEM_DATE,
+			ITEM_LIKE
+	   FROM ITEMT
+	  WHERE SELLER_ID = #{sellerId}
+   ORDER BY ITEM_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 리뷰 페이지 -->
+<select id="getYourReviewCount" parameterType="order" resultType="int">
+	SELECT COUNT(*)
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	       AND I.SELLER_ID = #{sellerId}
+</select>
+<select id="getYourReviewList" parameterType="order" resultType="order">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+  	SELECT BUYER_ID,
+		   REVIEW_STAR,
+		   REVIEW_CONTENT,
+		   TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') REVIEW_DATE,
+		   REVIEW_PIC,
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	       AND I.SELLER_ID = #{sellerId}
+  ORDER BY REVIEW_DATE DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+</mapper>

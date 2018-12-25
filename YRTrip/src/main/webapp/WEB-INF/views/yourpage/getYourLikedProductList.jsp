@@ -9,7 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+  
+<!-- 별점 등록부분 -->
+<link href="resources/css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
+<!--suppress JSUnresolvedLibraryURL -->
+<script src="resources/js/star-rating.js" type="text/javascript"></script>
+ 
 <meta name="robots" content="noindex">
 <link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
 <link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
@@ -54,94 +59,105 @@ a:hover { color:white }
 <link rel="stylesheet" href="resources/css/mypage.css">
 </head>
 <body>
+
     <!--    start about us area-->
     <section class="about_us_area" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
-                        <div class="pricing-title">
-                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
+                        <div class="pricing-title" style="padding-bottom:10px">
+                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; text-decoration:none !important">${user.userId}</a></h2>
+                            <!-- 별점 표시 부분 -->
+							<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="${user.userStar}" disabled>
                         </div>
                         <ul class=price-list>
-                            <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
+                            <li><a href="./getYourTravelList?userId=${user.userId}"
                             	   style="color:black; text-decoration:none !important;">여행정보</a></li>
-                            <li><a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
+                            <li><a href="./getYourLikedTravelList?userId=${user.userId}"
                             	   style="color:black; text-decoration:none !important;"><strong>좋아요</strong></a></li>
-                            <li><a href="./getMyProductList?sellerId=${sessionScope.login.userId}"
+                            <li><a href="./getYourProductList?sellerId=${user.userId}"
                             	   style="color:black; text-decoration:none !important;">상품</a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#" style="text-decoration:none !important;">탈퇴</a>
+                            <a href="#" style="text-decoration:none !important;">대화하기</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:450px;">
+                	<div class="table-responsive">
                 	
                 		<!-- 페이징 처리 -->
                 		<form name="frm">
-							<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
+							<input type="hidden" name="userId" value="${user.userId}"/>
 							<input type="hidden" name="page" />
 						</form>
 						
-	                	<div class="form-group"><br/>
-	                		<table style="width:100%; tabel-layout:fixed">
-	                			<tr>
+                		<div class="form-group"><br/>
+                			<table style="width:100%">
+                				<tr>
 	                				<td style="text-align:center; width:33%"><h2>
-	                					<a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
-	                					   style="color:black; font-family: 'NanumSquareRoundEB'">여행정보</a></h2></td>
+	                					<a href="./getYourLikedTravelList?userId=${user.userId}"
+	                					   style="color:#666666; font-family: 'NanumSquareRoundB'">여행정보</a></h2></td>
 	                				<td style="text-align:center; width:33%"><h2>
-	                					<a href="./getMyLikedPlaceList?userId=${sessionScope.login.userId}"
+	                					<a href="./getYourLikedPlaceList?userId=${user.userId}"
 	                					   style="color:#666666; font-family: 'NanumSquareRoundB'">여 행 지</a></h2></td>
 	                				<td style="text-align:center; width:33%"><h2>
-	                					<a href="./getMyLikedProductList?userId=${sessionScope.login.userId}"
-	                					   style="color:#666666; font-family: 'NanumSquareRoundB'">상&nbsp;&nbsp;&nbsp;&nbsp;품</a></h2></td>
-	                			</tr>
-	                		</table>
-	            		</div>
-	            		<p style="clear:both"/><br/>
-	                    
-						<div class="container card" style="width:100%; min-height:420px;">
+	                					<a href="./getYourLikedProductList?userId=${user.userId}"
+	                					   style="color:black; font-family: 'NanumSquareRoundEB'">상&nbsp;&nbsp;&nbsp;&nbsp;품</a></h2></td>
+                				</tr>
+                			</table>
+            			</div>
+            			<p style="clear:both"/><br/>
+					</div>
+					
+                	<div>
+						<div class="container card" style="width:100%; min-height:420px">
 							<!-- Normal Demo-->
-							<c:forEach items="${MyLikedTravelList}" var="travel">
+							<c:forEach items="${YourLikedProductList}" var="product">
 								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">No. ${travel.travelNo}</div>
+									<div class="demo-title">&nbsp;&nbsp;No. ${product.itemId}</div>
 									<!-- Post-->
 									<div class="post-module">
 										<!-- Thumbnail-->
 										<div class="thumbnail">
-											<a href="getTravelBoard?travelNo=${travel.travelNo}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
+											<a href="getProduct?itemId=${product.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
 										</div>
 										<!-- Post Content-->
 										<div class="post-content">
-											<div class="category">Photos</div>
-											<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; text-overflow: ellipsis; 
-												white-space: nowrap; overflow: hidden; width:220px; text-decoration:none !important;">${travel.travelTitle}</a></h1>
-											<h2 class="sub_title">${travel.travelDate}</h2>
-											<p class="description">${travel.travelContent}</p>
+											<div class="category">
+												<c:if test="${product.itemOrderdetail eq '구매가능'}">판매중</c:if>
+												<c:if test="${product.itemOrderdetail eq '구매불가'}">판매완료</c:if>
+											</div>
+											<h4 class="pull-right">￦${product.itemPrice}</h4>
+											<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+											white-space: nowrap; overflow: hidden; width:140px; text-decoration:none !important;">${product.itemName}</a></h1>
+											<h2 class="sub_title">${product.itemCategory}</h2>
+											<p class="description">${product.itemContent}</p>
 											<div class="post-meta">
-												<span class="timestamp"><i class="fa fa-gratipay"></i>&nbsp;${travel.travelLike}</span>
-												<span class="comments"><i class="fa fa-eye"></i>&nbsp;${travel.travelHit}</span>
+												<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
+												<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
 											</div>
 										</div>
 									</div>
 								</div>
 							</c:forEach>
 						</div>
-                    
-                    	<!-- 페이지 번호 -->
-						<c:if test="${not empty MyLikedTravelList}">
+						
+	                    <!-- 페이지 번호 -->
+	                    <c:if test="${not empty getYourLikedProductList}">
 	                    <div>
 							<my:paging paging="${paging}" jsFunc="go_page" />
 	                    </div>
 	                    </c:if>
-	                    
-                    </div>
+                    
+					</div>
                 </div>
             </div>
         </div>
     </section>
     <!--   end of about us area-->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="resources/js/mypage.js"></script>
 </body>
 </html>

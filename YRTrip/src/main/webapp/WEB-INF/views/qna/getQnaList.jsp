@@ -7,6 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+a { text-decoration:none !important; }
+a:hover { color:white }
+</style>
 <script>
 	function go_page(page) {
 		document.frm.page.value = page;
@@ -35,7 +40,7 @@
                 </div>
                 
                 <div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:450px;">
+                	<div class="table-responsive" style="min-height:400px;">
                 	
                 		<!-- 검색 창 & 페이징 처리 -->
                 		<form name="frm" class="form-inline">
@@ -78,8 +83,8 @@
                     				<th>no.</th>
                     				<th style="text-align:center">글제목</th>
                     				<th>작성자</th>
-                    				<th>작성일</th>
-                    				<th>답변여부</th>
+                    				<th style="text-align:center">작성일</th>
+                    				<th style="text-align:center">답변여부</th>
                     			</tr>
                     		</thead>
                     		<tbody>
@@ -87,10 +92,10 @@
 								<tr>
 									<td>${qna.qnaId}</td>
 									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
-										overflow: hidden; width:420px;" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}</a></td>
-									<td>${qna.userName}</td>
-									<td>${qna.qnaDate}</td>
-									<td>${qna.qnaAnswer}</td>
+										overflow: hidden; width:420px; vertical-align:middle" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}</a></td>
+									<td><a style="color:black;" href="./getYourTravelList?userId=${qna.userId}">${qna.userName}</a></td>
+									<td style="text-align:center">${qna.qnaDate}</td>
+									<td style="text-align:center">${qna.qnaAnswer}</td>
 								</tr>
 							</c:forEach>
                     		</tbody>

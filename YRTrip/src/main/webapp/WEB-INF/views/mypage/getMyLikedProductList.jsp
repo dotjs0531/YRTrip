@@ -17,6 +17,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
 
 <style class="cp-pen-styles">
+a:hover { color:white }
 @font-face {
  font-family: 'NanumSquareRoundEB';
  src: url(resources/fonts/NanumSquareRoundEB.eot);
@@ -61,23 +62,23 @@
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2 style="color:black">마이페이지</h2>
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black">여행정보</a></li>
+                            	   style="color:black; text-decoration:none !important;">여행정보</a></li>
                             <li><a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black"><strong>좋아요</strong></a></li>
+                            	   style="color:black; text-decoration:none !important;"><strong>좋아요</strong></a></li>
                             <li><a href="./getMyProductList?sellerId=${sessionScope.login.userId}"
-                            	   style="color:black">상품</a></li>
+                            	   style="color:black; text-decoration:none !important;">상품</a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                            <a href="#" style="text-decoration:none !important;">탈퇴</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:450px;">
+                	<div class="table-responsive">
                 	
                 		<!-- 페이징 처리 -->
                 		<form name="frm">
@@ -102,7 +103,7 @@
             		</div>
             		<p style="clear:both"/><br/>
                     
-						<div class="container card" style="width:100%">
+						<div class="container card" style="width:100%; min-height:420px;">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyLikedProductList}" var="product">
 								<div class="column" style="padding-bottom:20px;">
@@ -120,8 +121,8 @@
 												<c:if test="${product.itemOrderdetail eq '구매불가'}">판매완료</c:if>
 											</div>
 											<h4 class="pull-right">￦${product.itemPrice}</h4>
-											<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; 
-												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:140px">${product.itemName}</a></h1>
+											<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+												white-space: nowrap; overflow: hidden; width:140px; text-decoration:none !important;">${product.itemName}</a></h1>
 											<h2 class="sub_title">${product.itemCategory}</h2>
 											<p class="description">${product.itemContent}</p>
 											<div class="post-meta">
@@ -133,14 +134,14 @@
 								</div>
 							</c:forEach>
 						</div>
-					<p style="clear:both"/>
                     
-                    <!-- 페이지 번호 -->
-					<c:if test="${not empty MyLikedProductList}">
-                    <div>
-						<my:paging paging="${paging}" jsFunc="go_page" />
-                    </div>
-                    </c:if>
+	                    <!-- 페이지 번호 -->
+						<c:if test="${not empty MyLikedProductList}">
+	                    <div>
+							<my:paging paging="${paging}" jsFunc="go_page" />
+	                    </div>
+	                    </c:if>
+	                    
                     </div>
                 </div>
             </div>

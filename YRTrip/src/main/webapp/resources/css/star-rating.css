@@ -129,7 +129,7 @@
 /* extend support to BS4 */
 /* 별점 등록시 옆에 나오는 별점 */
 .rating-container .caption .label {
-    display: inline-block;
+    display: none; /* inline-block; */
     padding: .25em .4em;
     line-height: 1;
     text-align: center;

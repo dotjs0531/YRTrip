@@ -32,6 +32,7 @@ body {
 .modal-content{
   margin-top:70px;
 }
+a:hover { color:white }
 .check {
   cursor: pointer;
   position: relative;
@@ -210,18 +211,18 @@ body {
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2 style="color:black">마이페이지</h2>
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black">여행정보</a></li>
+                            	   style="color:black; text-decoration:none !important;">여행정보</a></li>
                             <li><a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black">좋아요</a></li>
+                            	   style="color:black; text-decoration:none !important;">좋아요</a></li>
                             <li><a href="./getMyProductList?sellerId=${sessionScope.login.userId}"
-                            	   style="color:black"><strong>상품</strong></a></li>
+                            	   style="color:black; text-decoration:none !important;"><strong>상품</strong></a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                            <a href="#" style="text-decoration:none !important;">탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -250,123 +251,124 @@ body {
             			</div>
             			<p style="clear:both"/><br/>
 					</div>
+					
                 	<div>
-                	<form action="deleteMyProductList">
-						<div class="container card" style="width:100%">
-							<!-- Normal Demo-->
-							<c:forEach items="${MyProductList}" var="product">
-								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">
-									<div class="checkboxes">
-										<input type="checkbox" class="cbx" id="${product.itemId}" name="itemNoList" value="${product.itemId}" style="display: none;">
-										<label for="${product.itemId}" class="check">
-											<svg width="18px" height="18px" viewBox="0 0 18 18">
-												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-												<polyline points="1 9 7 14 15 4"></polyline>
-											</svg>
-										</label>&nbsp;&nbsp;No. ${product.itemId}
-									</div></div>
-									<!-- Post-->
-									<div class="post-module">
-										<!-- Thumbnail-->
-										<div class="thumbnail">
-											<a href="getProduct?itemId=${product.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
-										</div>
-										<!-- Post Content-->
-										<div class="post-content">
-											<div class="category">
-												<c:if test="${product.itemOrderdetail eq '구매가능'}">판매중</c:if>
-												<c:if test="${product.itemOrderdetail eq '구매불가'}">판매완료</c:if>
+	                	<form action="deleteMyProductList">
+							<div class="container card" style="width:100%; min-height:420px">
+								<!-- Normal Demo-->
+								<c:forEach items="${MyProductList}" var="product">
+									<div class="column" style="padding-bottom:20px;">
+										<div class="demo-title">
+										<div class="checkboxes">
+											<input type="checkbox" class="cbx" id="${product.itemId}" name="itemNoList" value="${product.itemId}" style="display: none;">
+											<label for="${product.itemId}" class="check">
+												<svg width="18px" height="18px" viewBox="0 0 18 18">
+													<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+													<polyline points="1 9 7 14 15 4"></polyline>
+												</svg>
+											</label>&nbsp;&nbsp;No. ${product.itemId}
+										</div></div>
+										<!-- Post-->
+										<div class="post-module">
+											<!-- Thumbnail-->
+											<div class="thumbnail">
+												<a href="getProduct?itemId=${product.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
 											</div>
-											<h4 class="pull-right">￦${product.itemPrice}</h4>
-											<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; 
-												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:140px">${product.itemName}</a></h1>
-											<h2 class="sub_title">${product.itemCategory}</h2>
-											<p class="description">${product.itemContent}</p>
-											<div class="post-meta">
-												<button type="button" class="btn btn-default pull-right" id="buyer${product.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button>
-												<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
-												<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach>
-						</div>
-					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
-					<c:if test="${not empty MyProductList}">
-					<button class="btn btn-default" style="float:right;">삭제</button>
-					</c:if>
-					<p style="clear:both"/>
-					</form>
-					
-					<!-- 구매자 목록 보기 -->
-					<div class="modal fade" id="getMyBuyerList">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<!-- header -->
-								<div class="modal-header">
-									<!-- 닫기(x) 버튼 -->
-									<button type="button" class="close" data-dismiss="modal">×</button>
-								</div>
-								<!-- body -->
-								<div class="modal-body">
-									<div class="container">
-										<div id="login-row" class="row justify-content-center align-items-center">
-											<div id="login-column" class="col-md-6">
-												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
-													<h4 class="text-info" style="color:black; margin:20px 10px; font-family: 'NanumSquareRoundB'">구매자 목록</h4>
-													<div id="MyBuyerList"></div>
+											<!-- Post Content-->
+											<div class="post-content">
+												<div class="category">
+													<c:if test="${product.itemOrderdetail eq '구매가능'}">판매중</c:if>
+													<c:if test="${product.itemOrderdetail eq '구매불가'}">판매완료</c:if>
+												</div>
+												<h4 class="pull-right">￦${product.itemPrice}</h4>
+												<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+													white-space: nowrap; overflow: hidden; width:140px; text-decoration:none !important;">${product.itemName}</a></h1>
+												<h2 class="sub_title">${product.itemCategory}</h2>
+												<p class="description">${product.itemContent}</p>
+												<div class="post-meta">
+													<button type="button" class="btn btn-default pull-right" id="buyer${product.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button>
+													<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
+													<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>	<!-- end of modal-body -->
-							</div> <!-- end of modal-content -->
-						</div> 
-					</div> <!-- end of modal -->
+								</c:forEach>
+							</div>
+						<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
+						<c:if test="${not empty MyProductList}">
+							<button class="btn btn-default" style="float:right;">삭제</button>
+							<p style="clear:both"/>
+						</c:if>
+						</form>
 					
-                    <!-- 송장번호 등록 페이지 -->			
-					<div class="modal fade" id="updateDnoForm">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<!-- header -->
-								<div class="modal-header">
-									<!-- 닫기(x) 버튼 -->
-									<button type="button" class="close" data-dismiss="modal">×</button>
-								</div>
-								<!-- body -->
-								<div class="modal-body">
-									<div class="container">
-										<div id="login-row" class="row justify-content-center align-items-center">
-											<div id="login-column" class="col-md-6">
-												<div id="login-row" class="row justify-content-center align-items-center" style="width:100%; margin:0 auto">
-													<form action="./updateDno" method="post" enctype="multipart/form-data">										
-														<input type="hidden" id="dnoOrderId" name="orderId">
-														<h4 class="text-info" id="dnoTitle" style="color:black; font-family: 'NanumSquareRoundB'"></h4>
-														<div class="input-group">
-															<input type="text" class="form-control" id="dno" name="itemDeliveryno" style="margin:15px 0 15px 0">
-															<span class="input-group-btn">
-																<button type="submit" class="btn btn-default" id="updateDno" style="float:right;"></button>
-															</span>
-															<p style="clear:both"/>
-														</div>
-													</form>
+						<!-- 구매자 목록 보기 -->
+						<div class="modal fade" id="getMyBuyerList">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<!-- header -->
+									<div class="modal-header">
+										<!-- 닫기(x) 버튼 -->
+										<button type="button" class="close" data-dismiss="modal">×</button>
+									</div>
+									<!-- body -->
+									<div class="modal-body">
+										<div class="container">
+											<div id="login-row" class="row justify-content-center align-items-center">
+												<div id="login-column" class="col-md-6">
+													<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+														<h4 class="text-info" style="color:black; margin:20px 10px; font-family: 'NanumSquareRoundB'">구매자 목록</h4>
+														<div id="MyBuyerList"></div>
+													</div>
 												</div>
 											</div>
 										</div>
+									</div>	<!-- end of modal-body -->
+								</div> <!-- end of modal-content -->
+							</div> 
+						</div> <!-- end of modal -->
+						
+	                    <!-- 송장번호 등록 페이지 -->			
+						<div class="modal fade" id="updateDnoForm">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<!-- header -->
+									<div class="modal-header">
+										<!-- 닫기(x) 버튼 -->
+										<button type="button" class="close" data-dismiss="modal">×</button>
 									</div>
-								</div>	<!-- end of modal-body -->
-							</div> <!-- end of modal-content -->
-						</div> 
-					</div> <!-- end of modal -->
+									<!-- body -->
+									<div class="modal-body">
+										<div class="container">
+											<div id="login-row" class="row justify-content-center align-items-center">
+												<div id="login-column" class="col-md-6">
+													<div id="login-row" class="row justify-content-center align-items-center" style="width:100%; margin:0 auto">
+														<form action="./updateDno" method="post" enctype="multipart/form-data">										
+															<input type="hidden" id="dnoOrderId" name="orderId">
+															<h4 class="text-info" id="dnoTitle" style="color:black; font-family: 'NanumSquareRoundB'"></h4>
+															<div class="input-group">
+																<input type="text" class="form-control" id="dno" name="itemDeliveryno" style="margin:15px 0 15px 0">
+																<span class="input-group-btn">
+																	<button type="submit" class="btn btn-default" id="updateDno" style="float:right;"></button>
+																</span>
+																<p style="clear:both"/>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>	<!-- end of modal-body -->
+								</div> <!-- end of modal-content -->
+							</div> 
+						</div> <!-- end of modal -->
 					
-                    <!-- 페이지 번호 -->
-					<c:if test="${not empty MyProductList}">
-                    <div>
-						<my:paging paging="${paging}" jsFunc="go_page" />
-                    </div>
-                    </c:if>
+	                    <!-- 페이지 번호 -->
+						<c:if test="${not empty MyProductList}">
+	                    <div>
+							<my:paging paging="${paging}" jsFunc="go_page" />
+	                    </div>
+	                    </c:if>
                     
 					</div>
                 </div>

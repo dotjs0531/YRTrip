@@ -51,6 +51,7 @@ body {
     max-width: 100px;
     max-height: 100px;
 }  */
+a:hover { color:white }
 .check {
   cursor: pointer;
   position: relative;
@@ -208,18 +209,18 @@ $(function() {
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2 style="color:black">마이페이지</h2>
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black">여행정보</a></li>
+                            	   style="color:black; text-decoration:none !important;">여행정보</a></li>
                             <li><a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black">좋아요</a></li>
+                            	   style="color:black; text-decoration:none !important;">좋아요</a></li>
                             <li><a href="./getMyProductList?sellerId=${sessionScope.login.userId}"
-                            	   style="color:black"><strong>상품</strong></a></li>
+                            	   style="color:black; text-decoration:none !important;"><strong>상품</strong></a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                            <a href="#" style="text-decoration:none !important;">탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -249,62 +250,63 @@ $(function() {
             			<p style="clear:both"/><br/>
 					</div>
                 	<div>
-                	<form action="deleteMyOrderList">
-						<div class="container card" style="width:100%">
-							<!-- Normal Demo-->
-							<c:forEach items="${MyOrderList}" var="order">
-								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">
-									<div class="checkboxes">
-										<input type="checkbox" class="cbx" id="${order.orderId}" name="orderNoList" value="${order.orderId}" style="display: none;">
-										<label for="${order.orderId}" class="check">
-											<svg width="18px" height="18px" viewBox="0 0 18 18">
-												<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-												<polyline points="1 9 7 14 15 4"></polyline>
-											</svg>
-										</label>&nbsp;&nbsp;${order.orderId}
-									</div></div>
-									<!-- Post-->
-									<div class="post-module">
-										<!-- Thumbnail-->
-										<div class="thumbnail">
-											<a href="getProduct?itemId=${order.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
-										</div>
-										<!-- Post Content-->
-										<div class="post-content">
-											<div class="category">${order.orderDelivery}</div>
-											<h4 class="pull-right">${order.itemMethod}</h4>
-											<h1 class="title"><a href="getProduct?itemId=${order.itemId}" style="color:black; display: inline-block; 
-												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:130px">${order.itemName}</a></h1>
-											<h2 class="sub_title">${order.orderCondition}</h2>
-											<p class="description" align="center">
-												<button type="button" class="btn btn-default">
-													<c:if test="${order.orderCondition eq '결제완료'}">구매확정</c:if>
-													<c:if test="${order.orderCondition eq '거래완료'}">확정완료</c:if>
-												</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												<c:if test="${order.reviewContent eq null}">
-													<button type="button" class="btn btn-default" id="review${order.orderId}" 
-															data-toggle="modal" data-target="#insertMyReviewForm">리뷰작성</button>
-												</c:if>
-												<c:if test="${order.reviewContent ne null}">
-													<button type="button" class="btn btn-default">리뷰완료</button>
-												</c:if>
-												</p>
-												<div class="post-meta">
-												<button type="button" class="btn btn-default pull-right" id="order${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
-												<span class="comments" style="font-size:15px; vertical-align: middle;">${order.orderPrice} 원 / ${order.orderEa} 개</span>
+	                	<form action="deleteMyOrderList">
+							<div class="container card" style="width:100%; min-height:420px">
+								<!-- Normal Demo-->
+								<c:forEach items="${MyOrderList}" var="order">
+									<div class="column" style="padding-bottom:20px;">
+										<div class="demo-title">
+										<div class="checkboxes">
+											<input type="checkbox" class="cbx" id="${order.orderId}" name="orderNoList" value="${order.orderId}" style="display: none;">
+											<label for="${order.orderId}" class="check">
+												<svg width="18px" height="18px" viewBox="0 0 18 18">
+													<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+													<polyline points="1 9 7 14 15 4"></polyline>
+												</svg>
+											</label>&nbsp;&nbsp;${order.orderId}
+										</div></div>
+										<!-- Post-->
+										<div class="post-module">
+											<!-- Thumbnail-->
+											<div class="thumbnail">
+												<a href="getProduct?itemId=${order.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
+											</div>
+											<!-- Post Content-->
+											<div class="post-content">
+												<div class="category">${order.orderDelivery}</div>
+												<h4 class="pull-right">${order.itemMethod}</h4>
+												<h1 class="title"><a href="getProduct?itemId=${order.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+													white-space: nowrap; overflow: hidden; width:130px; text-decoration:none !important;">${order.itemName}</a></h1>
+												<h2 class="sub_title">${order.orderCondition}</h2>
+												<p class="description" align="center">
+													<button type="button" class="btn btn-default">
+														<c:if test="${order.orderCondition eq '결제완료'}">구매확정</c:if>
+														<c:if test="${order.orderCondition eq '거래완료'}">확정완료</c:if>
+													</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<c:if test="${order.reviewContent eq null}">
+														<button type="button" class="btn btn-default" id="review${order.orderId}" 
+																data-toggle="modal" data-target="#insertMyReviewForm">리뷰작성</button>
+													</c:if>
+													<c:if test="${order.reviewContent ne null}">
+														<button type="button" class="btn btn-default">리뷰완료</button>
+													</c:if>
+													</p>
+													<div class="post-meta">
+													<button type="button" class="btn btn-default pull-right" id="order${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
+													<span class="comments" style="font-size:15px; vertical-align: middle;">${order.orderPrice} 원 / ${order.orderEa} 개</span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</c:forEach>
-						</div>
-					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
-					<c:if test="${not empty MyOrderList}">
-						<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
-					</c:if>
-					<p style="clear:both"/>
-					</form>
+								</c:forEach>
+							</div>
+							
+							<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
+							<c:if test="${not empty MyOrderList}">
+								<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
+								<p style="clear:both"/>
+							</c:if>
+						</form>
 					</div>
 					
                     <!-- 페이지 번호 -->

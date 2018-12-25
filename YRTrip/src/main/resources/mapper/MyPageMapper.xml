@@ -274,6 +274,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	 WHERE BUYER_ID = #{buyerId}
 </select>
 <select id="getMyReviewList" parameterType="order" resultType="order">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT BUYER_ID,
 		   REVIEW_STAR,
 		   REVIEW_CONTENT,
@@ -284,6 +285,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM REVIEWV
 	 WHERE BUYER_ID = #{buyerId}
   ORDER BY REVIEW_DATE DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getMyReview" parameterType="order" resultType="order">
 	SELECT BUYER_ID,

@@ -27,6 +27,7 @@ body {
 body {
   display: grid;
 }
+a:hover { color:white }
 .check {
   cursor: pointer;
   position: relative;
@@ -142,18 +143,18 @@ body {
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2 style="color:black">마이페이지</h2>
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black"><strong>여행정보</strong></a></li>
+                            	   style="color:black; text-decoration:none !important;"><strong>여행정보</strong></a></li>
                             <li><a href="./getMyLikedTravelList?userId=${sessionScope.login.userId}"
-                            	   style="color:black">좋아요</a></li>
+                            	   style="color:black; text-decoration:none !important;">좋아요</a></li>
                             <li><a href="./getMyProductList?sellerId=${sessionScope.login.userId}"
-                            	   style="color:black">상품</a></li>
+                            	   style="color:black; text-decoration:none !important;">상품</a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                            <a href="#" style="text-decoration:none !important;">탈퇴</a>
                         </div>
                     </div>
                 </div>
@@ -184,7 +185,7 @@ body {
                 	
                 	<!-- 선택 삭제 -->
                 	<form action="deleteMyTravelList">
-						<div class="container card" style="width:100%">
+						<div class="container card" style="width:100%; min-height:420px">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyTravelList}" var="travel">
 								<div class="column" style="padding-bottom:20px;">
@@ -207,8 +208,8 @@ body {
 										<!-- Post Content-->
 										<div class="post-content">
 											<div class="category">Photos</div>
-											<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; 
-												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:220px">${travel.travelTitle}</a></h1>
+											<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+												white-space: nowrap; overflow: hidden; width:220px; text-decoration:none !important;">${travel.travelTitle}</a></h1>
 											<h2 class="sub_title">${travel.travelDate}</h2>
 											<p class="description">${travel.travelContent}</p>
 											<div class="post-meta">
@@ -221,8 +222,11 @@ body {
 							</c:forEach>
 						</div>
 					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
-					<button class="btn btn-default" style="float:right;">삭제</button>
-					<p style="clear:both"/>
+					
+            		<c:if test="${not empty MyTravelList}">
+						<button class="btn btn-default" style="float:right;">삭제</button>
+						<p style="clear:both"/>
+					</c:if>
 					</form>
 					
                     <!-- 페이지 번호 -->
