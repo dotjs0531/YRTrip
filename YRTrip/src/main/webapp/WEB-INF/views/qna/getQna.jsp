@@ -28,12 +28,21 @@
 		
 		//댓글 등록 처리
 		$("#btnAdd").click(function(){
-			var params = $("#addForm").serialize();
-			console.log(params);
-			$.getJSON("insertQnaComment", params, function(datas){
-				var div = makeCommentView(datas)
-				$(div).prependTo("#qnaCommentList");
-			});
+			var qnaUid = '${qna.userId}';
+			var userId = '${sessionScope.login.userId}';
+			var userGrant = '${sessionScope.login.userGrant}'
+			
+			if(qnaUid == userId || userGrant == 'admin') {
+				var params = $("#addForm").serialize();
+				console.log(params);
+				$.getJSON("insertQnaComment", params, function(datas){
+					var div = makeCommentView(datas)
+					$(div).prependTo("#qnaCommentList");
+					$("#addForm")[0].reset(); //등록후에 입력폼 리셋
+				});
+			} else {
+				alert("글 작성자만 댓글을 등록할 수 있습니다.");
+			}
 		});	// end btnAdd click event
 
 		//댓글 수정 이벤트
@@ -50,10 +59,16 @@
 		//수정폼 이벤트(수정할 댓글밑에 수정폼 보이게 함)
 		$("#qnaComment").on("click", ".btnUpdFrm", function(){
 			var commentId = $(this).parent().attr("id").substring(1);
+			//원래 댓글  내용 안보이게
+			$("#c"+commentId+" [name=comLabel]").css("display","none");
+			$("#c"+commentId+" [name=comContent]").css("display","none");
+			$("#c"+commentId+" [name=comUpd]").css("display","none");
+			$("#c"+commentId+" [name=comDel]").css("display","none");
+			
 			//수정할 데이터 입력필드에 셋팅
 			$("#updateForm [name=commentId]").val(commentId);    
-			$("#updateForm [name=userId]").val($("#c"+commentId+">.userId").text());
-			$("#updateForm [name=commentContent]").val($("#c"+commentId+">.commentContent").text());
+			$("#updateForm [name=userId]").val($("#c"+commentId+" [name=comLabel]").text());
+			$("#updateForm [name=commentContent]").val($("#c"+commentId+" [name=comContent]").text());
 			//수정할 댓글밑으로 이동하고 보이게
 			$("#c"+commentId).prepend($('#commentUpdate'));  
 			$('#commentUpdate').show();   
@@ -72,16 +87,29 @@
 			}
 		});	// end btnDel click event
 
+		//수정 취소 이벤트
+		$("#btnCancel").click(function(){
+			$("[name=updateForm]")[0].reset();   //폼 필드 클리어
+			$("#qnaComment").append( $("#commentUpdate") );//수정 폼(div)를 이동
+			$("#commentUpdate").hide();    // 수정폼 숨기기
+		});
+		
 		function makeCommentView(qnaComment){
+			var userId = '${sessionScope.login.userId}';
 			var div = $("<div class='form-group'>"); 
 			div.attr("id", "c"+qnaComment.commentId);
 			div.addClass('qnaCommentList');
 			div[0].qnaCommentList = qnaComment;  //{id:1,.... }
 			
-			var str ="<p/><label class='col-sm-2 control-label'>" + qnaComment.userId + "</label>" 
-			        +"<span class='col-lg-8 qnaContent'>" + qnaComment.commentContent +"</span>"
-					+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">수정</button>"
-					+"<button type=\"button\" class=\"btn btn-default btnDel\">삭제</button>"
+			if(qnaComment.userId == userId){
+				var str ="<p/><label class='col-sm-2 control-label' name='comLabel'>" + qnaComment.userId + "</label>" 
+		        +"<span class='col-lg-8 qnaContent' name='comContent'>" + qnaComment.commentContent +"</span>"
+				+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\" name='comUpd'>수정</button>"
+				+"<button type=\"button\" class=\"btn btn-default btnDel\" name='comDel'>삭제</button>"
+			} else {
+				var str ="<p/><label class='col-sm-2 control-label' name='comLabel'>" + qnaComment.userId + "</label>" 
+		        +"<span class='col-lg-8 qnaContent' name='comContent'>" + qnaComment.commentContent +"</span><br/>"
+			}
 			div.html(str);
 			return div;
 		}
@@ -152,17 +180,17 @@
 							
 							<!-- 댓글수정폼시작 -->
 							<div id="commentUpdate" style="display: none">
-								<form action="" name="updateForm" id="updateForm">
+								<form name="updateForm" id="updateForm">
 								<div class="form-group">
 									<input type="hidden" name="commentQnaid" value="${qna.qnaId}">
 									<input type="hidden" name="commentId" value="${qnaComment.commentId}" />
 									<label class='col-sm-2 control-label'>
 									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										${sessionScope.login.userId}</label>
-									<span class='col-lg-8 qnaContent'>
-									<input type="text" class="form-control" name="commentContent" value="${qnaComment.commentContent}">
+									<span class='col-lg-8 qnaContent' style="width:66%">
+										<input type="text" class="form-control" name="commentContent" value="${qnaComment.commentContent}">
 									</span>
-									<button type="button" class="btn btn-default" id="btnUpd">등록</button>
+									<button type="button" class="btn btn-default" id="btnUpd">수정</button>
 									<button type="button" class="btn btn-default" id="btnCancel">취소</button>
 								</div>
 								</form>
