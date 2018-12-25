@@ -44,6 +44,12 @@ public class TravelPlaceDAOMybatis {
 		return sqlSession.selectList("travelPlace.getTravelPlaceList", vo);
 	}
 	
+	//리스트선택조회
+	public List<TravelPlaceVO> selectTravelPlaceList(TravelPlaceVO vo) {
+		System.out.println("selectTravelPlaceList() 기능 처리");
+		return sqlSession.selectList("travelPlace.selectTravelPlaceList", vo);
+	}
+	
 	//건수조회
 	public int getCount(TravelPlaceVO vo) {
 		return sqlSession.selectOne("travelPlace.getCount", vo);

@@ -49,4 +49,9 @@ public class TravelPlaceServiceImpl implements TravelPlaceService {
 		return dao.getTravelPlaceList(vo);
 	}
 	
+	@Override
+	public List<TravelPlaceVO> selectTravelPlaceList(TravelPlaceVO vo) {
+		return dao.selectTravelPlaceList(vo);
+	}
+	
 }

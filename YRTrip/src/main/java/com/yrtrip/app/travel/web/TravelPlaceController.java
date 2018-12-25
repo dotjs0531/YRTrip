@@ -1,5 +1,6 @@
 package com.yrtrip.app.travel.web;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,21 +49,6 @@ public class TravelPlaceController {
 		return mv;
 	}
 	
-//등록처리 ajax
-	@RequestMapping(value= {"/insertTravelPlaceAjax"}, method = RequestMethod.POST)
-	@ResponseBody
-	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
-		travelPlaceService.insertTravelPlace(vo);
-		return travelPlaceService.getTravelPlace(vo);
-	}
-
-//선택조회 ajax
-	@RequestMapping(value= {"/insertTravelPlaceAjax"}, method = RequestMethod.POST)
-	@ResponseBody
-	public List<TravelPlaceVO> getTravelPlaceListAjax(TravelPlaceVO vo){
-		return travelPlaceService.getTravelPlaceList(vo);
-	}
-	
 	
 //단건조회
 	@RequestMapping("/getTravelPlace")
@@ -83,6 +69,22 @@ public class TravelPlaceController {
 		travelPlaceService.insertTravelPlace(vo); // 등록처리
 		return "redirect:getTravelPlaceList"; // 목록요청
 	}
+	
+//등록Ajax
+	@RequestMapping("/insertTravelPlaceAjax")
+	@ResponseBody
+	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
+		travelPlaceService.insertTravelPlace(vo);
+		return travelPlaceService.getTravelPlace(vo);	//어디로 return? 수정할 것
+	}
+	
+//조회Ajax
+	@RequestMapping("/selectTravelPlaceList")
+	@ResponseBody
+	public List<TravelPlaceVO> selectTravelPlaceList(TravelPlaceVO vo) {
+		return travelPlaceService.selectTravelPlaceList(vo);
+	}
+	
 
 //수정폼
 	@RequestMapping("/updateTravelPlaceform")

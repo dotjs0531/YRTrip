@@ -56,7 +56,7 @@
 			PLACE_TITLE,
 			PLACE_VISITDATE
 	FROM TRAVEL_PLACET
-	WHERE PLACE_TRAVELBOARDNO = ${travelBoard.travelNo}
+	WHERE PLACE_TRAVELBOARDNO = #{travelNo}
 	ORDER BY PLACE_NO DESC
 </select>
 
@@ -157,4 +157,5 @@
 	FROM TRAVEL_PLACET 
 	WHERE PLACE_NO = #{placeNo}
 </select>
+
 </mapper> 

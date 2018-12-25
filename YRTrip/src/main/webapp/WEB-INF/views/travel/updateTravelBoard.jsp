@@ -200,7 +200,7 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#insertTravelPlace').modal(true);
 		});
 	   /* 장소추가 list Ajax */
-	   $("#insertBTN").click(function(){
+/* 	   $("#insertBTN").click(function(){
 		   var param = $("#placeAjaxData").serialize();
 	    	$.ajax({
 	    		
@@ -210,24 +210,62 @@ jQuery( document ).ready(function( $ ) {
 	    		data: param,
 	    		success: insertTravelPlaceListResult
 	    		});
-	    	});
+	    	});*/
 	    	
-});
-	   
-   function insertTravelPlaceListResult(data) {
-		console.log(data);
-		$("tbody").empty();
-		$.each(data,function(idx,item){
-			$('<tr>')
-			.append($('<td>').html(item.seq))
-			.append($('<td>').html(item.title))
-			.append($('<td>').html(item.writer))
-			.append($('<td>').html('<button id=\'btnSelect\'>조회</button>'))
-			.append($('<td>').html('<button id=\'btnDelete\'>삭제</button>'))
-			.append($('<input type=\'hidden\' id=\'hidden_seq\'>').val(item.seq))
-			.appendTo('tbody');
-		});//each
-	}//boardListResult	   
+}); 
+
+$(function(){
+	loadTravelPlaceList();
+	
+	//댓글목록조회 요청	
+function loadTravelPlaceList(){
+	var params = { travelNo : '${travelBoard.travelNo}' };
+	$.getJSON("selectTravelPlaceList", params, function(datas){
+		console.log(datas);
+		for(i=0; i<datas.length; i++){
+			var div = makeTravelPlaceView(datas[i]);
+			$(div).appendTo("#travelPlaceList");
+		}
+	});
+} 	// end of loadTravelPlaceList
+
+	function makeTravelPlaceView(travelPlace){
+	var div = $("<div>"); 
+	div.attr("id", "TP"+travelPlace.placeNo);
+	div.addClass('travelPlace');
+	div[0].travelPlace=travelPlace;  //{id:1,.... }
+	
+	var str = "<article class=\"panel panel-warning\">"
+				+"<div class=\"panel-heading icon\">"
+				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
+				+"</div>"
+			
+				+"<div class=\"panel-heading\">"
+				+"<h2 class=\"panel-title\">" + travelPlace.placeTitle + "</h2>"
+				+"</div>"
+			
+				+"<div class=\"panel-body\">"
+				+"<img class=\"img-responsive img-rounded\" src=\"//placehold.it/350x150\" />"
+				+"</div>"
+			
+				+"<div class=\"panel-footer\">"
+				+"<i class=\"glyphicon glyphicon-heart\" style=\"color: #ff8000;\"></i>"
+				+"<small>"+ travelPlace.placeLike +"</small>"
+				+"</div>"
+				+"</article>"
+	div.html(str);
+	return div;
+} 	// end of makeTravelPlaceView
+
+	$("#insertTravelPlaceBtn").click(function(){
+		var params = $("#travelPlaceAjaxData").serialize();
+		console.log(params);
+		$.getJSON("insertTravelPlaceAjax", params, function(datas){
+			var div = makeTravelPlaceView(datas);
+			$(div).prependTo("#travelPlaceList");
+		});
+	});
+});	
 </script>
 </head>
 <body>
@@ -425,7 +463,7 @@ jQuery( document ).ready(function( $ ) {
 							<div style="padding-top:10px;">
 							<div class="timeline">
 								<div class="line text-muted"></div>
-																<article class="panel panel-default">
+								<article class="panel panel-default">
 											<div class="panel-heading icon">
 												<i class="glyphicon glyphicon glyphicon glyphicon-user"></i>
 											</div>
@@ -443,28 +481,7 @@ jQuery( document ).ready(function( $ ) {
 												<small>${travelBoard.travelLike}</small>
 											</div>
 								</article>
-								<c:forEach items="${travelPlaceList}" var="place">
-									<article class="panel panel-warning">
-
-										<div class="panel-heading icon">
-											<i class="glyphicon glyphicon glyphicon-map-marker"></i>
-										</div>
-
-										<div class="panel-heading">
-											<h2 class="panel-title">${place.travelPlaceTitle}</h2>
-										</div>
-
-										<div class="panel-body">
-											<img class="img-responsive img-rounded"
-												src="//placehold.it/350x150" />
-										</div>
-
-										<div class="panel-footer">
-											<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
-											<small>${place.travelPlaceLike}</small>
-										</div>
-									</article>
-								</c:forEach>
+								<div id="travelPlaceList"></div>		
 
 								<div class="separator text-muted"></div>
 								<div id="showPlace">
@@ -510,7 +527,7 @@ jQuery( document ).ready(function( $ ) {
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="placeAjaxData" method="post">
+									<form action="./insertTravelPlace" id="travelPlaceAjaxData" method="post">
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
@@ -536,7 +553,7 @@ jQuery( document ).ready(function( $ ) {
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요.">
 												</div>
-												<button class="btn btn-sm btn-default">
+												<button id="insertTravelPlaceBtn"class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
 												</button>
 											</div>

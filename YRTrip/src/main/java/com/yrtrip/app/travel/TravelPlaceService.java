@@ -11,6 +11,6 @@ public interface TravelPlaceService {
 	public TravelPlaceVO getTravelPlace(TravelPlaceVO vo);
 	public int getCount(TravelPlaceVO vo);
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo);
-	
+	public List<TravelPlaceVO> selectTravelPlaceList(TravelPlaceVO vo);
 	
 }
