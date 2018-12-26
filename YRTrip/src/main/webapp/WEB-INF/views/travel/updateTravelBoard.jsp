@@ -15,7 +15,10 @@
 .modal-backdrop {
 	z-index: -1;
 }
-
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 .timeline .separator {
 	border-top: 1px solid currentColor;
 	padding: 5px;
@@ -137,7 +140,6 @@
     -moz-transform: scale(1,1);
     -webkit-transform: scale(1,1);
     transform: scale(1,1);
-    background-image: url("https://bufiles.blob.core.windows.net/co3634/zooming_effect/zooming_bg_1.jpg");
     -moz-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
@@ -198,57 +200,49 @@ jQuery( document ).ready(function( $ ) {
 	   /* 장소 추가 modal */
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
-		});
-	   /* 장소추가 list Ajax */
-/* 	   $("#insertBTN").click(function(){
-		   var param = $("#placeAjaxData").serialize();
-	    	$.ajax({
-	    		
-	    		url: "insertTravelPlaceAjax",
-	    		type: "post",
-	    		dataType: "JSON",
-	    		data: param,
-	    		success: insertTravelPlaceListResult
-	    		});
-	    	});*/
-	    	
+		});	    	
 }); 
 
 $(function(){
 	loadTravelPlaceList();
 	
-	//댓글목록조회 요청	
+//장소리스트 조회 요청	
 function loadTravelPlaceList(){
 	var params = { travelNo : '${travelBoard.travelNo}' };
 	$.getJSON("selectTravelPlaceList", params, function(datas){
-		console.log(datas);
 		for(i=0; i<datas.length; i++){
 			var div = makeTravelPlaceView(datas[i]);
 			$(div).appendTo("#travelPlaceList");
 		}
 	});
 } 	// end of loadTravelPlaceList
-
+//장소리스트 조회 뷰
 	function makeTravelPlaceView(travelPlace){
 	var div = $("<div>"); 
-	div.attr("id", "TP"+travelPlace.placeNo);
-	div.addClass('travelPlace');
-	div[0].travelPlace=travelPlace;  //{id:1,.... }
-	
+ 	div.attr("id", "c"+travelPlace.placeNo);
+	div.addClass('travelPlaceList');
+	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
+	var year = (travelPlace.placeVisitDate).substring(0,4) ;
+	var month = (travelPlace.placeVisitDate).substring(5,7);
+	var day = (travelPlace.placeVisitDate).substring(8,10);
 	var str = "<article class=\"panel panel-warning\">"
 				+"<div class=\"panel-heading icon\">"
 				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
+				+"<p style=\"margin:-5px; background-color:#fff;\">" + year +"</p>"
+ 				+"<p style=\"margin:-15px;background-color:#fff;\">" + month +"</p>"
+				+"<p style=\"background-color:#fff;\">" + day +"</p>"
 				+"</div>"
 			
 				+"<div class=\"panel-heading\">"
-				+"<h2 class=\"panel-title\">" + travelPlace.placeTitle + "</h2>"
+				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
+				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
 				+"</div>"
 			
 				+"<div class=\"panel-body\">"
 				+"<img class=\"img-responsive img-rounded\" src=\"//placehold.it/350x150\" />"
 				+"</div>"
 			
-				+"<div class=\"panel-footer\">"
+				+"<div id=\"footer\" class=\"panel-footer\">"
 				+"<i class=\"glyphicon glyphicon-heart\" style=\"color: #ff8000;\"></i>"
 				+"<small>"+ travelPlace.placeLike +"</small>"
 				+"</div>"
@@ -257,15 +251,95 @@ function loadTravelPlaceList(){
 	return div;
 } 	// end of makeTravelPlaceView
 
+//장소 등록
 	$("#insertTravelPlaceBtn").click(function(){
 		var params = $("#travelPlaceAjaxData").serialize();
-		console.log(params);
-		$.getJSON("insertTravelPlaceAjax", params, function(datas){
+	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
 			var div = makeTravelPlaceView(datas);
 			$(div).prependTo("#travelPlaceList");
-		});
+			jQuery.noConflict();
+			$('#insertTravelPlace').modal("hide");
+		}); 
+	});
+//장소 삭제
+	$("#travelPlaceList").on("click", ".btnDel", function(){
+ 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
+		if(confirm("삭제할까요?")) {
+			var params = "placeNo=" + placeNo;
+			var url = "deleteTravelPlaceAjax";
+			$.getJSON(url, params, function(datas){
+				console.log($('#c'+placeNo));
+				$('#c'+placeNo).remove();
+			});
+		}
 	});
 });	
+/* modal 자동완성 */
+
+$(function() {
+    //input id autocomplete
+    var context = '${pageContext.request.contextPath}';
+    $( "#autocompleteTinfoListModal").autocomplete({
+     source : function(request, response){
+      $.ajax({
+          type:"post",
+          dataType:"json",
+          url:context + "/getTravelInfoListModalData",
+          data:{"tinfoListModal":$("#autocompleteTinfoListModal").val(), "searchCheckModal":$("[name='searchCheckModal']:checked").val()},
+          success:function(data){
+           response($.map(data, function(item){
+            return{
+             label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+             value:item.tinfoCity,
+             tinfoId:item.tinfoId
+            }
+           }));
+          },
+
+          error: function(jqxhr, status, error){
+                alert(jqxhr.statusText + ",  " + status + ",   " + error);
+               alert(jqxhr.status);
+               alert(jqxhr.responseText); 
+          }
+         })
+     },
+     autoFocus:true,
+     matchContains:true,
+     minLength:0,
+     delay:0,
+     select:function(event, ui){
+    	 $("#tinfoListModal").val(ui.item.value);
+         selectedListModal = ui.item.tinfoId;
+     	 $("#tinfoListDispModal").val(selectedListModal);
+         var flag = false;
+         $("#autocompleteTinfoListModal").keydown(function(e){
+          if(e.keyCode == 13){
+           if(!flag){
+             fn_regist();
+            flag = true;
+           }
+          }
+         }); 
+          
+        },
+        focus:function(event, ui){return false;}
+       });
+     });
+$("#autocompleteTinfoListModal").change(function(){
+		selectedListModal = "";
+	   $("#tinfoListModal").val("");
+	   $("#tinfoListDispModal").val("");
+	   $('[name=searchTinfoListboxModal]').val("");
+	});
+
+/* Modal 여행테마 select */      
+function selectTravelWith(ele){
+  	 if(ele.value=='alone'){
+  	travelBoardModalfrm.travelPerson.disabled=true;
+   } else {
+	travelBoardModalfrm.travelPerson.disabled=false;	   
+   }   
+}   
 </script>
 </head>
 <body>
@@ -295,10 +369,16 @@ function loadTravelPlaceList(){
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
-						
+						<form action="./updateTravelBoard">
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
+							<c:if test="${travelBoard.travelPic != null}">
+							<img src="resources/media/${travelPic}" class="img-responsive">
+							</c:if>
+							<c:if test="${travelBoard.travelPic == null}">
+							<img src="resources/media/noimage.jpg" class="img-responsive">
+							</c:if>
 							</div>
 							<span class="top-span">T${travelBoard.travelNo}</span>
 							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
@@ -309,8 +389,8 @@ function loadTravelPlaceList(){
 							</button>
 							</div>
 							<p class="son-text">
-								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" ></span><br/><br/>
-								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input"></span>
+								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
+								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	 <select id="travelWith" name="travelWith">
 																		  <option value="alone" selected>나홀로 여행</option>
@@ -373,7 +453,7 @@ function loadTravelPlaceList(){
 																</c:if>
 								</span> <br>
 								<span class="text-span"> ${sessionScope.login.userName}님과 함께한 여행인원 : 
-									<c:if test="${travelBoard.travelPerson == '0'}">
+									 <c:if test="${travelBoard.travelPerson == '0'}">
 										<select id="travelPerson" name="travelPerson">
 											  <option value="0" selected>0명</option>
 											  <option value="1">1명</option>
@@ -449,12 +529,12 @@ function loadTravelPlaceList(){
 											  <option value="5">5명</option>
 											  <option value="6" selected>6명 이상</option>
 										</select>
-									</c:if>	
+									</c:if>
 								</span><br>
-								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input">원</span>
-								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input"></span>
-								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;"> ~ 
-																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;">
+								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input" name="travelPay">원</span>
+								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche"></span>
+								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelStart"> ~ 
+																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelEnd">
 								</span><br>
 							</p>
 
@@ -473,7 +553,7 @@ function loadTravelPlaceList(){
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" id="travelContent">${travelBoard.travelContent}</textarea>
+												<textarea class="form-control" rows="3" name="travelContent">${travelBoard.travelContent}</textarea>
 											</div>
 											
 											<div class="panel-footer">
@@ -481,12 +561,9 @@ function loadTravelPlaceList(){
 												<small>${travelBoard.travelLike}</small>
 											</div>
 								</article>
-								<div id="travelPlaceList"></div>		
-
-								<div class="separator text-muted"></div>
-								<div id="showPlace">
-								
-								</div>
+								<div id="travelPlaceList">
+								<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
+								</div>		
 								<!-- 장소 추가 -->
 								<article class="panel panel-success">
 
@@ -498,7 +575,7 @@ function loadTravelPlaceList(){
 										<h2 class="panel-title">내가 방문한 장소를 등록하세요.</h2>
 									</div>
 									<div class="panel-body">
-									<button class="btn btn-sm btn-default" id="insertTravelPlaceButton">
+									<button type="button" class="btn btn-sm btn-default" id="insertTravelPlaceButton">
 												<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 장소 추가</i>
 									</button>
 									</div>
@@ -506,11 +583,14 @@ function loadTravelPlaceList(){
 
 							</div>
 							</div>
-																	<button class="btn btn-sm btn-warning pull-right" type="submit">
+										<button class="btn btn-sm btn-warning pull-right" type="submit">
 											<i class="fa fa-pencil fa-fw"></i>수정완료하기
 										</button>
+										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
+</form>
 						</div><!-- end of table-responsive -->
-						
+
 <!-- 장소 추가 modal -->			
 <div class="modal fade" id="insertTravelPlace">
 	<div class="modal-dialog">
@@ -553,12 +633,12 @@ function loadTravelPlaceList(){
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요.">
 												</div>
-												<button id="insertTravelPlaceBtn"class="btn btn-sm btn-default">
+												<button type="button" id="insertTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
 												</button>
 											</div>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
-										<input type="hidden" value="${travelBoard.travelNo}" name="${placeTravelBoardNo}">
+										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
 									</form>
 						</div>
 					</div>

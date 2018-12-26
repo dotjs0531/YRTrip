@@ -17,6 +17,10 @@
 .modal-backdrop {
 	z-index: -1;
 }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 </style>
 <script>
 /* 유저 tooltip */
@@ -232,7 +236,12 @@ $("#autocompleteTinfoList").change(function(){
 <!-- 여행기 리스트 -->
    			<c:forEach items="${travelBoardList}" var="board">
 				<div class="content-box">
-					<img src="resources/media/getTBL.PNG" class="img-responsive">
+							<c:if test="${travelBoard.travelPic != null}">
+							<img src="resources/media/${travelPic}" class="img-responsive">
+							</c:if>
+							<c:if test="${travelBoard.travelPic == null}">
+							<img src="resources/media/noimage.jpg" class="img-responsive">
+							</c:if>
 						<div class="content-title">
 							<div class="text-center">
 								<h3><a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a></h3>

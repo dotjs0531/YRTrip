@@ -134,13 +134,13 @@
 </update>
 
 <!-- 업데이트 (insertTravelBoard에서) -->
-<update id="updateTravelBoardTwo" parameterType="travelBoard">
+<!-- <update id="updateTravelBoardTwo" parameterType="travelBoard">
 	UPDATE TRAVELBOARDT 
 	SET TRAVEL_PAY = #{travelPay},
 		TRAVEL_CONTENT = #{travelContent},
 		TRAVEL_PIC = #{travelPic}
 	WHERE TRAVEL_NO = #{travelNo}
-</update>
+</update> -->
 
 <!-- 글 삭제(getTravelBoardList에서) -->
 <delete id="deleteTravelBoard" parameterType="int">

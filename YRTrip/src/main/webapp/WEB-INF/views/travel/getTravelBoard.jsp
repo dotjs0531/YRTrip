@@ -19,7 +19,10 @@
 .modal-backdrop {
 	z-index: -1;
 }
-
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 .timeline .separator {
 	border-top: 1px solid currentColor;
 	padding: 5px;
@@ -140,7 +143,6 @@
     -moz-transform: scale(1,1);
     -webkit-transform: scale(1,1);
     transform: scale(1,1);
-    background-image: url("https://bufiles.blob.core.windows.net/co3634/zooming_effect/zooming_bg_1.jpg");
     -moz-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
@@ -164,11 +166,6 @@
     -webkit-transition: all 1s;
     transition: all 1s;
 	padding-top: 5vh;
-}
-
-.son-text:hover {
-	background-color: #22313F;
-	opacity: 0.7;
 }
 
 .son-span {
@@ -249,6 +246,13 @@ $(function(){
 	   }
 	   likeCondition();
 });
+
+/* 글 삭제 */
+     function del(travelNo){
+      if(confirm("삭제하시겠습니까?")){
+         location.href = "./deleteTravelBoard?travelNo=" + travelNo;
+      } else { return; }
+   };
 </script>
 </head>
 <body>
@@ -280,6 +284,12 @@ $(function(){
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
+							<c:if test="${travelBoard.travelPic != null}">
+							<img src="resources/media/${travelPic}" style="width:100%;">
+							</c:if>
+							<c:if test="${travelBoard.travelPic == null}">
+							<img src="resources/media/noimage.jpg" style="width:100%;">
+							</c:if>
 							</div>
 							<span class="top-span">NO : T${travelBoard.travelNo}</span>
 							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
@@ -369,10 +379,12 @@ $(function(){
 										</article>
 										</c:forEach>
 								</div>
-								<div class="order-buton">
-								<a href="${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}">수정</a>
-								<a href="${pageContext.request.contextPath}/deleteTravelBoard?travelNo=${travelBoard.travelNo}">삭제</a>
-								</div>
+								<c:if test="${sessionScope.login.userId eq travelBoard.userId}">
+									<div class="order-buton" style="float:right">
+									<a href="${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}">수정</a>
+									<a onclick="del('${travelBoard.travelNo}')">삭제</a>
+									</div>
+								 </c:if>
 							</div>
 						</div>	<!-- end of table-responsive -->
 				

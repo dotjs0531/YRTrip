@@ -75,8 +75,15 @@ public class TravelPlaceController {
 	@ResponseBody
 	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
 		travelPlaceService.insertTravelPlace(vo);
-		return travelPlaceService.getTravelPlace(vo);	//어디로 return? 수정할 것
+		return travelPlaceService.getTravelPlace(vo);
 	}
+//삭제Ajax	
+	@RequestMapping("/deleteTravelPlaceAjax")
+	@ResponseBody
+	public TravelPlaceVO deleteTravelPlaceAjax(TravelPlaceVO vo) {
+		travelPlaceService.deleteTravelPlace(vo);
+		return vo;
+	}	
 	
 //조회Ajax
 	@RequestMapping("/selectTravelPlaceList")

@@ -106,8 +106,6 @@ public class TravelBoardController {
 	@RequestMapping(value="/getTravelInfoListData", method=RequestMethod.POST)
 	@ResponseBody
 	public List<TravelBoardVO> getTravelInfoListData(TravelInfoVO vo) {
-		System.out.println("--------------------------");
-		System.out.println(vo);
 		return travelBoardService.getTravelInfoList(vo);
 	}
 

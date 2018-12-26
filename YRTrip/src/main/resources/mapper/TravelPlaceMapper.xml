@@ -57,7 +57,7 @@
 			PLACE_VISITDATE
 	FROM TRAVEL_PLACET
 	WHERE PLACE_TRAVELBOARDNO = #{travelNo}
-	ORDER BY PLACE_NO DESC
+	ORDER BY PLACE_VISITDATE
 </select>
 
 
@@ -111,7 +111,7 @@
 				#{userId},
 				#{placeTitle},
 				#{placeVisitDate},
-				#{placeTravelBoardNo})
+				#{travelNo})
 </insert>
 
 <update id="updateTravelPlace" parameterType="travelPlace">
