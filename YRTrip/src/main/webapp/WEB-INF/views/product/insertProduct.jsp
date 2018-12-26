@@ -151,44 +151,17 @@
 
 
 $(function(){
-	$('#product_cart_insert').delegate("a", "click", function(){
-		$(this).data('clicked', true)
+	$('#product_cart_insert').on("click", "li", function(){
+		$("#itemCategory").val($(this).find("a").text());
 	});	
 });
-function p_cat(){
-	
-		if($("#pciClothes").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($('#pciClothes').text());
-		}
-		else if($("#pciTicket").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciTicket").text());
-		}
-		else if($("#pciElectronic").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciElectronic").text());
-		}
-		else if($("#pciBook").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciBook").text());
-		}
-		else if($("#pciUSIM").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciUSIM").text());
-		}
-		else if($("#pciETC").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciETC").text());
-		}
 
 	/* 버튼 클릭시 reset */
 	function insert_reset(){
 		$( "form" ).submit(function( event ) {
 			  event.preventDefault();
-			});
+		});
 	}
-}
 
 </script>
 </head>
@@ -205,18 +178,12 @@ function p_cat(){
 
 						<ul class="price-list" id="product_cart_insert">
 							<li><a href="getProductList" style="color: blue">선택하세요</a></li>
-							<li><a id="pciClothes" onclick="p_cat();" href="#"
-								style="color: black">의류</a></li>
-							<li><a id="pciTicket" onclick="p_cat();" href="#"
-								style="color: black">티켓/쿠폰</a></li>
-							<li><a id="pciElectronic" onclick="p_cat();" href="#"
-								style="color: black">전자기기</a></li>
-							<li><a id="pciBook" onclick="p_cat();" href="#"
-								style="color: black">여행도서</a></li>
-							<li><a id="pciUSIM" onclick="p_cat();" href="#"
-								style="color: black">USIM</a></li>
-							<li><a id="pciETC" onclick="p_cat();" href="#"
-								style="color: black">기타</a></li>
+							<li><a href="#">의류</a></li>
+							<li><a href="#"	style="color: black">티켓/쿠폰</a></li>
+							<li><a href="#"	style="color: black">전자기기</a></li>
+							<li><a href="#">여행도서</a></li>
+							<li><a href="#">USIM</a></li>
+							<li><a href="#">기타</a></li>
 						</ul>
 
 						<div class="order-buton">
@@ -301,7 +268,7 @@ function p_cat(){
 								<!-- 모바일 및 데스크톱에서 항상 칼럼폭이 50% 입니다. -->
 								<div class="row price_list">
 									<div class="col-6 col-md-4">
-										<h4>카테코리</h4>
+										<h4>카테고리</h4>
 									</div>
 									<div class="col-12 col-md-8">
 										<input type="text" class="form-control mb-5 input-lg"
@@ -327,7 +294,7 @@ function p_cat(){
 										<h4>수량</h4>
 									</div>
 									<div class="col-12 col-md-8">
-<!-- 수량 : 1.0 막아놓기 -->
+<!-- 수량 : 0 막아놓기 -->
 										<input type="number" name="quantity" min="1" name="itemEa"
 											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 									</div>

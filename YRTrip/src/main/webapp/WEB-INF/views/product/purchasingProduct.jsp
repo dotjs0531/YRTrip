@@ -26,16 +26,16 @@
 </style>
 <script>
 	$(function(){
-		var post_origin = $("#userPost").val();
+		var post_origin = $("#orderPost").val();
 		var address_origin = $("#userAddress").val();
 		var item_total = $("#itemPrice").text() * $("#itemEa").text();
 		$("#different-address").click(function(){
 			$("#userAddress").val('');
-			$("#userPost").val('');
+			$("#orderPost").val('');
 		});
 		$("#same-address").click(function(){
 			$("#userAddress").val(address_origin);
-			$("#userPost").val(post_origin);
+			$("#orderPost").val(post_origin);
 		});
 		
 		$("#itemTotal").html(item_total);
@@ -77,7 +77,7 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById("userPost").value = data.zonecode;
+                document.getElementById("orderPost").value = data.zonecode;
                 document.getElementById("userAddress").value = addr;
             }
         }).open();
@@ -134,27 +134,23 @@
 						</div>
 
 						<input class="form-control col-md-5 mr-4 mb-3" type="text"
-							value="${userPur.userPost}" id="userPost"> <a
+							value="${userPur.userPost}" id="orderPost"> <a
 							role="button" class="btn btn-warning col-md-3 pull-right"
 							onclick="sample4_execDaumPostcode()">우편번호 찾기</a> <input
 							type="text" class="form-control" id="userAddress"
 							name="orderAddress1" value="${userPur.userAddress}"
-							placeholder="시/군/구/동/읍/면/리" required="">
+							placeholder="시/군/구/동/읍/면/리+상세주소" required="">
 							<div class="invalid-feedback">배달될 주소를 입력해주세요</div>
+							<!-- 상세주소도 써달라고 하기! -->
 					</div>
-					<div class="mb-3">
-						<label for="address2">상세주소</label> <input type="text"
-							class="form-control" id="address2" name="orderAddress2"
-							placeholder="동/호/실/몇층과 같은 상세주소를 입력해주세요" required="">
-					</div>
-					<div class="mb-3">
+					<%-- <div class="mb-3">
 						<label for="email">이메일<span class="text-muted">(선택)</span></label>
 						<input type="email" class="form-control"
 							value="${userPur.userEmail}" id="email"
 							placeholder="you@example.com">
 						<div class="invalid-feedback">배송내역을 이메일로 알려드립니다 필요시 입력해주세요</div>
 					</div>
-
+ --%>
 					<hr class="mb-4">
 					<h4 class="mb-3">상품정보</h4>
 					상품이미지 작게 넣기 60*60정도?

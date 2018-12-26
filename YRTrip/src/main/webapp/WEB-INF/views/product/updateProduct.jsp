@@ -279,7 +279,7 @@ function p_cat(){
 								<!-- 모바일 및 데스크톱에서 항상 칼럼폭이 50% 입니다. -->
 								<div class="row price_list">
 									<div class="col-6 col-md-4">
-										<h4>카테코리</h4>
+										<h4>카테고리</h4>
 									</div>
 									<div class="col-12 col-md-8">
 										<input type="text" class="form-control mb-5 input-lg"
@@ -306,7 +306,7 @@ function p_cat(){
 										<h4>수량</h4>
 									</div>
 									<div class="col-12 col-md-8">
-<!-- 수량 : 1.0 막아놓기 -->
+<!-- 수량 : 0 막아놓기 -->
 										<input type="number" min="1" name="itemEa" value="${product.itemEa}"
 											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 									</div>
