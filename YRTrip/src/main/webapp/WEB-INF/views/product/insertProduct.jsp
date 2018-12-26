@@ -321,17 +321,18 @@ function p_cat(){
 										<div class="invalid-feedback">가격을 입력하세요</div>
 									</div>
 								</div>
-								<!-- 수량 : 1.0 막아놓기 -->
+
 								<div class="row price_list">
 									<div class="col-6 col-md-4">
 										<h4>수량</h4>
 									</div>
 									<div class="col-12 col-md-8">
+<!-- 수량 : 1.0 막아놓기 -->
 										<input type="number" name="quantity" min="1" name="itemEa"
 											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 									</div>
 								</div>
-								<!-- 상품상태 : 하나만 체크 되도록 -->
+<!-- 상품상태 : 하나만 체크 되도록 -->
 								<div class="row">
 									<div class="col-6 col-md-4">
 										<h4>상품상태</h4>
@@ -364,7 +365,7 @@ function p_cat(){
 									</div>
 								</div>
 								<div class="space-five"></div>
-								<!-- 결제방법 : 1.값 두개다 db에 들어갈 수 있도록  -->
+<!-- 결제방법 : 1.값 두개다 db에 들어갈 수 있도록  -->
 								<div class="row price_list">
 									<div class="col-6 col-md-4">
 										<h4>선호결제방법</h4>
@@ -390,10 +391,10 @@ function p_cat(){
 									<textarea name="itemContent" class="form-control col-sm-12"
 										rows="5"></textarea>
 								</div>
-								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
+<!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId"
 									value="${sessionScope.login.userId}">
-								<!--  구매가능 여부 : 구매가능(defalut)  -->
+<!--  구매가능 여부 : 구매가능(defalut)  -->
 							</div>
 						</div>
 					</form>

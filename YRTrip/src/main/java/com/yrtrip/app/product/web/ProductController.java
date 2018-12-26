@@ -81,8 +81,6 @@ public class ProductController {
 	//제품등록처리
 	@RequestMapping(value="/insertProduct", method=RequestMethod.POST)
 	public String insertProduct(Model model, ProductVO vo, HttpServletRequest request, MultipartFile[] productPicFile) throws IllegalStateException, IOException{
-
-		
 		
 		String path = request.getSession().getServletContext().getRealPath("/images/product");
 		
