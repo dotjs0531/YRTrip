@@ -160,42 +160,56 @@ a:hover { color:white }
 			div.addClass('MyBuyerList');
 			div[0].buyerList = buyer;
 			
-			if(buyer.itemDeliveryno == null){
-				 var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
-						+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
-		        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
-						+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>송장번호 등록</button></div>"
-						+ "<p style='clear:both'>";
-			} else {
-				 var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
+			var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
 					+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
-	        		+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
-					+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>송장번호 수정</button></div>"
+		        	+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
+					+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId + buyer.buyerId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>구매자 정보</button></div>"
 					+ "<p style='clear:both'>";
-			}
+			
 			div.html(str);
 			return div;
 		};
 
-		//송장번호 등록
+		//구매자 정보 - 송장번호 등록
 		$('#updateDnoForm').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
 			console.log(event);
-			var param = { orderId :  button.attr("id").substr(3) };
-			$.getJSON("getMyOrder", param, function(data) {
+			var params = { orderId : button.attr("id").substr(3,13),
+						   buyerId : button.attr("id").substr(16) };
+			$.getJSON("getMyBuyer", params, function(data) {
 				var orderId = data.orderId;
+				var orderDate = data.orderDate;
 				var itemDeliveryno = data.itemDeliveryno;
 				
-				if (data.itemDeliveryno == null) {
-					$("#dnoTitle").html("송장번호 등록");
-					$("#dnoOrderId").val(orderId);
-					$("#updateDno").html("등록");
-				} else {
-					$("#dnoTitle").html("송장번호 수정");
-					$("#dnoOrderId").val(orderId);
+				var itemMethod = data.itemMethod;
+				var orderPrice = data.orderPrice;
+				var orderEa = data.orderEa;
+				var totalPrice = orderEa*orderPrice;
+				
+				var userName = data.userName;
+				var userPhone = data.userPhone;
+				var orderPost = data.orderPost;
+				var orderAddress = data.orderAddress;
+
+				$("#orderId").html(orderId);
+				$("#dnoOrderId").val(orderId);
+				$("#orderDate").html(orderDate);
+				if(itemDeliveryno!=null){
 					$("#dno").val(itemDeliveryno);
 					$("#updateDno").html("수정");
+				} else {
+					$("#updateDno").html("등록");
 				}
+					
+				$("#itemMethod").html(itemMethod);
+				$("#orderEa").html(orderEa+"개");
+				$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+				$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+
+				$("#userName").html(userName);
+				$("#userPhone").html(userPhone);
+				$("#orderPost").html(orderPost);
+				$("#orderAddress").html(orderAddress);
 			})
 		});
 	});
@@ -332,7 +346,7 @@ a:hover { color:white }
 							</div> 
 						</div> <!-- end of modal -->
 						
-	                    <!-- 송장번호 등록 페이지 -->			
+	                    <!-- 구매자 정보 보기 - 송장번호 등록/수정 -->			
 						<div class="modal fade" id="updateDnoForm">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -346,19 +360,85 @@ a:hover { color:white }
 										<div class="container">
 											<div id="login-row" class="row justify-content-center align-items-center">
 												<div id="login-column" class="col-md-6">
-													<div id="login-row" class="row justify-content-center align-items-center" style="width:100%; margin:0 auto">
-														<form action="./updateDno" method="post" enctype="multipart/form-data">										
-															<input type="hidden" id="dnoOrderId" name="orderId">
-															<h4 class="text-info" id="dnoTitle" style="color:black; font-family: 'NanumSquareRoundB'"></h4>
-															<div class="input-group">
-																<input type="text" class="form-control" id="dno" name="itemDeliveryno" style="margin:15px 0 15px 0">
-																<span class="input-group-btn">
-																	<button type="submit" class="btn btn-default" id="updateDno" style="float:right;"></button>
-																</span>
-																<p style="clear:both"/>
-															</div>
-														</form>
+													<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+														<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+														<h4 class="text-info" style="color:black;">주문정보</h4><hr/>
+															<table style="width:100%; margin-left:10px">
+																<tr>
+																	<td><h5 class="text-info">주문번호</h5></td>
+																	<td style="text-align:right;"><h5 id="orderId"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">주문일자</h5></td>
+																	<td style="text-align:right;"><h5 id="orderDate"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">송장번호</h5></td>
+																	<td style="text-align:right;">
+																		<form action="./updateDno" method="post" enctype="multipart/form-data">										
+																			<input type="hidden" id="dnoOrderId" name="orderId">
+																			<div class="input-group">
+																				<input type="text" class="form-control" id="dno" name="itemDeliveryno">
+																				<span class="input-group-btn">
+																					<button type="submit" class="btn btn-default" id="updateDno" style="float:right;"></button>
+																				</span>
+																				<p style="clear:both"/>
+																			</div>
+																		</form>
+																	</td>
+																</tr>
+															</table>
+														</div>
 													</div>
+													
+													<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+						            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+														<h4 class="text-info" style="color:black;">결제정보</h4><hr/>
+															<table style="width:100%; margin-left:10px">
+																<tr>
+																	<td><h5 class="text-info">결제수단</h5></td>
+																	<td style="text-align:right;"><h5 id="itemMethod"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">상품 금액</h5></td>
+																	<td style="text-align:right;"><h5 id="orderPrice"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">구매 수량</h5></td>
+																	<td style="text-align:right;"><h5 id="orderEa"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">결제 금액</h5></td>
+																	<td style="text-align:right;"><h5 id="totalPrice"></h5></td>
+																</tr>
+															</table>
+														</div>
+													</div>
+													
+													<div id="login-row" class="row justify-content-center align-items-center" style="width:100%;">
+						            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
+														<h4 class="text-info" style="color:black;">배송정보</h4><hr/>
+															<table style="width:100%; margin-left:10px">
+																<tr>
+																	<td><h5 class="text-info">수령인</h5></td>
+																	<td style="text-align:right;"><h5 id="userName"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">연락처</h5></td>
+																	<td style="text-align:right;"><h5 id="userPhone"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">우편번호</h5></td>
+																	<td style="text-align:right;"><h5 id="orderPost"></h5></td>
+																</tr>
+																<tr>
+																	<td><h5 class="text-info" style="color:#5f768b;">주소</h5></td>
+																	<td style="text-align:right;"><h5 id="orderAddress"></h5></td>
+																</tr>
+															</table>
+														</div>
+													</div>
+													
 												</div>
 											</div>
 										</div>

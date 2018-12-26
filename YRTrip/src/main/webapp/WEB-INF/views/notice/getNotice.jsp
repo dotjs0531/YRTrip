@@ -46,7 +46,7 @@
 						<c:if test="${not empty notice.noticeImg}">
 							<img src="./images/notice/${notice.noticeImg}" />
 						</c:if>
-						${notice.noticeContent}
+							<pre style="background-color:white; border-style: none;">${notice.noticeContent}</pre>
 						</div>
 						
                     	<c:if test="${sessionScope.login.userGrant eq 'admin'}">

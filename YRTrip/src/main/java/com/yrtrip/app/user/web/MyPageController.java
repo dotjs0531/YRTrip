@@ -188,6 +188,11 @@ public class MyPageController {
 	public List<OrderVO> getMyBuyerList(OrderVO vo) {	//구매자 목록보기
 		return mypageService.getMyBuyerList(vo);
 	}
+	@RequestMapping("getMyBuyer")
+	@ResponseBody
+	public OrderVO getMyBuyer(OrderVO vo) {	//구매자 목록보기
+		return mypageService.getMyBuyer(vo);
+	}
 	@RequestMapping("/updateDno") //구매자 송장번호 등록
 	public String updateDno(OrderVO vo) {
 		mypageService.updateDno(vo);

@@ -215,17 +215,23 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   ORDER_DELIVERY,
 		   ORDER_PRICE,
 		   ORDER_EA,
+		   ORDER_POST,
+		   ORDER_ADDRESS,
 		   O.ITEM_ID,
+		   ITEM_METHOD,
 		   ITEM_DELIVERYNO,
-		   U.USER_
+		   USER_PHONE,
+		   USER_NAME
+	  FROM ORDERT O, ITEMT I, USERT U
 	 WHERE O.ITEM_ID = I.ITEM_ID
-	       AND O.ITEM_ID = #{itemId}
-	       AND I.SELLER_ID = #{sellerId}
-		   
+	 	   AND U.USER_ID = O.BUYER_ID
+           AND ORDER_ID = #{orderId}
+	       AND BUYER_ID =  #{buyerId}
 </select>
 <update id="updateDno" parameterType="order">
-	UPDATE ORDERT SET ITEM_DELIVERYNO = #{itemDeliveryno}
-				WHERE ORDER_ID = #{orderId}
+	UPDATE ORDERT SET ITEM_DELIVERYNO = #{itemDeliveryno},
+					  ORDER_DELIVERY = '배송중'
+				  WHERE ORDER_ID = #{orderId}
 </update>
 
 <!-- 거래내역 페이지 -->

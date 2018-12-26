@@ -72,6 +72,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public List<OrderVO> getMyBuyerList(OrderVO vo) {
 		return dao.getMyBuyerList(vo);
 	}
+	public OrderVO getMyBuyer(OrderVO vo) {
+		return dao.getMyBuyer(vo);
+	}
 	public void updateDno(OrderVO vo) {
 		dao.updateDno(vo);
 	}
