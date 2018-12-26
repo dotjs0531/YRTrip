@@ -157,9 +157,9 @@
 					상품이미지 작게 넣기 60*60정도?
 					<div class="row">
 						<div class="col-md-3 mb-3">
-							<label for="orderPrice">상품가격</label>
-							<div id="orderPrice">
-								<input type="text" name="orderPrice" value="${cart.itemPrice}">
+							<label for="orderPriceSingle">상품가격</label>
+							<div id="orderPriceSingle">
+								<input type="text" name="" value="${cart.itemPrice}">
 								${cart.itemPrice}
 							</div>
 						</div>
@@ -169,9 +169,9 @@
 						</div>
 
 						<div class="col-md-3 mb-3">
-							<label for="OrderEa" class="">주문개수</label>
-							<div id="OrderEa">
-								<input type="text" name="OrderEa" value="${cart.itemEa}">
+							<label for="orderEa" class="">주문개수</label>
+							<div id="orderEa">
+								<input type="text" name="orderEa" value="${cart.itemEa}">
 							</div>
 						</div>
 
