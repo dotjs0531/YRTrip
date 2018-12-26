@@ -23,6 +23,10 @@
 
 <style class="cp-pen-styles">
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 @font-face {
  font-family: 'NanumSquareRoundEB';
  src: url(resources/fonts/NanumSquareRoundEB.eot);
@@ -106,8 +110,22 @@ a:hover { color:white }
                 		<div style="min-height:420px">
 							<c:forEach items="${YourPartnerList}" var="partner">
 		           				<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
-									<h5 class="control-label"><a href="getPartner?partnerId=${partner.partnerId}" style="color:black; text-decoration:none !important">
-										<strong>no. ${partner.partnerId}</strong> &nbsp;&nbsp; ${partner.partnerTitle}</a></h5>
+									<h4 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left"><strong>${partner.partnerClass} > </strong></h4>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left">
+										<a href="getPartner?partnerId=${partner.partnerId}" style="color:black; text-decoration:none !important"><strong>&nbsp;&nbsp; ${partner.partnerTitle}</strong></a></h5>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left">
+										&nbsp;&nbsp;|&nbsp;<c:if test="${partner.tinfoCountry ne null}">${partner.tinfoCountry}</c:if><c:if test="${partner.tinfoState ne null}"> ${partner.tinfoState}</c:if> ${partner.tinfoCity}
+									</h5>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right">${partner.partnerDate}</h5>
+									<p style="clear:both"/>
+									
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; float:left">
+										여행 기간 : ${partner.partnerStart} ~ ${partner.partnerEnd}&nbsp;/&nbsp;비용 : ${partner.partnerPay}&nbsp;/&nbsp;인원 : ${partner.partnerPers}
+									</h5>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; float:right">
+										<span><i class="fa fa-eye">&nbsp;${partner.partnerHit}</i></span>
+										<span><i class="fa fa-comment">&nbsp;${YourJoinerCnt}</i></span></h5>
+									<p style="clear:both"/>
 								</div>
 							</c:forEach><br/>
 						</div>

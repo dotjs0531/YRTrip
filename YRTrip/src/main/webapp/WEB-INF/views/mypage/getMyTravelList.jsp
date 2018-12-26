@@ -28,6 +28,10 @@ body {
   display: grid;
 }
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 .check {
   cursor: pointer;
   position: relative;

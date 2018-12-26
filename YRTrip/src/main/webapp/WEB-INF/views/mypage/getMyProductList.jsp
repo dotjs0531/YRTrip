@@ -33,6 +33,10 @@ body {
   margin-top:70px;
 }
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 .check {
   cursor: pointer;
   position: relative;
@@ -282,7 +286,7 @@ a:hover { color:white }
 												</div>
 												<h4 class="pull-right">￦${product.itemPrice}</h4>
 												<h1 class="title"><a href="getProduct?itemId=${product.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
-													white-space: nowrap; overflow: hidden; width:140px; text-decoration:none !important;">${product.itemName}</a></h1>
+													white-space: nowrap; overflow: hidden; width:130px; text-decoration:none !important;">${product.itemName}</a></h1>
 												<h2 class="sub_title">${product.itemCategory}</h2>
 												<p class="description">${product.itemContent}</p>
 												<div class="post-meta">

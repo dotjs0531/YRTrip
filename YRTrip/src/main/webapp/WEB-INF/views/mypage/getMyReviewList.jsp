@@ -36,6 +36,10 @@
   margin-top:70px;
 }
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 @font-face {
  font-family: 'NanumSquareRoundEB';
  src: url(resources/fonts/NanumSquareRoundEB.eot);
@@ -160,7 +164,6 @@ $(function() {
 								<c:if test="${not empty review.reviewContent}">
 			            			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'"><strong>${order.orderId}</strong> &nbsp;&nbsp; ${review.reviewDate}</h5><br/>
-										<input type="checkbox" class="cbx" id="${order}" name="userId" value="${order.orderId}" style="display: none;" class="form-control">
 										
 										<!-- 사진 출력 -->
 										<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:180px; float:left">

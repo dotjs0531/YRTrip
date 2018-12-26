@@ -42,7 +42,7 @@
 						<strong>작성자</strong>&nbsp;&nbsp;${notice.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${notice.noticeDate} ｜ <strong>조회수</strong>&nbsp;&nbsp;${notice.noticeHit}
 						
 						<hr />
-						<div style="min-height:200px;">
+						<div style="min-height:300px;">
 						<c:if test="${not empty notice.noticeImg}">
 							<img src="./images/notice/${notice.noticeImg}" />
 						</c:if>

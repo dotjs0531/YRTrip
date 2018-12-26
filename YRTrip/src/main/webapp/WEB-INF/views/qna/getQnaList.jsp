@@ -7,10 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 a { text-decoration:none !important; }
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 </style>
 <script>
 	function go_page(page) {
@@ -40,7 +43,7 @@ a:hover { color:white }
                 </div>
                 
                 <div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:400px;">
+                	<div class="table-responsive" style="min-height:420px;">
                 	
                 		<!-- 검색 창 & 페이징 처리 -->
                 		<form name="frm" class="form-inline">

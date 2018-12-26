@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
+import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
@@ -45,14 +46,14 @@ public class YourPageController {
 	
 	//동행 페이지
 	@RequestMapping(value = "/getYourPartnerList", method = RequestMethod.GET)
-	public ModelAndView getYourPartnerList(PartnerVO vo, UserVO uvo, Paging paging) {
+	public ModelAndView getYourPartnerList(PartnerVO vo, JoinerVO jvo, UserVO uvo, Paging paging) {
 		ModelAndView mv = new ModelAndView();
 
 		if (paging.getPage() == null) {
 			paging.setPage(1);
 		}
 
-		paging.setPageUnit(10);
+		paging.setPageUnit(5);
 		
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
@@ -61,6 +62,7 @@ public class YourPageController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
+		mv.addObject("YourJoinerCnt", yourpageService.getYourJoinerCnt(jvo));
 		mv.addObject("YourPartnerList", yourpageService.getYourPartnerList(vo));
 		mv.setViewName("yourpage/getYourPartnerList");
 		return mv;
@@ -136,8 +138,9 @@ public class YourPageController {
 	
 	//상품 페이지
 	@RequestMapping(value = "/getYourProductList", method = RequestMethod.GET)
-	public ModelAndView getYourProductList(ProductVO vo, UserVO uvo, Paging paging) {
+	public ModelAndView getYourProductList(ProductVO vo, OrderVO ovo, UserVO uvo, Paging paging) {
 		uvo.setUserId(vo.getSellerId());
+		ovo.setItemId(vo.getItemId());
 		
 		ModelAndView mv = new ModelAndView();
 
@@ -154,6 +157,7 @@ public class YourPageController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
+		mv.addObject("YourReviewCnt", yourpageService.getYourProductReviewCnt(ovo));
 		mv.addObject("YourProductList", yourpageService.getYourProductList(vo));
 		mv.setViewName("yourpage/getYourProductList");
 		return mv;

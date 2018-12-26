@@ -63,7 +63,7 @@ public class JoinerController {
          System.out.println(v.getJoinerCondition());
       }
 
-      vo.setPartnerId(request.getParameter("partnerid"));
+      vo.setPartnerId(Integer.parseInt(request.getParameter("partnerid")));
 
       model.addAttribute("joinerList", joinerService.getJoinerList(vo));
 

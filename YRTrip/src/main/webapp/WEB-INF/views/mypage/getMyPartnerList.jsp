@@ -27,6 +27,10 @@ body {
   display: grid;
 }
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 .check {
   cursor: pointer;
   position: relative;
@@ -191,7 +195,7 @@ a:hover { color:white }
 												</c:if>
 											</c:forEach><br/>
 											<c:if test="${not empty MyJoinerList}">
-												<button type="button" class="btn btn-default" style="float:right;">취소</button>
+												<button type="submit" class="btn btn-default" style="float:right;">취소</button>
 											</c:if>
 										<p style="clear:both"/>
 										</form>

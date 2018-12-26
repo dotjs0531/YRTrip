@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.like.LikeVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
@@ -39,6 +40,9 @@ public class YourPageDAOMybatis {
 	public List<PartnerVO> getYourPartnerList(PartnerVO vo) {
 		return mybatis.selectList("user.getYourPartnerList", vo);
 	}
+	public int getYourJoinerCnt(JoinerVO vo) {
+		return mybatis.selectOne("user.getYourJoinerCnt", vo);
+	}
 
 	//좋아요
 	public int getYourLikedCount(LikeVO vo) {
@@ -60,6 +64,9 @@ public class YourPageDAOMybatis {
 	}
 	public List<ProductVO> getYourProductList(ProductVO vo) {
 		return mybatis.selectList("user.getYourProductList", vo);
+	}
+	public int getYourProductReviewCnt(OrderVO vo) {
+		return mybatis.selectOne("user.getYourProductReviewCnt", vo);
 	}
 
 	//리뷰

@@ -12,6 +12,10 @@
 <style>
 a { text-decoration:none !important; }
 a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 </style>
 <script>
 	function go_page(page) {

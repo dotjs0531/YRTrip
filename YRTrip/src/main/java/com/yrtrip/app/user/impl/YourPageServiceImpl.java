@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.like.LikeVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
@@ -38,6 +39,9 @@ public class YourPageServiceImpl implements YourPageService {
 	public List<PartnerVO> getYourPartnerList(PartnerVO vo) {
 		return dao.getYourPartnerList(vo);
 	}
+	public int getYourJoinerCnt(JoinerVO vo) {
+		return dao.getYourJoinerCnt(vo);
+	}
 
 	//좋아요
 	public int getYourLikedCount(LikeVO vo) {
@@ -59,6 +63,9 @@ public class YourPageServiceImpl implements YourPageService {
 	}
 	public List<ProductVO> getYourProductList(ProductVO vo) {
 		return dao.getYourProductList(vo);
+	}
+	public int getYourProductReviewCnt(OrderVO vo) {
+		return dao.getYourProductReviewCnt(vo);
 	}
 
 	//리뷰

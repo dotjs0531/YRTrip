@@ -207,6 +207,22 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	       AND O.ITEM_ID = #{itemId}
 	       AND I.SELLER_ID = #{sellerId}
 </select>
+<select id="getMyBuyer" parameterType="order" resultType="order">
+	SELECT BUYER_ID,
+		   ORDER_ID,
+		   TO_CHAR(ORDER_DATE, 'YYYY/MM/DD') ORDER_DATE,
+		   ORDER_CONDITION,
+		   ORDER_DELIVERY,
+		   ORDER_PRICE,
+		   ORDER_EA,
+		   O.ITEM_ID,
+		   ITEM_DELIVERYNO,
+		   U.USER_
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	       AND O.ITEM_ID = #{itemId}
+	       AND I.SELLER_ID = #{sellerId}
+		   
+</select>
 <update id="updateDno" parameterType="order">
 	UPDATE ORDERT SET ITEM_DELIVERYNO = #{itemDeliveryno}
 				WHERE ORDER_ID = #{orderId}

@@ -60,10 +60,10 @@
 		$("#qnaComment").on("click", ".btnUpdFrm", function(){
 			var commentId = $(this).parent().attr("id").substring(1);
 			//원래 댓글  내용 안보이게
-			$("#c"+commentId+" [name=comLabel]").css("display","none");
+			/* $("#c"+commentId+" [name=comLabel]").css("display","none");
 			$("#c"+commentId+" [name=comContent]").css("display","none");
 			$("#c"+commentId+" [name=comUpd]").css("display","none");
-			$("#c"+commentId+" [name=comDel]").css("display","none");
+			$("#c"+commentId+" [name=comDel]").css("display","none"); */
 			
 			//수정할 데이터 입력필드에 셋팅
 			$("#updateForm [name=commentId]").val(commentId);    

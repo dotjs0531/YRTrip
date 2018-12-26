@@ -35,13 +35,30 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  PARTNER_ID,
 			PARTNER_TITLE,
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,
-			USER_ID,
-			PARTNER_CONDITION
-	  FROM  PARTNERT
-	  WHERE USER_ID = #{userId}
+			PARTNER_HIT,
+			TO_CHAR(PARTNER_DATE, 'YY/MM/DD') PARTNER_DATE,
+			PARTNER_PAY,
+			PARTNER_CLASS,
+			PARTNER_PERS,
+			TO_CHAR(PARTNER_START, 'YYYY.MM.DD') PARTNER_START,
+			TO_CHAR(PARTNER_END, 'YYYY.MM.DD') PARTNER_END,
+			PARTNER_CONDITION,
+			P.TINFO_ID,
+			TINFO_COUNTRY,
+			TINFO_STATE,
+			TINFO_CITY,
+			USER_ID
+	  FROM  PARTNERT P, TRAVELINFOT T
+	  WHERE P.TINFO_ID = T.TINFO_ID
+	  		AND USER_ID = #{userId}
    ORDER BY PARTNER_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+<select id="getYourJoinerCnt" parameterType="joiner" resultType="int">
+	SELECT COUNT(*)
+	  FROM JOINERT J, PARTNERT P
+	 WHERE J.PARTNER_ID = P.PARTNER_ID
+		   AND P.USER_ID = #{userId}
 </select>
 
 <!-- 좋아요 페이지 -->
@@ -145,6 +162,13 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
    ORDER BY ITEM_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
+<select id="getYourProductReviewCnt" parameterType="order" resultType="int">
+	SELECT COUNT(*)
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	 	   AND I.ITEM_ID = #{itemId}
+	       AND I.SELLER_ID = #{sellerId}
+</select>
 
 <!-- 리뷰 페이지 -->
 <select id="getYourReviewCount" parameterType="order" resultType="int">
@@ -160,6 +184,9 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   REVIEW_CONTENT,
 		   TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') REVIEW_DATE,
 		   REVIEW_PIC,
+		   O.ITEM_ID,
+		   ITEM_NAME,
+		   ITEM_CATEGORY
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 	       AND I.SELLER_ID = #{sellerId}
