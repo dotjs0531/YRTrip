@@ -38,11 +38,32 @@
 	</select>
 
 	<insert id="insertOrder" parameterType="order">
-	INSERT INTO orderT
-				(
-	)
-	VALUES (FUNC_CREATE_ORDER_ID(),
-	 	)
+	INSERT INTO orderT(
+				ORDER_ID,
+				ORDER_DATE,
+				ORDER_CONDITION,
+				ORDER_DELIVERY,
+				ORDER_PRICE,
+				ORDER_EA,
+				ITEM_ID,
+				BUYER_ID,
+				<!-- ITEM_DELIVERYNO -->
+				ORDER_ADDRESS1,
+				ORDER_ADDRESS2
+				)
+			VALUES (
+				FUNC_CREATE_ORDER_ID(),
+				SYSDATE,
+				'결제완료',
+				#{orderDelivery},
+				#{orderPrice},
+				#{orderEa},
+				#{itemId},
+				#{buyerId},
+				<!-- #{}, -->
+				#{orderAddress1},
+				#{orderAddress2}				
+	 			)
 	</insert>
 	<update id="updateOrder" parameterType="order">
 		UPDATE SET

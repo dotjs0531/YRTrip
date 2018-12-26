@@ -54,7 +54,7 @@ public class OrderController {
 	@RequestMapping(value = "/insertOrder", method = RequestMethod.POST)
 	public String insertOrder(OrderVO vo) {
 		orderService.insertOrder(vo);
-		return "redirect:getOrderList";
+		return "redirect:getMyOrderList";
 	}
 	
 	//수정폼

@@ -135,14 +135,14 @@ public class ProductController {
 		productService.deleteProduct(vo);
 		return "redirect:getProductList";
 	}
-	//주문서 뷰(purchasingProduct.jsp)
+	/*//주문서 뷰(purchasingProduct.jsp)
 	@RequestMapping("/purchasingProductView")
 	public String purchasingProductForm(ProductVO vo) {
 		return "product/purchasingProduct";
-	}
-	//주문서 입력 처리 : 회원정보 select, 아이템정보 select, cart select
+	}*/
+	//주문서 폼 : 회원정보 select, 아이템정보 select, cart select
 	@RequestMapping("/purchasingProduct")
-	public String purchasingProduct(Model model, CartVO voc, UserVO vou, HttpSession session) {		
+	public String purchasingProductForm(Model model, CartVO voc, UserVO vou, HttpSession session) {		
 		
 		vou.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 		UserVO uservo = userService.getUser(vou);
