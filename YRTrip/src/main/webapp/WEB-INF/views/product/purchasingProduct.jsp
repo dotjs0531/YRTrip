@@ -27,14 +27,14 @@
 <script>
 	$(function(){
 		var post_origin = $("#orderPost").val();
-		var address_origin = $("#userAddress").val();
+		var address_origin = $("#orderAddress").val();
 		var item_total = $("#itemPrice").text() * $("#itemEa").text();
 		$("#different-address").click(function(){
-			$("#userAddress").val('');
+			$("#orderAddress").val('');
 			$("#orderPost").val('');
 		});
 		$("#same-address").click(function(){
-			$("#userAddress").val(address_origin);
+			$("#orderAddress").val(address_origin);
 			$("#orderPost").val(post_origin);
 		});
 		
@@ -78,7 +78,7 @@
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
                 document.getElementById("orderPost").value = data.zonecode;
-                document.getElementById("userAddress").value = addr;
+                document.getElementById("orderAddress").value = addr;
             }
         }).open();
     }
@@ -130,15 +130,16 @@
 
 					<div class="mb-3">
 						<div class="row">
-							<label class="col-md-12" for="userAddress">주소</label>
+							<label class="col-md-12" for="orderAddress">주소</label>
 						</div>
 
 						<input class="form-control col-md-5 mr-4 mb-3" type="text"
-							value="${userPur.userPost}" id="orderPost"> <a
+							value="${userPur.userPost}" name="orderPost" id="orderPost"> <a
 							role="button" class="btn btn-warning col-md-3 pull-right"
-							onclick="sample4_execDaumPostcode()">우편번호 찾기</a> <input
-							type="text" class="form-control" id="userAddress"
-							name="orderAddress1" value="${userPur.userAddress}"
+							onclick="sample4_execDaumPostcode()">우편번호 찾기</a> 
+						<input
+							type="text" class="form-control" id="orderAddress"
+							name="orderAddress" value="${userPur.userAddress}"
 							placeholder="시/군/구/동/읍/면/리+상세주소" required="">
 							<div class="invalid-feedback">배달될 주소를 입력해주세요</div>
 							<!-- 상세주소도 써달라고 하기! -->
@@ -205,17 +206,17 @@
 					<h4 class="mb-3">결제방법</h4>
 					<div class="mb-3">
 						<div class="custom-control custom-radio">
-							<input id="credit" name="orderDelivery" type="radio"
+							<input id="credit" name="" type="radio"
 								class="custom-control-input" value="카드결제" checked="" required="">
 							<label class="custom-control-label" for="credit">카드결제</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="debit" name="orderDelivery" type="radio"
+							<input id="debit" name="" type="radio"
 								class="custom-control-input" value="현금결제" required=""> <label
 								class="custom-control-label" for="debit">현금결제</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="paypal" name="orderDelivery" type="radio"
+							<input id="paypal" name="" type="radio"
 								class="custom-control-input" required=""> <label
 								class="custom-control-label" for="paypal">Paypal</label>
 						</div>

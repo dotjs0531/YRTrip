@@ -17,7 +17,9 @@ public class OrderVO extends ProductVO {
 	private String itemDeliveryno;	//송장번호(생략가능-배송중일 경우 입력)
 	private String orderPost; 		//우편번호
 	private String orderAddress;	//주소
-
+	private String userName;
+	private String userPhone;
+	
 	private String[] orderNoList;	//거래내역 선택삭제
 	
 	//리뷰 테이블
@@ -27,6 +29,19 @@ public class OrderVO extends ProductVO {
 	private String reviewPic;				//리뷰 사진
 	private MultipartFile[] reviewPicFile;	//실제 이미지 파일(다중파일 업로드)
 	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
 	public String getOrderId() {
 		return orderId;
 	}
@@ -90,7 +105,7 @@ public class OrderVO extends ProductVO {
 	public String getOrderAddress() {
 		return orderAddress;
 	}
-	public void setOrderAddress2(String orderAddress) {
+	public void setOrderAddress(String orderAddress) {
 		this.orderAddress = orderAddress;
 	}
 	public String[] getOrderNoList() {
