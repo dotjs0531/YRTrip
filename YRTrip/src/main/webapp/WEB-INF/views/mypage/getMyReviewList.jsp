@@ -160,10 +160,9 @@ $(function() {
 					<div>
 	                	<div style="min-height:420px">
 							<c:forEach items="${MyReviewList}" var="review">
-								<c:forEach items="${MyOrderList}" var="order">
 								<c:if test="${not empty review.reviewContent}">
 			            			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
-										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'"><strong>${order.orderId}</strong> &nbsp;&nbsp; ${review.reviewDate}</h5><br/>
+										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'"><strong>${review.orderId}</strong> &nbsp;&nbsp; ${review.reviewDate}</h5><br/>
 										
 										<!-- 사진 출력 -->
 										<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:180px; float:left">
@@ -172,7 +171,7 @@ $(function() {
 												<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')}"/>
 												<c:forEach items="${reviewPicname}" var="pic">
 												<div id="itemC" class="item">
-													<a href="getProduct?itemId=${order.itemId}">
+													<a href="getProduct?itemId=${review.itemId}">
 													<img id="img" src="./images/review/${pic}" style="height:180px" /></a>
 												</div>
 												</c:forEach>
@@ -196,15 +195,14 @@ $(function() {
 											-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">${review.reviewContent}</p>
 										<!-- 수정/삭제 버튼 -->
 										<form action="./deleteMyReview" method="post">
-											<input type="hidden" name="orderId" value="${order.orderId}">
+											<input type="hidden" name="orderId" value="${review.orderId}">
 											<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
 										</form>
-										<button type="button" class="btn btn-default" id="review${order.orderId}" 
+										<button type="button" class="btn btn-default" id="review${review.orderId}" 
 												data-toggle="modal" data-target="#updateMyReviewForm" style="float:right; margin-right:10px">수정</button>
 										<p style="clear:both"/>
 									</div>
 								</c:if>
-								</c:forEach>
 							</c:forEach><br/>
 						</div>
 					

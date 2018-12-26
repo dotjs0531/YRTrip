@@ -253,7 +253,6 @@ public class MyPageController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("MyReviewList", mypageService.getMyReviewList(vo));
-		mv.addObject("MyOrderList", mypageService.getMyOrderList(vo));
 		mv.setViewName("mypage/getMyReviewList");
 		return mv;
 	}

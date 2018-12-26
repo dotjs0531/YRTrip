@@ -197,7 +197,7 @@ a:hover { color:white }
 				if(itemDeliveryno!=null){
 					$("#dno").val(itemDeliveryno);
 					$("#updateDno").html("수정");
-				} else {
+				} else if(itemDeliveryno==null) {
 					$("#updateDno").html("등록");
 				}
 					

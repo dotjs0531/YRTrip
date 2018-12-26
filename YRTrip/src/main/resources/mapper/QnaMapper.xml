@@ -16,10 +16,10 @@
 		<if test="qnaAnswer != null">
 			AND QNA_ANSWER LIKE #{qnaAnswer}
 		</if>
-		<!-- <if test="searchDateStart != null and searchDateEnd != null">
+		<if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
     		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
     						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
-		</if> -->
+		</if>
 	</where>
 	ORDER BY QNA_ID DESC
 </select>
@@ -43,7 +43,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		<if test="qnaAnswer != null">
 			AND QNA_ANSWER LIKE #{qnaAnswer}
 		</if>
-		<if test="searchDateStart != null and searchDateEnd != null">
+		<if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
     		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
     						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
 		</if>

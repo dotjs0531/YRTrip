@@ -146,7 +146,7 @@
 						<strong>작성자</strong>&nbsp;&nbsp;${qna.userName} ｜ <strong>작성일</strong>&nbsp;&nbsp;${qna.qnaDate} ｜ <strong>답변여부</strong>&nbsp;&nbsp;${qna.qnaAnswer}
 						<hr />
 						<div style="min-height:200px;">
-							<pre style="background-color:white; border-style: none;">${qna.qnaContent}</pre>
+							<pre style="background-color:white; border-style: none; font-family: 'montserratbold'; font-size: 16px">${qna.qnaContent}</pre>
 						</div>
                     	<c:if test="${sessionScope.login.userId eq qna.userId}">
 						<div class="order-buton" style="float:right">

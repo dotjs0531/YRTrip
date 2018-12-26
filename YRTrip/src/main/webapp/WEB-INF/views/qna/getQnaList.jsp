@@ -60,11 +60,11 @@ a:hover { color:white }
 								</div>
 								
 								<!-- 문의날짜 -->
-								<!-- <div style="padding-bottom:5px">
+								<div style="padding-bottom:5px">
 								<label class="col-sm-2 control-label">문의일</label>
 								<input type="date" name="searchDateStart" class="form-control">
 								<input type="date" name="searchDateEnd" class="form-control">
-								</div> -->
+								</div> 
 								
 								<!-- 답변여부 -->
 								<div>
