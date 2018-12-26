@@ -15,8 +15,8 @@ public class OrderVO extends ProductVO {
 	private int itemId;				//상품ID
 	private String buyerId;			//구매자ID
 	private String itemDeliveryno;	//송장번호(생략가능-배송중일 경우 입력)
-	private String orderAddress1; 		//주소
-	private String orderAddress2;		//상세주소
+	private String orderPost; 		//우편번호
+	private String orderAddress;	//주소
 
 	private String[] orderNoList;	//거래내역 선택삭제
 	
@@ -81,17 +81,17 @@ public class OrderVO extends ProductVO {
 	public void setItemDeliveryno(String itemDeliveryno) {
 		this.itemDeliveryno = itemDeliveryno;
 	}	
-	public String getOrderAddress1() {
-		return orderAddress1;
+	public String getOrderPost() {
+		return orderPost;
 	}
-	public void setOrderAddress1(String orderAddress1) {
-		this.orderAddress1 = orderAddress1;
+	public void setOrderPost(String orderPost) {
+		this.orderPost = orderPost;
 	}
-	public String getOrderAddress2() {
-		return orderAddress2;
+	public String getOrderAddress() {
+		return orderAddress;
 	}
-	public void setOrderAddress2(String orderAddress2) {
-		this.orderAddress2 = orderAddress2;
+	public void setOrderAddress2(String orderAddress) {
+		this.orderAddress = orderAddress;
 	}
 	public String[] getOrderNoList() {
 		return orderNoList;
