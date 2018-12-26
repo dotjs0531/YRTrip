@@ -152,7 +152,7 @@
 .dad:hover > .son-1 {
     -moz-transform: scale(2,2);
     -webkit-transform: scale(2,2);
-    transform: scale(2,2);    
+    transform: scale(2,2);   
 }
 
 .son-text {
@@ -169,8 +169,8 @@
 }
 
 .son-span {
-	background: #fcfcfc;
-	color: #22313F;
+	background: #22313F;
+	color: #fcfcfc;
 	padding: 5px 45px;
 	font-family: 'Josefin Slab', serif;
 	font-style: italic;
@@ -178,17 +178,18 @@
 	border-radius: 30px;
 }
 .text-span {
-	background: #fcfcfc;
+	background: #22313F;
 	padding:5px;
-	color: #22313F;
+	color: #fcfcfc;
 	font-family: 'Josefin Slab', serif;
 	opacity: 0.6;
 	display:inline;
 	font-size: 0.5em;
+	border-radius:5px;
 }
 .top-span {
 	padding:5px;
-	color: #ffffff;
+	color: #22313F;
 	font-family: 'Josefin Slab', serif;
 	display:inline;
 	font-size: 0.6em;
