@@ -2,8 +2,10 @@ package com.yrtrip.app.partner;
 
 import org.springframework.stereotype.Repository;
 
+import com.yrtrip.app.travel.TravelInfoVO;
+
 @Repository
-public class PartnerVO {
+public class PartnerVO extends TravelInfoVO {
 	private Integer	partnerId; // 동행게시판번호
 	private String	partnerTitle; // 동행게시판제목
 	private String	partnerContent;	//동행게시판내용
@@ -18,7 +20,7 @@ public class PartnerVO {
 	private String partnerCondition; // 현재 상태
 	
 	private String userId; // 글쓴이
-	private String tinfoId; // 여행정보 ID
+	private int tinfoId; // 여행정보 ID
 
 	private String searchCondition; //
 	private String searchClass;
@@ -103,10 +105,10 @@ public class PartnerVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getTinfoId() {
+	public int getTinfoId() {
 		return tinfoId;
 	}
-	public void setTinfoId(String tinfoId) {
+	public void setTinfoId(int tinfoId) {
 		this.tinfoId = tinfoId;
 	}
 	public String getSearchClass() {

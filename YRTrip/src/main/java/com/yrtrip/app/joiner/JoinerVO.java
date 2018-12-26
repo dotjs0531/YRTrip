@@ -8,7 +8,7 @@ public class JoinerVO {
 	private Integer joinerId;
 	private String joinerDate;
 	private String userId;
-	private String partnerId;	// 참조키
+	private int partnerId;	// 참조키
 	private String joinerCondition;
 	private Integer	pageUnit;
 
@@ -33,10 +33,10 @@ public class JoinerVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public String getPartnerId() {
+	public int getPartnerId() {
 		return partnerId;
 	}
-	public void setPartnerId(String partnerId) {
+	public void setPartnerId(int partnerId) {
 		this.partnerId = partnerId;
 	}
 	public String getJoinerCondition() {
