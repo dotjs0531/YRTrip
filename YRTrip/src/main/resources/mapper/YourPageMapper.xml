@@ -31,7 +31,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <!-- 동행 페이지 -->
-<select id="getYourPartnerCount" parameterType="travelBoard" resultType="int">
+<select id="getYourPartnerCount" parameterType="partner" resultType="int">
 	SELECT COUNT(*)
 	  FROM PARTNERT
 	 WHERE USER_ID = #{userId}
