@@ -160,7 +160,7 @@
 }
 
 .son-span {
-	background: #fcfcfc;
+	background: #22313F;
 	color: #22313F;
 	padding: 15px 45px;
 	font-family: 'Josefin Slab', serif;
@@ -169,9 +169,9 @@
 	border-radius: 30px;
 }
 .text-span {
-	background: #fcfcfc;
+	background: #22313F;
 	padding:5px;
-	color: #22313F;
+	color: #fcfcfc;
 	font-family: 'Josefin Slab', serif;
 	opacity: 0.6;
 	display:inline;
@@ -179,14 +179,20 @@
 }
 .top-span {
 	padding:5px;
-	color: #ffffff;
+	color: #22313F;
 	font-family: 'Josefin Slab', serif;
 	display:inline;
 	font-size: 0.6em;
 }
 .update-input{
 width:50px; 
-background-color:#fff; 
+background-color:#22313F;
+}
+.file-input {
+    display: block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
 }
 </style>
 
@@ -396,7 +402,7 @@ function selectTravelWith(ele){
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
 								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
-																	 <select id="travelWith" name="travelWith">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone" selected>나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -406,7 +412,7 @@ function selectTravelWith(ele){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'friend'}">
-																	 <select id="travelWith" name="travelWith">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend" selected>친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -416,7 +422,7 @@ function selectTravelWith(ele){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'family'}">
-																	 <select id="travelWith" name="travelWith">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family" selected>가족과 함께</option>
@@ -426,7 +432,7 @@ function selectTravelWith(ele){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'couple'}">
-																	 <select id="travelWith" name="travelWith">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -436,7 +442,7 @@ function selectTravelWith(ele){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'group'}">
-																	 <select id="travelWith" name="travelWith">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -446,7 +452,7 @@ function selectTravelWith(ele){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'package'}">
-																	 <select id="travelWith" name="travelWith">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -458,7 +464,7 @@ function selectTravelWith(ele){
 								</span> <br>
 								<span class="text-span"> ${sessionScope.login.userName}님과 함께한 여행인원 : 
 									 <c:if test="${travelBoard.travelPerson == '0'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0" selected>0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -469,7 +475,7 @@ function selectTravelWith(ele){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '1'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0">0명</option>
 											  <option value="1" selected>1명</option>
 											  <option value="2">2명</option>
@@ -480,7 +486,7 @@ function selectTravelWith(ele){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '2'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2" selected>2명</option>
@@ -491,7 +497,7 @@ function selectTravelWith(ele){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '3'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2" >2명</option>
@@ -502,7 +508,7 @@ function selectTravelWith(ele){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '4'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0" >0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -513,7 +519,7 @@ function selectTravelWith(ele){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '5'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -524,7 +530,7 @@ function selectTravelWith(ele){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '6'}">
-										<select id="travelPerson" name="travelPerson">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -534,8 +540,7 @@ function selectTravelWith(ele){
 											  <option value="6" selected>6명 이상</option>
 										</select>
 									</c:if>
-								</span><br>
-								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input" name="travelPay">원</span>
+								</span><br>		
 								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche"></span>
 								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelStart"> ~ 
 																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelEnd">
@@ -557,7 +562,8 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" name="travelContent"></textarea>
+												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 관해 간단한 소개글을 입력해주세요:-)"></textarea><br>
+												<input type="text" class="form-control" name="travelPay" placeholder="총 여행경비를 입력하세요.">
 											</div>
 											
 											<div class="panel-footer">
@@ -588,7 +594,7 @@ function selectTravelWith(ele){
 							</div>
 							</div>
 										<button class="btn btn-sm btn-warning pull-right" type="submit">
-											<i class="fa fa-pencil fa-fw"></i>수정완료하기
+											<i class="fa fa-pencil fa-fw"></i>등록하기
 										</button>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">

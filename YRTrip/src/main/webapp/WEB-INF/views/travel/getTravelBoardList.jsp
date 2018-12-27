@@ -345,8 +345,9 @@ $("#autocompleteTinfoList").change(function(){
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
 									</div>
+									<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
 									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>

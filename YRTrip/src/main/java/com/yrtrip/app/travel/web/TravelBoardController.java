@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -61,18 +62,11 @@ public class TravelBoardController {
 
 	//등록처리
 	@RequestMapping(value = { "/insertTravelBoardform" }, method = RequestMethod.POST)
-	public String insertTravelBoardform(TravelBoardVO vo) {
+	public String insertTravelBoardform(@ModelAttribute("travelBoard") TravelBoardVO vo) {
 		travelBoardService.insertTravelBoard(vo);
 		return "travel/insertTravelBoard";
 	}
-	
-/*
-//紐⑤떖 �벑濡앹쿂由� 
-	@RequestMapping(value = { "insertTravelBoard" }, method = RequestMethod.POST)
-	public String insertTravelBoard(TravelBoardVO vo) { // 而ㅻ㎤�뱶 媛앹껜		
-		travelBoardService.insertTravelBoard(vo); // �벑濡앹쿂由�
-		return "redirect:insertTravelBoard"; // insertTravelBoard.jsp濡� �씠�룞
-	}*/
+
 
 //수정폼
 	@RequestMapping("/updateTravelBoardform")
@@ -84,22 +78,22 @@ public class TravelBoardController {
 //수정처리
 	@RequestMapping("updateTravelBoard")
 	public String updateTravelBoard(TravelBoardVO vo) {
-		travelBoardService.updateTravelBoard(vo); 
+		travelBoardService.updateTravelBoard(vo);
 		return "redirect:getTravelBoardList";
 	}
 	
 //삭제
 	@RequestMapping("deleteTravelBoard")
 	public String deleteTravelBoard(TravelBoardVO vo) {
-		travelBoardService.deleteTravelBoard(vo); // �궘�젣泥섎━
-		return "redirect:getTravelBoardList"; // 紐⑸줉�슂泥�
+		travelBoardService.deleteTravelBoard(vo);
+		return "redirect:getTravelBoardList"; 
 	}
 
 //선택삭제
 	@RequestMapping("deleteTravelBoardList")
 	public String deleteTravelBoardList(TravelBoardVO vo) {
-		travelBoardService.deleteTravelBoardList(vo); // �궘�젣泥섎━
-		return "redirect:getTravelBoardList"; // 紐⑸줉�슂泥�
+		travelBoardService.deleteTravelBoardList(vo);
+		return "redirect:getTravelBoardList"; 
 	}
 	
 // travelinfot list Ajax

@@ -149,12 +149,6 @@
     z-index: -1;
 }
 
-.dad:hover > .son-1 {
-    -moz-transform: scale(2,2);
-    -webkit-transform: scale(2,2);
-    transform: scale(2,2);   
-}
-
 .son-text {
     color: #fcfcfc;
 	font-size: 2em;
@@ -171,7 +165,7 @@
 .son-span {
 	background: #22313F;
 	color: #fcfcfc;
-	padding: 5px 45px;
+	padding: 15px 45px;
 	font-family: 'Josefin Slab', serif;
 	font-style: italic;
 	opacity: 0.6;
@@ -185,7 +179,6 @@
 	opacity: 0.6;
 	display:inline;
 	font-size: 0.5em;
-	border-radius:5px;
 }
 .top-span {
 	padding:5px;
@@ -193,6 +186,16 @@
 	font-family: 'Josefin Slab', serif;
 	display:inline;
 	font-size: 0.6em;
+}
+.update-input{
+width:50px; 
+background-color:#22313F;
+}
+.file-input {
+    display: block;
+    visibility: hidden;
+    width: 0;
+    height: 0;
 }
 </style>
 <script>
@@ -202,7 +205,63 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#insertTravelBoard').modal(true);
 		})
 });
+/* modal 자동완성 */
 
+$(function() {
+    //input id autocomplete
+    var context = '${pageContext.request.contextPath}';
+    $( "#autocompleteTinfoListModal").autocomplete({
+     source : function(request, response){
+      $.ajax({
+          type:"post",
+          dataType:"json",
+          url:context + "/getTravelInfoListModalData",
+          data:{"tinfoListModal":$("#autocompleteTinfoListModal").val(), "searchCheckModal":$("[name='searchCheckModal']:checked").val()},
+          success:function(data){
+           response($.map(data, function(item){
+            return{
+             label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+             value:item.tinfoCity,
+             tinfoId:item.tinfoId
+            }
+           }));
+          },
+
+          error: function(jqxhr, status, error){
+                alert(jqxhr.statusText + ",  " + status + ",   " + error);
+               alert(jqxhr.status);
+               alert(jqxhr.responseText); 
+          }
+         })
+     },
+     autoFocus:true,
+     matchContains:true,
+     minLength:0,
+     delay:0,
+     select:function(event, ui){
+    	 $("#tinfoListModal").val(ui.item.value);
+         selectedListModal = ui.item.tinfoId;
+     	 $("#tinfoListDispModal").val(selectedListModal);
+         var flag = false;
+         $("#autocompleteTinfoListModal").keydown(function(e){
+          if(e.keyCode == 13){
+           if(!flag){
+             fn_regist();
+            flag = true;
+           }
+          }
+         }); 
+          
+        },
+        focus:function(event, ui){return false;}
+       });
+     });
+$("#autocompleteTinfoListModal").change(function(){
+		selectedListModal = "";
+	   $("#tinfoListModal").val("");
+	   $("#tinfoListDispModal").val("");
+	   $('[name=searchTinfoListboxModal]').val("");
+	});
 /* 좋아요 */
 function disLike(uId, lC, lBid){
 	   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;

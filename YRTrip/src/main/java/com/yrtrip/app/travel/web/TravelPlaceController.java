@@ -1,6 +1,5 @@
 package com.yrtrip.app.travel.web;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,34 +21,34 @@ public class TravelPlaceController {
 	TravelPlaceService travelPlaceService;
 
 //전체조회
-	@RequestMapping(value = { "/getTravelPlaceList", "/getListTravelPlace", "/getTravelPlaces" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/getTravelPlaceList", "/getListTravelPlace",
+			"/getTravelPlaces" }, method = RequestMethod.GET)
 	public ModelAndView getTravelPlaceList(TravelPlaceVO vo, Paging paging) {
 		ModelAndView mv = new ModelAndView();
-		
-		//페이징 처리
-		//페이지번호 파라미터
-		if( paging.getPage() == null) {
-			paging.setPage(1); 
+
+		// 페이징 처리
+		// 페이지번호 파라미터
+		if (paging.getPage() == null) {
+			paging.setPage(1);
 		}
-		
-		//한페이지에 출력할 레코드 건수
+
+		// 한페이지에 출력할 레코드 건수
 		paging.setPageUnit(9);
-		
-		//first, last 계산
+
+		// first, last 계산
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
-		
-		//전체 레코드 건수
+
+		// 전체 레코드 건수
 		paging.setTotalRecord(travelPlaceService.getCount(vo));
-		
+
 		mv.addObject("paging", paging);
-		
+
 		mv.addObject("travelPlaceList", travelPlaceService.getTravelPlaceList(vo));
 		mv.setViewName("travel/getTravelPlaceList");
 		return mv;
 	}
-	
-	
+
 //단건조회
 	@RequestMapping("/getTravelPlace")
 	public String getTravelPlace(Model model, TravelPlaceVO vo) {
@@ -69,29 +68,6 @@ public class TravelPlaceController {
 		travelPlaceService.insertTravelPlace(vo); // 등록처리
 		return "redirect:getTravelPlaceList"; // 목록요청
 	}
-	
-//등록Ajax
-	@RequestMapping("/insertTravelPlaceAjax")
-	@ResponseBody
-	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
-		travelPlaceService.insertTravelPlace(vo);
-		return travelPlaceService.getTravelPlace(vo);
-	}
-//삭제Ajax	
-	@RequestMapping("/deleteTravelPlaceAjax")
-	@ResponseBody
-	public TravelPlaceVO deleteTravelPlaceAjax(TravelPlaceVO vo) {
-		travelPlaceService.deleteTravelPlace(vo);
-		return vo;
-	}	
-	
-//조회Ajax
-	@RequestMapping("/selectTravelPlaceList")
-	@ResponseBody
-	public List<TravelPlaceVO> selectTravelPlaceList(TravelPlaceVO vo) {
-		return travelPlaceService.selectTravelPlaceList(vo);
-	}
-	
 
 //수정폼
 	@RequestMapping("/updateTravelPlaceform")
@@ -120,5 +96,36 @@ public class TravelPlaceController {
 		travelPlaceService.deleteTravelPlaceList(vo); // 삭제처리
 		return "redirect:getTravelPlaceList"; // 목록요청
 	}
+
+// 조회Ajax
+	@RequestMapping("/selectTravelPlaceList")
+	@ResponseBody
+	public List<TravelPlaceVO> selectTravelPlaceList(TravelPlaceVO vo) {
+		return travelPlaceService.selectTravelPlaceList(vo);
+	}
 	
+// 등록Ajax
+	@RequestMapping("/insertTravelPlaceAjax")
+	@ResponseBody
+	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
+		travelPlaceService.insertTravelPlace(vo);
+		return travelPlaceService.getTravelPlace(vo);
+	}
+
+// 삭제Ajax
+	@RequestMapping("/deleteTravelPlaceAjax")
+	@ResponseBody
+	public TravelPlaceVO deleteTravelPlaceAjax(TravelPlaceVO vo) {
+		travelPlaceService.deleteTravelPlace(vo);
+		return vo;
+	}
+
+// 수정Ajax
+	@RequestMapping("/updateTravelPlaceAjax")
+	@ResponseBody
+	public TravelPlaceVO updateTravelPlaceAjax(TravelPlaceVO vo) {
+		travelPlaceService.updateTravelPlace(vo);
+		return travelPlaceService.getTravelPlace(vo);
+	}
+
 }
