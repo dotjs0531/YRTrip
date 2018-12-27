@@ -92,6 +92,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public void deleteMyOrderList(OrderVO vo) {
 		dao.deleteMyOrderList(vo);
 	}
+	public void updateOrderCondition(OrderVO vo) {
+		dao.updateOrderCondition(vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {

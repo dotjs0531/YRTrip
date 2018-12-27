@@ -198,6 +198,7 @@ a:hover { color:white }
 					$("#dno").val(itemDeliveryno);
 					$("#updateDno").html("수정");
 				} else if(itemDeliveryno==null) {
+					$("#dno").val('');
 					$("#updateDno").html("등록");
 				}
 					
@@ -211,6 +212,7 @@ a:hover { color:white }
 				$("#orderPost").html(orderPost);
 				$("#orderAddress").html(orderAddress);
 			})
+			
 		});
 	});
 </script>

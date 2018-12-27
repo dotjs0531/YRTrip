@@ -70,6 +70,15 @@ public class MyPageDAOMybatis {
 	public void deleteMyProductList(ProductVO vo) {
 		mybatis.update("user.deleteMyProductList", vo);
 	}
+	public List<OrderVO> getMyBuyerList(OrderVO vo) {
+		return mybatis.selectList("user.getMyBuyerList", vo);
+	}
+	public OrderVO getMyBuyer(OrderVO vo) {
+		return mybatis.selectOne("user.getMyBuyer", vo);
+	}
+	public void updateDno(OrderVO vo) {
+		mybatis.update("user.updateDno",vo);
+	}
 	
 	//거래내역
 	public int getMyOrderCount(OrderVO vo) {
@@ -84,14 +93,8 @@ public class MyPageDAOMybatis {
 	public void deleteMyOrderList(OrderVO vo) {
 		mybatis.update("user.deleteMyOrderList", vo);
 	}
-	public List<OrderVO> getMyBuyerList(OrderVO vo) {
-		return mybatis.selectList("user.getMyBuyerList", vo);
-	}
-	public OrderVO getMyBuyer(OrderVO vo) {
-		return mybatis.selectOne("user.getMyBuyer", vo);
-	}
-	public void updateDno(OrderVO vo) {
-		mybatis.update("user.updateDno",vo);
+	public void updateOrderCondition(OrderVO vo) {
+		mybatis.update("user.updateOrderCondition", vo);
 	}
 
 	//리뷰

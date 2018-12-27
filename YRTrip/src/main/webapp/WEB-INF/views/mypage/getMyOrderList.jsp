@@ -173,6 +173,8 @@ $(function() {
 			var orderPrice = data.orderPrice;
 			var totalPrice = orderEa*orderPrice;
 
+			var orderDelivery = data.orderDelivery;
+			
 			$("#orderId").html(orderId);
 			$("#orderDate").html(orderDate);
 			$("#itemDeliveryno").html(itemDeliveryno);
@@ -181,6 +183,10 @@ $(function() {
 			$("#orderEa").html(orderEa+"개");
 			$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 			$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+			
+			if(orderDelivery == '배송중'){
+				$("#cancleOrder").show();
+			}
 		})
 	});
 	$('#insertMyReviewForm').on('show.bs.modal', function(e) {
@@ -285,10 +291,13 @@ $(function() {
 													white-space: nowrap; overflow: hidden; width:130px; text-decoration:none !important;">${order.itemName}</a></h1>
 												<h2 class="sub_title">${order.orderCondition}</h2>
 												<p class="description" align="center">
-													<button type="button" class="btn btn-default">
-														<c:if test="${order.orderCondition eq '결제완료'}">구매확정</c:if>
-														<c:if test="${order.orderCondition eq '거래완료'}">확정완료</c:if>
-													</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<c:if test="${order.orderCondition eq '결제완료'}">
+														<button type="button" class="btn btn-default" onclick="location.href='./updateOrderCondition?orderId=${order.orderId}'">구매확정</button>
+													</c:if>
+													<c:if test="${order.orderCondition eq '거래완료'}">
+														<button type="button" class="btn btn-default">확정완료</button>
+													</c:if>
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													<c:if test="${order.reviewContent eq null}">
 														<button type="button" class="btn btn-default" id="review${order.orderId}" 
 																data-toggle="modal" data-target="#insertMyReviewForm">리뷰작성</button>
@@ -400,6 +409,9 @@ $(function() {
 															</tr>
 														</table>
 													</div>
+												</div>
+												<div id="cancleOrder" style="display: none">
+													<button type="button" class="btn btn-default" style="float:right; margin:10px;">거래취소</button>
 												</div>
 											</div>
 										</div>

@@ -232,6 +232,11 @@ public class MyPageController {
 		mypageService.deleteMyOrderList(vo);
 		return "redirect:getMyOrderList";
 	}
+	@RequestMapping("/updateOrderCondition") //거래내역 상태 변경(구매확정시 배송완료+거래완료)
+	public String updateOrderCondition(OrderVO vo) {
+		mypageService.updateOrderCondition(vo);
+		return "redirect:getMyOrderList";
+	}
 	
 	//리뷰 페이지
 	@RequestMapping(value = "/getMyReviewList", method = RequestMethod.GET)
@@ -285,6 +290,7 @@ public class MyPageController {
 		
 		mypageService.insertMyReview(vo);
 		mypageService.updateProductStar(vo); //상품 평점 업데이트
+		mypageService.updateOrderCondition(vo); //구매확정 완료
 		return "redirect:getMyReviewList";
 	}
 	@RequestMapping("getMyReview") //리뷰 조회

@@ -288,6 +288,11 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		WHERE ORDER_ID = -1
 	</if>
 </delete>
+<update id="updateOrderCondition" parameterType="order">
+	UPDATE ORDERT SET ORDER_DELIVERY = '배송완료',
+					  ORDER_CONDITION = '거래완료'
+				WHERE ORDER_ID = #{orderId}
+</update>
 
 <!-- 리뷰 페이지 -->
 <select id="getMyReviewCount" parameterType="order" resultType="int">
