@@ -33,7 +33,7 @@
 	}
 </script>
 <script>
-	/* 자기혼자 빨간줄이었다 오류있는지 확인 */
+	/* 자기혼자 빨간줄이었다 오류있는지 확인 :()주의! ;생략가능하나 명령문마다 해주자 */
 	$(function() {
 		$('#product_view').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
@@ -49,9 +49,14 @@
 				$("#modal-title").html(itemName);
 				$("#popup_itemId").html(itemId);
 				$("#popup_itemContent").html(itemContent);
-			})
+			});
+		});
+		
+		if("${sessionScope.login.userId}" == ''){
+			$("#insertbtn").hide();
 		}
 	});
+		
 </script>
 
 <style>
@@ -73,7 +78,7 @@
 				<div class="col-4">
 					<div class="single-pricing-table">
 						<div class="pricing-title">
-							<h2 style="color: black">카테고리</h2>
+							<h2 style="color: black">중고거래</h2>
 						</div>
 						<ul class="price-list">
 							<li><a href="#" style="color: black">전체보기</a></li>
@@ -87,7 +92,7 @@
 						<div class="order-buton">
 							<a href="#">상품요청</a>
 						</div>
-						<div class="order-buton">
+						<div class="order-buton" id="insertbtn">
 							<a href="insertProduct">상품등록</a>
 						</div>
 					</div>

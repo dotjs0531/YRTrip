@@ -3,7 +3,7 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="order">
 <select id="getOrderList" resultType="order">
-		select 
+SELECT
 			order_id, 
 			order_date,
 			order_condition, 
@@ -22,6 +22,26 @@
 		where i.item_id=o.item_id
 		and i.item_id=#{itemId}
 		ORDER BY ORDER_DATE DESC
+<!-- SELECT
+		order_id, 
+		order_date,
+		order_condition,
+		order_delivery,
+		order_price,
+		order_ea,
+		item_id,
+		buyer_id,
+		item_deliverno,
+		review_star,
+		review_content,
+		review_date,
+		review_pic,
+		order_post,
+		order_address,
+		cart_id
+FROM ORDERT 
+WHERE buyer_id = #{userId}
+ORDER BY ORDER_DATE DESC -->
 	</select>
 
 	<select id="getOrder" resultType="order">
@@ -45,7 +65,8 @@
 			#{buyerId}, 
 			#{itemId},
 			#{orderPost},
-			#{orderAddress}
+			#{orderAddress},
+			#{cartId}
 			)
 		}	
 	</insert>

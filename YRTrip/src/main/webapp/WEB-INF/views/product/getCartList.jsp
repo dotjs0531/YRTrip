@@ -76,7 +76,8 @@
 									<h3 class="my-0">${cart.itemName}</h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
-									<small class="text-muted cartId">${cart.cartId}</small> <br>
+									<small class="text-muted cartId">${cart.itemId}</small> <br>
+									<small class="text-muted cartId">${item.itemCondition}</small> <br>
 								</div> <span class="text-muted">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<!-- <form action="./updateCart"> --> <span id="original_itemEa">${cart.itemEa}</span>
 								<button type="button" id="go_update">수정</button> <!-- </form> -->

@@ -154,6 +154,8 @@ $(function(){
 	$('#product_cart_insert').on("click", "li", function(){
 		$("#itemCategory").val($(this).find("a").text());
 	});	
+	
+	
 });
 
 	/* 버튼 클릭시 reset */
@@ -178,20 +180,13 @@ $(function(){
 
 						<ul class="price-list" id="product_cart_insert">
 							<li><a href="getProductList" style="color: blue">선택하세요</a></li>
-							<li><a href="#">의류</a></li>
+							<li><a href="#" style="color: black">의류</a></li>
 							<li><a href="#"	style="color: black">티켓/쿠폰</a></li>
 							<li><a href="#"	style="color: black">전자기기</a></li>
-							<li><a href="#">여행도서</a></li>
-							<li><a href="#">USIM</a></li>
-							<li><a href="#">기타</a></li>
+							<li><a href="#" style="color: black">여행도서</a></li>
+							<li><a href="#" style="color: black">USIM</a></li>
+							<li><a href="#" style="color: black">기타</a></li>
 						</ul>
-
-						<div class="order-buton">
-							<a href="#">상품요청</a>
-						</div>
-						<div class="order-buton">
-							<a href="insertProduct">상품등록</a>
-						</div>
 					</div>
 				</div>
 
@@ -236,7 +231,7 @@ $(function(){
 										<h4>${sessionScope.login.userId}만의상품을공유해보입시더</h4>
 									</div>
 									<div class="pull-right">
-										<button onclick="insert_reset();" class="btn btn-link" type="reset" >모두삭제</button> <input
+										<button onclick="insert_reset();" class="btn btn-link" type="reset" >초기화</button> <input
 											type="submit" class="btn" value="등록">
 									</div>
 								</nav>

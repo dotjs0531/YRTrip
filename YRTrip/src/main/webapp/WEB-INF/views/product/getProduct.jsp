@@ -108,6 +108,20 @@
 		likeCondition();
 	});
 </script>
+<script>
+$(function(){
+	if($("#item_ea_js").text() == 0 || "${sessionScope.login.userId}" == "${product.sellerId}")
+	{
+		$("#insertcart").attr("disabled", "disabled");
+		$("#insertcart").text("구매불가");
+	}
+	
+	if("${sessionScope.login.userId}" != "${product.sellerId}"){
+		$("#seller-only").hide();	
+	}
+});
+
+</script>
 </head>
 <body>
 
@@ -121,7 +135,7 @@
 				<div class="container col-lg-3">
 					<div class="single-pricing-table">
 						<div class="pricing-title">
-							<h2 style="color: black">카테고리</h2>
+							<h2 style="color: black">중고거래</h2>
 						</div>
 						<ul class="price-list">
 							<li><a href="getProductList" style="color: black">전체보기</a></li>
@@ -164,7 +178,7 @@
 									<li class="breadcrumb-item active" aria-current="page">현재유심페이지!</li>
 								</ol>
 
-								<div class="btn-group pull-right">
+								<div class="btn-group pull-right" id="seller-only">
 									<a href="updateProduct?itemId=${product.itemId}"
 										class="btn btn-link">수정하기</a> <a
 										href="deleteProduct?itemId=${product.itemId}"
@@ -232,7 +246,7 @@
 										</div>
 										<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
 										<label for="quant">수량</label> <input type="number"
-											name="itemEa" min="1" id="quant" value=""
+											name="itemEa" min="1" max="${product.itemEa}" id="quant" value=""
 											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 										<input type="hidden" value="${sessionScope.login.userId}"
 											name="myId"> <input type="hidden"
@@ -243,7 +257,7 @@
 											<a role="button" class="col btn btn-lg btn-block btn-light"
 												href="./getCartList?myId=${sessionScope.login.userId}">
 												전체 장바구니 보기${sessionScope.login.userId}</a>
-											<button class="col btn btn-lg btn-block" type="submit">장바구니담기</button>
+											<button class="col btn btn-lg btn-block" type="submit" id="insertcart">장바구니담기</button>
 											<a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
 												role="button" class="btn btn-lg btn-block btn-light"
 												href="./purchasingProduct">구매하기</a>
@@ -302,7 +316,7 @@
 											<dt class="col-sm-4">가격</dt>
 											<dd class="col-sm-8">${product.itemPrice}</dd>
 											<dt class="col-sm-4">수량</dt>
-											<dd class="col-sm-8">${product.itemEa}</dd>
+											<dd class="col-sm-8" id="item_ea_js">${product.itemEa}</dd>
 											<dt class="col-sm-4">선호결제방법</dt>
 											<dd class="col-sm-8">${product.itemMethod}</dd>
 											<dt class="col-sm-4">구매가능여부</dt>
@@ -315,9 +329,9 @@
 											<dd class="col-sm-8">${product.sellerId}</dd>
 										</dl>
 										<h2 class="mb-5">제품 상세 설명</h2>
-										<p>${product.itemContent}</p>
+										<pre style="background-color:white; line-height:1.3em">${product.itemContent}</pre>
 									</div>
-									<div class="product-faq mb-5">
+									<!-- <div class="product-faq mb-5">
 										<h2 class="mb-3">Q/A라고 쓰고 큐엔에이라고 읽</h2>
 										<p class="text-muted">판매자에게 상품에 대한 질문을 해보세여!</p>
 										<div class="main-questions d-inline" data-container="body"
@@ -327,15 +341,15 @@
 												href="#" class="btn btn-outline-primary">???????????????</a>
 											<a href="#" class="btn btn-outline-primary">이건질문들옵션창같은데</a>
 										</div>
-									</div>
+									</div> -->
 									<div class="product-comments">
-										<h5 class="mb-2">다른 사람들의 후기를 좀 봐볼까나?</h5>
-										<form action="" class="form-inline mb-5">
+										<h2 class="mb-2">판매자와 거래 후 남긴 후기들</h2>
+										<!-- <form action="" class="form-inline mb-5">
 											<textarea name="" id="" cols="50" rows="2"
 												class="form-control mb-4" placeholder="후기후기후기"></textarea>
 											<button class="btn btn-lg-12 btn-primary">후기를 입력해보세</button>
 										</form>
-										<h5 class="mb-5">!후기!</h5>
+										<h5 class="mb-5">!후기!</h5> -->
 										<c:forEach items="${orderList}" var="order">
 											<ol class="list-unstyled last-questions-list">
 												<li><i class="fa fa-comment"></i> <span>

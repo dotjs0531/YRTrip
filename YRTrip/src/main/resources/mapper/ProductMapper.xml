@@ -45,6 +45,25 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		FROM ITEMT
 		WHERE ITEM_ID = #{itemId}	
 	</select>
+	<select id="getProductbySeller" resultType="product">
+		SELECT ITEM_ID,
+				ITEM_NAME,
+				ITEM_PRICE,
+				ITEM_EA,
+				ITEM_CONTENT,
+				ITEM_METHOD,
+				ITEM_CATEGORY,
+				SELLER_ID,
+				ITEM_ORDERDETAIL,
+				ITEM_STAR,
+				ITEM_PIC,
+				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
+				ITEM_CONDITION,
+				ITEM_LIKE
+		FROM ITEMT
+		WHERE SELLER_ID = #{sellerId}
+		ORDER BY ITEM_DATE DESC
+	</select>
 	<insert id="insertProduct" parameterType="product">
 	<selectKey keyProperty="itemId" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(ITEM_ID),0)+1 FROM ITEMT

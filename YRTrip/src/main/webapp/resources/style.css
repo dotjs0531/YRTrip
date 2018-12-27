@@ -27,7 +27,7 @@ html,body { height: 100%; margin: 0; padding: 0; }
 
 .header_area:before {
     /*background: #22313f;*/
-    background-image: url("img/img.jpg");
+    background-image: url("img/home_back2.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
     content: "";

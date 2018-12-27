@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
                         <div class="logo">
-                            <a href="main"><img src="resources/img/logo.png" alt="logo"></a>
+                            <a href="main"><img src="resources/img/logo1.png" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-md-6 col-xs-6 col-md-offset-1 col-sm-7 col-lg-offset-1 col-lg-6 mobMenuCol">
@@ -88,11 +88,11 @@
                     <div class="row">
                         <div class="col-xs-12 text-center">
                             <div class="welcome_text">
-                                <h1>Get the fastest service </h1>
-                                <h1>for your product</h1>
+                                <h1>유어 레알 트립</h1>
+                                <h1>YOUR REAL TRIP</h1>
                                 <div class="welcome_p">
-                                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam </p>
-                                    <p>nibh euismod tincidunt ut laoreet dolore magna.</p>
+                                    <p>YOU ONLY LIVE ONCE</p>
+                                    <p>당신이 꿈꾸는 여행을 위해</p>
                                 </div>
                                 <div class="welcome_form">
                                     <form action="#">

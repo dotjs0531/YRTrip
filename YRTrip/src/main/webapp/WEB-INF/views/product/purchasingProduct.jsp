@@ -221,7 +221,8 @@
 								class="custom-control-label" for="paypal">Paypal</label>
 						</div>
 					</div>
-				<input type="hidden" value="${cart.itemId}" name="itemId">
+				<input type="text" value="${cart.itemId}" name="itemId">
+				<input type="text" value="${cart.cartId}" name="cartId">
 				<hr class="mb-4">
 				<button class="btn btn-lg btn-block"
 					style="background-color: #f9bf3b; color: white;" type="submit"

@@ -148,47 +148,46 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-
-
-$(function(){
+/* $(function(){
 	$('#product_cart_insert').delegate("a", "click", function(){
 		$(this).data('clicked', true)
 	});	
 });
+
 function p_cat(){
 	
-		if($("#pciClothes").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($('#pciClothes').text());
-		}
-		else if($("#pciTicket").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciTicket").text());
-		}
-		else if($("#pciElectronic").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciElectronic").text());
-		}
-		else if($("#pciBook").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciBook").text());
-		}
-		else if($("#pciUSIM").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciUSIM").text());
-		}
-		else if($("#pciETC").data('clicked')){
-			$("itemCategory").empty();
-			$('#itemCategory').val($("#pciETC").text());
-		}
-
-	/* 버튼 클릭시 reset */
-	function insert_reset(){
-		$( "form" ).submit(function( event ) {
-			  event.preventDefault();
-			});
+	if($("#pciClothes").data('clicked')){
+		$("itemCategory").empty();
+		$('#itemCategory').val($('#pciClothes').text());
 	}
-}
+	else if($("#pciTicket").data('clicked')){
+		$("itemCategory").empty();
+		$('#itemCategory').val($("#pciTicket").text());
+	}
+	else if($("#pciElectronic").data('clicked')){
+		$("itemCategory").empty();
+		$('#itemCategory').val($("#pciElectronic").text());
+	}
+	else if($("#pciBook").data('clicked')){
+		$("itemCategory").empty();
+		$('#itemCategory').val($("#pciBook").text());
+	}
+	else if($("#pciUSIM").data('clicked')){
+		$("itemCategory").empty();
+		$('#itemCategory').val($("#pciUSIM").text());
+	}
+	else if($("#pciETC").data('clicked')){
+		$("itemCategory").empty();
+		$('#itemCategory').val($("#pciETC").text());
+	} */
+/* 역시 사람은 머리를 써야한다 */
+$(function(){
+	$('#product_cart_insert').on("click", "li", function(){
+		$("#itemCategory").val($(this).find("a").text());
+	});
+});
+
+	
 
 </script>
 </head>
@@ -200,7 +199,7 @@ function p_cat(){
 				<div class="container col-lg-3">
 					<div class="single-pricing-table">
 						<div class="pricing-title">
-							<h2 style="color: black">카테고리</h2>
+							<h2 style="color: black">중고거래</h2>
 						</div>
 
 						<ul class="price-list" id="product_cart_insert">
@@ -219,12 +218,7 @@ function p_cat(){
 								style="color: black">기타</a></li>
 						</ul>
 
-						<div class="order-buton">
-							<a href="#">상품요청</a>
-						</div>
-						<div class="order-buton">
-							<a href="insertProduct">상품등록</a>
-						</div>
+						
 					</div>
 				</div>
 
@@ -244,10 +238,10 @@ function p_cat(){
 										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
 									</ol>
 									<div class="pull-left">
-										<h4>${sessionScope.login.userId}수정중...</h4>
+										<h4>${sessionScope.login.userId}님의 {product.itemName}제품 수 정 중 ...</h4>
 									</div>
 									<div class="pull-right">
-										<button onclick="insert_reset();" class="btn btn-link" type="reset" >모두삭제</button> <input
+										<button onclick="insert_reset();" class="btn btn-link" type="reset">초기화</button> <input
 											type="submit" class="btn" value="수정">
 									</div>
 								</nav>

@@ -19,6 +19,7 @@ public class OrderVO extends ProductVO {
 	private String orderAddress;	//주소
 	private String userName;
 	private String userPhone;
+	private int cartId;
 	
 	private String[] orderNoList;	//거래내역 선택삭제
 	
@@ -29,7 +30,13 @@ public class OrderVO extends ProductVO {
 	private String reviewPic;				//리뷰 사진
 	private MultipartFile[] reviewPicFile;	//실제 이미지 파일(다중파일 업로드)
 	
-	
+		
+	public int getCartId() {
+		return cartId;
+	}
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
+	}
 	public String getUserName() {
 		return userName;
 	}
