@@ -23,6 +23,9 @@ public class YourPageServiceImpl implements YourPageService {
 	public UserVO getYourInfo(UserVO vo) {
 		return dao.getYourInfo(vo);
 	}
+	public void updateUserStar(UserVO vo) {
+		dao.updateUserStar(vo);
+	}
 	
 	//여행
 	public int getYourTravelCount(TravelBoardVO vo) {

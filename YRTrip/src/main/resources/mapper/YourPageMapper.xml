@@ -3,6 +3,11 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
 
+<select id="updateUserStar" statementType="CALLABLE" parameterType="user">
+	{
+		CALL PRO_USER_STAR ( #{userId} )
+	}
+</select>
 <!-- 여행 페이지 -->
 <select id="getYourTravelCount" parameterType="travelBoard" resultType="int">
 	SELECT COUNT(*)

@@ -191,8 +191,10 @@ $(function() {
 		}
 		$.getJSON("getMyReview", param, function(data){
 			var orderId = data.orderId;
+			var itemId = data.itemId;
 				
 			$("#reviewId").val(orderId);
+			$(".itemId").val(itemId);
 		});
 	});
 });
@@ -425,6 +427,7 @@ $(function() {
 					            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
 													<form action="./insertMyReview" method="post" enctype="multipart/form-data">										
 														<input type="hidden" id="reviewId" name="orderId">
+														<input type="hidden" class="itemId" name="itemId">
 														<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
 														<div class="form-group">
 															<!-- 별점 등록 부분 -->

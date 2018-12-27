@@ -13,6 +13,7 @@ import com.yrtrip.app.travel.TravelPlaceVO;
 public interface YourPageService {
 
 	public UserVO getYourInfo(UserVO vo);
+	public void updateUserStar(UserVO vo);
 	
 	//여행
 	public int getYourTravelCount(TravelBoardVO vo);

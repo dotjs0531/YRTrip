@@ -37,6 +37,8 @@ public class YourPageController {
 
 		paging.setTotalRecord(yourpageService.getYourTravelCount(vo));
 
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
+		
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
 		mv.addObject("YourTravelList", yourpageService.getYourTravelList(vo));

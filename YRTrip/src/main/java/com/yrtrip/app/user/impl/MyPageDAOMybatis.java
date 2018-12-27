@@ -113,4 +113,7 @@ public class MyPageDAOMybatis {
 	public void deleteMyReview(OrderVO vo) {
 		mybatis.update("user.deleteMyReview", vo);
 	}
+	public void updateProductStar(OrderVO vo) {
+		mybatis.update("user.updateProductStar", vo);
+	}
 }

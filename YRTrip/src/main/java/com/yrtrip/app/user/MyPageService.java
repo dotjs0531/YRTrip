@@ -7,6 +7,7 @@ import com.yrtrip.app.like.LikeVO;
 import com.yrtrip.app.order.OrderVO;
 import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.qna.QnaCommentVO;
 import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.travel.TravelPlaceVO;
 
@@ -49,4 +50,5 @@ public interface MyPageService {
 	public void insertMyReview(OrderVO vo);
 	public void updateMyReview(OrderVO vo);
 	public void deleteMyReview(OrderVO vo);
+	public void updateProductStar(OrderVO vo);
 }

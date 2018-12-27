@@ -112,4 +112,7 @@ public class MyPageServiceImpl implements MyPageService {
 	public void deleteMyReview(OrderVO vo) {
 		dao.deleteMyReview(vo);
 	}
+	public void updateProductStar(OrderVO vo) {
+		dao.updateProductStar(vo);
+	}
 }

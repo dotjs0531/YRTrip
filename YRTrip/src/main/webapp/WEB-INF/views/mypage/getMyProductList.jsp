@@ -161,7 +161,7 @@ a:hover { color:white }
 			div[0].buyerList = buyer;
 			
 			var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
-					+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\">" + buyer.buyerId + "</label>" 
+					+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\"><a style='color:black; text-decoration:none !important;' href='./getYourTravelList?userId="+ buyer.buyerId +"'>" + buyer.buyerId + "</a></label>" 
 		        	+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
 					+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId + buyer.buyerId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>구매자 정보</button></div>"
 					+ "<p style='clear:both'>";

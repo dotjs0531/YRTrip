@@ -85,12 +85,14 @@ $(function() {
 		}
 		$.getJSON("getMyReview", param, function(data){
 			var orderId = data.orderId;
+			var itemId = data.itemId;
 			var reviewStar = data.reviewStar;
 			var reviewContent = data.reviewContent;
 			var reviewPic = data.reviewPic;
 			//var picName = reviewPic.split(',');
 			
 			$("#reviewId").val(orderId);
+			$("#itemId").val(itemId);
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
@@ -196,6 +198,7 @@ $(function() {
 										<!-- 수정/삭제 버튼 -->
 										<form action="./deleteMyReview" method="post">
 											<input type="hidden" name="orderId" value="${review.orderId}">
+											<input type="hidden" name="itemId" value="${review.itemId}">
 											<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
 										</form>
 										<button type="button" class="btn btn-default" id="review${review.orderId}" 
@@ -231,6 +234,7 @@ $(function() {
 						            					<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black; margin-left:10px">
 														<form action="./updateMyReview" method="post" enctype="multipart/form-data">										
 															<input type="hidden" id="reviewId" name="orderId">
+															<input type="hidden" id="itemId" name="itemId">
 															<h4 class="text-info" style="color:black;">리뷰 수정</h4><hr/>
 															<div class="form-group">
 																<!-- <img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" /> -->

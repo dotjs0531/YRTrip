@@ -10,7 +10,7 @@ public class UserVO {
 	private String userPost;		//우편번호(생략가능-구매자일경우 입력)
 	private String userAddress;	//주소(생략가능-구매자일경우 입력)
 	private String userEmail;	//이메일
-	private int userStar;		//판매 평점 -> default:0
+	private float userStar;		//판매 평점 -> default:0
 	private String userGrant;	//권한 -> default:user
 	private String userAccount;	//계좌번호(생략가능-판매자일 경우 입력)
 	private String userBank;	//은행정보(생략가능-판매자일 경우 입력)
@@ -70,10 +70,10 @@ public class UserVO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public int getUserStar() {
+	public float getUserStar() {
 		return userStar;
 	}
-	public void setUserStar(int userStar) {
+	public void setUserStar(float userStar) {
 		this.userStar = userStar;
 	}
 	public String getUserGrant() {

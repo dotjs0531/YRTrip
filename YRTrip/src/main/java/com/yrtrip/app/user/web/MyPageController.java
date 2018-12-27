@@ -282,8 +282,9 @@ public class MyPageController {
 		}
 		
 		vo.setReviewPic(fileMultiName);
-
+		
 		mypageService.insertMyReview(vo);
+		mypageService.updateProductStar(vo); //상품 평점 업데이트
 		return "redirect:getMyReviewList";
 	}
 	@RequestMapping("getMyReview") //리뷰 조회
@@ -319,11 +320,13 @@ public class MyPageController {
 		vo.setReviewPic(fileMultiName);
 
 		mypageService.updateMyReview(vo);
+		mypageService.updateProductStar(vo); //상품 평점 업데이트
 		return "redirect:getMyReviewList";
 	}
 	@RequestMapping("/deleteMyReview") //리뷰 삭제
 	public String deleteMyReview(OrderVO vo) {
 		mypageService.deleteMyReview(vo);
+		mypageService.updateProductStar(vo); //상품 평점 업데이트
 		return "redirect:getMyReviewList";
 	}
 }

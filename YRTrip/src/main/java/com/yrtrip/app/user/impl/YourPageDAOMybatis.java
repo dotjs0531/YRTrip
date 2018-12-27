@@ -24,6 +24,9 @@ public class YourPageDAOMybatis {
 	public UserVO getYourInfo(UserVO vo) {
 		return mybatis.selectOne("user.getUser", vo);
 	}
+	public void updateUserStar(UserVO vo) {
+		mybatis.update("user.updateUserStar", vo);
+	}
 	
 	//여행
 	public int getYourTravelCount(TravelBoardVO vo) {

@@ -257,7 +257,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 	 	   AND BUYER_ID = #{buyerId}
-  ORDER BY ORDER_DATE DESC
+  ORDER BY ORDER_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getMyOrder" parameterType="order" resultType="order">
@@ -319,11 +319,14 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   REVIEW_CONTENT,
 		   TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') REVIEW_DATE,
 		   REVIEW_PIC,
-		   ITEM_NAME,
+		   I.ITEM_ID,
+		   I.ITEM_NAME,
+		   I.SELLER_ID,
 		   ORDER_EA,
 		   ORDER_ID
-	  FROM REVIEWV
-	 WHERE ORDER_ID = #{orderId}
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+	 	   AND O.ORDER_ID = #{orderId}
   ORDER BY REVIEW_DATE DESC
 </select>
 <update id="insertMyReview" parameterType="order">
@@ -340,10 +343,15 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  			WHERE ORDER_ID = #{orderId}
 </update>
 <update id="deleteMyReview" parameterType="order">
-	UPDATE ORDERT SET REVIEW_STAR = NULL,
+	UPDATE ORDERT SET REVIEW_STAR = 0.0,
 					  REVIEW_CONTENT = NULL,
 					  REVIEW_DATE = NULL,
 					  REVIEW_PIC = NULL
 	  			WHERE ORDER_ID = #{orderId}
 </update>
+<select id="updateProductStar" statementType="CALLABLE" parameterType="order">
+	{
+		CALL PRO_ITEM_STAR ( #{itemId} )
+	}
+</select>
 </mapper>
