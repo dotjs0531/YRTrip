@@ -11,8 +11,7 @@
     <title>YOUR REAL TRIP:-)</title>
     <!--  bootstrap css -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!--  font Awesome Css  -->
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    
     <!--    stylesheet for fonts-->
     <link href="resources/fonts/stylesheet.css" rel="stylesheet">
     <!-- Reset css-->
@@ -41,6 +40,8 @@
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    <!--  font Awesome Css  -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script>
     $(function() {
     	  $('a[href*=#]').on('click', function(e) {
@@ -49,6 +50,35 @@
     	  });
     	});
     </script>
+    
+<style>
+.container-1{
+  width: 100%;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+.container-1 input#loginId, input#loginPw, input#findEmail{
+  width: 100%;
+  height: 50px;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.container-1 .icon{
+  position: absolute;
+  top: 50%;
+  margin-left: 17px;
+  margin-top: 17px;
+  z-index: 1;
+  color: #4f5b66;
+}
+</style>
 </head>
 <body>    
    <!--start header area-->
@@ -605,55 +635,116 @@
     </div>
     <!--    end of copyright text area-->
    
+    <!-- 로그인 창 -->
+	<div class="modal fade" id="login">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width:80%; margin:0 auto">
+				<!-- remote ajax call이 되는영역 -->
+				<!-- header -->
+				<div class="modal-header">
+					<!-- 닫기(x) 버튼 -->
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
 
-   <div class="modal fade">
-      <div class="modal-dialog">
-         <div class="modal-content">
-            <!-- remote ajax call이 되는영역 -->
-            <!-- header -->
-            <div class="modal-header">
-               <!-- 닫기(x) 버튼 -->
-               <button type="button" class="close" data-dismiss="modal">×</button>
-            </div>
+				<!-- body -->
+				<div class="modal-body">
+					<div class="container" style="width:100%">
+						<div id="login-row"
+							class="row justify-content-center align-items-center">
+							<div id="login-column" style="margin: 20px">
+								<div id="login-box">
+									<form id="login-form" class="form" action="login" method="post" style="margin:0">
+										<h3 class="text-center text-info" style="color:#666666; margin-bottom: 20px">Login</h3>
+										
+										<div style="margin-bottom:20px">
+										<%-- <label for="username" class="text-info" style="color:#5f768b;">UserID:</label><br>
+										<input type="text" name="userId" id="username" value="${user.userId}"
+											class="form-control"> --%>
+											
+											<div class="box">
+											  <div class="container-1">
+											      <span class="icon"><i class="fa fa-user"></i></span>
+											      <input type="text" id="loginId" name="userId" placeholder="아이디" value="${user.userId}" />
+											  </div>
+											</div>
+											<p style="clear:both">
+											
+										<%-- <label for="password" class="text-info" style="color:#5f768b;">Password:</label><br>
+										<input type="password" name="userPw" id="password" value="${user.userPw}"
+											class="form-control"> --%>
+											
+											<div class="box">
+											  <div class="container-1">
+											      <span class="icon"><i class="fa fa-lock"></i></span>
+											      <input type="password" id="loginPw" name="userPw" placeholder="비밀번호" value="${user.userPw}" />
+											  </div>
+											</div>
+										</div>	
+										<p style="clear:both">
+										
+		                              <div class="form-group">
+		                                 <input type="submit" name="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 49%; padding:10px" value="Login">
+		                                 <button type="button" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 49%; padding:10px" onclick="location.href='signup'">SignUp</button>
+		                              </div><hr>
+		                              		<a href="#" id="pwFind" style="color:black">
+		                              			<span style="float:right; margin:0 10px 10px 0"><i class="fas fa-key"></i>&nbsp;비밀번호찾기</span>
+		                              		</a>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 비밀번호 찾기 창 -->
+	<div class="modal fade" id="pwdFindForm">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width:80%; margin:0 auto; margin-top:80px">
+				<!-- remote ajax call이 되는영역 -->
+				<!-- header -->
+				<div class="modal-header">
+					<!-- 닫기(x) 버튼 -->
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
 
-            <!-- body -->
-            <div class="modal-body">
-               <div class="container">
-                  <div id="login-row"
-                     class="row justify-content-center align-items-center">
-                     <div id="login-column" class="col-md-6">
-                        <div id="login-box" class="col-md-12">
-                           <form id="login-form" class="form" action="login" method="post">
-                              <h3 class="text-center text-info" style="color:#5f768b;">Login</h3>
-                              <div class="form-group">
-                                 <label for="username" class="text-info" style="color:#5f768b;">UserID:</label><br>
-                                 <input type="text" name="userId" id="username" value="${user.userId}"
-                                    class="form-control">
-                              </div>
-                              <div class="form-group">
-                                 <label for="password" class="text-info" style="color:#5f768b;">Password:</label><br>
-                                 <input type="password" name="userPw" id="password" value="${user.userPw}"
-                                    class="form-control">
-                              </div>
-                              <div class="form-group">
-                                 <label for="remember-me" class="text-info"><span>Remember
-                                       me</span> <span><input id="remember-me" name="remember-me"
-                                       type="checkbox"></span></label><input type="submit"
-                                    name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="Login">
-                              </div>
-                              <div id="register-link" class="text-right">
-                                 <a href="#" class="text-info">Register here</a>
-                              </div>
-                           </form>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-            </div>
-         </div>
-      </div>
-   </div>
+				<!-- body -->
+				<div class="modal-body">
+					<div class="container" style="width:100%">
+						<div id="login-row"
+							class="row justify-content-center align-items-center">
+							<div id="login-column" style="margin: 20px">
+								<div id="login-box">
+								
+									<form id="pwfind-Form" class="form" action="pwFind" method="post" style="margin:0">
+										<h3 class="text-center text-info" style="color:#666666; margin-bottom: 20px">비밀번호 찾기</h3>
+										<div style="margin-bottom:20px">
+										
+											<div class="box">
+											  <div class="container-1">
+											      <span class="icon"><i class="fas fa-envelope"></i></span>
+											      <input type="text" id="findEmail" name="userEmail" placeholder="이메일" />
+											  </div>
+											</div>
+											<p style="clear:both">
+											
+										</div>	
+										<p style="clear:both">
+										
+		                              <div class="form-group">
+		                                 <button type="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 100%; padding:10px" onclick="location.href='#'">비밀번호 재설정</button>
+		                              </div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
    
    
@@ -680,10 +771,15 @@
     <script src="resources/js/main.js"></script>
     
     <script type="text/javascript">
-   $(function(){
-       $("#popbutton").click(function(){
-           $('div.modal').modal(true);
-       })
+    $(function(){
+        $("#popbutton").click(function(){
+        	$('div#login').modal(true);
+        });
+	   	
+	   	$("#pwFind").click(function(){
+	       	$('div#pwdFindForm').modal(true);
+	       	$('div#login').modal('hide');
+	   	});
    })
    </script>
 </body>

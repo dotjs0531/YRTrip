@@ -47,6 +47,10 @@ public class UserServiceImpl implements UserService {
 		return dao.getUser(vo);
 	}
 
+	public UserVO getUserEmail(UserVO vo) {
+		return dao.getUserEmail(vo);
+	}
+	
 	public List<UserVO> getUserList(UserVO vo) {
 		return dao.getUserList(vo);
 	}

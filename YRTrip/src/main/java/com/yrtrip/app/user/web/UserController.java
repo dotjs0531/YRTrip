@@ -107,6 +107,15 @@ public class UserController {
 		if(user != null) result = 1;
 		return result;
 	}
+	//이메일 중복 체크
+	@ResponseBody
+	@RequestMapping(value = "/checkEmail")
+	public int checkEmail(ModelAndView mv, UserVO vo) {
+		int result = 0;
+		UserVO user = userService.getUserEmail(vo);
+		if(user != null) result = 1;
+		return result;
+	}
 	
 	
 	//마이페이지

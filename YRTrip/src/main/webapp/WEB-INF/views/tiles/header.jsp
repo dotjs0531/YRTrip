@@ -154,9 +154,6 @@
 										<h3 class="text-center text-info" style="color:#666666; margin-bottom: 20px">Login</h3>
 										
 										<div style="margin-bottom:20px">
-										<%-- <label for="username" class="text-info" style="color:#5f768b;">UserID:</label><br>
-										<input type="text" name="userId" id="username" value="${user.userId}"
-											class="form-control"> --%>
 											
 											<div class="box">
 											  <div class="container-1">
@@ -166,26 +163,25 @@
 											</div>
 											<p style="clear:both">
 											
-										<%-- <label for="password" class="text-info" style="color:#5f768b;">Password:</label><br>
-										<input type="password" name="userPw" id="password" value="${user.userPw}"
-											class="form-control"> --%>
-											
 											<div class="box">
 											  <div class="container-1">
 											      <span class="icon"><i class="fa fa-lock"></i></span>
 											      <input type="password" id="loginPw" name="userPw" placeholder="비밀번호" value="${user.userPw}" />
 											  </div>
 											</div>
+											<p style="clear:both">
+											
 										</div>	
-										<p style="clear:both">
 										
-		                              <div class="form-group">
-		                                 <input type="submit" name="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 49%; padding:10px" value="Login">
-		                                 <button type="button" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 49%; padding:10px" onclick="location.href='signup'">SignUp</button>
-		                              </div><hr>
-		                              		<a href="#" id="pwFind" style="color:black">
-		                              			<span style="float:right; margin:0 10px 10px 0"><i class="fas fa-key"></i>&nbsp;비밀번호찾기</span>
-		                              		</a>
+										<div class="form-group">
+											<input type="submit" name="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 49%; padding:10px" value="Login">
+											<button type="button" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 49%; padding:10px" onclick="location.href='signup'">SignUp</button>
+										</div><hr>
+		                              
+	                              		<a href="#" id="pwFind" style="color:black">
+	                              			<span style="float:right; margin:0 10px 10px 0"><i class="fas fa-key"></i>&nbsp;비밀번호찾기</span>
+	                              		</a>
+	                              		
 									</form>
 								</div>
 							</div>
@@ -230,9 +226,10 @@
 										</div>	
 										<p style="clear:both">
 										
-		                              <div class="form-group">
-		                                 <button type="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 100%; padding:10px" onclick="location.href='#'">비밀번호 재설정</button>
-		                              </div>
+										<div class="form-group">
+											<button type="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 100%; padding:10px" onclick="location.href='#'">비밀번호 재설정</button>
+										</div>
+										
 									</form>
 								</div>
 							</div>

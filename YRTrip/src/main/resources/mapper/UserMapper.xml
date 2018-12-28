@@ -39,6 +39,11 @@
 	  FROM  USERT
 	 WHERE  USER_ID = #{userId}
 </select>
+<select id="getUserEmail" parameterType="user" resultType="user">
+	SELECT  USER_EMAIL
+	  FROM  USERT
+	 WHERE  USER_EMAIL = #{userEmail}
+</select>
 
 <insert id="insertUser" parameterType="user">
 	INSERT INTO USERT ( USER_ID,

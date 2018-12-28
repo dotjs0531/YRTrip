@@ -7,6 +7,7 @@ public interface UserService {
 	public void updateUser(UserVO vo);
 	public void deleteUser(UserVO vo);
 	public UserVO getUser(UserVO vo);
+	public UserVO getUserEmail(UserVO vo);
 	public List<UserVO> getUserList(UserVO vo);
 	
 	public UserVO findUserPw(UserVO vo);

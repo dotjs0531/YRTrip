@@ -33,6 +33,10 @@ public class UserDAOMybatis {
 	public UserVO getUser(UserVO vo) {
 		return mybatis.selectOne("user.getUser", vo);
 	}
+	//이메일 중복 체크
+	public UserVO getUserEmail(UserVO vo) {
+		return mybatis.selectOne("user.getUserEmail", vo);
+	}
 	//전체 조회
 	public List<UserVO> getUserList(UserVO vo)  {
 		return mybatis.selectList("user.getUserList", vo);

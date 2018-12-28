@@ -89,32 +89,32 @@ input[type=radio]{
 		var MsgId = document.getElementById("MsgId");
 		var isid = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{4,20}$/;
 		
-			$.ajax({
-				data : {
-					userId : id.value
-				},
-				url: "checkId",
-				success : function(data) {
-	                if( !isid.test(id.value) && data=='0') {
-	                    //$(".signupbtn").prop("disabled", true);
-						MsgId.style.display="block";
-					    MsgId.className='error';
-						MsgId.innerHTML = "영문자로 시작하는 4~20자의 영문자 또는 숫자";
-						idCheck = 0;
-					} else if (data == '0'){
-	                    //$(".signupbtn").prop("disabled", false);
-						MsgId.className='vaild';
-					    MsgId.innerHTML="ok";
-					    idCheck = 1;
-					} else if (data == '1') {
-	                    //$(".signupbtn").prop("disabled", true);
-						MsgId.style.display="block";
-						MsgId.className='error';
-						MsgId.innerHTML = "중복된 ID입니다";
-						idCheck = 0;
-					}
+		$.ajax({
+			data : {
+				userId : id.value
+			},
+			url: "checkId",
+			success : function(data) {
+                if( !isid.test(id.value) && data=='0') {
+                    //$(".signupbtn").prop("disabled", true);
+					MsgId.style.display="block";
+				    MsgId.className='error';
+					MsgId.innerHTML = "영문자로 시작하는 4~20자의 영문자 또는 숫자";
+					idCheck = 0;
+				} else if (data == '0'){
+                    //$(".signupbtn").prop("disabled", false);
+					MsgId.className='vaild';
+				    MsgId.innerHTML="ok";
+				    idCheck = 1;
+				} else if (data == '1') {
+                    //$(".signupbtn").prop("disabled", true);
+					MsgId.style.display="block";
+					MsgId.className='error';
+					MsgId.innerHTML = "중복된 ID입니다";
+					idCheck = 0;
 				}
-			});
+			}
+		});
 	}
 
 	function ck_email(){
@@ -122,7 +122,33 @@ input[type=radio]{
 	    var MsgEmail = document.getElementById("MsgEmail");
 	    var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
 
-	    if(email.value=="" || !isEmail.test(email.value)){
+		$.ajax({
+			data : {
+				userEmail : email.value
+			},
+			url: "checkEmail",
+			success : function(data) {
+                if( !isEmail.test(email.value) && data=='0') {
+                    //$(".signupbtn").prop("disabled", true);
+        	    	MsgEmail.style.display="block";
+        	    	MsgEmail.className='error';
+        	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
+        	    	emailCheck = 0;
+				} else if (data == '0'){
+                    //$(".signupbtn").prop("disabled", false);
+			    	MsgEmail.className='vaild';
+			    	MsgEmail.innerHTML="ok";
+			    	emailCheck = 1;
+				} else if (data == '1') {
+                    //$(".signupbtn").prop("disabled", true);
+        	    	MsgEmail.style.display="block";
+        	    	MsgEmail.className='error';
+        	    	MsgEmail.innerHTML = "중복된 Email입니다";
+        	    	emailCheck = 0;
+				}
+			}
+		});
+	    /* if(email.value=="" || !isEmail.test(email.value)){
 	    	MsgEmail.style.display="block";
 	    	MsgEmail.className='error';
 	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
@@ -131,7 +157,7 @@ input[type=radio]{
 	    	MsgEmail.className='vaild';
 	    	MsgEmail.innerHTML="ok";
 	    	emailCheck = 1;
-	    }   
+	    }  */  
 	}
 
 	function ck_pwd(){
