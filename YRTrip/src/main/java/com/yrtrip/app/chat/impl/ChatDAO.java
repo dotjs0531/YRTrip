@@ -1,4 +1,4 @@
-package com.yrtrip.app.chat.impl;
+/*package com.yrtrip.app.chat.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -282,3 +282,4 @@ public class ChatDAO {
 		return chatList; // 챗 리스트 그릇 담아주기
 	}
 }
+*/

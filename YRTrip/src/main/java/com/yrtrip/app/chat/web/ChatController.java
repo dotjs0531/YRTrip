@@ -1,4 +1,4 @@
-package com.yrtrip.app.chat.web;
+/*package com.yrtrip.app.chat.web;
 
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -181,3 +181,4 @@ public class ChatController {
 	}
 
 }
+*/

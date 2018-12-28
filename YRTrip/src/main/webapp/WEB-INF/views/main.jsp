@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-6">
                         <div class="logo">
-                            <a href="main"><img src="resources/img/logo-oran.png" alt="logo"></a>
+                            <a href="main"><img src="resources/img/logo.png" alt="logo"></a>
                         </div>
                     </div>
                     <div class="col-md-6 col-xs-6 col-md-offset-1 col-sm-7 col-lg-offset-1 col-lg-6 mobMenuCol">
