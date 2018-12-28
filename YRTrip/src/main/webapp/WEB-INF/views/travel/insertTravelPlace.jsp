@@ -145,7 +145,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed4bb3cd4448f4dcda035a074723224&libraries=services,clusterer,drawing"></script>
+
 <script>
 /* datepicker */
 $(function() {
@@ -197,7 +197,7 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 
-function displayPlaces(places) {
+function displayPlaces(places, result) {
 
     var listEl = document.getElementById('placesList'), 
     menuEl = document.getElementById('menu_wrap'),
@@ -214,8 +214,6 @@ function displayPlaces(places) {
             marker = addMarker(placePosition, i), 
             itemEl = getListItem(i, places[i]); 
         bounds.extend(placePosition);
-        var getLat = placePosition.getLat();
-        var getLng = placePosition.getLng();
         
         (function(marker, title) {
             daum.maps.event.addListener(marker, 'mouseover', function() {
@@ -225,12 +223,12 @@ function displayPlaces(places) {
             daum.maps.event.addListener(marker, 'mouseout', function() {
                 infowindow.close();
             });
-            
-            daum.maps.event.addListener(marker, 'click', function() {
+
+             daum.maps.event.addListener(marker, 'click', function() {
             	
             	document.getElementById("placeName").value= title;
-                document.getElementById("placeAddress").value= marker.getPosition().getLat()+", "+marker.getPosition().getLng();
-            });
+               document.getElementById("placeAddress").value= marker.getPosition().getLat()+", "+marker.getPosition().getLng();
+            }); 
 
             itemEl.onmouseover =  function () {
                 displayInfowindow(marker, title);
@@ -238,6 +236,11 @@ function displayPlaces(places) {
 
             itemEl.onmouseout =  function () {
                 infowindow.close();
+            };
+            
+            itemEl.onclick =  function () {
+            	document.getElementById("placeName").value= title;
+                document.getElementById("placeAddress").value= marker.getPosition().getLat()+", "+marker.getPosition().getLng();
             };
 
         })(marker, places[i].place_name);
@@ -251,7 +254,7 @@ function displayPlaces(places) {
     map.setBounds(bounds);
 }
 
-function getListItem(index, places) {
+function getListItem(index, places,marker ) {
 
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
@@ -267,8 +270,8 @@ function getListItem(index, places) {
     }
                  
       itemStr += '  <span class="tel">' + places.phone  + '</span>' +
-                '</div>';           
-                
+                '</div>'; 
+                      
     el.innerHTML = itemStr;
     el.className = 'item';
 
@@ -338,6 +341,7 @@ function displayInfowindow(marker, title, places) {
  
     infowindow.setContent(content);
     infowindow.open(map, marker);
+
 }
 
 
@@ -346,7 +350,7 @@ function removeAllChildNods(el) {
         el.removeChild (el.lastChild);
     }
 }
-/* 
+
 var geocoder = new daum.maps.services.Geocoder();
 var clickMarker = new daum.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
 infowindow = new daum.maps.InfoWindow({zindex:1});
@@ -354,17 +358,12 @@ infowindow = new daum.maps.InfoWindow({zindex:1});
 daum.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === daum.maps.services.Status.OK) {
-            var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';           
-            var content = '<div class="bAddr">'+ 
-                            detailAddr + 
-                        '</div>';
-
             clickMarker.setPosition(mouseEvent.latLng);
             clickMarker.setMap(map);
 
-            infowindow.setContent(content);
-            infowindow.open(map, clickMarker);
+            document.getElementById("placeName").value = "";
+            document.getElementById("placeAddress").value= result[0].address.address_name;
+        
         }   
     });
 });
@@ -374,7 +373,7 @@ function searchAddrFromCoords(coords, callback) {
 }
 function searchDetailAddrFromCoords(coords, callback) {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-} */
+}
 </script>
 </body>
 </html>
