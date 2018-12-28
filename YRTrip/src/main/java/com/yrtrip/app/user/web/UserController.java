@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.user.EmailVO;
 import com.yrtrip.app.user.UserService;
 import com.yrtrip.app.user.UserVO;
 
@@ -23,7 +24,7 @@ import com.yrtrip.app.user.UserVO;
 public class UserController {
 
 	@Autowired UserService userService;
-
+	
 	//전체 조회
 	@RequestMapping(value = "/getUserList", method = RequestMethod.GET)
 	public String getUserList(Model model, UserVO vo) {
@@ -129,5 +130,34 @@ public class UserController {
 		session.invalidate(); //세션 무효화
 		
 		return "main";
+	}
+	
+	//비밀번호 재설정 - 메일발송처리
+	@RequestMapping("pwFind")
+	public void mailSend(EmailVO vo, UserVO uvo,
+			        HttpServletResponse response) throws IOException {
+		userService.findUserPw(uvo);
+		
+		//재설정할 비밀번호 생성
+		String pw = "";
+		for (int i = 0; i < 12; i++) {
+			pw += (char) ((Math.random() * 26) + 97);
+		}
+		
+		uvo.setUserPw(pw);
+		userService.updateUserPw(uvo);
+		
+		vo.setFrom("dotjs0531@gmail.com");
+		vo.setTo(uvo.getUserEmail());
+		vo.setSubject("[Your Real Trip] 재설정된 비밀번호를 확인하세요.");
+		vo.setContent(uvo.getUserPw());
+		
+		userService.send(vo);
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('해당 메일로 재설정된 비밀번호가 전송되었습니다.');");
+		out.println("</script>");
 	}
 }

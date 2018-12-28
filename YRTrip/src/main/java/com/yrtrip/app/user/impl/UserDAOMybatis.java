@@ -37,4 +37,13 @@ public class UserDAOMybatis {
 	public List<UserVO> getUserList(UserVO vo)  {
 		return mybatis.selectList("user.getUserList", vo);
 	}
+
+	//비밀번호 찾기
+	public UserVO findUserPw(UserVO vo) {
+		return mybatis.selectOne("user.findUserPw", vo);
+	}
+	//비밀번호 재설정
+	public void updateUserPw(UserVO vo) {
+		mybatis.update("user.updateUserPw", vo.getUserId());
+	}
 }

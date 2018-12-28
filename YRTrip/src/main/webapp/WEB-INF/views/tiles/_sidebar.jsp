@@ -1,6 +1,24 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<head>
+<style>
+.fa fa-user:before {
+    content: "\F6A0";
+}
+.fa fa-user:before {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+</style>
+</head>
+<body>
 	<nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item nav-profile">
@@ -8,10 +26,12 @@
               <div class="user-wrapper">
                 <div class="profile-image">
                   <!-- <img src="resources/admin/images/faces/face1.jpg" alt="profile image"> -->
-                  <button type="button" class="btn btn-icons btn-rounded btn-light"><i class=""></i></button>
+                  <button type="button" class="btn btn-icons btn-rounded btn-light" onclick="location.href='./admin'">
+                  	<i class="fa fa-user"></i>
+                  </button>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Richard V.Welsh</p>
+                  <p class="profile-name"><a href="./admin" style="color:black; text-decoration:none">${sessionScope.login.userName}</a></p>
                   <div>
                     <small class="designation text-muted">Manager</small>
                     <span class="status-indicator online"></span>
@@ -98,3 +118,4 @@
           </li>
         </ul>
       </nav>
+</body>

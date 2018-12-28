@@ -78,4 +78,15 @@
 	DELETE  FROM  USERT
 			WHERE USER_ID = #{value}
 </delete>
+
+<select id="findUserPw" parameterType="user" resultType="user">
+	SELECT  USER_PW,
+			USER_EMAIL
+	  FROM  USERT
+	 WHERE  USER_EMAIL = #{userEmail}
+</select>
+<update id="updateUserPw" parameterType="user">
+	UPDATE USERT SET USER_PW = #{userPw}
+			   WHERE USER_EMAIL = #{userEmail}
+</update>
 </mapper>

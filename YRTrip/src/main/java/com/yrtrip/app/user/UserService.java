@@ -8,4 +8,9 @@ public interface UserService {
 	public void deleteUser(UserVO vo);
 	public UserVO getUser(UserVO vo);
 	public List<UserVO> getUserList(UserVO vo);
+	
+	public UserVO findUserPw(UserVO vo);
+	public void updateUserPw(UserVO vo);
+	public void send(EmailVO vo);
+	public void sendAttatch(EmailVO vo);
 }
