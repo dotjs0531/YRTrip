@@ -28,12 +28,24 @@
     <link href="resources/style.css" rel="stylesheet">
     <!--  Responsive Css  -->
     <link href="resources/css/responsive.css" rel="stylesheet">
-
+    <!-- 폰트 모음 -->
+		<link href="https://fonts.googleapis.com/css?family=Do+Hyeon:400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
+	<!-- 폰트끝 -->
     <!--  browser campatibel css files-->
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <script>
+    $(function() {
+    	  $('a[href*=#]').on('click', function(e) {
+    	    e.preventDefault();
+    	    $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top}, 500, 'linear');
+    	  });
+    	});
+    </script>
 </head>
 <body>    
    <!--start header area-->
@@ -95,8 +107,8 @@
                                 <h1>유어 레알 트립</h1>
                                 <h1>YOUR REAL TRIP</h1>
                                 <div class="welcome_p">
-                                    <p>YOU ONLY LIVE ONCE</p>
-                                    <p>당신이 꿈꾸는 여행을 위해</p>
+                                    <p>YOU ONLY LIVE ONCE, FOR YOUR DREAM TRIP</p>
+                                    <p>인생은 한번뿐이니까, 당신이 꿈꾸는 여행을 위해</p>
                                 </div>
                                 <div class="welcome_form">
                                     <form action="#">
@@ -104,8 +116,12 @@
                                         <input class="submit" type="submit" value="Track your product">
                                     </form>
                                 </div>
+                                <section id="section05" class="demo">
+								  <a href="#about_top"><span></span></a>
+								</section>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -114,7 +130,7 @@
     </section>
     <!--end of header area-->
     <!--   start about top area-->
-    <section class="about_top">
+    <section class="about_top" id="about_top">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-4 col-xs-12">

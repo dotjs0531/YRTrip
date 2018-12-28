@@ -16,6 +16,54 @@
 ******************************************
 ******************************************
 */
+/* 버튼 */
+#section05 { background: url(https://www.nxworld.net/example/css-scroll-down-button/bg05.jpg) center center / cover no-repeat;}
+#section05 a {
+  padding-top: 70px;
+}
+#section05 a span {
+  position: absolute;
+  top: 500px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: sdb05 1.5s infinite;
+  animation: sdb05 1.5s infinite;
+  box-sizing: border-box;
+}
+@-webkit-keyframes sdb05 {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+@keyframes sdb05 {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+/* 버튼 끝*/
+
 
 html,body { height: 100%; margin: 0; padding: 0; }
 
@@ -247,6 +295,7 @@ nav.navbar {
 }
 
 .welcome_text {
+	
     position: relative;
     z-index: 5;
     margin-top: 10%
@@ -273,6 +322,7 @@ nav.navbar {
 .welcome_text p {
     color: #fff;
     line-height: 26px;
+    LETTER-SPACING: 3PX;
 }
 
 .welcome_p {
@@ -281,10 +331,13 @@ nav.navbar {
 }
 
 .welcome_text h1 {
+    font-size: 5em;
     color: #fff;
     text-transform: uppercase;
-    line-height: 46px;
-    font-family: 'montserratbold';
+    line-height: 60px;
+    font-size: 'regular';
+    font-family: 'Black Han Sans', 'montserratbold', 'Do Hyeon';
+    letter-spacing: 5px;    
 }
 
 .welcome_form .form-control {
