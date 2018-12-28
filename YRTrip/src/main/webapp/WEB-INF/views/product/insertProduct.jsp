@@ -40,10 +40,15 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
 	crossorigin="anonymous"></script>
 <script src="resources/js/fileinput.js" type="text/javascript"></script>
+
 <style>
-#login-row {
-	margin-left: -230px;
-	margin-right: 440px;
+#login-column {
+   width:100%;
+   margin: 0 10px;
+}
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
 }
 
 .carousel-control.left, .carousel-control.right {

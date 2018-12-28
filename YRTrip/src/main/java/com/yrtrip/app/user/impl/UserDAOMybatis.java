@@ -44,6 +44,6 @@ public class UserDAOMybatis {
 	}
 	//비밀번호 재설정
 	public void updateUserPw(UserVO vo) {
-		mybatis.update("user.updateUserPw", vo.getUserId());
+		mybatis.update("user.updateUserPw", vo);
 	}
 }

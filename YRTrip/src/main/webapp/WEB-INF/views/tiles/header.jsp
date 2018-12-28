@@ -37,6 +37,7 @@
     	
     	$("#pwFind").click(function(){
         	$('div#pwdFindForm').modal(true);
+        	$('div#login').modal('hide');
     	});
 	})
 	</script>

@@ -16,6 +16,10 @@
 .modal-backdrop {
 	z-index: -1;
 }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
 </style>
 </head>
 <body>

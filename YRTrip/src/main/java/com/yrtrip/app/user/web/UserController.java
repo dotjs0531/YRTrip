@@ -136,15 +136,18 @@ public class UserController {
 	@RequestMapping("pwFind")
 	public void mailSend(EmailVO vo, UserVO uvo,
 			        HttpServletResponse response) throws IOException {
-		userService.findUserPw(uvo);
+		UserVO nvo = new UserVO();	//입력받은 이메일로 회원 정보 가져옴
+		nvo = userService.findUserPw(uvo);
 		
 		//재설정할 비밀번호 생성
 		String pw = "";
 		for (int i = 0; i < 12; i++) {
 			pw += (char) ((Math.random() * 26) + 97);
 		}
+		String email = nvo.getUserEmail();
 		
 		uvo.setUserPw(pw);
+		uvo.setUserEmail(email);
 		userService.updateUserPw(uvo);
 		
 		vo.setFrom("dotjs0531@gmail.com");
@@ -157,7 +160,7 @@ public class UserController {
 		response.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		out.println("alert('해당 메일로 재설정된 비밀번호가 전송되었습니다.');");
+		out.println("alert('해당 메일로 재설정된 비밀번호가 전송되었습니다.'); history.go(-1);");
 		out.println("</script>");
 	}
 }

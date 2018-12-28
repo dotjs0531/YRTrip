@@ -23,9 +23,13 @@
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz">
 
 <style>
-#login-row {
-	margin-left: -230px;
-	margin-right: 440px;
+#login-column {
+   width:100%;
+   margin: 0 10px;
+}
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
 }
 </style>
 <script>
