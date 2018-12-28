@@ -17,9 +17,10 @@ public class OrderVO extends ProductVO {
 	private String itemDeliveryno;	//송장번호(생략가능-배송중일 경우 입력)
 	private String orderPost; 		//우편번호
 	private String orderAddress;	//주소
-	private String userName;
-	private String userPhone;
-	private int cartId;
+	private String userName;		//구매자 이름
+	private String userPhone;		//구매자 전화번호
+	private int cartId;				//장바구니 번호 - 삭제를 위해서
+	private String orderMethod; 	//결제방법
 	
 	private String[] orderNoList;	//거래내역 선택삭제
 	
@@ -30,7 +31,12 @@ public class OrderVO extends ProductVO {
 	private String reviewPic;				//리뷰 사진
 	private MultipartFile[] reviewPicFile;	//실제 이미지 파일(다중파일 업로드)
 	
-		
+	public String getOrderMethod() {
+		return orderMethod;
+	}
+	public void setOrderMethod(String orderMethod) {
+		this.orderMethod = orderMethod;
+	}
 	public int getCartId() {
 		return cartId;
 	}

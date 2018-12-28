@@ -18,31 +18,69 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- 결제를 위한 아임포트 라이브러리 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <style>
 #login-row {
 	margin-left: -230px;
 	margin-right: 440px;
 }
 </style>
+
 <script>
-	$(function(){
-		var post_origin = $("#orderPost").val();
-		var address_origin = $("#orderAddress").val();
-		var item_total = $("#itemPrice").text() * $("#itemEa").text();
-		$("#different-address").click(function(){
-			$("#orderAddress").val('');
-			$("#orderPost").val('');
-		});
-		$("#same-address").click(function(){
-			$("#orderAddress").val(address_origin);
-			$("#orderPost").val(post_origin);
-		});
-		
-		$("#itemTotal").html(item_total);
-		
-		/* sellerid = buyid 일때 막아놓기 */
+var IMP = window.IMP; // 생략가능
+IMP.init('imp75074879'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+$(function(){
+	var post_origin = $("#orderPost").val();
+	var address_origin = $("#orderAddress").val();
+	var item_total = $("div#orderPriceSingle").text() * $("div#orderEa").text();
+	$("#different-address").click(function(){
+		$("#orderAddress").val('');
+		$("#orderPost").val('');
 	});
+	$("#same-address").click(function(){
+		$("#orderAddress").val(address_origin);
+		$("#orderPost").val(post_origin);
+	});
+
+	$("#itemTotal").html(item_total);
 	
+		$("#pay").click(function(){
+			IMP.request_pay({
+				pg : 'html5_inicis', // version 1.1.0부터 지원.
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    name : '제품명: ${item.itemName}',
+			    amount : item_total,
+			    buyer_email : '${userPur.userEmail}',
+			    buyer_name : '${userPur.userName}',
+			    buyer_tel : '${userPur.userPhone}',
+			    buyer_addr : '${userPur.userAddress}',
+			    buyer_postcode : '${userPur.userPost}',
+			    m_redirect_url : 'http://localhost:8081/app/getMyOrderList'
+
+			}, function(rsp) {
+			    if ( rsp.success ) {
+			        var msg = '결제가 완료되었습니다.';
+			        msg += '고유ID : ' + rsp.imp_uid;
+			        msg += '상점 거래ID : ' + rsp.merchant_uid;
+			        msg += '결제 금액 : ' + rsp.paid_amount;
+			        msg += '카드 승인번호 : ' + rsp.apply_num;
+			        
+			    } else {
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			    
+			    alert(msg);
+			});
+		});
+	});
+</script>
+
+<script>
+	/* 주소찾기 */
 	function sample4_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -91,25 +129,26 @@
 			<div class="py-5 text-center">
 				<h2>주문서</h2>
 				<p class="lead">
-					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
+					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동 
 				</p>
 			</div>
 			<div class="row">
 				<div class="col-md-6 center-block order-md-1">
 					<h4 class="mb-3">필수정보</h4>
-					<form action="./insertOrder" method="post" class="needs-validation" 
+					<!-- ./insertOrder -->
+					<form action="./ins" method="post" class="needs-validation" 
 						novalidate="">
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="buyerName">이름</label> <input type="text"
 								class="form-control" id="buyerName" name="" placeholder=""
-								value="${userPur.userName}" required="" disabled>
+								value="${userPur.userName}" required="" readonly>
 							<div class="invalid-feedback">이름을 입력해주세요</div>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="buyerId">회원아이디</label> <input type="text"
-								class="form-control" id="buyerId" name="buyerId" placeholder=""
-								value="${sessionScope.login.userId}" required="">
+								class="form-control" id="buyerId" name="buyerId"
+								value="${sessionScope.login.userId}" required="" readonly>
 							<div class="invalid-feedback">이름을 입력해주세요</div>
 						</div>
 					</div>
@@ -117,41 +156,40 @@
 					<div class="mb-3">
 						<div class="custom-control custom-radio">
 							<input id="same-address" name="orderDelivery" type="radio"
-								class="custom-control-input" value="카드결제" checked="" required="">
+								class="custom-control-input" value="동일주소" checked="" required="">
 							<label class="custom-control-label address" for="same-address">회원정보에 있는 주소와 동일</label>
 						</div>
 						<!-- 주소 리셋해주기 -->
 						<div class="custom-control custom-radio">
 							<input id="different-address" name="orderDelivery" type="radio"
-								class="custom-control-input" value="현금결제" required=""> <label
+								class="custom-control-input" value="다른주소" required=""> <label
 								class="custom-control-label address" for="different-address">새 주소 입력</label>
 						</div>
 					</div>
 
 					<div class="mb-3">
 						<div class="row">
-							<label class="col-md-12" for="orderAddress">주소</label>
+							<label class="col-md-12" for="orderAddress">주소<span class="text-muted">(상세주소도 같이 써주세요)</span></label>
 						</div>
 
-						<input class="form-control col-md-5 mr-4 mb-3" type="text"
-							value="${userPur.userPost}" name="orderPost" id="orderPost"> <a
+						<input class="form-control col-md-5 mb-3" type="text"
+							value="${userPur.userPost}" name="orderPost" id="orderPost" placeholder="검색하세요!→"> <a
 							role="button" class="btn btn-warning col-md-3 pull-right"
 							onclick="sample4_execDaumPostcode()">우편번호 찾기</a> 
 						<input
 							type="text" class="form-control" id="orderAddress"
 							name="orderAddress" value="${userPur.userAddress}"
-							placeholder="시/군/구/동/읍/면/리+상세주소" required="">
+							placeholder="시/군/구/동/읍/면/리 + 상세주소" required="">
 							<div class="invalid-feedback">배달될 주소를 입력해주세요</div>
 							<!-- 상세주소도 써달라고 하기! -->
 					</div>
-					<%-- <div class="mb-3">
+					<div class="mb-3">
 						<label for="email">이메일<span class="text-muted">(선택)</span></label>
 						<input type="email" class="form-control"
 							value="${userPur.userEmail}" id="email"
 							placeholder="you@example.com">
 						<div class="invalid-feedback">배송내역을 이메일로 알려드립니다 필요시 입력해주세요</div>
 					</div>
- --%>
 					<hr class="mb-4">
 					<h4 class="mb-3">상품정보</h4>
 					상품이미지 작게 넣기 60*60정도?
@@ -159,7 +197,6 @@
 						<div class="col-md-3 mb-3">
 							<label for="orderPriceSingle">상품가격</label>
 							<div id="orderPriceSingle">
-								<input type="text" name="" value="${cart.itemPrice}">
 								${cart.itemPrice}
 							</div>
 						</div>
@@ -171,7 +208,8 @@
 						<div class="col-md-3 mb-3">
 							<label for="orderEa" class="">주문개수</label>
 							<div id="orderEa">
-								<input type="text" name="orderEa" value="${cart.itemEa}">
+								<%-- <input type="text" name="orderEa" value="${cart.itemEa}"> --%>
+								${cart.itemEa}
 							</div>
 						</div>
 
@@ -181,15 +219,16 @@
 
 						<div class="col-md-4 mb-3">
 							<label for="itemTotal">총가격</label>
-							<div id="itemTotal"></div>
+							<div id="itemTotal" name=""></div>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-4 mb-3">
-							<label for="sellerId">판매자아이디</label> <input type="text"
-								class="form-control" id="sellerId" placeholder=""
-								value="${cart.sellerId}" required="" disabled>
+							<label for="sellerId">판매자아이디</label> 
+							<div id="sellerId">
+							${cart.sellerId}
+							</div>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="itemMethod">선호결제</label>
@@ -206,27 +245,33 @@
 					<h4 class="mb-3">결제방법</h4>
 					<div class="mb-3">
 						<div class="custom-control custom-radio">
-							<input id="credit" name="" type="radio"
+							<input id="credit" name="which-payment" type="radio"
 								class="custom-control-input" value="카드결제" checked="" required="">
-							<label class="custom-control-label" for="credit">카드결제</label>
+							<label class="custom-control-label" for="credit">카드(KG이니시스)</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="debit" name="" type="radio"
+							<input id="debit" name="which-payment" type="radio"
 								class="custom-control-input" value="현금결제" required=""> <label
 								class="custom-control-label" for="debit">현금결제</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="paypal" name="" type="radio"
-								class="custom-control-input" required=""> <label
-								class="custom-control-label" for="paypal">Paypal</label>
+							<input id="paypal" name="which-payment" type="radio"
+								class="custom-control-input" value="직거래" required=""> <label
+								class="custom-control-label" for="paypal">직거래</label>
 						</div>
 					</div>
 				<input type="text" value="${cart.itemId}" name="itemId">
 				<input type="text" value="${cart.cartId}" name="cartId">
+				<input type="text" value="${cart.itemEa}" name="orderEa">
+				<%-- <input type="text" value="${cart.itemPrice}" name="itemPrice"> --%>
+				
 				<hr class="mb-4">
-				<button class="btn btn-lg btn-block"
+				<input class="btn btn-lg btn-block"
+					style="background-color: #f9bf3b; color: white;"
+					 id="pay" type="button" value="주문하기!!">
+<!-- 					 <button class="btn btn-lg btn-block"
 					style="background-color: #f9bf3b; color: white;" type="submit"
-					formaction="./insertOrder">주문하기!!</button>
+					 id="pay">주문하기!!</button> -->
 				</form>
 			</div>
 		</div>
@@ -242,12 +287,7 @@
 	</section>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-	<script src="../../assets/js/vendor/popper.min.js"></script>
-	<script src="../../dist/js/bootstrap.min.js"></script>
-	<script src="../../assets/js/vendor/holder.min.js"></script>
+	
 	<script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {
