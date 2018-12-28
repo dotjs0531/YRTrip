@@ -15,8 +15,9 @@ public class TravelPlaceVO extends LikeVO {
 	private String userId;
 	private String placeTitle;
 	private String placeVisitDate;
-	private String TravelNo;
+	private String placeMapId;
 	
+	private String TravelNo;
 	private String searchKeyword;
 	private String searchCondition;
 	private String sortCol;
@@ -88,6 +89,12 @@ public class TravelPlaceVO extends LikeVO {
 	}
 	public void setPlaceVisitDate(String placeVisitDate) {
 		this.placeVisitDate = placeVisitDate;
+	}
+	public String getPlaceMapId() {
+		return placeMapId;
+	}
+	public void setPlaceMapId(String placeMapId) {
+		this.placeMapId = placeMapId;
 	}
 	public String getSearchKeyword() {
 		return searchKeyword;

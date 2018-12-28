@@ -118,6 +118,7 @@
 	UPDATE TRAVEL_PLACET 
 	SET PLACE_NAME = #{placeName},
 		PLACE_ADDRESS = #{placeAddress},
+		PLACE_MAPID = #{placeMapId},
 		PLACE_CONTENT = #{placeContent},
 		PLACE_PIC = #{placePic},
 		PLACE_TITLE = #{placeTitle},

@@ -324,12 +324,12 @@ $(function(){
 			<div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
 				<div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2 style="color:black">카테고리</h2>
+                            <h2 style="color:black">여행정보</h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">베스트 장소</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black">Places</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
 	                        <a id="insertTravelBoardButton">새 여행기 등록</a>
