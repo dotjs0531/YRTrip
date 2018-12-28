@@ -19,5 +19,6 @@ public class ChatDAOMybatis {
 		System.out.println("mybatis 채팅리스트 전체조회 기능 처리");
 		return mybatis.selectList("chat.getChatList", vo);
 	}
+	
 }
 

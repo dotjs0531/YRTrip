@@ -92,7 +92,7 @@
 		$("#joinerList").on("click", ".btnChange", function(){
 			console.log(this);
 			
-			var a = $("#joinerList").val();
+			
 			console.log(a);
 			
 			$.ajax({
@@ -100,7 +100,7 @@
 				
 				type: "POST",
 				
-				data: {Condition : ""},
+				data: {Condition :"" },
 				
 				success: function(data){
 					console.log(data);

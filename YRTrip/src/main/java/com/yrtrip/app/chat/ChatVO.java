@@ -5,47 +5,49 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ChatVO {
 
-	private Integer	chatid;
-	private String	fromid;
-	private String	toid;
-	private String chatcontent;
-	private String Chattime;
+	private String chatId;
+	private String fromId;
+	private String toId;
+	private String chatContent;
+	private String chatTime;
 	
-	public Integer getChatid() {
-		return chatid;
+	public String getChatId() {
+		return chatId;
 	}
-	public void setChatid(Integer chatid) {
-		this.chatid = chatid;
+	public void setChatId(String chatId) {
+		this.chatId = chatId;
 	}
-	public String getFromid() {
-		return fromid;
+	public String getFromId() {
+		return fromId;
 	}
-	public void setFromid(String fromid) {
-		this.fromid = fromid;
+	public void setFromId(String fromId) {
+		this.fromId = fromId;
 	}
-	public String getToid() {
-		return toid;
+	public String getToId() {
+		return toId;
 	}
-	public void setToid(String toid) {
-		this.toid = toid;
+	public void setToId(String toId) {
+		this.toId = toId;
 	}
-	public String getChatcontent() {
-		return chatcontent;
+	public String getChatContent() {
+		return chatContent;
 	}
-	public void setChatcontent(String chatcontent) {
-		this.chatcontent = chatcontent;
+	public void setChatContent(String chatContent) {
+		this.chatContent = chatContent;
 	}
-	public String getChattime() {
-		return Chattime;
+	public String getChatTime() {
+		return chatTime;
 	}
-	public void setChattime(String chattime) {
-		Chattime = chattime;
+	public void setChatTime(String chatTime) {
+		this.chatTime = chatTime;
 	}
+	
 	@Override
 	public String toString() {
-		return "ChatVO [chatid=" + chatid + ", fromid=" + fromid + ", toid=" + toid + ", chatcontent=" + chatcontent
-				+ ", Chattime=" + Chattime + "]";
+		return "ChatVO [chatId=" + chatId + ", fromId=" + fromId + ", toId=" + toId + ", chatContent=" + chatContent
+				+ ", chatTime=" + chatTime + "]";
 	}
+	
 	
 	
 }
