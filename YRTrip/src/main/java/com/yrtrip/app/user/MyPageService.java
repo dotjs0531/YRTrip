@@ -18,6 +18,7 @@ public interface MyPageService {
 	public void deleteMyTravelList(TravelBoardVO vo);
 	
 	//동행
+	public int getMyPartnerCount(PartnerVO vo);
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo);
 	public List<JoinerVO> getMyJoinerList(JoinerVO vo);
 	public void cancleMyJoinerList(JoinerVO vo);

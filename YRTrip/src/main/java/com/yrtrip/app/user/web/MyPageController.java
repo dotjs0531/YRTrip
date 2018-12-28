@@ -67,11 +67,23 @@ public class MyPageController {
 	
 	//동행 페이지
 	@RequestMapping("/getMyPartnerList")
-	public ModelAndView getMyPartnerList(PartnerVO pvo, JoinerVO jvo, HttpSession session) {
+	public ModelAndView getMyPartnerList(PartnerVO pvo, JoinerVO jvo, Paging paging, HttpSession session) {
 		pvo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 
 		ModelAndView mv = new ModelAndView();
+
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+
+		paging.setPageUnit(5);
 		
+		pvo.setFirst(paging.getFirst());
+		pvo.setLast(paging.getLast());
+
+		paging.setTotalRecord(mypageService.getMyPartnerCount(pvo));
+
+		mv.addObject("paging", paging);
 		mv.addObject("MyPartnerList", mypageService.getMyPartnerList(pvo));
 		mv.addObject("MyJoinerList", mypageService.getMyJoinerList(jvo));
 		mv.setViewName("mypage/getMyPartnerList");

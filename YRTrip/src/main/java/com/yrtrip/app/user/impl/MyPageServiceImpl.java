@@ -32,6 +32,9 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	//동행
+	public int getMyPartnerCount(PartnerVO vo) {
+		return dao.getMyPartnerCount(vo);
+	}
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo) {
 		return dao.getMyPartnerList(vo);
 	}

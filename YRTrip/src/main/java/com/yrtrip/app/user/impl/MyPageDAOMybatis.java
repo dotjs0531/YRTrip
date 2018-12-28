@@ -33,6 +33,9 @@ public class MyPageDAOMybatis {
 	}
 
 	//동행
+	public int getMyPartnerCount(PartnerVO vo) {
+		return mybatis.selectOne("user.getMyPartnerCount", vo);
+	}
 	public List<PartnerVO> getMyPartnerList(PartnerVO vo)  {
 		return mybatis.selectList("user.getMyPartnerList", vo);
 	}

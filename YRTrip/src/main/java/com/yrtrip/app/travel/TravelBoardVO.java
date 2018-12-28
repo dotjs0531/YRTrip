@@ -5,7 +5,7 @@ import com.yrtrip.app.like.LikeVO;
 
 public class TravelBoardVO  extends LikeVO {
 
-	private int travelNo;
+	private Integer travelNo;
 	private int travelPerson;
 	private int travelPay;
 	private String travelSche;
@@ -33,7 +33,7 @@ public class TravelBoardVO  extends LikeVO {
 	public int getTravelNo() {
 		return travelNo;
 	}
-	public void setTravelNo(int travelNo) {
+	public void setTravelNo(Integer travelNo) {
 		this.travelNo = travelNo;
 	}
 	public int getTravelPerson() {

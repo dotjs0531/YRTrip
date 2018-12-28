@@ -39,15 +39,33 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </delete>
 
 <!-- 동행 페이지 -->
+<select id="getMyPartnerCount" parameterType="partner" resultType="int">
+	SELECT COUNT(*)
+	  FROM PARTNERT
+	 WHERE USER_ID = #{userId}
+</select>
 <select id="getMyPartnerList" parameterType="partner" resultType="partner">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  PARTNER_ID,
 			PARTNER_TITLE,
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,
-			USER_ID,
-			PARTNER_CONDITION
-	  FROM  PARTNERT
-	  WHERE USER_ID = #{userId}
-   ORDER BY PARTNER_DATE DESC
+			PARTNER_HIT,
+			TO_CHAR(PARTNER_DATE, 'YY/MM/DD') PARTNER_DATE,
+			PARTNER_PAY,
+			PARTNER_CLASS,
+			PARTNER_PERS,
+			TO_CHAR(PARTNER_START, 'YYYY.MM.DD') PARTNER_START,
+			TO_CHAR(PARTNER_END, 'YYYY.MM.DD') PARTNER_END,
+			PARTNER_CONDITION,
+			P.TINFO_ID,
+			TINFO_COUNTRY,
+			TINFO_STATE,
+			TINFO_CITY,
+			USER_ID
+	  FROM  PARTNERT P, TRAVELINFOT T
+	  WHERE P.TINFO_ID = T.TINFO_ID
+	  		AND USER_ID = #{userId}
+   ORDER BY PARTNER_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getMyJoinerList" parameterType="joiner" resultType="joiner">
 	SELECT	JOINER_ID,

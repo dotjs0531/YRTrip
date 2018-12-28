@@ -62,6 +62,8 @@ public class YourPageController {
 
 		paging.setTotalRecord(yourpageService.getYourPartnerCount(vo));
 
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
+
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
 		mv.addObject("YourJoinerCnt", yourpageService.getYourJoinerCnt(jvo));
@@ -86,6 +88,8 @@ public class YourPageController {
 		vo.setLikeCategory("T");
 
 		paging.setTotalRecord(yourpageService.getYourLikedCount(vo));
+
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
 		
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
@@ -108,6 +112,8 @@ public class YourPageController {
 		vo.setLikeCategory("P");
 
 		paging.setTotalRecord(yourpageService.getYourLikedCount(vo));
+
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
 		
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
@@ -130,6 +136,8 @@ public class YourPageController {
 		vo.setLikeCategory("I");
 
 		paging.setTotalRecord(yourpageService.getYourLikedCount(vo));
+
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
 		
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
@@ -157,6 +165,8 @@ public class YourPageController {
 
 		paging.setTotalRecord(yourpageService.getYourProductCount(vo));
 
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
+
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));
 		mv.addObject("YourReviewCnt", yourpageService.getYourProductReviewCnt(ovo));
@@ -182,6 +192,8 @@ public class YourPageController {
 		vo.setLast(paging.getLast());
 
 		paging.setTotalRecord(yourpageService.getYourReviewCount(vo));
+
+		yourpageService.updateUserStar(uvo); //상품 평점 업데이트
 
 		mv.addObject("paging", paging);
 		mv.addObject("user", yourpageService.getYourInfo(uvo));

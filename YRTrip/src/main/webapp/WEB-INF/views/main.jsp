@@ -71,8 +71,12 @@
 					<c:if test="${not empty sessionScope.login}">
                     <div class="col-md-3 col-sm-3 col-xs-4 col-lg-3 signup">
                         <ul class="nav navbar-nav">
-                            <li><a href="logout">logout</a></li>
-                            <li><a href="./getMyInfo?userId=${sessionScope.login.userId}">${sessionScope.login.userId}</a></li>
+                            <li><a href="logout">logout</a></li><c:if test="${sessionScope.login.userGrant ne 'admin'}">
+                            	<li><a href="./getMyInfo?userId=${sessionScope.login.userId}">${sessionScope.login.userId}</a></li>
+                            </c:if>
+                            <c:if test="${sessionScope.login.userGrant eq 'admin'}">
+                            	<li><a href="./admin">${sessionScope.login.userId}</a></li>
+                            </c:if>
                         </ul>
                     </div>
 					</c:if>

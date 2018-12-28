@@ -203,12 +203,13 @@ jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelBoardButton").click(function(){
 	    	$('div#insertTravelBoard').modal(true);
 		});
+		
 	   /* 장소 추가 modal */
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
-		});	   
+		});	 
+	   
 	   /* 사진 업로드 */
-
 	   $("#fileBtn").click(function(){
 		    $('.file-input').click();
 		    $(".file-Input").on('change', function(){  // 값이 변경되면
@@ -288,9 +289,11 @@ function selectTravelWith(ele){
    } else {
 	travelBoardModalfrm.travelPerson.disabled=false;	   
    }   
-}   
+} 
+
 $(function(){
-	
+	loadTravelPlaceList();
+
 //장소리스트 조회 요청	
 function loadTravelPlaceList(){
 	var params = { travelNo : '${travelBoard.travelNo}' };
@@ -307,9 +310,9 @@ function loadTravelPlaceList(){
  	div.attr("id", "c"+travelPlace.placeNo);
 	div.addClass('travelPlaceList');
 	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
-   	var year = ''+(travelPlace.placeVisitDate).substring(0,4) ;
-	var month = ''+(travelPlace.placeVisitDate).substring(5,7);
-	var day = ''+(travelPlace.placeVisitDate).substring(8,10);
+   	var year = (travelPlace.placeVisitDate).substring(0,4) ;
+	var month = (travelPlace.placeVisitDate).substring(5,7);
+	var day = (travelPlace.placeVisitDate).substring(8,10);
 	var str = "<article class=\"panel panel-warning\">"
 				+"<div class=\"panel-heading icon\">"
 				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
@@ -320,7 +323,10 @@ function loadTravelPlaceList(){
 			
 				+"<div class=\"panel-heading\">"
 				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
-				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
+ 				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
+ 				+"<button type=\"button\" class=\"btnUpd\" style=\"float:right;\">수정</button>"
+				+"<br>"
+				
 				+"</div>"
 			
 				+"<div class=\"panel-body\">"
@@ -338,7 +344,7 @@ function loadTravelPlaceList(){
 
 //장소 등록
 	$("#insertTravelPlaceBtn").click(function(){
-		var params = $("#travelPlaceAjaxData").serialize();
+		var params = $("#insertTravelPlaceAjaxData").serialize();
 	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
 			var div = makeTravelPlaceView(datas);
 			$(div).prependTo("#travelPlaceList");
@@ -358,8 +364,8 @@ function loadTravelPlaceList(){
 			});
 		}
 	});
-	loadTravelPlaceList();
 });	
+
 </script>
 </head>
 <body>
@@ -628,7 +634,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="travelPlaceAjaxData" method="post">
+									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
@@ -669,6 +675,64 @@ function loadTravelPlaceList(){
 		</div> <!-- end of modal-content -->
 	</div> 
 </div> <!-- end of modal -->		
+
+<!-- 장소 수정 modal -->			
+<div class="modal fade" id="updateTravelPlace">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+
+			<!-- body -->
+			<div class="modal-body">
+				<div class="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<div id="login-box" class="col-md-12">
+									<form action="./updateTravelPlace" id="updateTravelPlaceAjaxData" method="post">
+										<div class="panel-body">
+												<div class="form-group">
+													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeName" class="form-control" placeholder="장소에 대한 제목을 입력하세요." value="${travelPlace.placeName}">
+												</div>
+												<div class="form-group">
+													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeAddress" class="form-control" placeholder="장소에 대한 제목을 입력하세요." value="${travelPlace.placeAddress}">
+												</div>
+												<div class="form-group">
+													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력하세요." value="${travelPlace.placeTitle}">
+												</div>
+												<div class="form-group">
+													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요." value="${travelPlace.placePic}">
+												</div>
+												<div class="form-group">
+													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요." value="${travelPlace.placeContent}">
+												</div>
+												<div class="form-group">
+													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요." value="${travelPlace.placeVisitDate}">
+												</div>
+												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
+													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
+												</button>
+											</div>
+										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
+									</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	<!-- end of modal-body -->
+		</div> <!-- end of modal-content -->
+	</div> 
+</div> <!-- end of modal -->							
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
