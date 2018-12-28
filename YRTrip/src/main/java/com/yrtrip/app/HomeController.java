@@ -40,9 +40,5 @@ public class HomeController {
 	public String main(Model model) {
 		return "main";
 	}
-	@RequestMapping("/admin")
-	public String admin(Model model) {
-		return "admin/admin";
-	}
 	
 }
