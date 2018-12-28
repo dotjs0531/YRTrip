@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,10 +29,12 @@
     <link href="resources/style.css" rel="stylesheet">
     <!--  Responsive Css  -->
     <link href="resources/css/responsive.css" rel="stylesheet">
+    
     <!-- 폰트 모음 -->
 		<link href="https://fonts.googleapis.com/css?family=Do+Hyeon:400" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Black+Han+Sans:400" rel="stylesheet">
 	<!-- 폰트끝 -->
+    
     <!--  browser campatibel css files-->
     <!--[if lt IE 9]>
         <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
