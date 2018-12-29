@@ -246,25 +246,31 @@ background-color:#22313F;
 						+"</div>"
 					
 						+"<div id=\"footer\" class=\"panel-footer\">"
-						+"<div id='LikeConditionP"+travelPlace.placeNo+"'>";
-
-			var params = { userId : '${sessionScope.login.userId}',
-			   		 	   likeCategory : 'P',
-			   		 	   likeBoardid : travelPlace.placeNo
-		   				  };
-			$.getJSON("getLike", params, function(data){
-			   if (!data) {
-				   var div = makeDisLikeBtn('P',travelPlace.placeNo);
-					$(div).appendTo("#LikeConditionP"+travelPlace.placeNo);
-			    }
-			   else {
-				   var div = makeLikeBtn('P',travelPlace.placeNo);
-					$(div).appendTo("#LikeConditionP"+travelPlace.placeNo);
-			   }
-		    });
 						
-			str += "</div></div></article>";
-			
+			if(${not empty sessionScope.login}){
+				str += "<div id='LikeConditionP"+travelPlace.placeNo+"'>";
+	
+				var params = { userId : '${sessionScope.login.userId}',
+				   		 	   likeCategory : 'P',
+				   		 	   likeBoardid : travelPlace.placeNo
+			   				  };
+				$.getJSON("getLike", params, function(data){
+				   if (!data) {
+					   var div = makeDisLikeBtn('P',travelPlace.placeNo);
+						$(div).appendTo("#LikeConditionP"+travelPlace.placeNo);
+				    }
+				   else {
+					   var div = makeLikeBtn('P',travelPlace.placeNo);
+						$(div).appendTo("#LikeConditionP"+travelPlace.placeNo);
+				   }
+			    });		
+				
+				str += "</div>";
+			} else {
+				str += "<div><img src='./images/dislike.png' width='20px'></div>";
+			}
+			str += "</div></article>";
+						
 			div.html(str);
 			return div;
 		}; 	// end of makeTravelPlaceView
