@@ -61,7 +61,20 @@
 	display: inline;
 }
 </style>
+<script>
+/* 파일업로드 */
+$(document).ready(function(){
+		$("#fileInput").on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
 
+			$("#placefile").val(filename);
+		});
+	});
+</script>
 </head>
 <body>
 
@@ -99,7 +112,11 @@
 									<span id="place-name" class="title"></span>
 									<span id="place-address"></span>
 								</div>
-								<div class="form-group">
+									<div class="form-group">
+										<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+										<input type="text" name="placeTitle" class="form-control" placeholder="제목을 입력해주세요.">
+									</div>
+									<div class="form-group">
 										<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" id="placeName" name="placeName" class="form-control" placeholder="지도에서 장소를 검색하여 선택하면 자동으로 입력됩니다.">
 									</div>
@@ -108,17 +125,28 @@
 										<input type="text" id="placeAddress" name="placeAddress" class="form-control" placeholder="지도에서 장소를 검색하여 선택하면 자동으로 입력됩니다.">
 									</div>
 									<div class="form-group">
-										<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeTitle" class="form-control" placeholder="제목을 입력해주세요.">
-									</div>
-									<div class="form-group">
 										<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeContent" class="form-control" placeholder="장소에 대한 후기를 작성해주세요.">
+										<textarea class="form-control" rows="3" name="placeContent" placeholder="장소에 대한 후기를 작성해주세요."></textarea>
 									</div>
+									<input type="file" name="placePic" id="fileInput" data-class-button="btn btn-default"
+										data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" 
+										style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
+									<div class="bootstrap-filestyle input-group">
+										<input type="text" id="placefile" class="form-control"
+											name="placefile" disabled="">
+										<span class="group-span-filestyle input-group-btn" tabindex="0">
+											<label for="fileInput" class="btn btn-default ">
+												<span class="glyphicon fa fa-upload"></span>
+											</label>
+										</span>
+									</div>
+<!-- 									
+									
+									
 									<div class="form-group">
 										<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요.">
-									</div>
+									</div> -->
 									<div class="form-group">
 										<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 입력해주세요.">
@@ -138,7 +166,7 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
 <script>
 /* datepicker */
 $(function() {
@@ -162,7 +190,7 @@ $(function() {
 /* 지도 */
 function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 37.565598, lng: 126.978031},
           zoom: 13
         });
 
@@ -204,8 +232,7 @@ function initMap() {
           marker.setVisible(true);
 
           infowindowContent.children['place-name'].textContent = place.name;
-          infowindowContent.children['place-address'].textContent =
-              place.formatted_address;
+          infowindowContent.children['place-address'].textContent = place.formatted_address;
           infowindow.open(map, marker);
 
           document.getElementById("placeName").value= place.name;

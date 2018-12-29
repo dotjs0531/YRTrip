@@ -161,8 +161,8 @@
 					<div class="tile"> 
 					  <img src='resources/media/getTBL.PNG'/>
 					  <div class="text">
-					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">${board.placeName}</a></h2>
-					  <p class="animate-text">${board.placeTitle}</p>
+					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">${board.placeTitle}</a></h2>
+					  <p class="animate-text">${board.placeName}</p>
 					  <h3 class="animate-text">${board.userId}</h3>
 					  </div>
 					 </div>
