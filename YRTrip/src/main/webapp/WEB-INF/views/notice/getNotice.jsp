@@ -56,7 +56,7 @@
 						<c:if test="${not empty notice.noticeImg}">
 							<img id="noticeImg" src="./images/notice/${notice.noticeImg}" />
 						</c:if>
-							<pre style="background-color:white; border-style: none; font-family: 'montserratbold'; font-size: 16px">${notice.noticeContent}</pre>
+							<pre style="background-color:white; border-style: none; font-family: 'montserratbold'; font-size: 16px; white-space: pre-wrap;">${notice.noticeContent}</pre>
 						</div>
 						
                     	<c:if test="${sessionScope.login.userGrant eq 'admin'}">
@@ -91,9 +91,9 @@
 			}
 		},
 		social : {
-			likeCount : 286,
-			commentCount : 45,
-			sharedCount : 845
+			likeCount : 286,  //좋아요수(여행정보, 여행지, 상품)
+			commentCount : 45,  //댓글수(동행글)
+			viewCount  : Number('${notice.noticeHit}')  //조회수(여행정보, 여행지, 동행글)
 		},
 		buttons : [ {
 			title : '웹으로 보기',

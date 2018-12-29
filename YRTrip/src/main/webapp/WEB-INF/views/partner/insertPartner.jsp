@@ -43,6 +43,9 @@
                      <li><a href="*" style="color: black">교통</a></li>
                      <li><a href="*" style="color: black">숙소</a></li>
                   </ul>
+                  <div class="order-buton" style="padding-bottom: 1px;">
+                  	<a href="${pageContext.request.contextPath}/insertPartnerForm">글쓰기</a>
+                  </div>
                </div>
             </div>
                 <div class="col-md-offset-1 col-sm-6">
@@ -58,7 +61,7 @@
                             <td colspan="1">글제목 : </td>
                             <td colspan="9">
                             <input type="text" class="form-control" placeholder="글제목" name="partnerTitle" maxlength="50">
-                            <input type="hidden" name="partnerCondition" value="진행중">
+                            <input type="hidden" name="partnerCondition" value="미완료">
                             <input type="hidden" name="userId" value="${sessionScope.login.userId}">
                             <input type="text" class="form-control" placeholder="??TinfoID에는 뭘넣어여?" name="tinfoId">
                             </td>

@@ -13,28 +13,25 @@ public class JoinerServiceImpl implements JoinerService {
 
    @Autowired JoinerDAOMybatis dao;
    
-   @Override
    public void insertJoiner(JoinerVO vo) {
       dao.insertJoiner(vo);
    }
-
-   @Override
    public void deleteJoiner(JoinerVO vo) {
       dao.deleteJoiner(vo);
    }
    
-   @Override
-   public void updateJoiner(JoinerVO vo) {
-	   dao.updateJoiner(vo);
-   }
-   
-   @Override
    public List<JoinerVO> getJoinerList(JoinerVO vo) {
       return dao.getJoinerList(vo);
    }
-   @Override
    public JoinerVO getJoiner(JoinerVO vo) {
       return dao.getJoiner(vo);
-   }   
+   }
+   
+   public void acceptJoiner(JoinerVO vo) {
+	   dao.acceptJoiner(vo);
+   }
+   public void cancleJoiner(JoinerVO vo) {
+	   dao.cancleJoiner(vo);
+   }
    
 }

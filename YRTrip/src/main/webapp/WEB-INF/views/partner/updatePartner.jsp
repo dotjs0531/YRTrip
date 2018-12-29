@@ -32,6 +32,9 @@
                      <li><a href="*" style="color: black">교통</a></li>
                      <li><a href="*" style="color: black">숙소</a></li>
                   </ul>
+                  <div class="order-buton" style="padding-bottom: 1px;">
+                  	<a href="${pageContext.request.contextPath}/insertPartnerForm">글쓰기</a>
+                  </div>
                </div>
             </div>
             <div class="col-md-offset-1 col-sm-6">

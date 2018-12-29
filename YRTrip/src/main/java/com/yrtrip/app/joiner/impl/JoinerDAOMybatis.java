@@ -14,29 +14,30 @@ public class JoinerDAOMybatis {
    @Autowired
    private SqlSessionTemplate mybatis;
 
-   // 신청
+   //동행 신청(신청자)
    public void insertJoiner(JoinerVO vo) {
       mybatis.insert("joiner.insertJoiner", vo);
    }
-
-   // 신청 취소
+   // 동행 신청 취소(신청자)
    public void deleteJoiner(JoinerVO vo) {
       mybatis.delete("joiner.deleteJoiner", vo.getJoinerId());
    }
    
-   // 수락 하기
-   public void updateJoiner(JoinerVO vo) {
-	   mybatis.update("joiner.updateJoiner", vo);
-   }
-
    // 전체조회
    public List<JoinerVO> getJoinerList(JoinerVO vo) {
       return mybatis.selectList("joiner.getJoinerList", vo);
    }
-
+   // 단건조회
    public JoinerVO getJoiner(JoinerVO vo) {
       return mybatis.selectOne("joiner.getJoiner", vo);
    }
    
-   
+   // 수락하기(작성자)
+   public void acceptJoiner(JoinerVO vo) {
+	   mybatis.update("joiner.acceptJoiner", vo);
+   }
+   // 수락취소(작성자)
+   public void cancleJoiner(JoinerVO vo) {
+	   mybatis.update("joiner.cancleJoiner", vo);
+   }
 }

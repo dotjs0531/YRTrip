@@ -2,13 +2,9 @@ package com.yrtrip.app.joiner.web;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yrtrip.app.joiner.JoinerService;
@@ -21,23 +17,26 @@ public class JoinerController {
    JoinerService joinerService;
 
    // 동행 신청자 리스트 전체조회
-   @RequestMapping(value = { "/getJoinerList" }, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
+   @RequestMapping("/getJoinerList") // http://localhost:8081/app/getPartnerList
    @ResponseBody
    public List<JoinerVO> getjoinerList(JoinerVO vo) {
-	  System.out.println("이까지와야댐일단");
-      vo.setPageUnit(10);
       return joinerService.getJoinerList(vo);
    }
-
-   // 신청 처리
+	// 단건 조회
+	@RequestMapping("getJoiner")
+	@ResponseBody
+	public JoinerVO getJoiner(JoinerVO vo) {
+		return joinerService.getJoiner(vo);
+	}
+   
+   // 동행 신청(신청자)
    @RequestMapping("insertJoiner")
    @ResponseBody   
-   public JoinerVO insertJoiner(JoinerVO vo) { // 커맨드 객체
+   public JoinerVO insertJoiner(JoinerVO vo) {
       joinerService.insertJoiner(vo); // 등록 처리
       return joinerService.getJoiner(vo); // 목록요청
    }
-
-   // 삭제처리
+   // 동행 신청 취소(신청자)
    @RequestMapping("deleteJoiner")
    @ResponseBody
    public JoinerVO deleteJoiner(JoinerVO vo) {
@@ -45,14 +44,21 @@ public class JoinerController {
       return vo;
    }
 
-   // 수락 처리
-   @RequestMapping("closeJoiner")
+   // 수락하기(작성자)
+   @RequestMapping("acceptJoiner")
    @ResponseBody
-   public JoinerVO closeJoiner(JoinerVO vo) {
-	   joinerService.updateJoiner(vo);
+   public JoinerVO acceptJoiner(JoinerVO vo) {
+	   joinerService.acceptJoiner(vo);
 	   return vo;
    }
-   @RequestMapping(value = { "/ajax/getJoinerList" }, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
+   // 수락취소(작성자)
+   @RequestMapping("cancleJoiner")
+   @ResponseBody
+   public JoinerVO cancleJoiner(JoinerVO vo) {
+	   joinerService.cancleJoiner(vo);
+	   return vo;
+   }
+   /*@RequestMapping(value = { "/ajax/getJoinerList" }, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
    public String getajaxjoinerList(Model model, JoinerVO vo, HttpServletRequest request) {
 
       System.out.println("listin");
@@ -68,6 +74,6 @@ public class JoinerController {
       model.addAttribute("joinerList", joinerService.getJoinerList(vo));
 
       return "ajax/partner/testpage";
-   }
+   }*/
 
 }

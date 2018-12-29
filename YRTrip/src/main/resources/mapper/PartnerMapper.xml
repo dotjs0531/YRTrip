@@ -50,7 +50,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			</when>
 		</choose>
 	  </where>
-			) A ) B WHERE RN BETWEEN #{first} AND #{last}
+	ORDER BY PARTNER_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
 <select id="getPartner" parameterType="partner" resultType="partner">
@@ -58,14 +59,14 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			PARTNER_TITLE,    
 			PARTNER_CONTENT,  
 			PARTNER_HIT, 
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,    
+			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_DATE,    
 			USER_ID,    
 			TINFO_ID,         
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_START,    
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_END,   
+			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_START,    
+			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_END,   
 			PARTNER_CONDITION
 	FROM	PARTNERT
 	WHERE	PARTNER_ID = #{partnerId}
@@ -103,7 +104,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			#{partnerPers},
 			#{partnerStart},
 			#{partnerEnd},
-			#{partnerCondition}
+			'미완료'
 		)
 </insert>
 <update id="updatePartner" parameterType="partner">
@@ -116,6 +117,10 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 						PARTNER_END		= #{partnerEnd}
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
+<delete id="deletePartner" parameterType="int">
+	DELETE	FROM PARTNERT
+			WHERE PARTNER_ID = #{partnerId}
+</delete>
 
 <!-- 애선씨꺼 조회수 check -->
 <update id="updateViewCnt" parameterType="partner">
@@ -126,8 +131,4 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	UPDATE PARTNERT SET PARTNER_CONDITION = '완료'
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
-<delete id="deletePartner" parameterType="int">
-	DELETE	FROM PARTNERT
-			WHERE PARTNER_ID = #{partnerId}
-</delete>
 </mapper> 

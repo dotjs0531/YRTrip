@@ -7,6 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+a { text-decoration:none !important; }
+a:hover { color:white }
+.nav>li>a:focus,
+.nav>li>a:hover{
+   background-color:white;
+}
+</style>
 <script>
    function go_sort(sortCol) {
       document.frm.sortCol.value = sortCol;
@@ -26,15 +34,15 @@
             <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                <div class="single-pricing-table">
                   <div class="pricing-title">
-                     <h2 style="color: black">여행목적</h2>
+                     <h2 style="color: black">동행구하기</h2>
                   </div>
                   <ul class=price-list>
                      <li><a href="getPartnerList" style="color: black">전체보기</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=여행&page=" style="color: black">여행</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=문화&page=" style="color: black">문화</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=맛집&page=" style="color: black">맛집</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=교통&page=" style="color: black">교통</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=숙소&page=" style="color: black">숙소</a></li>
+                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=여행" style="color: black">여행</a></li>
+                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=문화" style="color: black">문화</a></li>
+                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=맛집" style="color: black">맛집</a></li>
+                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=교통" style="color: black">교통</a></li>
+                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=숙소" style="color: black">숙소</a></li>
                   </ul>
                   <div class="order-buton" style="padding-bottom: 1px;">
                      <a href="${pageContext.request.contextPath}/insertPartnerForm">글쓰기</a>
@@ -63,27 +71,24 @@
                      <!-- 동행구하기 테이블 헤더부분 -->
                      <thead>
                         <tr>
-                           <th>글번호</th>
-                           <th>글제목</th>
-                           <th>글쓴이</th>
-                           <th>문화</th>
-                           <th>게시일</th>
-                           <th>여행경비</th>
-                           <th>진행상태</th>
-                           <th>조회수</th>
+                           <th>no.</th>
+                           <th style="text-align:center">글제목</th>
+                           <th>작성자</th>
+                           <th style="text-align:center">작성일</th>
+                           <th style="text-align:center">조회수</th>
+                           <th style="text-align:center">진행상태</th>
                         </tr>
                      </thead>
                      <tbody>
                         <c:forEach items="${partnerList}" var="partner">
                            <tr>
                               <td>${partner.partnerId}</td>
-                              <td><a href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}</a></td>
-                              <td>${partner.userId}</td>
-                              <td>${partner.partnerClass}</td>
-                              <td>${partner.partnerDate}<!-- 여행 경비 넣는 부분 -->
-                              <td>${partner.partnerPay}</td>
-                              <td class="tbl-apply"><a href="#">${partner.partnerCondition}</a></td>
-                              <td>${partner.partnerHit}</td>
+                              <td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
+									overflow: hidden; width:380px; vertical-align:middle" href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}</a></td>
+                              <td><a style="color:black;" href="./getYourTravelList?userId=${partner.userId}">${partner.userId}</a></td>
+                              <td style="text-align:center">${partner.partnerDate}
+                              <td style="text-align:center">${partner.partnerHit}</td>
+                              <td style="text-align:center">${partner.partnerCondition}</td>
                            </tr>
                         </c:forEach>
                      </tbody>

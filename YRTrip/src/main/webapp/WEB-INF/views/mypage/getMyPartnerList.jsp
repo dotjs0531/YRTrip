@@ -199,21 +199,30 @@ a:hover { color:white }
 										
 										<!-- 선택 수락취소 -->
 										<form action="cancleMyJoinerList">
-											<c:forEach items="${MyJoinerList}" var="joiner">
-												<c:if test="${joiner.partnerId eq partner.partnerId}">
-												<c:if test="${joiner.joinerCondition eq 'Y'}">
-												<div class="checkboxes" style="padding-bottom:10px;">
-													<input type="checkbox" class="cbx" id="${joiner.userId}" name="joinerNoList" value="${joiner.userId}" style="display: none;" class="form-control">
-													<label for="${joiner.userId}" class="check">
-														<svg width="18px" height="18px" viewBox="0 0 18 18">
-															<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-															<polyline points="1 9 7 14 15 4"></polyline>
-														</svg>&nbsp;${joiner.userId}
-													</label>
-												</div>
-												</c:if>
-												</c:if>
-											</c:forEach><br/>
+											<table>
+												<tr>
+													<td style="vertical-align:top;">
+														<label style="font-family: 'NanumSquareRoundR'; font-size:15px">신청자 :&nbsp;&nbsp;</label>
+													</td>
+													<td>
+														<c:forEach items="${MyJoinerList}" var="joiner">
+															<c:if test="${joiner.partnerId eq partner.partnerId}">
+															<c:if test="${joiner.joinerCondition eq 'Y'}">
+															<div class="checkboxes" style="padding-bottom:10px;">
+																<input type="checkbox" class="cbx" id="${joiner.userId}" name="joinerNoList" value="${joiner.userId}" style="display: none;" class="form-control">
+																<label for="${joiner.userId}" class="check" style="font-family: 'NanumSquareRoundR'; color:#666666">
+																	<svg width="18px" height="18px" viewBox="0 0 18 18">
+																		<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+																		<polyline points="1 9 7 14 15 4"></polyline>
+																	</svg>&nbsp;${joiner.userId}
+																</label>
+															</div><br/>
+															</c:if>
+															</c:if>
+														</c:forEach>
+													</td>
+												</tr>
+											</table>
 											<c:if test="${not empty MyJoinerList}">
 												<button type="submit" class="btn btn-default" style="float:right;">취소</button>
 											</c:if>
@@ -235,16 +244,25 @@ a:hover { color:white }
 										</h5>
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right">${partner.partnerDate}</h5>
 										<p style="clear:both"/>
-											
-											<c:forEach items="${MyJoinerList}" var="joiner">
-												<c:if test="${joiner.partnerId eq partner.partnerId}">
-												<c:if test="${joiner.joinerCondition eq 'Y'}">
-													<div class="checkboxes" style="padding-bottom:10px;">
-														<label class="check">&nbsp;${joiner.userId}</label>
-													</div>
-												</c:if>
-												</c:if>
-											</c:forEach><br/>
+										
+										<table>
+											<tr>
+												<td style="vertical-align:top;">
+													<label style="font-family: 'NanumSquareRoundR'; font-size:15px">신청자 : </label>
+												</td>
+												<td>
+													<c:forEach items="${MyJoinerList}" var="joiner">
+														<c:if test="${joiner.partnerId eq partner.partnerId}">
+														<c:if test="${joiner.joinerCondition eq 'Y'}">
+															<div class="checkboxes" style="padding-bottom:10px;">
+																<label style="font-family: 'NanumSquareRoundR'; color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${joiner.userId}</label>
+															</div>
+														</c:if>
+														</c:if><br/>
+													</c:forEach>
+												</td>
+											</tr>
+										</table>
 									</div>
 								</c:if>
 							</c:forEach>

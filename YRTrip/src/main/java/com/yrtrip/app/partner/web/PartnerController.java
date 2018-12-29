@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
-import com.yrtrip.app.joiner.JoinerService;
-import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.partner.PartnerService;
 import com.yrtrip.app.partner.PartnerVO;
 
@@ -25,9 +23,6 @@ public class PartnerController {
 
 	@Autowired
 	PartnerService partnerService;
-
-	@Autowired
-	JoinerService joinerService;
 	
 	// 전체조회
 	@RequestMapping(value = { "/getPartnerList"}, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
@@ -51,30 +46,30 @@ public class PartnerController {
 	
 	// 단건조회
 	@RequestMapping("/getPartner") // http://localhost:8081/app/getPartner
-	public String getPartner(Model model, PartnerVO vo, JoinerVO vo1, HttpServletRequest req, HttpServletResponse res) {
+	public String getPartner(Model model, PartnerVO vo, HttpServletRequest req, HttpServletResponse res) {
 		int countCheck = 0;
 		
 		//저장된 쿠키 불러오기
-				Cookie[] cookies = req.getCookies();
-				if (cookies != null) {
-					for (int i = 0; i < cookies.length; i++) {
-						if(cookies[i].getName().equals("partnerId"+vo.getPartnerId())){
-							countCheck = 0;
-							break;
-						}else{
-							Cookie cookie = new Cookie("partnerId"+vo.getPartnerId(), String.valueOf(vo.getPartnerId()));
-							cookie.setMaxAge(60*60*24);	//하루동안 조회수 중복 증가 방지
-							cookie.setPath("/");
-							res.addCookie(cookie);
-							countCheck += 1;
-						}
-					}
+		Cookie[] cookies = req.getCookies();
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("partnerId"+vo.getPartnerId())){
+					countCheck = 0;
+					break;
+				}else{
+					Cookie cookie = new Cookie("partnerId"+vo.getPartnerId(), String.valueOf(vo.getPartnerId()));
+					cookie.setMaxAge(60*60*24);	//하루동안 조회수 중복 증가 방지
+					cookie.setPath("/");
+					res.addCookie(cookie);
+					countCheck += 1;
 				}
-				//상세정보 조회시 카운트 증가
-				if(countCheck > 0){
-					partnerService.updateViewCnt(vo);
-				}
-		//model.addAttribute("joiner", joinerService.getJoiner(vo1));
+			}
+		}
+		//상세정보 조회시 카운트 증가
+		if(countCheck > 0){
+			partnerService.updateViewCnt(vo);
+		}
+		
 		model.addAttribute("partner", partnerService.getPartner(vo));	// vo : 조회할 게시글 번호 넘어가는 것		
 		return "partner/getPartner";
 	}
@@ -84,7 +79,6 @@ public class PartnerController {
 	public String insertPartnerform() {
 		return "partner/insertPartner";
 	}
-
 	// 등록처리
 	@RequestMapping(value = { "/insertPartner" }, method = RequestMethod.POST)
 	public String insertPartner(PartnerVO vo) { // 커맨드 객체
@@ -98,14 +92,6 @@ public class PartnerController {
 		model.addAttribute("partner", partnerService.getPartner(vo));
 		return "partner/updatePartner";
 	}
-	// 마감처리
-	@RequestMapping("/closePartner")
-	public String closePartner(PartnerVO vo) {
-		System.out.println("마감 처리");
-		partnerService.closePartner(vo);
-		return "redirect:getPartnerList";
-	}
-
 	// 수정처리
 	@RequestMapping("updatePartner")
 	public String updatePartner(PartnerVO vo) {
@@ -119,11 +105,11 @@ public class PartnerController {
 		partnerService.deletePartner(vo); // 삭제처리
 		return "redirect:getPartnerList"; // 목록요청
 	}
-
-	// 선택삭제처리
-	@RequestMapping("deletePartnerList")
-	public String deletePartnerList(PartnerVO vo) {
-		partnerService.deletePartnerList(vo); // 삭제처리
-		return "redirect:getPartnerList"; // 목록요청
+	
+	// 마감처리
+	@RequestMapping("/closePartner")
+	public String closePartner(PartnerVO vo) {
+		partnerService.closePartner(vo);
+		return "redirect:getPartnerList";
 	}
 }

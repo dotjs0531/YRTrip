@@ -4,7 +4,7 @@
 <mapper namespace="joiner">
 <select id="getJoinerList" resultType="joiner" parameterType="joiner"> 
       SELECT JOINER_ID, 
-             JOINER_DATE,         
+             TO_CHAR(JOINER_DATE, 'YYYY.MM.DD') JOINER_DATE,         
              USER_ID,   
              PARTNER_ID,
              JOINER_CONDITION
@@ -14,7 +14,7 @@
 </select>
 <select id="getJoiner" resultType="joiner" parameterType="joiner"> 
       SELECT JOINER_ID            
-            ,JOINER_DATE         
+            ,TO_CHAR(JOINER_DATE, 'YYYY.MM.DD') JOINER_DATE         
             ,USER_ID  
             ,PARTNER_ID
             ,JOINER_CONDITION
@@ -44,8 +44,13 @@
    DELETE FROM JOINERT
         WHERE JOINER_ID = #{value}
 </delete>
-<update id="closeJoiner" parameterType="joiner">
-	UPDATE PARTNERT SET PARTNER_CONDITION = '수락하기'
-				WHERE	PARTNER_ID = #{partnerId}
+
+<update id="acceptJoiner" parameterType="joiner">
+	UPDATE JOINERT SET JOINER_CONDITION = 'Y'
+				 WHERE JOINER_ID = #{joinerId}
+</update>
+<update id="cancleJoiner" parameterType="joiner">
+	UPDATE JOINERT SET JOINER_CONDITION = 'N'
+				 WHERE JOINER_ID = #{joinerId}
 </update>
 </mapper>
