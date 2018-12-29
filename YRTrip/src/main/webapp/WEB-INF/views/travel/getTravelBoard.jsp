@@ -199,6 +199,117 @@ background-color:#22313F;
 }
 </style>
 <script>
+
+	function disLike(uId, lC, lBid){
+		   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
+	};
+	
+	$(function(){
+		loadTravelPlaceList();
+		
+		//장소리스트 조회 요청	
+		function loadTravelPlaceList(){
+			var params = { travelNo : '${travelBoard.travelNo}' };
+			$.getJSON("selectTravelPlaceList", params, function(datas){
+				for(i=0; i<datas.length; i++){
+					var div = makeTravelPlaceView(datas[i]);
+					$(div).appendTo("#travelPlaceList");
+				}
+			});
+		}; 	// end of loadTravelPlaceList
+		
+		//장소리스트 조회 뷰(좋아요 누르기 전)
+		function makeTravelPlaceView(travelPlace){
+			var div = $("<div>"); 
+		 	div.attr("id", "c"+travelPlace.placeNo);
+			div.addClass('travelPlaceList');
+			div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
+			var year = (travelPlace.placeVisitDate).substring(0,4) ;
+			var month = (travelPlace.placeVisitDate).substring(5,7);
+			var day = (travelPlace.placeVisitDate).substring(8,10);
+			var str = "<article class=\"panel panel-warning\">"
+						+"<div class=\"panel-heading icon\">"
+						+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
+						+"<p style=\"margin:-5px; background-color:#fff;\">" + year +"</p>"
+		 				+"<p style=\"margin:-15px;background-color:#fff;\">" + month +"</p>"
+						+"<p style=\"background-color:#fff;\">" + day +"</p>"
+						+"</div>"
+					
+						+"<div class=\"panel-heading\">"
+						+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
+						+"</div>"
+					
+						+"<div class=\"panel-body\">"
+						+"<img class=\"img-responsive img-rounded\" src=\"//placehold.it/350x150\" />"
+						+"<p>" + travelPlace.placeContent + "</p>"
+						+"</div>"
+					
+						+"<div id=\"footer\" class=\"panel-footer\">"
+						+"<div id='LikeConditionP"+travelPlace.placeNo+"'>";
+
+			var params = { userId : '${sessionScope.login.userId}',
+			   		 	   likeCategory : 'P',
+			   		 	   likeBoardid : travelPlace.placeNo
+		   				  };
+			$.getJSON("getLike", params, function(data){
+			   if (!data) {
+				   var div = makeDisLikeBtn('P',travelPlace.placeNo);
+					$(div).appendTo("#LikeConditionP"+travelPlace.placeNo);
+			    }
+			   else {
+				   var div = makeLikeBtn('P',travelPlace.placeNo);
+					$(div).appendTo("#LikeConditionP"+travelPlace.placeNo);
+			   }
+		    });
+						
+			str += "</div></div></article>";
+			
+			div.html(str);
+			return div;
+		}; 	// end of makeTravelPlaceView
+		
+		/* 여행정보 좋아요 */
+	   function likeCondition() {
+		   var params = { userId : '${sessionScope.login.userId}',
+				   		 likeCategory : 'T',
+				   		 likeBoardid :'${travelBoard.travelNo}'
+		   				}
+		   $.getJSON("getLike", params, function(data){
+			   if (!data) {
+				   var div = makeDisLikeBtn('T','${travelBoard.travelNo}');
+					$(div).appendTo("#LikeConditionT"+'${travelBoard.travelNo}');
+			   }
+			   else {
+				   var div = makeLikeBtn('T','${travelBoard.travelNo}');
+					$(div).appendTo("#LikeConditionT"+'${travelBoard.travelNo}');
+			   }
+		   });
+	   }
+	   function makeDisLikeBtn(likeCategory,likeBoardid) {
+			var div =$("<div>");
+			div.addClass('LikeCondition'+likeCategory+likeBoardid);
+			var str = "<form action='./insertLike' method='post'>"
+						+ "<input type='hidden' name='likeCategory' value="+likeCategory+">"
+						+ "<input type='hidden' name='likeBoardid' value="+likeBoardid+">"
+						+ "<input type='hidden' name='userId' value='${sessionScope.login.userId}'>"
+						+ "<button type='submit' style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+						+ "<img src='./images/dislike.png'></button></form>"
+			div.html(str);
+			return div;
+	   }
+	   function makeLikeBtn(likeCategory,likeBoardid) {
+			var div =$("<div>");
+			div.addClass('LikeCondition'+likeCategory+likeBoardid);
+			var str = "<button onclick=\"disLike('${sessionScope.login.userId}','"+likeCategory+"','"+likeBoardid+"')\" style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+					+ "<img src='./images/like.png'></button>"
+			div.html(str);
+			return div;
+	   }
+	   likeCondition();
+	});
+
+
+
 /* 여행등록 modal */
 jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelBoardButton").click(function(){
@@ -262,50 +373,6 @@ $("#autocompleteTinfoListModal").change(function(){
 	   $("#tinfoListDispModal").val("");
 	   $('[name=searchTinfoListboxModal]').val("");
 	});
-/* 좋아요 */
-function disLike(uId, lC, lBid){
-	   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
-};
-
-$(function(){
-	   function likeCondition() {
-		   var params = { userId : '${sessionScope.login.userId}',
-				   		 likeCategory : 'T',
-				   		 likeBoardid :'${travelBoard.travelNo}'
-		   				}
-		   $.getJSON("getLike", params, function(data){
-			   if (!data) {
-				   var div = makeDisLikeBtn();
-					$(div).appendTo("#LikeCondition");
-			   }
-			   else {
-				   var div = makeLikeBtn();
-					$(div).appendTo("#LikeCondition");
-			   }
-		   })
-	   }
-	   function makeDisLikeBtn() {
-			var div =$("<div>");
-			div.addClass('LikeCondition');
-			var str = "<form action='./insertLike' method='post'>"
-						+ "<input type='hidden' name='likeCategory' value='T'>"
-						+ "<input type='hidden' name='likeBoardid' value='${travelBoard.travelNo}'>"
-						+ "<input type='hidden' name='userId' value='${sessionScope.login.userId}'>"
-						+ "<button type='submit' style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
-						+ "<img src='./images/dislike.png'></button></form>"
-			div.html(str);
-			return div;
-	   }
-	   function makeLikeBtn() {
-			var div =$("<div>");
-			div.addClass('LikeCondition');
-			var str = "<button onclick=\"disLike('${sessionScope.login.userId}','T','${travelBoard.travelNo}')\" style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
-					+ "<img src='./images/like.png'></button>"
-			div.html(str);
-			return div;
-	   }
-	   likeCondition();
-});
 
 /* 글 삭제 */
      function del(travelNo){
@@ -404,7 +471,7 @@ $(function(){
 											<div class="panel-footer">
 											<c:choose>
 												<c:when test="${not empty sessionScope.login}">
-													<div id="LikeCondition"></div>
+													<div id="LikeConditionT${travelBoard.travelNo}"></div>
 												</c:when>
 												<c:otherwise>
 													<img src="./images/dislike.png" width="20px">
@@ -412,7 +479,10 @@ $(function(){
 											</c:choose>
 											</div>
 								</article>
-									<c:forEach items="${travelPlace}" var="place">
+								
+								<div id="travelPlaceList"></div>
+								
+									<%-- <c:forEach items="${travelPlace}" var="place">
 										<article class="panel panel-warning">
 
 											<div class="panel-heading icon">
@@ -437,7 +507,7 @@ $(function(){
 												<small>${place.placeLike}</small>
 											</div>
 										</article>
-										</c:forEach>
+										</c:forEach> --%>
 								</div>
 								<c:if test="${sessionScope.login.userId eq travelBoard.userId}">
 									<div class="order-buton" style="float:right">
