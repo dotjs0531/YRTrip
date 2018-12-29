@@ -14,6 +14,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="resources/vender/css/Travel.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <style>
 .modal-backdrop {
@@ -307,9 +308,9 @@ background-color:#22313F;
 	   }
 	   likeCondition();
 	});
+</script>
 
-
-
+<script>
 /* 여행등록 modal */
 jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelBoardButton").click(function(){
@@ -374,6 +375,14 @@ $("#autocompleteTinfoListModal").change(function(){
 	   $('[name=searchTinfoListboxModal]').val("");
 	});
 
+/* Modal 여행테마 select */      
+function selectTravelWith(ele){
+  	 if(ele.value=='alone'){
+  	travelBoardModalfrm.travelPerson.disabled=true;
+   } else {
+	travelBoardModalfrm.travelPerson.disabled=false;	   
+   }   
+}  
 /* 글 삭제 */
      function del(travelNo){
       if(confirm("삭제하시겠습니까?")){
@@ -609,6 +618,26 @@ $("#autocompleteTinfoListModal").change(function(){
 		</div> <!-- end of row -->
 	</div>	<!-- end of container -->
 </section>
-
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+	<script>
+$(function() {
+    $( ".datePicker" ).datepicker({   
+    	changeMonth: true, 
+        changeYear: true,
+        nextText: '다음 달',
+        prevText: '이전 달',
+        showButtonPanel: true, 
+        currentText: '오늘 날짜', 
+        closeText: '닫기', 
+        dateFormat: "yymmdd",
+        dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'], 
+        monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+        maxDate: "+0D",
+        showMonthAfterYear : true,
+        yearRange: "-100:+0"
+    });
+    }); 
+</script>
 </body>
 </html>
