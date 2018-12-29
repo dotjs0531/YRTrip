@@ -255,7 +255,7 @@ a:hover { color:white }
 														<c:if test="${joiner.partnerId eq partner.partnerId}">
 														<c:if test="${joiner.joinerCondition eq 'Y'}">
 															<div class="checkboxes" style="padding-bottom:10px;">
-																<label style="font-family: 'NanumSquareRoundR'; color:#666666">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${joiner.userId}</label>
+																<label style="font-family: 'NanumSquareRoundR'; color:#666666">&nbsp;&nbsp;${joiner.userId}</label>
 															</div>
 														</c:if>
 														</c:if><br/>

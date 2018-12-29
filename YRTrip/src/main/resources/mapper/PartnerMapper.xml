@@ -131,4 +131,10 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	UPDATE PARTNERT SET PARTNER_CONDITION = '완료'
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
+
+<select id="getJoinerCount" resultType="int">
+	SELECT COUNT(*)
+	  FROM PARTNERT
+	 WHERE PARTNER_ID = #{partnerId}
+</select>
 </mapper> 

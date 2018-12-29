@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.partner.PartnerService;
 import com.yrtrip.app.partner.PartnerVO;
 
@@ -55,5 +56,10 @@ public class PartnerServiceImpl implements PartnerService {
 	@Override
 	public void updateViewCnt(PartnerVO vo) {
 		dao.updateViewCnt(vo);
+	}
+
+	@Override
+	public int getJoinerCount(JoinerVO vo) {
+		return dao.getJoinerCount(vo);
 	}
 }

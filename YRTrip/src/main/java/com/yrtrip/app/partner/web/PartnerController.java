@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
+import com.yrtrip.app.joiner.JoinerVO;
 import com.yrtrip.app.partner.PartnerService;
 import com.yrtrip.app.partner.PartnerVO;
 
@@ -26,7 +27,7 @@ public class PartnerController {
 	
 	// 전체조회
 	@RequestMapping(value = { "/getPartnerList"}, method = RequestMethod.GET) // http://localhost:8081/app/getPartnerList
-	public ModelAndView getPartnerList(Paging paging, PartnerVO vo) {
+	public ModelAndView getPartnerList(Paging paging, PartnerVO vo, JoinerVO jvo) {
 		ModelAndView mv = new ModelAndView();
 		// 페이징
 		if (paging.getPage()==null) {
@@ -40,13 +41,14 @@ public class PartnerController {
 		
 		mv.addObject("paging", paging);
 		mv.addObject("partnerList", partnerService.getPartnerList(vo));
+		mv.addObject("joinerCnt", partnerService.getJoinerCount(jvo));
 		mv.setViewName("partner/getPartnerList");
 		return mv;
 	}
 	
 	// 단건조회
 	@RequestMapping("/getPartner") // http://localhost:8081/app/getPartner
-	public String getPartner(Model model, PartnerVO vo, HttpServletRequest req, HttpServletResponse res) {
+	public String getPartner(Model model, PartnerVO vo, JoinerVO jvo, HttpServletRequest req, HttpServletResponse res) {
 		int countCheck = 0;
 		
 		//저장된 쿠키 불러오기
@@ -70,6 +72,7 @@ public class PartnerController {
 			partnerService.updateViewCnt(vo);
 		}
 		
+		model.addAttribute("joinerCnt", partnerService.getJoinerCount(jvo));
 		model.addAttribute("partner", partnerService.getPartner(vo));	// vo : 조회할 게시글 번호 넘어가는 것		
 		return "partner/getPartner";
 	}
