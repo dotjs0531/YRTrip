@@ -1,5 +1,8 @@
 package com.yrtrip.app.admin;
 
-public interface AdminService {
+import java.util.List;
 
+public interface AdminService {
+	
+	public List<AdminVO> getTinfoChart(AdminVO vo);
 }

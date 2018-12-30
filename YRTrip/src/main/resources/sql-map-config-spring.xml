@@ -23,6 +23,7 @@
 		<typeAlias alias="chat" type="com.yrtrip.app.chat.ChatVO" />
 		<typeAlias alias="cart" type="com.yrtrip.app.product.CartVO" />
 		<typeAlias alias="like" type="com.yrtrip.app.like.LikeVO" />
+		<typeAlias alias="admin" type="com.yrtrip.app.admin.AdminVO" />
 	</typeAliases>
 	
 </configuration>
