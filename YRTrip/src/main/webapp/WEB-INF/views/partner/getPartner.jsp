@@ -13,10 +13,18 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <title>동행 게시판 글쓰기</title>
 <script>
+function del(partnerId) {
+	if (confirm("삭제하시겠습니까?")) {
+		location.href = "./deletePartner?partnerId=" + partnerId;
+	} else {
+		return;
+	}
+};
 	$(function() {
 		//동행 신청 목록 조회	
 		loadJoinerList();
-		
+ 		var apply = document.getElementById("btnAdd");		
+ 		
 		function loadJoinerList() {
 			var params = { partnerId : '${partner.partnerId}'};
 			console.log(params);
@@ -35,24 +43,31 @@
 			div.joiner = joiner; //{id:1,.... }
 			
 			var userId =  '${sessionScope.login.userId}';
-			console.log(userId);
 			var partnerId = '${partner.userId}';
+			var pCondition = '${partner.partnerCondition}';
 			
 			if(userId == joiner.userId){	//동행 신청자
 				var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>" + joiner.userId + "</label>"
 						+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
-						+ "<button type=\"button\" class=\"btn btn-default btnDel\">신청취소</button>"			
+						+ "<button type=\"button\" class=\"btn btn-default btnDel\">신청취소</button>";
+            	apply.style.display="none";
 			}else if(userId == partnerId){	//동행글 작성자
-				if(joiner.joinerCondition == 'N'){	//동행 수락 전
+				if(pCondition == '미완료'){
+					if(joiner.joinerCondition == 'N'){	//동행 수락 전
+						var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
+							+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
+							+ "<button type=\"button\" class=\"btn btn-default btnAccept\" id="+joiner.joinerId+">수락 하기</button>"
+					}else{	//동행 수락 후
+							var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
+							+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
+							+ "<button type=\"button\" class=\"btn btn-default btnCancle\" id="+joiner.joinerId+">수락 취소</button>"
+					}
+				}else if(pCondition == '완료'){
 					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
-					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
-					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
-					+ "<button type=\"button\" class=\"btn btn-default btnAccept\" id="+joiner.joinerId+">수락 하기</button>"
-				}else{	//동행 수락 후
-					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
-					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
-					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
-					+ "<button type=\"button\" class=\"btn btn-default btnCancle\" id="+joiner.joinerId+">수락 취소</button>"
+						+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
+						+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
 				}
 			}else{	//동행 신청을 하지 않은 사용자
 				var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
@@ -87,8 +102,9 @@
 				var url = "deleteJoiner";
 				$.getJSON(url, params, function(datas) {
 					$('#c' + datas.joinerId).remove();
+					apply.style.display="block";
 				});
-			}
+			};
 		});
 		
 		//동행 신청 수락하기(작성자)
@@ -118,14 +134,6 @@
 				loadJoinerList();
 			});
 		});
-
-	function del(partnerId) {
-		if (confirm("삭제하시겠습니까?")) {
-			location.href = "./deletePartner?partnerId=" + partnerId;
-		} else {
-			return;
-		}
-	};
 });
 </script>
 <style>
@@ -198,7 +206,9 @@
                			<table style="width:100%">
 							<tr>
 								<td style="width:33%">
-									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>여행지 : </strong>일단보류</h5>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>여행지 : </strong>
+										<c:if test="${partner.tinfoCountry ne null}">${partner.tinfoCountry}</c:if><c:if test="${partner.tinfoState ne null}"> ${partner.tinfoState}</c:if> ${partner.tinfoCity}
+									</h5>
 								</td>
 								<td style="width:33%">
 									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>경비 : </strong>${partner.partnerPay}</h5>
