@@ -1,6 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,12 @@ input[type=submit] {
                             <li><a href="getQnaList" style="color:black"><strong>1:1 문의</strong></a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                        	<c:if test="${sessionScope.login.userGrant ne 'admin'}">
+                     			<a href="${pageContext.request.contextPath}/insertQna">문의글 등록</a>
+                     		</c:if>
+                        	<c:if test="${sessionScope.login.userGrant eq 'admin'}">
+                     			<a href="${pageContext.request.contextPath}/insertNotice">공지 등록</a>
+                     		</c:if>
                         </div>
                     </div>
                 </div>

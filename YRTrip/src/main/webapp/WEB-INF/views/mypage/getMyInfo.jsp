@@ -90,23 +90,58 @@ input[type=radio]{
 /* $(function(){
 	document.getElementById('userBirth').valueAsDate = new Date(); //현재 날짜 출력
 }); */
+function del() {
+	var password = prompt("탈퇴하시려면 비밀번호를 입력해주세요.");
+	var uid = '${sessionScope.login.userId}';
+	var upw = '${sessionScope.login.userPw}';
+	
+	if(password == upw){
+		if(confirm("정말 탈퇴하시겠습니까?")){
+			location.href = "./deleteMyInfo?userId=" + uid;
+		} else { return; }
+	} else {
+		alert("비밀번호가 일치하지 않습니다.");
+	}
+};
 
 function ck_email(){
     var email = document.getElementById("userEmail");
     var MsgEmail = document.getElementById("MsgEmail");
     var isEmail = /([\w\-]+\@[\w\-]+\.[\w\-]+)/;
+    var uEmail = '${sessionScope.login.userEmail}';
 
-    if(!isEmail.test(email.value)){
-    	MsgEmail.style.display="block";
-    	MsgEmail.className='error';
-    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
-    	emailCheck = 0;
-		return false;
-    } else{
-    	MsgEmail.className='vaild';
-    	MsgEmail.innerHTML="ok";
-    	emailCheck = 1;
-	}   
+	$.ajax({
+		data : {
+			userEmail : email.value
+		},
+		url: "checkEmail",
+		success : function(data) {
+            if( !isEmail.test(email.value) && data=='0') {
+                //$(".signupbtn").prop("disabled", true);
+    	    	MsgEmail.style.display="block";
+    	    	MsgEmail.className='error';
+    	    	MsgEmail.innerHTML="이메일 형식을 확인하세요";
+    	    	emailCheck = 0;
+			} else if (data == '0'){
+                //$(".signupbtn").prop("disabled", false);
+		    	MsgEmail.className='vaild';
+		    	MsgEmail.innerHTML="ok";
+		    	emailCheck = 1;
+			} else if (data == '1') {
+				if(uEmail == email.value){
+			    	MsgEmail.className='vaild';
+			    	MsgEmail.innerHTML="ok";
+			    	emailCheck = 1;
+				} else {
+	                //$(".signupbtn").prop("disabled", true);
+	    	    	MsgEmail.style.display="block";
+	    	    	MsgEmail.className='error';
+	    	    	MsgEmail.innerHTML = "중복된 Email입니다";
+	    	    	emailCheck = 0;
+				}
+			}
+		}
+	});
 }
 
 function ck_pwd(){
@@ -488,7 +523,7 @@ function ck_phone(){
                             	   style="color:black">상품</a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                            <a href="#" onclick="del()">탈퇴</a>
                         </div>
                     </div>
                 </div>

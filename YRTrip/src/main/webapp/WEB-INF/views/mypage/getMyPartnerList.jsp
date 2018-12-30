@@ -129,6 +129,19 @@ a:hover { color:white }
 }
 </style>
 <script>
+function del() {
+	var password = prompt("탈퇴하시려면 비밀번호를 입력해주세요.");
+	var uid = '${sessionScope.login.userId}';
+	var upw = '${sessionScope.login.userPw}';
+	
+	if(password == upw){
+		if(confirm("정말 탈퇴하시겠습니까?")){
+			location.href = "./deleteMyInfo?userId=" + uid;
+		} else { return; }
+	} else {
+		alert("비밀번호가 일치하지 않습니다.");
+	}
+};
 	function go_page(page) {
 		document.frm.page.value = page;
 		document.frm.submit();
@@ -155,7 +168,7 @@ a:hover { color:white }
                             	   style="color:black; text-decoration:none !important;">상품</a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#" style="text-decoration:none !important;">탈퇴</a>
+                            <a href="#" style="text-decoration:none !important;" onclick="del()">탈퇴</a>
                         </div>
                     </div>
                 </div>

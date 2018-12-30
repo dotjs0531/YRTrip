@@ -39,7 +39,12 @@ a:hover { color:white }
                             <li><a href="getQnaList" style="color:black">1:1 문의</a></li>
                         </ul>
                         <div class="order-buton">
-                            <a href="#">탈퇴</a>
+                        	<c:if test="${sessionScope.login.userGrant ne 'admin'}">
+                     			<a href="${pageContext.request.contextPath}/insertQna">문의글 등록</a>
+                     		</c:if>
+                        	<c:if test="${sessionScope.login.userGrant eq 'admin'}">
+                     			<a href="${pageContext.request.contextPath}/insertNotice">공지 등록</a>
+                     		</c:if>
                         </div>
                     </div>
                 </div>

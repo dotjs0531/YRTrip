@@ -121,12 +121,13 @@ public class UserController {
 	//마이페이지
 	@RequestMapping("/getMyInfo")
 	public String getMyInfo(Model model, UserVO vo, HttpSession session) {
+		vo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 		model.addAttribute("user", userService.getUser(vo));
 		return "mypage/getMyInfo";
 	}
 	//마이페이지 수정
 	@RequestMapping("updateMyInfo")
-	public String updateMyInfo(Model model,UserVO vo, HttpSession session) {
+	public String updateMyInfo(Model model, UserVO vo, HttpSession session) {
 		userService.updateUser(vo);
 		model.addAttribute("user", userService.getUser(vo));
 		return "mypage/getMyInfo";
