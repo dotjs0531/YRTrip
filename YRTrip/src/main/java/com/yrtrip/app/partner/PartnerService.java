@@ -16,6 +16,4 @@ public interface PartnerService {
 	public int getCount(PartnerVO vo);
 	public void closePartner(PartnerVO vo);
 	public void updateViewCnt(PartnerVO vo);
-	
-	public int getJoinerCount(JoinerVO vo);
 }

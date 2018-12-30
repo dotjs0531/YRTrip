@@ -6,18 +6,15 @@
 	SELECT COUNT(*)
 	  FROM PARTNERT
 	  <where>
-		<choose>
-			<when test="searchClass != null and searchClass== 'partnerClass'">
-				AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			
-			<when test="searchCondition != null and searchCondition == 'partnerTitle'">
-				AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			<when test="searchCondition != null and searchCondition == 'partnerContent'">
-			 	AND PARTNER_CONTENT LIKE '%' || #{searchKeyword} || '%'
-			</when>
-		</choose>
+		<if test="searchClass != null and searchClass== 'partnerClass'">
+			AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition != null and searchCondition == 'userId'">
+			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'partnerTitle'">
+		 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>
 	</where>
 	ORDER BY PARTNER_ID DESC
 </select>
@@ -28,7 +25,9 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			PARTNER_CONTENT,  
 			PARTNER_HIT, 
 			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,    
-			USER_ID,    
+			U.USER_ID,    
+			USER_NAME,
+			(SELECT COUNT(*) FROM JOINERT WHERE PARTNER_ID = P.PARTNER_ID) AS JOINER_CNT,
 			TINFO_ID,         
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
@@ -36,20 +35,19 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			TO_CHAR(PARTNER_START, 'MM/DD') PARTNER_START,    
 			TO_CHAR(PARTNER_END, 'MM/DD') PARTNER_END,
 			PARTNER_CONDITION
-	FROM	PARTNERT
+	FROM	PARTNERT P, USERT U
 	<where>
-		<choose>
-			<when test="searchClass != null and searchClass == 'partnerClass'">
-				AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
-			</when>
-			<when test="searchCondition != null and searchCondition == 'userId'">
-				AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-			</when>	
-			<when test="searchCondition != null and searchCondition == 'partnerTitle'">
-			 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>
-		</choose>
-	  </where>
+		<if test="searchClass != null and searchClass == 'partnerClass'">
+			AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition != null and searchCondition == 'userId'">
+			AND U.USER_ID LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'partnerTitle'">
+		 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		AND P.USER_ID = U.USER_ID
+	</where>
 	ORDER BY PARTNER_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
@@ -60,7 +58,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			PARTNER_CONTENT,  
 			PARTNER_HIT, 
 			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_DATE,    
-			USER_ID,    
+			U.USER_ID,    
+			USER_NAME,
 			TINFO_ID,         
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
@@ -68,8 +67,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_START,    
 			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_END,   
 			PARTNER_CONDITION
-	FROM	PARTNERT
-	WHERE	PARTNER_ID = #{partnerId}
+	FROM	PARTNERT P, USERT U
+	WHERE	P.USER_ID = U.USER_ID AND PARTNER_ID = #{partnerId}
 </select>
 
 <insert id="insertPartner" parameterType="partner">

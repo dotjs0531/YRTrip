@@ -57,9 +57,4 @@ public class PartnerServiceImpl implements PartnerService {
 	public void updateViewCnt(PartnerVO vo) {
 		dao.updateViewCnt(vo);
 	}
-
-	@Override
-	public int getJoinerCount(JoinerVO vo) {
-		return dao.getJoinerCount(vo);
-	}
 }

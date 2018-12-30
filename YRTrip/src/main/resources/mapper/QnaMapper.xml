@@ -31,7 +31,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			TO_CHAR(QNA_DATE, 'MM/DD') QNA_DATE,
 			U.USER_ID,
 			USER_NAME,
-			QNA_ANSWER
+			QNA_ANSWER,
+			(SELECT COUNT(*) FROM QNA_COMMENTT WHERE COMMENT_QNAID = Q.QNA_ID) AS QNA_COMMENT_CNT
 	  FROM  QNAT Q, USERT U
 	  <where>
 		<if test="searchCondition != null and searchCondition == 'qnaTitle'">

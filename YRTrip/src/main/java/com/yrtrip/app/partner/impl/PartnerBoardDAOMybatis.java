@@ -55,9 +55,4 @@ public class PartnerBoardDAOMybatis {
 	public void updateViewCnt(PartnerVO vo) {
 		mybatis.update("partner.updateViewCnt", vo);
 	}
-	
-	//동행신청자 수
-	public int getJoinerCount(JoinerVO vo) {
-		return mybatis.selectOne("partner.getJoinerCount", vo);
-	}
 }

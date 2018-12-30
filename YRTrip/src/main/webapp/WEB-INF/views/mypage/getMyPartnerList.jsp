@@ -258,7 +258,7 @@ a:hover { color:white }
 																<label style="font-family: 'NanumSquareRoundR'; color:#666666">&nbsp;&nbsp;${joiner.userId}</label>
 															</div>
 														</c:if>
-														</c:if><br/>
+														</c:if>
 													</c:forEach>
 												</td>
 											</tr>

@@ -84,8 +84,11 @@ a:hover { color:white }
                            <tr>
                               <td>${partner.partnerId}</td>
                               <td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
-									overflow: hidden; width:380px; vertical-align:middle" href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}</a></td>
-                              <td><a style="color:black;" href="./getYourTravelList?userId=${partner.userId}">${partner.userId}</a></td>
+									overflow: hidden; width:380px; vertical-align:middle" href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
+									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if></a></td>
+                              <td style="color:black;"><c:if test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
+                                  <c:if test="${sessionScope.login.userId ne partner.userId}"><a style="color:black;" href="./getYourTravelList?userId=${partner.userId}">${partner.userName}</a></c:if>
+                              </td>
                               <td style="text-align:center">${partner.partnerDate}
                               <td style="text-align:center">${partner.partnerHit}</td>
                               <td style="text-align:center">${partner.partnerCondition}</td>

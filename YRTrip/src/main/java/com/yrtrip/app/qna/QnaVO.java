@@ -8,6 +8,8 @@ public class QnaVO {
 	private String userName;	//작성자이름
 	private String qnaDate;		//작성일
 	private String qnaAnswer;	//답변여부
+	
+	private int qnaCommentCnt;	//댓글수
 
 	private String searchCondition;
 	private String searchKeyword;
@@ -58,6 +60,13 @@ public class QnaVO {
 	}
 	public void setQnaAnswer(String qnaAnswer) {
 		this.qnaAnswer = qnaAnswer;
+	}
+	
+	public int getQnaCommentCnt() {
+		return qnaCommentCnt;
+	}
+	public void setQnaCommentCnt(int qnaCommentCnt) {
+		this.qnaCommentCnt = qnaCommentCnt;
 	}
 	
 	public String getSearchCondition() {

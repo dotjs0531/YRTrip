@@ -44,16 +44,19 @@
 						+ "<button type=\"button\" class=\"btn btn-default btnDel\">신청취소</button>"			
 			}else if(userId == partnerId){	//동행글 작성자
 				if(joiner.joinerCondition == 'N'){	//동행 수락 전
-					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>" + joiner.userId + "</label>"
+					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
+					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
 					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
 					+ "<button type=\"button\" class=\"btn btn-default btnAccept\" id="+joiner.joinerId+">수락 하기</button>"
 				}else{	//동행 수락 후
-					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>" + joiner.userId + "</label>"
+					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
+					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
 					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
 					+ "<button type=\"button\" class=\"btn btn-default btnCancle\" id="+joiner.joinerId+">수락 취소</button>"
 				}
 			}else{	//동행 신청을 하지 않은 사용자
-				var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>" + joiner.userId + "</label>"
+				var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
+				+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
 				+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
 			}
 			div.html(str);
@@ -175,7 +178,12 @@
 					<div class="about_car" style="padding-top:20px; min-height: 450px;">
 						<h4 class="control-label" style="font-family: 'NanumSquareRoundEB'; color:black; display: inline; float:left"><strong>카테고리></strong></h4>
 						<h4 class="control-label" style="font-family: 'NanumSquareRoundB'; color:black; display: inline; float:left">&nbsp;${partner.partnerClass}</h4>
-						<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right"><strong>작성자</strong>&nbsp;&nbsp;${partner.userId} ｜ <strong>조회수</strong>&nbsp;&nbsp;${partner.partnerHit} ｜ <strong>작성일</strong>&nbsp;&nbsp;${partner.partnerDate}</h5>
+						<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right">
+							<strong>작성자</strong>&nbsp;&nbsp;
+								<c:if test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
+								<c:if test="${sessionScope.login.userId ne partner.userId}"><a style='color:#919191' href='./getYourTravelList?userId=${partner.userId}'>${partner.userName}</a></c:if>
+							<strong> ｜ 조회수</strong>&nbsp;&nbsp;${partner.partnerHit}
+							<strong> ｜ 작성일</strong>&nbsp;&nbsp;${partner.partnerDate}</h5>
 						<p style="clear:both"/><br/>
 						<h3 class="control-label" style="font-family: 'NanumSquareRoundEB'; color:#666666; display: inline; float:left">${partner.partnerTitle}</h3>
 						

@@ -19,8 +19,11 @@ public class PartnerVO extends TravelInfoVO {
 	private String partnerEnd; // 도착일
 	private String partnerCondition; // 현재 상태
 	
-	private String userId; // 글쓴이
+	private String userId; // 작성자ID
+	private String userName; // 작성자 이름
 	private int tinfoId; // 여행정보 ID
+	
+	private int joinerCnt;	//동행 신청자수
 
 	private String searchCondition; //
 	private String searchClass;
@@ -105,6 +108,12 @@ public class PartnerVO extends TravelInfoVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getTinfoId() {
 		return tinfoId;
 	}
@@ -117,6 +126,14 @@ public class PartnerVO extends TravelInfoVO {
 	public void setSearchClass(String searchClass) {
 		this.searchClass = searchClass;
 	}
+
+	public int getJoinerCnt() {
+		return joinerCnt;
+	}
+	public void setJoinerCnt(int joinerCnt) {
+		this.joinerCnt = joinerCnt;
+	}
+	
 	public String getSearchCondition() {
 		return searchCondition;
 	}

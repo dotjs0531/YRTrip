@@ -95,8 +95,11 @@ a:hover { color:white }
 								<tr>
 									<td>${qna.qnaId}</td>
 									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
-										overflow: hidden; width:420px; vertical-align:middle" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}</a></td>
-									<td><a style="color:black;" href="./getYourTravelList?userId=${qna.userId}">${qna.userName}</a></td>
+										overflow: hidden; width:420px; vertical-align:middle" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}
+										<c:if test="${qna.qnaCommentCnt != '0'}"> [${qna.qnaCommentCnt}]</c:if></a></td>
+									<td style="color:black;"><c:if test="${sessionScope.login.userId eq qna.userId}">${qna.userName}</c:if>
+										<c:if test="${sessionScope.login.userId ne qna.userId}"><a style="color:black;" href="./getYourTravelList?userId=${qna.userId}">${qna.userName}</a></c:if>
+									</td>
 									<td style="text-align:center">${qna.qnaDate}</td>
 									<td style="text-align:center">${qna.qnaAnswer}</td>
 								</tr>
