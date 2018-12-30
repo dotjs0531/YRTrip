@@ -11,7 +11,5 @@ public class AdminVO {
 	public void setTinfoId(int tinfoId) {
 		this.tinfoId = tinfoId;
 	}
-	
-	
-	
+
 }

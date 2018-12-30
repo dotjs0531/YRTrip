@@ -91,10 +91,10 @@ $(document).ready(function(){
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">places</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black"><strong>세계의 장소들</strong></a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a href="./insertTravelPlaceform">나만의 장소 등록</a>
+	                        <a href="./insertTravelPlaceform">세계의 장소 등록</a>
 	                    </div>                   
 				</div>
 			</div>
@@ -133,27 +133,20 @@ $(document).ready(function(){
 										style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
 									<div class="bootstrap-filestyle input-group">
 										<input type="text" id="placefile" class="form-control"
-											name="placefile" disabled="">
+											name="placefile" disabled="" placeholder="업로드할 사진을 선택해주세요.">
 										<span class="group-span-filestyle input-group-btn" tabindex="0">
 											<label for="fileInput" class="btn btn-default ">
 												<span class="glyphicon fa fa-upload"></span>
 											</label>
 										</span>
 									</div>
-<!-- 									
-									
-									
-									<div class="form-group">
-										<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요.">
-									</div> -->
 									<div class="form-group">
 										<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 입력해주세요.">
 									</div>
 									<div class="form-group">
 										<label for="remember-me" class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="등록">
 									</div>
 
 									<input type="hidden" name="travelNo" value="0">
@@ -166,7 +159,7 @@ $(document).ready(function(){
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
+ 
 <script>
 /* datepicker */
 $(function() {

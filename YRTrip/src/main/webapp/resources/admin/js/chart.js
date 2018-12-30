@@ -73,9 +73,10 @@ $(function() {
     }
 
   };
+
   var doughnutPieData = {
     datasets: [{
-      data: [30, 40, 30],
+    	data: [30, 40, 50],
       backgroundColor: [
         'rgba(255, 99, 132, 0.5)',
         'rgba(54, 162, 235, 0.5)',
@@ -100,7 +101,9 @@ $(function() {
       'Blue',
       'Yellow',
     ]
+  
   };
+
   var doughnutPieOptions = {
     responsive: true,
     animation: {
@@ -334,14 +337,8 @@ $(function() {
     });
   }
 
-  if ($("#doughnutChart").length) {
-    var doughnutChartCanvas = $("#doughnutChart").get(0).getContext("2d");
-    var doughnutChart = new Chart(doughnutChartCanvas, {
-      type: 'doughnut',
-      data: doughnutPieData,
-      options: doughnutPieOptions
-    });
-  }
+  
+
 
   if ($("#pieChart").length) {
     var pieChartCanvas = $("#pieChart").get(0).getContext("2d");

@@ -1,28 +1,97 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>여행게시판 글 등록</title>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script>
+/* 파일업로드 */
+$(document).ready(function(){
+		$("#fileInput").on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+
+			$("#placefile").val(filename);
+		});
+	});
+</script>
 <style>
 .modal-backdrop {
 	z-index: -1;
 }
-.nav>li>a:focus,
-.nav>li>a:hover{
-   background-color:white;
+
+.nav>li>a:focus, .nav>li>a:hover {
+	background-color: white;
+}
+
+#map {
+	height: 400px;
+}
+
+.controls {
+	background-color: #fff;
+	border-radius: 2px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	box-sizing: border-box;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	height: 29px;
+	margin-left: 17px;
+	margin-top: 10px;
+	outline: none;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 400px;
+}
+
+.controls:focus {
+	border-color: #4d90fe;
+}
+
+.title {
+	font-weight: bold;
+}
+
+#infowindow-content {
+	display: none;
+}
+
+#map #infowindow-content {
+	display: inline;
 }
 </style>
+<script>
+/* 파일업로드 */
+$(document).ready(function(){
+		$("#fileInput").on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+
+			$("#placefile").val(filename);
+		});
+	});
+</script>
 </head>
 <body>
+
 <section class="about_us_area" id="about">
 	<div class="container">
 		<div class="row">
@@ -36,10 +105,10 @@
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">Places</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black"><strong>세계의 장소들</strong></a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a href="./insertTravelPlaceform">나만의 장소 등록</a>
+	                        <a href="./insertTravelPlaceform">세계의 장소 등록</a>
 	                    </div>                   
 				</div>
 			</div>
@@ -47,47 +116,65 @@
 			<!-- 검색 창 -->
 			<div>
 				<div class="col-sm-6" style="min-width:700px">
-                	<div class="table-responsive" style="min-height:450px;">
-						
+                	<div class="table-responsive" style="min-height:450px;">		
 <!-- 등록폼 -->
-<form class="form" action="./updateTravelPlace" method="post">		
-									<h3 class="text-center text-info" style="color:#5f768b;">나만의 장소 수정</h3>										
-									<div class="form-group">
-										<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeName" class="form-control" value="${travelPlace.placeName}">
-									</div>
-									<div class="form-group">
-										<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeAddress" class="form-control" value="${travelPlace.placeAddress}">
-									</div>
+ <form class="form" action="./updateTravelPlace" method="post">
+								<input id="pac-input" class="controls" type="text"
+									placeholder="Enter a location">
+								<div id="map"></div>
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span>
+									<span id="place-address"></span>
+								</div>
 									<div class="form-group">
 										<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="placeTitle" class="form-control" value="${travelPlace.placeTitle}">
 									</div>
 									<div class="form-group">
-										<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeContent" class="form-control" value="${travelPlace.placeContent}">
+										<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
+										<input type="text" id="placeName" name="placeName" class="form-control"  value="${travelPlace.placeName}">
 									</div>
 									<div class="form-group">
-										<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placePic" class="form-control" value="${travelPlace.placePic}">
+										<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
+										<input type="text" id="placeAddress" name="placeAddress" class="form-control" value="${travelPlace.placeAddress}">
+									</div>
+									<div class="form-group">
+										<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
+										<textarea class="form-control" rows="3" name="placeContent">${travelPlace.placeContent}</textarea>
+									</div>
+									<input type="file" name="placePic" id="fileInput" value="${travelPlace.placePic}" data-class-button="btn btn-default" 
+										data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" 
+										style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
+									<div class="bootstrap-filestyle input-group">
+										<input type="text" id="placefile" class="form-control"
+											name="placefile" disabled="" value="${travelPlace.placePic}">
+										<span class="group-span-filestyle input-group-btn" tabindex="0">
+											<label for="fileInput" class="btn btn-default ">
+												<span class="glyphicon fa fa-upload"></span>
+											</label>
+										</span>
 									</div>
 									<div class="form-group">
 										<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeVisitDate" class="form-control datePicker" value="${travelPlace.placeVisitDate}">
+										<input type="text" name="placeVisitDate" class="form-control datePicker"  value="${fn:substring(travelPlace.placeVisitDate, 0, 10)}">
 									</div>
 									<div class="form-group">
-										<label for="remember-me" class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<label for="submit" class="text-info"></label>
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="수정완료">
 									</div>
-									<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
-			</form>
+
+									<input type="hidden" name="travelNo" value="0">
+									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+									<input type="hidden" name="placeMapId" value="${travelPlace.placeMapId}">
+									
+ 			</form>
 
 			</div>	<!-- end of table-responsive -->
 				</div></div></div></div></section>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+ 
 <script>
 /* datepicker */
 $(function() {
@@ -107,6 +194,60 @@ $(function() {
         yearRange: "-100:+0"
     });
     }); 
+    
+/* 지도 */
+function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.565598, lng: 126.978031},
+          zoom: 13
+        });
+
+        var input = document.getElementById('pac-input');
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            return;
+          }
+
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+          }
+
+          marker.setPlace({
+            placeId: place.place_id,
+            location: place.geometry.location
+          });
+          marker.setVisible(true);
+
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = place.formatted_address;
+          infowindow.open(map, marker);
+
+          document.getElementById("placeName").value= place.name;
+          document.getElementById("placeAddress").value= place.formatted_address;
+        });
+      }
 </script>
+
 </body>
 </html>

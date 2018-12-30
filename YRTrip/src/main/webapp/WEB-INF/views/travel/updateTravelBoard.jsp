@@ -381,9 +381,9 @@ function loadTravelPlaceList(){
                             <h2 style="color:black">여행정보</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
+                            <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">Places</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
 	                        <a id="insertTravelBoardButton">새 여행기 등록</a>

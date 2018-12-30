@@ -137,10 +137,10 @@
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">Places</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black"><strong>세계의 장소들</strong></a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a href="./insertTravelPlaceform">나만의 장소 등록</a>
+	                        <a href="./insertTravelPlaceform">세계의 장소 등록</a>
 	                    </div>                   
 				</div>
 			</div>
@@ -159,7 +159,12 @@
 			
 					<div class="wrap">
 					<div class="tile"> 
-					  <img src='resources/media/getTBL.PNG'/>
+					  <c:if test="${not empty travelPlace.placePic}">
+								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" />
+							</c:if>
+							<c:if test="${travelPlace.placePic == null}">
+							<img src="./images/travel/placenoimage.jpg" class="img-responsive">
+							</c:if>
 					  <div class="text">
 					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">${board.placeTitle}</a></h2>
 					  <p class="animate-text">${board.placeName}</p>

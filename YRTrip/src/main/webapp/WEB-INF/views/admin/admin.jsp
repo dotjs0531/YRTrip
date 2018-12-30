@@ -42,9 +42,9 @@
                       <i class="mdi mdi-cube text-danger icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Total Revenue</p>
+                      <p class="mb-0 text-right">총 거래액</p>
                       <div class="fluid-container">
-                        <h3 class="font-weight-medium text-right mb-0">$65,650</h3>
+                        <h3 class="font-weight-medium text-right mb-0">$000,000</h3>
                       </div>
                     </div>
                   </div>
@@ -62,7 +62,7 @@
                       <i class="mdi mdi-receipt text-warning icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Orders</p>
+                      <p class="mb-0 text-right">총 거래량</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">3455</h3>
                       </div>
@@ -82,7 +82,7 @@
                       <i class="mdi mdi-poll-box text-success icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Sales</p>
+                      <p class="mb-0 text-right">총 여행기 수</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">5693</h3>
                       </div>
@@ -102,7 +102,7 @@
                       <i class="mdi mdi-account-location text-info icon-lg"></i>
                     </div>
                     <div class="float-right">
-                      <p class="mb-0 text-right">Employees</p>
+                      <p class="mb-0 text-right">총 회원수</p>
                       <div class="fluid-container">
                         <h3 class="font-weight-medium text-right mb-0">246</h3>
                       </div>

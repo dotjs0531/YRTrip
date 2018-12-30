@@ -409,9 +409,9 @@ function selectTravelWith(ele){
                             <h2 style="color:black">여행정보</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
+                            <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
                             <li><a href="#" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">Places</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
 	                        <a id="insertTravelBoardButton">새 여행기 등록</a>
@@ -427,10 +427,10 @@ function selectTravelWith(ele){
 						<div class="container dad">
 							<div class="son-1">
 							<c:if test="${travelBoard.travelPic != null}">
-							<img src="resources/media/${travelPic}" style="width:100%;">
+							<img src="./images/travel/${travelPic}" style="width:100%;">
 							</c:if>
 							<c:if test="${travelBoard.travelPic == null}">
-							<img src="resources/media/noimage.jpg" style="width:100%;">
+							<img src="./images/travel/noimage.jpg" style="width:100%;">
 							</c:if>
 							</div>
 							<span class="top-span">NO : T${travelBoard.travelNo}</span>
@@ -525,10 +525,13 @@ function selectTravelWith(ele){
 										</c:forEach> --%>
 								</div>
 								<c:if test="${sessionScope.login.userId eq travelBoard.userId}">
-									<div class="order-buton" style="float:right">
-									<a href="${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}">수정</a>
-									<a onclick="del('${travelBoard.travelNo}')">삭제</a>
-									</div>
+								
+								<div class="form-group" style="float:right;"><br>
+										<label for="update" class="text-info"></label>
+										<input type="submit" name="submit" class="btn btn-info btn-md" onClick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'" style="background-color:#f9bf3b; border:#f9bf3b;" value="수정">&nbsp;
+								<label for="delete" class="text-info"></label>
+										<input type="submit" name="submit" class="btn btn-info btn-md" onClick="del('${travelBoard.travelNo}')" style="background-color:#f9bf3b; border:#f9bf3b;" value="삭제">
+							</div>
 								 </c:if>
 							</div>
 						</div>	<!-- end of table-responsive -->

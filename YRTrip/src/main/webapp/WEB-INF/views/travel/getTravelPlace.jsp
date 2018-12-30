@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>장소게시판 글 상세보기</title>
 
-<link
+ <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
 <script
@@ -25,7 +26,49 @@
 #map {
 	height: 400px;
 }
+body { padding-top: 20px; }
+#myCarousel .nav a small {
+    display:block;
+}
+#myCarousel .nav {
+	background:#eee;
+}
+#myCarousel .nav a {
+    border-radius:0px;
+}
+
 </style>
+<script>
+$(document).ready( function() {
+    $('#myCarousel').carousel({
+		interval:   4000
+	});
+	
+	var clickEvent = false;
+	$('#myCarousel').on('click', '.nav a', function() {
+			clickEvent = true;
+			$('.nav li').removeClass('active');
+			$(this).parent().addClass('active');		
+	}).on('slid.bs.carousel', function(e) {
+		if(!clickEvent) {
+			var count = $('.nav').children().length -1;
+			var current = $('.nav li.active');
+			current.removeClass('active').next().addClass('active');
+			var id = parseInt(current.data('slide-to'));
+			if(count == id) {
+				$('.nav li').first().addClass('active');	
+			}
+		}
+		clickEvent = false;
+	});
+});
+
+function del(placeNo){
+    if(confirm("삭제하시겠습니까?")){
+    	location.href= "./deleteTravelPlace?placeNo=" + placeNo;
+    } else { return; }
+ };
+</script>
 </head>
 <body>
 
@@ -43,10 +86,10 @@
 							<li><a href="./getTravelBoardList" style="color: black">전체
 									여행기</a></li>
 							<li><a href="#" style="color: black">베스트 여행기</a></li>
-							<li><a href="./getTravelPlaceList" style="color: black">Places</a></li>
+							<li><a href="./getTravelPlaceList" style="color: black"><strong>세계의 장소들</strong></a></li>
 						</ul>
 						<div class="order-buton" style="padding-bottom: 30px;">
-							<a href="./insertTravelPlaceform">나만의 장소 등록</a>
+							<a href="./insertTravelPlaceform" style="text-decoration:none;">세계의 장소 등록</a>
 						</div>
 					</div>
 				</div>
@@ -57,39 +100,71 @@
 						<div class="table-responsive" style="min-height: 450px;">
 
 							<!-- 장소글 -->
+                <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
+				<div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
+				  <div class="carousel-inner">
+				    <div class="active item">
+				    	<blockquote>
+				    	<div style="float:right;">
+				    		${fn:substring(travelPlace.placeVisitDate, 0, 10)}
+				    		</div>
+				    		<h3>${travelPlace.placeTitle}</h3> 
+				    		<p> ${travelPlace.placeContent}</p>
+				    	</blockquote>
+				    	<div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>
+				    </div>
+				  </div>
+				</div>
+				<hr>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+     
+       <div class="item active" style="height:300px;">
+        <div style="min-height: 300px;">
+							<c:if test="${not empty travelPlace.placePic}">
+								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" />
+							</c:if>
+							<c:if test="${travelPlace.placePic == null}">
+							<img src="./images/travel/placenoimage.jpg" class="img-responsive">
+							</c:if>
+	</div>
+          <div class="carousel-caption">
+            <h3>${travelPlace.placeName}</h3>
+            <p>${travelPlace.placeAddress}</p>
+          </div>
+        </div>
+ 
+         <div class="item" style="height:300px;">
+                    <div id="map"></div>
+           <div class="carousel-caption">
+			<p>크게보기</p>
+          </div>
+        </div>
+        <ul class="nav nav-pills nav-justified">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#"><i class="glyphicon glyphicon-camera"> 사진보기</i></a></li>
+          <li data-target="#myCarousel" data-slide-to="1"><a href="#"><i class="glyphicon glyphicon-search"> 지도보기</i></a></li>
+        </ul>
+      </div>
 
-							<div id="map"></div>
-							<div style="min-height: 300px;">
-								<c:if test="${not empty travelPlace.placePic}">
-									<img id=travelPic src="./images/travel/${travelPlace.placePic}" />
-								</c:if>
+    </div><!-- End Carousel -->
+							<c:if test="${sessionScope.login.userId eq travelPlace.userId}">
+							<div class="form-group" style="float:right;"><br>
+										<label for="update" class="text-info"></label>
+										<input type="submit" name="submit" class="btn btn-info btn-md" onClick="location.href='${pageContext.request.contextPath}/updateTravelPlaceform?placeNo=${travelPlace.placeNo}'" style="background-color:#f9bf3b; border:#f9bf3b;" value="수정">&nbsp;
+								<label for="delete" class="text-info"></label>
+										<input type="submit" name="submit" class="btn btn-info btn-md" onClick="del('${travelPlace.placeNo}')" style="background-color:#f9bf3b; border:#f9bf3b;" value="삭제">
 							</div>
-
-							${travelPlace.placeName} ${travelPlace.placeAddress}
-							${travelPlace.placeTitle} ${travelPlace.placeContent}
-							${travelPlace.placeVisitDate}
-
-
-
-
-							<div class="form-group">
-								<label for="remember-me" class="text-info"></label>
-								<button class="submit-btn" type="button"
-									onclick="location.href='${pageContext.request.contextPath}/updateTravelPlaceform?placeNo=${travelPlace.placeNo}'">수정</button>
-								<button class="submit-btn" type="button"
-									onclick="location.href='${pageContext.request.contextPath}/deleteTravelPlace?placeNo=${travelPlace.placeNo}'">삭제</button>
-							</div>
+							</c:if>
 
 						</div>
+</div>
+
+
 						<!-- end of table-responsive -->
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
 
-	<script>
-		
-	</script>
+	</section>
 </body>
 </html>

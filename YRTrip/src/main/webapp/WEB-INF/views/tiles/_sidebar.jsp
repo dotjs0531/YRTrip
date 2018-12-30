@@ -33,12 +33,12 @@
                 <div class="text-wrapper">
                   <p class="profile-name"><a href="./admin" style="color:black; text-decoration:none">${sessionScope.login.userName}</a></p>
                   <div>
-                    <small class="designation text-muted">Manager</small>
+                    <small class="designation text-muted">관리자</small>
                     <span class="status-indicator online"></span>
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">New Project
+              <button class="btn btn-success btn-block">전체 알림 전송
                 <i class="mdi mdi-plus"></i>
               </button>
             </div>
@@ -46,54 +46,55 @@
           <li class="nav-item">
             <a class="nav-link" href="./admin">
               <i class="menu-icon mdi mdi-television"></i>
-              <span class="menu-title">Dashboard</span>
+              <span class="menu-title">HOME</span>
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="./form">
+              <i class="menu-icon mdi mdi-backup-restore"></i>
+              <span class="menu-title">회원관리</span>
+            </a>
+          </li>
+           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-content-copy"></i>
-              <span class="menu-title">Basic UI Elements</span>
+              <span class="menu-title">거래관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a>
+                  <a class="nav-link" href="pages/ui-features/buttons.html">첫번째 메뉴</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
+                  <a class="nav-link" href="pages/ui-features/typography.html">두번째 메뉴</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./form">
-              <i class="menu-icon mdi mdi-backup-restore"></i>
-              <span class="menu-title">Form elements</span>
+            <a class="nav-link" href="./table">
+              <i class="menu-icon mdi mdi-sticker"></i>
+              <span class="menu-title">동행관리</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="pages/icons/font-awesome.html">
+              <i class="menu-icon mdi mdi-table"></i>
+              <span class="menu-title">여행관리</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="./chart">
               <i class="menu-icon mdi mdi-chart-line"></i>
-              <span class="menu-title">Charts</span>
+              <span class="menu-title">통계정보</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="./table">
-              <i class="menu-icon mdi mdi-table"></i>
-              <span class="menu-title">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pages/icons/font-awesome.html">
-              <i class="menu-icon mdi mdi-sticker"></i>
-              <span class="menu-title">Icons</span>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-restart"></i>
-              <span class="menu-title">User Pages</span>
+              <span class="menu-title">음...뭐넣을까....</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">

@@ -103,6 +103,9 @@
 								TINFO_ID,
 								USER_ID,
 								TRAVEL_WITH
+							<if test="travelPic != null and travelPic != ''">
+						 		,TRAVEL_PIC
+							</if> 
 								)
 		VALUES (#{travelNo}, 
 				#{travelPerson},
@@ -114,6 +117,9 @@
 				#{selectedTinfoModal},
 				#{userId}, 
 				#{travelWith}
+				<if test="travelPic != null and travelPic != ''">
+					,#{travelPic}
+				</if> 
 				)
 </insert>
 
@@ -128,8 +134,10 @@
 		TRAVEL_TITLE = #{travelTitle},
 		TRAVEL_CONTENT = #{travelContent},
 		TINFO_ID = #{tinfoId},
-		TRAVEL_WITH = #{travelWith},
-		TRAVEL_PIC = #{travelPic}
+		TRAVEL_WITH = #{travelWith}
+		<if test="travelPic != null and travelPic != ''">
+		,TRAVEL_PIC = #{travelPic}
+		</if>
 	WHERE TRAVEL_NO = #{travelNo}
 </update>
 
