@@ -5,40 +5,36 @@
 <select id="getJoinerList" resultType="joiner" parameterType="joiner"> 
       SELECT JOINER_ID, 
              TO_CHAR(JOINER_DATE, 'YYYY.MM.DD') JOINER_DATE,         
-             USER_ID,   
+             U.USER_ID,    
+			 USER_NAME,   
+			 USER_GEN,
              PARTNER_ID,
              JOINER_CONDITION
-        FROM JOINERT
-       WHERE PARTNER_ID = #{partnerId}
-       ORDER BY JOINER_ID DESC 
+        FROM JOINERT J, USERT U
+       WHERE J.USER_ID = U.USER_ID AND PARTNER_ID = #{partnerId}
+       ORDER BY JOINER_ID
 </select>
 <select id="getJoiner" resultType="joiner" parameterType="joiner"> 
       SELECT JOINER_ID            
             ,TO_CHAR(JOINER_DATE, 'YYYY.MM.DD') JOINER_DATE         
-            ,USER_ID  
+            ,U.USER_ID    
+			,USER_NAME
+			,USER_GEN
             ,PARTNER_ID
             ,JOINER_CONDITION
-        FROM JOINERT
-       WHERE JOINER_ID = #{joinerId}
+        FROM JOINERT J, USERT U
+       WHERE J.USER_ID = U.USER_ID AND JOINER_ID = #{joinerId}
 </select>
 <insert id="insertJoiner" parameterType="joiner">
    <selectKey keyProperty="joinerId" resultType="integer" order="BEFORE">
 		SELECT NVL(MAX(JOINER_ID), 0)+1 FROM JOINERT
 	</selectKey>
-   INSERT INTO JOINERT (
-         JOINER_ID,
-         JOINER_DATE,
-         USER_ID,
-         PARTNER_ID,
-         JOINER_CONDITION
-         )
-   VALUES (
-         #{joinerId},
-         sysdate,
-         #{userId},
-         #{partnerId},
-         #{joinerCondition}
-      )
+   INSERT INTO JOINERT ( JOINER_ID,
+         				 USER_ID,
+         				 PARTNER_ID )
+   VALUES ( #{joinerId},
+         	#{userId},
+         	#{partnerId} )
 </insert>
 <delete id="deleteJoiner" parameterType="int">
    DELETE FROM JOINERT

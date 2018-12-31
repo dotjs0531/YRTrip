@@ -20,6 +20,13 @@ function del(partnerId) {
 		return;
 	}
 };
+function close(partnerId) {
+	if (confirm("완료하시겠습니까?")) {
+		location.href = "./closePartner?partnerId=" + partnerId;
+	} else {
+		return;
+	}
+};
 	$(function() {
 		//동행 신청 목록 조회	
 		loadJoinerList();
@@ -47,32 +54,50 @@ function del(partnerId) {
 			var pCondition = '${partner.partnerCondition}';
 			
 			if(userId == joiner.userId){	//동행 신청자
-				var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>" + joiner.userId + "</label>"
-						+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
-						+ "<button type=\"button\" class=\"btn btn-default btnDel\">신청취소</button>";
+				if(joiner.joinerCondition == 'N'){
+					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#919191'>" + joiner.userName + "("+joiner.userGen+")</label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px;  color:#919191'>" + joiner.joinerDate + "</span>"
+							+ "<button type=\"button\" class=\"btn btn-default btn-sm btnDel\">취소</button>";
+				}else{
+					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#009933'>" + joiner.userName + "("+joiner.userGen+")</label>"
+					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#009933'>" + joiner.joinerDate + "</span>"
+					+ "<button type=\"button\" class=\"btn btn-default btn-sm btnDel\">취소</button>";
+				}
             	apply.style.display="none";
 			}else if(userId == partnerId){	//동행글 작성자
 				if(pCondition == '미완료'){
 					if(joiner.joinerCondition == 'N'){	//동행 수락 전
-						var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
-							+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
-							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
-							+ "<button type=\"button\" class=\"btn btn-default btnAccept\" id="+joiner.joinerId+">수락 하기</button>"
+						var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#919191'>"
+							+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#919191'>" + joiner.joinerDate + "</span>"
+							+ "<button type=\"button\" class=\"btn btn btn-success btn-sm btnAccept\" id="+joiner.joinerId+">수락 </button>"
 					}else{	//동행 수락 후
-							var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
-							+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
-							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
-							+ "<button type=\"button\" class=\"btn btn-default btnCancle\" id="+joiner.joinerId+">수락 취소</button>"
+							var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#009933'>"
+							+ "<a style='color:#009933' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#009933'>" + joiner.joinerDate + "</span>"
+							+ "<button type=\"button\" class=\"btn btn-default btn-sm btnCancle\" id="+joiner.joinerId+">취소</button>"
 					}
 				}else if(pCondition == '완료'){
-					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
-						+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
-						+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
+					if(joiner.joinerCondition == 'N'){
+						var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#919191'>"
+							+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#919191'>" + joiner.joinerDate + "</span>"
+					}else{
+						var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#009933'>"
+							+ "<a style='color:#009933' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+							+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#009933'>" + joiner.joinerDate + "</span>"
+					}
 				}
 			}else{	//동행 신청을 하지 않은 사용자
-				var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px'>"
-				+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userId + "</a></label>"
-				+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px'>" + joiner.joinerDate + "</span>"
+				if(joiner.joinerCondition == 'N'){
+					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#919191'>"
+					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#919191'>" + joiner.joinerDate + "</span>"
+				}else{
+					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#009933'>"
+						+ "<a style='color:#009933' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+						+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#009933'>" + joiner.joinerDate + "</span>"
+				}
 			}
 			div.html(str);
 			return div;
@@ -89,7 +114,7 @@ function del(partnerId) {
 				var params = $("#addForm").serialize();
 				$.getJSON("insertJoiner", params, function(datas) {
 					var div = JoinerView(datas);
-					$(div).prependTo("#joinerList");
+					$(div).appendTo("#joinerList");
 				});
 			}
 		}); //end btnAdd clcic event
@@ -188,8 +213,8 @@ function del(partnerId) {
 						<h4 class="control-label" style="font-family: 'NanumSquareRoundB'; color:black; display: inline; float:left">&nbsp;${partner.partnerClass}</h4>
 						<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right">
 							<strong>작성자</strong>&nbsp;&nbsp;
-								<c:if test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
-								<c:if test="${sessionScope.login.userId ne partner.userId}"><a style='color:#919191' href='./getYourTravelList?userId=${partner.userId}'>${partner.userName}</a></c:if>
+								<c:if test="${sessionScope.login.userId eq partner.userId}">${partner.userName}(${partner.userGen})</c:if>
+								<c:if test="${sessionScope.login.userId ne partner.userId}"><a style='color:#919191' href='./getYourTravelList?userId=${partner.userId}'>${partner.userName}</a>(${partner.userGen})</c:if>
 							<strong> ｜ 조회수</strong>&nbsp;&nbsp;${partner.partnerHit}
 							<strong> ｜ 작성일</strong>&nbsp;&nbsp;${partner.partnerDate}</h5>
 						<p style="clear:both"/><br/>
@@ -214,7 +239,7 @@ function del(partnerId) {
 									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>경비 : </strong>${partner.partnerPay}</h5>
 								</td>
 								<td style="width:33%">
-									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>인원 : </strong>${partner.partnerPers}명</h5>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>인원 : </strong>${partner.partnerPers}</h5>
 								</td>
 							</tr>
 							<tr>
@@ -237,8 +262,6 @@ function del(partnerId) {
 									<c:if test="${sessionScope.login.userId != partner.userId}">
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="partnerId" value="${partner.partnerId}">
-										<input type="hidden" id="joinerCondition" name="joinerCondition" value="Y">
-										<br />
 										<button type="button" class="btn btn-default" id="btnAdd">신청</button>
 									</c:if>
 								</form>
@@ -254,7 +277,7 @@ function del(partnerId) {
 									<button class="btn btn-default" onclick="del('${partner.partnerId}')">삭제</button>
 								</c:when>
 								<c:otherwise>
-									<button class="btn btn-default" onclick="location.href='./closePartner?partnerId=${partner.partnerId}'">완료하기</button>
+									<button class="btn btn-success" onclick="close('${partner.partnerId}')">완료하기</button>
 									<button class="btn btn-default" onclick="location.href='./updatePartnerForm?partnerId=${partner.partnerId}'">수정</button>
 									<button class="btn btn-default" onclick="del('${partner.partnerId}')">삭제</button>
 								</c:otherwise>

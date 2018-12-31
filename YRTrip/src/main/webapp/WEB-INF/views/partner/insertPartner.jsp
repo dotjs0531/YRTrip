@@ -98,7 +98,6 @@ input[type=submit] {
 										</td>
 										<td colspan="5" style="width:80%">
 											<input type="text" class="form-control" placeholder="글제목" name="partnerTitle" maxlength="50" required>
-											<input type="hidden" name="partnerCondition" value="미완료">
 											<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										</td>
 									</tr>
@@ -119,10 +118,10 @@ input[type=submit] {
 										<td colspan="2" style="width:20%">
 											<select name="partnerPers" class="form-control" required>
 												<option value="" selected disabled="disabled">인원</option>
-												<option value="2">2명</option>
-												<option value="3">3명</option>
-												<option value="4">4명</option>
-												<option value="5">5명</option>
+												<option value="2명">2명</option>
+												<option value="3명">3명</option>
+												<option value="4명">4명</option>
+												<option value="5명">5명</option>
 												<option value="단체">단체</option>
 											</select>
 										</td>

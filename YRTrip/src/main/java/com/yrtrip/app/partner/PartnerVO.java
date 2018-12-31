@@ -20,7 +20,8 @@ public class PartnerVO extends TravelInfoVO {
 	private String partnerCondition; // 현재 상태
 	
 	private String userId; // 작성자ID
-	private String userName; // 작성자 이름
+	private String userName; // 회원 이름
+	private String userGen;	// 회원 성별
 	private int tinfoId; // 여행정보 ID
 	
 	private int joinerCnt;	//동행 신청자수
@@ -113,6 +114,12 @@ public class PartnerVO extends TravelInfoVO {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getUserGen() {
+		return userGen;
+	}
+	public void setUserGen(String userGen) {
+		this.userGen = userGen;
 	}
 	public int getTinfoId() {
 		return tinfoId;

@@ -60,6 +60,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_DATE,    
 			U.USER_ID,    
 			USER_NAME,
+			USER_GEN,
 			P.TINFO_ID,         
 			TINFO_COUNTRY,
 			TINFO_STATE,
@@ -67,8 +68,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
-			TO_CHAR(PARTNER_DATE, 'YYYY-MM-DD') PARTNER_START,    
-			TO_CHAR(PARTNER_DATE, 'YYYY-MM-DD') PARTNER_END,   
+			TO_CHAR(PARTNER_START, 'YYYY-MM-DD') PARTNER_START,    
+			TO_CHAR(PARTNER_END, 'YYYY-MM-DD') PARTNER_END,   
 			PARTNER_CONDITION
 	FROM	PARTNERT P, USERT U, TRAVELINFOT T
 	WHERE	P.USER_ID = U.USER_ID AND P.TINFO_ID = T.TINFO_ID AND PARTNER_ID = #{partnerId}
@@ -81,32 +82,26 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	INSERT INTO PARTNERT (
 			PARTNER_ID,
 			PARTNER_TITLE,    
-			PARTNER_CONTENT,  
-			PARTNER_HIT, 
-			PARTNER_DATE,    
+			PARTNER_CONTENT,   
 			USER_ID,    
 			TINFO_ID,
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
 			PARTNER_START,    
-			PARTNER_END,   
-			PARTNER_CONDITION
+			PARTNER_END
 			)
 	VALUES (
 			#{partnerId},
 			#{partnerTitle},
 			#{partnerContent},
-			0,
-			sysdate,
 			#{userId},
 			#{tinfoId},
 			#{partnerPay},
 			#{partnerClass},
 			#{partnerPers},
 			#{partnerStart},
-			#{partnerEnd},
-			'미완료'
+			#{partnerEnd}
 		)
 </insert>
 <update id="updatePartner" parameterType="partner">
