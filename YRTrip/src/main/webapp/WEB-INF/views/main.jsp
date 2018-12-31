@@ -189,10 +189,9 @@
 				<div class="col-md-4 col-sm-4 col-xs-12">
 					<div class="about_single_item">
 						<div class="about_single_item_content">
-						<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')}" />
-						<c:forEach items="${productPicFile}" var="pic">
+						<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}"/>
+							<c:set var="pic" value="${productPicFile}" />
 							<img src="./images/product/${pic}" alt="item">
-						</c:forEach>
 						<br>
 							<h4><a href="./getProduct?itemId=${product.itemId}">${product.itemName}</a></h4>
 							<h2>${product.itemPrice}원</h2>
@@ -246,15 +245,14 @@
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="row">
-				<!-- foreach itemT에서 들고오기-->
-				<c:forEach items="${travelBoardlist}" var="travelBoard">
+			  <%-- <c:forEach items="${travelBoardlist}" var="travelBoard">
 				<div class="col-md-4 col-sm-4 col-xs-12">
 					<div class="about_single_item">
 						<div class="about_single_item_content">
-						<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')}" />
-						<c:forEach items="${productPicFile}" var="pic">
+						<c:set var="productPicFile" value="${fn:split(travelBoard.itemPic, ',')}" />
+						
 							<img src="./images/product/${pic}" alt="item">
-						</c:forEach>
+						
 						<br>
 							<h4><a href="./getTravelBoardList?travelBoardNo=${travelBoard.travelBoardNo}">${travelBoard.}</a></h4>
 							<h2>${product.itemPrice}원</h2>
@@ -262,8 +260,7 @@
 						</div>
 					</div>
 				</div>
-				 </c:forEach>
-				<!-- foreach 끝 -->
+				 </c:forEach> --%>
 			</div>
 		</div>
 	</section>
@@ -278,25 +275,25 @@
 			<div class="row">
 				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-4">
 					<div class="single-footer">
-						<h2>about us</h2>
-						<p>ABOUT US Lorem ipsum dolor sit amet, consectetuer
-							adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-							laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim
-							veniam, quis nostrud exerci tation ullamcorper suscipit lobortis
-							nisl ut aliquip ex ea commodo consequat.</p>
+					<h2>사이트맵</h2>
+						<ul class="list">
+							<li><a href=""></a></li>
+							<li><a href=""></a></li>
+						</ul>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-4">
 					<div class="single-footer">
-						<h2>More links</h2>
+						<h2>고객센터</h2>
 						<ul class="list">
-							<li><a href="getNoticeList">고객센터</a></li>
+							<li><a href="getNoticeList">공지사항</a></li>
+							<li><a href="getNoticeList">1:1문의</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
 					<div class="single-footer clearfix">
-						<h2>news latters</h2>
+						<h2>여긴뭐하지...</h2>
 						<input type="text" class="form-control"> <input
 							type="submit" class="submt-button" value="submit">
 					</div>

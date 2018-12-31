@@ -124,6 +124,24 @@ $(function(){
 		$("#seller-only").hide();	
 	}
 });
+</script>
+<script>
+function deleteProduct(){	
+		if(confirm("삭제하시겠습니까? \n(복구는 불가합니다)") == true){
+			if('구매불가' != '${product.itemOrderdetail}'){
+				alert("구매중인 구매자가 있습니다.\n해당상품의 구매자목록을 확인하세요");
+				return false;
+			}
+			else{
+				alert("삭제됩니다\n복구는 불가합니다");
+				$("#deleteProduct").attr("href", "deleteProduct?itemId=${product.itemId}");
+				return true;
+			}
+		}
+		else{
+			return false;
+		}
+	}
 
 </script>
 </head>
@@ -184,9 +202,8 @@ $(function(){
 
 								<div class="btn-group pull-right" id="seller-only">
 									<a href="updateProduct?itemId=${product.itemId}"
-										class="btn btn-link">수정하기</a> <a
-										href="deleteProduct?itemId=${product.itemId}"
-										class="btn btn-link btn-share">삭제하기</a>
+										class="btn btn-link">수정하기</a> <a id="deleteProduct"
+										onclick="deleteProduct();" class="btn btn-link btn-share">삭제하기</a>
 								</div>
 							</nav>
 						</div>
@@ -248,7 +265,6 @@ $(function(){
 										<div class="text-muted mb-2">
 											<small>약간의 사용감이 있습니다!</small>
 										</div>
-										<!-- 구매가능하면 text-success 구매불가하면 text-danger -->
 										<label for="quant">수량</label> <input type="number"
 											name="itemEa" min="1" max="${product.itemEa}" id="quant" value=""
 											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">

@@ -21,6 +21,12 @@ public class ProductVO extends LikeVO{
 	private String itemCondition;
 	private int itemLike;
 	
+	//private String sortCol; // 정렬
+
+	private String searchCondition; //
+	private String searchClass;
+	private String searchKeyword; // 검색키워드
+	
 	//선택삭제
 	private String[] itemNoList;
 	
@@ -28,6 +34,24 @@ public class ProductVO extends LikeVO{
 	private int first;
 	private int last; 
 	
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSearchClass() {
+		return searchClass;
+	}
+	public void setSearchClass(String searchClass) {
+		this.searchClass = searchClass;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	public int getItemId() {
 		return itemId;
 	}

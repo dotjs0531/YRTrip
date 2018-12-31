@@ -56,8 +56,7 @@
 		if("${sessionScope.login.userId}" == ''){
 			$("#insertbtn").hide();
 		}
-	});
-		
+	});		
 </script>
 
 <style>
@@ -87,8 +86,8 @@
 						</div>
 						<ul class="price-list">
 							<li><a href="#" style="color: black">전체보기</a></li>
-							<li><a href="#" style="color: black">의류</a></li>
-							<li><a href="#" style="color: black">티켓/쿠폰</a></li>
+							<li><a href="" style="color: black">의류</a></li>
+							<li><a href="" style="color: black">티켓/쿠폰</a></li>
 							<li><a href="#" style="color: black">전자기기</a></li>
 							<li><a href="#" style="color: black">여행도서</a></li>
 							<li><a href="#" style="color: black">USIM</a></li>
@@ -106,7 +105,35 @@
 
 				<!-- 여기서 부터 가운데 창! -->
 				<div class="col-8">
-
+					<form name="frm" class="form-inline">
+                			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
+								
+								<!-- 검색 내용 -->
+								<div style="padding-bottom:5px">
+								<label class="col-sm-2 control-label">검색어</label>
+								<select name="searchClass" class="form-control">
+									<option value="전체">전체</option>
+									<option value="의류">의류</option>
+									<option value="티켓">티켓</option>
+									<option value="전자기기">전자기기</option>
+									<option value="여행도서">여행도서</option>
+									<option value="USIM">USIM</option>
+									<option value="기타">기타</option>
+								</select>
+								<input type="text" name="searchClass" class="form-control" placeholder="검색할 내용을 입력하세요">
+								</div>
+								<!-- 구매가능여부 -->
+								<div>
+								<label class="col-sm-2 control-label">구매가능여부</label>
+								<input type="radio" name="qnaAnswer" id="complete" value="" class="form-control vertical" check="">모두보기 
+								<input type="radio" name="qnaAnswer" id="incomplete" value="구매가능" class="form-control">구매가능
+								<input type="radio" name="qnaAnswer" id="incomplete" value="구매불가" class="form-control">구매불가
+								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+								</div>
+								
+								<input type="hidden" name="page">
+         					</div>
+						</form>
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 						<!-- Indicators -->
 						<ol class="carousel-indicators">
@@ -151,9 +178,10 @@
 								
 								<div class="col-4">
 									<div class="thumbnail">
+									<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}"/>
+										<c:set var="pic" value="${productPicFile}" />
 										<img
-											src="http://tech.firstpost.com/wp-content/uploads/2014/09/Apple_iPhone6_Reuters.jpg"
-											alt="" class="img-fluid">
+											src="./images/product/${pic}" alt="" class="img-fluid">
 										<div class="caption">
 
 											<h4 class="pull-right">￦${product.itemPrice}</h4>

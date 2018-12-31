@@ -24,6 +24,23 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				ITEM_CONDITION,
 				ITEM_LIKE
 		FROM ITEMT
+		<where>
+		<if test="searchClass != null and searchClass == 'itemCategory'">
+			AND ITEM_CATEGORY LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition != null and searchCondition == 'itemName'">
+			AND ITEM_NAME LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'itemPrice'">
+		 	AND ITEM_PRICE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition != null and searchCondition == 'itemOrderdetail'">
+		 	AND ITEM_ORDERDETAIL LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition != null and searchCondition == 'itemContent'">
+		 	AND ITEM_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		</if>
+	</where>
 		ORDER BY ITEM_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 	</select>

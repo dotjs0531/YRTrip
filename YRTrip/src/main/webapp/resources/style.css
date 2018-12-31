@@ -26,14 +26,14 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; 
 }
-.text-truncate{
+/* .text-truncate{
 	
 	width: 250px;
 	margin: 0 0 1em 0;
 	white-space: nowrap;
 	overflow: hidden;
   	text-overflow: ellipsis; 
-}	
+}	 */
 html{
 	scroll-behavior : smooth;
 }
