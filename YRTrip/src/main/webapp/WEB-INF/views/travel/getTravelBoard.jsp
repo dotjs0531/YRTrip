@@ -528,7 +528,9 @@ function selectTravelWith(ele){
 								
 								<div class="form-group" style="float:right;"><br>
 										<label for="update" class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md" onClick="location.href='${pageContext.request.contextPath}/updateTravelBoardform?travelNo=${travelBoard.travelNo}'" style="background-color:#f9bf3b; border:#f9bf3b;" value="수정">&nbsp;
+										<input type="submit" name="submit" class="btn btn-info btn-md" 
+												onClick="location.href='./updateTravelBoardform?travelNo=${travelBoard.travelNo}'" 
+												style="background-color:#f9bf3b; border:#f9bf3b;" value="수정">&nbsp;
 								<label for="delete" class="text-info"></label>
 										<input type="submit" name="submit" class="btn btn-info btn-md" onClick="del('${travelBoard.travelNo}')" style="background-color:#f9bf3b; border:#f9bf3b;" value="삭제">
 							</div>

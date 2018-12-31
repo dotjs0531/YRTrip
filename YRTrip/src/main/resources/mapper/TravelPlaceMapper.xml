@@ -118,11 +118,10 @@
 	UPDATE TRAVEL_PLACET 
 	SET PLACE_NAME = #{placeName},
 		PLACE_ADDRESS = #{placeAddress},
-		PLACE_MAPID = #{placeMapId},
 		PLACE_CONTENT = #{placeContent},
 		PLACE_PIC = #{placePic},
 		PLACE_TITLE = #{placeTitle},
-		PLACE_VISITDATE = TO_DATE(#{placeVisitDate}, 'yyyy-mm-dd hh24:mi:ss'),
+		PLACE_VISITDATE = TO_DATE(#{placeVisitDate}, 'yyyy-mm-dd hh24:mi:ss')
 	WHERE PLACE_NO = #{placeNo}
 </update>
 

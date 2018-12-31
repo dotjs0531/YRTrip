@@ -3,10 +3,12 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 
-<select id="getTinfoChart" resultType="admin" parameterType="admin">
-	SELECT TINFO_ID, COUNT(TINFO_ID) AS COUNTTINFO
-	FROM TRAVELBOARDT
-	GROUP BY TINFO_ID
-	ORDER BY COUNTTINFO DESC
+<select id="getTinfoChart" resultType="map" parameterType="map">
+select to_char(i.tinfo_city) "ranktinfoid", COUNT(b.tinfo_id) "counttinfoid"
+from travelinfot i, travelboardt b
+where i.tinfo_id = b.tinfo_id
+and to_char(b.TRAVEL_DATE, 'yyyy/mm') = #{day}
+GROUP BY i.tinfo_city
+ORDER BY 2 DESC
 </select>
 </mapper>

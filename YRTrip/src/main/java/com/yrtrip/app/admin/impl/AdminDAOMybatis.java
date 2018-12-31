@@ -1,12 +1,11 @@
 package com.yrtrip.app.admin.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.yrtrip.app.admin.AdminVO;
 
 @Repository
 public class AdminDAOMybatis {
@@ -15,8 +14,8 @@ public class AdminDAOMybatis {
 	private SqlSessionTemplate sqlSession;
 	
 	
-	public List<AdminVO> getTinfoChart(AdminVO vo) {
-		return sqlSession.selectList("admin.getTinfoChart", vo);
+	public List<Map> getTinfoChart(String day) {
+		return sqlSession.selectList("admin.getTinfoChart", day);
 	}
 	
 }

@@ -50,7 +50,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./form">
+            <a class="nav-link" href="./manageUser">
               <i class="menu-icon mdi mdi-backup-restore"></i>
               <span class="menu-title">회원관리</span>
             </a>
@@ -64,22 +64,22 @@
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/buttons.html">첫번째 메뉴</a>
+                  <a class="nav-link" href="./manageProduct">상품관리</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/ui-features/typography.html">두번째 메뉴</a>
+                  <a class="nav-link" href="./manageOrder">주문내역관리</a>
                 </li>
               </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./table">
+            <a class="nav-link" href="./managePartner">
               <i class="menu-icon mdi mdi-sticker"></i>
               <span class="menu-title">동행관리</span>
             </a>
           </li>
            <li class="nav-item">
-            <a class="nav-link" href="pages/icons/font-awesome.html">
+            <a class="nav-link" href="./manageTravel">
               <i class="menu-icon mdi mdi-table"></i>
               <span class="menu-title">여행관리</span>
             </a>
@@ -94,25 +94,16 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
               <i class="menu-icon mdi mdi-restart"></i>
-              <span class="menu-title">음...뭐넣을까....</span>
+              <span class="menu-title">고객센터관리</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/blank-page.html"> Blank Page </a>
+                  <a class="nav-link" href="./manageNotice">공지사항 관리</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/login.html"> Login </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/register.html"> Register </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/error-404.html"> 404 </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="pages/samples/error-500.html"> 500 </a>
+                  <a class="nav-link" href="./manageQna">1:1문의글 관리</a>
                 </li>
               </ul>
             </div>

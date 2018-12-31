@@ -209,6 +209,11 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#insertTravelPlace').modal(true);
 		});	 
 	   
+	   /* 장소 수정 modal */
+	   $("#travelPlaceList").on("click", ".btnUpd", function(){
+	    	$('div#updateTravelPlace').modal(true);
+		});	
+	   
 	   /* 사진 업로드 */
 	   $("#fileBtn").click(function(){
 		    $('.file-input').click();
@@ -324,7 +329,7 @@ function loadTravelPlaceList(){
 				+"<div class=\"panel-heading\">"
 				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
  				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
- 				+"<button type=\"button\" class=\"btnUpd\" style=\"float:right;\">수정</button>"
+ 				+"<button type=\"button\" class=\"btnUpd\" style=\"float:right;\">수정</button>" 
 				+"<br>"
 				
 				+"</div>"
@@ -364,6 +369,17 @@ function loadTravelPlaceList(){
 			});
 		}
 	});
+	//장소 수정
+ 	$("#updateTravelPlaceBtn").on("click", ".btnUpd", function(){
+ 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
+ 		var params = $("#updateTravelPlaceAjaxData").serialize();
+	 	$.getJSON("updateTravelPlaceAjax", params, function(datas){
+			var div = makeTravelPlaceView(datas);
+			$(div).prependTo("#travelPlaceList");
+			jQuery.noConflict();
+			$('#updateTravelPlace').modal("hide");
+		}); 
+	}); 
 });	
 
 </script>
@@ -400,10 +416,10 @@ function loadTravelPlaceList(){
 						<div class="container dad">
 							<div class="son-1">
 							<c:if test="${travelBoard.travelPic != null}">
-							<img src="resources/media/${travelPic}" class="img-responsive">
+							<img src="./images/travel/${travelPic}" class="img-responsive">
 							</c:if>
 							<c:if test="${travelBoard.travelPic == null}">
-							<img src="resources/media/noimage.jpg" class="img-responsive">
+							<img src="./images/travel/noimage.jpg" class="img-responsive">
 							</c:if>
 							</div>
 							<span class="top-span">T${travelBoard.travelNo}</span>
@@ -413,6 +429,7 @@ function loadTravelPlaceList(){
 							<input type="file" name="travelBoardFile" class="file-input" size="chars">
 							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
 								<i class="fa fa-camera"> 메인사진 수정</i>
+
 							</button>
 							</div>
 							<p class="son-text">
@@ -696,27 +713,27 @@ function loadTravelPlaceList(){
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" placeholder="장소에 대한 제목을 입력하세요." value="${travelPlace.placeName}">
+													<input type="text" name="placeName" class="form-control" value="${travelPlace.placeName}">
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" placeholder="장소에 대한 제목을 입력하세요." value="${travelPlace.placeAddress}">
+													<input type="text" name="placeAddress" class="form-control" value="${travelPlace.placeAddress}">
 												</div>
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력하세요." value="${travelPlace.placeTitle}">
+													<input type="text" name="placeTitle" class="form-control" value="${travelPlace.placeTitle}">
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요." value="${travelPlace.placePic}">
+													<input type="text" name="placePic" class="form-control" value="${travelPlace.placePic}">
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요." value="${travelPlace.placeContent}">
+													<input type="text" name="placeContent" class="form-control" value="${travelPlace.placeContent}">
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요." value="${travelPlace.placeVisitDate}">
+													<input type="text" name="placeVisitDate" class="form-control datePicker" value="${travelPlace.placeVisitDate}">
 												</div>
 												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
