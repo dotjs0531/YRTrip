@@ -39,15 +39,6 @@ $(function(){
 	var post_origin = $("#orderPost").val();
 	var address_origin = $("#orderAddress").val();
 	var item_total = $("div#orderPriceSingle").text() * $("div#orderEa").text();
-	/* 넘길정보들... */
-	var orderEa_ = $("div#orderEa").text();
-	console.log(orderEa_);
-	var buyerId = 'user2';
-	var itemId = '${cart.itemId}';
-	/* var orderPost = 
-	var orderAddress=  */
-	var cartId='${cart.cartId}';
-	var orderMethod=$('input[name="orderMethod"]:checked').val();
 	
 	$("#different-address").click(function(){
 		$("#orderAddress").val('');
@@ -58,9 +49,23 @@ $(function(){
 		$("#orderPost").val(post_origin);
 	});
 
+	var itemId = $("#itemId").val();
+	console.log(itemId);
 	$("#itemTotal").html(item_total);
 	
 		$("#pay").click(function(){
+			var orderEa = $("div#orderEa").text();
+			var buyerId = '${sessionScope.login.userId}';
+			var itemId = $("#itemId").val();
+			var orderPost = $("#orderPost").val();
+			var orderAddress = $("#orderAddress").val();
+			var cartId = $("#cartId").val();
+			var orderMethod=$('input[name="orderMethod"]:checked').val();
+			
+			console.log(itemId);
+			console.log(buyerId);
+			console.log(orderPost);
+			console.log(orderAddress);
 			IMP.request_pay({
 			    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
 			    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
@@ -70,10 +75,10 @@ $(function(){
 			    buyer_email : '${userPur.userEmail}',
 			    buyer_name :  '${userPur.userName}',
 			    buyer_tel : '${userPur.userPhone}',//누락되면 이니시스 결제창에서 오류
-			    buyer_addr : '${userPur.userAddress}',
-			    buyer_postcode : '${userPur.userPost}'
+			    buyer_addr : orderAddress,
+			    buyer_postcode : orderPost
 			}, function(rsp) {
-				console.log('호출실행');
+				console.log(rsp);
 			    if ( rsp.success ) {
 			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 			    	jQuery.ajax({
@@ -81,8 +86,14 @@ $(function(){
 			    		type: 'POST',
 			    		dataType: 'json',
 			    		data: {
-				    		imp_uid : rsp.imp_uid
-				    		
+			    			orderEa : orderEa,
+			    			buyerId : buyerId,
+			    			itemId : itemId,
+			    			orderPost : rsp.buyer_postcode, 
+			    			orderAddress : rsp.buyer_addr,
+			    			cartId : cartId,
+			    			orderMethod :orderMethod 
+			   	    		 //imp_uid : rsp.imp_uid 
 				    		//기타 필요한 데이터가 있으면 추가 전달
 			    		}
 			    	}).done(function(data) {
@@ -94,18 +105,20 @@ $(function(){
 			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 			    			msg += '\n결제 금액 : ' + rsp.paid_amount;
 			    			msg += '카드 승인번호 : ' + rsp.apply_num;
-			    			
-			    			alert(msg);
+			    			window.location = "./insertOrder";
 			    		} else {
 			    			alret("에러");//[3] 아직 제대로 결제가 되지 않았습니다.
 			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    			window.location="./getCartList";
 			    		}
 			    	});
+			    	window.location = "./getMyOrderList?buyerId=" + buyerId;
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
 			        
 			        alert(msg);
+			        window.location = "./getCartList";
 			    }
 			});
 		});
@@ -212,7 +225,7 @@ $(function(){
 						<input
 							type="text" class="form-control" id="orderAddress"
 							name="orderAddress" value="${userPur.userAddress}"
-							placeholder="시/군/구/동/읍/면/리 + 상세주소" required="">
+							placeholder="시/군/구/동/읍/면/리 + 상세주소" required>
 							<div class="invalid-feedback">배달될 주소를 입력해주세요</div>
 							<!-- 상세주소도 써달라고 하기! -->
 					</div>
@@ -293,7 +306,7 @@ $(function(){
 								class="custom-control-label" for="paypal">직거래</label>
 						</div>
 					</div>
-				<input type="text" value="${cart.itemId}" name="itemId">
+				<input type="text" value="${cart.itemId}" id="itemId" name="itemId">
 				<input type="text" value="${cart.cartId}" name="cartId">
 				<input type="text" value="${cart.itemEa}" name="orderEa">
 				<%-- <input type="text" value="${cart.itemPrice}" name="itemPrice"> --%>

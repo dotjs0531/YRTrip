@@ -236,8 +236,8 @@ $(function(){
 										<h4>${sessionScope.login.userId}만의상품을공유해보입시더</h4>
 									</div>
 									<div class="pull-right">
-										<button onclick="insert_reset();" class="btn btn-link" type="reset" >초기화</button> <input
-											type="submit" class="btn" value="등록">
+										<button onclick="insert_reset();" class="btn btn-link" type="reset" >초기화
+										</button> <button type="submit" class="btn">등록</button>
 									</div>
 								</nav>
 							</div>
@@ -295,7 +295,7 @@ $(function(){
 									</div>
 									<div class="col-12 col-md-8">
 <!-- 수량 : 0 막아놓기 -->
-										<input type="number" name="quantity" min="1" name="itemEa"
+										<input type="number" min="1" name="itemEa"
 											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
 									</div>
 								</div>

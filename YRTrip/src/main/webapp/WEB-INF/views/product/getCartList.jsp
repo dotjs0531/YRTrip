@@ -33,6 +33,14 @@
 }
 </style>
 <script>
+$(function(){
+	   var money =${cart.itemPrice};
+	   var money2 = money.toLocaleString();
+	   
+	   $("#itemPrice").text('￦'+money2);   
+	});
+</script>
+<script>
 	/* <input class="form-control col-md-1" type="text" value="${cart.itemEa}">
 	 <button type="button" class="btn-link" onclick="updateCart();">수정</button> */
 	$(function() {
@@ -83,7 +91,7 @@
 									<small class="text-muted">${cart.itemCondition}</small> <br>
 									<small class="text-muted cartId">${cart.itemId}</small> <br>
 									<small class="text-muted">${item.itemCondition}</small> <br>
-								</div> <span class="text-muted">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
+								</div> <span class="text-muted" id="itemPrice">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<!-- <form action="./updateCart"> --> <span id="original_itemEa">${cart.itemEa}</span>
 								<button type="button" id="go_update">수정</button> <!-- </form> -->
 								<div>

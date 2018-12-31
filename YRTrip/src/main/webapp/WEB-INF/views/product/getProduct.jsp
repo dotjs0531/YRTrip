@@ -194,10 +194,8 @@ function deleteProduct(){
 									</c:otherwise>
 								</c:choose>
 								<ol class="breadcrumb">
-									<li class="breadcrumb-item"><a href="#">유심</a></li>
-									<li class="breadcrumb-item"><a href="#">유심</a></li>
-									<li class="breadcrumb-item"><a href="#">유시이임</a></li>
-									<li class="breadcrumb-item active" aria-current="page">현재유심페이지!</li>
+									<li class="breadcrumb-item">${product.itemCategory}</li>
+									<li class="breadcrumb-item active" aria-current="page">${product.itemName}</li>
 								</ol>
 
 								<div class="btn-group pull-right" id="seller-only">
@@ -237,11 +235,12 @@ function deleteProduct(){
 											
 											<!--왼쪽 / 오른쪽 화살표-->
 											<a class="left carousel-control" href="#myCarousel"
-												data-slide="prev"> <span
+												data-slide="prev" style="opacity: 0;"> <span
 												class="glyphicon glyphicon-chevron-left"></span> <span
 												class="sr-only">Previous</span>
-											</a> <a class="right carousel-control" href="#myCarousel"
-												data-slide="next"> <span
+											</a> 
+											<a class="right carousel-control" href="#myCarousel"
+												data-slide="next" style="opacity: 0;"> <span
 												class="glyphicon glyphicon-chevron-right"></span> <span
 												class="sr-only">Next</span>
 											</a>

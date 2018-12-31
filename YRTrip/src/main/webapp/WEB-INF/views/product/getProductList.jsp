@@ -23,10 +23,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="resources/css/product.css" rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	function go_page(page) {
 		document.frm.page.value = page;
@@ -58,7 +55,14 @@
 		}
 	});		
 </script>
+<script>
+/*가격 세단위 부터 ,*/
+var money =${product.itemPrice};
+console.log(money);
+var money2 = money.toLocaleString();
 
+$("#itemPrice").text('￦'+money2);
+</script>
 <style>
 #login-column {
    width:100%;
@@ -85,13 +89,13 @@
 							<h2 style="color: black">중고거래</h2>
 						</div>
 						<ul class="price-list">
-							<li><a href="#" style="color: black">전체보기</a></li>
-							<li><a href="" style="color: black">의류</a></li>
-							<li><a href="" style="color: black">티켓/쿠폰</a></li>
-							<li><a href="#" style="color: black">전자기기</a></li>
-							<li><a href="#" style="color: black">여행도서</a></li>
-							<li><a href="#" style="color: black">USIM</a></li>
-							<li><a href="#" style="color: black">기타</a></li>
+							<li><a href="getProductList" style="color: black">전체보기</a></li>
+							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=의류" style="color: black">의류</a></li>
+							<li><a href="getProductList?searchClass=itemCategorys&searchKeyword=티켓" style="color: black">티켓/쿠폰</a></li>
+							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=전자기기" style="color: black">전자기기</a></li>
+							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=여행도서" style="color: black">여행도서</a></li>
+							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=USIM" style="color: black">USIM</a></li>
+							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=기타" style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton">
 							<a href="#">상품요청</a>
@@ -105,29 +109,26 @@
 
 				<!-- 여기서 부터 가운데 창! -->
 				<div class="col-8">
-					<form name="frm" class="form-inline">
+					<form name="./getProductList" class="form-inline">
                 			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 								
-								<!-- 검색 내용 -->
+								<!-- 제품이름 & 제품내용 -->
 								<div style="padding-bottom:5px">
 								<label class="col-sm-2 control-label">검색어</label>
-								<select name="searchClass" class="form-control">
-									<option value="전체">전체</option>
-									<option value="의류">의류</option>
-									<option value="티켓">티켓</option>
-									<option value="전자기기">전자기기</option>
-									<option value="여행도서">여행도서</option>
-									<option value="USIM">USIM</option>
-									<option value="기타">기타</option>
+								<select name="searchCondition" class="form-control" id="">
+									<option value="itemName">제품명</option>
+									<option value="itemContent">내용</option>									
 								</select>
-								<input type="text" name="searchClass" class="form-control" placeholder="검색할 내용을 입력하세요">
+								<input type="text" name="searchKeyword" class="form-control" placeholder="검색할 내용을 입력하세요">
 								</div>
+								<!-- 가격 -->
+								<!--  -->
 								<!-- 구매가능여부 -->
 								<div>
 								<label class="col-sm-2 control-label">구매가능여부</label>
-								<input type="radio" name="qnaAnswer" id="complete" value="" class="form-control vertical" check="">모두보기 
-								<input type="radio" name="qnaAnswer" id="incomplete" value="구매가능" class="form-control">구매가능
-								<input type="radio" name="qnaAnswer" id="incomplete" value="구매불가" class="form-control">구매불가
+								<input type="radio" name="itemOrderdetail" id="" value="" class="form-control vertical" checked>모두보기 
+								<input type="radio" name="itemOrderdetail" id="" value="구매가능" class="form-control">구매가능
+								<input type="radio" name="itemOrderdetail" id="" value="구매불가" class="form-control">구매불가
 								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 								</div>
 								
@@ -184,7 +185,7 @@
 											src="./images/product/${pic}" alt="" class="img-fluid">
 										<div class="caption">
 
-											<h4 class="pull-right">￦${product.itemPrice}</h4>
+											<h4 class="pull-right" id="itemPrice"></h4>
 											<h4 class="text-truncate">
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
@@ -318,10 +319,8 @@
 		<!-- /.container -->
 	</section>
 	<!-- Bootstrap core JavaScript -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>
