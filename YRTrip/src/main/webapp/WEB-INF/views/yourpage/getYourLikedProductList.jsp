@@ -115,12 +115,11 @@ a:hover { color:white }
             			<p style="clear:both"/><br/>
 					</div>
 					
-                	<div>
-						<div class="container card" style="width:100%; min-height:420px">
+                	<div style="min-height:420px">
+						<div class="container card" style="width:100%;">
 							<!-- Normal Demo-->
 							<c:forEach items="${YourLikedProductList}" var="product">
 								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">&nbsp;&nbsp;No. ${product.itemId}</div>
 									<!-- Post-->
 									<div class="post-module">
 										<!-- Thumbnail-->
@@ -149,7 +148,7 @@ a:hover { color:white }
 						</div>
 						
 	                    <!-- 페이지 번호 -->
-	                    <c:if test="${not empty getYourLikedProductList}">
+	                    <c:if test="${not empty YourLikedProductList}">
 	                    <div>
 							<my:paging paging="${paging}" jsFunc="go_page" />
 	                    </div>

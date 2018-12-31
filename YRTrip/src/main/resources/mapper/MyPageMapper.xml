@@ -96,7 +96,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 <select id="getMyLikedCount" parameterType="like" resultType="int">
 	SELECT COUNT(*)
 	  FROM LIKET
-	 WHERE USER_ID = #{userId}
+	 WHERE USER_ID = #{userId} AND LIKE_CATEGORY = #{likeCategory}
 </select>
 <select id="getMyLikedTravelList" parameterType="travelBoard" resultType="travelBoard">
 SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 

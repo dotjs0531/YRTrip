@@ -221,10 +221,10 @@ function del() {
                 				<tr>
 	                				<td style="text-align:center; width:33%"><h2>
 	                					<a href="./getYourLikedTravelList?userId=${user.userId}"
-	                					   style="color:black; font-family: 'NanumSquareRoundEB'">여행정보</a></h2></td>
+	                					   style="color:#666666; font-family: 'NanumSquareRoundB'">여행정보</a></h2></td>
 	                				<td style="text-align:center; width:33%"><h2>
 	                					<a href="./getYourLikedPlaceList?userId=${user.userId}"
-	                					   style="color:#666666; font-family: 'NanumSquareRoundB'">여 행 지</a></h2></td>
+	                					   style="color:black; font-family: 'NanumSquareRoundEB'">여 행 지</a></h2></td>
 	                				<td style="text-align:center; width:33%"><h2>
 	                					<a href="./getYourLikedProductList?userId=${user.userId}"
 	                					   style="color:#666666; font-family: 'NanumSquareRoundB'">상&nbsp;&nbsp;&nbsp;&nbsp;품</a></h2></td>
@@ -233,25 +233,27 @@ function del() {
 	            		</div>
 	            		<p style="clear:both"/><br/>
 
-						<c:forEach items="${YourLikedPlaceList}" var="place">
-							<div class="wrap">
-								<div class="tile">
-									<%-- <c:if test="${place.placePic ne null}">
-										<img id="travelPic" src="./images/travel/${place.placePic}" />
-									</c:if>
-									<c:if test="${place.placePic eq null}"> --%>
-										<img src="./images/travel/placenoimage.jpg" class="img-responsive">
-									<%-- </c:if> --%>
-									<div class="text">
-										<h2 class="animate-text">
-											<a href="getTravelPlace?PlaceNo=${place.placeNo}" style="text-decoration: none; color: #34495E;">${place.placeName}</a>
-										</h2>
-										<p class="animate-text">${place.placeName}</p>
-										<h3 class="animate-text">${place.userId}</h3>
+						<div style="min-height:420px">
+							<c:forEach items="${YourLikedPlaceList}" var="place">
+								<div class="wrap">
+									<div class="tile">
+										<%-- <c:if test="${place.placePic ne null}">
+											<img id="travelPic" src="./images/travel/${place.placePic}" />
+										</c:if>
+										<c:if test="${place.placePic eq null}"> --%>
+											<img src="./images/travel/placenoimage.jpg" class="img-responsive">
+										<%-- </c:if> --%>
+										<div class="text">
+											<h2 class="animate-text">
+												<a href="getTravelPlace?PlaceNo=${place.placeNo}" style="text-decoration: none; color: #34495E;">${place.placeName}</a>
+											</h2>
+											<p class="animate-text">${place.placeName}</p>
+											<h3 class="animate-text">${place.userId}</h3>
+										</div>
 									</div>
 								</div>
-							</div>
-						</c:forEach>
+							</c:forEach>
+						</div>
 
 						<!-- 페이지 번호 -->
 						<c:if test="${not empty YourLikedPlaceList}">

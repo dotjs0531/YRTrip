@@ -202,11 +202,11 @@ function del() {
             			<p style="clear:both"/><br/>
 					</div>
 					
-                	<div>
+                	<div style="min-height:420px;">
 	                <!-- 선택 삭제 -->
 	                <form action="deleteMyTravelList">
 		   				<c:forEach items="${MyTravelList}" var="travel" varStatus="status">
-						<div style="min-height:420px; display: table-cell; vertical-align:middle; width:230px; padding:10px">
+						<div style="display: table-cell; vertical-align:middle; width:230px; padding:10px">
 							
 							<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
 							<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
@@ -249,6 +249,7 @@ function del() {
 							<p style="clear:both"/>
 						</c:if>
 					</form>
+					</div>
 					
                     <!-- 페이지 번호 -->
                     <c:if test="${not empty MyTravelList}">
@@ -257,7 +258,6 @@ function del() {
                     </div>
                     </c:if>
                     
-					</div>
                 </div>
             </div>
         </div>

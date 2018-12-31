@@ -157,7 +157,6 @@ function del() {
 							<my:paging paging="${paging}" jsFunc="go_page" />
 	                    </div>
 	                    </c:if>
-	                    
                     </div>
                 </div>
             </div>
