@@ -594,7 +594,7 @@ function selectTravelWith(ele){
 							</div>
 							</div>
 										<button class="btn btn-sm btn-warning pull-right" type="submit">
-											<i class="fa fa-pencil fa-fw"></i>등록하기
+											<i class="fas fa-pencil-alt fa-fw"></i>등록하기
 										</button>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
