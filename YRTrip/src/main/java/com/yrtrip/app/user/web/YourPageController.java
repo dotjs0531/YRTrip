@@ -30,7 +30,7 @@ public class YourPageController {
 			paging.setPage(1);
 		}
 
-		paging.setPageUnit(4);
+		paging.setPageUnit(9);
 		
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
@@ -81,7 +81,7 @@ public class YourPageController {
 			paging.setPage(1);
 		}
 
-		paging.setPageUnit(4);
+		paging.setPageUnit(9);
 		
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());
@@ -105,7 +105,7 @@ public class YourPageController {
 			paging.setPage(1);
 		}
 
-		paging.setPageUnit(4);
+		paging.setPageUnit(9);
 		
 		vo.setFirst(paging.getFirst());
 		vo.setLast(paging.getLast());

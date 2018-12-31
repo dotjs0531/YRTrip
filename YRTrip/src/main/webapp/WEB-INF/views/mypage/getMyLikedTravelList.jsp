@@ -118,7 +118,6 @@ function del() {
 						<div class="container card" style="width:100%; min-height:420px;">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyLikedTravelList}" var="travel" varStatus="status">
-							
 								
 								<div class="content-box" style="width:29%; margin-top:10px">
 									<c:if test="${travel.travelPic != null}">
@@ -141,7 +140,7 @@ function del() {
 										</span>
 									</div>
 								</div>
-							<c:if test="${status.count%3 eq 0}" ><br/></c:if>
+								<c:if test="${status.count%3 eq 0}" ><br/></c:if>
 								
 							</c:forEach>
 						</div>

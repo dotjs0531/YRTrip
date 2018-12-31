@@ -197,7 +197,7 @@ $(function() {
 			$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 			$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 			
-			if(orderDelivery == '배송중'){
+			if(orderDelivery == '배송준비중'){
 				$("#cancleOrder").show();
 			}
 		})

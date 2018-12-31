@@ -8,6 +8,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 여행정보 -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="resources/vender/css/Travel.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
+
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
   
 <!-- 별점 등록부분 -->
@@ -22,6 +29,9 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
 
 <style class="cp-pen-styles">
+.modal-backdrop {
+	z-index: -1;
+}
 a:hover { color:white }
 .nav>li>a:focus,
 .nav>li>a:hover{
@@ -113,7 +123,7 @@ a:hover { color:white }
 					</div>
 					
                 	<div>
-						<div class="container card" style="width:100%; min-height:420px">
+						<%-- <div class="container card" style="width:100%; min-height:420px">
 							<!-- Normal Demo-->
 							<c:forEach items="${YourTravelList}" var="travel">
 								<div class="column" style="padding-bottom:20px;">
@@ -139,7 +149,40 @@ a:hover { color:white }
 									</div>
 								</div>
 							</c:forEach>
+						</div> --%>
+						
+						<c:forEach items="${YourTravelList}" var="travel" varStatus="status">
+						<div style="min-height:420px; display: table-cell; vertical-align:middle; width:230px; padding:10px;">
+							
+							<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
+							<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
+							&nbsp;&nbsp;No. ${travel.travelNo}
+							</div>
+							
+							<div class="content-box" style="width:100%; margin-top:10px">
+								<c:if test="${travel.travelPic != null}">
+									<img src="./images/travel/${travel.travelPic}" class="img-responsive">
+								</c:if>
+								<c:if test="${travel.travelPic == null}">
+									<img src="./images/travel/noimage.jpg" class="img-responsive">
+								</c:if>
+								
+								<div class="content-title">
+									<div class="text-center">
+										<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+									</div>
+								</div>
+								<div class="content-footer">
+									<span class="user-info">${travel.travelDate}</span>
+									<span class="pull-right">
+										<a href="#" data-placement="right" title="Like">
+										<i class="fa fa-heart"></i> ${travel.travelLike}</a>
+									</span>
+								</div>
+							</div>
 						</div>
+						<c:if test="${status.count%3 eq 0}" ><br/></c:if>
+						</c:forEach><br/>
 						
 	                    <!-- 페이지 번호 -->
 	                    <c:if test="${not empty YourTravelList}">
