@@ -8,6 +8,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 여행정보 -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="resources/vender/css/Travel.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
+
+
+
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 <script src='//static.codepen.io/assets/editor/live/console_runner-1df7d3399bdc1f40995a35209755dcfd8c7547da127f6469fd81e5fba982f6af.js'></script>
@@ -201,7 +210,7 @@ function del() {
                 	<div>
                 	
                 	<!-- 선택 삭제 -->
-                	<form action="deleteMyTravelList">
+                	<%-- <form action="deleteMyTravelList">
 						<div class="container card" style="width:100%; min-height:420px">
 							<!-- Normal Demo-->
 							<c:forEach items="${MyTravelList}" var="travel">
@@ -244,7 +253,58 @@ function del() {
 						<button class="btn btn-default" style="float:right;">삭제</button>
 						<p style="clear:both"/>
 					</c:if>
-					</form>
+					</form> --%>
+					
+				
+                <!-- 선택 삭제 -->
+                <form action="deleteMyTravelList" style="width:28%">
+					<div style="min-height:420px; width:100%">
+	   				<c:forEach items="${MyTravelList}" var="travel">
+						<div class="column" style="padding-bottom:20px; width:100%">
+							<div class="demo-title">
+							<div class="checkboxes">
+								<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
+								<label for="${travel.travelNo}" class="check">
+									<svg width="18px" height="18px" viewBox="0 0 18 18">
+										<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+										<polyline points="1 9 7 14 15 4"></polyline>
+									</svg>
+								</label>&nbsp;&nbsp;No. ${travel.travelNo}
+							</div>
+							</div>
+						<div class="content-box" style="width:100%">
+							
+								<c:if test="${travel.travelPic != null}">
+								<img src="./images/travel/${travel.travelPic}" class="img-responsive">
+								</c:if>
+								<c:if test="${travel.travelPic == null}">
+								<img src="./images/travel/noimage.jpg" class="img-responsive">
+								</c:if>
+							<div class="content-title">
+								<div class="text-center">
+									<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+								</div>
+							</div>
+							<div class="content-footer">
+								<span class="user-info">${travel.travelDate}</span>
+								<span class="pull-right">
+									<a href="#" data-placement="right" title="Like">
+									<i class="fa fa-heart"></i> ${travel.travelLike}</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					</c:forEach>
+					</div>
+					
+					<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
+					
+            		<c:if test="${not empty MyTravelList}">
+						<button class="btn btn-default" style="float:right;">삭제</button>
+						<p style="clear:both"/>
+					</c:if>
+				</form>
+					
 					
                     <!-- 페이지 번호 -->
                     <c:if test="${not empty MyTravelList}">
@@ -259,6 +319,12 @@ function del() {
         </div>
     </section>
     <!--   end of about us area-->
+<!-- js -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+
+
+
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="resources/js/mypage.js"></script>
 </body>
