@@ -16,15 +16,37 @@
 ******************************************
 ******************************************
 */
+.module {
+	width: 250px;
+	margin: 0 0 1em 0;  
+	overflow: hidden;
+}
+.line-clamp {
+   display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+}
+.text-truncate{
+	
+	width: 250px;
+	margin: 0 0 1em 0;
+	white-space: nowrap;
+	overflow: hidden;
+  	text-overflow: ellipsis; 
+}	
+html{
+	scroll-behavior : smooth;
+}
 /* 버튼 */
 #section05 { background: url(https://www.nxworld.net/example/css-scroll-down-button/bg05.jpg) center center / cover no-repeat;}
 #section05 a {
+  scroll-behavior: smooth;
   padding-top: 70px;
 }
 /* gkgk */
 #section05 a span {
   position: absolute;
-  top: 500px;
+  top: 109%;
   left: 50%;
   width: 24px;
   height: 24px;
@@ -380,10 +402,11 @@ nav.navbar {
     padding-bottom: 50px;
 }
 
-.about_top {
-    padding: 120px 0;
+.about_top {	
+/* 	position:"relative";*/ 
+    padding: 75px 0 0 9px	;
     border-bottom: 1px solid #dfdfdf;
-    padding-bottom:70px; 
+    /* padding-bottom:70px; */ 
 }
 .about_single_item {
   margin-bottom: 50px;

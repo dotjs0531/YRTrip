@@ -39,6 +39,16 @@ $(function(){
 	var post_origin = $("#orderPost").val();
 	var address_origin = $("#orderAddress").val();
 	var item_total = $("div#orderPriceSingle").text() * $("div#orderEa").text();
+	/* 넘길정보들... */
+	var orderEa_ = $("div#orderEa").text();
+	console.log(orderEa_);
+	var buyerId = 'user2';
+	var itemId = '${cart.itemId}';
+	/* var orderPost = 
+	var orderAddress=  */
+	var cartId='${cart.cartId}';
+	var orderMethod=$('input[name="orderMethod"]:checked').val();
+	
 	$("#different-address").click(function(){
 		$("#orderAddress").val('');
 		$("#orderPost").val('');
@@ -52,32 +62,49 @@ $(function(){
 	
 		$("#pay").click(function(){
 			IMP.request_pay({
-				pg : 'html5_inicis', // version 1.1.0부터 지원.
-			    pay_method : 'card',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    name : '제품명: ${item.itemName}',
+			    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
+			    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+			    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+			    name : '주문명:결제테스트',
 			    amount : item_total,
 			    buyer_email : '${userPur.userEmail}',
-			    buyer_name : '${userPur.userName}',
-			    buyer_tel : '${userPur.userPhone}',
+			    buyer_name :  '${userPur.userName}',
+			    buyer_tel : '${userPur.userPhone}',//누락되면 이니시스 결제창에서 오류
 			    buyer_addr : '${userPur.userAddress}',
-			    buyer_postcode : '${userPur.userPost}',
-			    m_redirect_url : 'http://localhost:8081/app/getMyOrderList'
-
+			    buyer_postcode : '${userPur.userPost}'
 			}, function(rsp) {
 			    if ( rsp.success ) {
-			        var msg = '결제가 완료되었습니다.';
-			        msg += '고유ID : ' + rsp.imp_uid;
-			        msg += '상점 거래ID : ' + rsp.merchant_uid;
-			        msg += '결제 금액 : ' + rsp.paid_amount;
-			        msg += '카드 승인번호 : ' + rsp.apply_num;
-			        
+			    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+			    	jQuery.ajax({
+			    		url: "/payments/complete", //cross-domain error가 발생하지 않도록 주의해주세요
+			    		type: 'POST',
+			    		dataType: 'json',
+			    		data: {
+				    		imp_uid : rsp.imp_uid
+				    		//기타 필요한 데이터가 있으면 추가 전달
+			    		}
+			    	}).done(function(data) {
+			    		console.log(imp_uid);
+			    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+			    		if ( everythings_fine ) {
+			    			var msg = '결제가 완료되었습니다.';
+			    			msg += '\n고유ID : ' + rsp.imp_uid;
+			    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+			    			msg += '\n결제 금액 : ' + rsp.paid_amount;
+			    			msg += '카드 승인번호 : ' + rsp.apply_num;
+			    			
+			    			alert(msg);
+			    		} else {
+			    			alret("에러");//[3] 아직 제대로 결제가 되지 않았습니다.
+			    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+			    		}
+			    	});
 			    } else {
 			        var msg = '결제에 실패하였습니다.';
 			        msg += '에러내용 : ' + rsp.error_msg;
+			        
+			        alert(msg);
 			    }
-			    
-			    alert(msg);
 			});
 		});
 	});
@@ -140,8 +167,8 @@ $(function(){
 				<div class="col-md-6 center-block order-md-1">
 					<h4 class="mb-3">필수정보</h4>
 					<!-- ./insertOrder -->
-					<form action="./ins" method="post" class="needs-validation" 
-						novalidate="">
+						<!-- <form action="./insertOrder" method="post" class="needs-validation" 
+							novalidate="" id="insertOrderId"> -->
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="buyerName">이름</label> <input type="text"
@@ -249,17 +276,17 @@ $(function(){
 					<h4 class="mb-3">결제방법</h4>
 					<div class="mb-3">
 						<div class="custom-control custom-radio">
-							<input id="credit" name="which-payment" type="radio"
+							<input id="credit" name="orderMethod" type="radio"
 								class="custom-control-input" value="카드결제" checked="" required="">
 							<label class="custom-control-label" for="credit">카드(KG이니시스)</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="debit" name="which-payment" type="radio"
+							<input id="debit" name="orderMethod" type="radio"
 								class="custom-control-input" value="현금결제" required=""> <label
 								class="custom-control-label" for="debit">현금결제</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="paypal" name="which-payment" type="radio"
+							<input id="paypal" name="orderMethod" type="radio"
 								class="custom-control-input" value="직거래" required=""> <label
 								class="custom-control-label" for="paypal">직거래</label>
 						</div>
@@ -276,7 +303,7 @@ $(function(){
 <!-- 					 <button class="btn btn-lg btn-block"
 					style="background-color: #f9bf3b; color: white;" type="submit"
 					 id="pay">주문하기!!</button> -->
-				</form>
+				<!-- </form> -->
 			</div>
 		</div>
 		<footer class="my-5 pt-5 text-muted text-center text-small">
