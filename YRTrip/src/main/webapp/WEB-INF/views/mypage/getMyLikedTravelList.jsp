@@ -8,13 +8,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<!-- 여행정보 -->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="resources/vender/css/Travel.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
 
-<meta name="robots" content="noindex">
-<link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
-<link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
-<link rel="canonical" href="https://codepen.io/andreasstorm/pen/deRvMy" />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
 <style class="cp-pen-styles">
 a:hover { color:white }
@@ -64,14 +65,9 @@ function del() {
 	};
 </script>
 
-<script src="//use.typekit.net/xyl8bgh.js"></script>
-<script>try{Typekit.load();}catch(e){}</script>
-<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
-<link rel='stylesheet prefetch' href='resources/css/mypage__codepen_io_andytran_pen.css'>
-<link rel="stylesheet" href="resources/css/mypage.css">
 </head>
 <body>
-    <!--    start about us area-->
+    <!-- start about us area-->
     <section class="about_us_area" id="about">
         <div class="container">
             <div class="row">
@@ -121,29 +117,32 @@ function del() {
 	                    
 						<div class="container card" style="width:100%; min-height:420px;">
 							<!-- Normal Demo-->
-							<c:forEach items="${MyLikedTravelList}" var="travel">
-								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">No. ${travel.travelNo}</div>
-									<!-- Post-->
-									<div class="post-module">
-										<!-- Thumbnail-->
-										<div class="thumbnail">
-											<a href="getTravelBoard?travelNo=${travel.travelNo}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
-										</div>
-										<!-- Post Content-->
-										<div class="post-content">
-											<div class="category">Photos</div>
-											<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; text-overflow: ellipsis; 
-												white-space: nowrap; overflow: hidden; width:220px; text-decoration:none !important;">${travel.travelTitle}</a></h1>
-											<h2 class="sub_title">${travel.travelDate}</h2>
-											<p class="description">${travel.travelContent}</p>
-											<div class="post-meta">
-												<span class="timestamp"><i class="fa fa-gratipay"></i>&nbsp;${travel.travelLike}</span>
-												<span class="comments"><i class="fa fa-eye"></i>&nbsp;${travel.travelHit}</span>
-											</div>
+							<c:forEach items="${MyLikedTravelList}" var="travel" varStatus="status">
+							
+								
+								<div class="content-box" style="width:29%; margin-top:10px">
+									<c:if test="${travel.travelPic != null}">
+										<img src="./images/travel/${travel.travelPic}" class="img-responsive">
+									</c:if>
+									<c:if test="${travel.travelPic == null}">
+										<img src="./images/travel/noimage.jpg" class="img-responsive">
+									</c:if>
+									
+									<div class="content-title">
+										<div class="text-center">
+											<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
 										</div>
 									</div>
+									<div class="content-footer">
+										<span class="user-info">${travel.userId}</span>
+										<span class="pull-right">
+											<a href="#" data-placement="right" title="Like">
+											<i class="fa fa-heart"></i> ${travel.travelLike}</a>
+										</span>
+									</div>
 								</div>
+							<c:if test="${status.count%3 eq 0}" ><br/></c:if>
+								
 							</c:forEach>
 						</div>
                     

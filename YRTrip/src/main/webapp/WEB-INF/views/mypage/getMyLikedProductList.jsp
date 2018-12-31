@@ -124,7 +124,6 @@ function del() {
 							<!-- Normal Demo-->
 							<c:forEach items="${MyLikedProductList}" var="product">
 								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">No. ${product.itemId}</div>
 									<!-- Post-->
 									<div class="post-module">
 										<!-- Thumbnail-->
