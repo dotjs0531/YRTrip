@@ -246,8 +246,8 @@ background-color:#22313F;
 						+"</div>"
 					
 						+"<div id=\"footer\" class=\"panel-footer\">"
-						
-			if(${not empty sessionScope.login}){
+			var login = '${sessionScope.login}';
+			if(login != null){
 				str += "<div id='LikeConditionP"+travelPlace.placeNo+"'>";
 	
 				var params = { userId : '${sessionScope.login.userId}',
