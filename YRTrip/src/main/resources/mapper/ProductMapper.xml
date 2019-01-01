@@ -25,8 +25,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				ITEM_LIKE
 		FROM ITEMT
 		<where>
-		<if test="searchClass != null and searchClass == 'itemCategory'">
-			AND ITEM_CATEGORY LIKE '%' || #{searchKeyword} || '%'
+		<if	 test="itemCategory != null">
+			AND ITEM_CATEGORY LIKE '%' || #{itemCategory} || '%'
 		</if>
 		<if test="searchCondition != null and searchCondition == 'itemName'">
 			AND ITEM_NAME LIKE '%' || #{searchKeyword} || '%'
@@ -34,8 +34,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		<if test="searchCondition != null and searchCondition == 'itemPrice'">
 		 	AND ITEM_PRICE LIKE '%' || #{searchKeyword} || '%'
 		</if>
-		<if test="searchCondition != null and searchCondition == 'itemOrderdetail'">
-		 	AND ITEM_ORDERDETAIL LIKE '%' || #{searchKeyword} || '%'
+		<if test="itemOrderdetail != null">
+		 	AND ITEM_ORDERDETAIL LIKE '%' || #{itemOrderdetail} || '%'
 		</if>
 		<if test="searchCondition != null and searchCondition == 'itemContent'">
 		 	AND ITEM_CONTENT LIKE '%' || #{searchKeyword} || '%'

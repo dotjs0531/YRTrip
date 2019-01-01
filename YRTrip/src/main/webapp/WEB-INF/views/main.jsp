@@ -145,7 +145,39 @@
 				</div>
 			</div>
 		</div>
-
+		<!-- 사이드 -->
+	<div class="share-post stick show" style="top: 627.175px;">
+  <div class="twitter sharrre sharrre-twitter-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="Tweet">
+    <div class="box">
+      <div class="share">
+        <i class="fa fa-twitter"></i>
+      </div> <span class="count">1329</span>
+    </div>
+    </div>
+    <div class="facebook sharrre sharrre-facebook-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="Like">
+      <div class="box">
+        <div class="share">
+          <i class="fa fa-facebook"></i>
+        </div> 
+        <span class="count">6619</span>
+      </div>
+    </div>
+    <div class="googlePlus sharrre sharrre-googleplus-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="+1">
+      <div class="box">
+        <div class="share">
+          <i class="fa fa-google"></i>
+        </div>
+      </div>
+    </div>
+    <div class="linkedin sharrre sharrre-linkedin-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="Share">
+      <div class="box">
+        <div class="share">
+          <i class="fa fa-linkedin"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 사이드 -->
 		<!--   end of logo menu markup     -->
 		<!--  start welcome text marup  -->
 		<div class="table">

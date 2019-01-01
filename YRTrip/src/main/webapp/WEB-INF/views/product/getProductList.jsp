@@ -25,10 +25,14 @@
 <link href="resources/css/product.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	function go_page(page) {
+	function go_page(page) {/* 
+		var option_val = $("#searchClass").val();
+		console.log(option_val);
+		$("#itemCategory").val(option_val); */
+		
 		document.frm.page.value = page;
 		document.frm.submit();
-	}
+	} 
 </script>
 <script>
 	/* 자기혼자 빨간줄이었다 오류있는지 확인 :()주의! ;생략가능하나 명령문마다 해주자 */
@@ -90,12 +94,12 @@ $("#itemPrice").text('￦'+money2);
 						</div>
 						<ul class="price-list">
 							<li><a href="getProductList" style="color: black">전체보기</a></li>
-							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=의류" style="color: black">의류</a></li>
-							<li><a href="getProductList?searchClass=itemCategorys&searchKeyword=티켓" style="color: black">티켓/쿠폰</a></li>
-							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=전자기기" style="color: black">전자기기</a></li>
-							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=여행도서" style="color: black">여행도서</a></li>
-							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=USIM" style="color: black">USIM</a></li>
-							<li><a href="getProductList?searchClass=itemCategory&searchKeyword=기타" style="color: black">기타</a></li>
+							<li><a href="getProductList?itemCategory=의류" style="color: black">의류</a></li>
+							<li><a href="getProductList?itemCategory=티켓" style="color: black">티켓/쿠폰</a></li>
+							<li><a href="getProductList?itemCategory=전자기기" style="color: black">전자기기</a></li>
+							<li><a href="getProductList?itemCategory=여행도서" style="color: black">여행도서</a></li>
+							<li><a href="getProductList?itemCategory=USIM" style="color: black">USIM</a></li>
+							<li><a href="getProductList?itemCategory=기타" style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton">
 							<a href="#">상품요청</a>
@@ -114,11 +118,23 @@ $("#itemPrice").text('￦'+money2);
 								
 								<!-- 제품이름 & 제품내용 -->
 								<div style="padding-bottom:5px">
-								<label class="col-sm-2 control-label">검색어</label>
-								<select name="searchCondition" class="form-control" id="">
+								<label class="col-sm-2 control-label" for="searchClass">카테고리 </label>
+								<label class="col-sm-2 control-label" for="searchCondition">검색어</label>
+								<select name="itemCategory" class="form-control" id="searchClass">
+									<option value="">전체</option>
+									<option value="의류">의류</option>
+									<option value="티켓">티켓/쿠폰</option>
+									<option value="전자기기">전자기기</option>
+									<option value="여행도서">여행도서</option>
+									<option value="USIM">USIM</option>
+									<option value="기타">기타</option>
+								</select><!-- 
+								<input type="hidden" name="itemCategory" id="itemCategory"/> -->
+								
+								<select name="searchCondition" class="form-control" id="searchCondition">
 									<option value="itemName">제품명</option>
 									<option value="itemContent">내용</option>									
-								</select>
+								</select>	
 								<input type="text" name="searchKeyword" class="form-control" placeholder="검색할 내용을 입력하세요">
 								</div>
 								<!-- 가격 -->
@@ -126,9 +142,9 @@ $("#itemPrice").text('￦'+money2);
 								<!-- 구매가능여부 -->
 								<div>
 								<label class="col-sm-2 control-label">구매가능여부</label>
-								<input type="radio" name="itemOrderdetail" id="" value="" class="form-control vertical" checked>모두보기 
-								<input type="radio" name="itemOrderdetail" id="" value="구매가능" class="form-control">구매가능
-								<input type="radio" name="itemOrderdetail" id="" value="구매불가" class="form-control">구매불가
+								<input type="radio" name="itemOrderdetail" value="" class="form-control vertical" checked>모두보기 
+								<input type="radio" name="itemOrderdetail" value="구매가능" class="form-control">구매가능
+								<input type="radio" name="itemOrderdetail" value="구매불가" class="form-control">구매불가
 								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 								</div>
 								
