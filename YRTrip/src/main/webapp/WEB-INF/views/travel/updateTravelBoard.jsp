@@ -709,7 +709,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./updateTravelPlace" id="updateTravelPlaceAjaxData" method="post">
+									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>

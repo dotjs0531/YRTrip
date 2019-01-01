@@ -2,6 +2,7 @@ package com.yrtrip.app.user.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.yrtrip.app.travel.TravelPlaceVO;
 import com.yrtrip.app.user.EmailVO;
 import com.yrtrip.app.user.UserService;
 import com.yrtrip.app.user.UserVO;
@@ -26,7 +28,7 @@ public class UserController {
 	@Autowired UserService userService;
 	
 	//전체 조회
-	@RequestMapping(value = "/getUserList", method = RequestMethod.GET)
+	@RequestMapping(value = "/userList", method = RequestMethod.GET)
 	public String getUserList(Model model, UserVO vo) {
 		model.addAttribute("userList", userService.getUserList(vo));
 		return "user/getUserList";

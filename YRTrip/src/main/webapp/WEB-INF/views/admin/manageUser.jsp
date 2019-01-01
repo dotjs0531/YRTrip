@@ -1,149 +1,100 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+<script>
+$(function(){
+	$(function() {
+		$.getJSON("getUserListAjax", null, function(datas){	
+		for(i=0; i<datas.length; i++){
+			
+			var str = "<tr><td>"
+					 +"<strong>"+ datas[i].userId +"</strong>"
+					 +"</td><td>"
+					 +"<strong>" + datas[i].userName +"</strong>"
+					 +"</td><td>"
+						 + datas[i].userBirth
+					 +"</td><td>"
+						 + datas[i].userEmail
+					 +"</td><td>"
+						 + datas[i].userPhone
+					 +"</td><td>"
+						 + datas[i].userDate
+					 +"</td><td>"
+					 +"<button type=\"button\" class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+					 +"<input type=\"hidden\" id=\"userId\" value=\""+datas[i].userId+"\">"
+					 +"</td></tr>"
+					$(str).appendTo("#userList");
+		}
+		});	
+	});
+
+	$("#userList").on("click", ".btnDel", function(){
+ 		var userId = $(this).closest('#userList').find('#userId').val();
+		if(confirm("삭제하시겠습니까?")) {
+			var params = "userId=" + userId;
+			var url = "deleteUserAjax";
+			$.getJSON(url, params, function(datas){
+				$(userId).remove();
+			});
+		}
+	});
+
+});	
+
+</script>
 </head>
 <body>
-<div class="row">
-            <div class="col-12 grid-margin">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Manage Tickets</h5>
-                  <div class="fluid-container">
-                    <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
-                      <div class="col-md-1">
-                        <img class="img-sm rounded-circle mb-4 mb-md-0" src="resources/admin/images/faces/face1.jpg" alt="profile image">
-                      </div>
-                      <div class="ticket-details col-md-9">
-                        <div class="d-flex">
-                          <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">James :</p>
-                          <p class="text-primary mr-1 mb-0">[#23047]</p>
-                          <p class="mb-0 ellipsis">Donec rutrum congue leo eget malesuada.</p>
-                        </div>
-                        <p class="text-gray ellipsis mb-2">Donec rutrum congue leo eget malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim
-                          vivamus.
-                        </p>
-                        <div class="row text-gray d-md-flex d-none">
-                          <div class="col-4 d-flex">
-                            <small class="mb-0 mr-2 text-muted text-muted">Last responded :</small>
-                            <small class="Last-responded mr-2 mb-0 text-muted text-muted">3 hours ago</small>
-                          </div>
-                          <div class="col-4 d-flex">
-                            <small class="mb-0 mr-2 text-muted text-muted">Due in :</small>
-                            <small class="Last-responded mr-2 mb-0 text-muted text-muted">2 Days</small>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ticket-actions col-md-2">
-                        <div class="btn-group dropdown">
-                          <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Manage
-                          </button>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-reply fa-fw"></i>Quick reply</a>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-history fa-fw"></i>Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-check text-success fa-fw"></i>Resolve Issue</a>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-times text-danger fa-fw"></i>Close Issue</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row ticket-card mt-3 pb-2 border-bottom pb-3 mb-3">
-                      <div class="col-md-1">
-                        <img class="img-sm rounded-circle mb-4 mb-md-0" src="resources/admin/images/faces/face2.jpg" alt="profile image">
-                      </div>
-                      <div class="ticket-details col-md-9">
-                        <div class="d-flex">
-                          <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">Stella :</p>
-                          <p class="text-primary mr-1 mb-0">[#23135]</p>
-                          <p class="mb-0 ellipsis">Curabitur aliquet quam id dui posuere blandit.</p>
-                        </div>
-                        <p class="text-gray ellipsis mb-2">Pellentesque in ipsum id orci porta dapibus. Sed porttitor lectus nibh. Curabitur non nulla sit amet
-                          nisl.
-                        </p>
-                        <div class="row text-gray d-md-flex d-none">
-                          <div class="col-4 d-flex">
-                            <small class="mb-0 mr-2 text-muted">Last responded :</small>
-                            <small class="Last-responded mr-2 mb-0 text-muted">3 hours ago</small>
-                          </div>
-                          <div class="col-4 d-flex">
-                            <small class="mb-0 mr-2 text-muted">Due in :</small>
-                            <small class="Last-responded mr-2 mb-0 text-muted">2 Days</small>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ticket-actions col-md-2">
-                        <div class="btn-group dropdown">
-                          <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Manage
-                          </button>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-reply fa-fw"></i>Quick reply</a>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-history fa-fw"></i>Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-check text-success fa-fw"></i>Resolve Issue</a>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-times text-danger fa-fw"></i>Close Issue</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row ticket-card mt-3">
-                      <div class="col-md-1">
-                        <img class="img-sm rounded-circle mb-4 mb-md-0" src="images/faces/face3.jpg" alt="profile image">
-                      </div>
-                      <div class="ticket-details col-md-9">
-                        <div class="d-flex">
-                          <p class="text-dark font-weight-semibold mr-2 mb-0 no-wrap">John Doe :</p>
-                          <p class="text-primary mr-1 mb-0">[#23246]</p>
-                          <p class="mb-0 ellipsis">Mauris blandit aliquet elit, eget tincidunt nibh pulvinar.</p>
-                        </div>
-                        <p class="text-gray ellipsis mb-2">Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Lorem ipsum dolor sit amet.</p>
-                        <div class="row text-gray d-md-flex d-none">
-                          <div class="col-4 d-flex">
-                            <small class="mb-0 mr-2 text-muted">Last responded :</small>
-                            <small class="Last-responded mr-2 mb-0 text-muted">3 hours ago</small>
-                          </div>
-                          <div class="col-4 d-flex">
-                            <small class="mb-0 mr-2 text-muted">Due in :</small>
-                            <small class="Last-responded mr-2 mb-0 text-muted">2 Days</small>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ticket-actions col-md-2">
-                        <div class="btn-group dropdown">
-                          <button type="button" class="btn btn-success dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Manage
-                          </button>
-                          <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-reply fa-fw"></i>Quick reply</a>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-history fa-fw"></i>Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-check text-success fa-fw"></i>Resolve Issue</a>
-                            <a class="dropdown-item" href="#">
-                              <i class="fa fa-times text-danger fa-fw"></i>Close Issue</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+<div class="col-lg-12 grid-margin stretch-card">
+         <div class="card">
+           <div class="card-body">
+             <h4 class="card-title"><strong>회원관리</strong></h4>
+             <div class="input-group col-xs-12" style="width:300px; float:right;">
+                   <input type="text" class="form-control file-upload-info" style="width:200px;">
+<!--  시간 남으면 추가                  <span class="input-group-append">
+                     <button class="file-upload-browse btn" type="button">검색</button>
+                   </span> -->
+                 </div>
+             <div class="table-responsive">
+               <table class="table table-striped">
+                 <thead style="text-align:center;">
+                   <tr>
+                     <th>
+              		         아이디
+                     </th>
+                     <th>
+                       	이름
+                     </th>
+                     <th>
+                       	생년월일
+                     </th>
+                     <th>
+                       	메일주소
+                     </th>
+                     <th>
+                       	전화번호
+                     </th>
+                     <th>
+                       	가입일
+                     </th>
+                     <th>
+                     	관리
+                     </th>
+                   </tr>
+                 </thead>
+                 <tbody id="userList">
+                 
+                 </tbody>
+               </table>
+             </div>
+           </div>
+         </div>
+       </div>
 </body>
 </html>

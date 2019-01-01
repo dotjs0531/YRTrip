@@ -3,6 +3,8 @@ package com.yrtrip.app.admin.web;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +14,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yrtrip.app.admin.AdminService;
+import com.yrtrip.app.order.OrderService;
+import com.yrtrip.app.order.OrderVO;
+import com.yrtrip.app.product.ProductService;
+import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.travel.TravelPlaceVO;
+import com.yrtrip.app.user.UserService;
+import com.yrtrip.app.user.UserVO;
 
 @Controller
 public class AdminController {
 	
 	@Autowired AdminService adminService;
+	@Autowired UserService userService;
+	@Autowired ProductService productService;
+	@Autowired OrderService orderService;
 	
 	//관리자 첫화면
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -24,21 +36,51 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
+	
 	//회원관리
 	@RequestMapping(value = "/manageUser", method = RequestMethod.GET)
 	public String manageUser(Model model) {
 		return "admin/manageUser";
 	}
-	
-	//거래관리 - 상품관리
-	@RequestMapping(value = "/manageProduct", method = RequestMethod.GET)
-	public String manageProduct(Model model) {
-		return "admin/manageProduct";
+	//회원 삭제Ajax
+	@RequestMapping("/deleteUserAjax")
+	@ResponseBody
+	public UserVO deleteUserAjax(UserVO vo) {
+		userService.deleteUser(vo);
+		return vo;
 	}
-	
+	//회원 조회Ajax
+		@RequestMapping("/getUserListAjax")
+		@ResponseBody
+		public List<UserVO> getUserList(UserVO vo) {
+			return userService.getUserList(vo);
+		}
+		
+	//거래관리
+		@RequestMapping(value = "/manageProduct", method = RequestMethod.GET)
+		public String manageProduct(Model model) {
+			return "admin/manageProduct";
+		}
+	//거래관리 - 상품관리 조회Ajax
+		@RequestMapping("/getProductListAjax")
+		@ResponseBody
+		public List<ProductVO> getProductListAjax(ProductVO vo) {
+			System.out.println("=============================================="+vo);
+			return productService.getProductList(vo);
+		}
+		
+		//거래관리 - 상품관리 삭제Ajax
+		@RequestMapping("/deleteProductAjax")
+		@ResponseBody
+		public ProductVO deleteProductAjax(ProductVO vo) {
+			productService.deleteProduct(vo);
+			return vo;
+		}
+		
 	//거래관리 - 주문내역관리
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
-	public String manageOrder(Model model) {
+	public String manageOrder(Model model, OrderVO vo) {
+		model.addAttribute("manageOrder", orderService.getOrderList(vo));
 		return "admin/manageOrder";
 	}
 	
@@ -62,18 +104,19 @@ public class AdminController {
 	}
 	@RequestMapping(value = "/chart", method = RequestMethod.GET)
 	public String chart(Model model) {
-		return "admin/chartjs";
+		return "admin/chart";
 	}
 	
 	//1:1문의글 관리
 	@RequestMapping(value = "/manageNotice", method = RequestMethod.GET)
 	public String manageNotice(Model model) {
-		return "admin/manageNotice";
+		return "admin/basic_elements";
 	}
 	
 	//1:1문의글 관리
 	@RequestMapping(value = "/manageQna", method = RequestMethod.GET)
 	public String manageQna(Model model) {
-		return "admin/manageQna";
+		return "admin/basic-table";
 	}
+
 }
