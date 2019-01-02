@@ -3,7 +3,6 @@ package com.yrtrip.app.admin.web;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yrtrip.app.admin.AdminService;
+import com.yrtrip.app.notice.NoticeService;
+import com.yrtrip.app.notice.NoticeVO;
 import com.yrtrip.app.order.OrderService;
 import com.yrtrip.app.order.OrderVO;
+import com.yrtrip.app.partner.PartnerService;
+import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
-import com.yrtrip.app.travel.TravelPlaceVO;
+import com.yrtrip.app.qna.QnaService;
+import com.yrtrip.app.qna.QnaVO;
+import com.yrtrip.app.travel.TravelBoardService;
+import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.user.UserService;
 import com.yrtrip.app.user.UserVO;
 
@@ -29,6 +35,10 @@ public class AdminController {
 	@Autowired UserService userService;
 	@Autowired ProductService productService;
 	@Autowired OrderService orderService;
+	@Autowired PartnerService partnerService;
+	@Autowired TravelBoardService travelBoardService;
+	@Autowired NoticeService noticeService;
+	@Autowired QnaService qnaService;
 	
 	//관리자 첫화면
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -62,11 +72,10 @@ public class AdminController {
 			return "admin/manageProduct";
 		}
 	//거래관리 - 상품관리 조회Ajax
-		@RequestMapping("/getProductListAjax")
+		@RequestMapping("/getManageProductListAjax")
 		@ResponseBody
-		public List<ProductVO> getProductListAjax(ProductVO vo) {
-			System.out.println("=============================================="+vo);
-			return productService.getProductList(vo);
+		public List<ProductVO> getManageProductListAjax(ProductVO vo) {
+			return adminService.getManageProductList(vo);
 		}
 		
 		//거래관리 - 상품관리 삭제Ajax
@@ -83,11 +92,30 @@ public class AdminController {
 		model.addAttribute("manageOrder", orderService.getOrderList(vo));
 		return "admin/manageOrder";
 	}
+	//거래관리 - 주문내역관리 조회Ajax
+			@RequestMapping("/getManageOrderListAjax")
+			@ResponseBody
+			public List<OrderVO> getManageOrderListAjax(OrderVO vo) {
+				return adminService.getManageOrderList(vo);
+			}
 	
 	//동행관리
 	@RequestMapping(value = "/managePartner", method = RequestMethod.GET)
 	public String managePartner(Model model) {
 		return "admin/managePartner";
+	}
+	//동행관리  조회Ajax
+	@RequestMapping("/getManagePartnerListAjax")
+	@ResponseBody
+	public List<PartnerVO> getManagePartnerListAjax(PartnerVO vo) {
+		return adminService.getManagePartnerList(vo);
+	}
+	//동행관리 삭제Ajax
+	@RequestMapping("/deletePartnerAjax")
+	@ResponseBody
+	public PartnerVO deletePartnerAjax(PartnerVO vo) {
+		partnerService.deletePartner(vo);
+		return vo;
 	}
 	
 	//여행관리
@@ -95,28 +123,68 @@ public class AdminController {
 	public String manageTravel(Model model) {
 		return "admin/manageTravel";
 	}
+	//여행관리  조회Ajax
+	@RequestMapping("/getManageTravelListAjax")
+	@ResponseBody
+	public List<TravelBoardVO> getManageTravelListAjax(TravelBoardVO vo) {
+		return adminService.getManageTravelList(vo);
+	}
+	//여행관리 삭제Ajax
+	@RequestMapping("/deleteTravelAjax")
+	@ResponseBody
+	public TravelBoardVO deleteTravelAjax(TravelBoardVO vo) {
+		travelBoardService.deleteTravelBoard(vo);
+		return vo;
+	}
 	
 	//통계관리
+	@RequestMapping(value = "/chart", method = RequestMethod.GET)
+	public String chart(Model model) {
+		return "admin/chart";
+	}
 	@RequestMapping(value = "/getTinfoChart", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map> getTinfoChart(@RequestParam String day) {
 		return adminService.getTinfoChart(day);
 	}
-	@RequestMapping(value = "/chart", method = RequestMethod.GET)
-	public String chart(Model model) {
-		return "admin/chart";
-	}
+
 	
-	//1:1문의글 관리
+	//공지사항 관리
 	@RequestMapping(value = "/manageNotice", method = RequestMethod.GET)
 	public String manageNotice(Model model) {
-		return "admin/basic_elements";
+		return "admin/manageNotice";
+	}
+	//공지사항관리  조회Ajax
+	@RequestMapping("/getManageNoticeListAjax")
+	@ResponseBody
+	public List<NoticeVO> getManageNoticeListAjax(NoticeVO vo) {
+		return adminService.getManageNoticeList(vo);
+	}
+	//공지사항관리 삭제Ajax
+	@RequestMapping("/deleteNoticeAjax")
+	@ResponseBody
+	public NoticeVO deleteNoticeAjax(NoticeVO vo) {
+		noticeService.deleteNotice(vo);
+		return vo;
 	}
 	
 	//1:1문의글 관리
 	@RequestMapping(value = "/manageQna", method = RequestMethod.GET)
 	public String manageQna(Model model) {
-		return "admin/basic-table";
+		return "admin/manageQna";
+	}
+	//공지사항관리  조회Ajax
+	@RequestMapping("/getManageQnaListAjax")
+	@ResponseBody
+	public List<QnaVO> getManageQnaListAjax(QnaVO vo) {
+		return adminService.getManageQnaList(vo);
+	}
+	//공지사항관리 삭제Ajax
+	@RequestMapping("/deleteQnaAjax")
+	@ResponseBody
+	public QnaVO deleteQnaAjax(QnaVO vo) {
+		qnaService.deleteQna(vo);
+		return vo;
 	}
 
 }

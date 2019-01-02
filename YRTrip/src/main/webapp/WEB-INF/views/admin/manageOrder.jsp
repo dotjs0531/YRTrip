@@ -8,33 +8,30 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script>
-/* $(function(){
+ $(function(){
 	$(function() {
-		$.getJSON("getOrderListAjax", null, function(datas){	
+		$.getJSON("getManageOrderListAjax", null, function(datas){	
 		for(i=0; i<datas.length; i++){
 			
-			var str = "<tr><td>"
-					 +"<strong>"+ datas[i].orderId +"</strong>"
+			var str = "<tr id=\"OR"+datas[i].orderId+"\"><td>"
+					 +"<strong>OR"+ datas[i].orderId +"</strong>"
 					 +"</td><td>"
 					 +"<strong>" + datas[i].itemId +"</strong>"
 					 +"</td><td>"
 						 + datas[i].orderEa
 					 +"</td><td>"
-						 + datas[i].userEmail
-					 +"</td><td>"
 						 + datas[i].buyerId
 					 +"</td><td>"
 						 + datas[i].orderCondition
 					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-danger mr-2\">상세보기</button>"
-					 +"<input type=\"hidden\" id=\"orderId\" value=\""+datas[i].orderId+"\">"
+					 +"<button type=\"button\" onclick=\"location.href='./getOrder?orderId="+datas[i].orderId+"'\" class=\"btn btn-success mr-2\">상세보기</button>"
 					 +"</td></tr>"
 					$(str).appendTo("#orderList");
 		}
 		});	
 	});
 
-});	 */
+});	 
 </script>
 </head>
 <body>
@@ -66,20 +63,7 @@
                      </th>
                    </tr>
                  </thead>
-                 <tbody>
-                 <c:forEach items="${manageOrder}" var="order">
-                 <tr>
-                 	<td><strong>${order.orderId}</strong></td>
-					 <td><strong>${order.itemId}</strong></td>
-					 <td>${order.orderEa}</td>
-					 <td></td>
-					 <td>${order.buyerId}</td>
-					 <td>${order.orderCondition }</td>
-					 <td>
-					 	<button type="button" class="btn btn-danger mr-2">상세보기</button>
-					 </td>
-				</tr>
-					 </c:forEach>
+                 <tbody id="orderList">
                  </tbody>
                </table>
              </div>

@@ -4,11 +4,82 @@
 <mapper namespace="admin">
 
 <select id="getTinfoChart" resultType="map" parameterType="map">
-select to_char(i.tinfo_city) "ranktinfoid", COUNT(b.tinfo_id) "counttinfoid"
-from travelinfot i, travelboardt b
-where i.tinfo_id = b.tinfo_id
-and to_char(b.TRAVEL_DATE, 'yyyy/mm') = #{day}
-GROUP BY i.tinfo_city
+SELECT TO_CHAR(I.TINFO_CITY) "ranktinfoid", COUNT(B.TINFO_ID) "counttinfoid"
+FROM TRAVELINFOT I, TRAVELBOARDT B
+WHERE I.TINFO_ID = B.TINFO_ID
+AND TO_CHAR(B.TRAVEL_DATE, 'YYYY/MM') = #{day}
+GROUP BY I.TINFO_CITY
 ORDER BY 2 DESC
+</select>
+
+<select id="getManageProductList" resultType="product">
+		 SELECT ITEM_ID,
+				ITEM_NAME,
+				ITEM_PRICE,
+				ITEM_EA,
+				ITEM_CONTENT,
+				ITEM_METHOD,
+				ITEM_CATEGORY,
+				SELLER_ID,
+				ITEM_ORDERDETAIL,
+				ITEM_STAR,
+				ITEM_PIC,
+				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
+				ITEM_CONDITION,
+				ITEM_LIKE
+		FROM ITEMT
+		ORDER BY ITEM_ID DESC
+</select>
+
+<select id="getManageOrderList" resultType="order">
+		SELECT  O.ORDER_ID AS ORDER_ID, 
+				O.ORDER_CONDITION AS ORDER_CONDITION, 
+				O.ORDER_EA AS ORDER_EA,
+				I.ITEM_ID AS ITEM_ID,
+				I.SELLER_ID AS BUYER_ID,
+				O.ORDER_DATE AS ORDER_DATE
+			FROM ORDERT O, ITEMT I
+			WHERE I.ITEM_ID=O.ITEM_ID
+	 	    ORDER BY ORDER_DATE DESC
+</select>
+
+<select id="getManagePartnerList" resultType="partner">
+SELECT	PARTNER_ID,
+			PARTNER_TITLE,      
+			TO_CHAR(PARTNER_DATE, 'YYYY/MM/DD') PARTNER_DATE,    
+			USER_ID,    
+			TINFO_ID,
+			PARTNER_CONDITION
+	FROM	PARTNERT
+	ORDER BY PARTNER_ID DESC
+</select>
+
+<select id="getManageTravelList" resultType="travelBoard">
+	SELECT TRAVEL_NO,
+			TRAVEL_TITLE,
+			TRAVEL_DATE,
+			TINFO_ID,
+			USER_ID
+	FROM TRAVELBOARDT
+	ORDER BY TRAVEL_NO DESC
+</select>
+
+<select id="getManageNoticeList" resultType="notice">
+	SELECT  NOTICE_ID,
+			NOTICE_TITLE,
+			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE
+	  FROM  NOTICET
+	  ORDER BY NOTICE_ID DESC
+</select>
+
+<select id="getManageQnaList" resultType="qna">
+	SELECT  QNA_ID,
+			QNA_TITLE,
+			QNA_CONTENT,
+			TO_CHAR(QNA_DATE, 'MM/DD') QNA_DATE,
+			USER_ID,
+			QNA_ANSWER
+	  FROM  QNAT
+	  ORDER BY QNA_ID DESC
 </select>
 </mapper>

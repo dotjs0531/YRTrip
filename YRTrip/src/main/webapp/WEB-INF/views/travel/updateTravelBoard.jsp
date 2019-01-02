@@ -364,7 +364,6 @@ function loadTravelPlaceList(){
 			var params = "placeNo=" + placeNo;
 			var url = "deleteTravelPlaceAjax";
 			$.getJSON(url, params, function(datas){
-				console.log($('#c'+placeNo));
 				$('#c'+placeNo).remove();
 			});
 		}
