@@ -158,7 +158,7 @@
 											<div class="box">
 											  <div class="container-1">
 											      <span class="icon"><i class="fa fa-user"></i></span>
-											      <input type="text" id="loginId" name="userId" placeholder="아이디" value="${user.userId}" />
+											      <input type="text" id="loginId" name="userId" placeholder="아이디" />
 											  </div>
 											</div>
 											<p style="clear:both">
@@ -166,7 +166,7 @@
 											<div class="box">
 											  <div class="container-1">
 											      <span class="icon"><i class="fa fa-lock"></i></span>
-											      <input type="password" id="loginPw" name="userPw" placeholder="비밀번호" value="${user.userPw}" />
+											      <input type="password" id="loginPw" name="userPw" placeholder="비밀번호" />
 											  </div>
 											</div>
 											<p style="clear:both">

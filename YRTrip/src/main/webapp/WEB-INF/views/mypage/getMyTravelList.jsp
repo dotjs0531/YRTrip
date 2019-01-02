@@ -202,54 +202,55 @@ function del() {
             			<p style="clear:both"/><br/>
 					</div>
 					
-                	<div style="min-height:420px;">
 	                <!-- 선택 삭제 -->
 	                <form action="deleteMyTravelList">
-		   				<c:forEach items="${MyTravelList}" var="travel" varStatus="status">
-						<div style="display: table-cell; vertical-align:middle; width:230px; padding:10px">
-							
-							<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
-							<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
-							<label for="${travel.travelNo}" class="check">
-								<svg width="18px" height="18px" viewBox="0 0 18 18">
-									<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-									<polyline points="1 9 7 14 15 4"></polyline>
-								</svg>
-							</label>&nbsp;&nbsp;No. ${travel.travelNo}
-							</div>
-							
-							<div class="content-box" style="width:100%; margin-top:10px">
-								<c:if test="${travel.travelPic != null}">
-									<img src="./images/travel/${travel.travelPic}" class="img-responsive">
-								</c:if>
-								<c:if test="${travel.travelPic == null}">
-									<img src="./images/travel/noimage.jpg" class="img-responsive">
-								</c:if>
+	                	<div style="min-height:420px;">
+			   				<c:forEach items="${MyTravelList}" var="travel" varStatus="status">
+							<div style="display: table-cell; vertical-align:middle; width:230px; padding:10px">
 								
-								<div class="content-title">
-									<div class="text-center">
-										<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+								<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
+								<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
+								<label for="${travel.travelNo}" class="check">
+									<svg width="18px" height="18px" viewBox="0 0 18 18">
+										<path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
+										<polyline points="1 9 7 14 15 4"></polyline>
+									</svg>
+								</label>&nbsp;&nbsp;No. ${travel.travelNo}
+								</div>
+								
+								<div class="content-box" style="width:100%; margin-top:10px">
+									<c:if test="${travel.travelPic != null}">
+										<img src="./images/travel/${travel.travelPic}" class="img-responsive">
+									</c:if>
+									<c:if test="${travel.travelPic == null}">
+										<img src="./images/travel/noimage.jpg" class="img-responsive">
+									</c:if>
+									
+									<div class="content-title">
+										<div class="text-center">
+											<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+										</div>
+									</div>
+									<div class="content-footer">
+										<span class="user-info">${travel.travelDate}</span>
+										<span class="pull-right">
+											<a href="#" data-placement="right" title="Like">
+											<i class="fa fa-heart"></i> ${travel.travelLike}</a>
+										</span>
 									</div>
 								</div>
-								<div class="content-footer">
-									<span class="user-info">${travel.travelDate}</span>
-									<span class="pull-right">
-										<a href="#" data-placement="right" title="Like">
-										<i class="fa fa-heart"></i> ${travel.travelLike}</a>
-									</span>
-								</div>
 							</div>
+							<c:if test="${status.count%3 eq 0}" ><br/></c:if>
+							</c:forEach>
 						</div>
-						<c:if test="${status.count%3 eq 0}" ><br/></c:if>
-						</c:forEach>
 						
 						<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 	            		<c:if test="${not empty MyTravelList}">
 							<button class="btn btn-default" style="float:right;">삭제</button>
 							<p style="clear:both"/>
 						</c:if>
+						
 					</form>
-					</div>
 					
                     <!-- 페이지 번호 -->
                     <c:if test="${not empty MyTravelList}">

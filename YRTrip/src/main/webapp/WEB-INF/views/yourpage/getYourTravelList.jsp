@@ -64,11 +64,6 @@ a:hover { color:white }
 		document.frm.page.value = page;
 		document.frm.submit();
 	};
-
-$(function() {
-	$('#loginId').val('');
-	$('#loginPw').val('');
-});
 </script>
 
 <script src="//use.typekit.net/xyl8bgh.js"></script>
@@ -128,66 +123,68 @@ $(function() {
 					</div>
 					
                 	<div>
-						<%-- <div class="container card" style="width:100%; min-height:420px">
-							<!-- Normal Demo-->
-							<c:forEach items="${YourTravelList}" var="travel">
-								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">&nbsp;&nbsp;No. ${travel.travelNo}</div>
-									<!-- Post-->
-									<div class="post-module">
-										<!-- Thumbnail-->
-										<div class="thumbnail">
-											<a href="getTravelBoard?travelNo=${travel.travelNo}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
-										</div>
-										<!-- Post Content-->
-										<div class="post-content">
-											<div class="category">Photos</div>
-											<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; 
-												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:220px; text-decoration:none !important;">${travel.travelTitle}</a></h1>
-											<h2 class="sub_title">${travel.travelDate}</h2>
-											<p class="description">${travel.travelContent}</p>
-											<div class="post-meta">
-												<span class="timestamp"><i class="fa fa-gratipay"></i>&nbsp;${travel.travelLike}</span>
-												<span class="comments"><i class="fa fa-eye"></i>&nbsp;${travel.travelHit}</span>
+	                	<div class="container card" style="width:100%; min-height:420px">
+							<%-- <div class="container card" style="width:100%; min-height:420px">
+								<!-- Normal Demo-->
+								<c:forEach items="${YourTravelList}" var="travel">
+									<div class="column" style="padding-bottom:20px;">
+										<div class="demo-title">&nbsp;&nbsp;No. ${travel.travelNo}</div>
+										<!-- Post-->
+										<div class="post-module">
+											<!-- Thumbnail-->
+											<div class="thumbnail">
+												<a href="getTravelBoard?travelNo=${travel.travelNo}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
+											</div>
+											<!-- Post Content-->
+											<div class="post-content">
+												<div class="category">Photos</div>
+												<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; 
+													text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:220px; text-decoration:none !important;">${travel.travelTitle}</a></h1>
+												<h2 class="sub_title">${travel.travelDate}</h2>
+												<p class="description">${travel.travelContent}</p>
+												<div class="post-meta">
+													<span class="timestamp"><i class="fa fa-gratipay"></i>&nbsp;${travel.travelLike}</span>
+													<span class="comments"><i class="fa fa-eye"></i>&nbsp;${travel.travelHit}</span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</c:forEach>
-						</div> --%>
-						
-						<c:forEach items="${YourTravelList}" var="travel" varStatus="status">
-						<div style="min-height:420px; display: table-cell; vertical-align:middle; width:230px; padding:10px;">
+								</c:forEach>
+							</div> --%>
 							
-							<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
-							<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
-							&nbsp;&nbsp;No. ${travel.travelNo}
-							</div>
-							
-							<div class="content-box" style="width:100%; margin-top:10px">
-								<c:if test="${travel.travelPic != null}">
-									<img src="./images/travel/${travel.travelPic}" class="img-responsive">
-								</c:if>
-								<c:if test="${travel.travelPic == null}">
-									<img src="./images/travel/noimage.jpg" class="img-responsive">
-								</c:if>
+							<c:forEach items="${YourTravelList}" var="travel" varStatus="status">
+							<div style="min-height:420px; display: table-cell; vertical-align:middle; width:230px; padding:10px;">
 								
-								<div class="content-title">
-									<div class="text-center">
-										<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+								<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
+								<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
+								&nbsp;&nbsp;No. ${travel.travelNo}
+								</div>
+								
+								<div class="content-box" style="width:100%; margin-top:10px">
+									<c:if test="${travel.travelPic != null}">
+										<img src="./images/travel/${travel.travelPic}" class="img-responsive">
+									</c:if>
+									<c:if test="${travel.travelPic == null}">
+										<img src="./images/travel/noimage.jpg" class="img-responsive">
+									</c:if>
+									
+									<div class="content-title">
+										<div class="text-center">
+											<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+										</div>
+									</div>
+									<div class="content-footer">
+										<span class="user-info">${travel.travelDate}</span>
+										<span class="pull-right">
+											<a href="#" data-placement="right" title="Like">
+											<i class="fa fa-heart"></i> ${travel.travelLike}</a>
+										</span>
 									</div>
 								</div>
-								<div class="content-footer">
-									<span class="user-info">${travel.travelDate}</span>
-									<span class="pull-right">
-										<a href="#" data-placement="right" title="Like">
-										<i class="fa fa-heart"></i> ${travel.travelLike}</a>
-									</span>
-								</div>
 							</div>
+							<c:if test="${status.count%3 eq 0}" ><br/></c:if>
+							</c:forEach><br/>
 						</div>
-						<c:if test="${status.count%3 eq 0}" ><br/></c:if>
-						</c:forEach><br/>
 						
 	                    <!-- 페이지 번호 -->
 	                    <c:if test="${not empty YourTravelList}">

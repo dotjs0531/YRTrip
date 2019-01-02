@@ -166,11 +166,6 @@ a:hover { color:white }
 		document.frm.page.value = page;
 		document.frm.submit();
 	};
-
-	$(function() {
-		$('#loginId').val('');
-		$('#loginPw').val('');
-	});
 </script>
 
 </head>

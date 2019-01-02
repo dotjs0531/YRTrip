@@ -64,11 +64,6 @@ a:hover { color:white }
 		document.frm.page.value = page;
 		document.frm.submit();
 	};
-
-	$(function() {
-		$('#loginId').val('');
-		$('#loginPw').val('');
-	});
 </script>
 </head>
 <body>
@@ -179,8 +174,6 @@ a:hover { color:white }
 								<c:if test="${status.count%3 eq 0}" ><br/></c:if>
 								
 							</c:forEach>
-							
-							
 						</div>
 						
 	                    <!-- 페이지 번호 -->
