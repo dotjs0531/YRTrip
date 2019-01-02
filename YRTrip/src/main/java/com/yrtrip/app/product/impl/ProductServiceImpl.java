@@ -48,4 +48,9 @@ public class ProductServiceImpl implements ProductService {
 		return dao.getCount(vo);
 	}
 
+	@Override
+	public int getOrderConditionforDelete(ProductVO vo) {
+		return dao.getOrderConditionforDelete(vo);		
+	}
+
 }

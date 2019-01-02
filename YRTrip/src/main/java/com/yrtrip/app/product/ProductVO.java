@@ -33,7 +33,15 @@ public class ProductVO extends LikeVO{
 	//페이징 처리 
 	private int first;
 	private int last; 
-	
+	//deleteinfo 삭제를 위해가져오는 정보들이 몇개있는지 넣는 주머니
+	private int deleteinfo;
+		
+	public int getDeleteinfo() {
+		return deleteinfo;
+	}
+	public void setDeleteinfo(int deleteinfo) {
+		this.deleteinfo = deleteinfo;
+	}
 	public String getSearchCondition() {
 		return searchCondition;
 	}

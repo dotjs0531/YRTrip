@@ -71,7 +71,11 @@ public class ProductController {
 		model.addAttribute("orderList", orderService.getOrderList(voo));
 		return "product/getProduct";
 	}
-	
+	@RequestMapping("infofordelete")
+	@ResponseBody
+	public int inforForDelete(ProductVO vo) {
+		return productService.getOrderConditionforDelete(vo);
+	}
 	//제품등록폼
 	@RequestMapping(value="/insertProduct", method=RequestMethod.GET)
 	public String insertProductForm() {

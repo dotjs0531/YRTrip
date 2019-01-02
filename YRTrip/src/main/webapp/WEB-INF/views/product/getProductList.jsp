@@ -25,10 +25,11 @@
 <link href="resources/css/product.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-$(function(){
+console.log(a);
+/* $(function(){
     var productMenu = document.getElementById("productMenu");
     productMenu.className='current-menu-item';
-});
+}); */
 	function go_page(page) {/* 
 		var option_val = $("#searchClass").val();
 		console.log(option_val);
@@ -65,11 +66,13 @@ $(function(){
 </script>
 <script>
 /*가격 세단위 부터 ,*/
-var money =${product.itemPrice};
-console.log(money);
-var money2 = money.toLocaleString();
-
-$("#itemPrice").text('￦'+money2);
+/*  $(function(){ */
+	var money = $("#itemPrice").text();
+	console.log(money);
+	var money2 = money.toLocaleString();
+	$("#itemPrice").text('');
+	$("#itemPrice").text('￦'+money2);
+/*  }); */
 </script>
 <style>
 #login-column {
@@ -116,81 +119,53 @@ $("#itemPrice").text('￦'+money2);
 				<!-- /.col-lg-3 -->
 
 				<!-- 여기서 부터 가운데 창! -->
+				<!-- 검색시작 -->
 				<div class="col-8">
 					<form name="./getProductList" class="form-inline">
                 			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 								
 								<!-- 제품이름 & 제품내용 -->
-								<div style="padding-bottom:5px">
-								<label class="col-sm-2 control-label" for="searchClass">카테고리 </label>
-								<label class="col-sm-2 control-label" for="searchCondition">검색어</label>
-								<select name="itemCategory" class="form-control" id="searchClass">
-									<option value="">전체</option>
-									<option value="의류">의류</option>
-									<option value="티켓">티켓/쿠폰</option>
-									<option value="전자기기">전자기기</option>
-									<option value="여행도서">여행도서</option>
-									<option value="USIM">USIM</option>
-									<option value="기타">기타</option>
-								</select><!-- 
-								<input type="hidden" name="itemCategory" id="itemCategory"/> -->
+								<div class="row">
+									<label class="col-2 control-label" for="searchClass">카테고리 </label>
+									<label class="col-4 control-label" for="searchCondition">검색어</label>
+								</div>
 								
-								<select name="searchCondition" class="form-control" id="searchCondition">
-									<option value="itemName">제품명</option>
-									<option value="itemContent">내용</option>									
-								</select>	
-								<input type="text" name="searchKeyword" class="form-control" placeholder="검색할 내용을 입력하세요">
+								<div style="padding-bottom:5px">
+								
+									<select name="itemCategory" class="form-control" id="searchClass">
+										<option value="">전체</option>
+										<option value="의류">의류</option>
+										<option value="티켓">티켓/쿠폰</option>
+										<option value="전자기기">전자기기</option>
+										<option value="여행도서">여행도서</option>
+										<option value="USIM">USIM</option>
+										<option value="기타">기타</option>
+									</select><!-- 
+									<input type="hidden" name="itemCategory" id="itemCategory"/> -->
+									
+									<select name="searchCondition" class="form-control" id="searchCondition">
+										<option value="itemName">제품명</option>
+										<option value="itemContent">내용</option>									
+									</select>	
+									<input type="text" name="searchKeyword" class="form-control" placeholder="검색할 내용을 입력하세요">
 								</div>
 								<!-- 가격 -->
 								<!--  -->
 								<!-- 구매가능여부 -->
+								<div class="row">
+									<label class="col-sm-2 control-label">구매가능여부</label>
+								</div>				
 								<div>
-								<label class="col-sm-2 control-label">구매가능여부</label>
-								<input type="radio" name="itemOrderdetail" value="" class="form-control vertical" checked>모두보기 
-								<input type="radio" name="itemOrderdetail" value="구매가능" class="form-control">구매가능
-								<input type="radio" name="itemOrderdetail" value="구매불가" class="form-control">구매불가
-								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+									<input type="radio" name="itemOrderdetail" value="" class="form-control vertical" checked>모두보기 
+									<input type="radio" name="itemOrderdetail" value="구매가능" class="form-control">구매가능
+									<input type="radio" name="itemOrderdetail" value="구매불가" class="form-control">구매불가
+									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 								</div>
 								
 								<input type="hidden" name="page">
          					</div>
 						</form>
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						<!-- Indicators -->
-						<ol class="carousel-indicators">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1"></li>
-							<li data-target="#myCarousel" data-slide-to="2"></li>
-						</ol>
-						<!-- Wrapper for slides -->
-
-						<div class="carousel-inner">
-							<div class="item active">
-								<img src="http://placehold.it/900x350" alt="Los Angeles"
-									style="width: 100%;">
-							</div>
-
-							<div class="item">
-								<img src="http://placehold.it/900x350" alt="Chicago"
-									style="width: 100%;">
-							</div>
-
-							<div class="item">
-								<img src="http://placehold.it/900x350" alt="New york"
-									style="width: 100%;">
-							</div>
-						</div>
-						<!-- Left and right controls -->
-						<a class="left carousel-control" href="#myCarousel"
-							data-slide="prev"> <span
-							class="glyphicon glyphicon-chevron-left"></span> <span
-							class="sr-only">Previous</span>
-						</a> <a class="right carousel-control" href="#myCarousel"
-							data-slide="next"> <span
-							class="glyphicon glyphicon-chevron-right"></span> <span
-							class="sr-only">Next</span>
-						</a>
-					</div>
+		
 					<div class="space-ten"></div>
 					<!--상품상세 페이지-->
 					<div class="col-lg-container">
@@ -205,7 +180,7 @@ $("#itemPrice").text('￦'+money2);
 											src="./images/product/${pic}" alt="" class="img-fluid">
 										<div class="caption">
 
-											<h4 class="pull-right" id="itemPrice"></h4>
+											<h4 class="pull-right" id="itemPrice">${product.itemPrice}</h4>
 											<h4 class="text-truncate">
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>

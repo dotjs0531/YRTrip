@@ -33,6 +33,13 @@
 <!--  Responsive Css  -->
 <link href="resources/css/responsive.css" rel="stylesheet">
 
+
+<link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+<link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+<link rel="canonical" href="https://codepen.io/andreasstorm/pen/deRvMy" />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
+
+
 <!-- 폰트 모음 -->
 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon:400"
 	rel="stylesheet">
@@ -146,38 +153,51 @@
 			</div>
 		</div>
 		<!-- 사이드 -->
-	<div class="share-post stick show" style="top: 627.175px;">
-  <div class="twitter sharrre sharrre-twitter-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="Tweet">
-    <div class="box">
-      <div class="share">
-        <i class="fa fa-twitter"></i>
-      </div> <span class="count">1329</span>
-    </div>
-    </div>
-    <div class="facebook sharrre sharrre-facebook-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="Like">
-      <div class="box">
-        <div class="share">
-          <i class="fa fa-facebook"></i>
-        </div> 
-        <span class="count">6619</span>
-      </div>
-    </div>
-    <div class="googlePlus sharrre sharrre-googleplus-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="+1">
-      <div class="box">
-        <div class="share">
-          <i class="fa fa-google"></i>
-        </div>
-      </div>
-    </div>
-    <div class="linkedin sharrre sharrre-linkedin-9194" data-url="https://ahrefs.com/blog/seo-tips/" data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)" data-title="Share">
-      <div class="box">
-        <div class="share">
-          <i class="fa fa-linkedin"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 사이드 -->
+		<div class="share-post stick show" style="top: 627.175px;">
+			<div class="twitter sharrre sharrre-twitter-9194"
+				data-url="https://ahrefs.com/blog/seo-tips/"
+				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
+				data-title="Tweet">
+				<div class="box">
+					<div class="share">
+						<i class="fa fa-twitter"></i>
+					</div>
+					<span class="count">1329</span>
+				</div>
+			</div>
+			<div class="facebook sharrre sharrre-facebook-9194"
+				data-url="https://ahrefs.com/blog/seo-tips/"
+				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
+				data-title="Like">
+				<div class="box">
+					<div class="share">
+						<i class="fa fa-facebook"></i>
+					</div>
+					<span class="count">6619</span>
+				</div>
+			</div>
+			<div class="googlePlus sharrre sharrre-googleplus-9194"
+				data-url="https://ahrefs.com/blog/seo-tips/"
+				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
+				data-title="+1">
+				<div class="box">
+					<div class="share">
+						<i class="fa fa-google"></i>
+					</div>
+				</div>
+			</div>
+			<div class="linkedin sharrre sharrre-linkedin-9194"
+				data-url="https://ahrefs.com/blog/seo-tips/"
+				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
+				data-title="Share">
+				<div class="box">
+					<div class="share">
+						<i class="fa fa-linkedin"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 사이드 -->
 		<!--   end of logo menu markup     -->
 		<!--  start welcome text marup  -->
 		<div class="table">
@@ -216,22 +236,43 @@
 	<section class="about_top" id="about_top">
 		<div class="container">
 			<div class="row">
-				<!-- foreach itemT에서 들고오기-->
-				<c:forEach items="${productList}" var="product">
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<div class="about_single_item">
-						<div class="about_single_item_content">
-						<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}"/>
-							<c:set var="pic" value="${productPicFile}" />
-							<img src="./images/product/${pic}" alt="item">
-						<br>
-							<h4><a href="./getProduct?itemId=${product.itemId}">${product.itemName}</a></h4>
-							<h2>${product.itemPrice}원</h2>
-							<p class="module line-clamp">${product.itemContent}</p>
+				<div class="container card">
+					<c:forEach items="${productList}" var="product">
+						<div class="column col-md-4 col-sm-4 col-xs-12" style="padding-bottom: 20px;">
+							<!-- Post-->
+							<div class="post-module">
+								<!-- Thumbnail-->
+								<div class="thumbnail">
+									<c:set var="productPicFile"
+										value="${fn:split(product.itemPic, ',')[0]}" />
+									<c:set var="pic" value="${productPicFile}" />
+
+									<img class="card-img-top" src="./images/product/${pic}"
+										alt="item" style="height: 200px;">
+								</div>
+								<!-- Post Content-->
+								<div class="post-content">
+									<div class="category">판매중</div>
+									<h4 class="pull-right">￦12000</h4>
+									<h1 class="title">
+										<a href="./getProduct?itemId=${product.itemId}"
+											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 130px; text-decoration: none !important;">${product.itemName}</a>
+									</h1>
+									<h2 class="sub_title">${product.itemPrice}원</h2>
+									<p class="description"
+										style="display: none; height: 24px; opacity: 1;">테스트1111111</p>
+									<div class="post-meta">
+										<button type="button" class="btn btn-default pull-right"
+											id="buyer1006" data-toggle="modal"
+											data-target="#getMyBuyerList">구매자 목록</button>
+										<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;0</span>
+										<span class="comments"><i class="fa fa-star"></i>&nbsp;0.0</span>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
-				 </c:forEach>
 				<!-- foreach 끝 -->
 			</div>
 		</div>
@@ -277,22 +318,29 @@
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="row">
-			  <%-- <c:forEach items="${travelBoardlist}" var="travelBoard">
-				<div class="col-md-4 col-sm-4 col-xs-12">
-					<div class="about_single_item">
-						<div class="about_single_item_content">
-						<c:set var="productPicFile" value="${fn:split(travelBoard.itemPic, ',')}" />
-						
-							<img src="./images/product/${pic}" alt="item">
-						
-						<br>
-							<h4><a href="./getTravelBoardList?travelBoardNo=${travelBoard.travelBoardNo}">${travelBoard.}</a></h4>
-							<h2>${product.itemPrice}원</h2>
-							<p class="module line-clamp">${product.itemContent}</p>
+				<c:forEach items="${travelBoardlist}" var="board">
+					<div class="col-md-2 col-sm-2 col-xs-12">
+						<div class="about_single_item">
+							<div class="about_single_item_content">
+								<c:if test="${travelBoard.travelPic != null}">
+									<img src="./images/travel/${travelBoard.travelPic}"
+										class="img-responsive">
+								</c:if>
+								<c:if test="${travelBoard.travelPic == null}">
+									<img src="./images/travel/noimage.jpg" class="img-responsive">
+								</c:if>
+								<br>
+								<h4>
+									<a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a>
+								</h4>
+								<h2>${board.userId}</h2>
+								<a href="#" data-placement="right" title="Like"> <i
+									class="fa fa-heart"></i> ${board.travelLike}
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				 </c:forEach> --%>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -307,7 +355,7 @@
 			<div class="row">
 				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-4">
 					<div class="single-footer">
-					<h2>사이트맵</h2>
+						<h2>사이트맵</h2>
 						<ul class="list">
 							<li><a href=""></a></li>
 							<li><a href=""></a></li>
@@ -481,15 +529,17 @@
 	</div>
 
 
-
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="resources/js/mypage.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!--  jquery.min.js  -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<!-- <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
 	<!--    bootstrap.min.js-->
-	<script
+	<!-- <script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
 	<!--    jquery.sticky.js-->
 	<script src="resources/js/jquery.sticky.js"></script>
 	<!--  owl.carousel.min.js  -->
@@ -521,5 +571,5 @@
 			});
 		})
 	</script>
-</body>
+	</ body>
 </html>

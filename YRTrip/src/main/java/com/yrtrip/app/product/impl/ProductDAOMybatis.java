@@ -39,4 +39,8 @@ public class ProductDAOMybatis {
 	public int getCount(ProductVO vo) {
 		return mybatis.selectOne("product.getCount", vo);
 	}
+	
+	public int getOrderConditionforDelete(ProductVO vo) {
+		return mybatis.selectOne("product.getOrderConditionforDelete", vo);
+	}
 }

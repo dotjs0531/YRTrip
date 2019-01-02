@@ -39,19 +39,19 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 #login-column {
-   width:100%;
-   margin: 0 10px;
+	width: 100%;
+	margin: 0 10px;
 }
-.nav>li>a:focus,
-.nav>li>a:hover{
-   background-color:white;
+
+.nav>li>a:focus, .nav>li>a:hover {
+	background-color: white;
 }
 </style>
 <script>
-$(function(){
-    var productMenu = document.getElementById("productMenu");
-    productMenu.className='current-menu-item';
-});
+	$(function() {
+		var productMenu = document.getElementById("productMenu");
+		productMenu.className = 'current-menu-item';
+	});
 </script>
 <script>
 	/* function insertCartbtn(){
@@ -59,26 +59,26 @@ $(function(){
 		var url = 'getCartList.jsp?myId=' + encodeURI(s);
 		window.location.href = url;
 	} */
-	
+
 	function disLike(uId, lC, lBid) {
 		location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC
 				+ "&likeBoardid=" + lBid;
 	};
 	/* 좋아요 */
-	$(function(){
+	$(function() {
 		/* 캐러셀 div class 계속 변경 시키는 스크립트 */
-		var carousel_class_init = "active";	
+		var carousel_class_init = "active";
 		var carousel_ea = $("div#itemC").length;
 		console.log(carousel_ea);
-		for(i=0; i<1; i++){
+		for (i = 0; i < 1; i++) {
 			$("#itemC").addClass(carousel_class_init);
-		}	
-
-		if($("#itemOrderdetail_class").text() == '구매불가'){
-			$("#itemOrderdetail_class").removeClass("text-success").addClass("text-danger")
 		}
-				
-		
+
+		if ($("#itemOrderdetail_class").text() == '구매불가') {
+			$("#itemOrderdetail_class").removeClass("text-success").addClass(
+					"text-danger")
+		}
+
 		function likeCondition() {
 			var params = {
 				userId : '${sessionScope.login.userId}',
@@ -119,36 +119,42 @@ $(function(){
 	});
 </script>
 <script>
-$(function(){
-	if($("#item_ea_js").text() == 0 || "${sessionScope.login.userId}" == "${product.sellerId}")
-	{
-		$("#insertcart").attr("disabled", "disabled");
-		$("#insertcart").text("구매불가");
-	}
-	
-	if("${sessionScope.login.userId}" != "${product.sellerId}"){
-		$("#seller-only").hide();	
-	}
-});
+	$(function() {
+		if ($("#item_ea_js").text() == 0
+				|| "${sessionScope.login.userId}" == "${product.sellerId}") {
+			$("#insertcart").attr("disabled", "disabled");
+			$("#insertcart").text("구매불가");
+		}
+
+		if ("${sessionScope.login.userId}" != "${product.sellerId}") {
+			$("#seller-only").hide();
+		}
+	});
 </script>
 <script>
-function deleteProduct(){	
-		if(confirm("삭제하시겠습니까? \n(복구는 불가합니다)") == true){
-			if('구매불가' != '${product.itemOrderdetail}'){
-				alert("구매중인 구매자가 있습니다.\n해당상품의 구매자목록을 확인하세요");
-				return false;
+$(function(){
+	$('#deleteProduct').on("click", function(){
+		var par = {
+				itemId : '${product.itemId}'
 			}
-			else{
-				alert("삭제됩니다\n복구는 불가합니다");
-				$("#deleteProduct").attr("href", "deleteProduct?itemId=${product.itemId}");
-				return true;
-			}
-		}
-		else{
-			return false;
-		}
-	}
-
+			$.getJson("infofordelete", par, function(datas) {
+				if (confirm("삭제하시겠습니까? \n(복구는 불가합니다)") == true) {
+					if (datas == '0') {
+						alert("삭제합니다");
+						$("#deleteProduct").attr("href",
+								"deleteProduct?itemId=${product.itemId}");
+						return true;
+					} else {
+						alert("거래진행중인 상품입니다 \n해당제품의 구매자목록을 확인하세요");
+						return false;
+					}
+				} else {
+					return false;
+				}
+			})
+	});
+});
+	
 </script>
 </head>
 <body>
@@ -184,7 +190,7 @@ function deleteProduct(){
 				</div>
 				<!-- 끝 : 사이드 : 3-->
 				<!-- 시작 : 내용 : 9-->
-				<div class="container col-lg-9">					
+				<div class="container col-lg-9">
 					<div class="card mb-10">
 						<div class="card-header">
 							<nav class="header-navigation">
@@ -206,15 +212,17 @@ function deleteProduct(){
 
 								<div class="btn-group pull-right" id="seller-only">
 									<a href="updateProduct?itemId=${product.itemId}"
-										class="btn btn-link">수정하기</a> <a id="deleteProduct"
-										onclick="deleteProduct();" class="btn btn-link btn-share">삭제하기</a>
+										class="btn btn-link">수정하기</a> 
+										<a id="deleteProduct"
+										 class="btn btn-link btn-share">삭제하기</a>
+										 <!-- onclick="deleteinfo();" -->
 								</div>
 							</nav>
 						</div>
 						<div class="card-body store-body">
 							<!-- 왼쪽 -->
 							<div class="product-info">
-								
+
 								<!-- 왼쪽 갤러리(사진들만) -->
 								<div class="product-gallery">
 									<div class="product-gallery-featured">
@@ -227,25 +235,24 @@ function deleteProduct(){
 												<li data-target="#myCarousel" data-slide-to="1"></li>
 												<li data-target="#myCarousel" data-slide-to="2"></li>
 											</ol>
-												<!-- 사진넣는부분 -->
+											<!-- 사진넣는부분 -->
 											<div class="carousel-inner">
 												<c:set var="productPicFile"
 													value="${fn:split(product.itemPic, ',')}" />
 												<c:forEach items="${productPicFile}" var="pic">
-												<div id="itemC" class="item">
-													<img class="img-responsive center-block" id="img" src="./images/product/${pic}"
-														style="height: 600px;" />
-												</div>												
+													<div id="itemC" class="item">
+														<img class="img-responsive center-block" id="img"
+															src="./images/product/${pic}" style="height: 600px;" />
+													</div>
 												</c:forEach>
 											</div>
-											
+
 											<!--왼쪽 / 오른쪽 화살표-->
 											<a class="left carousel-control" href="#myCarousel"
 												data-slide="prev" style="opacity: 0;"> <span
 												class="glyphicon glyphicon-chevron-left"></span> <span
 												class="sr-only">Previous</span>
-											</a> 
-											<a class="right carousel-control" href="#myCarousel"
+											</a> <a class="right carousel-control" href="#myCarousel"
 												data-slide="next" style="opacity: 0;"> <span
 												class="glyphicon glyphicon-chevron-right"></span> <span
 												class="sr-only">Next</span>
@@ -264,25 +271,26 @@ function deleteProduct(){
 											<h1 class="col-md-4 product-price display-1">￦${product.itemPrice}</h1>
 										</div>
 										<p class="mb-0">
-											<i class="fa fa-truck"></i>${product.itemCondition}
-											<small id="itemOrderdetail_class" class="pull-right text-success">${product.itemOrderdetail}</small>
+											<i class="fa fa-truck"></i>${product.itemCondition} <small
+												id="itemOrderdetail_class" class="pull-right text-success">${product.itemOrderdetail}</small>
 										</p>
 										<div class="text-muted mb-2">
 											<small>약간의 사용감이 있습니다!</small>
 										</div>
 										<label for="quant">수량</label> <input type="number"
-											name="itemEa" min="1" max="${product.itemEa}" id="quant" value=""
-											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
-										<input type="hidden" value="${sessionScope.login.userId}"
-											name="myId"> <input type="hidden"
-											value="${product.itemId}" name="itemId">
+											name="itemEa" min="1" max="${product.itemEa}" id="quant"
+											value="" class="form-control mb-5 input-lg"
+											placeholder="1개 이상 선택하세요"> <input type="hidden"
+											value="${sessionScope.login.userId}" name="myId"> <input
+											type="hidden" value="${product.itemId}" name="itemId">
 										<!-- </form> -->
 										<div class="order-buton align-content-sm-center">
 											<!-- 테스터 -->
 											<a role="button" class="col btn btn-lg btn-block btn-light"
 												href="./getCartList?myId=${sessionScope.login.userId}">
 												전체 장바구니 보기${sessionScope.login.userId}</a>
-											<button class="col btn btn-lg btn-block" type="submit" id="insertcart">장바구니담기</button>
+											<button class="col btn btn-lg btn-block" type="submit"
+												id="insertcart">장바구니담기</button>
 											<a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
 												role="button" class="btn btn-lg btn-block btn-light"
 												href="./purchasingProduct">구매하기</a>
@@ -354,7 +362,7 @@ function deleteProduct(){
 											<dd class="col-sm-8">${product.sellerId}</dd>
 										</dl>
 										<h2 class="mb-5">제품 상세 설명</h2>
-										<pre style="background-color:white; line-height:1.3em">${product.itemContent}</pre>
+										<pre style="background-color: white; line-height: 1.3em">${product.itemContent}</pre>
 									</div>
 									<!-- <div class="product-faq mb-5">
 										<h2 class="mb-3">Q/A라고 쓰고 큐엔에이라고 읽</h2>
