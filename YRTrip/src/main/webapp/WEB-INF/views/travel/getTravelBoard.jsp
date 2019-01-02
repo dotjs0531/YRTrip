@@ -201,6 +201,10 @@ background-color:#22313F;
 </style>
 <script>
 
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 	function disLike(uId, lC, lBid){
 		   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
 	};

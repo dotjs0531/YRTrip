@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,7 @@
                 </div>
             </div>
         </div>
+		<%-- <c:set var="path" value="${fn:split(requestScope['javax.servlet.include.request_uri'],'/')[3]}" /> ${path}<br> --%>
     </section>
     <!--   end of about us area-->
 </body>

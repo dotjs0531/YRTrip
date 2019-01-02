@@ -48,6 +48,12 @@
 }
 </style>
 <script>
+$(function(){
+    var productMenu = document.getElementById("productMenu");
+    productMenu.className='current-menu-item';
+});
+</script>
+<script>
 	/* function insertCartbtn(){
 		var s = document.getElementById('myId').value;
 		var url = 'getCartList.jsp?myId=' + encodeURI(s);

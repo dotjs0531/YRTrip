@@ -64,7 +64,10 @@ $(function() {
 	console.log(carousel_ea);
 	for(i=0; i<1; i++){
 		$("#itemC").addClass(carousel_class_init);
-	}
+	};
+	
+	$('#loginId').val('');
+	$('#loginPw').val('');
 });
 </script>
 <script src="//use.typekit.net/xyl8bgh.js"></script>

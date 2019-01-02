@@ -25,6 +25,10 @@
 <link href="resources/css/product.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+$(function(){
+    var productMenu = document.getElementById("productMenu");
+    productMenu.className='current-menu-item';
+});
 	function go_page(page) {/* 
 		var option_val = $("#searchClass").val();
 		console.log(option_val);

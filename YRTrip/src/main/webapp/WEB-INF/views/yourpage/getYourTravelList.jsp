@@ -64,6 +64,11 @@ a:hover { color:white }
 		document.frm.page.value = page;
 		document.frm.submit();
 	};
+
+$(function() {
+	$('#loginId').val('');
+	$('#loginPw').val('');
+});
 </script>
 
 <script src="//use.typekit.net/xyl8bgh.js"></script>

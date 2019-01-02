@@ -62,6 +62,10 @@
 }
 </style>
 <script>
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 /* 파일업로드 */
 $(document).ready(function(){
 		$("#fileInput").on('change', function(){

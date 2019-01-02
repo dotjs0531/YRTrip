@@ -122,6 +122,12 @@
 }
 
 </style>
+<script>
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
+</script>
 </head>
 <body>
 <section class="about_us_area" id="about">

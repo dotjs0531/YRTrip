@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 카카오톡 공유하기 -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
-<title>KakaoLink v2 Demo(Default / List) - Kakao JavaScript SDK</title>
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<title>동행 게시판 글쓰기</title>
+<script>
+$(function(){
+    var partnerMenu = document.getElementById("partnerMenu");
+    partnerMenu.className='current-menu-item';
+});
+</script>
 <script>
 function del(partnerId) {
 	if (confirm("삭제하시겠습니까?")) {
@@ -20,13 +20,24 @@ function del(partnerId) {
 		return;
 	}
 };
-function close(partnerId) {
+/* function close(partnerId) {
 	if (confirm("완료하시겠습니까?")) {
 		location.href = "./closePartner?partnerId=" + partnerId;
 	} else {
 		return;
 	}
-};
+}; */
+$(function(){
+	$("#closePartner").click(function() {
+		if (confirm("완료하시겠습니까?")) {
+			document.closeForm.submit();
+		} else {
+			return;
+		}
+	});
+});
+</script>
+<script>
 	$(function() {
 		//동행 신청 목록 조회	
 		loadJoinerList();
@@ -271,17 +282,20 @@ function close(partnerId) {
 						
 						<c:if test="${sessionScope.login.userId eq partner.userId}">
 							<div class="order-buton" style="float: right">
-							<c:choose>
-								<c:when test="${partner.partnerCondition eq '완료'}">
+								<c:if test="${partner.partnerCondition eq '완료'}">
 									<button class="btn btn-default" onclick="location.href='./updatePartnerForm?partnerId=${partner.partnerId}'">수정</button>
 									<button class="btn btn-default" onclick="del('${partner.partnerId}')">삭제</button>
-								</c:when>
-								<c:otherwise>
-									<button class="btn btn-success" onclick="close('${partner.partnerId}')">완료하기</button>
+								</c:if>
+								<c:if test="${partner.partnerCondition eq '미완료'}">
+								
+									<form action="./closePartner" name="closeForm">
+										<input type="hidden" id="partnerId" name="partnerId" value="${partner.partnerId}">
+									</form>
+									
+									<button class="btn btn-success" id="closePartner">완료하기</button>
 									<button class="btn btn-default" onclick="location.href='./updatePartnerForm?partnerId=${partner.partnerId}'">수정</button>
 									<button class="btn btn-default" onclick="del('${partner.partnerId}')">삭제</button>
-								</c:otherwise>
-							</c:choose>
+								</c:if>
 							</div>
 							<p style="clear:both">
 						</c:if>
@@ -297,6 +311,8 @@ function close(partnerId) {
 			</div>
 		</div>
 	</section>
+<!-- 카카오톡 공유하기 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type='text/javascript'>
   //<![CDATA[
 	  

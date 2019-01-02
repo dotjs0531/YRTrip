@@ -198,6 +198,10 @@ background-color:#22313F;
 
 <script>
 
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 jQuery( document ).ready(function( $ ) {
 		/* 여행등록 modal */
 	   $("#insertTravelBoardButton").click(function(){
@@ -627,7 +631,7 @@ function loadTravelPlaceList(){
 							</div>
 							</div>
 										<button class="btn btn-sm btn-warning pull-right" type="submit">
-											<i class="fa fa-pencil fa-fw"></i>수정완료하기
+											<i class="fas fa-pencil-alt fa-fw"></i>수정완료하기
 										</button>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
