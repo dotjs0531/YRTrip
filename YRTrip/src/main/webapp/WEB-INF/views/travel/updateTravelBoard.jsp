@@ -215,6 +215,14 @@ jQuery( document ).ready(function( $ ) {
 	   
 	   /* 장소 수정 modal */
 	   $("#travelPlaceList").on("click", ".btnUpd", function(){
+	 		var div = $(this).closest('.travelPlaceList');
+	 		$("#updateTravelPlaceAjaxData [name=placeNo]").val(div[0].data.placeNo);
+	 		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
+	 		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
+	 		$("#updateTravelPlaceAjaxData [name=placeTitle]").val(div[0].data.placeTitle);
+	 		$("#updateTravelPlaceAjaxData [name=placePic]").val(div[0].data.placePic);
+	 		$("#updateTravelPlaceAjaxData [name=placeContent]").val(div[0].data.placeContent);
+	 		$("#updateTravelPlaceAjaxData [name=placeVisitDate]").val((div[0].data.placeVisitDate).substring(0,10));
 	    	$('div#updateTravelPlace').modal(true);
 		});	
 	   
@@ -316,13 +324,14 @@ function loadTravelPlaceList(){
 //장소리스트 조회 뷰
 	function makeTravelPlaceView(travelPlace){
 	var div = $("<div>"); 
+	div[0].data = travelPlace;
  	div.attr("id", "c"+travelPlace.placeNo);
 	div.addClass('travelPlaceList');
 	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
    	var year = (travelPlace.placeVisitDate).substring(0,4) ;
 	var month = (travelPlace.placeVisitDate).substring(5,7);
 	var day = (travelPlace.placeVisitDate).substring(8,10);
-	var str = "<article class=\"panel panel-warning\">"
+	var str = "<article class=\"panel panel-warning placeNo\" id=\"c"+travelPlace.placeNo+"\">"
 				+"<div class=\"panel-heading icon\">"
 				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
   				+"<p style=\"margin:-5px; background-color:#fff;\">" + year +"</p>"
@@ -333,13 +342,16 @@ function loadTravelPlaceList(){
 				+"<div class=\"panel-heading\">"
 				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
  				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
- 				+"<button type=\"button\" class=\"btnUpd\" style=\"float:right;\">수정</button>" 
+ 				+"<button type=\"button\" value='"+travelPlace.placeNo+"' class=\"btnUpd\" style=\"float:right;\">수정</button>" 
 				+"<br>"
 				
 				+"</div>"
 			
 				+"<div class=\"panel-body\">"
-				+"<img class=\"img-responsive img-rounded\" src=\"//placehold.it/350x150\" />"
+				+ travelPlace.placeName + "<br>"
+				+"<small>" + travelPlace.placeAddress + "</small>"
+				+"<img class=\"img-responsive img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
+				+ travelPlace.placeContent
 				+"</div>"
 			
 				+"<div id=\"footer\" class=\"panel-footer\">"
@@ -373,16 +385,27 @@ function loadTravelPlaceList(){
 		}
 	});
 	//장소 수정
- 	$("#updateTravelPlaceBtn").on("click", ".btnUpd", function(){
+	$("#updateTravelPlaceBtn").click(function(){
+			var params = $("#updateTravelPlaceAjaxData").serialize();
+			var placeId = $(this).closest('.placeNo').attr("id");
+			console.log(placeId);
+			$.getJSON("updateTravelPlaceAjax", params, function(datas){
+				jQuery.noConflict();
+				$('#updateTravelPlace').modal("hide");
+				$("#c55").remove();
+				loadTravelPlaceList();
+			});
+		});
+	
+/*  	$("#updateTravelPlaceBtn").on("click", ".btnUpd", function(){
  		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
- 		var params = $("#updateTravelPlaceAjaxData").serialize();
 	 	$.getJSON("updateTravelPlaceAjax", params, function(datas){
 			var div = makeTravelPlaceView(datas);
 			$(div).prependTo("#travelPlaceList");
 			jQuery.noConflict();
 			$('#updateTravelPlace').modal("hide");
 		}); 
-	}); 
+	});  */
 });	
 
 </script>
@@ -716,34 +739,35 @@ function loadTravelPlaceList(){
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" value="${travelPlace.placeName}">
+													<input type="text" name="placeName" class="form-control">
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" value="${travelPlace.placeAddress}">
+													<input type="text" name="placeAddress" class="form-control">
 												</div>
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" value="${travelPlace.placeTitle}">
+													<input type="text" name="placeTitle" class="form-control">
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" value="${travelPlace.placePic}">
+													<input type="text" name="placePic" class="form-control">
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" value="${travelPlace.placeContent}">
+													<input type="text" name="placeContent" class="form-control">
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" value="${travelPlace.placeVisitDate}">
+													<input type="text" name="placeVisitDate" class="form-control datePicker">
 												</div>
 												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
-													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
+													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 수정</i>
 												</button>
 											</div>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
+										<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
 									</form>
 						</div>
 					</div>

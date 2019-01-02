@@ -14,7 +14,7 @@ $(function(){
 		$.getJSON("getUserListAjax", null, function(datas){	
 		for(i=0; i<datas.length; i++){
 			
-			var str = "<tr><td>"
+			var str = "<tr id=\"USR"+datas[i].userId+"\"><td>"
 					 +"<strong>"+ datas[i].userId +"</strong>"
 					 +"</td><td>"
 					 +"<strong>" + datas[i].userName +"</strong>"
@@ -27,8 +27,7 @@ $(function(){
 					 +"</td><td>"
 						 + datas[i].userDate
 					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-					 +"<input type=\"hidden\" id=\"userId\" value=\""+datas[i].userId+"\">"
+					 +"<button type=\"button\" value='"+datas[i].userId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
 					 +"</td></tr>"
 					$(str).appendTo("#userList");
 		}
@@ -36,12 +35,12 @@ $(function(){
 	});
 
 	$("#userList").on("click", ".btnDel", function(){
- 		var userId = $(this).closest('#userList').find('#userId').val();
+		var userId = $(this).closest('.btnDel').val();
 		if(confirm("삭제하시겠습니까?")) {
 			var params = "userId=" + userId;
 			var url = "deleteUserAjax";
 			$.getJSON(url, params, function(datas){
-				$(userId).remove();
+				$("#USR" + userId).remove();
 			});
 		}
 	});
@@ -57,13 +56,13 @@ $(function(){
              <h4 class="card-title"><strong>회원관리</strong></h4>
              <div class="input-group col-xs-12" style="width:300px; float:right;">
                    <input type="text" class="form-control file-upload-info" style="width:200px;">
-<!--  시간 남으면 추가                  <span class="input-group-append">
+                  <span class="input-group-append">
                      <button class="file-upload-browse btn" type="button">검색</button>
-                   </span> -->
+                   </span>
                  </div>
              <div class="table-responsive">
-               <table class="table table-striped">
-                 <thead style="text-align:center;">
+               <table class="table table-striped" style="text-align:center;">
+                 <thead>
                    <tr>
                      <th>
               		         아이디

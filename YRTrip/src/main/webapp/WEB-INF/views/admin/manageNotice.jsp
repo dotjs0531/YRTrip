@@ -47,8 +47,14 @@
          <div class="card">
            <div class="card-body">
              <h4 class="card-title">공지사항 관리</h4>
+             <div class="input-group col-xs-12" style="width:300px; float:right;">
+                   <input type="text" class="form-control file-upload-info" style="width:200px;">
+                  <span class="input-group-append">
+                     <button class="file-upload-browse btn" type="button">검색</button>
+                   </span>
+                 </div>
              <div class="table-responsive">
-               <table class="table table-striped">
+               <table class="table table-striped" style="text-align: center;">
                  <thead>
                    <tr>
                      <th>

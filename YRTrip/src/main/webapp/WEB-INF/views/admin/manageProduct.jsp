@@ -11,49 +11,36 @@
 <script>
 	$(function() {
 		$(function() {
-			$
-					.getJSON(
-							"getManageProductListAjax",
-							null,
-							function(datas) {
-								console.log(datas);
-								for (i = 0; i < datas.length; i++) {
-
-									var str = "<tr><td>"
-											+ "<strong>PR"
-											+ datas[i].itemId
-											+ "</strong>"
-											+ "</td><td>"
-											+ "<strong>"
-											+ datas[i].itemName
-											+ "</strong>"
-											+ "</td><td>"
-											+ datas[i].itemEa
-											+ "</td><td>"
-											+ datas[i].itemMethod
-											+ "</td><td>"
-											+ datas[i].sellerId
-											+ "</td><td>"
-											+ datas[i].itemCondition
-											+ "</td><td>"
-											+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='./getProduct?itemId='\""
-											+ datas[i].itemId
-											+ ">상세보기</button>"
-											+ "<button type=\"button\" class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-											+ "<input type=\"hidden\" id=\"itemId\" value=\""+datas[i].itemId+"\">"
-											+ "</td></tr>"
+			$.getJSON("getManageProductListAjax", null, function(datas) {
+					for (i = 0; i < datas.length; i++) {
+						var str = "<tr id=\"PR"+datas[i].itemId+"\"><td>"
+								+ "<strong>PR"+ datas[i].itemId+ "</strong>"
+								+ "</td><td>"
+								+ "<strong>"+ datas[i].itemName+ "</strong>"
+								+ "</td><td>"
+								  + datas[i].itemEa
+								+ "Ea</td><td>"
+								  + datas[i].itemMethod
+								+ "</td><td>"
+								  + datas[i].sellerId
+								+ "</td><td>"
+								  + datas[i].itemCondition
+								+ "</td><td>"
+								+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='./getProduct?itemId='\""+ datas[i].itemId+ ">상세보기</button>"
+								+ "<button type=\"button\" value='"+datas[i].itemId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+								+ "</td></tr>"
 									$(str).appendTo("#productList");
 								}
 							});
 		});
 
 		$("#productList").on("click", ".btnDel", function() {
-			var itemId = $(this).closest('#productList').find('#itemId').val();
+			var itemId = $(this).closest('.btnDel').val();
 			if (confirm("삭제하시겠습니까?")) {
 				var params = "itemId=" + itemId;
 				var url = "deleteProductAjax";
 				$.getJSON(url, params, function(datas) {
-					$(itemId).remove();
+					$("#PR" + itemId).remove();
 				});
 			}
 		});
@@ -88,7 +75,7 @@
 								<th>관리</th>
 							</tr>
 						</thead>
-						<tbody id="productList">
+						<tbody id="productList" style="text-align: center;">
 
 						</tbody>
 					</table>
