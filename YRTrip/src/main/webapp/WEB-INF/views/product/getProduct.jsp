@@ -134,26 +134,44 @@
 <script>
 $(function(){
 	$('#deleteProduct').on("click", function(){
-		var par = {
-				itemId : '${product.itemId}'
-			}
-			$.getJson("infofordelete", par, function(datas) {
-				if (confirm("삭제하시겠습니까? \n(복구는 불가합니다)") == true) {
-					if (datas == '0') {
+		$.ajax({
+			type:"GET",
+			url:"infofordelete",
+			data:{itemId : "${product.itemId}"},
+			datatype : "integer",
+			success : function(data){
+				console.log(data);	
+				if(confirm("삭제하시겠습니까? 복구는 불가합니다.")==true){
+					if(data == 0){
 						alert("삭제합니다");
-						$("#deleteProduct").attr("href",
-								"deleteProduct?itemId=${product.itemId}");
-						return true;
-					} else {
-						alert("거래진행중인 상품입니다 \n해당제품의 구매자목록을 확인하세요");
+						window.location = "deleteProduct?itemId=${product.itemId}";
+					}
+					else{
+						alert("진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
 						return false;
 					}
-				} else {
+				}
+				else{
 					return false;
 				}
-			})
+			}
+			
+		});	
 	});
 });
+					
+				/*if(data == 0){
+					if (confirm("삭제하시겠습니까? \n(복구는 불가합니다)") == true) {		
+						alert("삭제합니다");
+						
+					}
+					else{
+						return false;
+					}
+				}else{
+					return false;
+				} */
+
 	
 </script>
 </head>
@@ -181,10 +199,7 @@ $(function(){
 							<li><a href="#" style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton">
-							<a href="#">상품요청</a>
-						</div>
-						<div class="order-buton">
-							<a href="#">상품등록</a>
+							<a href="insertProduct">상품등록</a>
 						</div>
 					</div>
 				</div>
@@ -212,7 +227,7 @@ $(function(){
 
 								<div class="btn-group pull-right" id="seller-only">
 									<a href="updateProduct?itemId=${product.itemId}"
-										class="btn btn-link">수정하기</a> 
+										class="btn btn-link btn-share">수정하기</a> 
 										<a id="deleteProduct"
 										 class="btn btn-link btn-share">삭제하기</a>
 										 <!-- onclick="deleteinfo();" -->

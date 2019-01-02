@@ -54,12 +54,37 @@ $(function(){
 		console.log(cart_total);
 		$(".cart_total").html(cart_total);
 		
-		$('#go_update').click(function(){
-			var new_itemEa = '<input type=\"text\" id=\"update_btn\" value=\"${cart.itemEa}\">';
+			/* $('#go_update').click(function(){
+				
+				$("#original_itemEa").empty();
+				
+			}) */
+		
+		/* $("#go_update").on("click", function(){
+			var new_input = '<input type=\"text\" id=\"update_input\">';
+			var new_button = '<button type=\"button\" id=\"update_button\">수정</button>';
 			$("#original_itemEa").empty();
-			$("#original_itemEa").html(new_itemEa);
-		})
-	}); 
+			$("#original_itemEa").html(new_input);
+			$("#go_update").empty();
+			$("#go_update").html(new_button);
+		}); */
+			/* $("#update_button").on("click", function(){
+				$.ajax({
+					type:"POST",
+					url:"updateCart",
+					data:{
+						itemEa : "${cart.itemEa}",
+						cartId : "${cart.cartId}"
+					},
+				success : function(data){
+					console.log(data.itemEa);
+					$("#original_itemEa").text(data.itemEa);
+						$("#update_input").empty();
+							
+					}
+				}); 
+			}); */			
+		});
 	 /*	$.ajax({
 		
 	}) */

@@ -60,7 +60,10 @@ console.log(a);
 		});
 		
 		if("${sessionScope.login.userId}" == ''){
-			$("#insertbtn").hide();
+			$("#insertbtn").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			});
 		}
 	});		
 </script>
@@ -108,9 +111,6 @@ console.log(a);
 							<li><a href="getProductList?itemCategory=USIM" style="color: black">USIM</a></li>
 							<li><a href="getProductList?itemCategory=기타" style="color: black">기타</a></li>
 						</ul>
-						<div class="order-buton">
-							<a href="#">상품요청</a>
-						</div>
 						<div class="order-buton" id="insertbtn">
 							<a href="insertProduct">상품등록</a>
 						</div>
