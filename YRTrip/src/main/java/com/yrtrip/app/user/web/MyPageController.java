@@ -279,6 +279,11 @@ public class MyPageController {
 		mv.setViewName("mypage/getMyReviewList");
 		return mv;
 	}
+	@RequestMapping("getMyReviewListAjax") //리뷰목록 ajax 조회
+	@ResponseBody
+	public List<OrderVO> getMyReviewListAjax(OrderVO vo) {
+		return mypageService.getMyReviewList(vo);
+	}
 	@RequestMapping("insertMyReview") //리뷰 등록
 	public String insertMyReview(Model model, OrderVO vo, MultipartHttpServletRequest request, MultipartFile[] reviewPicFile) throws IllegalStateException, IOException {
 		model.addAttribute("MyOrder", mypageService.getMyOrder(vo));

@@ -135,7 +135,7 @@
     <!-- 로그인 창 -->
 	<div class="modal fade" id="login">
 		<div class="modal-dialog">
-			<div class="modal-content" style="width:80%; margin:0 auto">
+			<div class="modal-content" style="width:80%; margin:0 auto; margin-top:100px">
 				<!-- remote ajax call이 되는영역 -->
 				<!-- header -->
 				<div class="modal-header">

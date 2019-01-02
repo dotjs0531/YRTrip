@@ -109,10 +109,7 @@ $(function() {
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
-			/* for (var i in picName) {
-				$(".file-caption-info").html(picName[i]);
-				$(".file-caption-info").html(picName[i]);
-			} */
+			$("input[name=reviewPicFile]").val(reviewPic);
 		});
 	});
 });
