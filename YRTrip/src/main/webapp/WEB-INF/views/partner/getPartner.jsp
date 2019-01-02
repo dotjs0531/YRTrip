@@ -170,7 +170,7 @@ $(function(){
 				loadJoinerList();
 			});
 		});
-});
+	});
 </script>
 <style>
 @font-face {

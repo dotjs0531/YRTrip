@@ -69,6 +69,7 @@ public class MyPageController {
 	@RequestMapping("/getMyPartnerList")
 	public ModelAndView getMyPartnerList(PartnerVO pvo, JoinerVO jvo, Paging paging, HttpSession session) {
 		pvo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
+		jvo.setUserId(((UserVO)session.getAttribute("login")).getUserId());
 
 		ModelAndView mv = new ModelAndView();
 
@@ -247,6 +248,11 @@ public class MyPageController {
 	@RequestMapping("/updateOrderCondition") //거래내역 상태 변경(구매확정시 배송완료+거래완료)
 	public String updateOrderCondition(OrderVO vo) {
 		mypageService.updateOrderCondition(vo);
+		return "redirect:getMyOrderList";
+	}
+	@RequestMapping("/cancleMyOrder") //거래취소
+	public String cancleMyOrder(OrderVO vo) {
+		mypageService.cancleMyOrder(vo);
 		return "redirect:getMyOrderList";
 	}
 	

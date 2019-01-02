@@ -99,6 +99,9 @@ public class MyPageDAOMybatis {
 	public void updateOrderCondition(OrderVO vo) {
 		mybatis.update("user.updateOrderCondition", vo);
 	}
+	public void cancleMyOrder(OrderVO vo) {
+		mybatis.update("user.cancleMyOrder", vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {

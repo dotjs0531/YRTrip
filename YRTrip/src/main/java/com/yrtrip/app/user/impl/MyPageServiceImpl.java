@@ -98,6 +98,9 @@ public class MyPageServiceImpl implements MyPageService {
 	public void updateOrderCondition(OrderVO vo) {
 		dao.updateOrderCondition(vo);
 	}
+	public void cancleMyOrder(OrderVO vo) {
+		dao.cancleMyOrder(vo);
+	}
 
 	//리뷰
 	public int getMyReviewCount(OrderVO vo) {

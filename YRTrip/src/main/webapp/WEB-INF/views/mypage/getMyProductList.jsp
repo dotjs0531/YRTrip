@@ -160,10 +160,10 @@ function del() {
 			$("#MyBuyerList").empty();
 			$.getJSON("getMyBuyerList", param, function(datas) {
 				for(i=0; i<datas.length; i++) {
-					if(datas[i].orderCondition != '거래취소'){
+					/* if(datas[i].orderCondition != '거래취소'){ */
 						var div = makeBuyerListView(datas[i]);
 						$(div).appendTo("#MyBuyerList");
-					}
+					/* } */
 				}
 			})
 		});
@@ -175,10 +175,14 @@ function del() {
 			
 			var str = "<div><i class='fa fa-user' style='float:left; margin:10px 0 10px 10px'></i>"
 					+ "<label class='col-sm-2 control-label' style=\"margin:10px 0 0 0\"><a style='color:black; text-decoration:none !important;' href='./getYourTravelList?userId="+ buyer.buyerId +"'>" + buyer.buyerId + "</a></label>" 
-		        	+ "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
+			if(buyer.orderCondition != '거래취소') {
+		        str += "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 " + buyer.orderEa +"개 주문하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
 					+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId + buyer.buyerId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>구매자 정보</button></div>"
-					+ "<p style='clear:both'>";
-			
+			} else {
+		        str += "<span class='col-lg-7 qnaContent' style=\"margin:10px 0 0 0\">" + "님께서 주문 취소하셨습니다.&nbsp;&nbsp;&nbsp;(" + buyer.orderDate +")</span>"
+				+ "<button type=\"button\" class=\"btn btn-default btnDno\" id='dno"+ buyer.orderId + buyer.buyerId +"' data-toggle='modal' data-target='#updateDnoForm' style='float:right'>구매자 정보</button></div>"
+			}
+				str += "<p style='clear:both'>";
 			div.html(str);
 			return div;
 		};
@@ -207,6 +211,13 @@ function del() {
 				$("#orderId").html(orderId);
 				$("#dnoOrderId").val(orderId);
 				$("#orderDate").html(orderDate);
+				
+				if(data.orderCondition != '거래취소'){
+					$("#dnoContainer").show();
+				} else {
+					$("#dnoContainer").hide();
+				}
+				
 				if(itemDeliveryno!=null){
 					$("#dno").val(itemDeliveryno);
 					$("#updateDno").html("수정");
@@ -387,7 +398,7 @@ function del() {
 																	<td><h5 class="text-info" style="color:#5f768b;">주문일자</h5></td>
 																	<td style="text-align:right;"><h5 id="orderDate"></h5></td>
 																</tr>
-																<tr>
+																<tr id="dnoContainer" style="display:none">
 																	<td><h5 class="text-info" style="color:#5f768b;">송장번호</h5></td>
 																	<td style="text-align:right;">
 																		<form action="./updateDno" method="post" enctype="multipart/form-data">										

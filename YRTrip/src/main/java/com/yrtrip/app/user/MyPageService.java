@@ -44,6 +44,7 @@ public interface MyPageService {
 	public OrderVO getMyOrder(OrderVO vo);
 	public void deleteMyOrderList(OrderVO vo);
 	public void updateOrderCondition(OrderVO vo);
+	public void cancleMyOrder(OrderVO vo);
 	
 	//리뷰
 	public int getMyReviewCount(OrderVO vo);

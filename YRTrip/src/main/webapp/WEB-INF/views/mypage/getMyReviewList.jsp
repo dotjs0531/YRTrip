@@ -202,6 +202,8 @@ $(function() {
 											</a>
 										</div>
 										
+										
+										
 										<!-- 별점 표시 부분 -->
 										<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
 											   value="${review.reviewStar}" style="" disabled>

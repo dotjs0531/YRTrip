@@ -163,6 +163,13 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
+function confirmPurchase(orderId) {
+	if (confirm("구매확정하시겠습니까?")) {
+		location.href = "./updateOrderCondition?orderId=" + orderId;
+	} else {
+		return;
+	}
+};
 	function go_page(page) {
 		document.frm.page.value = page;
 		document.frm.submit();
@@ -187,6 +194,7 @@ $(function() {
 			var totalPrice = orderEa*orderPrice;
 
 			var orderDelivery = data.orderDelivery;
+			var orderCondition = data.orderCondition;
 			
 			$("#orderId").html(orderId);
 			$("#orderDate").html(orderDate);
@@ -197,8 +205,11 @@ $(function() {
 			$("#orderPrice").html(orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 			$("#totalPrice").html(totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 			
-			if(orderDelivery == '배송준비중'){
+			if(orderDelivery == '배송준비중' && orderCondition != '거래취소'){
+				$("#cancleOrderId").val(orderId);
 				$("#cancleOrder").show();
+			} else {
+				$("#cancleOrder").hide();
 			}
 		})
 	});
@@ -215,6 +226,14 @@ $(function() {
 			$("#reviewId").val(orderId);
 			$(".itemId").val(itemId);
 		});
+	});
+	
+	$("#cancleOrder").click(function(){
+		if (confirm("거래취소하시겠습니까?")) {
+			document.cancleOrderForm.submit();
+		} else {
+			return;
+		}
 	});
 });
 </script>
@@ -305,19 +324,29 @@ $(function() {
 												<h2 class="sub_title">${order.orderCondition}</h2>
 												<p class="description" align="center">
 													<c:if test="${order.orderCondition eq '결제완료'}">
-														<button type="button" class="btn btn-default" onclick="location.href='./updateOrderCondition?orderId=${order.orderId}'">구매확정</button>
+														<button type="button" class="btn btn-default" onclick="confirmPurchase('${order.orderId}')">구매확정</button>
 													</c:if>
 													<c:if test="${order.orderCondition eq '거래완료'}">
-														<button type="button" class="btn btn-default">확정완료</button>
+														<button type="button" class="btn btn-default" disabled>확정완료</button>
 													</c:if>
+													<c:if test="${order.orderCondition eq '거래취소'}">
+														<button type="button" class="btn btn-default" disabled>구매확정</button>
+													</c:if>
+													
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-													<c:if test="${order.reviewContent eq null}">
-														<button type="button" class="btn btn-default" id="review${order.orderId}" 
-																data-toggle="modal" data-target="#insertMyReviewForm">리뷰작성</button>
+													<c:if test="${order.orderCondition eq '거래완료'}">
+														<c:if test="${order.reviewContent eq null}">
+															<button type="button" class="btn btn-default" id="review${order.orderId}" 
+																	data-toggle="modal" data-target="#insertMyReviewForm">리뷰작성</button>
+														</c:if>
+														<c:if test="${order.reviewContent ne null}">
+															<button type="button" class="btn btn-default" disabled>리뷰완료</button>
+														</c:if>
 													</c:if>
-													<c:if test="${order.reviewContent ne null}">
-														<button type="button" class="btn btn-default">리뷰완료</button>
+													<c:if test="${order.orderCondition ne '거래완료'}">
+														<button type="button" class="btn btn-default" disabled>리뷰작성</button>
 													</c:if>
+													
 													</p>
 													<div class="post-meta">
 													<button type="button" class="btn btn-default pull-right" id="order${order.orderId}" data-toggle="modal" data-target="#getMyOrder">상세보기</button>
@@ -424,7 +453,10 @@ $(function() {
 													</div>
 												</div>
 												<div id="cancleOrder" style="display: none">
-													<button type="button" class="btn btn-default" style="float:right; margin:10px;">거래취소</button>
+													<form action="./cancleMyOrder" name="cancleOrderForm" method="post">
+														<input type="hidden" id="cancleOrderId" name="orderId">
+													</form>
+													<button class="btn btn-default" onclick="cancleOrder()" style="float:right; margin:10px;">거래취소</button>
 												</div>
 											</div>
 										</div>

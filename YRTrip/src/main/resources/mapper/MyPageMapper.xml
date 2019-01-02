@@ -311,6 +311,10 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 					  ORDER_CONDITION = '거래완료'
 				WHERE ORDER_ID = #{orderId}
 </update>
+<update id="cancleMyOrder" parameterType="order">
+	UPDATE ORDERT SET ORDER_CONDITION = '거래취소'
+				WHERE ORDER_ID = #{orderId}
+</update>
 
 <!-- 리뷰 페이지 -->
 <select id="getMyReviewCount" parameterType="order" resultType="int">
@@ -318,6 +322,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 		   AND O.BUYER_ID = #{buyerId}
+		   AND O.REVIEW_CONTENT IS NOT NULL
 </select>
 <select id="getMyReviewList" parameterType="order" resultType="order">
 SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
@@ -333,6 +338,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 	 	   AND O.BUYER_ID = #{buyerId}
+		   AND O.REVIEW_CONTENT IS NOT NULL
   ORDER BY REVIEW_DATE DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
