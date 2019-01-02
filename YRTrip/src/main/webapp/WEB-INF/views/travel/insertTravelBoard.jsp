@@ -197,6 +197,10 @@ background-color:#22313F;
 </style>
 
 <script>
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 /* 여행등록 modal */
 jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelBoardButton").click(function(){

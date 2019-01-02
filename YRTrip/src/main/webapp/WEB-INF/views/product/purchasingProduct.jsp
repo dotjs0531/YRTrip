@@ -126,6 +126,12 @@ $(function(){
 </script>
 
 <script>
+$(function(){
+    var productMenu = document.getElementById("productMenu");
+    productMenu.className='current-menu-item';
+});
+</script>
+<script>
 	/* 주소찾기 */
 	function sample4_execDaumPostcode() {
         new daum.Postcode({

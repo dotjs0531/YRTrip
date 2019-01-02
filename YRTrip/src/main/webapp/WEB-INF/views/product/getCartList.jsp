@@ -41,6 +41,12 @@ $(function(){
 	});
 </script>
 <script>
+$(function(){
+    var productMenu = document.getElementById("productMenu");
+    productMenu.className='current-menu-item';
+});
+</script>
+<script>
 	/* <input class="form-control col-md-1" type="text" value="${cart.itemEa}">
 	 <button type="button" class="btn-link" onclick="updateCart();">수정</button> */
 	$(function() {

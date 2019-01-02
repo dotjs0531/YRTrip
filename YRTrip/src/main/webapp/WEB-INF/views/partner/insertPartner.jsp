@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <script>
+$(function(){
+    var partnerMenu = document.getElementById("partnerMenu");
+    partnerMenu.className='current-menu-item';
+});
 function selectPay(ele){
 	if (ele.value == 'other') {
 		$("#partnerPay").attr("readonly", false); 

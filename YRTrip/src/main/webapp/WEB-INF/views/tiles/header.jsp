@@ -39,7 +39,7 @@
         	$('div#pwdFindForm').modal(true);
         	$('div#login').modal('hide');
     	});
-	})
+	});
 	</script>
 <style>
 .container-1{
@@ -100,9 +100,9 @@
 							<!-- <ul class="nav navbar-nav navbar-right menu"> -->
                             <ul class="nav navbar-nav navbar-right menu navbar-menu-items wow fadeIn">
                                 <li><a href="main">홈 </a></li>
-                                <li class="current-menu-item"><a href="getTravelBoardList">여행정보</a></li>
-                                <li><a href="getPartnerList">동행구하기</a></li>
-                                <li><a href="getProductList">중고상품</a></li>
+                                <li id="travelMenu"><a href="getTravelBoardList">여행정보</a></li>
+                                <li id="partnerMenu"><a href="getPartnerList">동행구하기</a></li>
+                                <li id="productMenu"><a href="getProductList">중고상품</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -229,7 +229,6 @@
 										<div class="form-group">
 											<button type="submit" class="btn btn-info form-input"  style="background-color:#f9bf3b; border:gray; margin:0 auto; width: 100%; padding:10px" onclick="location.href='#'">비밀번호 재설정</button>
 										</div>
-										
 									</form>
 								</div>
 							</div>
@@ -239,6 +238,5 @@
 			</div>
 		</div>
 	</div>
-	
 </body>
 </html>

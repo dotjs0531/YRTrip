@@ -23,6 +23,10 @@
 }
 </style>
 <script>
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 /* 유저 tooltip */
 jQuery( document ).ready(function( $ ) {
 	$('[data-toggle="tooltip"]').tooltip();

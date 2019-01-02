@@ -153,8 +153,12 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-
-
+$(function(){
+    var productMenu = document.getElementById("productMenu");
+    productMenu.className='current-menu-item';
+});
+</script>
+<script>
 $(function(){
 	$('#product_cart_insert').on("click", "li", function(){
 		$("#itemCategory").val($(this).find("a").text());

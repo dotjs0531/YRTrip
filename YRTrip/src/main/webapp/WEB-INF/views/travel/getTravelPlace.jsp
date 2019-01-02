@@ -39,6 +39,10 @@ body { padding-top: 20px; }
 
 </style>
 <script>
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 $(document).ready( function() {
     $('#myCarousel').carousel({
 		interval:   4000

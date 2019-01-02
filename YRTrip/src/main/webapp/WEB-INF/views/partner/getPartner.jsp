@@ -13,6 +13,12 @@
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <title>동행 게시판 글쓰기</title>
 <script>
+$(function(){
+    var partnerMenu = document.getElementById("partnerMenu");
+    partnerMenu.className='current-menu-item';
+});
+</script>
+<script>
 function del(partnerId) {
 	if (confirm("삭제하시겠습니까?")) {
 		location.href = "./deletePartner?partnerId=" + partnerId;

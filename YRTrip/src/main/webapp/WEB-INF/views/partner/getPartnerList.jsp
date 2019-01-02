@@ -16,6 +16,10 @@ a:hover { color:white }
 }
 </style>
 <script>
+$(function(){
+    var partnerMenu = document.getElementById("partnerMenu");
+    partnerMenu.className='current-menu-item';
+});
    function go_sort(sortCol) {
       document.frm.sortCol.value = sortCol;
       document.frm.submit();
