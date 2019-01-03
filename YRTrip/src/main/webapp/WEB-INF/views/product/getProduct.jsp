@@ -312,39 +312,18 @@ $(function(){
 									<h3 class="mb-5">판매자의 다른 상품</h3>
 									<!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
 									<div class="row">
-										<!-- <div class="recommended-items card-deck"> -->
-										<div class="col-md-4">
-											<div class="card">
-												<img src="https://via.placeholder.com/157x157"
-													class="card-img-top">
-												<div class="card-body">
-													<h5 class="card-title">판매자 다른 상품 이름</h5>
-													<span class="text-muted">￦ 12,000</span>
+										<c:forEach items="" var="">
+											<div class="col-md-4">
+												<div class="card">
+													<img src="https://via.placeholder.com/157x157"
+														class="card-img-top">
+													<div class="card-body">
+														<h5 class="card-title">판매자 다른 상품 이름</h5>
+														<span class="text-muted">￦ 12,000</span>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="card">
-												<img src="https://via.placeholder.com/157x157"
-													class="card-img-top">
-												<div class="card-body">
-													<h5 class="card-title">판매자 다른 상품 이름1</h5>
-													<span class="text-muted">￦ 12,000</span>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="card">
-												<img src="https://via.placeholder.com/157x157"
-													class="card-img-top">
-												<div class="card-body">
-													<h5 class="card-title">판매자 다른 상품 이름1</h5>
-													<span class="text-muted">￦ 12,000</span>
-												</div>
-											</div>
-										</div>
-
-										<!-- </div> -->
+										</c:forEach>
 									</div>
 									<!-- /.recommended-items-->
 									<p class="mb-5 mt-5">
