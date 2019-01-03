@@ -15,6 +15,7 @@ public interface AdminService {
 	public List<Map> getTinfoChart(String day);	
 	public List<ProductVO> getManageProductList(ProductVO vo);
 	public List<OrderVO> getManageOrderList(OrderVO vo);
+	public OrderVO getManageOrder(OrderVO vo);
 	public List<PartnerVO> getManagePartnerList(PartnerVO vo);
 	public List<TravelBoardVO> getManageTravelList(TravelBoardVO vo);
 	public List<NoticeVO> getManageNoticeList(NoticeVO vo);

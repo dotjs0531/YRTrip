@@ -33,6 +33,9 @@ public class AdminServiceImpl implements AdminService {
 	public List<OrderVO> getManageOrderList(OrderVO vo) {
 		return dao.getManageOrderList(vo);
 	}
+	public OrderVO getManageOrder(OrderVO vo) {
+		return dao.getManageOrder(vo);
+	}
 	
 	@Override
 	public List<PartnerVO> getManagePartnerList(PartnerVO vo) {

@@ -98,6 +98,12 @@ public class AdminController {
 			public List<OrderVO> getManageOrderListAjax(OrderVO vo) {
 				return adminService.getManageOrderList(vo);
 			}
+	//거래관리 - 주문내역 상세보기
+			@RequestMapping("getManageOrder")
+			@ResponseBody
+			public OrderVO getManageOrder(OrderVO vo) {
+				return adminService.getManageOrder(vo);
+			}
 	
 	//동행관리
 	@RequestMapping(value = "/managePartner", method = RequestMethod.GET)
