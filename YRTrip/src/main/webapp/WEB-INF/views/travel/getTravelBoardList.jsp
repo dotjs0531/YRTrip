@@ -135,7 +135,6 @@ $("#autocompleteTinfoList").change(function(){
              }
             }));
            }
-           }
           })
       },
       autoFocus:true,
