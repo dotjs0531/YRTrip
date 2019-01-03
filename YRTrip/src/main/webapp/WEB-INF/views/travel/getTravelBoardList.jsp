@@ -134,12 +134,7 @@ $("#autocompleteTinfoList").change(function(){
               tinfoId:item.tinfoId
              }
             }));
-           },
-
-           error: function(jqxhr, status, error){
-                 alert(jqxhr.statusText + ",  " + status + ",   " + error);
-                alert(jqxhr.status);
-                alert(jqxhr.responseText); 
+           }
            }
           })
       },
