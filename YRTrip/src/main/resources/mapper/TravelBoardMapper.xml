@@ -182,15 +182,17 @@
 			TRAVEL_DATE,
 			TRAVEL_HIT,
 			TRAVEL_LIKE,
-			TINFO_ID,
+			B.TINFO_ID,
+			I.TINFO_CITY
 			USER_ID,
 			TRAVEL_WITH,
 			TRAVEL_PIC
-	FROM TRAVELBOARDT 
-	WHERE TRAVEL_NO = #{travelNo}
+	FROM TRAVELBOARDT B, TRAVELINFOT I
+	WHERE B.TRAVEL_NO = #{travelNo}
+  	AND B.TINFO_ID = I.TINFO_ID
 </select>
 <select id="getTravelPlaceList" parameterType="travelPlace" resultType="travelPlace">
-	SELECT PLACE_NO,
+SELECT PLACE_NO,
 			PLACE_NAME,
 			PLACE_ADDRESS,
 			PLACE_LIKE,

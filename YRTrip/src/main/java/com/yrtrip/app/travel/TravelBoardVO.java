@@ -17,6 +17,7 @@ public class TravelBoardVO  extends LikeVO {
 	private int travelHit;
 	private int travelLike;
 	private int tinfoId;
+	private String tinfoCity;
 	private String userId;
 	private String travelWith;
 	private String travelPic;
@@ -101,6 +102,12 @@ public class TravelBoardVO  extends LikeVO {
 	}
 	public void setTinfoId(int tinfoId) {
 		this.tinfoId = tinfoId;
+	}
+	public String getTinfoCity() {
+		return tinfoCity;
+	}
+	public void setTinfoCity(String tinfoCity) {
+		this.tinfoCity = tinfoCity;
 	}
 	public String getUserId() {
 		return userId;

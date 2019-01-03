@@ -443,7 +443,7 @@ function selectTravelWith(ele){
 							
 							<p class="son-text">
 								<span class="son-span">${travelBoard.travelTitle}</span><br/><br/>
-								<span class="text-span">여행지 : ${travelBoard.tinfoId}</span>
+								<span class="text-span">여행지 : ${travelBoard.tinfoCity}</span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	나홀로 여행
 																</c:if>
