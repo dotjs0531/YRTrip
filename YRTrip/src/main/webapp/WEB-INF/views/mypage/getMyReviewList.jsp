@@ -39,7 +39,8 @@ a:hover { color:white }
 .nav>li>a:focus,
 .nav>li>a:hover{
    background-color:white;
-}
+}/* Style the Image Used to Trigger the Modal */
+
 @font-face {
  font-family: 'NanumSquareRoundEB';
  src: url(resources/fonts/NanumSquareRoundEB.eot);
@@ -88,12 +89,8 @@ $(function() {
 	console.log(carousel_ea);
 	for(i=0; i<1; i++){
 		$("#itemC").addClass(carousel_class_init);
-	} */
-	$('.pop').on('click', function() {
-		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
-		$('#imagemodal').modal('show');   
-	});
-	
+	}
+	 */
 	$('#updateMyReviewForm').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
 		console.log(event);
@@ -105,16 +102,15 @@ $(function() {
 			var itemId = data.itemId;
 			var reviewStar = data.reviewStar;
 			var reviewContent = data.reviewContent;
-			//var reviewPic = data.reviewPic;
-			//var picName[] = reviewPic.split(',');
+			var reviewPic = data.reviewPic;
+			//var picName = reviewPic.split(',');
 			
 			$("#reviewId").val(orderId);
 			$("#itemId").val(itemId);
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
-			/* for(i=0;i<picName.length;i++)
-				$(".file-caption-name").val(picName[i]); */
+			$("input[name=reviewPicFile]").val(reviewPic);
 		});
 	});
 });
@@ -184,14 +180,15 @@ $(function() {
 										<!-- 사진 출력 -->
 										<!-- <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:180px; float:left"> -->
 											<!-- 사진넣는부분 -->
-											<!-- <div class="carousel-inner"> -->
-												<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
-												<c:set var="pic" value="${reviewPicname}"/>
-													<a href="#" class="pop">
-														<img id="img" src="./images/review/${pic}" style="height:180px; margin-right:10px" />
-													</a>
-												<%-- </c:forEach> --%>
-											<!-- </div> -->
+											<%-- <div class="carousel-inner">
+												<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')}"/>
+												<c:forEach items="${reviewPicname}" var="pic">
+												<div id="itemC" class="item">
+													<a href="getProduct?itemId=${review.itemId}">
+													<img id="img" src="./images/review/${pic}" style="height:180px" /></a>
+												</div>
+												</c:forEach>
+											</div> --%>
 											<!--왼쪽 / 오른쪽 화살표-->
 											<!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
 												<span class="glyphicon glyphicon-chevron-left"></span>
@@ -203,15 +200,20 @@ $(function() {
 											</a>
 										</div> -->
 										
-										<div style="margin-left:150px;">
-											<!-- 별점 표시 부분 -->
-											<input name="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
-												   value="${review.reviewStar}" style="" disabled>
-											<p class="control-label" style="font-family: 'NanumSquareRoundR';
-												overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
-												-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">
-											<a href="getProduct?itemId=${review.itemId}" style="color:black; text-decoration:none !important">${review.reviewContent}</a></p>
-										</div>
+										<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
+										<c:set value="${reviewPicname}" var="pic"/>
+											<a href="#" data-toggle="modal" data-target="#myModal" id="pic${review.orderId}">
+												<img id="img" src="./images/review/${pic}" style="height:180px" /></a>
+										
+										
+										<!-- 별점 표시 부분 -->
+										<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
+											   value="${review.reviewStar}" style="" disabled>
+											   
+										<p class="control-label" style="font-family: 'NanumSquareRoundR'; margin-left:190px;
+											overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
+											-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">
+										<a href="getProduct?itemId=${review.itemId}" style="color:black; text-decoration:none">${review.reviewContent}</a></p>
 										
 										<!-- 수정/삭제 버튼 -->
 										<form action="./deleteMyReview" method="post">
@@ -233,24 +235,7 @@ $(function() {
 							<my:paging paging="${paging}" jsFunc="go_page" />
 	                    </div>
 	                    </c:if>
-	                    
-	                	<!-- 이미지 뷰 modal -->
-	                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-						  <div class="modal-dialog" data-dismiss="modal">
-						    <div class="modal-content"  >
-								<div class="modal-header">
-									<!-- 닫기(x) 버튼 -->
-									<button type="button" class="close" data-dismiss="modal">×</button>
-								</div>
-						      <div class="modal-body" style="margin-bottom:500px"> 
-						          <div class="col-xs-12">
-						               <img src="" class="imagepreview" style="width: 100%;" >
-						          </div>
-						      </div>
-						    </div>
-						  </div>
-						</div>
-					
+                    
 	                    <!-- 리뷰수정 페이지 -->			
 						<div class="modal fade" id="updateMyReviewForm">
 							<div class="modal-dialog">
@@ -301,12 +286,41 @@ $(function() {
 								</div> <!-- end of modal-content -->
 							</div> 
 						</div> <!-- end of modal -->
+						
+						<!-- 이미지 팝업 -->
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						        <div class="modal-body">
+						            <img src="./images/review/${pic}" class="img-responsive">
+						        </div>	<!-- end of modal-body -->
+						    </div> <!-- end of modal-content -->
+						  </div>
+						</div> <!-- end of modal -->
+
 					</div>
                 </div>
             </div>
         </div>
     </section>
     <!--   end of about us area-->
+    
+<!-- 이미지 팝업 -->
+<script>
+function centerModal() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 2;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+}
+
+$('.modal').on('show.bs.modal', centerModal);
+$(window).on("resize", function () {
+    $('.modal:visible').each(centerModal);
+});
+</script>
+
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
