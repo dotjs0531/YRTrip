@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
@@ -248,10 +249,20 @@ $("#autocompleteTinfoList").change(function(){
 							</c:if>
 						<div class="content-title">
 							<div class="text-center">
-								<h3><a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a></h3>
+								<h3><a href="getTravelBoard?travelNo=${board.travelNo}">
+								 <c:choose>
+						           <c:when test="${fn:length(board.travelTitle) > 9}">
+						           		<c:out value="${fn:substring(board.travelTitle,0,8)}"/>..
+									</c:when>
+						           <c:otherwise>
+						            <c:out value="${board.travelTitle}"/>
+						           </c:otherwise> 
+						          </c:choose>
+								</a></h3>
 							</div>
 						</div>
 						<div class="content-footer">
+						<hr style="margin-bottom:-3px;">
 							<span class="user-info">${board.userId}</span>
 							<span class="pull-right">
 								<a href="#" data-placement="right" title="Like">

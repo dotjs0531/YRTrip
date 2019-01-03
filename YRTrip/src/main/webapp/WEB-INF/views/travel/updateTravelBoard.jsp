@@ -194,6 +194,47 @@ background-color:#22313F;
     width: 0;
     height: 0;
 }
+
+#map {
+	height: 400px;
+}
+
+.controls {
+	background-color: #fff;
+	border-radius: 2px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	box-sizing: border-box;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	height: 29px;
+	margin-left: 17px;
+	margin-top: 10px;
+	outline: none;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 280px;
+}
+
+.controls:focus {
+	border-color: #4d90fe;
+}
+
+.title {
+	font-weight: bold;
+}
+
+#infowindow-content {
+	display: none;
+}
+
+#map #infowindow-content {
+	display: inline;
+}
+.pac-container{
+	z-index:1051;
+}
 </style>
 
 <script>
@@ -651,7 +692,7 @@ function loadTravelPlaceList(){
 
 <!-- 장소 추가 modal -->			
 <div class="modal fade" id="insertTravelPlace">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -666,18 +707,24 @@ function loadTravelPlaceList(){
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
 									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
+									<div id="map"></div>
+								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span>
+									<span id="place-address"></span>
+									</div>
 										<div class="panel-body">
 												<div class="form-group">
+													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력해주세요."style="margin: -10px 0;">
+												</div>
+												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+													<input type="text" name="placeName" class="form-control" placeholder="장소명은 지도에서 선택하면 자동으로 입력됩니다.">
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
-												</div>
-												<div class="form-group">
-													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다.">
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
@@ -709,7 +756,7 @@ function loadTravelPlaceList(){
 
 <!-- 장소 수정 modal -->			
 <div class="modal fade" id="updateTravelPlace">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -724,6 +771,12 @@ function loadTravelPlaceList(){
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
 									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
+									<div id="map"></div>
+								<input id="pac-input-update" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span>
+									<span id="place-address"></span>
+									</div>
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
@@ -768,7 +821,7 @@ function loadTravelPlaceList(){
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -862,6 +915,7 @@ function loadTravelPlaceList(){
 	</section>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+
 	<script>
 $(function() {
     $( ".datePicker" ).datepicker({   
@@ -880,6 +934,63 @@ $(function() {
         yearRange: "-100:+0"
     });
     }); 
+/* 지도 */
+function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.565598, lng: 126.978031},
+          zoom: 13
+        });
+
+        var input = document.getElementById('pac-input');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        
+        var updateinput = document.getElementById('pac-input-update');
+        var autocomplete = new google.maps.places.Autocomplete(updateinput);
+        autocomplete.bindTo('bounds', map);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(updateinput);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            return;
+          }
+          
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+          }
+
+          marker.setPlace({
+            placeId: place.place_id,
+            location: place.geometry.location
+          });
+          marker.setVisible(true);
+
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = place.formatted_address;
+          infowindow.open(map, marker);
+			
+          $("#insertTravelPlaceAjaxData [name=placeName]").val(place.name);
+          $("#insertTravelPlaceAjaxData [name=placeAddress]").val(place.formatted_address);
+        });
+      }
 </script>
 </body>
 </html>

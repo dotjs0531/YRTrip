@@ -215,7 +215,7 @@ background-color:#22313F;
 	outline: none;
 	padding: 0 11px 0 13px;
 	text-overflow: ellipsis;
-	width: 400px;
+	width: 280px;
 }
 
 .controls:focus {
@@ -253,6 +253,9 @@ jQuery( document ).ready(function( $ ) {
 	   /* 장소 추가 modal */
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
+	    	$('.modal').on('hidden.bs.modal', function (e) {
+	    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
+	    	});
 		});	 
 	   
 	   /* 장소 수정 modal */
@@ -479,7 +482,7 @@ function loadTravelPlaceList(){
 							<div style="padding-right:10px;">
 							<input type="file" name="travelBoardFile" class="file-input" size="chars">
 							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
-								<i class="fa fa-camera"> 메인사진 수정</i>
+								<i class="fa fa-camera"> 메인사진 등록</i>
 
 							</button>
 							</div>
@@ -701,17 +704,17 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
+									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
 								<div id="map"></div>
-								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요.">
+								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
 									<span id="place-address"></span>
 									</div>
-									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" placeholder="제목을 입력하세요."style="margin: -10px 0;">
+													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력해주세요."style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
@@ -767,7 +770,7 @@ function loadTravelPlaceList(){
 							<div id="login-box" class="col-md-12">
 									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
 								<div id="map"></div>
-								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요." style="width:100px!important;">
+								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요.">
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
 									<span id="place-address"></span>
@@ -845,7 +848,7 @@ function loadTravelPlaceList(){
 									</div>
 									<div style="padding-bottom:5px">
 										<label class="col-sm-2 control-label"></label>
-										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
+										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="다녀 온 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
 										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal">
 								</div>
 									<div class="form-group">
@@ -863,7 +866,7 @@ function loadTravelPlaceList(){
 									<div class="form-group">
 										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
 										<select id="travelPerson" name="travelPerson" class="form-control">
-										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요.</option>
+										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요. (본인 제외)</option>
 										  <option value="1">1명</option>
 										  <option value="2">2명</option>
 										  <option value="3">3명</option>
@@ -910,7 +913,7 @@ function loadTravelPlaceList(){
 	</section>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
- 
+
 	<script>
 $(function() {
     $( ".datePicker" ).datepicker({   
