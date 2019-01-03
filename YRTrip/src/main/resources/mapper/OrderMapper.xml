@@ -46,14 +46,16 @@ ORDER BY ORDER_DATE DESC -->
 
 	<select id="getOrder" resultType="order">
 		SELECT
+			buyer_id,
 			o.ITEM_ID as ITEM_ID,
 			ORDER_DATE,
 			review_star,
 			review_content,
-			review_date,
-			review_pic
+			review_date
+			<!-- ,review_pic -->
 		FROM ORDERT o, ITEMT i
 		where i.item_id = o.item_id
+		and i.item_id = #{itemId}
 		ORDER BY ORDER_DATE DESC
 	</select>
 

@@ -120,6 +120,7 @@
 </script>
 <script>
 	$(function() {
+		/* 구매불가로 만들기 */
 		if ($("#item_ea_js").text() == 0
 				|| "${sessionScope.login.userId}" == "${product.sellerId}") {
 			$("#insertcart").attr("disabled", "disabled");
@@ -129,6 +130,13 @@
 		if ("${sessionScope.login.userId}" != "${product.sellerId}") {
 			$("#seller-only").hide();
 		}
+		
+		/* 상품평 안보이게 만들기 */
+		/* 상품평 내용 있는지 없는지 확인하기 위한 값 : 
+			console.log($(".review_show_content").prev().text()); */
+		if($(".review_show_content").prev().text() != '' ){
+			$(".default_review").hide();
+		} 
 	});
 </script>
 <script>
@@ -159,20 +167,6 @@ $(function(){
 		});	
 	});
 });
-					
-				/*if(data == 0){
-					if (confirm("삭제하시겠습니까? \n(복구는 불가합니다)") == true) {		
-						alert("삭제합니다");
-						
-					}
-					else{
-						return false;
-					}
-				}else{
-					return false;
-				} */
-
-	
 </script>
 </head>
 <body>
@@ -398,12 +392,27 @@ $(function(){
 											<button class="btn btn-lg-12 btn-primary">후기를 입력해보세</button>
 										</form>
 										<h5 class="mb-5">!후기!</h5> -->
-										<c:forEach items="${orderList}" var="order">
-											<ol class="list-unstyled last-questions-list">
-												<li><i class="fa fa-comment"></i> <span>
-														${order.reviewStar} ${order.reviewContent}
-														${order.reviewDate} ${order.reviewPic} </span></li>
-											</ol>
+									
+										<div class="card default_review">
+										 	<div class="card-body row">
+											 	아직 등록된 상품평이 없습니다
+										 	</div>
+										</div>										
+										<c:forEach items="${order}" var="review">
+											<%-- <c:if test="${review.reviewContent ne null}"> --%>
+												 	<div class="card review_show">
+												 	<div class="card-body row">
+													 	<div class="col-6">
+													 		<img class="card-img-top" src=".../100px180/" alt="Card image cap">
+													 	</div>
+													 	<div class="col-6 review_show_content">
+													 		<h5 class="card-title">${review.reviewStar}</h5>
+															<h6 class="card-subtitle mb-2 text-muted">${review.buyerId}</h6>
+															<p class="card-text">${review.reviewContent}</p>
+															<span>${review.reviewDate}</span></div>
+													 	</div>
+												 	</div>
+											<%-- </c:if> --%>
 										</c:forEach>
 									</div>
 								</div>

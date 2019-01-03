@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 		dao.deleteOrder(vo);
 	}
 
-	public OrderVO getOrder(OrderVO vo) {
+	public List<OrderVO> getOrder(OrderVO vo) {
 		return dao.getOrder(vo);
 	}
 

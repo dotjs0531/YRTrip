@@ -47,48 +47,37 @@ $(function(){
 });
 </script>
 <script>
-	/* <input class="form-control col-md-1" type="text" value="${cart.itemEa}">
-	 <button type="button" class="btn-link" onclick="updateCart();">수정</button> */
-	$(function() {
-		var cart_total= $(".cartId").length;
-		console.log(cart_total);
-		$(".cart_total").html(cart_total);
-		
-			/* $('#go_update').click(function(){
-				
-				$("#original_itemEa").empty();
-				
-			}) */
-		
-		/* $("#go_update").on("click", function(){
-			var new_input = '<input type=\"text\" id=\"update_input\">';
-			var new_button = '<button type=\"button\" id=\"update_button\">수정</button>';
-			$("#original_itemEa").empty();
-			$("#original_itemEa").html(new_input);
-			$("#go_update").empty();
-			$("#go_update").html(new_button);
-		}); */
-			/* $("#update_button").on("click", function(){
-				$.ajax({
-					type:"POST",
-					url:"updateCart",
-					data:{
-						itemEa : "${cart.itemEa}",
-						cartId : "${cart.cartId}"
-					},
-				success : function(data){
-					console.log(data.itemEa);
-					$("#original_itemEa").text(data.itemEa);
-						$("#update_input").empty();
-							
-					}
-				}); 
-			}); */			
-		});
-	 /*	$.ajax({
-		
-	}) */
+$(function() {
+	var cart_total= $(".cartId").length;
+	console.log(cart_total);
+	$(".cart_total").html(cart_total);
+	
+	var cartEa = ${cart.itemEa};
+	console.log(cartEa);
+	var cartEa_original = $( "#cartEa option:selected" ).val();
+	console.log(cartEa_original);
+	var cartEa_new = $("#cartEa option:selected" ).val();
+	
+	
+	 $(".go_update").on("click", function(){
+		var new_cartEa = $( "#cartEa option:selected" ).val();
+		console.log(new_cartEa);
+		$.ajax({
+			type:"POST",
+			url:"updateCart",
+			data:{
+				itemEa : new_cartEa,
+				cartId : "${cart.cartId}"
+			},
+			success : function(data){
+				 $( "#cartEa option:selected" ).val(data.itemEa);
+			}
+		}); 
+	}); 
+
+});
 </script>
+
 </head>
 
 <body class="bg-light">
@@ -100,7 +89,7 @@ $(function(){
 					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
 				</p>
 			</div>
-			<div class="row">
+			<div class="row" id="cartList">
 
 				<div class="col-md-7 center-block order-md-1">
 					<h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -117,14 +106,25 @@ $(function(){
 								<div>
 
 									<!-- <label class='col-sm-2 control-label'> 정렬하게 해주는거 -->
-									<h3 class="my-0">${cart.itemName}</h3>
+									<h3 class="my-0"><a href="getProduct?itemId=${cart.itemId}">${cart.itemName}</a></h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
 									<small class="text-muted cartId">${cart.itemId}</small> <br>
-									<small class="text-muted">${item.itemCondition}</small> <br>
-								</div> <span class="text-muted" id="itemPrice">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
-								<!-- <form action="./updateCart"> --> <span id="original_itemEa">${cart.itemEa}</span>
-								<button type="button" id="go_update">수정</button> <!-- </form> -->
+									111
+								</div> 
+								<span class="text-muted" id="itemPrice">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
+							
+							
+								<%-- <select id="cartEa">
+								
+								<c:forEach items="${product}" var="item">
+								${item.itemId}
+									<option value="${item}">${item}</option>
+								</c:forEach>
+								</select> --%>
+								
+			<!-- <form action="./updateCart"> --> 
+								<button type="button" class="go_update">수정</button> <!-- </form> -->
 								<div>
 								<%-- <c:choose>
 									<c:when test=${}>

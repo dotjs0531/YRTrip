@@ -26,8 +26,8 @@ public class OrderDAOMybatis {
 		mybatis.update("order.deleteOrder", vo);
 	}
 
-	public OrderVO getOrder(OrderVO vo) {
-		return mybatis.selectOne("order.getOrder", vo);
+	public List<OrderVO> getOrder(OrderVO vo) {
+		return mybatis.selectList("order.getOrder", vo);
 	}
 
 	public List<OrderVO> getOrderList(OrderVO vo) {

@@ -1,6 +1,5 @@
 package com.yrtrip.app.product.web;
 
-import java.awt.font.TextLayout.CaretPolicy;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -68,7 +67,7 @@ public class ProductController {
 	@RequestMapping("/getProduct")
 	public String getProduct(Model model, ProductVO vop, OrderVO voo) {
 		model.addAttribute("product", productService.getProduct(vop));
-		model.addAttribute("orderList", orderService.getOrderList(voo));
+		model.addAttribute("order", orderService.getOrder(voo));
 		return "product/getProduct";
 	}
 	@RequestMapping("infofordelete")
@@ -165,9 +164,16 @@ public class ProductController {
 		
 	//장바구니 폼(조회, 찜 목록 이랑 비슷)
 	@RequestMapping("/getCartList")
-	public String getCartListForm(Model model, CartVO vo, HttpSession session) {		
+	public String getCartListForm(Model model, CartVO vo, ProductVO vop, HttpSession session) {		
+		System.out.println(vo.getCartId());
+		System.out.println(vo.getItemId());
 		vo.setMyId(((UserVO)session.getAttribute("login")).getUserId());
 		model.addAttribute("cartList", cartService.getCartList(vo));
+		
+	/*	//vop.setItemId(vo.getItemId());
+		//System.out.println(vop.getItemId());
+		model.addAttribute("product", productService.getProduct(vop));*/
+		
 		return "product/getCartList";
 	}
 	
