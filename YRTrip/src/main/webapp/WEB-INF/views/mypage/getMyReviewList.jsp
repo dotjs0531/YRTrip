@@ -89,6 +89,10 @@ $(function() {
 	for(i=0; i<1; i++){
 		$("#itemC").addClass(carousel_class_init);
 	} */
+	$('.pop').on('click', function() {
+		$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+		$('#imagemodal').modal('show');   
+	});
 	
 	$('#updateMyReviewForm').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
@@ -183,8 +187,9 @@ $(function() {
 											<!-- <div class="carousel-inner"> -->
 												<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
 												<c:set var="pic" value="${reviewPicname}"/>
-													<a href="getProduct?itemId=${review.itemId}">
-													<img id="img" src="./images/review/${pic}" style="height:180px; margin-right:10px" /></a>
+													<a href="#" class="pop">
+														<img id="img" src="./images/review/${pic}" style="height:180px; margin-right:10px" />
+													</a>
 												<%-- </c:forEach> --%>
 											<!-- </div> -->
 											<!--왼쪽 / 오른쪽 화살표-->
@@ -198,14 +203,14 @@ $(function() {
 											</a>
 										</div> -->
 										
-										
 										<div style="margin-left:150px;">
 											<!-- 별점 표시 부분 -->
 											<input name="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
 												   value="${review.reviewStar}" style="" disabled>
 											<p class="control-label" style="font-family: 'NanumSquareRoundR';
 												overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
-												-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">${review.reviewContent}</p>
+												-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">
+											<a href="getProduct?itemId=${review.itemId}" style="color:black; text-decoration:none !important">${review.reviewContent}</a></p>
 										</div>
 										
 										<!-- 수정/삭제 버튼 -->
@@ -228,7 +233,24 @@ $(function() {
 							<my:paging paging="${paging}" jsFunc="go_page" />
 	                    </div>
 	                    </c:if>
-                    
+	                    
+	                	<!-- 이미지 뷰 modal -->
+	                    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" data-dismiss="modal">
+						    <div class="modal-content"  >
+								<div class="modal-header">
+									<!-- 닫기(x) 버튼 -->
+									<button type="button" class="close" data-dismiss="modal">×</button>
+								</div>
+						      <div class="modal-body" style="margin-bottom:500px"> 
+						          <div class="col-xs-12">
+						               <img src="" class="imagepreview" style="width: 100%;" >
+						          </div>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+					
 	                    <!-- 리뷰수정 페이지 -->			
 						<div class="modal fade" id="updateMyReviewForm">
 							<div class="modal-dialog">
@@ -252,14 +274,14 @@ $(function() {
 															<div class="form-group">
 																<!-- <img id="reviewimg" src="./images/review/Penguins.jpg" style="height:200px; float:left" /> -->
 																<!-- 별점 등록 부분 -->
-																<input name="reviewStar" class="rating rating-loading reviewStar" data-min="0" data-max="5" data-step="0.1" >
-																<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px"></textarea>
+																<input name="reviewStar" class="rating rating-loading reviewStar" data-min="0" data-max="5" data-step="0.1" required>
+																<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px" required></textarea>
 																
 																<!-- 다중파일 업로드 -->
 																<div class="container my-4" style="width:100%; padding:0">
 																	<div class="form-group">
 																    	<div class="file-loading">
-																        	<input multiple="multiple" name="reviewPicFile" id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
+																        	<input multiple="multiple" name="reviewPicFile" id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas" required>
 																        </div>
 																    </div>
 																</div>

@@ -55,11 +55,11 @@ input[type=submit] {
 			 			</thead>
 			 			<tbody>
 			 				<tr>
-			 					<td><input type="text" class="form-control" placeholder="글제목" name="qnaTitle" value="${qna.qnaTitle}" maxlength="100" size="100"></td>
-			 					<td><input type="text" class="form-control" readonly="readonly" name="userId" value="${qna.userId}"></td>
+			 					<td><input type="text" class="form-control" placeholder="글제목" name="qnaTitle" value="${qna.qnaTitle}" maxlength="100" size="100" required></td>
+			 					<td><input type="text" class="form-control" readonly="readonly" name="userId" value="${qna.userId}" required></td>
 			 				</tr>
 			 				<tr>	
-			 					<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="qnaContent" maxlength="1024" style="height:200px">${qna.qnaContent}</textarea> </td>
+			 					<td colspan="2"><textarea class="form-control" placeholder="글 내용" name="qnaContent" maxlength="1024" style="height:200px" required>${qna.qnaContent}</textarea> </td>
 			 				</tr>
 			 			</tbody>
 			 		</table>

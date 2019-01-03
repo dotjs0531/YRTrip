@@ -488,14 +488,14 @@ $(function() {
 														<h4 class="text-info" style="color:black;">리뷰 작성</h4><hr/>
 														<div class="form-group">
 															<!-- 별점 등록 부분 -->
-															<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1">
-															<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px"></textarea>
+															<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" required>
+															<textarea name="reviewContent" class="form-control" placeholder="리뷰 내용을 입력해주세요." rows="5" style="margin-bottom:10px" required></textarea>
 															
 															<!-- 다중파일 업로드 -->
 															<div class="container my-4" style="width:100%; padding:0">
 																<div class="form-group">
 															    	<div class="file-loading">
-															        	<input multiple="multiple" name="reviewPicFile" id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas">
+															        	<input multiple="multiple" name="reviewPicFile" id="file-5" class="file" type="file" multiple data-preview-file-type="any" data-upload-url="#" data-theme="fas" required>
 															        </div>
 															    </div>
 															</div>

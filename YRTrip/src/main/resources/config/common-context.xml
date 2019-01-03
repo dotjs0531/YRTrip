@@ -60,21 +60,34 @@
             <mvc:exclude-mapping path="/checkId"/>
             <mvc:exclude-mapping path="/checkEmail"/>
             <mvc:exclude-mapping path="/pwFind"/>
+            
             <mvc:exclude-mapping path="/getNoticeList"/>
             <mvc:exclude-mapping path="/getNotice"/>
+            
             <mvc:exclude-mapping path="/getPartnerList"/>
             <mvc:exclude-mapping path="/getPartner"/>
+            <mvc:exclude-mapping path="/getJoinerList"/>
+            <mvc:exclude-mapping path="/getJoiner"/>
+            
+            <mvc:exclude-mapping path="/getLike"/>
+            
             <mvc:exclude-mapping path="/getProductList"/>
             <mvc:exclude-mapping path="/getProduct"/>
+            <mvc:exclude-mapping path="/getProductAjax"/>
+            
             <mvc:exclude-mapping path="/getQnaList"/>
+            
             <mvc:exclude-mapping path="/getTravelBoardList"/>
+            <mvc:exclude-mapping path="/getBestTravelList"/>
             <mvc:exclude-mapping path="/getTravelBoard"/>
-            <mvc:exclude-mapping path="/getTravelPlaceList"/>
-            <mvc:exclude-mapping path="/getTravelPlace"/>
             <mvc:exclude-mapping path="/getTravelInfoListData"/>
             <mvc:exclude-mapping path="/getTravelInfoList"/>
             <mvc:exclude-mapping path="/getTravelInfoListModalData"/>
             <mvc:exclude-mapping path="/getTravelInfoListModal"/>
+            
+            <mvc:exclude-mapping path="/getTravelPlaceList"/>
+            <mvc:exclude-mapping path="/getTravelPlace"/>
+            <mvc:exclude-mapping path="/selectTravelPlaceList"/>
             
             <ref bean="authenticationInterceptor"/>
         </mvc:interceptor>
