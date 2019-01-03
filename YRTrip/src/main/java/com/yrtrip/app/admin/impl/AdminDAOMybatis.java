@@ -32,6 +32,9 @@ public class AdminDAOMybatis {
 	public List<OrderVO> getManageOrderList(OrderVO vo) {
 		return sqlSession.selectList("admin.getManageOrderList", vo);
 	}
+	public OrderVO getManageOrder(OrderVO vo) {
+		return sqlSession.selectOne("admin.getManageOrder",vo);
+	}
 	
 	public List<PartnerVO> getManagePartnerList(PartnerVO vo) {
 		return sqlSession.selectList("admin.getManagePartnerList", vo);

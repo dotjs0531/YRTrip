@@ -83,12 +83,12 @@ function del() {
 </script>
 <script>
 $(function() {
-	var carousel_class_init = "active";	
+	/* var carousel_class_init = "active";	
 	var carousel_ea = $("div#itemC").length;
 	console.log(carousel_ea);
 	for(i=0; i<1; i++){
 		$("#itemC").addClass(carousel_class_init);
-	}
+	} */
 	
 	$('#updateMyReviewForm').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
@@ -101,15 +101,16 @@ $(function() {
 			var itemId = data.itemId;
 			var reviewStar = data.reviewStar;
 			var reviewContent = data.reviewContent;
-			var reviewPic = data.reviewPic;
-			//var picName = reviewPic.split(',');
+			//var reviewPic = data.reviewPic;
+			//var picName[] = reviewPic.split(',');
 			
 			$("#reviewId").val(orderId);
 			$("#itemId").val(itemId);
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
-			$("input[name=reviewPicFile]").val(reviewPic);
+			/* for(i=0;i<picName.length;i++)
+				$(".file-caption-name").val(picName[i]); */
 		});
 	});
 });
@@ -177,19 +178,17 @@ $(function() {
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'"><strong>${review.orderId}</strong> &nbsp;&nbsp; ${review.reviewDate}</h5><br/>
 										
 										<!-- 사진 출력 -->
-										<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:180px; float:left">
+										<!-- <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:180px; float:left"> -->
 											<!-- 사진넣는부분 -->
-											<div class="carousel-inner">
-												<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')}"/>
-												<c:forEach items="${reviewPicname}" var="pic">
-												<div id="itemC" class="item">
+											<!-- <div class="carousel-inner"> -->
+												<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
+												<c:set var="pic" value="${reviewPicname}"/>
 													<a href="getProduct?itemId=${review.itemId}">
-													<img id="img" src="./images/review/${pic}" style="height:180px" /></a>
-												</div>
-												</c:forEach>
-											</div>
+													<img id="img" src="./images/review/${pic}" style="height:180px; margin-right:10px" /></a>
+												<%-- </c:forEach> --%>
+											<!-- </div> -->
 											<!--왼쪽 / 오른쪽 화살표-->
-											<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+											<!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
 												<span class="glyphicon glyphicon-chevron-left"></span>
 												<span class="sr-only">Previous</span>
 											</a>
@@ -197,16 +196,18 @@ $(function() {
 											<span class="glyphicon glyphicon-chevron-right"></span>
 											<span class="sr-only">Next</span>
 											</a>
+										</div> -->
+										
+										
+										<div style="margin-left:150px;">
+											<!-- 별점 표시 부분 -->
+											<input name="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
+												   value="${review.reviewStar}" style="" disabled>
+											<p class="control-label" style="font-family: 'NanumSquareRoundR';
+												overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
+												-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">${review.reviewContent}</p>
 										</div>
 										
-										
-										
-										<!-- 별점 표시 부분 -->
-										<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
-											   value="${review.reviewStar}" style="" disabled>
-										<p class="control-label" style="font-family: 'NanumSquareRoundR'; margin-left:190px;
-											overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
-											-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">${review.reviewContent}</p>
 										<!-- 수정/삭제 버튼 -->
 										<form action="./deleteMyReview" method="post">
 											<input type="hidden" name="orderId" value="${review.orderId}">

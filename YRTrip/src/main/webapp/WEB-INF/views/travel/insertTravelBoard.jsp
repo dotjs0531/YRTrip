@@ -6,12 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>여행게시판 글 등록</title>
+<title>여행게시판 글 수정</title>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <style>
+
 .modal-backdrop {
 	z-index: -1;
 }
@@ -194,100 +195,91 @@ background-color:#22313F;
     width: 0;
     height: 0;
 }
+
+#map {
+	height: 400px;
+}
+
+.controls {
+	background-color: #fff;
+	border-radius: 2px;
+	border: 1px solid transparent;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	box-sizing: border-box;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	height: 29px;
+	margin-left: 17px;
+	margin-top: 10px;
+	outline: none;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 400px;
+}
+
+.controls:focus {
+	border-color: #4d90fe;
+}
+
+.title {
+	font-weight: bold;
+}
+
+#infowindow-content {
+	display: none;
+}
+
+#map #infowindow-content {
+	display: inline;
+}
 </style>
 
 <script>
+
 $(function(){
     var travelMenu = document.getElementById("travelMenu");
     travelMenu.className='current-menu-item';
 });
-/* 여행등록 modal */
 jQuery( document ).ready(function( $ ) {
+		/* 여행등록 modal */
 	   $("#insertTravelBoardButton").click(function(){
 	    	$('div#insertTravelBoard').modal(true);
-		})
-});
-
-/* 장소 추가 modal */
-jQuery( document ).ready(function( $ ) {
+		});
+		
+	   /* 장소 추가 modal */
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
-		});
-});
+		});	 
+	   
+	   /* 장소 수정 modal */
+	   $("#travelPlaceList").on("click", ".btnUpd", function(){
+	 		var div = $(this).closest('.travelPlaceList');
+	 		$("#updateTravelPlaceAjaxData [name=placeNo]").val(div[0].data.placeNo);
+	 		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
+	 		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
+	 		$("#updateTravelPlaceAjaxData [name=placeTitle]").val(div[0].data.placeTitle);
+	 		$("#updateTravelPlaceAjaxData [name=placePic]").val(div[0].data.placePic);
+	 		$("#updateTravelPlaceAjaxData [name=placeContent]").val(div[0].data.placeContent);
+	 		$("#updateTravelPlaceAjaxData [name=placeVisitDate]").val((div[0].data.placeVisitDate).substring(0,10));
+	    	$('div#updateTravelPlace').modal(true);
+		});	
+	   
+	   /* 사진 업로드 */
+	   $("#fileBtn").click(function(){
+		    $('.file-input').click();
+		    $(".file-Input").on('change', function(){  // 값이 변경되면
+				if(window.FileReader){  // modern browser
+					var filename = $(this)[0].files[0].name;
+				} else {  // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+				}
 
-/* ajax */
-$(function(){
-	loadTravelPlaceList();
-	
-//장소리스트 조회 요청	
-function loadTravelPlaceList(){
-	var params = { travelNo : '${travelBoard.travelNo}' };
-	$.getJSON("selectTravelPlaceList", params, function(datas){
-		for(i=0; i<datas.length; i++){
-			var div = makeTravelPlaceView(datas[i]);
-			$(div).appendTo("#travelPlaceList");
-		}
-	});
-} 	// end of loadTravelPlaceList
-//장소리스트 조회 뷰
-	function makeTravelPlaceView(travelPlace){
-	var div = $("<div>"); 
- 	div.attr("id", "c"+travelPlace.placeNo);
-	div.addClass('travelPlaceList');
-	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
-	var year = (travelPlace.placeVisitDate).substring(0,4) ;
-	var month = (travelPlace.placeVisitDate).substring(5,7);
-	var day = (travelPlace.placeVisitDate).substring(8,10);
-	var str = "<article class=\"panel panel-warning\">"
-				+"<div class=\"panel-heading icon\">"
-				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
-				+"<p style=\"margin:-5px; background-color:#fff;\">" + year +"</p>"
- 				+"<p style=\"margin:-15px;background-color:#fff;\">" + month +"</p>"
-				+"<p style=\"background-color:#fff;\">" + day +"</p>"
-				+"</div>"
-			
-				+"<div class=\"panel-heading\">"
-				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
-				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
-				+"</div>"
-			
-				+"<div class=\"panel-body\">"
-				+"<img class=\"img-responsive img-rounded\" src=\"//placehold.it/350x150\" />"
-				+"</div>"
-			
-				+"<div id=\"footer\" class=\"panel-footer\">"
-				+"<i class=\"glyphicon glyphicon-heart\" style=\"color: #ff8000;\"></i>"
-				+"<small>"+ travelPlace.placeLike +"</small>"
-				+"</div>"
-				+"</article>"
-	div.html(str);
-	return div;
-} 	// end of makeTravelPlaceView
-
-//장소 등록
-	$("#insertTravelPlaceBtn").click(function(){
-		var params = $("#travelPlaceAjaxData").serialize();
-	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
-			var div = makeTravelPlaceView(datas);
-			$(div).prependTo("#travelPlaceList");
-			jQuery.noConflict();
-			$('#insertTravelPlace').modal("hide");
-		}); 
-	});
-//장소 삭제
-	$("#travelPlaceList").on("click", ".btnDel", function(){
- 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
-		if(confirm("삭제할까요?")) {
-			var params = "placeNo=" + placeNo;
-			var url = "deleteTravelPlaceAjax";
-			$.getJSON(url, params, function(datas){
-				console.log($('#c'+placeNo));
-				$('#c'+placeNo).remove();
+				// 추출한 파일명 삽입
+				$("#travelBoardFile").val(filename);
 			});
-		}
-	});
-});	
-
+		});
+}); 
 /* modal 자동완성 */
 
 $(function() {
@@ -353,7 +345,97 @@ function selectTravelWith(ele){
    } else {
 	travelBoardModalfrm.travelPerson.disabled=false;	   
    }   
-}   
+} 
+
+$(function(){
+	loadTravelPlaceList();
+
+//장소리스트 조회 요청	
+function loadTravelPlaceList(){
+	var params = { travelNo : '${travelBoard.travelNo}' };
+	$.getJSON("selectTravelPlaceList", params, function(datas){
+		for(i=0; i<datas.length; i++){
+			var div = makeTravelPlaceView(datas[i]);
+			$(div).appendTo("#travelPlaceList");
+		}
+	});
+} 	// end of loadTravelPlaceList
+//장소리스트 조회 뷰
+	function makeTravelPlaceView(travelPlace){
+	var div = $("<div>"); 
+	div[0].data = travelPlace;
+ 	div.attr("id", "c"+travelPlace.placeNo);
+	div.addClass('travelPlaceList');
+	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
+   	var year = (travelPlace.placeVisitDate).substring(0,4) ;
+	var month = (travelPlace.placeVisitDate).substring(5,7);
+	var day = (travelPlace.placeVisitDate).substring(8,10);
+	var str = "<article class=\"panel panel-warning placeNo\" id=\"c"+travelPlace.placeNo+"\">"
+				+"<div class=\"panel-heading icon\">"
+				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
+  				+"<p style=\"margin:-5px; background-color:#fff;\">" + year +"</p>"
+  				+"<p style=\"margin:-15px;background-color:#fff;\">" + month +"</p>"
+				+"<p style=\"background-color:#fff;\">" + day +"</p>" 
+				+"</div>"
+			
+				+"<div class=\"panel-heading\">"
+				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
+ 				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
+ 				+"<button type=\"button\" value='"+travelPlace.placeNo+"' class=\"btnUpd\" style=\"float:right;\">수정</button>" 
+				+"<br>"
+				
+				+"</div>"
+			
+				+"<div class=\"panel-body\">"
+				+ travelPlace.placeName + "<br>"
+				+"<small>" + travelPlace.placeAddress + "</small>"
+				+"<img class=\"img-responsive img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
+				+ travelPlace.placeContent
+				+"</div>"
+			
+				+"<div id=\"footer\" class=\"panel-footer\">"
+				+"</div>"
+				+"</article>"
+	div.html(str);
+	return div;
+} 	// end of makeTravelPlaceView
+
+//장소 등록
+	$("#insertTravelPlaceBtn").click(function(){
+		var params = $("#insertTravelPlaceAjaxData").serialize();
+	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
+			var div = makeTravelPlaceView(datas);
+			$(div).prependTo("#travelPlaceList");
+			jQuery.noConflict();
+			$('#insertTravelPlace').modal("hide");
+		}); 
+	});
+//장소 삭제
+	$("#travelPlaceList").on("click", ".btnDel", function(){
+ 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
+		if(confirm("삭제할까요?")) {
+			var params = "placeNo=" + placeNo;
+			var url = "deleteTravelPlaceAjax";
+			$.getJSON(url, params, function(datas){
+				$('#c'+placeNo).remove();
+			});
+		}
+	});
+	//장소 수정
+	$("#updateTravelPlaceBtn").click(function(){
+			var params = $("#updateTravelPlaceAjaxData").serialize();
+			var placeId = $(this).closest('.placeNo').attr("id");
+			console.log(placeId);
+			$.getJSON("updateTravelPlaceAjax", params, function(datas){
+				jQuery.noConflict();
+				$('#updateTravelPlace').modal("hide");
+				$("#c55").remove();
+				loadTravelPlaceList();
+			});
+		});
+
+});	
+
 </script>
 </head>
 <body>
@@ -370,7 +452,7 @@ function selectTravelWith(ele){
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -388,18 +470,20 @@ function selectTravelWith(ele){
 						<div class="container dad">
 							<div class="son-1">
 							<c:if test="${travelBoard.travelPic != null}">
-							<img src="resources/media/${travelPic}" class="img-responsive">
+							<img src="./images/travel/${travelPic}" class="img-responsive">
 							</c:if>
 							<c:if test="${travelBoard.travelPic == null}">
-							<img src="resources/media/noimage.jpg" class="img-responsive">
+							<img src="./images/travel/noimage.jpg" class="img-responsive">
 							</c:if>
 							</div>
 							<span class="top-span">T${travelBoard.travelNo}</span>
 							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
 							<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
 							<div style="padding-right:10px;">
-							<button class="btn btn-sm btn-warning" style="float:right;">
-											<i class="fa fa-camera"> 메인사진  등록</i>
+							<input type="file" name="travelBoardFile" class="file-input" size="chars">
+							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
+								<i class="fa fa-camera"> 메인사진 수정</i>
+
 							</button>
 							</div>
 							<p class="son-text">
@@ -544,7 +628,8 @@ function selectTravelWith(ele){
 											  <option value="6" selected>6명 이상</option>
 										</select>
 									</c:if>
-								</span><br>		
+								</span><br>
+								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input" name="travelPay">원</span>
 								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche"></span>
 								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelStart"> ~ 
 																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelEnd">
@@ -566,8 +651,7 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 관해 간단한 소개글을 입력해주세요:-)"></textarea><br>
-												<input type="text" class="form-control" name="travelPay" placeholder="총 여행경비를 입력하세요.">
+												<textarea class="form-control" rows="3" name="travelContent">${travelBoard.travelContent}</textarea>
 											</div>
 											
 											<div class="panel-footer">
@@ -598,7 +682,7 @@ function selectTravelWith(ele){
 							</div>
 							</div>
 										<button class="btn btn-sm btn-warning pull-right" type="submit">
-											<i class="fas fa-pencil-alt fa-fw"></i>등록하기
+											<i class="fas fa-pencil-alt fa-fw"></i>여행기 등록
 										</button>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
@@ -621,7 +705,7 @@ function selectTravelWith(ele){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="travelPlaceAjaxData" method="post">
+									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
@@ -662,6 +746,72 @@ function selectTravelWith(ele){
 		</div> <!-- end of modal-content -->
 	</div> 
 </div> <!-- end of modal -->		
+
+<!-- 장소 수정 modal -->			
+<div class="modal fade" id="updateTravelPlace">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- header -->
+			<div class="modal-header">
+				<!-- 닫기(x) 버튼 -->
+				<button type="button" class="close" data-dismiss="modal">×</button>
+			</div>
+
+			<!-- body -->
+			<div class="modal-body">
+				<div class="container">
+					<div id="login-row" class="row justify-content-center align-items-center">
+						<div id="login-column" class="col-md-6">
+							<div id="login-box" class="col-md-12">
+									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
+									<input id="pac-input" class="controls" type="text"
+									placeholder="Enter a location">
+								<div id="map"></div>
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span>
+									<span id="place-address"></span>
+								</div>
+										<div class="panel-body">
+												<div class="form-group">
+													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeName" class="form-control">
+												</div>
+												<div class="form-group">
+													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeAddress" class="form-control">
+												</div>
+												<div class="form-group">
+													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeTitle" class="form-control">
+												</div>
+												<div class="form-group">
+													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placePic" class="form-control">
+												</div>
+												<div class="form-group">
+													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeContent" class="form-control">
+												</div>
+												<div class="form-group">
+													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeVisitDate" class="form-control datePicker">
+												</div>
+												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
+													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 수정</i>
+												</button>
+											</div>
+										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
+										<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
+									</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	<!-- end of modal-body -->
+		</div> <!-- end of modal-content -->
+	</div> 
+</div> <!-- end of modal -->							
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
@@ -735,7 +885,7 @@ function selectTravelWith(ele){
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
 									</div>
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>
@@ -757,8 +907,9 @@ function selectTravelWith(ele){
 		</div>
 		<!-- end of container -->
 	</section>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
 	<script>
 $(function() {
     $( ".datePicker" ).datepicker({   
@@ -777,6 +928,58 @@ $(function() {
         yearRange: "-100:+0"
     });
     }); 
+/* 지도 */
+function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.565598, lng: 126.978031},
+          zoom: 13
+        });
+
+        var input = document.getElementById('pac-input');
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            return;
+          }
+
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);
+          }
+
+          marker.setPlace({
+            placeId: place.place_id,
+            location: place.geometry.location
+          });
+          marker.setVisible(true);
+
+          infowindowContent.children['place-name'].textContent = place.name;
+          infowindowContent.children['place-address'].textContent = place.formatted_address;
+          infowindow.open(map, marker);
+
+          document.getElementById("placeName").value= place.name;
+          document.getElementById("placeAddress").value= place.formatted_address;
+        });
+      }
 </script>
 </body>
 </html>

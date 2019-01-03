@@ -52,6 +52,12 @@ public class TravelBoardDAOMybatis {
 		return sqlSession.selectList("travelBoard.getTravelBoardList", vo);
 	}
 	
+	//베스트여행기 전체 조회
+	public List<TravelBoardVO> getBestTravelList(TravelBoardVO vo) {
+		System.out.println("getBestTravelList() 기능 처리");
+		return sqlSession.selectList("travelBoard.getBestTravelList", vo);
+	}
+	
 	//건수조회
 	public int getCount(TravelBoardVO vo) {
 		return sqlSession.selectOne("travelBoard.getCount", vo);
@@ -62,6 +68,7 @@ public class TravelBoardDAOMybatis {
 		System.out.println("getTravelBoard() 기능 처리");
 		return sqlSession.selectOne("travelBoard.getTravelBoard", vo);
 	}
+	
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo) {
 		return sqlSession.selectList("travelBoard.getTravelPlaceList", vo);
 	}

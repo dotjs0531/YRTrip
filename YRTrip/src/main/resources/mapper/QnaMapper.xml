@@ -13,8 +13,8 @@
 		<if test="searchCondition != null and searchCondition == 'qnaContent'">
 			 AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
 		</if>
-		<if test="qnaAnswer != null">
-			AND QNA_ANSWER LIKE #{qnaAnswer}
+		<if test="qnaAnswer != null and qnaAnswer != ''">
+			AND QNA_ANSWER = #{qnaAnswer}
 		</if>
 		<if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
     		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
@@ -41,8 +41,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		<if test="searchCondition != null and searchCondition == 'qnaContent'">
 			 AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
 		</if>
-		<if test="qnaAnswer != null">
-			AND QNA_ANSWER LIKE #{qnaAnswer}
+		<if test="qnaAnswer != null and qnaAnswer != ''">
+			AND QNA_ANSWER = #{qnaAnswer}
 		</if>
 		<if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
     		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )

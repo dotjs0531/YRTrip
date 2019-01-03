@@ -79,6 +79,12 @@ for (i = 0; i < acc.length; i++) {
               tinfoId:item.tinfoId
              }
             }));
+           },
+
+           error: function(jqxhr, status, error){
+                 alert(jqxhr.statusText + ",  " + status + ",   " + error);
+                alert(jqxhr.status);
+                alert(jqxhr.responseText); 
            }
           })
       },
@@ -134,6 +140,12 @@ $("#autocompleteTinfoList").change(function(){
               tinfoId:item.tinfoId
              }
             }));
+           },
+
+           error: function(jqxhr, status, error){
+                 alert(jqxhr.statusText + ",  " + status + ",   " + error);
+                alert(jqxhr.status);
+                alert(jqxhr.responseText); 
            }
           })
       },
@@ -188,8 +200,8 @@ $("#autocompleteTinfoList").change(function(){
                             <h2 style="color:black">여행정보</h2>
                         </div>
                         <ul class=price-list>
-                            <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
+                            <li><a href="./getBestTravelList" style="color:black"><strong>베스트 여행기</strong></a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -226,7 +238,7 @@ $("#autocompleteTinfoList").change(function(){
 						</form>
 						
 <!-- 여행기 리스트 -->
-   			<c:forEach items="${travelBoardList}" var="board">
+   			<c:forEach items="${bestTravelList}" var="board">
 				<div class="content-box">
 							<c:if test="${travelBoard.travelPic != null}">
 							<img src="./images/travel/${travelBoard.travelPic}" class="img-responsive">

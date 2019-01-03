@@ -181,6 +181,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 	       AND I.SELLER_ID = #{sellerId}
+		   AND O.REVIEW_CONTENT IS NOT NULL
 </select>
 <select id="getYourReviewList" parameterType="order" resultType="order">
 SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
@@ -195,6 +196,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM ORDERT O, ITEMT I
 	 WHERE O.ITEM_ID = I.ITEM_ID
 	       AND I.SELLER_ID = #{sellerId}
+		   AND O.REVIEW_CONTENT IS NOT NULL
   ORDER BY REVIEW_DATE DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>

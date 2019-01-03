@@ -318,15 +318,15 @@
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="row">
-				<c:forEach items="${travelBoardlist}" var="board">
+				<c:forEach items="${bestTravelList}" var="board">
 					<div class="col-md-2 col-sm-2 col-xs-12">
 						<div class="about_single_item">
 							<div class="about_single_item_content">
-								<c:if test="${travelBoard.travelPic != null}">
+								<c:if test="${board.travelPic != null}">
 									<img src="./images/travel/${travelBoard.travelPic}"
 										class="img-responsive">
 								</c:if>
-								<c:if test="${travelBoard.travelPic == null}">
+								<c:if test="${board.travelPic == null}">
 									<img src="./images/travel/noimage.jpg" class="img-responsive">
 								</c:if>
 								<br>

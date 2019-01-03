@@ -355,8 +355,6 @@ function loadTravelPlaceList(){
 				+"</div>"
 			
 				+"<div id=\"footer\" class=\"panel-footer\">"
-				+"<i class=\"glyphicon glyphicon-heart\" style=\"color: #ff8000;\"></i>"
-				+"<small>"+ travelPlace.placeLike +"</small>"
 				+"</div>"
 				+"</article>"
 	div.html(str);
@@ -396,16 +394,7 @@ function loadTravelPlaceList(){
 				loadTravelPlaceList();
 			});
 		});
-	
-/*  	$("#updateTravelPlaceBtn").on("click", ".btnUpd", function(){
- 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
-	 	$.getJSON("updateTravelPlaceAjax", params, function(datas){
-			var div = makeTravelPlaceView(datas);
-			$(div).prependTo("#travelPlaceList");
-			jQuery.noConflict();
-			$('#updateTravelPlace').modal("hide");
-		}); 
-	});  */
+
 });	
 
 </script>
