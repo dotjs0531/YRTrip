@@ -38,7 +38,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">전체 알림 전송
+              <button class="btn btn-success btn-block">전체 메일 전송
                 <i class="mdi mdi-plus"></i>
               </button>
             </div>

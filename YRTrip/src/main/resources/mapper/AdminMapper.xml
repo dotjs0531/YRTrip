@@ -13,6 +13,7 @@ ORDER BY 2 DESC
 </select>
 
 <select id="getManageProductList" resultType="product">
+		SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		 SELECT ITEM_ID,
 				ITEM_NAME,
 				ITEM_PRICE,
@@ -29,6 +30,7 @@ ORDER BY 2 DESC
 				ITEM_LIKE
 		FROM ITEMT
 		ORDER BY ITEM_ID DESC
+		) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
 <select id="getManageOrderList" resultType="order">

@@ -75,6 +75,8 @@ public class AdminController {
 		@RequestMapping("/getManageProductListAjax")
 		@ResponseBody
 		public List<ProductVO> getManageProductListAjax(ProductVO vo) {
+			vo.setFirst(1);
+			vo.setLast(10);
 			return adminService.getManageProductList(vo);
 		}
 		

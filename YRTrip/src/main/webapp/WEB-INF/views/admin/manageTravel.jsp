@@ -22,7 +22,7 @@
 					 +"</td><td>"
 						 + datas[i].travelDate
 					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\">상세보기</button>"
+					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getTravelBoard?travelNo="+ datas[i].travelNo +"'\">상세보기</button>"
 					 + "<button type=\"button\" value='"+datas[i].travelNo+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
 					 +"</td></tr>"
 					$(str).appendTo("#travelList");

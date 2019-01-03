@@ -110,7 +110,7 @@ $(document).ready(function(){
 <!-- 등록폼 -->
  <form class="form" action="./insertTravelPlace" method="post">
 								<input id="pac-input" class="controls" type="text"
-									placeholder="Enter a location">
+									placeholder="다녀온 장소를 검색하세요.">
 								<div id="map"></div>
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
@@ -163,7 +163,6 @@ $(document).ready(function(){
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
- 
 <script>
 /* datepicker */
 $(function() {

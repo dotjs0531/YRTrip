@@ -280,7 +280,7 @@ $("#autocompleteTinfoList").change(function(){
 				
 <!-- modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 20px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">

@@ -209,8 +209,10 @@ SELECT PLACE_NO,
 
 <select id="getBestTravelList" parameterType="travelBoard" resultType="travelBoard">
 	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
-SELECT * FROM TRAVELBOARDT
-ORDER BY TRAVEL_LIKE DESC
+			SELECT * FROM(
+			SELECT * FROM TRAVELBOARDT
+			ORDER BY TRAVEL_LIKE DESC)
+			WHERE ROWNUM <![CDATA[<]]>= 120
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 </mapper> 

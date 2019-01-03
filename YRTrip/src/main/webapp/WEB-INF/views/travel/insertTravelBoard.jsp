@@ -233,6 +233,9 @@ background-color:#22313F;
 #map #infowindow-content {
 	display: inline;
 }
+.pac-container{
+	z-index:1051;
+}
 </style>
 
 <script>
@@ -301,12 +304,6 @@ $(function() {
             }
            }));
           },
-
-          error: function(jqxhr, status, error){
-                alert(jqxhr.statusText + ",  " + status + ",   " + error);
-               alert(jqxhr.status);
-               alert(jqxhr.responseText); 
-          }
          })
      },
      autoFocus:true,
@@ -629,7 +626,6 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>
 								</span><br>
-								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input" name="travelPay">원</span>
 								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche"></span>
 								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelStart"> ~ 
 																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelEnd">
@@ -651,9 +647,9 @@ function loadTravelPlaceList(){
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" name="travelContent">${travelBoard.travelContent}</textarea>
+												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 대한 간단한 후기를 적어주세요:-)">${travelBoard.travelContent}</textarea><br>
+												<input type="text" id="travelPay" name="travelPay" class="form-control" placeholder="여행에 사용한 총 경비를 입력해주세요.">
 											</div>
-											
 											<div class="panel-footer">
 												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
 												<small>${travelBoard.travelLike}</small>
@@ -691,7 +687,7 @@ function loadTravelPlaceList(){
 
 <!-- 장소 추가 modal -->			
 <div class="modal fade" id="insertTravelPlace">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -705,31 +701,37 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
+								<div id="map"></div>
+								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요.">
+								<div id="infowindow-content">
+									<span id="place-name" class="title"></span>
+									<span id="place-address"></span>
+									</div>
 									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
 										<div class="panel-body">
 												<div class="form-group">
+													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeTitle" class="form-control" placeholder="제목을 입력하세요."style="margin: -10px 0;">
+												</div>
+												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+													<input type="text" name="placeName" class="form-control" placeholder="장소명은 지도에서 선택하면 자동으로 입력됩니다." style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
-												</div>
-												<div class="form-group">
-													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력하세요.">
+													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다."style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요.">
+													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요."style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요.">
+													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요."style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요.">
+													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요."style="margin: -10px 0;">
 												</div>
 												<button type="button" id="insertTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
@@ -749,7 +751,7 @@ function loadTravelPlaceList(){
 
 <!-- 장소 수정 modal -->			
 <div class="modal fade" id="updateTravelPlace">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -764,9 +766,8 @@ function loadTravelPlaceList(){
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
 									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
-									<input id="pac-input" class="controls" type="text"
-									placeholder="Enter a location">
 								<div id="map"></div>
+								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요." style="width:100px!important;">
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
 									<span id="place-address"></span>
@@ -774,27 +775,27 @@ function loadTravelPlaceList(){
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control">
+													<input type="text" name="placeName" class="form-control" style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control">
+													<input type="text" name="placeAddress" class="form-control" style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control">
+													<input type="text" name="placeTitle" class="form-control" style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control">
+													<input type="text" name="placePic" class="form-control" style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control">
+													<input type="text" name="placeContent" class="form-control" style="margin: -10px 0;">
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker">
+													<input type="text" name="placeVisitDate" class="form-control datePicker" style="margin: -10px 0;">
 												</div>
 												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 수정</i>
@@ -815,7 +816,7 @@ function loadTravelPlaceList(){
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -909,7 +910,7 @@ function loadTravelPlaceList(){
 	</section>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
+ 
 	<script>
 $(function() {
     $( ".datePicker" ).datepicker({   
@@ -936,7 +937,6 @@ function initMap() {
         });
 
         var input = document.getElementById('pac-input');
-
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.bindTo('bounds', map);
 
@@ -958,7 +958,7 @@ function initMap() {
           if (!place.geometry) {
             return;
           }
-
+          
           if (place.geometry.viewport) {
             map.fitBounds(place.geometry.viewport);
           } else {
@@ -975,11 +975,12 @@ function initMap() {
           infowindowContent.children['place-name'].textContent = place.name;
           infowindowContent.children['place-address'].textContent = place.formatted_address;
           infowindow.open(map, marker);
-
-          document.getElementById("placeName").value= place.name;
-          document.getElementById("placeAddress").value= place.formatted_address;
+			
+          $("#insertTravelPlaceAjaxData [name=placeName]").val(place.name);
+          $("#insertTravelPlaceAjaxData [name=placeAddress]").val(place.formatted_address);
         });
       }
+
 </script>
 </body>
 </html>

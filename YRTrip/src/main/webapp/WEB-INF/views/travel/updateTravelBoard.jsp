@@ -614,7 +614,6 @@ function loadTravelPlaceList(){
 											<div class="panel-body">
 												<textarea class="form-control" rows="3" name="travelContent">${travelBoard.travelContent}</textarea>
 											</div>
-											
 											<div class="panel-footer">
 												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
 												<small>${travelBoard.travelLike}</small>

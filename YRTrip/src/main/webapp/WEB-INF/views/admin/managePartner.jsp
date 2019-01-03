@@ -25,7 +25,7 @@
 					 +"</td><td>"
 						 + datas[i].partnerDate
 					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\">상세보기</button>"
+					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getPartner?partnerId="+ datas[i].partnerId +"'\">상세보기</button>"
 					 + "<button type=\"button\" value='"+datas[i].partnerId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
 					 +"</td></tr>"
 					$(str).appendTo("#partnerList");

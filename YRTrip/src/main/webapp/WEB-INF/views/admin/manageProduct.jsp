@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 								+ "</td><td>"
 								  + datas[i].itemCondition
 								+ "</td><td>"
-								+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='./getProduct?itemId='\""+ datas[i].itemId+ ">상세보기</button>"
+								+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getProduct?itemId="+ datas[i].itemId +"'\">상세보기</button>"
 								+ "<button type=\"button\" value='"+datas[i].itemId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
 								+ "</td></tr>"
 									$(str).appendTo("#productList");
@@ -80,6 +81,10 @@
 						</tbody>
 					</table>
 				</div>
+								<!-- 페이징처리 -->
+				<nav aria-label="Page navigation example" style="padding:50px 5% 0 0;">
+					<my:paging paging="${paging}" jsFunc="go_page"/>
+				</nav>
 			</div>
 		</div>
 
