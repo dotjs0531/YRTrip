@@ -245,8 +245,10 @@ $(function(){
 						+"</div>"
 					
 						+"<div class=\"panel-body\">"
-						+"<img class=\"img-responsive img-rounded\" src=\"//placehold.it/350x150\" />"
-						+"<p>" + travelPlace.placeContent + "</p>"
+						+ travelPlace.placeName + "<br>"
+						+"<small>" + travelPlace.placeAddress + "</small><br>"
+						+"<img class=\"img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
+						+ travelPlace.placeContent
 						+"</div>"
 					
 						+"<div id=\"footer\" class=\"panel-footer\">"
@@ -414,7 +416,7 @@ function selectTravelWith(ele){
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -443,7 +445,7 @@ function selectTravelWith(ele){
 							
 							<p class="son-text">
 								<span class="son-span">${travelBoard.travelTitle}</span><br/><br/>
-								<span class="text-span">여행지 : ${travelBoard.tinfoCity}</span>
+								<span class="text-span">여행지 : ${travelBoard.tinfoId}</span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	나홀로 여행
 																</c:if>
@@ -500,33 +502,6 @@ function selectTravelWith(ele){
 								</article>
 								
 								<div id="travelPlaceList"></div>
-								
-									<%-- <c:forEach items="${travelPlace}" var="place">
-										<article class="panel panel-warning">
-
-											<div class="panel-heading icon">
-												<i class="glyphicon glyphicon glyphicon-map-marker"></i>
-												<p style="margin:-5px; background-color:#fff;">${fn:substring(place.placeVisitDate, 0, 4)}</p>
-												<p style="margin:-15px;background-color:#fff;">${fn:substring(place.placeVisitDate, 5, 7)}</p>
-												<p style="background-color:#fff;">${fn:substring(place.placeVisitDate, 8, 10)}</p>
-											</div>
-											
-											<div class="panel-heading">
-												<h2 class="panel-title" style="display:inline;">${place.placeName}</h2>
-											</div>
-	
-											<div class="panel-body">
-												<h2 class="panel-title">${place.placeTitle}</h2>
-												<img class="img-responsive img-rounded" src="//placehold.it/350x150" />
-												<p>${place.placeContent}</p>
-											</div>
-	
-											<div class="panel-footer">
-												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
-												<small>${place.placeLike}</small>
-											</div>
-										</article>
-										</c:forEach> --%>
 								</div>
 								<c:if test="${sessionScope.login.userId eq travelBoard.userId}">
 								

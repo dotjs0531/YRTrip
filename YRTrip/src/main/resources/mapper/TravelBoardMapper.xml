@@ -182,14 +182,12 @@
 			TRAVEL_DATE,
 			TRAVEL_HIT,
 			TRAVEL_LIKE,
-			B.TINFO_ID,
-			I.TINFO_CITY
+			TINFO_ID,
 			USER_ID,
 			TRAVEL_WITH,
 			TRAVEL_PIC
-	FROM TRAVELBOARDT B, TRAVELINFOT I
-	WHERE B.TRAVEL_NO = #{travelNo}
-  	AND B.TINFO_ID = I.TINFO_ID
+	FROM TRAVELBOARDT
+	WHERE TRAVEL_NO = #{travelNo}
 </select>
 <select id="getTravelPlaceList" parameterType="travelPlace" resultType="travelPlace">
 SELECT PLACE_NO,
@@ -207,5 +205,12 @@ SELECT PLACE_NO,
 	WHERE P.PLACE_TRAVELBOARDNO = B.TRAVEL_NO
  		  AND B.TRAVEL_NO = #{travelNo}
 	ORDER BY PLACE_NO DESC
+</select>
+
+<select id="getBestTravelList" parameterType="travelBoard" resultType="travelBoard">
+	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
+SELECT * FROM TRAVELBOARDT
+ORDER BY TRAVEL_LIKE DESC
+			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 </mapper> 

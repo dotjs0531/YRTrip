@@ -51,6 +51,33 @@ public class TravelBoardController {
 				mv.setViewName("travel/getTravelBoardList");
 				return mv;
 			}
+	
+	//베스트여행기 조회
+	@RequestMapping(value = { "/getBestTravelList"}, method = RequestMethod.GET)
+	public ModelAndView getBestTravelList(TravelBoardVO vo, Paging paging) {
+		
+		ModelAndView mv = new ModelAndView();
+		// 페이징 처리
+				// 페이지번호 파라미터
+				if( paging.getPage() == null) {
+					paging.setPage(1); 
+				}
+
+				paging.setPageUnit(12);
+				
+				// 시작/마지막 레코드 번호
+				vo.setFirst(paging.getFirst());
+				vo.setLast(paging.getLast());
+				// 전체 건수
+				paging.setTotalRecord(travelBoardService.getCount(vo));
+				
+				mv.addObject("paging", paging);
+				
+				mv.addObject("bestTravelList", travelBoardService.getBestTravelList(vo));
+				
+				mv.setViewName("travel/getBestTravelList");
+				return mv;
+			}
 
 	//상세조회
 	@RequestMapping("/getTravelBoard")

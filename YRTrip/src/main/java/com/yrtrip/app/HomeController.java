@@ -63,7 +63,7 @@ public class HomeController {
 		//정보 뿌리기
 		model.addAttribute("productList", productService.getProductList(pvo));
 		model.addAttribute("joinerlist", joinerService.getJoinerList(jvo));
-		model.addAttribute("travelBoardlist", travelBoardService.getTravelBoardList(tbvo));
+		model.addAttribute("bestTravelList", travelBoardService.getBestTravelList(tbvo));
 		return "main";
 	}
 	

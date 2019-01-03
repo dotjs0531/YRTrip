@@ -56,6 +56,11 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 	}
 	
 	@Override
+	public List<TravelBoardVO> getBestTravelList(TravelBoardVO vo) {
+		return dao.getBestTravelList(vo);
+	}
+	
+	@Override
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo) {
 		return dao.getTravelPlaceList(vo);
 	}

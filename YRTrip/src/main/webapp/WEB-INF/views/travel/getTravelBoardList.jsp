@@ -79,12 +79,6 @@ for (i = 0; i < acc.length; i++) {
               tinfoId:item.tinfoId
              }
             }));
-           },
-
-           error: function(jqxhr, status, error){
-                 alert(jqxhr.statusText + ",  " + status + ",   " + error);
-                alert(jqxhr.status);
-                alert(jqxhr.responseText); 
            }
           })
       },
@@ -201,7 +195,7 @@ $("#autocompleteTinfoList").change(function(){
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
