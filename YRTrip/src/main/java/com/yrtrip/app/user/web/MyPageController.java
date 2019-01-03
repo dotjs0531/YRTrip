@@ -279,11 +279,12 @@ public class MyPageController {
 		mv.setViewName("mypage/getMyReviewList");
 		return mv;
 	}
-	@RequestMapping("getMyReviewListAjax") //리뷰목록 ajax 조회
+	/*@RequestMapping("getMyReviewListAjax") //리뷰목록 ajax 조회
 	@ResponseBody
-	public List<OrderVO> getMyReviewListAjax(OrderVO vo) {
+	public List<OrderVO> getMyReviewListAjax(OrderVO vo, HttpSession session) {
+		vo.setBuyerId(((UserVO)session.getAttribute("login")).getUserId());
 		return mypageService.getMyReviewList(vo);
-	}
+	}*/
 	@RequestMapping("insertMyReview") //리뷰 등록
 	public String insertMyReview(Model model, OrderVO vo, MultipartHttpServletRequest request, MultipartFile[] reviewPicFile) throws IllegalStateException, IOException {
 		model.addAttribute("MyOrder", mypageService.getMyOrder(vo));
@@ -295,7 +296,7 @@ public class MyPageController {
 		for(int i=0;i<reviewPicFile.length; i++) {
 			fileOriginName = reviewPicFile[i].getOriginalFilename();
 			System.out.println("기존 파일명 : " + fileOriginName);
-			SimpleDateFormat formatter = new SimpleDateFormat("YYMMDD_"+i);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmss_"+i);
 			Calendar now = Calendar.getInstance();
 			
 			String extension = fileOriginName.split("\\.")[1];
@@ -332,7 +333,7 @@ public class MyPageController {
 		for(int i=0;i<reviewPicFile.length; i++) {
 			fileOriginName = reviewPicFile[i].getOriginalFilename();
 			System.out.println("기존 파일명 : " + fileOriginName);
-			SimpleDateFormat formatter = new SimpleDateFormat("YYMMDD_"+i);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyMMddHHmmss_"+i);
 			Calendar now = Calendar.getInstance();
 			
 			String extension = fileOriginName.split("\\.")[1];
