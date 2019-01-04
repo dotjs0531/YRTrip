@@ -271,18 +271,15 @@ jQuery( document ).ready(function( $ ) {
 		});	
 	   
 	   /* 사진 업로드 */
-	   $("#fileBtn").click(function(){
-		    $('.file-input').click();
-		    $(".file-Input").on('change', function(){  // 값이 변경되면
-				if(window.FileReader){  // modern browser
-					var filename = $(this)[0].files[0].name;
-				} else {  // old IE
-					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
-				}
+		$("#fileInput").on('change', function(){  // 값이 변경되면
+			if(window.FileReader){  // modern browser
+				var filename = $(this)[0].files[0].name;
+			} else {  // old IE
+				var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+			}
 
-				// 추출한 파일명 삽입
-				$("#travelBoardFile").val(filename);
-			});
+			// 추출한 파일명 삽입
+			$("#userfile").val(filename);
 		});
 }); 
 /* modal 자동완성 */
@@ -473,7 +470,7 @@ function loadTravelPlaceList(){
 						<div class="container dad">
 							<div class="son-1">
 							<c:if test="${travelBoard.travelPic != null}">
-							<img src="./images/travel/${travelPic}" class="img-responsive">
+							<img src="./images/travel/${travelBoard.travelPic}" class="img-responsive">
 							</c:if>
 							<c:if test="${travelBoard.travelPic == null}">
 							<img src="./images/travel/noimage.jpg" class="img-responsive">
@@ -482,13 +479,7 @@ function loadTravelPlaceList(){
 							<span class="top-span">T${travelBoard.travelNo}</span>
 							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
 							<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
-							<div style="padding-right:10px;">
-							<input type="file" name="travelBoardFile" class="file-input" size="chars">
-							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
-								<i class="fa fa-camera"> 메인사진 수정</i>
 
-							</button>
-							</div>
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
 								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
@@ -654,7 +645,21 @@ function loadTravelPlaceList(){
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" name="travelContent">${travelBoard.travelContent}</textarea>
+												<textarea class="form-control" rows="3" name="travelContent">${travelBoard.travelContent}</textarea><br>
+												<input type="file" name="travelPicFile"
+						 							id="fileInput" data-class-button="btn btn-default"
+													data-class-input="form-control" data-icon-name="fa fa-upload"
+													class="form-control" tabindex="-1" style="position: absolute;
+													clip: rect(0px, 0px, 0px, 0px);" value="${travelBoard.travelPic}">
+												<div class="bootstrap-filestyle input-group">
+													<input type="text" id="userfile" class="form-control"
+														name="userfile" disabled="" placeholder="${travelBoard.travelPic}">
+													<span class="group-span-filestyle input-group-btn" tabindex="0">
+														<label for="fileInput" class="btn btn-default ">
+															<span class="glyphicon fa fa-upload"></span>
+														</label>
+													</span>
+												</div>
 											</div>
 											<div class="panel-footer">
 												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>

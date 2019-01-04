@@ -223,12 +223,14 @@ $("#autocompleteTinfoList").change(function(){
 <!-- 여행기 리스트 -->
    			<c:forEach items="${travelBoardList}" var="board">
 				<div class="content-box">
-							<c:if test="${travelBoard.travelPic != null}">
-							<img src="./images/travel/${travelBoard.travelPic}" class="img-responsive">
+							<div style="width:140px; height:80px;">
+							<c:if test="${board.travelPic != null}">
+							<img src="./images/travel/${board.travelPic}" class="img-responsive" style="display:inline-block;">
 							</c:if>
-							<c:if test="${travelBoard.travelPic == null}">
+							<c:if test="${board.travelPic == null}">
 							<img src="./images/travel/noimage.jpg" class="img-responsive">
 							</c:if>
+							</div>
 						<div class="content-title">
 							<div class="text-center">
 								<h3><a href="getTravelBoard?travelNo=${board.travelNo}" class="getTravelBoard">

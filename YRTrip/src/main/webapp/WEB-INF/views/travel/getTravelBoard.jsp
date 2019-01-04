@@ -274,8 +274,8 @@ function del(travelNo){
 						+"</div>"
 					
 						+"<div id=\"footer\" class=\"panel-footer\">"
-			var login = '${sessionScope.login}';
-			if(login != null){
+				var login = '${sessionScope.login.userId}';
+				if(login != ''){
 				str += "<div id='LikeConditionP"+travelPlace.placeNo+"'>";
 	
 				var params = { userId : '${sessionScope.login.userId}',
@@ -440,7 +440,7 @@ function selectTravelWith(ele){
 						<div class="container dad">
 							<div class="son-1">
 							<c:if test="${travelBoard.travelPic != null}">
-							<img src="./images/travel/${travelPic}" style="width:100%;">
+							<img src="./images/travel/${travelBoard.travelPic}" style="width:100%;">
 							</c:if>
 							<c:if test="${travelBoard.travelPic == null}">
 							<img src="./images/travel/noimage.jpg" style="width:100%;">

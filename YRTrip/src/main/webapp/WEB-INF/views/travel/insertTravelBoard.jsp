@@ -477,13 +477,7 @@ function loadTravelPlaceList(){
 							<span class="top-span">T${travelBoard.travelNo}</span>
 							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
 							<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
-							<div style="padding-right:10px;">
-							<!-- <input type="file" name="travelfile" class="fileinput" size="chars">
-							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
-								<i class="fa fa-camera"> 메인사진 수정</i> 
 
-							</button> -->
-							</div>
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
 								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
