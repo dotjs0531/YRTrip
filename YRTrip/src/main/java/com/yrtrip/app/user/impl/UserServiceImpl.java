@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService {
 		dao.deleteUser(vo);
 	}
 
+	public void deleteUserList(UserVO vo) {
+		dao.deleteUserList(vo);
+	}
+	
 	public UserVO getUser(UserVO vo) {
 		return dao.getUser(vo);
 	}

@@ -15,6 +15,9 @@ public class UserVO {
 	private String userAccount;	//계좌번호(생략가능-판매자일 경우 입력)
 	private String userBank;	//은행정보(생략가능-판매자일 경우 입력)
 	private String userDate;	//가입일 -> default:sysdate
+
+	//선택삭제
+	private String[] userNoList;
 	
 	public String getUserId() {
 		return userId;
@@ -99,6 +102,13 @@ public class UserVO {
 	}
 	public void setUserDate(String userDate) {
 		this.userDate = userDate;
+	}
+
+	public String[] getUserNoList() {
+		return userNoList;
+	}
+	public void setUserNoList(String[] userNoList) {
+		this.userNoList = userNoList;
 	}
 	
 	@Override

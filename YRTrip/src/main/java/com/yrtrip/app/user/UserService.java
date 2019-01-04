@@ -6,6 +6,8 @@ public interface UserService {
 	public void insertUser(UserVO vo);
 	public void updateUser(UserVO vo);
 	public void deleteUser(UserVO vo);
+	public void deleteUserList(UserVO vo);
+	
 	public UserVO getUser(UserVO vo);
 	public UserVO getUserEmail(UserVO vo);
 	public List<UserVO> getUserList(UserVO vo);

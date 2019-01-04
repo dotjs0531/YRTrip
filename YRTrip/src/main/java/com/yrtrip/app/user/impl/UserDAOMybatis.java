@@ -29,6 +29,11 @@ public class UserDAOMybatis {
 		mybatis.update("user.deleteUser", vo.getUserId());
 	}
 	
+	//선택 삭제
+	public void deleteUserList(UserVO vo) {
+		mybatis.update("user.deleteUserList", vo);
+	}
+	
 	//단건 조회
 	public UserVO getUser(UserVO vo) {
 		return mybatis.selectOne("user.getUser", vo);

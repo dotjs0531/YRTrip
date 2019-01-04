@@ -83,6 +83,19 @@
 	DELETE  FROM  USERT
 			WHERE USER_ID = #{value}
 </delete>
+<delete id="deleteUserList" parameterType="user">
+	DELETE  FROM  USERT
+	<if test="userNoList != null and userNoList.length > 0">
+		WHERE USER_ID in
+	<foreach collection="userNoList" item="item"
+			open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="userNoList == null or not userNoList.length > 0">
+		WHERE USER_ID = -1
+	</if>
+</delete>
 
 <select id="findUserPw" parameterType="user" resultType="user">
 	SELECT  USER_PW,
