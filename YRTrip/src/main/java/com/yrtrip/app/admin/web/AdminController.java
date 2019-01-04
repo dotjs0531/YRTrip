@@ -59,13 +59,6 @@ public class AdminController {
 		userService.deleteUser(vo);
 		return vo;
 	}
-	//회원 선택 삭제
-	@RequestMapping("/deleteUserList")
-	public String deleteUserList(UserVO vo) {
-		userService.deleteUserList(vo);
-		return "redirect:manageUser";
-	}
-	
 	//회원 조회Ajax
 		@RequestMapping("/getUserListAjax")
 		@ResponseBody
