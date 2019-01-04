@@ -208,7 +208,29 @@ $(function(){
 	function disLike(uId, lC, lBid){
 		   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
 	};
-	
+jQuery( document ).ready(function( $ ) {
+		 	/* 여행등록 modal & 로그인 안했을시 예외처리 */
+			if("${sessionScope.login.userId}" == ''){
+				$("#insertTravelBoardButton").click(function(e){
+					e.preventDefault();
+					alert("로그인이 필요한 서비스입니다");
+				});
+				$(".goToUserPage").click(function(e){
+					e.preventDefault();
+					alert("로그인이 필요한 서비스입니다");
+				});
+			} else {
+		   $("#insertTravelBoardButton").click(function(){
+		    	$('div#insertTravelBoard').modal(true);
+			});
+		};
+	});
+/* 글 삭제 */
+function del(travelNo){
+ if(confirm("삭제하시겠습니까?")){
+    location.href = "./deleteTravelBoard?travelNo=" + travelNo;
+ } else { return; }
+};
 	$(function(){
 		loadTravelPlaceList();
 		
@@ -320,17 +342,8 @@ $(function(){
 	   }
 	   likeCondition();
 	});
-</script>
 
-<script>
-/* 여행등록 modal */
-jQuery( document ).ready(function( $ ) {
-	   $("#insertTravelBoardButton").click(function(){
-	    	$('div#insertTravelBoard').modal(true);
-		})
-});
 /* modal 자동완성 */
-
 $(function() {
     //input id autocomplete
     var context = '${pageContext.request.contextPath}';
@@ -395,12 +408,6 @@ function selectTravelWith(ele){
 	travelBoardModalfrm.travelPerson.disabled=false;	   
    }   
 }  
-/* 글 삭제 */
-     function del(travelNo){
-      if(confirm("삭제하시겠습니까?")){
-         location.href = "./deleteTravelBoard?travelNo=" + travelNo;
-      } else { return; }
-   };
 </script>
 </head>
 <body>
@@ -417,10 +424,10 @@ function selectTravelWith(ele){
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
                             <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black">세계의 여행지</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a id="insertTravelBoardButton">새 여행기 등록</a>
+	                        <a id="insertTravelBoardButton"><strong>새 여행기 등록</strong></a>
 	                    </div>                   
 				</div>
 			</div>
@@ -482,7 +489,10 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-heading">
-												<h2 class="panel-title">${travelBoard.userId}</h2>
+											<c:if test="${sessionScope.login.userId eq travelBoard.userId}"><strong>${travelBoard.userId}</strong></c:if>
+				                            <c:if test="${sessionScope.login.userId ne travelBoard.userId}">
+												<h2 class="panel-title"><a href="getYourTravelList?userId=${travelBoard.userId}" class="goToUserPage" style="text-decoration:none;"><strong>${travelBoard.userId}</strong></a></h2>
+											</c:if>
 											</div>
 	
 											<div class="panel-body">

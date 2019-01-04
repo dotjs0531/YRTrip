@@ -28,6 +28,18 @@ $(function(){
       document.frm.page.value = page;
       document.frm.submit();
    }
+jQuery( document ).ready(function( $ ) {
+	if("${sessionScope.login.userId}" == ''){
+		$(".insertPartner").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+		});
+		$(".goToUserPage").click(function(e){
+			e.preventDefault();
+			alert("로그인이 필요한 서비스입니다");
+	});
+	}
+});
 </script>
 </head>
 <body>
@@ -49,7 +61,7 @@ $(function(){
                      <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=숙소" style="color: black">숙소</a></li>
                   </ul>
                   <div class="order-buton" style="padding-bottom: 1px;">
-                     <a href="${pageContext.request.contextPath}/insertPartnerForm">글쓰기</a>
+                     <a href="${pageContext.request.contextPath}/insertPartnerForm" class="insertPartner">글쓰기</a>
                   </div>
                </div>
             </div>
@@ -91,7 +103,7 @@ $(function(){
 									overflow: hidden; width:380px; vertical-align:middle" href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
 									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if></a></td>
                               <td style="color:black;"><c:if test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
-                                  <c:if test="${sessionScope.login.userId ne partner.userId}"><a style="color:black;" href="./getYourTravelList?userId=${partner.userId}">${partner.userName}</a></c:if>
+                                  <c:if test="${sessionScope.login.userId ne partner.userId}"><a style="color:black;" href="./getYourTravelList?userId=${partner.userId}" class="goToUserPage">${partner.userName}</a></c:if>
                               </td>
                               <td style="text-align:center">${partner.partnerDate}
                               <td style="text-align:center">${partner.partnerHit}</td>

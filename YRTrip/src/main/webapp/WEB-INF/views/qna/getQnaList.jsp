@@ -20,6 +20,22 @@ a:hover { color:white }
 		document.frm.page.value = page;
 		document.frm.submit();
 	}
+	jQuery( document ).ready(function( $ ) {
+		if("${sessionScope.login.userId}" == ''){
+			$(".insertQna").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다.");
+		});
+			$(".goToUserPage").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다.");
+		});
+			$(".cantGetQna").click(function(e){
+				e.preventDefault();
+				alert("작성자만 열람 가능합니다.");
+		});
+		}
+	});
 </script>
 </head>
 <body>
@@ -38,7 +54,7 @@ a:hover { color:white }
                         </ul>
                         <div class="order-buton">
                         	<c:if test="${sessionScope.login.userGrant ne 'admin'}">
-                     			<a href="${pageContext.request.contextPath}/insertQna">문의글 등록</a>
+                     			<a href="${pageContext.request.contextPath}/insertQna" class="insertQna">문의글 등록</a>
                      		</c:if>
                         	<c:if test="${sessionScope.login.userGrant eq 'admin'}">
                      			<a href="${pageContext.request.contextPath}/insertNotice">공지 등록</a>
@@ -100,11 +116,20 @@ a:hover { color:white }
 							<c:forEach items="${qnaList}" var="qna">
 								<tr>
 									<td>${qna.qnaId}</td>
-									<td><a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
+									<td>
+									<c:if test="${sessionScope.login.userId eq qna.userId || sessionScope.login.userGrant eq 'admin'}">
+									<a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
 										overflow: hidden; width:420px; vertical-align:middle" href="./getQna?qnaId=${qna.qnaId}">${qna.qnaTitle}
-										<c:if test="${qna.qnaCommentCnt != '0'}"> [${qna.qnaCommentCnt}]</c:if></a></td>
+										<c:if test="${qna.qnaCommentCnt != '0'}"> [${qna.qnaCommentCnt}]</c:if></a>
+									</c:if>
+									<c:if test="${sessionScope.login.userId ne qna.userId && sessionScope.login.userGrant ne 'admin'}">
+									<a style="color:black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; 
+										overflow: hidden; width:420px; vertical-align:middle" href="#" class="cantGetQna">${qna.qnaTitle}
+										<c:if test="${qna.qnaCommentCnt != '0'}"> [${qna.qnaCommentCnt}]</c:if></a>
+									</c:if>
+									</td>
 									<td style="color:black;"><c:if test="${sessionScope.login.userId eq qna.userId}">${qna.userName}</c:if>
-										<c:if test="${sessionScope.login.userId ne qna.userId}"><a style="color:black;" href="./getYourTravelList?userId=${qna.userId}">${qna.userName}</a></c:if>
+										<c:if test="${sessionScope.login.userId ne qna.userId}"><a style="color:black;" href="./getYourTravelList?userId=${qna.userId}" class="goToUserPage">${qna.userName}</a></c:if>
 									</td>
 									<td style="text-align:center">${qna.qnaDate}</td>
 									<td style="text-align:center">${qna.qnaAnswer}</td>

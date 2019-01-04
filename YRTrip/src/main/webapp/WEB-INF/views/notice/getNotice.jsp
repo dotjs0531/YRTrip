@@ -14,6 +14,14 @@
          location.href = "./deleteNotice?noticeId=" + nid;
       } else { return; }
    };
+	jQuery( document ).ready(function( $ ) {
+		if("${sessionScope.login.userId}" == ''){
+			$(".insertQna").click(function(e){
+					e.preventDefault();
+					alert("로그인이 필요한 서비스입니다");
+			});
+		}
+	});	
 </script>
 </head>
 <body>
@@ -32,7 +40,7 @@
                         </ul>
                         <div class="order-buton">
                         	<c:if test="${sessionScope.login.userGrant ne 'admin'}">
-                     			<a href="${pageContext.request.contextPath}/insertQna">문의글 등록</a>
+                     			<a href="${pageContext.request.contextPath}/insertQna" class="insertQna">문의글 등록</a>
                      		</c:if>
                         	<c:if test="${sessionScope.login.userGrant eq 'admin'}">
                      			<a href="${pageContext.request.contextPath}/insertNotice">공지 등록</a>

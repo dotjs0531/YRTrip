@@ -127,6 +127,19 @@ $(function(){
     var travelMenu = document.getElementById("travelMenu");
     travelMenu.className='current-menu-item';
 });
+jQuery( document ).ready(function( $ ) {
+ 	/* 여행등록 modal & 로그인 안했을시 예외처리 */
+	if("${sessionScope.login.userId}" == ''){
+		$(".insertPlace").click(function(e){
+			e.preventDefault();
+			alert("로그인이 필요한 서비스입니다");
+		});
+		$(".goToUserPage").click(function(e){
+			e.preventDefault();
+			alert("로그인이 필요한 서비스입니다");
+		});
+	};
+});
 </script>
 </head>
 <body>
@@ -143,10 +156,10 @@ $(function(){
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
                             <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black"><strong>세계의 장소들</strong></a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black"><strong>세계의 여행지</strong></a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a href="./insertTravelPlaceform">세계의 장소 등록</a>
+	                        <a href="./insertTravelPlaceform" class="insertPlace" style="text-decoration:none; color:#fff;"><strong>세계의 여행지 등록</strong></a>
 	                    </div>                   
 				</div>
 			</div>
@@ -174,7 +187,11 @@ $(function(){
 					  <div class="text">
 					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">${board.placeTitle}</a></h2>
 					  <p class="animate-text">${board.placeName}</p>
-					  <h3 class="animate-text">${board.userId}</h3>
+					  <c:if test="${sessionScope.login.userId eq board.userId}"><h3 class="animate-text" style="text-decoration: none; color:#34495E;">${board.userId}</h3></c:if>
+				      <c:if test="${sessionScope.login.userId ne board.userId}">
+			   	      <h3 class="animate-text"><a href="getYourTravelList?userId=${board.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">${board.userId}</a></h3>
+					  </c:if>
+					  
 					  </div>
 					 </div>
 					 </div>

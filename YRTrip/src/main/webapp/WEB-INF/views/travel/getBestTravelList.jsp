@@ -28,32 +28,23 @@ $(function(){
     var travelMenu = document.getElementById("travelMenu");
     travelMenu.className='current-menu-item';
 });
-/* 유저 tooltip */
 jQuery( document ).ready(function( $ ) {
-	$('[data-toggle="tooltip"]').tooltip();
+ 	/* 여행등록 modal & 로그인 안했을시 예외처리 */
+	if("${sessionScope.login.userId}" == ''){
+		$("#insertTravelBoardButton").click(function(e){
+			e.preventDefault();
+			alert("로그인이 필요한 서비스입니다");
+		});
+		$(".goToUserPage").click(function(e){
+			e.preventDefault();
+			alert("로그인이 필요한 서비스입니다");
+		});
+	} else {
+   $("#insertTravelBoardButton").click(function(){
+    	$('div#insertTravelBoard').modal(true);
+	});
+};
 });
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-	acc[i].onclick = function() {
-		this.classList.toggle("active");
-		var panel = this.nextElementSibling;
-		if (panel.style.maxHeight) {
-			panel.style.maxHeight = null;
-		} else {
-			panel.style.maxHeight = panel.scrollHeight + "px";
-		}
-	}
-}; 
-
-/* 여행등록 modal */
- jQuery( document ).ready(function( $ ) {
-	   $("#insertTravelBoardButton").click(function(){
-	    	$('div#insertTravelBoard').modal(true);
-		})
-});
-
  /* autocomplete */
  $(document).ready(function(){ 
     //input id autocomplete
@@ -203,10 +194,10 @@ $("#autocompleteTinfoList").change(function(){
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black">전체 여행기</a></li>
                             <li><a href="./getBestTravelList" style="color:black"><strong>베스트 여행기</strong></a></li>
-                            <li><a href="./getTravelPlaceList" style="color:black">세계의 장소들</a></li>
+                            <li><a href="./getTravelPlaceList" style="color:black">세계의 여행지</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
-	                        <a id="insertTravelBoardButton">새 여행기 등록</a>
+	                        <a id="insertTravelBoardButton"><strong>새 여행기 등록</strong></a>
 	                    </div>                   
 				</div>
 			</div>
@@ -263,7 +254,12 @@ $("#autocompleteTinfoList").change(function(){
 						</div>
 						<div class="content-footer">
 						<hr style="margin-bottom:-3px;">
-							<span class="user-info">${board.userId}</span>
+							<span class="user-info">
+							<c:if test="${sessionScope.login.userId eq board.userId}">${board.userId}</c:if>
+				            <c:if test="${sessionScope.login.userId ne board.userId}">
+							<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userId}</a>
+							</c:if>
+							</span>
 							<span class="pull-right">
 								<a href="#" data-placement="right" title="Like">
 								<i class="fa fa-heart"></i> ${board.travelLike}</a>

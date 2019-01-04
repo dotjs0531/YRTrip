@@ -72,6 +72,20 @@ function del(placeNo){
     	location.href= "./deleteTravelPlace?placeNo=" + placeNo;
     } else { return; }
  };
+ 
+ jQuery( document ).ready(function( $ ) {
+	 	/* 여행등록 modal & 로그인 안했을시 예외처리 */
+		if("${sessionScope.login.userId}" == ''){
+			$(".insertPlace").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			});
+			$(".goToUserPage").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			});
+		};
+	});
 </script>
 </head>
 <body>
@@ -87,13 +101,12 @@ function del(placeNo){
 							<h2 style="color: black">여행정보</h2>
 						</div>
 						<ul class=price-list>
-							<li><a href="./getTravelBoardList" style="color: black">전체
-									여행기</a></li>
+							<li><a href="./getTravelBoardList" style="color: black">전체 여행기</a></li>
 							<li><a href="./getBestTravelList" style="color: black">베스트 여행기</a></li>
-							<li><a href="./getTravelPlaceList" style="color: black"><strong>세계의 장소들</strong></a></li>
+							<li><a href="./getTravelPlaceList" style="color: black"><strong>세계의 여행지</strong></a></li>
 						</ul>
 						<div class="order-buton" style="padding-bottom: 30px;">
-							<a href="./insertTravelPlaceform" style="text-decoration:none;">세계의 장소 등록</a>
+							<a href="./insertTravelPlaceform" style="text-decoration:none; color:#fff;" class="insertPlace"><strong>세계의 여행지 등록</strong></a>
 						</div>
 					</div>
 				</div>
@@ -114,6 +127,12 @@ function del(placeNo){
 				    		</div>
 				    		<h3>${travelPlace.placeTitle}</h3> 
 				    		<p> ${travelPlace.placeContent}</p>
+				    	<div style="float:right;">
+					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}">${travelPlace.userId}</c:if>
+					        <c:if test="${sessionScope.login.userId ne travelPlace.userId}">
+							<a href="getYourTravelList?userId=${travelPlace.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">- ${travelPlace.userId}</a>
+							</c:if>
+				    	</div>
 				    	</blockquote>
 				    	<div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>
 				    </div>
