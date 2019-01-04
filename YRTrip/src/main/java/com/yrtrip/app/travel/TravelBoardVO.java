@@ -1,5 +1,7 @@
 package com.yrtrip.app.travel;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yrtrip.app.like.LikeVO;
 
@@ -21,6 +23,7 @@ public class TravelBoardVO  extends LikeVO {
 	private String userId;
 	private String travelWith;
 	private String travelPic;
+	private MultipartFile travelPicFile;
 	
 	private String selectedTinfoModal;
 	private String searchTinfo;
@@ -127,7 +130,12 @@ public class TravelBoardVO  extends LikeVO {
 	public void setTravelPic(String travelPic) {
 		this.travelPic = travelPic;
 	}
-	
+	public MultipartFile getTravelPicFile() {
+		return travelPicFile;
+	}
+	public void setTravelPicFile(MultipartFile travelPicFile) {
+		this.travelPicFile = travelPicFile;
+	}
 	@JsonIgnore
 	public String getSortCol() {
 		return sortCol;

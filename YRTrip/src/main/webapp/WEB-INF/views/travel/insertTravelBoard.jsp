@@ -271,18 +271,15 @@ jQuery( document ).ready(function( $ ) {
 		});	
 	   
 	   /* 사진 업로드 */
-	   $("#fileBtn").click(function(){
-		    $('.file-input').click();
-		    $(".file-Input").on('change', function(){  // 값이 변경되면
-				if(window.FileReader){  // modern browser
-					var filename = $(this)[0].files[0].name;
-				} else {  // old IE
-					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
-				}
+		$("#fileInput").on('change', function(){  // 값이 변경되면
+			if(window.FileReader){  // modern browser
+				var filename = $(this)[0].files[0].name;
+			} else {  // old IE
+				var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+			}
 
-				// 추출한 파일명 삽입
-				$("#travelBoardFile").val(filename);
-			});
+			// 추출한 파일명 삽입
+			$("#userfile").val(filename);
 		});
 }); 
 /* modal 자동완성 */
@@ -466,7 +463,7 @@ function loadTravelPlaceList(){
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
-						<form action="./updateTravelBoard">
+						<form action="./updateTravelBoard" method="post" enctype="multipart/form-data">
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
@@ -481,11 +478,11 @@ function loadTravelPlaceList(){
 							<span class="top-span">${fn:substring(travelBoard.travelDate, 0, 10)}</span>
 							<span class="top-span">조회수 : ${travelBoard.travelHit}</span><br>
 							<div style="padding-right:10px;">
-							<input type="file" name="travelBoardFile" class="file-input" size="chars">
+							<!-- <input type="file" name="travelfile" class="fileinput" size="chars">
 							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
-								<i class="fa fa-camera"> 메인사진 수정</i>
+								<i class="fa fa-camera"> 메인사진 수정</i> 
 
-							</button>
+							</button> -->
 							</div>
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
@@ -652,7 +649,21 @@ function loadTravelPlaceList(){
 	
 											<div class="panel-body">
 												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 대해 간단한 후기를 작성해주세요:-)" required></textarea><br>
-												<input type="number" class="form-control" name="travelPay" placeholder="여행에 사용한 총 경비를 입력해주세요.(숫자만 입력 가능)" required>
+												<input type="number" class="form-control" name="travelPay" placeholder="여행에 사용한 총 경비를 입력해주세요.(숫자만 입력 가능)" required><br>
+												<input type="file" name="travelPicFile"
+						 							id="fileInput" data-class-button="btn btn-default"
+													data-class-input="form-control" data-icon-name="fa fa-upload"
+													class="form-control" tabindex="-1" style="position: absolute;
+													clip: rect(0px, 0px, 0px, 0px);">
+												<div class="bootstrap-filestyle input-group">
+													<input type="text" id="userfile" class="form-control"
+														name="userfile" disabled="">
+													<span class="group-span-filestyle input-group-btn" tabindex="0">
+														<label for="fileInput" class="btn btn-default ">
+															<span class="glyphicon fa fa-upload"></span>
+														</label>
+													</span>
+												</div>
 											</div>
 											<div class="panel-footer">
 											</div>

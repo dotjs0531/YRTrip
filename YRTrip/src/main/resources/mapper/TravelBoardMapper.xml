@@ -136,7 +136,7 @@
 		TINFO_ID = #{tinfoId},
 		TRAVEL_WITH = #{travelWith}
 		<if test="travelPic != null and travelPic != ''">
-		,TRAVEL_PIC = #{travelBoardFile}
+		,TRAVEL_PIC = #{travelPic}
 		</if>
 	WHERE TRAVEL_NO = #{travelNo}
 </update>

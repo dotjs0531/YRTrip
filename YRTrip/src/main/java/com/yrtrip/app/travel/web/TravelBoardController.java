@@ -1,6 +1,10 @@
 package com.yrtrip.app.travel.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
@@ -103,8 +108,18 @@ public class TravelBoardController {
 	}
 
 //수정처리
-	@RequestMapping("updateTravelBoard")
-	public String updateTravelBoard(TravelBoardVO vo) {
+	@RequestMapping(value = { "updateTravelBoard" }, method = RequestMethod.POST)
+	public String updateTravelBoard(TravelBoardVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/travel");
+
+		MultipartFile travelPicFile = vo.getTravelPicFile();
+		if (!travelPicFile.isEmpty() && travelPicFile.getSize() > 0) {
+			String filename = travelPicFile.getOriginalFilename();
+			travelPicFile.transferTo(new File(path, filename));
+
+		vo.setTravelPic(filename);
+		System.out.println("====================================="+filename);
+	}
 		travelBoardService.updateTravelBoard(vo);
 		return "redirect:getTravelBoardList";
 	}
