@@ -24,6 +24,7 @@ import com.yrtrip.app.product.CartService;
 import com.yrtrip.app.product.CartVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.user.MyPageService;
 import com.yrtrip.app.user.UserService;
 import com.yrtrip.app.user.UserVO;
 
@@ -34,6 +35,7 @@ public class ProductController {
 	@Autowired CartService cartService;
 	@Autowired OrderService orderService;
 	@Autowired UserService userService;
+	@Autowired MyPageService mypageService;
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
 	public ModelAndView getProductList(Paging paging, ProductVO vo) {
@@ -66,7 +68,12 @@ public class ProductController {
 	//상세조회(폼)
 	@RequestMapping("/getProduct")
 	public String getProduct(Model model, ProductVO vop, OrderVO voo) {
+		ProductVO vo = new ProductVO();
+		vo.setSellerId(vop.getSellerId());
+		System.out.println(vo.getSellerId());
+
 		model.addAttribute("product", productService.getProduct(vop));
+		//model.addAttribute("getSellerList", mypageService.getMyProductList(vo));
 		model.addAttribute("order", orderService.getOrder(voo));
 		return "product/getProduct";
 	}

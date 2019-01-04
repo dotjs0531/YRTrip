@@ -304,30 +304,29 @@ $(function(){
 												role="button" class="btn btn-lg btn-block btn-light"
 												href="./purchasingProduct">구매하기</a>
 										</div>
-
-
 									</form>
 								</div>
 								<div class="product-seller-recommended">
-									<h3 class="mb-5">판매자의 다른 상품</h3>
+									<h3 class="mb-5">${product.sellerId} 판매자의 다른 상품</h3>
 									<!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
 									<div class="row">
-										<c:forEach items="" var="">
+									<%-- <c:set var="seller" value="${product.sellerId}" /> --%>
+	 									<%-- <c:forEach items="${getSellerList}" var="sellerP"> --%> 
 											<div class="col-md-4">
 												<div class="card">
 													<img src="https://via.placeholder.com/157x157"
 														class="card-img-top">
 													<div class="card-body">
-														<h5 class="card-title">판매자 다른 상품 이름</h5>
+														<h5 class="card-title"><a href="#">${sellerP.itemName}</a></h5>
 														<span class="text-muted">￦ 12,000</span>
 													</div>
 												</div>
 											</div>
-										</c:forEach>
+ 										<%-- </c:forEach> --%>
 									</div>
 									<!-- /.recommended-items-->
 									<p class="mb-5 mt-5">
-										<a href="#">판매자의 모든 상품 보러가기!</a>
+										<a href="./getMyProductList?sellerId=${product.sellerId}">판매자의 모든 상품 보러가기!</a>
 									</p>
 									<div class="product-description mb-5">
 										<h2 class="mb-5">제품 기본정보</h2>
@@ -381,8 +380,10 @@ $(function(){
 											<%-- <c:if test="${review.reviewContent ne null}"> --%>
 												 	<div class="card review_show">
 												 	<div class="card-body row">
-													 	<div class="col-6">
-													 		<img class="card-img-top" src=".../100px180/" alt="Card image cap">
+													 	<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
+															<c:set var="pic" value="${reviewPicname}"/>
+													 	<div class="col-6">													 	
+													 		<img class="card-img-top" src="./images/review/${pic}" alt="Card image cap">
 													 	</div>
 													 	<div class="col-6 review_show_content">
 													 		<h5 class="card-title">${review.reviewStar}</h5>

@@ -51,8 +51,8 @@ ORDER BY ORDER_DATE DESC -->
 			ORDER_DATE,
 			review_star,
 			review_content,
-			review_date
-			<!-- ,review_pic -->
+			review_date,
+			review_pic
 		FROM ORDERT o, ITEMT i
 		where i.item_id = o.item_id
 		and i.item_id = #{itemId}
