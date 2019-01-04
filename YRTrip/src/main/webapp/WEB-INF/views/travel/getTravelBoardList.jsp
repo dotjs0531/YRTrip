@@ -251,22 +251,11 @@ $("#autocompleteTinfoList").change(function(){
 						</div>
 						<div class="content-footer">
 						<hr style="margin-bottom:-3px;">
-							<span class="user-info">${board.userId}</span>
+							<span class="user-info"><a href="getYourTravelList?userId=${board.userId}" style="padding-top:25px;">${board.userId}</a></span>
 							<span class="pull-right">
-								<a href="#" data-placement="right" title="Like">
+								<a data-placement="right" title="Like">
 								<i class="fa fa-heart"></i> ${board.travelLike}</a>
 							</span>
-							<div class="user-ditels">
-								<div class="user-img">
-									<img src="resources/media/users.png" class="img-responsive">
-								</div>
-								<div class="social-icon">
-									<a href="#"><i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="유저정보"></i></a> 
-									<a href="#"><i class="glyphicon glyphicon-usd" data-toggle="tooltip" data-placement="bottom" title="판매상품"></i></a><br> 
-									<a href="#"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="bottom" title="리뷰"></i></a> 
-									<a href="#"><i class="glyphicon glyphicon-globe" data-toggle="tooltip" data-placement="bottom" title="여행글"></i></a> 
-								</div>
-							</div>
 						</div>
 					</div>
 				</c:forEach>
@@ -297,7 +286,7 @@ $("#autocompleteTinfoList").change(function(){
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 									<div class="form-group">
 										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
+										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요." required>
 									</div>
 									<div style="padding-bottom:-15px;">
 										<input type="radio" id="modal-domestic" name="searchCheckModal" checked="checked" value="domestic">
@@ -307,12 +296,12 @@ $("#autocompleteTinfoList").change(function(){
 									</div>
 									<div style="padding-bottom:5px">
 										<label class="col-sm-2 control-label"></label>
-										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
-										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal">
+										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal" required>
+										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal" required>
 								</div>
 									<div class="form-group">
 										<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)">
+										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)" required>
 										  <option value="" selected>여행테마를 선택하세요.</option>
 										  <option value="alone">나홀로 여행</option>
 										  <option value="friend">친구와 함께</option>
@@ -324,7 +313,7 @@ $("#autocompleteTinfoList").change(function(){
 									</div>
 									<div class="form-group">
 										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelPerson" name="travelPerson" class="form-control">
+										<select id="travelPerson" name="travelPerson" class="form-control" required>
 										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요.</option>
 										  <option value="1">1명</option>
 										  <option value="2">2명</option>
@@ -336,15 +325,15 @@ $("#autocompleteTinfoList").change(function(){
 									</div>
 									<div class="form-group">
 										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요.">
+										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요." required>
 									</div>
 									<div class="form-group">
 										<label for="travelEnd" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요.">
+										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요." required>
 									</div>
 									<div class="form-group">
 										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일">
+										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일" required>
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>

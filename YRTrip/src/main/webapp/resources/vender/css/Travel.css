@@ -20,13 +20,13 @@
 
 .content-footer {
 	background-color: #ffffff;
-	padding: 0 10px 10px 10px;
+	padding: 0 5px 0 5px;
 	position: relative;
 }
 
 .content-footer span a {
 	color: #ff8000;
-	display: block;
+	display: inline-block;
 	padding: 10px 5px;
 	text-decoration: none;
 	transition: 0.5s;

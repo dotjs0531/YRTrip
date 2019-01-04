@@ -308,8 +308,7 @@ $("#autocompleteTinfoList").change(function(){
 								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 									<div class="form-group">
-										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
+										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요." required>
 									</div>
 									<div style="padding-bottom:-15px;">
 										<input type="radio" id="modal-domestic" name="searchCheckModal" checked="checked" value="domestic">
@@ -318,13 +317,11 @@ $("#autocompleteTinfoList").change(function(){
 										<label for="overseas">해외</label>
 									</div>
 									<div style="padding-bottom:5px">
-										<label class="col-sm-2 control-label"></label>
-										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
-										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal">
+										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal" required>
+										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal" required>
 								</div>
 									<div class="form-group">
-										<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)">
+										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)" required>
 										  <option value="" selected>여행테마를 선택하세요.</option>
 										  <option value="alone">나홀로 여행</option>
 										  <option value="friend">친구와 함께</option>
@@ -334,9 +331,8 @@ $("#autocompleteTinfoList").change(function(){
 										  <option value="package">패키지여행</option>
 										</select>
 									</div>
-									<div class="form-group">
-										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelPerson" name="travelPerson" class="form-control">
+									<div class="form-group"><br>
+										<select id="travelPerson" name="travelPerson" class="form-control" required>
 										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요.</option>
 										  <option value="1">1명</option>
 										  <option value="2">2명</option>
@@ -347,20 +343,16 @@ $("#autocompleteTinfoList").change(function(){
 										</select>
 									</div>
 									<div class="form-group">
-										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요.">
+										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요." required>
 									</div>
 									<div class="form-group">
-										<label for="travelEnd" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요.">
+										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요." required>
 									</div>
 									<div class="form-group">
-										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일">
+										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일" required>
 									</div>
 									<div class="form-group">
-										<label class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
+										<button type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;">여행기 만들기</button>
 									</div>
 									<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
 									<input type="hidden" name="userId" value="${sessionScope.login.userId}">

@@ -271,23 +271,24 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#updateTravelPlace').modal(true);
 		});	
 	   
-	   /* 사진 업로드 */
-	   $("#fileBtn").click(function(){
-		    $('.file-input').click();
-		    $(".file-Input").on('change', function(){  // 값이 변경되면
-				if(window.FileReader){  // modern browser
-					var filename = $(this)[0].files[0].name;
-				} else {  // old IE
-					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
-				}
-
-				// 추출한 파일명 삽입
-				$("#travelBoardFile").val(filename);
+/* 사진 업로드(board) */
+$("#fileBtn").click(function(){
+	$('.file-input').click();
+	$(".file-Input").on('change', function(){
+		if(window.FileReader){
+		var filename = $(this)[0].files[0].name;
+		} else {  // old IE
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$("#travelBoardFile").val(filename);
 			});
 		});
-}); 
-/* modal 자동완성 */
 
+?...
+
+
+
+/* modal 자동완성 */
 $(function() {
     //input id autocomplete
     var context = '${pageContext.request.contextPath}';
@@ -306,7 +307,7 @@ $(function() {
              tinfoId:item.tinfoId
             }
            }));
-          },
+          }
          })
      },
      autoFocus:true,
@@ -345,7 +346,7 @@ function selectTravelWith(ele){
    } else {
 	travelBoardModalfrm.travelPerson.disabled=false;	   
    }   
-} 
+}   
 
 $(function(){
 	loadTravelPlaceList();
@@ -435,7 +436,13 @@ function loadTravelPlaceList(){
 		});
 
 });	
-
+function validate() {
+    if (event.keyCode >=48 && event.keyCode <= 57 ) {
+        return true;
+    } else {
+        event.returnValue = false;
+    }
+}
 </script>
 </head>
 <body>
@@ -461,11 +468,11 @@ function loadTravelPlaceList(){
 				</div>
 			</div>
 
-				<!-- 여행기 수정 폼 -->
+				<!-- 여행기 등록 폼2 -->
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
-						<form action="./updateTravelBoard">
+						<form action="./updateTravelBoard" enctype="multipart/form-data" name="updatefrm">
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
@@ -483,14 +490,13 @@ function loadTravelPlaceList(){
 							<input type="file" name="travelBoardFile" class="file-input" size="chars">
 							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
 								<i class="fa fa-camera"> 메인사진 등록</i>
-
 							</button>
 							</div>
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
-								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
+								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId" required></span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone" selected>나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -500,7 +506,7 @@ function loadTravelPlaceList(){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'friend'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend" selected>친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -510,7 +516,7 @@ function loadTravelPlaceList(){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'family'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family" selected>가족과 함께</option>
@@ -520,7 +526,7 @@ function loadTravelPlaceList(){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'couple'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -530,7 +536,7 @@ function loadTravelPlaceList(){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'group'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -540,7 +546,7 @@ function loadTravelPlaceList(){
 																		</select>
 																</c:if>
 																<c:if test="${travelBoard.travelWith == 'package'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
+																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
@@ -552,7 +558,7 @@ function loadTravelPlaceList(){
 								</span> <br>
 								<span class="text-span"> ${sessionScope.login.userName}님과 함께한 여행인원 : 
 									 <c:if test="${travelBoard.travelPerson == '0'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0" selected>0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -563,7 +569,7 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '1'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0">0명</option>
 											  <option value="1" selected>1명</option>
 											  <option value="2">2명</option>
@@ -574,7 +580,7 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '2'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2" selected>2명</option>
@@ -585,7 +591,7 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '3'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2" >2명</option>
@@ -596,7 +602,7 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '4'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0" >0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -607,7 +613,7 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '5'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -618,7 +624,7 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>	
 									<c:if test="${travelBoard.travelPerson == '6'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;" required>
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
@@ -629,9 +635,9 @@ function loadTravelPlaceList(){
 										</select>
 									</c:if>
 								</span><br>
-								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche"></span>
-								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelStart"> ~ 
-																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelEnd">
+								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche" required></span>
+								<span class="text-span">여행기간 : <input type="text" value="${fn:substring(travelBoard.travelStart, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelStart" required> ~ 
+																<input type="text" value="${fn:substring(travelBoard.travelEnd, 0, 10)}" class="update-input datePicker" style="width:100px!important;" name="travelEnd" required>
 								</span><br>
 							</p>
 
@@ -650,8 +656,8 @@ function loadTravelPlaceList(){
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 대한 간단한 후기를 적어주세요:-)">${travelBoard.travelContent}</textarea><br>
-												<input type="text" id="travelPay" name="travelPay" class="form-control" placeholder="여행에 사용한 총 경비를 입력해주세요.">
+												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 대한 간단한 후기를 적어주세요:-)" required>${travelBoard.travelContent}</textarea><br>
+												<input type="number" id="travelPay" name="travelPay" class="form-control" placeholder="여행에 사용한 총 경비를 입력해주세요." required>
 											</div>
 											<div class="panel-footer">
 												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
@@ -659,7 +665,6 @@ function loadTravelPlaceList(){
 											</div>
 								</article>
 								<div id="travelPlaceList">
-								<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
 								</div>		
 								<!-- 장소 추가 -->
 								<article class="panel panel-success">
@@ -704,7 +709,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
+									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
 								<div id="map"></div>
 								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
@@ -714,27 +719,27 @@ function loadTravelPlaceList(){
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력해주세요."style="margin: -10px 0;">
+													<input type="text" name="placeTitle" class="form-control" placeholder="장소에 대한 제목을 입력해주세요."style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" placeholder="장소명은 지도에서 선택하면 자동으로 입력됩니다." style="margin: -10px 0;">
+													<input type="text" name="placeName" class="form-control" placeholder="장소명은 지도에서 선택하면 자동으로 입력됩니다." style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다."style="margin: -10px 0;">
+													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다."style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요."style="margin: -10px 0;">
+													<input type="file" name="placePic" class="form-control" placeholder="사진을 업로드해주세요."style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요."style="margin: -10px 0;">
+													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요."style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요."style="margin: -10px 0;">
+													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요."style="margin: -10px 0;" required>
 												</div>
 												<button type="button" id="insertTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
@@ -768,7 +773,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
+									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
 								<div id="map"></div>
 								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요.">
 								<div id="infowindow-content">
@@ -778,27 +783,27 @@ function loadTravelPlaceList(){
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" style="margin: -10px 0;">
+													<input type="text" name="placeName" class="form-control" style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" style="margin: -10px 0;">
+													<input type="text" name="placeAddress" class="form-control" style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" style="margin: -10px 0;">
+													<input type="text" name="placeTitle" class="form-control" style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" style="margin: -10px 0;">
+													<input type="text" name="placePic" class="form-control" style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" style="margin: -10px 0;">
+													<input type="text" name="placeContent" class="form-control" style="margin: -10px 0;" required>
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" style="margin: -10px 0;">
+													<input type="text" name="placeVisitDate" class="form-control datePicker" style="margin: -10px 0;" required>
 												</div>
 												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 수정</i>
@@ -819,7 +824,7 @@ function loadTravelPlaceList(){
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog" style="padding: 30px 0 0 0;">
+	<div class="modal-dialog" style="padding: 20px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -833,12 +838,11 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form action="./updateTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
+								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
-										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 									<div class="form-group">
 										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
+										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요." required>
 									</div>
 									<div style="padding-bottom:-15px;">
 										<input type="radio" id="modal-domestic" name="searchCheckModal" checked="checked" value="domestic">
@@ -848,12 +852,12 @@ function loadTravelPlaceList(){
 									</div>
 									<div style="padding-bottom:5px">
 										<label class="col-sm-2 control-label"></label>
-										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="다녀 온 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
-										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal">
+										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal" required>
+										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal" required>
 								</div>
 									<div class="form-group">
 										<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)">
+										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)" required>
 										  <option value="" selected>여행테마를 선택하세요.</option>
 										  <option value="alone">나홀로 여행</option>
 										  <option value="friend">친구와 함께</option>
@@ -865,8 +869,8 @@ function loadTravelPlaceList(){
 									</div>
 									<div class="form-group">
 										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelPerson" name="travelPerson" class="form-control">
-										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요. (본인 제외)</option>
+										<select id="travelPerson" name="travelPerson" class="form-control" required>
+										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요.</option>
 										  <option value="1">1명</option>
 										  <option value="2">2명</option>
 										  <option value="3">3명</option>
@@ -877,20 +881,22 @@ function loadTravelPlaceList(){
 									</div>
 									<div class="form-group">
 										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요.">
+										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요." required>
 									</div>
 									<div class="form-group">
 										<label for="travelEnd" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요.">
+										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요." required>
 									</div>
 									<div class="form-group">
 										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일">
+										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일" required>
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
 									</div>
+									<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
+									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>
 						</div>
@@ -913,7 +919,7 @@ function loadTravelPlaceList(){
 	</section>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
 	<script>
 $(function() {
     $( ".datePicker" ).datepicker({   

@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,7 +130,16 @@ function del() {
 									
 									<div class="content-title">
 										<div class="text-center">
-											<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">${travel.travelTitle}</a></h3>
+											<h3><a href="getTravelBoard?travelNo=${travel.travelNo}">
+											 <c:choose>
+									           <c:when test="${fn:length(travel.travelTitle) > 9}">
+									           		<c:out value="${fn:substring(travel.travelTitle,0,8)}"/>..
+												</c:when>
+									           <c:otherwise>
+									            <c:out value="${travel.travelTitle}"/>
+									           </c:otherwise> 
+									          </c:choose>
+											</a></h3>
 										</div>
 									</div>
 									<div class="content-footer">

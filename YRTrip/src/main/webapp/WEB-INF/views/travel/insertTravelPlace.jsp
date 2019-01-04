@@ -118,19 +118,19 @@ $(document).ready(function(){
 								</div>
 									<div class="form-group">
 										<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeTitle" class="form-control" placeholder="제목을 입력해주세요.">
+										<input type="text" name="placeTitle" class="form-control" placeholder="제목을 입력해주세요." required>
 									</div>
 									<div class="form-group">
 										<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" id="placeName" name="placeName" class="form-control" placeholder="지도에서 장소를 검색하여 선택하면 자동으로 입력됩니다.">
+										<input type="text" id="placeName" name="placeName" class="form-control" placeholder="지도에서 장소를 검색하여 선택하면 자동으로 입력됩니다." required>
 									</div>
 									<div class="form-group">
 										<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" id="placeAddress" name="placeAddress" class="form-control" placeholder="지도에서 장소를 검색하여 선택하면 자동으로 입력됩니다.">
+										<input type="text" id="placeAddress" name="placeAddress" class="form-control" placeholder="지도에서 장소를 검색하여 선택하면 자동으로 입력됩니다." required>
 									</div>
 									<div class="form-group">
 										<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-										<textarea class="form-control" rows="3" name="placeContent" placeholder="장소에 대한 후기를 작성해주세요."></textarea>
+										<textarea class="form-control" rows="3" name="placeContent" placeholder="장소에 대한 후기를 작성해주세요." required></textarea>
 									</div>
 									<input type="file" name="placePic" id="fileInput" data-class-button="btn btn-default"
 										data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" 
@@ -146,7 +146,7 @@ $(document).ready(function(){
 									</div>
 									<div class="form-group">
 										<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 입력해주세요.">
+										<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 입력해주세요." required>
 									</div>
 									<div class="form-group">
 										<label for="remember-me" class="text-info"></label>
