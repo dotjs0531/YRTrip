@@ -93,6 +93,13 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
+function del() {
+	if (confirm("삭제하시겠습니까?")) {
+		document.reviewDel.submit();
+	} else {
+		return;
+	}
+};
 	function go_page(page) {
 		document.frm.page.value = page;
 		document.frm.submit();
@@ -253,14 +260,14 @@ $(function() {
 											   
 										<p class="control-label" style="font-family: 'NanumSquareRoundR'; margin-left:190px;
 											overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
-											-webkit-box-orient:vertical; word-wrap:break-word; height:10em;">
+											-webkit-box-orient:vertical; word-wrap:break-word; height:10em; white-space: pre-line; word-break: break-word;">
 										<a href="getProduct?itemId=${review.itemId}" style="color:black; text-decoration:none">${review.reviewContent}</a></p>
 										
 										<!-- 수정/삭제 버튼 -->
-										<form action="./deleteMyReview" method="post">
+										<form action="./deleteMyReview" method="post" name="reviewDel">
 											<input type="hidden" name="orderId" value="${review.orderId}">
 											<input type="hidden" name="itemId" value="${review.itemId}">
-											<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
+											<button type="submit" class="btn btn-default" style="float:right;" onclick="del()">삭제</button>
 										</form>
 										<button type="button" class="btn btn-default" id="review${review.orderId}" 
 												data-toggle="modal" data-target="#updateMyReviewForm" style="float:right; margin-right:10px">수정</button>

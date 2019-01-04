@@ -139,9 +139,16 @@ function del() {
 	if(password == upw){
 		if(confirm("정말 탈퇴하시겠습니까?")){
 			location.href = "./deleteMyInfo?userId=" + uid;
-		} else { return; }
+		} else { return false; }
 	} else {
 		alert("비밀번호가 일치하지 않습니다.");
+	}
+};
+function del() {
+	if (confirm("삭제하시겠습니까?")) {
+		document.productDel.submit();
+	} else {
+		return false;
 	}
 };
 	function go_page(page) {
@@ -297,7 +304,7 @@ function del() {
 					</div>
 					
                 	<div style="min-height:420px">
-	                	<form action="deleteMyProductList">
+	                	<form action="deleteMyProductList" name="productDel">
 							<div class="container card" style="width:100%;">
 								<!-- Normal Demo-->
 								<c:forEach items="${MyProductList}" var="product">
@@ -341,7 +348,7 @@ function del() {
 							</div>
 						<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 						<c:if test="${not empty MyProductList}">
-							<button class="btn btn-default" style="float:right;">삭제</button>
+							<button class="btn btn-default" style="float:right;" onclick="del()">삭제</button>
 							<p style="clear:both"/>
 						</c:if>
 						</form>
