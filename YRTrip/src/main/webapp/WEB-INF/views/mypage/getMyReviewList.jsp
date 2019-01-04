@@ -25,22 +25,38 @@
 <script src="resources/js/fileinput.js" type="text/javascript"></script>
     
 <style class="cp-pen-styles">
-#img { 
+.img { 
 	float:left;
     width: auto; 
     height: auto;
     max-width: 180px;
     max-height: 180px;
-} 
-.modal-content{
-  margin-top:70px;
 }
 a:hover { color:white }
 .nav>li>a:focus,
 .nav>li>a:hover{
    background-color:white;
-}/* Style the Image Used to Trigger the Modal */
-
+}
+.modal-content{
+	margin-top:70px;
+}
+.modal {
+	text-align: center;
+}
+ 
+@media screen and (min-width: 768px) { 
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
 @font-face {
  font-family: 'NanumSquareRoundEB';
  src: url(resources/fonts/NanumSquareRoundEB.eot);
@@ -84,13 +100,38 @@ function del() {
 </script>
 <script>
 $(function() {
-	/* var carousel_class_init = "active";	
+	var carousel_class_init = "active";	
 	var carousel_ea = $("div#itemC").length;
 	console.log(carousel_ea);
 	for(i=0; i<1; i++){
 		$("#itemC").addClass(carousel_class_init);
 	}
-	 */
+	
+	$('#myModal').on('show.bs.modal', function(e) {
+		var a = $(event.target);
+		console.log(event);
+		var param = {
+			orderId :  a.attr("id").substr(3)
+		};
+		$.getJSON("getMyReview", param, function(data){
+			console.log(data.orderId);
+			var orderId = data.orderId;
+			var reviewPic = data.reviewPic;
+			var picName = reviewPic.split(',');
+			
+			var str = '';
+			
+			for( var i in picName ){
+				//$(".modalImg").attr("src", "./images/review/"+picName[i]);
+				str += "<div id='itemC' class='item'><img src='./images/review/"+picName[i]+"' class=\"img-responsive modalImg\" /></div>";
+			}
+			
+			$(str).appendTo(".carousel-inner");
+			$(".item").first().addClass('active');
+			$("#myCarousel").carousel();
+		});
+	});
+	
 	$('#updateMyReviewForm').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
 		console.log(event);
@@ -110,7 +151,7 @@ $(function() {
 			$(".reviewStar").val(reviewStar);
 			//$(".reviewStar").attr('value', reviewStar);
 			$("textarea[name=reviewContent]").text(reviewContent);
-			$("input[name=reviewPicFile]").val(reviewPic);
+			//$("input[name=reviewPicFile]").val(reviewPic);
 		});
 	});
 });
@@ -202,12 +243,12 @@ $(function() {
 										
 										<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
 										<c:set value="${reviewPicname}" var="pic"/>
-											<a href="#" data-toggle="modal" data-target="#myModal" id="pic${review.orderId}">
-												<img id="img" src="./images/review/${pic}" style="height:180px" /></a>
+											<a href="#" data-toggle="modal" data-target="#myModal">
+												<img id="pic${review.orderId}" class="img" src="./images/review/${pic}" style="height:180px" /></a>
 										
 										
 										<!-- 별점 표시 부분 -->
-										<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
+										<input name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1"
 											   value="${review.reviewStar}" style="" disabled>
 											   
 										<p class="control-label" style="font-family: 'NanumSquareRoundR'; margin-left:190px;
@@ -292,7 +333,26 @@ $(function() {
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						        <div class="modal-body">
-						            <img src="./images/review/${pic}" class="img-responsive">
+						            <!-- <img <%-- src="./images/review/${pic}" --%> class="img-responsive modalImg"> -->
+						            
+						            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+										<!-- 사진넣는부분 -->
+										<div class="carousel-inner">
+											<!-- <div id="itemC" class="item">
+												<img id="img" class="img-responsive modalImg" />
+											</div> -->
+										</div>
+										<!-- 왼쪽 / 오른쪽 화살표 -->
+										<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+											<span class="glyphicon glyphicon-chevron-left"></span>
+											<span class="sr-only">Previous</span>
+										</a>
+										<a class="right carousel-control" href="#myCarousel" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right"></span>
+										<span class="sr-only">Next</span>
+										</a>
+									</div>
+						            
 						        </div>	<!-- end of modal-body -->
 						    </div> <!-- end of modal-content -->
 						  </div>
@@ -304,23 +364,6 @@ $(function() {
         </div>
     </section>
     <!--   end of about us area-->
-    
-<!-- 이미지 팝업 -->
-<script>
-function centerModal() {
-    $(this).css('display', 'block');
-    var $dialog = $(this).find(".modal-dialog");
-    var offset = ($(window).height() - $dialog.height()) / 2;
-    // Center modal vertically in window
-    $dialog.css("margin-top", offset);
-}
-
-$('.modal').on('show.bs.modal', centerModal);
-$(window).on("resize", function () {
-    $('.modal:visible').each(centerModal);
-});
-</script>
-
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
