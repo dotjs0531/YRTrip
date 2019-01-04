@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <style>
-
 .modal-backdrop {
 	z-index: -1;
 }
@@ -254,13 +253,13 @@ jQuery( document ).ready(function( $ ) {
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
 	    	$('.modal').on('hidden.bs.modal', function (e) {
-	    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
-	    	});
+		    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
+		    	});
 		});	 
 	   
 	   /* 장소 수정 modal */
 	   $("#travelPlaceList").on("click", ".btnUpd", function(){
-	 		var div = $(this).closest('.travelPlaceList');
+	 		var div = $(this).closest('.travelPlace');
 	 		$("#updateTravelPlaceAjaxData [name=placeNo]").val(div[0].data.placeNo);
 	 		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
 	 		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
@@ -271,23 +270,21 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#updateTravelPlace').modal(true);
 		});	
 	   
-/* 사진 업로드(board) */
-$("#fileBtn").click(function(){
-	$('.file-input').click();
-	$(".file-Input").on('change', function(){
-		if(window.FileReader){
-		var filename = $(this)[0].files[0].name;
-		} else {  // old IE
-			var filename = $(this).val().split('/').pop().split('\\').pop();
-		}
-		$("#travelBoardFile").val(filename);
+	   /* 사진 업로드 */
+	   $("#fileBtn").click(function(){
+		    $('.file-input').click();
+		    $(".file-Input").on('change', function(){  // 값이 변경되면
+				if(window.FileReader){  // modern browser
+					var filename = $(this)[0].files[0].name;
+				} else {  // old IE
+					var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+				}
+
+				// 추출한 파일명 삽입
+				$("#travelBoardFile").val(filename);
 			});
 		});
-
-?...
-
-
-
+}); 
 /* modal 자동완성 */
 $(function() {
     //input id autocomplete
@@ -307,6 +304,12 @@ $(function() {
              tinfoId:item.tinfoId
             }
            }));
+          },
+
+          error: function(jqxhr, status, error){
+                alert(jqxhr.statusText + ",  " + status + ",   " + error);
+               alert(jqxhr.status);
+               alert(jqxhr.responseText); 
           }
          })
      },
@@ -346,7 +349,7 @@ function selectTravelWith(ele){
    } else {
 	travelBoardModalfrm.travelPerson.disabled=false;	   
    }   
-}   
+} 
 
 $(function(){
 	loadTravelPlaceList();
@@ -366,12 +369,11 @@ function loadTravelPlaceList(){
 	var div = $("<div>"); 
 	div[0].data = travelPlace;
  	div.attr("id", "c"+travelPlace.placeNo);
-	div.addClass('travelPlaceList');
-	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
+	div.addClass('travelPlace');
    	var year = (travelPlace.placeVisitDate).substring(0,4) ;
 	var month = (travelPlace.placeVisitDate).substring(5,7);
 	var day = (travelPlace.placeVisitDate).substring(8,10);
-	var str = "<article class=\"panel panel-warning placeNo\" id=\"c"+travelPlace.placeNo+"\">"
+	var str = "<article class=\"panel panel-warning\">"
 				+"<div class=\"panel-heading icon\">"
 				+"<i class=\"glyphicon glyphicon glyphicon-map-marker\"></i>"
   				+"<p style=\"margin:-5px; background-color:#fff;\">" + year +"</p>"
@@ -381,17 +383,17 @@ function loadTravelPlaceList(){
 			
 				+"<div class=\"panel-heading\">"
 				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
- 				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
- 				+"<button type=\"button\" value='"+travelPlace.placeNo+"' class=\"btnUpd\" style=\"float:right;\">수정</button>" 
+ 				+"<button type=\"button\" class=\"btnDel btn btn-sm btn-danger\" style=\"float:right;\">삭제</button>"
+ 				+"<button type=\"button\" value='"+travelPlace.placeNo+"' class=\"btnUpd btn btn-sm btn-warning\" style=\"float:right;\">수정</button>" 
 				+"<br>"
 				
 				+"</div>"
 			
 				+"<div class=\"panel-body\">"
-				+ travelPlace.placeName + "<br>"
+				+"<strong>"+travelPlace.placeName + "</strong><br>"
 				+"<small>" + travelPlace.placeAddress + "</small>"
 				+"<img class=\"img-responsive img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
-				+ travelPlace.placeContent
+				+"<pre style=\"background-color:#fff; border-style:none;\">"+travelPlace.placeContent+"</pre>"
 				+"</div>"
 			
 				+"<div id=\"footer\" class=\"panel-footer\">"
@@ -413,7 +415,7 @@ function loadTravelPlaceList(){
 	});
 //장소 삭제
 	$("#travelPlaceList").on("click", ".btnDel", function(){
- 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
+ 		var placeNo = $(this).closest('.travelPlace').attr("id").substr(1);
 		if(confirm("삭제할까요?")) {
 			var params = "placeNo=" + placeNo;
 			var url = "deleteTravelPlaceAjax";
@@ -424,25 +426,17 @@ function loadTravelPlaceList(){
 	});
 	//장소 수정
 	$("#updateTravelPlaceBtn").click(function(){
-			var params = $("#updateTravelPlaceAjaxData").serialize();
-			var placeId = $(this).closest('.placeNo').attr("id");
-			console.log(placeId);
-			$.getJSON("updateTravelPlaceAjax", params, function(datas){
-				jQuery.noConflict();
-				$('#updateTravelPlace').modal("hide");
-				$("#c55").remove();
-				loadTravelPlaceList();
-			});
+		var params = $("#updateTravelPlaceAjaxData").serialize();
+ 		var placeNo = $("#updateTravelPlaceAjaxData [name=placeNo]").val();
+		$.getJSON("updateTravelPlaceAjax", params, function(datas){
+			jQuery.noConflict();
+			$('#updateTravelPlace').modal("hide");
+			$("#c"+placeNo).remove();
+			loadTravelPlaceList();
 		});
-
+	});
 });	
-function validate() {
-    if (event.keyCode >=48 && event.keyCode <= 57 ) {
-        return true;
-    } else {
-        event.returnValue = false;
-    }
-}
+
 </script>
 </head>
 <body>
@@ -459,7 +453,7 @@ function validate() {
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
+                            <li><a href="#" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 여행지</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -468,11 +462,11 @@ function validate() {
 				</div>
 			</div>
 
-				<!-- 여행기 등록 폼2 -->
+				<!-- 여행기 등록 폼 -->
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
-						<form action="./updateTravelBoard" enctype="multipart/form-data" name="updatefrm">
+						<form action="./updateTravelBoard">
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
@@ -489,12 +483,13 @@ function validate() {
 							<div style="padding-right:10px;">
 							<input type="file" name="travelBoardFile" class="file-input" size="chars">
 							<button class="btn btn-sm btn-warning" style="float:right;" type="button" id="fileBtn">
-								<i class="fa fa-camera"> 메인사진 등록</i>
+								<i class="fa fa-camera"> 메인사진 수정</i>
+
 							</button>
 							</div>
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
-								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId" required></span>
+								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone" selected>나홀로 여행</option>
@@ -656,12 +651,10 @@ function validate() {
 											</div>
 	
 											<div class="panel-body">
-												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 대한 간단한 후기를 적어주세요:-)" required>${travelBoard.travelContent}</textarea><br>
-												<input type="number" id="travelPay" name="travelPay" class="form-control" placeholder="여행에 사용한 총 경비를 입력해주세요." required>
+												<textarea class="form-control" rows="3" name="travelContent" placeholder="여행에 대해 간단한 후기를 작성해주세요:-)" required></textarea><br>
+												<input type="number" class="form-control" name="travelPay" placeholder="여행에 사용한 총 경비를 입력해주세요.(숫자만 입력 가능)" required>
 											</div>
 											<div class="panel-footer">
-												<i class="glyphicon glyphicon-heart" style="color: #ff8000;"></i>
-												<small>${travelBoard.travelLike}</small>
 											</div>
 								</article>
 								<div id="travelPlaceList">
@@ -686,7 +679,7 @@ function validate() {
 							</div>
 							</div>
 										<button class="btn btn-sm btn-warning pull-right" type="submit">
-											<i class="fas fa-pencil-alt fa-fw"></i>여행기 등록
+											<i class="fas fa-pencil-alt fa-fw"></i>등록 완료하기
 										</button>
 										<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 										<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
@@ -709,8 +702,8 @@ function validate() {
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
-								<div id="map"></div>
+									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
+									<div id="map"></div>
 								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
@@ -723,23 +716,23 @@ function validate() {
 												</div>
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" placeholder="장소명은 지도에서 선택하면 자동으로 입력됩니다." style="margin: -10px 0;" required>
+													<input type="text" name="placeName" class="form-control" placeholder="장소명은 지도에서 선택하면 자동으로 입력됩니다." required>
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다."style="margin: -10px 0;" required>
+													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다." required>
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="file" name="placePic" class="form-control" placeholder="사진을 업로드해주세요."style="margin: -10px 0;" required>
+													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요." required>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요."style="margin: -10px 0;" required>
+													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요." required>
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요."style="margin: -10px 0;" required>
+													<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 선택해주세요." required>
 												</div>
 												<button type="button" id="insertTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 등록</i>
@@ -773,37 +766,37 @@ function validate() {
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
-								<div id="map"></div>
-								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력하세요.">
+									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
+									<div id="map"></div>
+								<input id="pac-input-update" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
 									<span id="place-address"></span>
-								</div>
+									</div>
 										<div class="panel-body">
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeName" class="form-control" style="margin: -10px 0;" required>
+													<input type="text" name="placeName" class="form-control" required>
 												</div>
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeAddress" class="form-control" style="margin: -10px 0;" required>
+													<input type="text" name="placeAddress" class="form-control" required>
 												</div>
 												<div class="form-group">
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control" style="margin: -10px 0;" required>
+													<input type="text" name="placeTitle" class="form-control" required>
 												</div>
 												<div class="form-group">
 													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" style="margin: -10px 0;" required>
+													<input type="text" name="placePic" class="form-control" required>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" style="margin: -10px 0;" required>
+													<input type="text" name="placeContent" class="form-control" required>
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeVisitDate" class="form-control datePicker" style="margin: -10px 0;" required>
+													<input type="text" name="placeVisitDate" class="form-control datePicker" required>
 												</div>
 												<button type="button" id="updateTravelPlaceBtn" class="btn btn-sm btn-default">
 													<i class="glyphicon glyphicon glyphicon-map-marker" style="color: #009933;"> 수정</i>
@@ -824,7 +817,7 @@ function validate() {
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog" style="padding: 20px 0 0 0;">
+	<div class="modal-dialog" style="padding: 30px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -838,11 +831,12 @@ function validate() {
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
+								<form action="./updateTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
+										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 									<div class="form-group">
 										<label for="travelTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요." required>
+										<input type="text" name="travelTitle" class="form-control" placeholder="여행기 제목을 입력하세요.">
 									</div>
 									<div style="padding-bottom:-15px;">
 										<input type="radio" id="modal-domestic" name="searchCheckModal" checked="checked" value="domestic">
@@ -852,12 +846,12 @@ function validate() {
 									</div>
 									<div style="padding-bottom:5px">
 										<label class="col-sm-2 control-label"></label>
-										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal" required>
-										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal" required>
+										<input type="text" class="form-control" id="autocompleteTinfoListModal" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListboxModal">
+										<input type="hidden" class="form-control" id="tinfoListModal" name="searchTinfoModal">
 								</div>
 									<div class="form-group">
 										<label for="travelWith" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)" required>
+										<select id="travelWith" name="travelWith" class="form-control" onChange="selectTravelWith(this)">
 										  <option value="" selected>여행테마를 선택하세요.</option>
 										  <option value="alone">나홀로 여행</option>
 										  <option value="friend">친구와 함께</option>
@@ -869,7 +863,7 @@ function validate() {
 									</div>
 									<div class="form-group">
 										<label for="travelPerson" class="text-info" style="color:#5f768b;"></label><br>
-										<select id="travelPerson" name="travelPerson" class="form-control" required>
+										<select id="travelPerson" name="travelPerson" class="form-control">
 										  <option value="0" selected>${sessionScope.login.userName}님과 함께 여행한 인원을 선택하세요.</option>
 										  <option value="1">1명</option>
 										  <option value="2">2명</option>
@@ -881,22 +875,20 @@ function validate() {
 									</div>
 									<div class="form-group">
 										<label for="travelStart" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요." required>
+										<input type="text" name="travelStart" class="form-control datePicker" placeholder="여행 시작일을 선택하세요.">
 									</div>
 									<div class="form-group">
 										<label for="travelEnd" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요." required>
+										<input type="text" name="travelEnd" class="form-control datePicker" placeholder="여행 도착일을 선택하세요.">
 									</div>
 									<div class="form-group">
 										<label for="travelSche" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일" required>
+										<input type="text" name="travelSche" class="form-control" placeholder="여행 일정을 입력하세요. 예: 1박2일">
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
+										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
 									</div>
-									<input type="hidden" name="travelNo" value="${travelBoard.travelNo}">
-									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>
 						</div>
@@ -917,8 +909,8 @@ function validate() {
 		</div>
 		<!-- end of container -->
 	</section>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
 	<script>
 $(function() {
@@ -950,6 +942,7 @@ function initMap() {
         autocomplete.bindTo('bounds', map);
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        
 
         var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
@@ -989,7 +982,6 @@ function initMap() {
           $("#insertTravelPlaceAjaxData [name=placeAddress]").val(place.formatted_address);
         });
       }
-
 </script>
 </body>
 </html>

@@ -252,11 +252,14 @@ jQuery( document ).ready(function( $ ) {
 	   /* 장소 추가 modal */
 	   $("#insertTravelPlaceButton").click(function(){
 	    	$('div#insertTravelPlace').modal(true);
+	    	$('.modal').on('hidden.bs.modal', function (e) {
+		    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
+		    	});
 		});	 
 	   
 	   /* 장소 수정 modal */
 	   $("#travelPlaceList").on("click", ".btnUpd", function(){
-	 		var div = $(this).closest('.travelPlaceList');
+	 		var div = $(this).closest('.travelPlace');
 	 		$("#updateTravelPlaceAjaxData [name=placeNo]").val(div[0].data.placeNo);
 	 		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
 	 		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
@@ -367,8 +370,7 @@ function loadTravelPlaceList(){
 	var div = $("<div>"); 
 	div[0].data = travelPlace;
  	div.attr("id", "c"+travelPlace.placeNo);
-	div.addClass('travelPlaceList');
-	div[0].travelPlaceList=travelPlace;  //{id:1,.... } 
+	div.addClass('travelPlace');
    	var year = (travelPlace.placeVisitDate).substring(0,4) ;
 	var month = (travelPlace.placeVisitDate).substring(5,7);
 	var day = (travelPlace.placeVisitDate).substring(8,10);
@@ -382,17 +384,17 @@ function loadTravelPlaceList(){
 			
 				+"<div class=\"panel-heading\">"
 				+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
- 				+"<button type=\"button\" class=\"btnDel\" style=\"float:right;\">삭제</button>"
- 				+"<button type=\"button\" value='"+travelPlace.placeNo+"' class=\"btnUpd\" style=\"float:right;\">수정</button>" 
+ 				+"<button type=\"button\" class=\"btnDel btn btn-sm btn-danger\" style=\"float:right;\">삭제</button>"
+ 				+"<button type=\"button\" value='"+travelPlace.placeNo+"' class=\"btnUpd btn btn-sm btn-warning\" style=\"float:right; margin-right:10px;\">수정</button>" 
 				+"<br>"
 				
 				+"</div>"
 			
 				+"<div class=\"panel-body\">"
-				+ travelPlace.placeName + "<br>"
+				+"<strong>"+travelPlace.placeName + "</strong><br>"
 				+"<small>" + travelPlace.placeAddress + "</small>"
 				+"<img class=\"img-responsive img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
-				+ travelPlace.placeContent
+				+"<pre style=\"background-color:#fff; border-style:none;\">"+travelPlace.placeContent+"</pre>"
 				+"</div>"
 			
 				+"<div id=\"footer\" class=\"panel-footer\">"
@@ -412,9 +414,9 @@ function loadTravelPlaceList(){
 			$('#insertTravelPlace').modal("hide");
 		}); 
 	});
-//장소 삭제
+	//장소 삭제
 	$("#travelPlaceList").on("click", ".btnDel", function(){
- 		var placeNo = $(this).closest('.travelPlaceList').attr("id").substr(1);
+ 		var placeNo = $(this).closest('.travelPlace').attr("id").substr(1);
 		if(confirm("삭제할까요?")) {
 			var params = "placeNo=" + placeNo;
 			var url = "deleteTravelPlaceAjax";
@@ -425,18 +427,17 @@ function loadTravelPlaceList(){
 	});
 	//장소 수정
 	$("#updateTravelPlaceBtn").click(function(){
-			var params = $("#updateTravelPlaceAjaxData").serialize();
-			var placeId = $(this).closest('.placeNo').attr("id");
-			console.log(placeId);
-			$.getJSON("updateTravelPlaceAjax", params, function(datas){
-				jQuery.noConflict();
-				$('#updateTravelPlace').modal("hide");
-				$("#c55").remove();
-				loadTravelPlaceList();
-			});
+		var params = $("#updateTravelPlaceAjaxData").serialize();
+ 		var placeNo = $("#updateTravelPlaceAjaxData [name=placeNo]").val();
+		$.getJSON("updateTravelPlaceAjax", params, function(datas){
+			jQuery.noConflict();
+			$('#updateTravelPlace').modal("hide");
+			$("#c"+placeNo).remove();
+			loadTravelPlaceList();
 		});
-
+	});
 });	
+
 
 </script>
 </head>
@@ -661,7 +662,6 @@ function loadTravelPlaceList(){
 											</div>
 								</article>
 								<div id="travelPlaceList">
-								<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
 								</div>		
 								<!-- 장소 추가 -->
 								<article class="panel panel-success">
@@ -947,11 +947,6 @@ function initMap() {
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         
-        var updateinput = document.getElementById('pac-input-update');
-        var autocomplete = new google.maps.places.Autocomplete(updateinput);
-        autocomplete.bindTo('bounds', map);
-
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(updateinput);
 
         var infowindow = new google.maps.InfoWindow();
         var infowindowContent = document.getElementById('infowindow-content');
