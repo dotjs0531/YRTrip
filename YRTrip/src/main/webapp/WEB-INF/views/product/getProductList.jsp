@@ -64,6 +64,16 @@
 				alert("로그인이 필요한 서비스입니다");
 			});
 		}
+	/* 	var str = $(".orderdetailColor").text();
+	
+		console.log(substr(str, 4));
+		
+		if($(".orderdetailColor").text().substr(0,4) == '구매가능'){
+			$(".btn-which").addClass("btn-success");
+		}
+		else{
+			$(".btn-which").addClass("btn-danger");
+		} */
 	});		
 </script>
 <script>
@@ -175,46 +185,55 @@
 									<div class="thumbnail">
 									<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}"/>
 										<c:set var="pic" value="${productPicFile}" />
-										<img
-											src="./images/product/${pic}" alt="" class="img-fluid">
+										<img src="./images/product/${pic}" alt="" class="img-fluid">
 										<div class="caption">
 
 											<h4 class="pull-right" id="itemPrice">${product.itemPrice}</h4>
 											<h4 class="text-truncate">
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
-
-											<div class="space-ten"></div>
-											<p>${product.itemOrderdetail}</p>
-											<p>${product.itemCategory}</p>
-											<p>${product.itemCondition}</p>
+											<div class="space-five"></div>
+											<c:forEach items="${product.itemOrderdetail}" var="orderd" step="4">
+													<c:if test="${orderd eq '구매가능'}">
+														<p class="btn-which btn btn-xs btn-success">${product.itemOrderdetail}</p>
+													</c:if>
+													<c:if test="${orderd eq '구매불가'}">
+														<p class="btn-which btn btn-xs btn-danger">${product.itemOrderdetail}</p>
+													</c:if>
+											</c:forEach>
+											
+											<p class="btn btn-xs btn-info">${product.itemCondition}</p>
+											<p class="pull-right"><span class="glyphicon glyphicon-star"></span> 
+											<a href="#">${product.itemStar}</a></p>
+											
 										</div>
-										<div class="ratings text-center">
-											<p>
-												<!-- ${product.itemStar} 받아서 '별'로 나타내는 거 !!-->
-												<span class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <a href="#">
-													${product.itemStar}<br />(15 reviews)
-												</a>
-											</p>
-										</div>
-										<div class="space-ten"></div>
+										<div class="space-five"></div>
 										<div class="btn-ground text-center">
+											<!-- <button> -->
+												<i class="fa fa-shopping-cart text-center col-4"></i>
+											<!-- </button> -->
+											<button type="button" id="item${product.itemId}" class="btn-link" data-toggle="modal" data-target="#product_view" style="color:black;">
+												<i class="fa fa-search text-center col-3"></i>
+											</button>
+										
+											<c:forEach items="${order}" var="review">
+												<p><a href="#">${review.reviewName}</a></p>
+											</c:forEach>
+											
+										</div>
+								<div class="space-five"></div>
+							<%-- 			<div class="btn-ground text-center">
 											<button type="button" class="btn"
 												style="background-color: #f9bf3b; color: white">
 												<i class="fa fa-shopping-cart"></i> 장바구니
 											</button>
-											<div class="space-two"></div>
 											<button id="item${product.itemId}" type="button" class="btn"
 												style="background-color: #f9bf3b; color: white"
 												data-toggle="modal" data-target="#product_view">
 												<i class="fa fa-search"></i>&nbsp; 퀵 뷰
 											</button>
-										</div>
-										<div class="space-ten"></div>
+										</div> --%>
+										
 									</div>
 								</div>
 							</c:forEach>
@@ -231,6 +250,7 @@
 										class="glyphicon glyphicon-remove"></span></a>
 									<h3 class="modal-title" id="modal-title"></h3>
 								</div>
+								
 								<div class="modal-body">
 									<div class="row">
 										<div class="col-md-6 product_img">

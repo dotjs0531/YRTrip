@@ -38,7 +38,7 @@ public class ProductController {
 	@Autowired MyPageService mypageService;
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
-	public ModelAndView getProductList(Paging paging, ProductVO vo) {
+	public ModelAndView getProductList(Paging paging, ProductVO vo, OrderVO voo) {
 		ModelAndView mv = new ModelAndView();
 		// 페이징 처리
 		// 페이지번호 파라미터
@@ -55,7 +55,9 @@ public class ProductController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("productList", productService.getProductList(vo));
+
 		mv.setViewName("product/getProductList");
+		
 		return mv;
 	}
 	//퀵뷰
@@ -68,12 +70,16 @@ public class ProductController {
 	//상세조회(폼)
 	@RequestMapping("/getProduct")
 	public String getProduct(Model model, ProductVO vop, OrderVO voo) {
+		ProductVO sellervo = productService.getProduct(vop);
 		ProductVO vo = new ProductVO();
-		vo.setSellerId(vop.getSellerId());
-		System.out.println(vo.getSellerId());
+		vo.setSellerId(sellervo.getSellerId());
 
+		vo.setFirst(2);
+		vo.setLast(4);
+		System.out.println(vo.getSellerId());
+		
 		model.addAttribute("product", productService.getProduct(vop));
-		//model.addAttribute("getSellerList", mypageService.getMyProductList(vo));
+		model.addAttribute("getSellerList", mypageService.getMyProductList(vo));
 		model.addAttribute("order", orderService.getOrder(voo));
 		return "product/getProduct";
 	}
@@ -100,7 +106,7 @@ public class ProductController {
 		for(int i=0; i<productPicFile.length; i++) {
 			fileOriginName = productPicFile[i].getOriginalFilename();
 			System.out.println("기존 파일명 : " + fileOriginName);
-			SimpleDateFormat formatter = new SimpleDateFormat("YYMMDD_"+i);
+			SimpleDateFormat formatter = new SimpleDateFormat("YYMMDDHHmmss_"+i);
 			Calendar now = Calendar.getInstance();
 			
 			String extension = fileOriginName.split("\\.")[1];

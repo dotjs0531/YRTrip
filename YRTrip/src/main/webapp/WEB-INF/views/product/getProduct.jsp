@@ -75,8 +75,7 @@
 		}
 
 		if ($("#itemOrderdetail_class").text() == '구매불가') {
-			$("#itemOrderdetail_class").removeClass("text-success").addClass(
-					"text-danger")
+			$("#itemOrderdetail_class").removeClass("text-success").addClass("text-danger");
 		}
 
 		function likeCondition() {
@@ -136,7 +135,18 @@
 			console.log($(".review_show_content").prev().text()); */
 		if($(".review_show_content").prev().text() != '' ){
 			$(".default_review").hide();
-		} 
+		}
+			console.log($(".seller-list").children(".some-list-product").html());
+		if($(".seller-list").children(".seller-list").text() != '' ){
+			$(".no-list-product").hide();
+		}
+		
+		if("${sessionScope.login.userId}" == ''){
+			$(".more-product-list").click(function(e){
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			});
+		}
 	});
 </script>
 <script>
@@ -151,7 +161,7 @@ $(function(){
 				console.log(data);	
 				if(confirm("삭제하시겠습니까? 복구는 불가합니다.")==true){
 					if(data == 0){
-						alert("삭제합니다");
+						/* alert("삭제합니다"); */
 						window.location = "deleteProduct?itemId=${product.itemId}";
 					}
 					else{
@@ -309,24 +319,34 @@ $(function(){
 								<div class="product-seller-recommended">
 									<h3 class="mb-5">${product.sellerId} 판매자의 다른 상품</h3>
 									<!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
-									<div class="row">
-									<%-- <c:set var="seller" value="${product.sellerId}" /> --%>
-	 									<%-- <c:forEach items="${getSellerList}" var="sellerP"> --%> 
-											<div class="col-md-4">
+									<div class="row seller-list">
+										<div class="col-md-12 no-list-product">
+											<div class="card no-list-product">
+											 	<div class="card-body mx-auto">
+												 	더 이상의 상품은 없어요 ㅠㅠ
+												</div>
+											</div>
+										</div>
+	 									 <c:forEach items="${getSellerList}" var="sellerP"> 
+	 									 	<div class="col-md-4 some-list-product">
 												<div class="card">
 													<img src="https://via.placeholder.com/157x157"
 														class="card-img-top">
 													<div class="card-body">
-														<h5 class="card-title"><a href="#">${sellerP.itemName}</a></h5>
-														<span class="text-muted">￦ 12,000</span>
+														<h5 class="card-title seller-list">
+															<a href="./getProduct?itemId=${sellerP.itemId}" class="seller-list">${sellerP.itemName}</a>
+														</h5>
+														<span class="text-muted">${sellerP.itemPrice}</span>
+														<span class="text-muted">${sellerP.itemCategory}</span>
 													</div>
 												</div>
 											</div>
- 										<%-- </c:forEach> --%>
+										</c:forEach>
 									</div>
+								</div>
 									<!-- /.recommended-items-->
-									<p class="mb-5 mt-5">
-										<a href="./getMyProductList?sellerId=${product.sellerId}">판매자의 모든 상품 보러가기!</a>
+									<p class="mb-1 mt-9">
+										<a class="pull-right more-product-list" href="./getYourProductList?sellerId=${product.sellerId}">판매자의 모든 상품 보러가기!</a>
 									</p>
 									<div class="product-description mb-5">
 										<h2 class="mb-5">제품 기본정보</h2>
@@ -349,35 +369,22 @@ $(function(){
 											<dd class="col-sm-8">${product.sellerId}</dd>
 										</dl>
 										<h2 class="mb-5">제품 상세 설명</h2>
-										<pre style="background-color: white; line-height: 1.3em">${product.itemContent}</pre>
-									</div>
-									<!-- <div class="product-faq mb-5">
-										<h2 class="mb-3">Q/A라고 쓰고 큐엔에이라고 읽</h2>
-										<p class="text-muted">판매자에게 상품에 대한 질문을 해보세여!</p>
-										<div class="main-questions d-inline" data-container="body"
-											data-toggle="popover" data-placement="right"
-											data-content="Are you in doubt? these shortcuts can help you!">
-											<a href="#" class="btn btn-outline-primary">판매자에게메세지</a> <a
-												href="#" class="btn btn-outline-primary">???????????????</a>
-											<a href="#" class="btn btn-outline-primary">이건질문들옵션창같은데</a>
+										<div class="card">
+											<p class="m-4" style="white-space: pre-line;
+    word-break: break-word;">
+												${product.itemContent}
+											</p>
 										</div>
-									</div> -->
+									</div>
 									<div class="product-comments">
 										<h2 class="mb-2">판매자와 거래 후 남긴 후기들</h2>
-										<!-- <form action="" class="form-inline mb-5">
-											<textarea name="" id="" cols="50" rows="2"
-												class="form-control mb-4" placeholder="후기후기후기"></textarea>
-											<button class="btn btn-lg-12 btn-primary">후기를 입력해보세</button>
-										</form>
-										<h5 class="mb-5">!후기!</h5> -->
-									
 										<div class="card default_review">
 										 	<div class="card-body row">
 											 	아직 등록된 상품평이 없습니다
 										 	</div>
 										</div>										
 										<c:forEach items="${order}" var="review">
-											<%-- <c:if test="${review.reviewContent ne null}"> --%>
+											<c:if test="${review.reviewContent ne null}">
 												 	<div class="card review_show">
 												 	<div class="card-body row">
 													 	<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
@@ -392,7 +399,7 @@ $(function(){
 															<span>${review.reviewDate}</span></div>
 													 	</div>
 												 	</div>
-											<%-- </c:if> --%>
+											</c:if>
 										</c:forEach>
 									</div>
 								</div>
