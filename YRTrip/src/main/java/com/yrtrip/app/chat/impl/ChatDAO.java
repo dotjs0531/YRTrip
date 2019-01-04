@@ -1,4 +1,4 @@
-/*package com.yrtrip.app.chat.impl;
+package com.yrtrip.app.chat.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -257,7 +257,7 @@ public class ChatDAO {
 					ChatVO y = chatList.get(j);
 					//x라는 메세지를 보내는 사람과 y라는 메세지를 받는사람과 동일할뿐만 아니라 x라는 받는사람과 y라는 보내는사람과 동일한 경우 까지 비교연산하여 가장 최신 데이터만 남기기.
 					if(x.getFromId().equals(y.getToId()) && x.getToId().equals(y.getFromId())) {
-						if(x.getChatId() < y.getChatId()) {
+						if(x.getChatId().compareTo(y.getChatId())<0) {
 							chatList.remove(x);
 							i--;
 							break;
@@ -282,4 +282,3 @@ public class ChatDAO {
 		return chatList; // 챗 리스트 그릇 담아주기
 	}
 }
-*/
