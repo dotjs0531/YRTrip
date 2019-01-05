@@ -93,9 +93,10 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
-function del() {
+function reviewDel() {
 	if (confirm("삭제하시겠습니까?")) {
-		document.reviewDel.submit();
+		$('#reviewDel').attr('action', 'deleteMyReview');
+		//document.reviewDel.submit();
 	} else {
 		return;
 	}
@@ -264,10 +265,10 @@ $(function() {
 										<a href="getProduct?itemId=${review.itemId}" style="color:black; text-decoration:none">${review.reviewContent}</a></p>
 										
 										<!-- 수정/삭제 버튼 -->
-										<form action="./deleteMyReview" method="post" name="reviewDel">
+										<form <%-- action="./deleteMyReview" --%> id="reviewDel">
 											<input type="hidden" name="orderId" value="${review.orderId}">
 											<input type="hidden" name="itemId" value="${review.itemId}">
-											<button type="submit" class="btn btn-default" style="float:right;" onclick="del()">삭제</button>
+											<button class="btn btn-default" style="float:right;" onclick="reviewDel()">삭제</button>
 										</form>
 										<button type="button" class="btn btn-default" id="review${review.orderId}" 
 												data-toggle="modal" data-target="#updateMyReviewForm" style="float:right; margin-right:10px">수정</button>

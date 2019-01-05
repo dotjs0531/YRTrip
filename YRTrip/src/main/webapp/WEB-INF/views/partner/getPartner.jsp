@@ -114,11 +114,11 @@ jQuery( document ).ready(function( $ ) {
 			}else{	//동행 신청을 하지 않은 사용자
 				if(joiner.joinerCondition == 'N'){
 					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#919191'>"
-					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+					+ "<a style='color:#919191' href='./getYourTravelList?userId="+joiner.userId+"' class='goToUserPage'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
 					+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#919191'>" + joiner.joinerDate + "</span>"
 				}else{
 					var str = "<label class='col-sm-3 control-label joinerName' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; color:#009933'>"
-						+ "<a style='color:#009933' href='./getYourTravelList?userId="+joiner.userId+"'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
+						+ "<a style='color:#009933' href='./getYourTravelList?userId="+joiner.userId+"' class='goToUserPage'>" + joiner.userName + "</a>("+joiner.userGen+")</label>"
 						+ "<span class='joinerDate' style='font-family: \"NanumSquareRoundR\"; font-size: 15px; padding-right:20px; color:#009933'>" + joiner.joinerDate + "</span>"
 				}
 			}

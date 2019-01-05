@@ -163,6 +163,14 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
+function orderDel() {
+	if (confirm("삭제하시겠습니까?")) {
+		$('#orderDel').attr('action', 'deleteMyOrderList');
+		//document.orderDel.submit();
+	} else {
+		return false;
+	}
+};
 function confirmPurchase(orderId) {
 	if (confirm("구매확정하시겠습니까?")) {
 		location.href = "./updateOrderCondition?orderId=" + orderId;
@@ -170,6 +178,7 @@ function confirmPurchase(orderId) {
 		return;
 	}
 };
+
 	function go_page(page) {
 		document.frm.page.value = page;
 		document.frm.submit();
@@ -177,6 +186,47 @@ function confirmPurchase(orderId) {
 </script>
 <script>
 $(function() {
+	$(".getProduct").click(function(){
+		var id = $(this).attr("id");
+		
+		$.ajax({
+	        type: "GET",
+	        url: "getProductAjax",
+	        data: { itemId : id } ,
+	        success: function (data){
+	        	if(!data) { 
+					alert("삭제된 상품입니다.");
+	            } else{
+					location.href = "getProduct?itemId=" + id;
+	        	}
+	        }
+	      });   
+	});
+/* 	function getProduct(order_itemId){
+		console.log(order_itemId); */
+		//var param = { itemId : order_itemId }
+		/* $.getJSON("getProductAjax", param, function(data) {
+			if(data){
+				location.href = "getProduct?itemId" + data.itemId;
+			} else {
+				alert("삭제된 상품입니다.");
+				return;
+			}
+		}); */
+		
+/* 		  $.ajax({
+		        type: "GET",
+		        url: "getProductAjax",
+		        data: "itemId=" + order_itemId,
+		        success: function (data){
+					location.href = "getProduct?itemId" + data.itemId;
+		        },
+		        error: function (jqXHR, textStatus, errorThrown) {
+					alert("삭제된 상품입니다.");
+		           }
+		      });    
+	}; */
+	
 	$('#getMyOrder').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
 		console.log(event);
@@ -294,7 +344,7 @@ $(function() {
             			<p style="clear:both"/><br/>
 					</div>
                 	<div>
-	                	<form action="deleteMyOrderList">
+	                	<form id="orderDel">
 							<div class="container card" style="width:100%; min-height:420px">
 								<!-- Normal Demo-->
 								<c:forEach items="${MyOrderList}" var="order">
@@ -313,18 +363,21 @@ $(function() {
 										<div class="post-module">
 											<!-- Thumbnail-->
 											<div class="thumbnail">
-												<a href="getProduct?itemId=${order.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
+												<a href="#" id="${order.itemId}" class="getProduct" <%-- onclick="getProduct('${order.itemId}')" --%>><img src="./images/notice/1.jpg" style="height:200px" /></a>
 											</div>
 											<!-- Post Content-->
 											<div class="post-content">
 												<div class="category">${order.orderDelivery}</div>
 												<h4 class="pull-right">${order.itemMethod}</h4>
-												<h1 class="title"><a href="getProduct?itemId=${order.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+												<h1 class="title"><a href="#" onclick="getProduct('${order.itemId}')" style="color:black; display: inline-block; text-overflow: ellipsis; 
 													white-space: nowrap; overflow: hidden; width:130px; text-decoration:none !important;">${order.itemName}</a></h1>
 												<h2 class="sub_title">${order.orderCondition}</h2>
 												<p class="description" align="center">
-													<c:if test="${order.orderCondition eq '결제완료'}">
+													<c:if test="${order.orderCondition eq '결제완료' && order.orderDelivery eq '배송중'}">
 														<button type="button" class="btn btn-default" onclick="confirmPurchase('${order.orderId}')">구매확정</button>
+													</c:if>
+													<c:if test="${order.orderCondition eq '결제완료' && order.orderDelivery eq '배송준비중'}">
+														<button type="button" class="btn btn-default" disabled>구매확정</button>
 													</c:if>
 													<c:if test="${order.orderCondition eq '거래완료'}">
 														<button type="button" class="btn btn-default" disabled>확정완료</button>
@@ -360,7 +413,7 @@ $(function() {
 							
 							<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 							<c:if test="${not empty MyOrderList}">
-								<button type="submit" class="btn btn-default" style="float:right;">삭제</button>
+								<button class="btn btn-default" style="float:right;" onclick="orderDel()">삭제</button>
 								<p style="clear:both"/>
 							</c:if>
 						</form>

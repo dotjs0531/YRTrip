@@ -144,9 +144,10 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
-function del() {
+function productDel() {
 	if (confirm("삭제하시겠습니까?")) {
-		document.productDel.submit();
+		$('#productDel').attr('action', 'deleteMyProductList');
+		//document.productDel.submit();
 	} else {
 		return false;
 	}
@@ -304,7 +305,7 @@ function del() {
 					</div>
 					
                 	<div style="min-height:420px">
-	                	<form action="deleteMyProductList" name="productDel">
+	                	<form id="productDel">
 							<div class="container card" style="width:100%;">
 								<!-- Normal Demo-->
 								<c:forEach items="${MyProductList}" var="product">
@@ -348,7 +349,7 @@ function del() {
 							</div>
 						<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 						<c:if test="${not empty MyProductList}">
-							<button class="btn btn-default" style="float:right;" onclick="del()">삭제</button>
+							<button class="btn btn-default" style="float:right;" onclick="productDel()">삭제</button>
 							<p style="clear:both"/>
 						</c:if>
 						</form>

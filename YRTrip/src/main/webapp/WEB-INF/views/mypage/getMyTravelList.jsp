@@ -142,9 +142,10 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
-function del() {
+function travelDel() {
 	if (confirm("삭제하시겠습니까?")) {
-		document.travelDel.submit();
+		$('#travelDel').attr('action', 'deleteMyTravelList');
+		//document.travelDel.submit();
 	} else {
 		return false;
 	}
@@ -211,7 +212,7 @@ function del() {
 					</div>
 					
 	                <!-- 선택 삭제 -->
-	                <form action="deleteMyTravelList" name="travelDel">
+	                <form id="travelDel">
 	                	<div style="min-height:420px;">
 			   				<c:forEach items="${MyTravelList}" var="travel" varStatus="status">
 							<div style="display: table-cell; vertical-align:middle; width:230px; padding:10px">
@@ -263,7 +264,7 @@ function del() {
 						
 						<input type="hidden" name="userId" value="${sessionScope.login.userId}"/>
 	            		<c:if test="${not empty MyTravelList}">
-							<button class="btn btn-default" style="float:right;" onclick="del()">삭제</button>
+							<button class="btn btn-default" style="float:right;" onclick="travelDel()">삭제</button>
 							<p style="clear:both"/>
 						</c:if>
 						
