@@ -86,7 +86,7 @@ public class UserController {
 		
 		session.invalidate(); //세션 무효화
 		
-		return "main";
+		return "redirect:"+url;
 	}
 	
 	//회원가입 폼
