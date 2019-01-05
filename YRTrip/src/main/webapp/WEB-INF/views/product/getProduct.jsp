@@ -176,6 +176,13 @@ $(function(){
 			
 		});	
 	});
+	
+	if("${sessionScope.login.userId}" == ''){
+		$("#insertbtn").click(function(e){
+			e.preventDefault();
+			alert("로그인이 필요한 서비스입니다");
+		});
+	}
 });
 </script>
 </head>
@@ -202,7 +209,7 @@ $(function(){
 							<li><a href="#" style="color: black">USIM</a></li>
 							<li><a href="#" style="color: black">기타</a></li>
 						</ul>
-						<div class="order-buton">
+						<div class="order-buton" id="insertbtn">
 							<a href="insertProduct">상품등록</a>
 						</div>
 					</div>
