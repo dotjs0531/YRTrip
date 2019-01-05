@@ -215,7 +215,7 @@ function travelDel() {
 	                <form id="travelDel">
 	                	<div style="min-height:420px;">
 			   				<c:forEach items="${MyTravelList}" var="travel" varStatus="status">
-							<div style="display: table-cell; vertical-align:middle; width:230px; padding:10px">
+							<div style="display: table-cell; vertical-align:middle; width:180px; padding:10px">
 								
 								<div class="checkboxes" style="font-family: 'proxima-nova-soft', sans-serif; font-size: 18px; font-weight: bold; text-transform: uppercase; padding-left:10px">
 								<input type="checkbox" class="cbx" id="${travel.travelNo}" name="travelNoList" value="${travel.travelNo}" style="display: none;">
@@ -227,13 +227,15 @@ function travelDel() {
 								</label>&nbsp;&nbsp;No. ${travel.travelNo}
 								</div>
 								
-								<div class="content-box" style="width:100%; margin-top:10px">
-									<c:if test="${travel.travelPic != null}">
-										<img src="./images/travel/${travel.travelPic}" class="img-responsive">
-									</c:if>
-									<c:if test="${travel.travelPic == null}">
-										<img src="./images/travel/noimage.jpg" class="img-responsive">
-									</c:if>
+								<div class="content-box" style="width:180px; margin-top:10px">
+									<div style="height:120px;">
+										<c:if test="${travel.travelPic != null}">
+											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:180px; height:140px">
+										</c:if>
+										<c:if test="${travel.travelPic == null}">
+											<img src="./images/travel/noimage.jpg" class="img-responsive" style="width:180px; height:140px">
+										</c:if>
+									</div>
 									
 									<div class="content-title">
 										<div class="text-center">
@@ -250,9 +252,10 @@ function travelDel() {
 										</div>
 									</div>
 									<div class="content-footer">
-										<span class="user-info">${travel.travelDate}</span>
+									<hr style="margin-bottom:-3px;">
+										<span class="user-info"><a>${travel.travelDate}</a></span>
 										<span class="pull-right">
-											<a href="#" data-placement="right" title="Like">
+											<a href="#" data-placement="right" title="Like" style="padding-top:25px;">
 											<i class="fa fa-heart"></i> ${travel.travelLike}</a>
 										</span>
 									</div>

@@ -121,12 +121,14 @@ function del() {
 							<c:forEach items="${MyLikedTravelList}" var="travel" varStatus="status">
 								
 								<div class="content-box" style="width:29%; margin-top:10px">
-									<c:if test="${travel.travelPic != null}">
-										<img src="./images/travel/${travel.travelPic}" class="img-responsive">
-									</c:if>
-									<c:if test="${travel.travelPic == null}">
-										<img src="./images/travel/noimage.jpg" class="img-responsive">
-									</c:if>
+									<div style="height:130px;">
+										<c:if test="${travel.travelPic != null}">
+											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:210px; height:150px">
+										</c:if>
+										<c:if test="${travel.travelPic == null}">
+											<img src="./images/travel/noimage.jpg" class="img-responsive" style="width:210px; height:150px">
+										</c:if>
+									</div>
 									
 									<div class="content-title">
 										<div class="text-center">
@@ -143,9 +145,15 @@ function del() {
 										</div>
 									</div>
 									<div class="content-footer">
-										<span class="user-info">${travel.userId}</span>
+									<hr style="margin-bottom:-3px;">
+										<span class="user-info">
+											<c:if test="${sessionScope.login.userId eq travel.userId}"><a>${travel.userId}</a></c:if>
+				                            <c:if test="${sessionScope.login.userId ne travel.userId}">
+												<a href="getYourTravelList?userId=${travel.userId}" class="goToUserPage">${travel.userId}</a>
+											</c:if>
+										</span>
 										<span class="pull-right">
-											<a href="#" data-placement="right" title="Like">
+											<a href="#" data-placement="right" title="Like" style="padding-top:25px;">
 											<i class="fa fa-heart"></i> ${travel.travelLike}</a>
 										</span>
 									</div>

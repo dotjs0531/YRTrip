@@ -161,13 +161,15 @@ a:hover { color:white }
 								&nbsp;&nbsp;No. ${travel.travelNo}
 								</div>
 								
-								<div class="content-box" style="width:100%; margin-top:10px">
-									<c:if test="${travel.travelPic != null}">
-										<img src="./images/travel/${travel.travelPic}" class="img-responsive">
-									</c:if>
-									<c:if test="${travel.travelPic == null}">
-										<img src="./images/travel/noimage.jpg" class="img-responsive">
-									</c:if>
+								<div class="content-box" style="width:180px; margin-top:10px">
+									<div style="height:120px;">
+										<c:if test="${travel.travelPic != null}">
+											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:180px; height:140px">
+										</c:if>
+										<c:if test="${travel.travelPic == null}">
+											<img src="./images/travel/noimage.jpg" class="img-responsive" style="width:180px; height:140px">
+										</c:if>
+									</div>
 									
 									<div class="content-title">
 										<div class="text-center">
@@ -184,9 +186,10 @@ a:hover { color:white }
 										</div>
 									</div>
 									<div class="content-footer">
-										<span class="user-info">${travel.travelDate}</span>
+									<hr style="margin-bottom:-3px;">
+										<span class="user-info"><a>${travel.travelDate}</a></span>
 										<span class="pull-right">
-											<a href="#" data-placement="right" title="Like">
+											<a href="#" data-placement="right" title="Like" style="padding-top:25px;">
 											<i class="fa fa-heart"></i> ${travel.travelLike}</a>
 										</span>
 									</div>
