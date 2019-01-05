@@ -344,7 +344,7 @@ $(function(){
 									<div class="col-12 col-md-8 input-lg">
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> -->
-											<input type="hidden" value="카드결제" />
+											<input type="hidden" value="카드결제" name="itemMethod"/>
 											<!--</label>
 										</div>
 										<div class="form-check form-check-inline">

@@ -186,24 +186,20 @@ public class ProductController {
 	//장바구니 폼(조회, 찜 목록 이랑 비슷)
 	@RequestMapping("/getCartList")
 	public String getCartListForm(Model model, CartVO vo, ProductVO vop, HttpSession session) {		
-		System.out.println(vo.getCartId());
-		System.out.println(vo.getItemId());
-		vo.setMyId(((UserVO)session.getAttribute("login")).getUserId());
+		String userid = ((UserVO)session.getAttribute("login")).getUserId();
+		//System.out.println(userid);
+		vo.setMyId(userid);
+		//vo.getCartId();
+		//System.out.println(vo.getCartId());
+		
 		model.addAttribute("cartList", cartService.getCartList(vo));
 		
-	/*	//vop.setItemId(vo.getItemId());
-		//System.out.println(vop.getItemId());
-		model.addAttribute("product", productService.getProduct(vop));*/
-		
+		//판매자가 올려논 상품개수 정보 필요
+			//cart안에 itemid가 있고 이 itemId를 이용해서 itemt의 itemEa를 가지고 오기
 		return "product/getCartList";
 	}
 	
-	/*@RequestMapping(value="/getCartList", method=RequestMethod.POST)
-	public String getCartListForm(Model model, CartVO vo, @RequestParam String myId) {
-		model.addAttribute("myId", myId);
-		return "redirect:getCartList";
-	}*/
-	
+
 	//뷰안에 넣을 컬럼값들이 없으면 뷰에 redirect해도 안나오나...? 그래서 그런건가...
 	//장바구니 insert 처리
 	@RequestMapping("/insertCart")
@@ -213,6 +209,7 @@ public class ProductController {
 	}
 	//장바구니 수정 처리 : itemEa, cartid,
 	@RequestMapping("/updateCart")
+	@ResponseBody
 	public String updateCart(CartVO vo) {
 		cartService.updateCart(vo);
 		return "redirect:getCartList";

@@ -71,14 +71,14 @@ ORDER BY ORDER_DATE DESC -->
 			#{cartId}
 			)
 		}	
-	</insert>
+	</insert><!-- 
 	<update id="updateOrder" parameterType="order">
-		UPDATE SET
+		UPDATE SET 
 				
 	</update>
 	<delete id="deleteOrder">
 		DELETE FROM 
 		WHERE
 		= 
-	</delete>
+	</delete> -->
 </mapper>

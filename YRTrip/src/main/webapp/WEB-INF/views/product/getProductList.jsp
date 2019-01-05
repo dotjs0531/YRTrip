@@ -241,7 +241,7 @@ $(function(){
 										<div class="space-five"></div>
 										<div class="btn-ground text-center">
 											<!-- <button> -->
-												<button id="item${product.itemId}" type="button" 
+												<button id="" type="button" 
 												class="btn btn-link" data-toggle="modal" 
 												data-target="#product_view" style="color:black;" >
 												<i class="fa fa-shopping-cart"> Cart</i>
@@ -339,6 +339,17 @@ $(function(){
 						</div>
 					</div>
 					<!-- 페이지 번호 -->
+					<%-- 			<div class="btn-ground text-center">
+											<button type="button" class="btn"
+												style="background-color: #f9bf3b; color: white">
+												<i class="fa fa-shopping-cart"></i> 장바구니
+											</button>
+											<button id="item${product.itemId}" type="button" class="btn"
+												style="background-color: #f9bf3b; color: white"
+												data-toggle="modal" data-target="#product_view">
+												<i class="fa fa-search"></i>&nbsp; 퀵 뷰
+											</button>
+										</div> --%>
 					<div style="padding-top: 50px;">
 						<my:paging paging="${paging}" jsFunc="go_page" />
 					</div>

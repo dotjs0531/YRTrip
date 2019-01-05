@@ -12,15 +12,15 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <!-- 제품명들어갈듯 -->
-<title>등록 제품 수정에서 가지고 온</title>
+<title></title>
 
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
-	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz">
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"> -->
 
 <style>
 #login-column {
@@ -34,10 +34,11 @@
 </style>
 <script>
 $(function(){
-	   var money =${cart.itemPrice};
-	   var money2 = money.toLocaleString();
-	   
-	   $("#itemPrice").text('￦'+money2);   
+	var money = $("#itemPrice").text();
+	console.log(money);
+	var money2 = money.toLocaleString();
+	$("#itemPrice").text('');
+	$("#itemPrice").text('￦' + money2);
 	});
 </script>
 <script>
@@ -47,7 +48,7 @@ $(function(){
 });
 </script>
 <script>
-$(function() {
+/* $(function() {
 	var cart_total= $(".cartId").length;
 	console.log(cart_total);
 	$(".cart_total").html(cart_total);
@@ -57,27 +58,59 @@ $(function() {
 	var cartEa_original = $( "#cartEa option:selected" ).val();
 	console.log(cartEa_original);
 	var cartEa_new = $("#cartEa option:selected" ).val();
-	
-	
-	 $(".go_update").on("click", function(){
-		var new_cartEa = $( "#cartEa option:selected" ).val();
-		console.log(new_cartEa);
-		$.ajax({
-			type:"POST",
-			url:"updateCart",
-			data:{
-				itemEa : new_cartEa,
-				cartId : "${cart.cartId}"
-			},
-			success : function(data){
-				 $( "#cartEa option:selected" ).val(data.itemEa);
-			}
-		}); 
-	}); 
-
-});
+}); */
 </script>
-
+<script>
+$(function(){
+	 $(".go_update").click(function(){
+		 $.ajax({
+				type : "POST",
+				url : "./updateCart",
+				dataType: "text",
+				data : {itemEa : "new_ea",
+						cartId : "cartid" },
+				success : function(data){
+					$(".old_itemEa").val(data.itemEa);
+					$(".update_ea").attr("class", "btn go_update"); //버튼 다시 .go_update로 class변경
+					$(".old_itemEa").show();
+					$(".new_itemEa").hide();
+				}
+			});
+		 
+		/*  $(".old_itemEa").hide();
+		 $(".new_itemEa").show();
+		 $(this).removeClass();
+		$(this).attr("class", "btn update_ea"); */
+	 });
+	 
+	 /* $(".update_ea").click(function(){
+			var new_ea = $(".new_itemEa").val();
+			var cartid = $("#cartinfo").find(".cartId").attr("id").substr(6);
+			console.log(new_ea);
+			/* if(new_ea == 0){
+				alert("0이상 입력하세요");
+			} */
+			//new_ea > item_ea :판매자가 판매하는 수량 
+			//alert("판매하는 수량보다 많습니다. 다시 입력하세요")
+			/* else{ */
+				$.ajax({
+					type : "POST",
+					url : "./updateCart",
+					dataType: "text",
+					data : {itemEa : "new_ea",
+							cartId : "cartid" },
+					success : function(data){
+						$(".old_itemEa").val(data.itemEa);
+						$(".update_ea").attr("class", "btn go_update"); //버튼 다시 .go_update로 class변경
+						$(".old_itemEa").show();
+						$(".new_itemEa").hide();
+					}
+				});
+			/* } */
+	 });
+ */
+ });
+</script>
 </head>
 
 <body class="bg-light">
@@ -101,40 +134,32 @@ $(function() {
 					<ul class="list-group mb-3">
 						<c:forEach items="${cartList}" var="cart" varStatus="status">
 
-							<li
-								class="list-group-item d-flex justify-content-between lh-condensed">
-								<div>
-
+							<li class="list-group-item d-flex justify-content-between lh-condensed">
+								<div id="cartinfo">
 									<!-- <label class='col-sm-2 control-label'> 정렬하게 해주는거 -->
 									<h3 class="my-0"><a href="getProduct?itemId=${cart.itemId}">${cart.itemName}</a></h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
-									<small class="text-muted cartId">${cart.itemId}</small> <br>
+									<small class="text-muted cartId" id="cartId${cart.cartId}">${cart.cartId}</small> <br>
 									111
 								</div> 
-								<span class="text-muted" id="itemPrice">￦${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
-							
-							
-								<%-- <select id="cartEa">
+								<span class="text-muted" id="itemPrice">${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
+								<span class="text-muted old_itemEa">${cart.itemEa}</span>
 								
-								<c:forEach items="${product}" var="item">
-								${item.itemId}
-									<option value="${item}">${item}</option>
-								</c:forEach>
-								</select> --%>
+								<span><input type="text" name="itemEa" style="display:none" class="new_itemEa" value="${cart.itemEa}"/></span>
 								
-			<!-- <form action="./updateCart"> --> 
-								<button type="button" class="go_update">수정</button> <!-- </form> -->
+<!-- dfjsldjfasdlf -->
+<%-- <select id="cartEa">
+<c:forEach items="${product}" var="item">
+${item.itemId}
+	<option value="${item}">${item}</option>
+</c:forEach>
+</select> --%>
+<!-- <form action="./updateCart"> --> 
+							<div>
+								<button type="button" class="btn go_update">수정</button> <!-- </form> -->
+							</div>
 								<div>
-								<%-- <c:choose>
-									<c:when test=${}>
-										
-									</c:when>
-									<c:otherwise>
-									
-									</c:otherwise>
-								</c:choose> --%>
-								
 									<c:choose>
 										<c:when test="${cart.itemOrderdetail eq '구매가능'}">
 											<c:choose>
@@ -146,10 +171,8 @@ $(function() {
 													<a role="button" href="./purchasingProduct?cartId=${cart.cartId}"class="btn btn-lg btn-block"
 														style="background-color: #f9bf3b; color: white;">결제하기</a>
 												</c:otherwise>
-
 											</c:choose>
 										</c:when>
-
 										<c:otherwise>
 											<button class="btn btn-lg btn-block btn-light disabled">
 												구매불가</button>
@@ -157,25 +180,26 @@ $(function() {
 									</c:choose>
 								<!-- 삭제 -->
 									<a href="./deleteCart?cartId=${cart.cartId}" style="text-decoration: none;">
-									<button class="btn btn-light btn-link btn-block">취소하기</button></a>
+									<button class="btn btn-light btn-link btn-block">삭제</button></a>
 								</div>
 							</li>
 						</c:forEach>
 						<!-- 내가 사려고 선택한 물건 목록들 c:forEach 끝-->
 
 
-						<li
+						<!-- <li
 							class="list-group-item d-flex justify-content-between bg-light">
 							<div class="text-success">
 								<h6 class="my-0">마일맂...?</h6>
 								<small>마일리지 넣을까..?</small>
-							</div> <span class="text-success">-$5</span>
+							</div> 
+							<span class="text-success">-$5</span>
 						</li>
 						<li class="list-group-item d-flex justify-content-between"><span>최종금액
-								(WON)</span> <strong>이부분은 필요할지 모르겠네...</strong></li>
+								(WON)</span> <strong>이부분은 필요할지 모르겠네...</strong></li> -->
 					</ul>
 
-					<form class="card p-2">
+					<!-- <form class="card p-2">
 						<div class="input-group">
 							<input type="text" class="col-md-10 form-control ml-4"
 								placeholder="쿠폰 코드">
@@ -183,7 +207,7 @@ $(function() {
 								<button type="submit" class="btn btn-secondary">적용</button>
 							</div>
 						</div>
-					</form>
+					</form> -->
 
 				</div>
 			</div>
