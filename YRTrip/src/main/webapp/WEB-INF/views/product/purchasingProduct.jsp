@@ -60,7 +60,7 @@ $(function(){
 			var orderPost = $("#orderPost").val();
 			var orderAddress = $("#orderAddress").val();
 			var cartId = $("#cartId").val();
-			var orderMethod=$('input[name="orderMethod"]:checked').val();
+			/* var orderMethod=$('input[name="orderMethod"]:checked').val(); */
 			
 			console.log(itemId);
 			console.log(buyerId);
@@ -86,13 +86,14 @@ $(function(){
 			    		type: 'POST',
 			    		dataType: 'json',
 			    		data: {
+			    			
 			    			orderEa : orderEa,
 			    			buyerId : buyerId,
 			    			itemId : itemId,
 			    			orderPost : rsp.buyer_postcode, 
 			    			orderAddress : rsp.buyer_addr,
-			    			cartId : cartId,
-			    			orderMethod :orderMethod 
+			    			cartId : cartId 
+			    			
 			   	    		 //imp_uid : rsp.imp_uid 
 				    		//기타 필요한 데이터가 있으면 추가 전달
 			    		}
@@ -294,14 +295,14 @@ $(function(){
 
 					<hr class="mb-4">
 
-					<h4 class="mb-3">결제방법</h4>
+					<!-- <h4 class="mb-3">결제방법</h4>
 					<div class="mb-3">
 						<div class="custom-control custom-radio">
 							<input id="credit" name="orderMethod" type="radio"
 								class="custom-control-input" value="카드결제" checked="" required="">
 							<label class="custom-control-label" for="credit">카드(KG이니시스)</label>
 						</div>
-						<div class="custom-control custom-radio">
+						 <div class="custom-control custom-radio">
 							<input id="debit" name="orderMethod" type="radio"
 								class="custom-control-input" value="현금결제" required=""> <label
 								class="custom-control-label" for="debit">현금결제</label>
@@ -310,8 +311,8 @@ $(function(){
 							<input id="paypal" name="orderMethod" type="radio"
 								class="custom-control-input" value="직거래" required=""> <label
 								class="custom-control-label" for="paypal">직거래</label>
-						</div>
-					</div>
+						</div> 
+					</div>-->
 				<input type="text" value="${cart.itemId}" id="itemId" name="itemId">
 				<input type="text" value="${cart.cartId}" name="cartId">
 				<input type="text" value="${cart.itemEa}" name="orderEa">

@@ -24,6 +24,7 @@ import com.yrtrip.app.product.CartService;
 import com.yrtrip.app.product.CartVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
+import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.user.MyPageService;
 import com.yrtrip.app.user.UserService;
 import com.yrtrip.app.user.UserVO;
@@ -55,12 +56,18 @@ public class ProductController {
 
 		mv.addObject("paging", paging);
 		mv.addObject("productList", productService.getProductList(vo));
-
 		mv.setViewName("product/getProductList");
 		
 		return mv;
 	}
-	//퀵뷰
+	//여행글 하나 이상 작성되어있을때 상품판매 가능
+	@RequestMapping("travelCountForInfo")
+	@ResponseBody
+	public int getProduct(TravelBoardVO vo) {
+		return mypageService.getMyTravelCount(vo);
+	}
+	
+	//퀵뷰(json)
 	@RequestMapping("getProductAjax")
 	@ResponseBody
 	public ProductVO getProduct(ProductVO vo) {
@@ -83,6 +90,7 @@ public class ProductController {
 		model.addAttribute("order", orderService.getOrder(voo));
 		return "product/getProduct";
 	}
+	//상품삭제시 구매중인 유저가 있으면 안되도록 막음(ajax)
 	@RequestMapping("infofordelete")
 	@ResponseBody
 	public int inforForDelete(ProductVO vo) {

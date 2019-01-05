@@ -23,20 +23,21 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
 <link href="resources/css/product.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
- $(function(){
-    var productMenu = document.getElementById("productMenu");
-    productMenu.className='current-menu-item';
-}); 
+	$(function() {
+		var productMenu = document.getElementById("productMenu");
+		productMenu.className = 'current-menu-item';
+	});
 	function go_page(page) {/* 
-		var option_val = $("#searchClass").val();
-		console.log(option_val);
-		$("#itemCategory").val(option_val); */
-		
+			var option_val = $("#searchClass").val();
+			console.log(option_val);
+			$("#itemCategory").val(option_val); */
+
 		document.frm.page.value = page;
 		document.frm.submit();
-	} 
+	}
 </script>
 <script>
 	/* 자기혼자 빨간줄이었다 오류있는지 확인 :()주의! ;생략가능하나 명령문마다 해주자 */
@@ -57,43 +58,61 @@
 				$("#popup_itemContent").html(itemContent);
 			});
 		});
+
 		
-		if("${sessionScope.login.userId}" == ''){
-			$("#insertbtn").click(function(e){
+	$("#insertbtn").click(function(e) {
+		if ("${sessionScope.login.userId}" == '') {
 				e.preventDefault();
 				alert("로그인이 필요한 서비스입니다");
-			});
-		}
-	/* 	var str = $(".orderdetailColor").text();
-	
-		console.log(substr(str, 4));
-		
-		if($(".orderdetailColor").text().substr(0,4) == '구매가능'){
-			$(".btn-which").addClass("btn-success");
-		}
+			}		
 		else{
-			$(".btn-which").addClass("btn-danger");
-		} */
-	});		
+			alert("dfjla");
+				$.ajax({
+					type:"GET",
+					url:"travelCountForInfo",
+					data:{userId : "${sessionScope.login.userId}"},
+					datatype : "integer",
+					success : function(data){
+						console.log(data);	
+						if(data == 0){
+							alert("여행글 하나 이상 작성후 물품판매 가능합니다");
+						}
+						else{
+							window.location = "./insertProduct";
+						}
+					}
+				});	
+			}
+		});
+		/* 	var str = $(".orderdetailColor").text();
+		
+			console.log(substr(str, 4));
+			
+			if($(".orderdetailColor").text().substr(0,4) == '구매가능'){
+				$(".btn-which").addClass("btn-success");
+			}
+			else{
+				$(".btn-which").addClass("btn-danger");
+			} */
 </script>
 <script>
-/*가격 세단위 부터 ,*/
-/*  $(function(){ */
+	/*가격 세단위 부터 ,*/
+	/*  $(function(){ */
 	var money = $("#itemPrice").text();
 	console.log(money);
 	var money2 = money.toLocaleString();
 	$("#itemPrice").text('');
-	$("#itemPrice").text('￦'+money2);
-/*  }); */
+	$("#itemPrice").text('￦' + money2);
+	/*  }); */
 </script>
 <style>
 #login-column {
-   width:100%;
-   margin: 0 10px;
+	width: 100%;
+	margin: 0 10px;
 }
-.nav>li>a:focus,
-.nav>li>a:hover{
-   background-color:white;
+
+.nav>li>a:focus, .nav>li>a:hover {
+	background-color: white;
 }
 </style>
 </head>
@@ -113,12 +132,18 @@
 						</div>
 						<ul class="price-list">
 							<li><a href="getProductList" style="color: black">전체보기</a></li>
-							<li><a href="getProductList?itemCategory=의류" style="color: black">의류</a></li>
-							<li><a href="getProductList?itemCategory=티켓" style="color: black">티켓/쿠폰</a></li>
-							<li><a href="getProductList?itemCategory=전자기기" style="color: black">전자기기</a></li>
-							<li><a href="getProductList?itemCategory=여행도서" style="color: black">여행도서</a></li>
-							<li><a href="getProductList?itemCategory=USIM" style="color: black">USIM</a></li>
-							<li><a href="getProductList?itemCategory=기타" style="color: black">기타</a></li>
+							<li><a href="getProductList?itemCategory=의류"
+								style="color: black">의류</a></li>
+							<li><a href="getProductList?itemCategory=티켓"
+								style="color: black">티켓/쿠폰</a></li>
+							<li><a href="getProductList?itemCategory=전자기기"
+								style="color: black">전자기기</a></li>
+							<li><a href="getProductList?itemCategory=여행도서"
+								style="color: black">여행도서</a></li>
+							<li><a href="getProductList?itemCategory=USIM"
+								style="color: black">USIM</a></li>
+							<li><a href="getProductList?itemCategory=기타"
+								style="color: black">기타</a></li>
 						</ul>
 						<div class="order-buton" id="insertbtn">
 							<a href="insertProduct">상품등록</a>
@@ -131,59 +156,67 @@
 				<!-- 검색시작 -->
 				<div class="col-8">
 					<form name="./getProductList" class="form-inline">
-                			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
-								
-								<!-- 제품이름 & 제품내용 -->
-								<div class="row">
-									<label class="col-2 control-label" for="searchClass">카테고리 </label>
-									<label class="col-4 control-label" for="searchCondition">검색어</label>
-								</div>
-								
-								<div style="padding-bottom:5px">
-								
-									<select name="itemCategory" class="form-control" id="searchClass">
-										<option value="">전체</option>
-										<option value="의류">의류</option>
-										<option value="티켓">티켓/쿠폰</option>
-										<option value="전자기기">전자기기</option>
-										<option value="여행도서">여행도서</option>
-										<option value="USIM">USIM</option>
-										<option value="기타">기타</option>
-									</select><!-- 
+						<div class="form-group single-pricing-table"
+							style="width: 100%; text-align: left; padding: 20px; color: black;">
+
+							<!-- 제품이름 & 제품내용 -->
+							<div class="row">
+								<label class="col-2 control-label" for="searchClass">카테고리
+								</label> <label class="col-4 control-label" for="searchCondition">검색어</label>
+							</div>
+
+							<div style="padding-bottom: 5px">
+
+								<select name="itemCategory" class="form-control"
+									id="searchClass">
+									<option value="">전체</option>
+									<option value="의류">의류</option>
+									<option value="티켓">티켓/쿠폰</option>
+									<option value="전자기기">전자기기</option>
+									<option value="여행도서">여행도서</option>
+									<option value="USIM">USIM</option>
+									<option value="기타">기타</option>
+								</select>
+								<!-- 
 									<input type="hidden" name="itemCategory" id="itemCategory"/> -->
-									
-									<select name="searchCondition" class="form-control" id="searchCondition">
-										<option value="itemName">제품명</option>
-										<option value="itemContent">내용</option>									
-									</select>	
-									<input type="text" name="searchKeyword" class="form-control" placeholder="검색할 내용을 입력하세요">
-								</div>
-								<!-- 가격 -->
-								<!--  -->
-								<!-- 구매가능여부 -->
-								<div class="row">
-									<label class="col-sm-2 control-label">구매가능여부</label>
-								</div>				
-								<div>
-									<input type="radio" name="itemOrderdetail" value="" class="form-control vertical" checked>모두보기 
-									<input type="radio" name="itemOrderdetail" value="구매가능" class="form-control">구매가능
-									<input type="radio" name="itemOrderdetail" value="구매불가" class="form-control">구매불가
-									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
-								</div>
-								
-								<input type="hidden" name="page">
-         					</div>
-						</form>
-		
+
+								<select name="searchCondition" class="form-control"
+									id="searchCondition">
+									<option value="itemName">제품명</option>
+									<option value="itemContent">내용</option>
+								</select> <input type="text" name="searchKeyword" class="form-control"
+									placeholder="검색할 내용을 입력하세요">
+							</div>
+							<!-- 가격 -->
+							<!--  -->
+							<!-- 구매가능여부 -->
+							<div class="row">
+								<label class="col-sm-2 control-label">구매가능여부</label>
+							</div>
+							<div>
+								<input type="radio" name="itemOrderdetail" value=""
+									class="form-control vertical" checked>모두보기 <input
+									type="radio" name="itemOrderdetail" value="구매가능"
+									class="form-control">구매가능 <input type="radio"
+									name="itemOrderdetail" value="구매불가" class="form-control">구매불가
+								<button class="btn btn-warning signupbtn"
+									style="float: right; margin-right: 10px">검색</button>
+							</div>
+
+							<input type="hidden" name="page">
+						</div>
+					</form>
+
 					<div class="space-ten"></div>
 					<!--상품상세 페이지-->
 					<div class="col-lg-container">
 						<div class="row">
 							<c:forEach items="${productList}" var="product">
-								
+
 								<div class="col-4">
 									<div class="thumbnail">
-									<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}"/>
+										<c:set var="productPicFile"
+											value="${fn:split(product.itemPic, ',')[0]}" />
 										<c:set var="pic" value="${productPicFile}" />
 										<img src="./images/product/${pic}" alt="" class="img-fluid">
 										<div class="caption">
@@ -193,47 +226,46 @@
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
 											<div class="space-five"></div>
-											<c:forEach items="${product.itemOrderdetail}" var="orderd" step="4">
-													<c:if test="${orderd eq '구매가능'}">
-														<p class="btn-which btn btn-xs btn-success">${product.itemOrderdetail}</p>
-													</c:if>
-													<c:if test="${orderd eq '구매불가'}">
-														<p class="btn-which btn btn-xs btn-danger">${product.itemOrderdetail}</p>
-													</c:if>
+											<c:forEach items="${product.itemOrderdetail}" var="orderd"
+												step="4">
+												<c:if test="${orderd eq '구매가능'}">
+													<p class="btn-which btn btn-xs btn-success">${product.itemOrderdetail}</p>
+												</c:if>
+												<c:if test="${orderd eq '구매불가'}">
+													<p class="btn-which btn btn-xs btn-danger">${product.itemOrderdetail}</p>
+												</c:if>
 											</c:forEach>
-											
+
 											<p class="btn btn-xs btn-info">${product.itemCondition}</p>
-											<p class="pull-right"><span class="glyphicon glyphicon-star"></span> 
-											<a href="#">${product.itemStar}</a></p>
-											
+											<p class="pull-right">
+												<span class="glyphicon glyphicon-star"></span> <a href="#">${product.itemStar}</a>
+											</p>
+
 										</div>
 										<div class="space-five"></div>
 										<div class="btn-ground text-center">
 											<!-- <button> -->
-												<i class="fa fa-shopping-cart text-center col-4"></i>
-											<!-- </button> -->
-											<button type="button" id="item${product.itemId}" class="btn-link" data-toggle="modal" data-target="#product_view" style="color:black;">
-												<i class="fa fa-search text-center col-3"></i>
+												<button id="item${product.itemId}" type="button" 
+												class="btn btn-link" data-toggle="modal" 
+												data-target="#product_view" style="color:black;" >
+												<i class="fa fa-shopping-cart"> Cart</i>
 											</button>
-										
-											<c:forEach items="${order}" var="review">
-												<p><a href="#">${review.reviewName}</a></p>
-											</c:forEach>
 											
+											<!-- </button> -->
+											<button id="item${product.itemId}" type="button" 
+												class="btn btn-link" data-toggle="modal" 
+												data-target="#product_view" >
+												<i class="fa fa-search"> Quick View</i>
+											</button>
 										</div>
-								<div class="space-five"></div>
-							<%-- 			<div class="btn-ground text-center">
-											<button type="button" class="btn"
-												style="background-color: #f9bf3b; color: white">
-												<i class="fa fa-shopping-cart"></i> 장바구니
-											</button>
-											<button id="item${product.itemId}" type="button" class="btn"
-												style="background-color: #f9bf3b; color: white"
-												data-toggle="modal" data-target="#product_view">
-												<i class="fa fa-search"></i>&nbsp; 퀵 뷰
-											</button>
-										</div> --%>
+											<c:forEach items="${order}" var="review">
+												<p>
+													<a href="#">${review.reviewName}</a>
+												</p>
+											</c:forEach>
 										
+										<div class="space-five"></div>
+
 									</div>
 								</div>
 							</c:forEach>
@@ -250,7 +282,7 @@
 										class="glyphicon glyphicon-remove"></span></a>
 									<h3 class="modal-title" id="modal-title"></h3>
 								</div>
-								
+
 								<div class="modal-body">
 									<div class="row">
 										<div class="col-md-6 product_img">
@@ -304,16 +336,6 @@
 												</div>
 												<!-- end col -->
 											</div>
-											<div class="space-ten"></div>
-											<div class="btn-ground">
-												<button type="button" class="btn btn-primary">
-													<span class="glyphicon glyphicon-shopping-cart"></span>
-													장바구니
-												</button>
-												<button type="button" class="btn btn-primary">
-													<span class="glyphicon glyphicon-heart"></span> 판매자와 대화
-												</button>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -333,8 +355,10 @@
 		<!-- /.container -->
 	</section>
 	<!-- Bootstrap core JavaScript -->
-	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>

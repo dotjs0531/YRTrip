@@ -68,8 +68,7 @@ ORDER BY ORDER_DATE DESC -->
 			#{itemId},
 			#{orderPost},
 			#{orderAddress},
-			#{cartId},
-			#{orderMethod}
+			#{cartId}
 			)
 		}	
 	</insert>
