@@ -26,86 +26,83 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	$(function() {
+	$(function(){
 		var productMenu = document.getElementById("productMenu");
 		productMenu.className = 'current-menu-item';
+		//가격 천단위 
+		var money = $("#itemPrice").text();
+		console.log(money);
+		var money2 = money.toLocaleString();
+		$("#itemPrice").text('');
+		$("#itemPrice").text('￦' + money2);
+		
+		//
+		function go_page(page) {
+			document.frm.page.value = page;
+			document.frm.submit();
+		}
 	});
-	function go_page(page) {/* 
-			var option_val = $("#searchClass").val();
-			console.log(option_val);
-			$("#itemCategory").val(option_val); */
-
-		document.frm.page.value = page;
-		document.frm.submit();
-	}
+</script>
+<script>		
+$(function(){
+	$('#product_view').on('show.bs.modal', function(e) {
+		var button = $(event.target) // Button that triggered the modal
+		console.log(event);
+		var param = {
+			itemId : button.attr("id").substr(4)
+		}
+		$.getJSON("getProductAjax", param, function(data) {
+			var itemId = data.itemId;
+			var itemName = data.itemName;
+			var itemContent = data.itemContent;
+			console.log(itemId);
+			$("#modal-title").html(itemName);
+			$("#popup_itemId").html(itemId);
+			$("#popup_itemContent").html(itemContent);
+		});
+	});
+});
 </script>
 <script>
-	/* 자기혼자 빨간줄이었다 오류있는지 확인 :()주의! ;생략가능하나 명령문마다 해주자 */
-	$(function() {
-		$('#product_view').on('show.bs.modal', function(e) {
-			var button = $(event.target) // Button that triggered the modal
-			console.log(event);
-			var param = {
-				itemId : button.attr("id").substr(4)
-			}
-			$.getJSON("getProductAjax", param, function(data) {
-				var itemId = data.itemId;
-				var itemName = data.itemName;
-				var itemContent = data.itemContent;
-				console.log(itemId);
-				$("#modal-title").html(itemName);
-				$("#popup_itemId").html(itemId);
-				$("#popup_itemContent").html(itemContent);
-			});
-		});
-
-		
-	$("#insertbtn").click(function(e) {
-		if ("${sessionScope.login.userId}" == '') {
-				e.preventDefault();
-				alert("로그인이 필요한 서비스입니다");
-			}		
-		else{
-			alert("dfjla");
-				$.ajax({
-					type:"GET",
-					url:"travelCountForInfo",
-					data:{userId : "${sessionScope.login.userId}"},
-					datatype : "integer",
-					success : function(data){
-						console.log(data);	
-						if(data == 0){
-							alert("여행글 하나 이상 작성후 물품판매 가능합니다");
-						}
-						else{
-							window.location = "./insertProduct";
-						}
+$(function(){
+	 $(".insertbtn").click(function(e){
+		 if ("${sessionScope.login.userId}" == '') {
+			 e.preventDefault();
+	         alert("로그인이 필요한 서비스입니다");
+		 }
+		 else{
+			 $.ajax({
+				type:"GET",
+				url:"travelCountForInfo",
+				data:{userId : "${sessionScope.login.userId}"},
+				datatype : "integer",
+				success : function(data){
+					console.log(data);	
+					if(data == 0){
+						alert("여행글 하나 이상 작성후 물품판매 가능합니다");
 					}
-				});	
-			}
-		});
-		/* 	var str = $(".orderdetailColor").text();
-		
-			console.log(substr(str, 4));
-			
-			if($(".orderdetailColor").text().substr(0,4) == '구매가능'){
-				$(".btn-which").addClass("btn-success");
-			}
-			else{
-				$(".btn-which").addClass("btn-danger");
-			} */
-</script>
-<script>
-	/*가격 세단위 부터 ,*/
-	/*  $(function(){ */
-	var money = $("#itemPrice").text();
-	console.log(money);
-	var money2 = money.toLocaleString();
-	$("#itemPrice").text('');
-	$("#itemPrice").text('￦' + money2);
-	/*  }); */
+					else{
+						window.location = "./insertProduct";
+					}
+				}
+			});
+		 }
+      });
+});
+	
 </script>
 <style>
+
+#btn-custom
+{
+    background: #f9bf3b none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 40px;
+    text-transform: uppercase;
+ }
 #login-column {
 	width: 100%;
 	margin: 0 10px;
@@ -116,7 +113,6 @@
 }
 </style>
 </head>
-
 <body>
 	<form name="frm" class="form-inline">
 		<input type="hidden" name="page" />
@@ -145,8 +141,8 @@
 							<li><a href="getProductList?itemCategory=기타"
 								style="color: black">기타</a></li>
 						</ul>
-						<div class="order-buton" id="insertbtn">
-							<a href="insertProduct">상품등록</a>
+						<div class="order-buton">
+							<button class="btn insertbtn" id="btn-custom">상품등록</button>
 						</div>
 					</div>
 				</div>

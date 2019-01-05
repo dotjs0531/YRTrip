@@ -262,7 +262,7 @@ $(function(){
 											<div class="file-loading">
 												<input multiple="multiple" id="file-5" name="productPicFile" class="file" type="file" multiple
 													data-preview-file-type="any" data-upload-url="#"
-													data-theme="fas">
+													data-theme="fas" required>
 											</div>
 										</div>
 									</div>
@@ -300,7 +300,7 @@ $(function(){
 									<div class="col-12 col-md-8">
 <!-- 수량 : 0 막아놓기 -->
 										<input type="number" min="1" name="itemEa"
-											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
+											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요" required>
 									</div>
 								</div>
 <!-- 상품상태 : 하나만 체크 되도록 -->
@@ -312,41 +312,40 @@ $(function(){
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="새상품"> 새상품
+												value="새상품" required> 새상품
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="약간중고"> 약간중고
+												value="약간중고" required> 약간중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="조금중고"> 조금중고
+												value="조금중고" required> 조금중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="완전중고"> 완전중고
+												value="완전중고" required> 완전중고
 											</label>
 										</div>
 									</div>
 								</div>
 								<div class="space-five"></div>
 <!-- 결제방법 : 1.값 두개다 db에 들어갈 수 있도록  -->
-								<div class="row price_list">
+								<!-- <div class="row price_list">
 									<div class="col-6 col-md-4">
 										<h4>선호결제방법</h4>
 									</div>
 									<div class="col-12 col-md-8 input-lg">
 										<div class="form-check form-check-inline">
-											<label class="form-check-label"> <input
-												class="form-check-input" type="checkbox" name="itemMethod"
-												value="현금결제"> 현금결제(만나서 결제)
-											</label>
+											<label class="form-check-label"> -->
+											<input type="hidden" value="카드결제" />
+											<!--</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
@@ -355,7 +354,7 @@ $(function(){
 											</label>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div>
 									<div class="spcae-five"></div>
 									<h4>제품설명</h4>

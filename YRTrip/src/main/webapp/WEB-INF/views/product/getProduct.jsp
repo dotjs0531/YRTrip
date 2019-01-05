@@ -177,14 +177,43 @@ $(function(){
 		});	
 	});
 	
-	if("${sessionScope.login.userId}" == ''){
-		$("#insertbtn").click(function(e){
-			e.preventDefault();
-			alert("로그인이 필요한 서비스입니다");
-		});
-	}
+	$(".insertbtn").click(function(e){
+		 if ("${sessionScope.login.userId}" == '') {
+			 e.preventDefault();
+	         alert("로그인이 필요한 서비스입니다");
+		 }
+		 else{
+			 $.ajax({
+				type:"GET",
+				url:"travelCountForInfo",
+				data:{userId : "${sessionScope.login.userId}"},
+				datatype : "integer",
+				success : function(data){
+					console.log(data);	
+					if(data == 0){
+						alert("여행글 하나 이상 작성후 물품판매 가능합니다");
+					}
+					else{
+						window.location = "./insertProduct";
+					}
+				}
+			});
+		 }
+     });
 });
 </script>
+<style>
+#btn-custom
+{
+    background: #f9bf3b none repeat scroll 0 0;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 40px;
+    text-transform: uppercase;
+ }
+</style>
 </head>
 <body>
 
@@ -209,8 +238,8 @@ $(function(){
 							<li><a href="#" style="color: black">USIM</a></li>
 							<li><a href="#" style="color: black">기타</a></li>
 						</ul>
-						<div class="order-buton" id="insertbtn">
-							<a href="insertProduct">상품등록</a>
+						<div class="order-buton">
+							<button class="btn insertbtn" id="btn-custom">상품등록</button>
 						</div>
 					</div>
 				</div>
