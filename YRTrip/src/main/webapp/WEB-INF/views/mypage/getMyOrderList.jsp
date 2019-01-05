@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
 <!DOCTYPE html>
@@ -362,8 +363,11 @@ $(function() {
 										<!-- Post-->
 										<div class="post-module">
 											<!-- Thumbnail-->
-											<div class="thumbnail">
-												<a href="#" id="${order.itemId}" class="getProduct" <%-- onclick="getProduct('${order.itemId}')" --%>><img src="./images/notice/1.jpg" style="height:200px" /></a>
+											<div class="thumbnail" style="background-color:white">
+												<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}" />
+												<a href="getProduct?itemId=${product.itemId}">
+													<img class="img-responsive center-block" id="img" src="./images/product/${productPicFile}" style="height: 200px;" />
+												</a>
 											</div>
 											<!-- Post Content-->
 											<div class="post-content">

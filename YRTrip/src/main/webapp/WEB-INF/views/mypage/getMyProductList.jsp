@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
@@ -159,6 +160,27 @@ function productDel() {
 </script>
 <script>
 	$(function() {
+		//구매자 목록 버튼 출력
+		function makeBuyerBtn(){
+			var iId = $(".btnBuyer").attr("id").substr(3);
+			var suid = '${sessionScope.login.userId}';
+			
+			$.ajax({
+		        type: "GET",
+		        url: "getMyBuyerList",
+		        data: { itemId : iId,
+		        		sellerId : suid } ,
+		        success: function (data){
+		        	if(!data) { 
+		        	} else {
+		        		var str = "<button type='button' class='btn btn-default pull-right' id='buyer"+iId+"' data-toggle='modal' data-target='#getMyBuyerList'>구매자 목록</button>";
+		        		$(str).appendTo("#btn"+iId);
+		        	}
+		        }
+		    });  
+		};
+		makeBuyerBtn();
+		
 		//구매자 목록
 		$('#getMyBuyerList').on('show.bs.modal', function(e) {
 			var button = $(event.target) // Button that triggered the modal
@@ -323,8 +345,11 @@ function productDel() {
 										<!-- Post-->
 										<div class="post-module">
 											<!-- Thumbnail-->
-											<div class="thumbnail">
-												<a href="getProduct?itemId=${product.itemId}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
+											<div class="thumbnail" style="background-color:white">
+												<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}" />
+												<a href="getProduct?itemId=${product.itemId}">
+													<img class="img-responsive center-block" id="img" src="./images/product/${productPicFile}" style="height: 200px;" />
+												</a>
 											</div>
 											<!-- Post Content-->
 											<div class="post-content">
@@ -338,7 +363,8 @@ function productDel() {
 												<h2 class="sub_title">${product.itemCategory}</h2>
 												<p class="description">${product.itemContent}</p>
 												<div class="post-meta">
-													<button type="button" class="btn btn-default pull-right" id="buyer${product.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button>
+													<div class="btnBuyer" id="btn${product.itemId}"></div>
+													<%-- <button type="button" class="btn btn-default pull-right" id="buyer${product.itemId}" data-toggle="modal" data-target="#getMyBuyerList">구매자 목록</button> --%>
 													<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;${product.itemLike}</span>
 													<span class="comments"><i class="fa fa-star"></i>&nbsp;${product.itemStar}</span>
 												</div>

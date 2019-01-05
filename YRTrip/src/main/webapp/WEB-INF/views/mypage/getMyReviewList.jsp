@@ -43,7 +43,6 @@ a:hover { color:white }
 .modal {
 	text-align: center;
 }
- 
 @media screen and (min-width: 768px) { 
 	.modal:before {
 		display: inline-block;

@@ -177,10 +177,9 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 <!-- 리뷰 페이지 -->
 <select id="getYourReviewCount" parameterType="order" resultType="int">
 	SELECT COUNT(*)
-	  FROM ORDERT O, ITEMT I
-	 WHERE O.ITEM_ID = I.ITEM_ID
-	       AND I.SELLER_ID = #{sellerId}
-		   AND O.REVIEW_CONTENT IS NOT NULL
+	  FROM ORDERT
+	 WHERE SELLER_ID = #{sellerId}
+		   AND REVIEW_CONTENT IS NOT NULL
 </select>
 <select id="getYourReviewList" parameterType="order" resultType="order">
 SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
@@ -189,13 +188,13 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   REVIEW_CONTENT,
 		   TO_CHAR(REVIEW_DATE, 'YYYY/MM/DD') REVIEW_DATE,
 		   REVIEW_PIC,
-		   O.ITEM_ID,
-		   ITEM_NAME,
-		   ITEM_CATEGORY
-	  FROM ORDERT O, ITEMT I
-	 WHERE O.ITEM_ID = I.ITEM_ID
-	       AND I.SELLER_ID = #{sellerId}
-		   AND O.REVIEW_CONTENT IS NOT NULL
+		   ORDER_ID,
+		   ITEM_ID,
+		   ITEM_NAME
+		   <!-- ,ITEM_CATEGORY -->
+	  FROM ORDERT
+	 WHERE SELLER_ID = #{sellerId}
+		   AND REVIEW_CONTENT IS NOT NULL
   ORDER BY REVIEW_DATE DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
@@ -13,6 +14,7 @@ import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.travel.TravelPlaceVO;
+import com.yrtrip.app.user.MyPageService;
 import com.yrtrip.app.user.UserVO;
 import com.yrtrip.app.user.YourPageService;
 
@@ -20,6 +22,7 @@ import com.yrtrip.app.user.YourPageService;
 public class YourPageController {
 
 	@Autowired YourPageService yourpageService;
+	@Autowired MyPageService mypageService;
 	
 	//여행정보 페이지
 	@RequestMapping(value = "/getYourTravelList", method = RequestMethod.GET)

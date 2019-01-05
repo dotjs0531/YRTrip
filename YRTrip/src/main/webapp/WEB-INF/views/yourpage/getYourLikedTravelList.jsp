@@ -151,13 +151,13 @@ a:hover { color:white }
 							
 							<c:forEach items="${YourLikedTravelList}" var="travel" varStatus="status">
 								
-								<div class="content-box" style="width:29%; margin-top:10px">
+								<div class="content-box" style="width:180px; margin-top:10px">
 									<div style="height:130px;">
 										<c:if test="${travel.travelPic != null}">
-											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:210px; height:150px">
+											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:180px; height:150px">
 										</c:if>
 										<c:if test="${travel.travelPic == null}">
-											<img src="./images/travel/noimage.jpg" class="img-responsive" style="width:210px; height:150px">
+											<img src="./images/travel/noimage.jpg" class="img-responsive" style="width:180px; height:150px">
 										</c:if>
 									</div>
 									
