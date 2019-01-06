@@ -170,6 +170,7 @@
 	z-index: 1;
 	color: #4f5b66;
 }
+
 </style>
 </head>
 <body>
@@ -258,7 +259,7 @@
 	</section>
 	<!--end of header area-->
 	<!-- 상품 판매자 1,2,3위  올리기-->
-	<section class="about_top" id="about_top">
+	<section class="about_top" id="about_top" style="border-bottom:none;">
 		<div class="container">
 			<div class="row">
 				<div class="container card">
