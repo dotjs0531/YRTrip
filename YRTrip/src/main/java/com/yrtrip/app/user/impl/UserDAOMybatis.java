@@ -42,6 +42,10 @@ public class UserDAOMybatis {
 	public UserVO getUserEmail(UserVO vo) {
 		return mybatis.selectOne("user.getUserEmail", vo);
 	}
+	//메일 전체 조회
+	public List<String> getUserEmailList(){
+		return mybatis.selectList("user.getUserEmailList");
+	}
 	//전체 조회
 	public List<UserVO> getUserList(UserVO vo)  {
 		return mybatis.selectList("user.getUserList", vo);

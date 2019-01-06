@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <style>
 .fa fa-user:before {
     content: "\F6A0";
@@ -16,7 +17,31 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+.modal {
+        text-align: center;
+}
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+        }
+}
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+	   	$("#mailSend").click(function(){
+	       	$('div#mailSendForm').modal(true);
+	   	});
+	});
+</script>
 </head>
 <body>
 	<nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -27,7 +52,7 @@
                 <div class="profile-image">
                   <!-- <img src="resources/admin/images/faces/face1.jpg" alt="profile image"> -->
                   <button type="button" class="btn btn-icons btn-rounded btn-light" onclick="location.href='./admin'">
-                  	<i class="fa fa-user"></i>
+                  	<i class="far fa-user"></i>
                   </button>
                 </div>
                 <div class="text-wrapper">
@@ -38,7 +63,7 @@
                   </div>
                 </div>
               </div>
-              <button class="btn btn-success btn-block">전체 메일 전송
+              <button class="btn btn-success btn-block" id="mailSend">전체 메일 전송
                 <i class="mdi mdi-plus"></i>
               </button>
             </div>
@@ -110,4 +135,54 @@
           </li>
         </ul>
       </nav>
+      
+      
+    <!-- 전체 메일 보내기 -->
+	<div class="modal fade" id="mailSendForm">
+		<div class="modal-dialog" style="width:100%;">
+			<div class="modal-content" style="margin:0 auto; background-color:#fdfdfd !important">
+				<!-- remote ajax call이 되는영역 -->
+				<!-- header -->
+				<div class="modal-header">
+					<!-- 닫기(x) 버튼 -->
+					<button type="button" class="close" data-dismiss="modal">×</button>
+				</div>
+
+				<!-- body -->
+				<div class="modal-body">
+					<div class="container" style="width:100%">
+						<div id="login-row" class="row justify-content-center align-items-center">
+							<div id="login-column" style="margin: 20px; width:100%">
+								<div id="login-box">
+								
+									<form id="mailForm" class="form" action="mailSendAll" method="post" style="margin:0">
+										<h3 class="text-center text-info" style="color:#666666 !important; margin-bottom: 20px">전체 메일 전송</h3>
+										<div style="margin-bottom:20px">
+										
+											<div class="box" style="margin-bottom:0">
+											  <div class="form-group container-1">
+											      <input type="text" id="mailTitle" name="subject" placeholder="메일 제목을 입력해 주세요" value="[Your Real Trip] " class="form-control" style="font-size: medium"/>
+											  </div>
+											
+											  <div class="form-group container-1">
+											  	<textarea id="mailContent" name="content" placeholder="메일 내용을 입력해 주세요" class="form-control" rows="10" style="font-size: medium"></textarea>
+											  </div>
+											</div>
+											<p style="clear:both">
+											
+										</div>	
+										
+										<div class="form-group">
+											<button type="submit" class="btn btn-info form-input"  style="width:100%; height:40px" onclick="location.href='#'"><i class="fas fa-envelope"></i>메일 보내기</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

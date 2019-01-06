@@ -145,14 +145,47 @@ function del() {
 		alert("비밀번호가 일치하지 않습니다.");
 	}
 };
-function productDel() {
+
+function productDel() { //배송완료되지 않은 구매자가 있을 경우에는 삭제 불가능
+	var DATA;
+	$("input[name=itemNoList]").each(function() {
+		if($(this).is(':checked'))
+            DATA += "|"+($(this).val());
+	});
+	
+	var pDATA = "${data['DATA']}";
+	var splitDATA = pDATA.split("|");
+	var result = 0;
+
 	if (confirm("삭제하시겠습니까?")) {
-		$('#productDel').attr('action', 'deleteMyProductList');
-		//document.productDel.submit();
+		for (var i=1; i<splitDATA.length; i++) {
+	      	$.ajax({
+	  			type:"GET",
+	  			url:"infofordelete",
+	  			data:{itemId : splitDATA[i]},
+	  			datatype : "integer",
+	  			success : function(data){
+  					if(data == 0){
+  						result = 1;
+  					}
+  					else{
+  						result = 0;
+  					}
+	  			}
+	  		});	
+		}
+	
+       if(result == 1){
+    	   $('#productDel').attr('action', 'deleteMyProductList');
+       } else {
+			alert("선택하신 제품 중 진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
+			return false;
+       }
 	} else {
 		return false;
 	}
 };
+
 	function go_page(page) {
 		document.frm.page.value = page;
 		document.frm.submit();
@@ -161,25 +194,27 @@ function productDel() {
 <script>
 	$(function() {
 		//구매자 목록 버튼 출력
-		function makeBuyerBtn(){
-			var iId = $(".btnBuyer").attr("id").substr(3);
+		$(".btnBuyer").each(function() {
+		//function makeBuyerBtn(){
+			//var iId = $(".btnBuyer").attr("id").substr(3);
+			var iId = $(this).attr("id").substr(3);
 			var suid = '${sessionScope.login.userId}';
 			
 			$.ajax({
 		        type: "GET",
-		        url: "getMyBuyerList",
+		        url: "getMyBuyerCount",
 		        data: { itemId : iId,
 		        		sellerId : suid } ,
 		        success: function (data){
-		        	if(!data) { 
+		        	if(data == 0) { 
 		        	} else {
 		        		var str = "<button type='button' class='btn btn-default pull-right' id='buyer"+iId+"' data-toggle='modal' data-target='#getMyBuyerList'>구매자 목록</button>";
 		        		$(str).appendTo("#btn"+iId);
 		        	}
 		        }
 		    });  
-		};
-		makeBuyerBtn();
+		});
+		//makeBuyerBtn();
 		
 		//구매자 목록
 		$('#getMyBuyerList').on('show.bs.modal', function(e) {

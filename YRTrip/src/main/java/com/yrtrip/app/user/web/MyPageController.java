@@ -196,6 +196,11 @@ public class MyPageController {
 		mypageService.deleteMyProductList(vo);
 		return "redirect:getMyProductList";
 	}
+	@RequestMapping("getMyBuyerCount")
+	@ResponseBody
+	public int getMyBuyerCount(OrderVO vo) {	//구매자 수
+		return mypageService.getMyBuyerCount(vo);
+	}
 	@RequestMapping("getMyBuyerList")
 	@ResponseBody
 	public List<OrderVO> getMyBuyerList(OrderVO vo) {	//구매자 목록보기
@@ -203,7 +208,7 @@ public class MyPageController {
 	}
 	@RequestMapping("getMyBuyer")
 	@ResponseBody
-	public OrderVO getMyBuyer(OrderVO vo) {	//구매자 목록보기
+	public OrderVO getMyBuyer(OrderVO vo) {	//구매자 상세정보
 		return mypageService.getMyBuyer(vo);
 	}
 	@RequestMapping("/updateDno") //구매자 송장번호 등록

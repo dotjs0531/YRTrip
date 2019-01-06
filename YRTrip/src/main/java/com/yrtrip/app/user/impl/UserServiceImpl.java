@@ -54,7 +54,11 @@ public class UserServiceImpl implements UserService {
 	public UserVO getUserEmail(UserVO vo) {
 		return dao.getUserEmail(vo);
 	}
-	
+
+	public List<String> getUserEmailList(){
+		return dao.getUserEmailList();
+	}
+
 	public List<UserVO> getUserList(UserVO vo) {
 		return dao.getUserList(vo);
 	}
@@ -154,4 +158,47 @@ public class UserServiceImpl implements UserService {
 			throw new RuntimeException(e);
 		}
 	}	
+	
+	public void sendAll(EmailVO vo) {	//전체회원 메일발송
+		//String to = vo.getTo();// change accordingly
+		String from = vo.getFrom(); // change accordingly
+		final String username = "dotjs0531@gmail.com"; // change accordingly
+		final String password = "jbvknqzxshnqylqv"; // change accordingly
+		
+		// Assuming you are sending email through relay.jangosmtp.net
+		String host = "smtp.gmail.com";
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", "587");
+		
+		// Get the Session object.
+		Session session = Session.getInstance(props, new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}			
+		});
+		
+		try {
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			
+			//UserVO uvo = new UserVO();
+			List<String> userList = getUserEmailList();
+			InternetAddress[] toAddr = new InternetAddress[userList.size()];
+			for(int i=0;i<userList.size();i++) {
+				toAddr[i] = new InternetAddress(userList.get(i).toString());
+			}
+			message.setRecipients(Message.RecipientType.TO, toAddr);
+			
+			message.setSubject(vo.getSubject());
+			message.setText(vo.getContent());
+			Transport.send(message);
+			System.out.println("Sent message successfully....");
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

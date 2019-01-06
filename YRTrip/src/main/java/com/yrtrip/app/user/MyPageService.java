@@ -34,6 +34,7 @@ public interface MyPageService {
 	public int getMyProductCount(ProductVO vo);
 	public List<ProductVO> getMyProductList(ProductVO vo);
 	public void deleteMyProductList(ProductVO vo);
+	public int getMyBuyerCount(OrderVO vo);
 	public List<OrderVO> getMyBuyerList(OrderVO vo);
 	public OrderVO getMyBuyer(OrderVO vo);
 	public void updateDno(OrderVO vo);

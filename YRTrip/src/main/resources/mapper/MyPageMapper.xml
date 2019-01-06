@@ -210,6 +210,13 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		WHERE ITEM_ID = -1
 	</if>
 </delete>
+<select id="getMyBuyerCount" resultType="int">
+	SELECT COUNT(*)
+	  FROM ORDERT O, ITEMT I
+	 WHERE O.ITEM_ID = I.ITEM_ID
+		   AND O.ITEM_ID = #{itemId}
+		   AND I.SELLER_ID = #{sellerId}
+</select>
 <select id="getMyBuyerList" parameterType="order" resultType="order">
 	SELECT BUYER_ID,
 		   ORDER_ID,

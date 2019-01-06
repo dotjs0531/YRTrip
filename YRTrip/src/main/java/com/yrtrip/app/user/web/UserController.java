@@ -175,4 +175,18 @@ public class UserController {
 		out.println("alert('해당 메일로 재설정된 비밀번호가 전송되었습니다.'); history.go(-1);");
 		out.println("</script>");
 	}
+	
+	//전체 회원 메일 발송
+	@RequestMapping("mailSendAll")
+	public void mailSendAll(EmailVO vo, HttpServletResponse response) throws IOException {
+		vo.setFrom("dotjs0531@gmail.com");
+		
+		userService.sendAll(vo);
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('메일 전송에 성공하였습니다.'); history.go(-1);");
+		out.println("</script>");
+	}
 }

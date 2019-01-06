@@ -73,6 +73,9 @@ public class MyPageDAOMybatis {
 	public void deleteMyProductList(ProductVO vo) {
 		mybatis.update("user.deleteMyProductList", vo);
 	}
+	public int getMyBuyerCount(OrderVO vo) {
+		return mybatis.selectOne("user.getMyBuyerCount", vo);
+	}
 	public List<OrderVO> getMyBuyerList(OrderVO vo) {
 		return mybatis.selectList("user.getMyBuyerList", vo);
 	}
