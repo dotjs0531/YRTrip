@@ -47,9 +47,9 @@
 $(function(){
 	$('#product_view').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
-		console.log(event);
-		var param = {
-			itemId : button.attr("id").substr(4)
+		var buttonstr = button.attr("id").substr(5);
+ 		var param = {
+			itemId : buttonstr
 		}
 		$.getJSON("getProductAjax", param, function(data) {
 			var itemId = data.itemId;
@@ -248,7 +248,7 @@ $(function(){
 											</button>
 											
 											<!-- </button> -->
-											<button id="item${product.itemId}" type="button" 
+											<button id="item+${product.itemId}" type="button" 
 												class="btn btn-link" data-toggle="modal" 
 												data-target="#product_view" >
 												<i class="fa fa-search"> Quick View</i>

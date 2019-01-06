@@ -26,12 +26,10 @@ public class CartDAOMybatis {
 	}
 	
 	public CartVO getCart(CartVO vo) {
-		System.out.println("getcart되나안되나..");
 		return mybatis.selectOne("cart.getCart", vo);
 	}
 	
 	public List<CartVO> getCartList(CartVO vo) {
-		System.out.println("getcartList되나안되나..");
 		return mybatis.selectList("cart.getCartList", vo);
 
 	}

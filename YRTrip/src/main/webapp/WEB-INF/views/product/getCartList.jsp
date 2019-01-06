@@ -62,53 +62,26 @@ $(function(){
 </script>
 <script>
 $(function(){
-	 $(".go_update").click(function(){
+	 $(".go_update").on('click', function(){
+		 var new_ea = $(".new_itemEa").val();
+		 var cartid = $(".cartId").attr("id").substr("6");
+		 //조건 : itemt에서 itemea에서 받아와서 비교
+		 //var real_ea = $(".itemIteaEa").val();
+		 var button = $(this).attr("id").substr(6);
+		 console.log(button);
 		 $.ajax({
-				type : "POST",
-				url : "./updateCart",
-				dataType: "text",
-				data : {itemEa : "new_ea",
-						cartId : "cartid" },
-				success : function(data){
-					$(".old_itemEa").val(data.itemEa);
-					$(".update_ea").attr("class", "btn go_update"); //버튼 다시 .go_update로 class변경
-					$(".old_itemEa").show();
-					$(".new_itemEa").hide();
-				}
-			});
-		 
-		/*  $(".old_itemEa").hide();
-		 $(".new_itemEa").show();
-		 $(this).removeClass();
-		$(this).attr("class", "btn update_ea"); */
+			 type:"GET",
+			url:"updateCart",
+			data:{
+				itemEa : new_ea,
+		 		cartId : button
+			},
+			datatype: "text",
+			success:function(data){
+			}		 
+		 });
+
 	 });
-	 
-	 /* $(".update_ea").click(function(){
-			var new_ea = $(".new_itemEa").val();
-			var cartid = $("#cartinfo").find(".cartId").attr("id").substr(6);
-			console.log(new_ea);
-			/* if(new_ea == 0){
-				alert("0이상 입력하세요");
-			} */
-			//new_ea > item_ea :판매자가 판매하는 수량 
-			//alert("판매하는 수량보다 많습니다. 다시 입력하세요")
-			/* else{ */
-				$.ajax({
-					type : "POST",
-					url : "./updateCart",
-					dataType: "text",
-					data : {itemEa : "new_ea",
-							cartId : "cartid" },
-					success : function(data){
-						$(".old_itemEa").val(data.itemEa);
-						$(".update_ea").attr("class", "btn go_update"); //버튼 다시 .go_update로 class변경
-						$(".old_itemEa").show();
-						$(".new_itemEa").hide();
-					}
-				});
-			/* } */
-	 });
- */
  });
 </script>
 </head>
@@ -117,7 +90,7 @@ $(function(){
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="py-5 text-center">
-				<h2>장바구니(찜리스트)${sessionScope.login.userId}</h2>
+				<h2>너의 장바구니(찜리스트)</h2>
 				<p class="lead">
 					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
 				</p>
@@ -141,13 +114,14 @@ $(function(){
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
 									<small class="text-muted cartId" id="cartId${cart.cartId}">${cart.cartId}</small> <br>
-									111
+									
 								</div> 
 								<span class="text-muted" id="itemPrice">${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
-								<span class="text-muted old_itemEa">${cart.itemEa}</span>
+								<%-- <span class="text-muted old_itemEa">${cart.itemEa}</span> --%>
 								
-								<span><input type="text" name="itemEa" style="display:none" class="new_itemEa" value="${cart.itemEa}"/></span>
-								
+								<span><input type="text" name="itemEa" class="new_itemEa" id="new_itemEa${cart.cartId}" value="${cart.itemEa}"/></span>
+						<%-- <c:set value="${cart}" var="cartonly" />
+						<input type="hidden" class="itemIteaEa" value="${cartonly.itemEa}"> --%>		
 <!-- dfjsldjfasdlf -->
 <%-- <select id="cartEa">
 <c:forEach items="${product}" var="item">
@@ -157,7 +131,7 @@ ${item.itemId}
 </select> --%>
 <!-- <form action="./updateCart"> --> 
 							<div>
-								<button type="button" class="btn go_update">수정</button> <!-- </form> -->
+								<button type="button" class="btn go_update" id="update${cart.cartId}">수정</button> <!-- </form> -->
 							</div>
 								<div>
 									<c:choose>
@@ -228,6 +202,11 @@ ${item.itemId}
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 		crossorigin="anonymous"></script>
+		<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
 	<script>
 		window.jQuery
 				|| document

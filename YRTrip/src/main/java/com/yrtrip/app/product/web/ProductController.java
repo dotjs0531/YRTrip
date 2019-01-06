@@ -77,10 +77,11 @@ public class ProductController {
 	//상세조회(폼)
 	@RequestMapping("/getProduct")
 	public String getProduct(Model model, ProductVO vop, OrderVO voo) {
-		ProductVO sellervo = productService.getProduct(vop);
-		ProductVO vo = new ProductVO();
+		//해당제품의 SEELLERID를 받아내서 상품정보가지고 오기
+		ProductVO sellervo = productService.getProduct(vop); //VO1
+		ProductVO vo = new ProductVO();	//NEW VO2
 		vo.setSellerId(sellervo.getSellerId());
-
+		//가장 최신것은 제외하고 3개 뽑아내기
 		vo.setFirst(2);
 		vo.setLast(4);
 		System.out.println(vo.getSellerId());
@@ -185,20 +186,26 @@ public class ProductController {
 		
 	//장바구니 폼(조회, 찜 목록 이랑 비슷)
 	@RequestMapping("/getCartList")
-	public String getCartListForm(Model model, CartVO vo, ProductVO vop, HttpSession session) {		
+	public String getCartListForm(Model model, CartVO vo, HttpSession session) {
+		/*CartVO get_cvo = cartService.getCart(vo);
+		CartVO cvo = new CartVO();
+		cvo.setCartId(get_cvo.getCartId());
+		System.out.println(cvo.getCartId());*/
+		
 		String userid = ((UserVO)session.getAttribute("login")).getUserId();
-		//System.out.println(userid);
 		vo.setMyId(userid);
-		//vo.getCartId();
-		//System.out.println(vo.getCartId());
 		
 		model.addAttribute("cartList", cartService.getCartList(vo));
-		
+		//model.addAttribute("cart", cartService.getCart(vo));
 		//판매자가 올려논 상품개수 정보 필요
 			//cart안에 itemid가 있고 이 itemId를 이용해서 itemt의 itemEa를 가지고 오기
 		return "product/getCartList";
 	}
-	
+	@RequestMapping("getCartAjax")
+	@ResponseBody
+	public CartVO getCart(CartVO vo) {
+		return cartService.getCart(vo);
+	} 
 
 	//뷰안에 넣을 컬럼값들이 없으면 뷰에 redirect해도 안나오나...? 그래서 그런건가...
 	//장바구니 insert 처리
@@ -208,7 +215,7 @@ public class ProductController {
 		return "redirect:getCartList";
 	}
 	//장바구니 수정 처리 : itemEa, cartid,
-	@RequestMapping("/updateCart")
+	@RequestMapping("updateCart")
 	@ResponseBody
 	public String updateCart(CartVO vo) {
 		cartService.updateCart(vo);
