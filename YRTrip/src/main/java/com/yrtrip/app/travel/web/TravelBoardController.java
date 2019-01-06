@@ -118,7 +118,6 @@ public class TravelBoardController {
 			travelPicFile.transferTo(new File(path, filename));
 
 		vo.setTravelPic(filename);
-		System.out.println("====================================="+filename);
 	}
 		travelBoardService.updateTravelBoard(vo);
 		return "redirect:getTravelBoardList";

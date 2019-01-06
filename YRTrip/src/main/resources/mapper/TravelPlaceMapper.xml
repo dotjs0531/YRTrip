@@ -97,21 +97,27 @@
 									PLACE_ADDRESS,
 									PLACE_DATE,
 									PLACE_CONTENT,
-									PLACE_PIC,
 									USER_ID,
 									PLACE_TITLE,
 									PLACE_VISITDATE,
-									PLACE_TRAVELBOARDNO)
+									PLACE_TRAVELBOARDNO
+									<if test="placePic != null and placePic != ''">
+									,PLACE_PIC
+									</if>
+									)
 		VALUES (#{placeNo}, 
 				#{placeName}, 
 				#{placeAddress}, 
 				sysdate, 
 				#{placeContent}, 
-				#{placePic}, 
 				#{userId},
 				#{placeTitle},
 				#{placeVisitDate},
-				#{travelNo})
+				#{travelNo}
+				<if test="placePic != null and placePic != ''">
+				,#{placePic}
+				</if>
+				)
 </insert>
 
 <update id="updateTravelPlace" parameterType="travelPlace">
@@ -119,9 +125,11 @@
 	SET PLACE_NAME = #{placeName},
 		PLACE_ADDRESS = #{placeAddress},
 		PLACE_CONTENT = #{placeContent},
-		PLACE_PIC = #{placePic},
 		PLACE_TITLE = #{placeTitle},
 		PLACE_VISITDATE = TO_DATE(#{placeVisitDate}, 'yyyy-mm-dd hh24:mi:ss')
+		<if test="placePic != null and placePic != ''">
+		,PLACE_PIC = #{placePic}
+		</if>
 	WHERE PLACE_NO = #{placeNo}
 </update>
 

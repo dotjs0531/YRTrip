@@ -46,10 +46,33 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		<if test="searchCondition != null and searchCondition == 'partnerTitle'">
 		 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
 		</if>
+		<if test="searchTinfo != null">
+			tinfo_id = #{searchTinfo}
+		</if>
 		AND P.USER_ID = U.USER_ID
 	</where>
 	ORDER BY PARTNER_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 검색 select -->
+<select id="getTravelInfoList" resultType="travelInfo" parameterType="travelInfo">
+		SELECT NVL(TINFO_COUNTRY, ' ') TINFO_COUNTRY, 
+				NVL(TINFO_STATE, ' ') TINFO_STATE, 
+				TINFO_CITY, 
+				TINFO_ID,
+				TINFO_LOCATION
+		FROM TRAVELINFOT
+		<if test="searchCheck == 'overseas'">
+		 WHERE TINFO_LOCATION = 'overseas'
+ 				and (TINFO_COUNTRY LIKE '%' ||#{tinfoList}|| '%' 
+ 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
+		</if>
+		<if test="searchCheck == 'domestic'">
+		 WHERE TINFO_LOCATION = 'domestic'
+ 				and (TINFO_STATE LIKE '%' ||#{tinfoList}|| '%' 
+ 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
+		</if>
 </select>
 
 <select id="getPartner" parameterType="partner" resultType="partner">
@@ -61,18 +84,15 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			U.USER_ID,    
 			USER_NAME,
 			USER_GEN,
-			P.TINFO_ID,         
-			TINFO_COUNTRY,
-			TINFO_STATE,
-			TINFO_CITY,
+			TINFO_ID,         
 			PARTNER_PAY,      
 			PARTNER_CLASS,    
 			PARTNER_PERS,   
 			TO_CHAR(PARTNER_START, 'YYYY-MM-DD') PARTNER_START,    
 			TO_CHAR(PARTNER_END, 'YYYY-MM-DD') PARTNER_END,   
 			PARTNER_CONDITION
-	FROM	PARTNERT P, USERT U, TRAVELINFOT T
-	WHERE	P.USER_ID = U.USER_ID AND P.TINFO_ID = T.TINFO_ID AND PARTNER_ID = #{partnerId}
+	FROM	PARTNERT P, USERT U
+	WHERE	P.USER_ID = U.USER_ID AND PARTNER_ID = #{partnerId}
 </select>
 
 <insert id="insertPartner" parameterType="partner">
@@ -96,7 +116,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			#{partnerTitle},
 			#{partnerContent},
 			#{userId},
-			#{tinfoId},
+			#{searchTinfo},
 			#{partnerPay},
 			#{partnerClass},
 			#{partnerPers},
@@ -111,7 +131,8 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 						PARTNER_CLASS	= #{partnerClass},
 						PARTNER_PERS	= #{partnerPers},
 						PARTNER_START	= #{partnerStart},
-						PARTNER_END		= #{partnerEnd}
+						PARTNER_END		= #{partnerEnd},
+						TINFO_ID		= #{searchTinfo}
 				WHERE	PARTNER_ID = #{partnerId}
 </update>
 <delete id="deletePartner" parameterType="int">

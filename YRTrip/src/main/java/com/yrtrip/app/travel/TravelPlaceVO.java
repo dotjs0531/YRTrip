@@ -1,5 +1,7 @@
 package com.yrtrip.app.travel;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.yrtrip.app.like.LikeVO;
 
 public class TravelPlaceVO extends LikeVO {
@@ -12,6 +14,7 @@ public class TravelPlaceVO extends LikeVO {
 	private String placeContent;
 	private int placeTravelBoardNo;
 	private String placePic;
+	private MultipartFile placePicFile;
 	private String userId;
 	private String placeTitle;
 	private String placeVisitDate;
@@ -71,6 +74,12 @@ public class TravelPlaceVO extends LikeVO {
 	}
 	public void setPlacePic(String placePic) {
 		this.placePic = placePic;
+	}
+	public MultipartFile getPlacePicFile() {
+		return placePicFile;
+	}
+	public void setPlacePicFile(MultipartFile placePicFile) {
+		this.placePicFile = placePicFile;
 	}
 	public String getUserId() {
 		return userId;

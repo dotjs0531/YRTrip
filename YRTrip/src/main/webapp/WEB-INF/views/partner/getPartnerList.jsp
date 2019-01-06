@@ -15,6 +15,9 @@ a:hover { color:white }
    background-color:white;
 }
 </style>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script>
 $(function(){
     var partnerMenu = document.getElementById("partnerMenu");
@@ -39,6 +42,66 @@ jQuery( document ).ready(function( $ ) {
 			alert("로그인이 필요한 서비스입니다");
 	});
 	}
+});
+/* autocomplete */
+$(document).ready(function(){ 
+   //input id autocomplete
+   var selectedLocation = document.getElementsByName('searchCheck');
+	var searchCheckVal;
+	for(var i=0; i<selectedLocation.length; i++) {
+ 	  if(selectedLocation[i].checked) {
+  		 	searchCheckVal = selectedLocation[i].value;
+  		 }
+	}
+    var context = '${pageContext.request.contextPath}';
+    $( "#autocompleteTinfoList").autocomplete({
+     source : function(request, response){
+      $.ajax({
+          type:"post",
+          dataType:"json",
+          url:context + "/getTravelInfoListData",
+          data:{"tinfoList":$("#autocompleteTinfoList").val(), "searchCheck":$("[name='searchCheck']:checked").val()},
+          success:function(data){
+           response($.map(data, function(item){
+            return{
+             label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+             value:item.tinfoCity,
+             tinfoId:item.tinfoId
+            }
+           }));
+          }
+         })
+     },
+     autoFocus:true,
+     matchContains:true,
+     minLength:0,
+     delay:0,
+     select:function(event, ui){
+    	 $("#tinfoList").val(ui.item.value);
+         selectedList = ui.item.tinfoId;
+     	 $("#tinfoListDisp").val(selectedList);
+         var flag = false;
+         $("#autocompleteTinfoList").keydown(function(e){
+          if(e.keyCode == 13){
+           if(!flag){
+             fn_regist();
+            flag = true;
+           }
+          }
+         }); 
+          
+        },
+        focus:function(event, ui){return false;}
+       });
+});
+
+$(function initSelectdList() {
+$("#autocompleteTinfoList").change(function(){
+	selectedList = "";
+  $("#tinfoList").val("");
+  $("#tinfoListDisp").val("");
+  $('[name=searchTinfoListbox]').val("");
+});
 });
 </script>
 </head>
@@ -70,18 +133,24 @@ jQuery( document ).ready(function( $ ) {
             <div class="col-sm-6" style="min-width: 700px">
                <div class="table-responsive" style="min-height: 450px;">
                   <!-- 검색 창 & 페이징 처리 -->
-                  <form name="frm" class="form-inline">
-                     <div class="form-group"
-                        style="padding-bottom: 10px; float: right">
-                        <select name="searchCondition" class="form-control">
-                           <option value="userId">글쓴이
-                           <option value="partnerTitle">제목
-                        </select> <input type="text" name="searchKeyword" class="form-control">
-                        <button class="btn btn-warning signupbtn">검색</button>
-                        <input type="hidden" name="page" />
-                     </div>
-                  </form>
-                  <p style="clear: both">
+                     <div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
+								
+								<!-- 검색 내용 -->
+								<form class="form-inline">
+								<div style="padding-bottom:5px; padding-left:17%;">
+									<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+									<label for="domestic">국내</label>
+									<input type="radio" id="overseas" name="searchCheck" value="overseas">
+									<label for="overseas">해외</label>
+								</div>
+								<div style="padding-bottom:5px">
+									<label class="col-sm-2 control-label"></label>
+									<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" style="width:350px;" name="searchTinfoListbox">
+									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+									<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
+								</div>
+								</form>
+							</div>
                      <!-- 동행 게시판 리스트 -->
                   <table class="table table-hover">
                      <!-- 동행구하기 테이블 헤더부분 -->
@@ -113,6 +182,18 @@ jQuery( document ).ready(function( $ ) {
                      </tbody>
                   </table>
                </div>
+                                                   <form name="frm" class="form-inline">
+                     <div class="form-group"
+                        style="padding-bottom: 10px; float: right">
+                        <select name="searchCondition" class="form-control">
+                           <option value="userId">글쓴이
+                           <option value="partnerTitle">제목
+                        </select> <input type="text" name="searchKeyword" class="form-control">
+                        <button class="btn btn-warning signupbtn">검색</button>
+                        <input type="hidden" name="page" />
+                     </div>
+                  </form>
+                  <p style="clear: both">
                <!-- 페이지 번호 -->
                <div style="padding-top: 50px;">
                   <my:paging paging="${paging}" jsFunc="go_page" />

@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script>
 $(function(){
     var partnerMenu = document.getElementById("partnerMenu");
@@ -33,6 +36,66 @@ $(function(){
 			$(this).attr("selected","selected");
 		}
 	});
+});
+/* autocomplete */
+$(document).ready(function(){ 
+   //input id autocomplete
+   var selectedLocation = document.getElementsByName('searchCheck');
+	var searchCheckVal;
+	for(var i=0; i<selectedLocation.length; i++) {
+ 	  if(selectedLocation[i].checked) {
+  		 	searchCheckVal = selectedLocation[i].value;
+  		 }
+	}
+    var context = '${pageContext.request.contextPath}';
+    $( "#autocompleteTinfoList").autocomplete({
+     source : function(request, response){
+      $.ajax({
+          type:"post",
+          dataType:"json",
+          url:context + "/getTravelInfoListData",
+          data:{"tinfoList":$("#autocompleteTinfoList").val(), "searchCheck":$("[name='searchCheck']:checked").val()},
+          success:function(data){
+           response($.map(data, function(item){
+            return{
+             label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+             value:item.tinfoCity,
+             tinfoId:item.tinfoId
+            }
+           }));
+          }
+         })
+     },
+     autoFocus:true,
+     matchContains:true,
+     minLength:0,
+     delay:0,
+     select:function(event, ui){
+    	 $("#tinfoList").val(ui.item.value);
+         selectedList = ui.item.tinfoId;
+     	 $("#tinfoListDisp").val(selectedList);
+         var flag = false;
+         $("#autocompleteTinfoList").keydown(function(e){
+          if(e.keyCode == 13){
+           if(!flag){
+             fn_regist();
+            flag = true;
+           }
+          }
+         }); 
+          
+        },
+        focus:function(event, ui){return false;}
+       });
+});
+
+$(function initSelectdList() {
+$("#autocompleteTinfoList").change(function(){
+	selectedList = "";
+  $("#tinfoList").val("");
+  $("#tinfoListDisp").val("");
+  $('[name=searchTinfoListbox]').val("");
+});
 });
 </script>
 <style>
@@ -132,7 +195,15 @@ input[type=submit] {
 									</tr>
 									<tr>
 										<td colspan="2" style="width:30%">
-											<input type="text" class="form-control" placeholder="여행지" name="tinfoId" value="${partner.tinfoId}" required>
+											<div style="float:left">
+												<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+												<label for="domestic">국내</label>
+												<input type="radio" id="overseas" name="searchCheck" value="overseas">
+												<label for="overseas">해외</label>
+											</div>
+												<label class="col-sm-2 control-label"></label>
+												<input type="text" class="form-control" id="autocompleteTinfoList" value="${partner.tinfoId}" autocomplete="on" style="width:350px;" name="searchTinfoListbox">
+												<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
 										</td>
 										<td colspan="2" style="width:50%">
 											<select id="selpartnerPay" class="form-control" style="width:42%; display:inline" onChange="selectPay(this)" required>

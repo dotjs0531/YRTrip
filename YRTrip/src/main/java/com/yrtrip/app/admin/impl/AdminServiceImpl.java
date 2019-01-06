@@ -25,6 +25,26 @@ public class AdminServiceImpl implements AdminService {
 		return dao.getTinfoChart(day);
 	}
 	@Override
+	public List<Map> getSellerChart(String day) {
+		return dao.getSellerChart(day);
+	}
+	@Override
+	public List<Map> getDayChart(String day) {
+		return dao.getDayChart(day);
+	}
+	@Override
+	public List<Map> getTimeChart(String day) {
+		return dao.getTimeChart(day);
+	}
+	@Override
+	public List<Map> getOrderPriceChart(String day) {
+		return dao.getOrderPriceChart(day);
+	}
+	@Override
+	public List<Map> getOrderIdChart(String day) {
+		return dao.getOrderIdChart(day);
+	}
+	@Override
 	public List<ProductVO> getManageProductList(ProductVO vo) {
 		return dao.getManageProductList(vo);
 	}

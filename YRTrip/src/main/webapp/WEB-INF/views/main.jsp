@@ -62,6 +62,8 @@
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+
 <script>
 	/*  $(function() {
 	 	  $('a[href*=#]').animate({
@@ -238,13 +240,21 @@
 									<p>YOU ONLY LIVE ONCE, FOR YOUR DREAM TRIP</p>
 									<p>인생은 한번뿐이니까, 당신이 꿈꾸는 여행을 위해</p>
 								</div>
-								<div class="welcome_form">
-									<form action="#">
-										<input class="form-control" type="text"
-											placeholder="Enter your product code"> <input
-											class="submit" type="submit" value="Track your product">
+									<form action="./getTravelBoardList">
+											<div style="margin-left:-550px; color:#fff;">
+												<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+												<label for="domestic">국내</label>
+												<input type="radio" id="overseas" name="searchCheck" value="overseas">
+												<label for="overseas">해외</label>
+											</div>
+																			<div class="welcome_form">
+											<input id="autocompleteTinfoList" name="searchTinfoListbox" class="form-control" type="text"
+														placeholder="떠나고 싶은 여행지를 검색해주세요:-)"> 
+											<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
+											<input class="submit" type="submit" value="검색">
+																	</div>
 									</form>
-								</div>
+
 								<section id="section05" class="demo">
 									<a href="#about_top"><span></span></a>
 								</section>
@@ -632,6 +642,8 @@
 	<!--    main.js-->
 	<script src="resources/js/main.js"></script>
 
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
 	<script type="text/javascript">
 		$(function() {
 			$("#popbutton").click(function() {
@@ -643,8 +655,66 @@
 				$('div#login').modal('hide');
 			});
 		})
-	
-</script>
+	/* autocomplete */
+/* 	$(document).ready(function(){ 
+	   //input id autocomplete
+	   var selectedLocation = document.getElementsByName('searchCheck');
+		var searchCheckVal;
+		for(var i=0; i<selectedLocation.length; i++) {
+	 	  if(selectedLocation[i].checked) {
+	  		 	searchCheckVal = selectedLocation[i].value;
+	  		 }
+		}
+	    var context = '${pageContext.request.contextPath}';
+	    $( "#autocompleteTinfoList").autocomplete({
+	     source : function(request, response){
+	      $.ajax({
+	          type:"post",
+	          dataType:"json",
+	          url:context + "/getTravelInfoListData",
+	          data:{"tinfoList":$("#autocompleteTinfoList").val(), "searchCheck":$("[name='searchCheck']:checked").val()},
+	          success:function(data){
+	           response($.map(data, function(item){
+	            return{
+	             label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
+	             value:item.tinfoCity,
+	             tinfoId:item.tinfoId
+	            }
+	           }));
+	          }
+	         })
+	     },
+	     autoFocus:true,
+	     matchContains:true,
+	     minLength:0,
+	     delay:0,
+	     select:function(event, ui){
+	    	 $("#tinfoList").val(ui.item.value);
+	         selectedList = ui.item.tinfoId;
+	     	 $("#tinfoListDisp").val(selectedList);
+	         var flag = false;
+	         $("#autocompleteTinfoList").keydown(function(e){
+	          if(e.keyCode == 13){
+	           if(!flag){
+	             fn_regist();
+	            flag = true;
+	           }
+	          }
+	         }); 
+	          
+	        },
+	        focus:function(event, ui){return false;}
+	       });
+	});
 
+	$(function initSelectdList() {
+	$("#autocompleteTinfoList").change(function(){
+		selectedList = "";
+	  $("#tinfoList").val("");
+	  $("#tinfoListDisp").val("");
+	  $('[name=searchTinfoListbox]').val("");
+	});
+	});	 */
+</script>
 	</ body>
 </html>

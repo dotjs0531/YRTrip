@@ -473,7 +473,7 @@ function selectTravelWith(ele){
 																</c:if>
 								</span><br>
 								<span class="text-span">여행인원 : ${travelBoard.travelPerson+1}명</span>
-								<span class="text-span">여행경비 : ${travelBoard.travelPay}원</span>
+								<span class="text-span">여행경비 : ${travelBoard.travelPay}원</span><br>
 								<span class="text-span">여행일정 : ${travelBoard.travelSche}</span>
 								<span class="text-span">여행기간 : ${fn:substring(travelBoard.travelStart, 0, 10)} ~ ${fn:substring(travelBoard.travelEnd, 0, 10)}</span><br>
 							</p>
@@ -543,7 +543,7 @@ function selectTravelWith(ele){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
+								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 									<div class="form-group">
@@ -599,7 +599,7 @@ function selectTravelWith(ele){
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
 									</div>
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>

@@ -24,6 +24,21 @@ public class AdminDAOMybatis {
 	public List<Map> getTinfoChart(String day) {
 		return sqlSession.selectList("admin.getTinfoChart", day);
 	}
+	public List<Map> getSellerChart(String day) {
+		return sqlSession.selectList("admin.getSellerChart", day);
+	}
+	public List<Map> getDayChart(String day) {
+		return sqlSession.selectList("admin.getDayChart", day);
+	}
+	public List<Map> getTimeChart(String day) {
+		return sqlSession.selectList("admin.getTimeChart", day);
+	}
+	public List<Map> getOrderPriceChart(String day) {
+		return sqlSession.selectList("admin.getOrderPriceChart", day);
+	}
+	public List<Map> getOrderIdChart(String day) {
+		return sqlSession.selectList("admin.getOrderIdChart", day);
+	}
 	
 	public List<ProductVO> getManageProductList(ProductVO vo) {
 		return sqlSession.selectList("admin.getManageProductList", vo);

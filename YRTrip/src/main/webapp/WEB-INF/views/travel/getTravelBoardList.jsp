@@ -225,10 +225,10 @@ $("#autocompleteTinfoList").change(function(){
 				<div class="content-box">
 							<div style="width:140px; height:80px;">
 							<c:if test="${board.travelPic != null}">
-							<img src="./images/travel/${board.travelPic}" class="img-responsive" style="display:inline-block;">
+							<img src="./images/travel/${board.travelPic}" style="display:inline-block;">
 							</c:if>
 							<c:if test="${board.travelPic == null}">
-							<img src="./images/travel/noimage.jpg" class="img-responsive">
+							<img src="./images/travel/noimage.jpg" >
 							</c:if>
 							</div>
 						<div class="content-title">

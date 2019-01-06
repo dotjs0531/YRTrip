@@ -3,6 +3,31 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="admin">
 
+<!-- 메인 : 총 거래액 -->
+<select id="totalOrderPrice" resultType="map" parameterType="map">
+SELECT SUM(ORDER_PRICE)
+FROM ORDERT
+</select>
+
+<!-- 메인 : 총 거래량 -->
+<select id="countOrderAmount" resultType="map" parameterType="map">
+SELECT COUNT(ORDER_ID)
+FROM ORDERT
+</select>
+
+<!-- 메인 : 총 여행기 수 -->
+<select id="countTravelAmount" resultType="map" parameterType="map">
+SELECT COUNT(TRAVEL_NO)
+FROM TRAVELBOARDT
+</select>
+
+<!-- 메인 : 총 회원수 -->
+<select id="countUserAmount" resultType="map" parameterType="map">
+SELECT COUNT(USER_ID)-1
+FROM USERT
+</select>
+
+<!-- 차트 : 월별 최다 방문 여행지 -->
 <select id="getTinfoChart" resultType="map" parameterType="map">
 SELECT TO_CHAR(I.TINFO_CITY) "ranktinfoid", COUNT(B.TINFO_ID) "counttinfoid"
 FROM TRAVELINFOT I, TRAVELBOARDT B
@@ -12,6 +37,49 @@ GROUP BY I.TINFO_CITY
 ORDER BY 2 DESC
 </select>
 
+<!-- 차트 : 월별 최다 판매자-->
+<select id="getSellerChart" resultType="map" parameterType="map">
+SELECT SELLER_ID "rankseller", COUNT(SELLER_ID) "countseller"
+FROM ITEMT
+WHERE ITEM_ID IN (SELECT ITEM_ID FROM ORDERT)
+<!-- 월별...? -->
+GROUP BY SELLER_ID
+ORDER BY 2 DESC
+</select>
+
+<!-- 차트 : 월별 최다 거래 요일-->
+<select id="getDayChart" resultType="map" parameterType="map">
+SELECT TO_CHAR(ORDER_DATE, 'Day') "rankday", COUNT(ORDER_DATE) "countday"
+FROM ORDERT
+WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
+GROUP BY ORDER_DATE
+ORDER BY 2 DESC
+</select>
+
+<!-- 차트 : 월별 최다 거래 시간대-->
+<select id="getTimeChart" resultType="map" parameterType="map">
+SELECT TO_CHAR(ORDER_DATE, 'HH24') "ranktime", COUNT(ORDER_DATE) "counttime"
+FROM ORDERT
+WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
+GROUP BY ORDER_DATE
+ORDER BY 2 DESC
+</select>
+
+<!-- 차트 : 월별 총 거래액-->
+<select id="getOrderPriceChart" resultType="map" parameterType="map">
+SELECT SUM(ORDER_PRICE) "sumorder"
+FROM ORDERT
+WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
+</select>
+
+<!-- 차트 : 월별 총 거래량-->
+<select id="getOrderIdChart" resultType="map" parameterType="map">
+SELECT COUNT(ORDER_ID) "countorder"
+FROM ORDERT
+WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
+</select>
+
+<!-- 각 페이지 select -->
 <select id="getManageProductList" resultType="product">
 		SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		 SELECT ITEM_ID,

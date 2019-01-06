@@ -270,17 +270,36 @@ jQuery( document ).ready(function( $ ) {
 	    	$('div#updateTravelPlace').modal(true);
 		});	
 	   
-	   /* 사진 업로드 */
-		$("#fileInput").on('change', function(){  // 값이 변경되면
-			if(window.FileReader){  // modern browser
+	    /* 사진 업로드 Board */
+		$("#fileInput").on('change', function(){ 
+			if(window.FileReader){
 				var filename = $(this)[0].files[0].name;
-			} else {  // old IE
-				var filename = $(this).val().split('/').pop().split('\\').pop();  // 파일명만 추출
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
 			}
-
-			// 추출한 파일명 삽입
 			$("#userfile").val(filename);
 		});
+	   
+		/* 사진 업로드 Place */
+		$("#placefileInput").on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+			$("#placefile").val(filename);
+		});
+		
+		/* 사진 업로드 Place update */
+		$("#updateplacefileInput").on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+			$("#updateplacefile").val(filename);
+		});
+	   
 }); 
 /* modal 자동완성 */
 
@@ -452,7 +471,7 @@ function loadTravelPlaceList(){
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 여행지</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -465,7 +484,7 @@ function loadTravelPlaceList(){
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
-						<form action="./updateTravelBoard">
+						<form action="./updateTravelBoard" enctype="multipart/form-data" method="post">
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
@@ -711,7 +730,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post">
+									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
 									<div id="map"></div>
 								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
@@ -732,8 +751,20 @@ function loadTravelPlaceList(){
 													<input type="text" name="placeAddress" class="form-control" placeholder="주소는 지도에서 선택하면 자동으로 입력됩니다.">
 												</div>
 												<div class="form-group">
-													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control" placeholder="사진을 업로드해주세요.">
+													<input type="file" name="placePicFile"
+							 							id="placefileInput" data-class-button="btn btn-default"
+														data-class-input="form-control" data-icon-name="fa fa-upload"
+														class="form-control" tabindex="-1" style="position: absolute;
+														clip: rect(0px, 0px, 0px, 0px);">
+													<div class="bootstrap-filestyle input-group">
+														<input type="text" id="placefile" class="form-control"
+															name="placefile" disabled="">
+														<span class="group-span-filestyle input-group-btn" tabindex="0">
+															<label for="placefileInput" class="btn btn-default ">
+																<span class="glyphicon fa fa-upload"></span>
+															</label>
+														</span>
+													</div>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
@@ -775,7 +806,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post">
+									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
 									<div id="map"></div>
 								<input id="pac-input-update" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
@@ -795,9 +826,19 @@ function loadTravelPlaceList(){
 													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeTitle" class="form-control">
 												</div>
-												<div class="form-group">
-													<label for="placePic" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placePic" class="form-control">
+													<input type="file" name="placePicFile"
+						 							id="updateplacefileInput" data-class-button="btn btn-default"
+													data-class-input="form-control" data-icon-name="fa fa-upload"
+													class="form-control" tabindex="-1" style="position: absolute;
+													clip: rect(0px, 0px, 0px, 0px);">
+												<div class="bootstrap-filestyle input-group">
+													<input type="text" id="updateplacefile" class="form-control"
+														name="updateplacefile" disabled="">
+													<span class="group-span-filestyle input-group-btn" tabindex="0">
+														<label for="updateplacefileInput" class="btn btn-default ">
+															<span class="glyphicon fa fa-upload"></span>
+														</label>
+													</span>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
@@ -825,8 +866,9 @@ function loadTravelPlaceList(){
 </div> <!-- end of modal -->							
 						
 <!-- 여행 등록 modal -->			
+<!-- modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog" style="padding: 30px 0 0 0;">
+	<div class="modal-dialog" style="padding: 20px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -840,7 +882,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form action="./updateTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
+								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 									<div class="form-group">
@@ -896,7 +938,7 @@ function loadTravelPlaceList(){
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
 									</div>
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>

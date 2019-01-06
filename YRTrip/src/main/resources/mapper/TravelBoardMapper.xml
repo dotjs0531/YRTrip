@@ -102,10 +102,7 @@
 								TRAVEL_DATE,
 								TINFO_ID,
 								USER_ID,
-								TRAVEL_WITH
-							<if test="travelPic != null and travelPic != ''">
-						 		,TRAVEL_PIC
-							</if> 
+								TRAVEL_WITH 
 								)
 		VALUES (#{travelNo}, 
 				#{travelPerson},
@@ -116,10 +113,7 @@
 				sysdate, 
 				#{selectedTinfoModal},
 				#{userId}, 
-				#{travelWith}
-				<if test="travelPic != null and travelPic != ''">
-					,#{travelPic}
-				</if> 
+				#{travelWith} 
 				)
 </insert>
 
@@ -140,15 +134,6 @@
 		</if>
 	WHERE TRAVEL_NO = #{travelNo}
 </update>
-
-<!-- 업데이트 (insertTravelBoard에서) -->
-<!-- <update id="updateTravelBoardTwo" parameterType="travelBoard">
-	UPDATE TRAVELBOARDT 
-	SET TRAVEL_PAY = #{travelPay},
-		TRAVEL_CONTENT = #{travelContent},
-		TRAVEL_PIC = #{travelPic}
-	WHERE TRAVEL_NO = #{travelNo}
-</update> -->
 
 <!-- 글 삭제(getTravelBoardList에서) -->
 <delete id="deleteTravelBoard" parameterType="int">

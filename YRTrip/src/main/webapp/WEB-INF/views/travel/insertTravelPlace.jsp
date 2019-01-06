@@ -66,18 +66,17 @@ $(function(){
     var travelMenu = document.getElementById("travelMenu");
     travelMenu.className='current-menu-item';
 });
-/* 파일업로드 */
 $(document).ready(function(){
-		$("#fileInput").on('change', function(){
-			if(window.FileReader){
-				var filename = $(this)[0].files[0].name;
-			} else {
-				var filename = $(this).val().split('/').pop().split('\\').pop();
-			}
-
-			$("#placefile").val(filename);
-		});
+	/* 파일업로드 */
+	$("#fileInput").on('change', function(){ 
+		if(window.FileReader){ 
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$("#userfile").val(filename);
 	});
+});
 </script>
 </head>
 <body>
@@ -108,7 +107,7 @@ $(document).ready(function(){
 				<div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive" style="min-height:450px;">		
 <!-- 등록폼 -->
- <form class="form" action="./insertTravelPlace" method="post">
+ <form class="form" action="./insertTravelPlace" method="post" enctype="multipart/form-data">
 								<input id="pac-input" class="controls" type="text"
 									placeholder="다녀온 장소를 검색하세요.">
 								<div id="map"></div>
@@ -132,18 +131,20 @@ $(document).ready(function(){
 										<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
 										<textarea class="form-control" rows="3" name="placeContent" placeholder="장소에 대한 후기를 작성해주세요." required></textarea>
 									</div>
-									<input type="file" name="placePic" id="fileInput" data-class-button="btn btn-default"
-										data-class-input="form-control" data-icon-name="fa fa-upload" class="form-control" tabindex="-1" 
-										style="position: absolute; clip: rect(0px, 0px, 0px, 0px);">
-									<div class="bootstrap-filestyle input-group">
-										<input type="text" id="placefile" class="form-control"
-											name="placefile" disabled="" placeholder="업로드할 사진을 선택해주세요.">
-										<span class="group-span-filestyle input-group-btn" tabindex="0">
-											<label for="fileInput" class="btn btn-default ">
-												<span class="glyphicon fa fa-upload"></span>
-											</label>
-										</span>
-									</div>
+									<input type="file" name="placePicFile"
+						 							id="fileInput" data-class-button="btn btn-default"
+													data-class-input="form-control" data-icon-name="fa fa-upload"
+													class="form-control" tabindex="-1" style="position: absolute;
+													clip: rect(0px, 0px, 0px, 0px);">
+												<div class="bootstrap-filestyle input-group">
+													<input type="text" id="userfile" class="form-control"
+														name="userfile" disabled="">
+													<span class="group-span-filestyle input-group-btn" tabindex="0">
+														<label for="fileInput" class="btn btn-default ">
+															<span class="glyphicon fa fa-upload"></span>
+														</label>
+													</span>
+												</div>
 									<div class="form-group">
 										<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
 										<input type="text" name="placeVisitDate" class="form-control datePicker" placeholder="장소에 방문한 날짜를 입력해주세요." required>

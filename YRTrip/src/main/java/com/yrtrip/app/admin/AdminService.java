@@ -13,6 +13,11 @@ import com.yrtrip.app.travel.TravelBoardVO;
 public interface AdminService {
 	
 	public List<Map> getTinfoChart(String day);	
+	public List<Map> getSellerChart(String day);	
+	public List<Map> getDayChart(String day);	
+	public List<Map> getTimeChart(String day);	
+	public List<Map> getOrderPriceChart(String day);	
+	public List<Map> getOrderIdChart(String day);	
 	public List<ProductVO> getManageProductList(ProductVO vo);
 	public List<OrderVO> getManageOrderList(OrderVO vo);
 	public OrderVO getManageOrder(OrderVO vo);

@@ -450,7 +450,7 @@ function loadTravelPlaceList(){
                         </div>
                         <ul class=price-list>
                             <li><a href="./getTravelBoardList" style="color:black"><strong>전체 여행기</strong></a></li>
-                            <li><a href="#" style="color:black">베스트 여행기</a></li>
+                            <li><a href="./getBestTravelList" style="color:black">베스트 여행기</a></li>
                             <li><a href="./getTravelPlaceList" style="color:black">세계의 여행지</a></li>
                         </ul>
 	                    <div class="order-buton" style="padding-bottom:30px;">
@@ -822,7 +822,7 @@ function loadTravelPlaceList(){
 						
 <!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
-	<div class="modal-dialog" style="padding: 30px 0 0 0;">
+	<div class="modal-dialog" style="padding: 20px 0 0 0;">
 		<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
@@ -836,7 +836,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-								<form action="./updateTravelBoardform" class="form" name="travelBoardModalfrm" method="get">		
+								<form action="./insertTravelBoardform" class="form" name="travelBoardModalfrm" method="post">		
 									<h3 class="text-center text-info" style="color:#5f768b;">여행기 작성</h3>										
 										<input type="hidden" name="userId" class="form-control" value="${sessionScope.login.userId}">
 									<div class="form-group">
@@ -892,7 +892,7 @@ function loadTravelPlaceList(){
 									</div>
 									<div class="form-group">
 										<label class="text-info"></label>
-										<input id="insertBTN" type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="submit">
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="여행기 만들기">
 									</div>
 									<input type="hidden" id="tinfoListDispModal" name="selectedTinfoModal">
 							</form>

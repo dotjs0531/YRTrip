@@ -155,7 +155,31 @@ public class AdminController {
 	public List<Map> getTinfoChart(@RequestParam String day) {
 		return adminService.getTinfoChart(day);
 	}
-
+	@RequestMapping(value = "/getSellerChart", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map> getSellerChart(@RequestParam String day) {
+		return adminService.getSellerChart(day);
+	}
+	@RequestMapping(value = "/getDayChart", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map> getDayChart(@RequestParam String day) {
+		return adminService.getDayChart(day);
+	}
+	@RequestMapping(value = "/getTimeChart", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map> getTimeChart(@RequestParam String day) {
+		return adminService.getTimeChart(day);
+	}
+	@RequestMapping(value = "/getOrderPriceChart", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map> getOrderPriceChart(@RequestParam String day) {
+		return adminService.getOrderPriceChart(day);
+	}
+	@RequestMapping(value = "/getOrderIdChart", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Map> getOrderIdChart(@RequestParam String day) {
+		return adminService.getOrderIdChart(day);
+	}
 	
 	//공지사항 관리
 	@RequestMapping(value = "/manageNotice", method = RequestMethod.GET)

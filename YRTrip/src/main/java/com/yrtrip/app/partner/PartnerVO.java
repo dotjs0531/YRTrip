@@ -29,6 +29,8 @@ public class PartnerVO extends TravelInfoVO {
 	private String searchCondition; //
 	private String searchClass;
 	private String searchKeyword; // 검색키워드
+	private String selectedTinfoModal;
+	private String searchTinfo;
 	
 	private String sortCol; // 정렬
 
@@ -158,6 +160,19 @@ public class PartnerVO extends TravelInfoVO {
 	}
 	public void setSortCol(String sortCol) {
 		this.sortCol = sortCol;
+	}
+	
+	public String getSelectedTinfoModal() {
+		return selectedTinfoModal;
+	}
+	public void setSelectedTinfoModal(String selectedTinfoModal) {
+		this.selectedTinfoModal = selectedTinfoModal;
+	}
+	public String getSearchTinfo() {
+		return searchTinfo;
+	}
+	public void setSearchTinfo(String searchTinfo) {
+		this.searchTinfo = searchTinfo;
 	}
 	public String[] getSeqList() {
 		return seqList;

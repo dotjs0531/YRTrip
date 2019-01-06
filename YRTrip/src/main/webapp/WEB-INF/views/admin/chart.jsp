@@ -28,8 +28,8 @@ function searchChart(){
 		ajaxData();
 	}
 }
-var options = {
-		width : 800,
+var options1 = {
+		width : 590,
 		height : 250,
 		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
 	};
@@ -37,9 +37,9 @@ var options = {
 		'packages' : [ 'corechart' ]
 	});
 	
-	google.setOnLoadCallback(ajaxData);
+	google.setOnLoadCallback(ajaxData1);
 
-function ajaxData() {
+function ajaxData1() {
 	
 	var s_year = document.getElementById('year').value;
 	var s_month = document.getElementById('month').value; 
@@ -51,6 +51,157 @@ function ajaxData() {
 		dataType : 'json',
 		success : function(data) {
 			var chartData = [];
+			chartData.push([ '여행지명', '방문회원수', {type: 'string', role: 'tooltip'} ])
+			for (i = 0; i < data.length; i++) {
+				var tooltip = data[i].ranktinfoid+ " : " +data[i].counttinfoid
+				var subarr = [ data[i].ranktinfoid, parseInt(data[i].counttinfoid), tooltip ];
+				chartData.push(subarr);
+			}
+			//챠트 그리기
+			var chart = new google.visualization.PieChart(document.querySelector('#chart_div1'));
+			chart.draw(google.visualization.arrayToDataTable(chartData),
+					options1);
+
+		}
+		
+	});
+}
+var options2 = {
+		width : 590,
+		height : 250,
+		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+	};
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	
+	google.setOnLoadCallback(ajaxData2);
+
+function ajaxData2() {
+	
+	var s_year = document.getElementById('year').value;
+	var s_month = document.getElementById('month').value; 
+	var day = s_year+"/"+s_month;
+	$.ajax({
+		type : 'GET',
+		data : {day:day},
+		url : './getSellerChart',
+		dataType : 'json',
+		success : function(data) {
+			var chartData = [];
+			chartData.push([ '판매자', '판매량', {type: 'string', role: 'tooltip'} ])
+			for (i = 0; i < data.length; i++) {
+				var tooltip = data[i].rankseller+ " : " +data[i].countseller
+				var subarr = [ data[i].rankseller, parseInt(data[i].countseller), tooltip ];
+				chartData.push(subarr);
+			}
+			//챠트 그리기
+			var chart = new google.visualization.PieChart(document.querySelector('#chart_div2'));
+			chart.draw(google.visualization.arrayToDataTable(chartData),
+					options2);
+
+		}
+		
+	});
+}
+var options3 = {
+		width : 590,
+		height : 250,
+		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+	};
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	
+	google.setOnLoadCallback(ajaxData3);
+
+function ajaxData3() {
+	
+	var s_year = document.getElementById('year').value;
+	var s_month = document.getElementById('month').value; 
+	var day = s_year+"/"+s_month;
+	$.ajax({
+		type : 'GET',
+		data : {day:day},
+		url : './getDayChart',
+		dataType : 'json',
+		success : function(data) {
+			var chartData = [];
+			chartData.push([ '요일', '거래량', {type: 'string', role: 'tooltip'} ])
+			for (i = 0; i < data.length; i++) {
+				var tooltip = data[i].rankday+ " : " +data[i].countday
+				var subarr = [ data[i].rankday, parseInt(data[i].countday), tooltip ];
+				chartData.push(subarr);
+			}
+			//챠트 그리기
+			var chart = new google.visualization.PieChart(document.querySelector('#chart_div3'));
+			chart.draw(google.visualization.arrayToDataTable(chartData),
+					options3);
+
+		}
+		
+	});
+}
+var options4 = {
+		width : 590,
+		height : 250,
+		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+	};
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	
+	google.setOnLoadCallback(ajaxData4);
+
+function ajaxData4() {
+	
+	var s_year = document.getElementById('year').value;
+	var s_month = document.getElementById('month').value; 
+	var day = s_year+"/"+s_month;
+	$.ajax({
+		type : 'GET',
+		data : {day:day},
+		url : './getTimeChart',
+		dataType : 'json',
+		success : function(data) {
+			var chartData = [];
+			chartData.push([ '시간대', '거래량', {type: 'string', role: 'tooltip'} ])
+			for (i = 0; i < data.length; i++) {
+				var tooltip = data[i].ranktime+ " : " +data[i].counttime
+				var subarr = [ data[i].ranktime, parseInt(data[i].counttime), tooltip ];
+				chartData.push(subarr);
+			}
+			//챠트 그리기
+			var chart = new google.visualization.PieChart(document.querySelector('#chart_div4'));
+			chart.draw(google.visualization.arrayToDataTable(chartData),
+					options4);
+		}
+		
+	});
+}
+/* var options5 = {
+		width : 590,
+		height : 250,
+		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+	};
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	
+	google.setOnLoadCallback(ajaxData5);
+
+function ajaxData5() {
+	
+	var s_year = document.getElementById('year').value;
+	var s_month = document.getElementById('month').value; 
+	var day = s_year+"/"+s_month;
+	$.ajax({
+		type : 'GET',
+		data : {day:day},
+		url : './getOrderPriceChart',
+		dataType : 'json',
+		success : function(data) {
+			var chartData = [];
 			chartData.push([ '사원명', '사원수', {type: 'string', role: 'tooltip'} ])
 			for (i = 0; i < data.length; i++) {
 				var tooltip = data[i].ranktinfoid+ " : " +data[i].counttinfoid
@@ -58,27 +209,58 @@ function ajaxData() {
 				chartData.push(subarr);
 			}
 			//챠트 그리기
-			var chart = new google.visualization.PieChart(document.querySelector('#chart_div'));
+			var chart = new google.visualization.PieChart(document.querySelector('#chart_div5'));
 			chart.draw(google.visualization.arrayToDataTable(chartData),
-					options);
-			
-			//이벤트
-			google.visualization.events.addListener(chart, 'select', selectHandler);
-			
+					options5);
 		}
 		
 	});
 }
-function selectHandler(e) {
-	  alert('알림창입니당');
-}
+var options6 = {
+		width : 590,
+		height : 250,
+		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
+	};
+	google.load('visualization', '1.0', {
+		'packages' : [ 'corechart' ]
+	});
+	
+	google.setOnLoadCallback(ajaxData6);
+
+function ajaxData6() {
+	
+	var s_year = document.getElementById('year').value;
+	var s_month = document.getElementById('month').value; 
+	var day = s_year+"/"+s_month;
+	$.ajax({
+		type : 'GET',
+		data : {day:day},
+		url : './getOrderIdChart',
+		dataType : 'json',
+		success : function(data) {
+			var chartData = [];
+			chartData.push([ '사원명', '사원수', {type: 'string', role: 'tooltip'} ])
+			for (i = 0; i < data.length; i++) {
+				var tooltip = data[i].ranktinfoid+ " : " +data[i].counttinfoid
+				var subarr = [ data[i].ranktinfoid, parseInt(data[i].counttinfoid), tooltip ];
+				chartData.push(subarr);
+			}
+			//챠트 그리기
+			var chart = new google.visualization.PieChart(document.querySelector('#chart_div6'));
+			chart.draw(google.visualization.arrayToDataTable(chartData),
+					options6);
+			
+		}
+		
+	});
+} */
 </script>
 </head>
 
 <body>
 <div style="padding: 30px 0;">
-<input type="text" style="width: 50px;" id="year" value="2018">년 &nbsp;&nbsp; 
-<input type="text" style="width: 30px;" id="month" value="12">월  &nbsp;&nbsp; 
+<input type="text" style="width: 50px;" id="year" value="2019">년 &nbsp;&nbsp; 
+<input type="text" style="width: 30px;" id="month" value="01">월  &nbsp;&nbsp; 
 <input type="button" value="보기" onclick="searchChart()"> 
 </div>
    <div class="row">
@@ -86,11 +268,60 @@ function selectHandler(e) {
        <div class="card">
          <div class="card-body">
            <h4 class="card-title">월별 최다 방문 여행지</h4>
-           <div id="chart_div"></div>
+           <div id="chart_div1"></div>
          </div>
        </div>
      </div>
-
+   </div>
+      <div class="row">
+     <div class="col-lg-6 grid-margin stretch-card">
+       <div class="card">
+         <div class="card-body">
+           <h4 class="card-title">월별 최다 판매자</h4>
+           <div id="chart_div2"></div>
+         </div>
+       </div>
+     </div>
+   </div>
+      <div class="row">
+     <div class="col-lg-6 grid-margin stretch-card">
+       <div class="card">
+         <div class="card-body">
+           <h4 class="card-title">월별 최다 거래 요일</h4>
+           <div id="chart_div3"></div>
+         </div>
+       </div>
+     </div>
+   </div>
+      <div class="row">
+     <div class="col-lg-6 grid-margin stretch-card">
+       <div class="card">
+         <div class="card-body">
+           <h4 class="card-title">월별 최다 거래 시간대</h4>
+           <div id="chart_div4"></div>
+         </div>
+       </div>
+     </div>
+   </div>
+      <div class="row">
+     <div class="col-lg-6 grid-margin stretch-card">
+       <div class="card">
+         <div class="card-body">
+           <h4 class="card-title">월별 총 거래액</h4>
+           <div id="chart_div5"></div>
+         </div>
+       </div>
+     </div>
+   </div>
+      <div class="row">
+     <div class="col-lg-6 grid-margin stretch-card">
+       <div class="card">
+         <div class="card-body">
+           <h4 class="card-title">월별 총 거래량</h4>
+           <div id="chart_div6"></div>
+         </div>
+       </div>
+     </div>
    </div>
 
 </body>

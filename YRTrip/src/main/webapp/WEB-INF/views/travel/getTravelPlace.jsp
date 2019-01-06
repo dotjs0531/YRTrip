@@ -145,10 +145,10 @@ function del(placeNo){
        <div class="item active" style="height:300px;">
         <div style="min-height: 300px;">
 							<c:if test="${travelPlace.placePic ne null}">
-								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" />
+								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" style="background-size: cover;" />
 							</c:if>
 							<c:if test="${travelPlace.placePic eq null}">
-							<img src="./images/travel/placenoimage.jpg" class="img-responsive">
+							<img src="./images/travel/placenoimage.jpg" class="img-responsive" style="background-size: cover;" >
 							</c:if>
 	</div>
           <div class="carousel-caption">

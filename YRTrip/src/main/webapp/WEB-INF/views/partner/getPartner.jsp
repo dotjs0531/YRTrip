@@ -254,8 +254,8 @@ jQuery( document ).ready(function( $ ) {
                			<table style="width:100%">
 							<tr>
 								<td style="width:33%">
-									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>여행지 : </strong>
-										<c:if test="${partner.tinfoCountry ne null}">${partner.tinfoCountry}</c:if><c:if test="${partner.tinfoState ne null}"> ${partner.tinfoState}</c:if> ${partner.tinfoCity}
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>여행지 : </strong> ${partner.tinfoId}
+										<%-- <c:if test="${partner.tinfoCountry ne null}">${partner.tinfoCountry}</c:if><c:if test="${partner.tinfoState ne null}"> ${partner.tinfoState}</c:if> ${partner.tinfoCity} --%>
 									</h5>
 								</td>
 								<td style="width:33%">

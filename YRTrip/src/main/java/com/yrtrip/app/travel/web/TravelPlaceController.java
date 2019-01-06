@@ -1,6 +1,10 @@
 package com.yrtrip.app.travel.web;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.Paging;
@@ -63,10 +68,20 @@ public class TravelPlaceController {
 	}
 
 //등록처리
-	@RequestMapping(value = { "/insertTravelPlace" }, method = RequestMethod.POST)
-	public String insertTravelPlace(TravelPlaceVO vo) { // 커맨드 객체
-		travelPlaceService.insertTravelPlace(vo); // 등록처리
-		return "redirect:getTravelPlaceList"; // 목록요청
+	@RequestMapping(value = { "insertTravelPlace" }, method = RequestMethod.POST)
+	public String insertTravelPlace(TravelPlaceVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/travel");
+
+		MultipartFile placePicFile = vo.getPlacePicFile();
+		if (!placePicFile.isEmpty() && placePicFile.getSize() > 0) {
+			String filename = placePicFile.getOriginalFilename();
+			placePicFile.transferTo(new File(path, filename));
+
+		vo.setPlacePic(filename);
+		System.out.println("=================================================================="+filename);
+	}
+		travelPlaceService.insertTravelPlace(vo);
+		return "redirect:getTravelPlaceList";
 	}
 
 //수정폼
@@ -77,10 +92,19 @@ public class TravelPlaceController {
 	}
 
 //수정처리
-	@RequestMapping("updateTravelPlace")
-	public String updateTravelPlace(TravelPlaceVO vo) {
-		travelPlaceService.updateTravelPlace(vo); // 수정처리
-		return "redirect:getTravelPlaceList"; // 목록요청
+	@RequestMapping(value = { "updateTravelPlace" }, method = RequestMethod.POST)
+	public String updateTravelPlace(TravelPlaceVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/travel");
+
+		MultipartFile placePicFile = vo.getPlacePicFile();
+		if (!placePicFile.isEmpty() && placePicFile.getSize() > 0) {
+			String filename = placePicFile.getOriginalFilename();
+			placePicFile.transferTo(new File(path, filename));
+
+		vo.setPlacePic(filename);
+	}
+		travelPlaceService.updateTravelPlace(vo);
+		return "redirect:getTravelPlaceList";
 	}
 
 //삭제처리
