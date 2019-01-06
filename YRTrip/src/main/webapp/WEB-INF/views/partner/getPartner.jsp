@@ -316,7 +316,46 @@ jQuery( document ).ready(function( $ ) {
 					
 					<!-- 동행 신청  -->
 					<h4 class="control-label" style="font-family: 'NanumSquareRoundB'; color: #666666;">동행 신청 리스트</h4><br/>
-					<div class="about_car" id="joinerList" style="min-height:100px;">
+					<div class="about_car" id="joinerList" style="min-height:50px; padding-bottom:20px"></div>
+					
+					<!-- 동행 신청자들끼리 대화창 -->
+					<div style="border-style: solid; border-radius: 15px; border-width: thin; padding:20px">
+					<h4 class="control-label" style="font-family: 'NanumSquareRoundB'; color: #666666;"><i class="far fa-comments"></i> 대화하기</h4><br>
+						
+						<span style="float:left">
+							<label class='control-label' style="font-size:15px; color:black; padding:0 10px 0 0">
+								<i class="fas fa-user-circle"></i><strong> 상대방</strong>
+							</label>
+			        		<span class='commentContent' style="margin-right:10px; color:black">대구에서 만나요</span>
+			        		<span class='commentDate' style="margin-right:10px; color:black">2019-01-06</span>
+						</span>
+						<p style="clear:both"/>
+						
+						<span style="float:right;">
+							<label class='control-label' style="font-size:15px; color:black; padding:0 10px 0 0">
+								<i class="far fa-user-circle"></i><strong> 나</strong>
+							</label>
+			        		<span class='commentContent' style="margin-right:10px; color:black">좋습니다</span>
+			        		<span class='commentDate' style="margin-right:10px; color:black">2019-01-06</span>
+							<button type="button" class="btn btn-default btn-sm">삭제</button>
+						</span>
+						<p style="clear:both"/>
+
+						<!-- 댓글등록시작 -->
+						<br>
+						<div id="commentAdd">
+							<form>
+							<div class="input-group">
+								<input type="hidden" name="partnerId" value="${partner.partnerId}">
+								<input type="hidden" name="userId" value="${sessionScope.login.userId}">
+								<input type="text" class="form-control" id="commentContent" name="commentContent" placeholder="내용을 입력하세요">
+								<span class="input-group-btn">
+								<button type="button" class="btn btn-default">등록</button>
+								</span>
+							</div>
+							</form>
+						</div>
+						
 					</div>
 					
 				</div>

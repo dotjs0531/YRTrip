@@ -147,40 +147,29 @@ function del() {
 };
 
 function productDel() { //배송완료되지 않은 구매자가 있을 경우에는 삭제 불가능
-	var DATA;
-	$("input[name=itemNoList]").each(function() {
-		if($(this).is(':checked'))
-            DATA += "|"+($(this).val());
-	});
-	
-	var pDATA = "${data['DATA']}";
-	var splitDATA = pDATA.split("|");
-	var result = 0;
-
 	if (confirm("삭제하시겠습니까?")) {
-		for (var i=1; i<splitDATA.length; i++) {
+		var cnt = 0;
+		$("input[name=itemNoList]:checked").each(function(){
 	      	$.ajax({
-	  			type:"GET",
-	  			url:"infofordelete",
-	  			data:{itemId : splitDATA[i]},
+	  			type : "GET",
+	  			url : "infofordelete",
+	  			data : $(this).val(),
 	  			datatype : "integer",
 	  			success : function(data){
-  					if(data == 0){
-  						result = 1;
-  					}
-  					else{
-  						result = 0;
+  					if(data != '0'){
+  						cnt++;
   					}
 	  			}
 	  		});	
-		}
+		});
+		alert(cnt);
 	
-       if(result == 1){
+       /* if(cnt == 0){
     	   $('#productDel').attr('action', 'deleteMyProductList');
        } else {
 			alert("선택하신 제품 중 진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
 			return false;
-       }
+       } */
 	} else {
 		return false;
 	}
