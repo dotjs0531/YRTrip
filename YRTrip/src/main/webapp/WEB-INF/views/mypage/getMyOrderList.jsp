@@ -188,7 +188,7 @@ function confirmPurchase(orderId) {
 <script>
 $(function() {
 	$(".getProduct").click(function(){
-		var id = $(this).attr("id");
+		var id = $(this).attr("id").substr(3);
 		
 		$.ajax({
 	        type: "GET",
@@ -365,7 +365,7 @@ $(function() {
 											<!-- Thumbnail-->
 											<div class="thumbnail" style="background-color:white">
 												<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}" />
-												<a href="getProduct?itemId=${product.itemId}">
+												<a href="#" id="pic${order.itemId}" class="getProduct">
 													<img class="img-responsive center-block" id="img" src="./images/product/${productPicFile}" style="height: 200px;" />
 												</a>
 											</div>
@@ -373,8 +373,8 @@ $(function() {
 											<div class="post-content">
 												<div class="category">${order.orderDelivery}</div>
 												<h4 class="pull-right">${order.itemMethod}</h4>
-												<h1 class="title"><a href="#" onclick="getProduct('${order.itemId}')" style="color:black; display: inline-block; text-overflow: ellipsis; 
-													white-space: nowrap; overflow: hidden; width:130px; text-decoration:none !important;">${order.itemName}</a></h1>
+												<h1 class="title"><a href="#" id="pro${order.itemId}" style="color:black; display: inline-block; text-overflow: ellipsis; 
+													white-space: nowrap; overflow: hidden; width:130px; text-decoration:none !important;" class="getProduct">${order.itemName}</a></h1>
 												<h2 class="sub_title">${order.orderCondition}</h2>
 												<p class="description" align="center">
 													<c:if test="${order.orderCondition eq '결제완료' && order.orderDelivery eq '배송중'}">

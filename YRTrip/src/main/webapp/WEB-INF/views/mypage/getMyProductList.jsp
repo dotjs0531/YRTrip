@@ -146,25 +146,27 @@ function del() {
 	}
 };
 
-function productDel() { //배송완료되지 않은 구매자가 있을 경우에는 삭제 불가능
+function productDel() { //거래완료되지 않은 구매자가 있을 경우에는 삭제 불가능
 	if (confirm("삭제하시겠습니까?")) {
 		var cnt = 0;
 		$("input[name=itemNoList]:checked").each(function(){
+			var id = $(this).val();
 	      	$.ajax({
 	  			type : "GET",
 	  			url : "infofordelete",
-	  			data : $(this).val(),
+	  			async: false,
+	  			data : { itemId : id },
 	  			datatype : "integer",
 	  			success : function(data){
-  					if(data != '0'){
+  					if(data != 0){	//거래완료된 구매자가 있을때
   						cnt++;
   					}
 	  			}
-	  		});	
+	  		});
+	      	return cnt;
 		});
 		alert(cnt);
-	
-       /* if(cnt == 0){
+		/* if(cnt == 0){
     	   $('#productDel').attr('action', 'deleteMyProductList');
        } else {
 			alert("선택하신 제품 중 진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
