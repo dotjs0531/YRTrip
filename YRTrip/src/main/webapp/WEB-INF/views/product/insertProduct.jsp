@@ -359,7 +359,7 @@ $(function(){
 									<div class="spcae-five"></div>
 									<h4>제품설명</h4>
 									<textarea name="itemContent" class="form-control col-sm-12"
-										rows="5"></textarea>
+										rows="5" required></textarea>
 								</div>
 <!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId"

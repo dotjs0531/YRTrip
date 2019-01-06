@@ -34,10 +34,14 @@
 <link href="resources/css/responsive.css" rel="stylesheet">
 
 
-<link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
-<link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+<link rel="mask-icon" type=""
+	href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg"
+	color="#111" />
 <link rel="canonical" href="https://codepen.io/andreasstorm/pen/deRvMy" />
-<script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
+<script
+	src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js'></script>
 
 
 <!-- 폰트 모음 -->
@@ -71,6 +75,73 @@
 </script>
 
 <style>
+#quote-carousel {
+	padding: 0 10px 30px 10px;
+	margin-top: 30px;
+	/* Control buttons  */
+	/* Previous button  */
+	/* Next button  */
+	/* Changes the position of the indicators */
+	/* Changes the color of the indicators */
+}
+
+#quote-carousel .carousel-control {
+	background: none;
+	color: #CACACA;
+	font-size: 2.3em;
+	text-shadow: none;
+	margin-top: 30px;
+}
+
+/* #quote-carousel .carousel-control.left {
+	left: -60px;
+}
+
+#quote-carousel .carousel-control.right {
+	right: -60px;
+} */
+#quote-carousel .carousel-indicators {
+	right: 50%;
+	top: auto;
+	/* bottom: 0px; */
+	margin-right: -19px;
+}
+
+#quote-carousel .carousel-indicators li {
+	margin: 5px;
+	cursor: pointer;
+	border: 1px solid #CCC;
+	border-radius: 50px;
+	/* opacity: 0.4; */
+	overflow: hidden;
+	transition: all 0.4s;
+}
+
+#quote-carousel .carousel-indicators .active {
+	/*   background: #333333;
+    width: 128px;
+    height: 128px;
+    border-radius: 100px;
+    border-color: #f33;
+    opacity: 1; */
+	overflow: hidden;
+}
+
+/* .carousel-inner {
+	min-height: 300px;
+} */
+.item blockquote {
+	border-left: none;
+	margin: 0;
+}
+
+.item blockquote p:before {
+	content: "\f10d";
+	font-family: 'Fontawesome';
+	float: left;
+	margin-right: 10px;
+}
+
 .container-1 {
 	width: 100%;
 	vertical-align: middle;
@@ -152,52 +223,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- 사이드 -->
-		<div class="share-post stick show" style="top: 627.175px;">
-			<div class="twitter sharrre sharrre-twitter-9194"
-				data-url="https://ahrefs.com/blog/seo-tips/"
-				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
-				data-title="Tweet">
-				<div class="box">
-					<div class="share">
-						<i class="fa fa-twitter"></i>
-					</div>
-					<span class="count">1329</span>
-				</div>
-			</div>
-			<div class="facebook sharrre sharrre-facebook-9194"
-				data-url="https://ahrefs.com/blog/seo-tips/"
-				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
-				data-title="Like">
-				<div class="box">
-					<div class="share">
-						<i class="fa fa-facebook"></i>
-					</div>
-					<span class="count">6619</span>
-				</div>
-			</div>
-			<div class="googlePlus sharrre sharrre-googleplus-9194"
-				data-url="https://ahrefs.com/blog/seo-tips/"
-				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
-				data-title="+1">
-				<div class="box">
-					<div class="share">
-						<i class="fa fa-google"></i>
-					</div>
-				</div>
-			</div>
-			<div class="linkedin sharrre sharrre-linkedin-9194"
-				data-url="https://ahrefs.com/blog/seo-tips/"
-				data-text="75 Actionable SEO Tips (That Work Like A Charm in 2018)"
-				data-title="Share">
-				<div class="box">
-					<div class="share">
-						<i class="fa fa-linkedin"></i>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- 사이드 -->
 		<!--   end of logo menu markup     -->
 		<!--  start welcome text marup  -->
 		<div class="table">
@@ -238,7 +263,8 @@
 			<div class="row">
 				<div class="container card">
 					<c:forEach items="${productList}" var="product">
-						<div class="column col-md-4 col-sm-4 col-xs-12" style="padding-bottom: 20px;">
+						<div class="column col-md-4 col-sm-4 col-xs-12"
+							style="padding-bottom: 20px;">
 							<!-- Post-->
 							<div class="post-module">
 								<!-- Thumbnail-->
@@ -252,22 +278,11 @@
 								</div>
 								<!-- Post Content-->
 								<div class="post-content">
-									<div class="category">판매중</div>
-									<h4 class="pull-right">￦12000</h4>
+									<h4 class="pull-right">￦${product.itemPrice}</h4>
 									<h1 class="title">
 										<a href="./getProduct?itemId=${product.itemId}"
 											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 130px; text-decoration: none !important;">${product.itemName}</a>
 									</h1>
-									<h2 class="sub_title">${product.itemPrice}원</h2>
-									<p class="description"
-										style="display: none; height: 24px; opacity: 1;">테스트1111111</p>
-									<div class="post-meta">
-										<button type="button" class="btn btn-default pull-right"
-											id="buyer1006" data-toggle="modal"
-											data-target="#getMyBuyerList">구매자 목록</button>
-										<span class="timestamp"><i class="fa fa-heart"></i>&nbsp;0</span>
-										<span class="comments"><i class="fa fa-star"></i>&nbsp;0.0</span>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -279,37 +294,91 @@
 	</section>
 	<!--    end 상품 판매자 1,2,3위  올리기-->
 	<!--이벤트 창? 공지사항창 -->
-	<section class="couter_up_area" id="service">
-		<div class="table">
-			<div class="cell">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-2 col-sm-3 text-center">
-							<div class="single_count">
-								<h1 class="counter">126</h1>
-								<h5>Satisfied clients</h5>
+	<section class="container" id="service">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="col-md-12" data-wow-delay="0.2s">
+					<div class="carousel slide" data-ride="carousel"
+						id="quote-carousel">
+						<!-- Bottom Carousel Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#quote-carousel" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#quote-carousel" data-slide-to="1"></li>
+							<li data-target="#quote-carousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Carousel Slides / Quotes -->
+						<div class="carousel-inner text-center">
+
+							<!-- Quote 1 -->
+							<div class="item active">
+								<div class="row">
+									<div class="col-12">
+										<img src="./images/product/공지.png">
+									</div>
+								</div>
+							</div>
+							<!-- Quote 2 -->
+							<div class="item">
+								<div class="row">
+									<div class="col-12">
+										<img src="./images/product/공지2.png">
+									</div>
+								</div>
+							</div>
+							<!-- Quote 3 -->
+							<div class="item">
+								<div class="row">
+									<div class="col-12">
+										<img src="./images/product/공지3.png">
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-md-2 col-sm-3 col-md-offset-1 text-center">
-							<div class="single_count">
-								<h1 class="counter">34</h1>
-								<h5>Branches</h5>
-							</div>
-						</div>
-						<div class="col-md-2 col-sm-3 col-md-offset-1 text-center">
-							<div class="single_count">
-								<h1 class="counter">120</h1>
-								<h5>Active workers</h5>
-							</div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-md-offset-1 text-center">
-							<div class="single_count">
-								<h1 class="counter">3546</h1>
-								<h5>Product delivered s</h5>
-							</div>
-						</div>
+
+						<!-- Carousel Buttons Next/Prev -->
+						<a data-slide="prev" href="#quote-carousel"
+							class="left carousel-control"></a> <a data-slide="next"
+							href="#quote-carousel" class="right carousel-control"></a>
 					</div>
 				</div>
+			</div>
+			<div class="col-lg-4" style="padding: 30px">
+				<h3 style="padding: 10px 0px">동행구하기</h3>
+				<table>
+					<thead>
+						<tr style="line-height: 3;" >
+							<th>no.</th>
+							<th style="text-align: center">글제목</th>
+							<th>작성자</th>
+							<!-- <th style="text-align: center">작성일</th> -->
+							<th style="text-align: center">조회수</th>
+							<th style="text-align: center">진행상태</th>
+						</tr>
+					</thead>
+					<c:forEach items="${partnerList}" var="partner">
+						<tr style="line-height: 3;" >
+							<td>${partner.partnerId}</td>
+							<td><a
+								style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; vertical-align: middle"
+								href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
+									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if>
+							</a></td>
+							<td style="color: black;"><c:if
+									test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
+								<c:if test="${sessionScope.login.userId ne partner.userId}">
+									<a style="color: black;"
+										href="./getYourTravelList?userId=${partner.userId}"
+										class="goToUserPage">${partner.userName}</a>
+								</c:if></td>
+							<%-- <td style="text-align: center">${partner.partnerDate} --%>
+							<td style="text-align: center">${partner.partnerHit}</td>
+							<td style="text-align: center">${partner.partnerCondition}</td>
+						</tr>
+					</c:forEach>
+				</table>
+
 			</div>
 		</div>
 	</section>
@@ -407,7 +476,8 @@
 	<!-- 로그인 창 -->
 	<div class="modal fade" id="login">
 		<div class="modal-dialog">
-			<div class="modal-content" style="width: 80%; margin: 0 auto; margin-top:100px">
+			<div class="modal-content"
+				style="width: 80%; margin: 0 auto; margin-top: 100px">
 				<!-- remote ajax call이 되는영역 -->
 				<!-- header -->
 				<div class="modal-header">
@@ -529,9 +599,11 @@
 	</div>
 
 
-<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src="resources/js/mypage.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src="resources/js/mypage.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!--  jquery.min.js  -->
 	<!-- <script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
@@ -570,6 +642,8 @@
 				$('div#login').modal('hide');
 			});
 		})
-	</script>
+	
+</script>
+
 	</ body>
 </html>

@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.yrtrip.app.joiner.JoinerService;
 import com.yrtrip.app.joiner.JoinerVO;
+import com.yrtrip.app.partner.PartnerService;
+import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductService;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.travel.TravelBoardService;
@@ -27,9 +29,10 @@ import com.yrtrip.app.travel.TravelBoardVO;
 @Controller
 public class HomeController {
 	
-	@Autowired ProductService productService; //user정보에서 상품 많이 올린순, 최근에 올린 상품, 최신리뷰순
-	@Autowired JoinerService joinerService;								//동행게시판 최신글 순
-	@Autowired TravelBoardService travelBoardService;								//베스트 여행정보후기 순
+	@Autowired ProductService productService; 			//user정보에서 상품 많이 올린순, 최근에 올린 상품, 최신리뷰순
+	@Autowired JoinerService joinerService;				//동행게시판 최신글 순
+	@Autowired TravelBoardService travelBoardService;	//베스트 여행정보후기 순
+	@Autowired PartnerService partnerService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -51,18 +54,21 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/main")
-	public String mainForm(Model model, ProductVO pvo, JoinerVO jvo, TravelBoardVO tbvo) {
+	public String mainForm(Model model, PartnerVO ptvo, ProductVO pvo, TravelBoardVO tbvo) {
 		//최신 상품 목록
 		pvo.setFirst(1);
 		pvo.setLast(3);
 		//특정 동행자 ...?
-		jvo.setJoinerId(3);
+		ptvo.setFirst(1);
+		ptvo.setLast(5);
 		//최신 여행기 목록
 		tbvo.setFirst(1);
 		tbvo.setLast(5);
 		//정보 뿌리기
+		
+		model.addAttribute("partnerList", partnerService.getPartnerList(ptvo));
 		model.addAttribute("productList", productService.getProductList(pvo));
-		model.addAttribute("joinerlist", joinerService.getJoinerList(jvo));
+		//model.addAttribute("joinerlist", joinerService.getJoinerList(jvo));
 		model.addAttribute("bestTravelList", travelBoardService.getBestTravelList(tbvo));
 		return "main";
 	}

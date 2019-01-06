@@ -313,7 +313,7 @@ $(function(){
 									<div class="col-12 col-md-8">
 <!-- 수량 : 0 막아놓기 -->
 										<input type="number" min="1" name="itemEa" value="${product.itemEa}"
-											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요">
+											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요" required>
 									</div>
 								</div>
 <!-- 상품상태 : 하나만 체크 되도록 -->
@@ -325,32 +325,33 @@ $(function(){
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="새상품"> 새상품
+												value="새상품" required> 새상품
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="약간중고"> 약간중고
+												value="약간중고" required> 약간중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="조금중고"> 조금중고
+												value="조금중고" required> 조금중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="완전중고"> 완전중고
+												value="완전중고" required> 완전중고
 											</label>
 										</div>
 									</div>
 								</div>
 								<div class="space-five"></div>
+								<input type="hidden" name="itemMethod" value="카드결제">
 <!-- 결제방법 : 1.값 두개다 db에 들어갈 수 있도록  -->
-								<div class="row price_list">
+								<!-- <div class="row price_list">
 									<div class="col-6 col-md-4">
 										<h4>선호결제방법</h4>
 									</div>
@@ -368,12 +369,12 @@ $(function(){
 											</label>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div>
 									<div class="spcae-five"></div>
 									<h4>제품설명</h4>
 									<textarea name="itemContent" class="form-control col-sm-12"
-										rows="5">${product.itemContent}</textarea>
+										rows="5" required>${product.itemContent}</textarea>
 								</div>
 <!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId"
