@@ -207,35 +207,13 @@ $(function(){
 						<div class="card mb-10">
 							<div class="card-header">
 								<nav class="header-navigation">
-									<div>
+									<!-- <div>
 										<a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a>
-										<div class="btn-group pull-right">
-											<!-- Social Button HTML -->
-
-											<!-- Twitter -->
-											<a
-												href="http://twitter.com/share?url=<URL>&text=<TEXT>&via=<VIA>"
-												target="_blank" class="share-btn twitter"> <i
-												class="fab fa-twitter"></i>
-											</a>
-
-											<!-- Google Plus -->
-											<a href="https://plus.google.com/share?url=<BTN>"
-												target="_blank" class="share-btn google-plus"> <i
-												class="fab fa-google-plus"></i>
-											</a>
-
-											<!-- Facebook -->
-											<a href="http://www.facebook.com/sharer/sharer.php?u=<URL>"
-												target="_blank" class="share-btn facebook"> <i
-												class="fab fa-facebook"></i>
-											</a>
-										</div>
-									</div>
-									<ol class="breadcrumb">
+									</div> -->
+									<!-- <ol class="breadcrumb">
 										<li class="breadcrumb-item"><a href="#">카테고리를 설정하세요</a></li>
 										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
-									</ol>
+									</ol> -->
 									<div class="pull-left">
 										<h4>${sessionScope.login.userId}만의상품을공유해보입시더</h4>
 									</div>
@@ -359,7 +337,7 @@ $(function(){
 									<div class="spcae-five"></div>
 									<h4>제품설명</h4>
 									<textarea name="itemContent" class="form-control col-sm-12"
-										rows="5" required></textarea>
+										rows="5"></textarea>
 								</div>
 <!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId"

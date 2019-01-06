@@ -55,10 +55,17 @@ $(function(){
 			var itemId = data.itemId;
 			var itemName = data.itemName;
 			var itemContent = data.itemContent;
-			console.log(itemId);
+			var itemImgList = data.itemPic;
+			var itemImgSlipt = itemImgList.split(',');
+			
 			$("#modal-title").html(itemName);
 			$("#popup_itemId").html(itemId);
 			$("#popup_itemContent").html(itemContent);
+			for(var i in itemImgSlipt){
+			console.log(itemImgSlipt[0]);
+				$("#itemImg").attr("src", "./images/product/itemImgSlipt[i]");	
+			}
+			
 		});
 	});
 });
@@ -88,10 +95,20 @@ $(function(){
 			});
 		 }
       });
+	 $('[data-toggle="tooltip"]').tooltip(); 
+	 $(".loginRequired").click(function(e){
+		 if ("${sessionScope.login.userId}" == '') {
+			 e.preventDefault();
+	         alert("로그인이 필요한 서비스입니다");
+		 }
+	 })
 });
 	
 </script>
 <style>
+a#warn:hover{
+	
+}
 
 #btn-custom
 {
@@ -241,11 +258,9 @@ $(function(){
 										<div class="space-five"></div>
 										<div class="btn-ground text-center">
 											<!-- <button> -->
-												<button id="" type="button" 
-												class="btn btn-link" data-toggle="modal" 
-												data-target="#product_view" style="color:black;" >
-												<i class="fa fa-shopping-cart"> Cart</i>
-											</button>
+												<a class="loginRequired" data-toggle="tooltip" data-placement="bottom" title="상세페이지에서 수량결정하세요" href="./getProduct?itemId=${product.itemId}#quant">
+												<i class="fa fa-shopping-cart"> Cart</i></a>
+											
 											
 											<!-- </button> -->
 											<button id="item+${product.itemId}" type="button" 
@@ -282,27 +297,21 @@ $(function(){
 								<div class="modal-body">
 									<div class="row">
 										<div class="col-md-6 product_img">
-											<img
-												src="http://img.bbystatic.com/BestBuy_US/images/products/5613/5613060_sd.jpg"
-												class="img-fluid">
+											<img src="#" id="itemImg">	
 										</div>
 										<div class="col-md-6 product_content">
 											<h4>
 												<span class="pull-right" id="popup_itemId"></span>
 											</h4>
 											<div class="rating">
-												<span class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span> <span
-													class="glyphicon glyphicon-star"></span>
+												<span class="glyphicon glyphicon-star"></span> 
 												<!-- rating  -->
 											</div>
 											<p></p>
 											<h3>상세설명</h3>
 											<div id="popup_itemContent" class="pull-right"></div>
 											<div class="row">
-												<div class="col-md-4 col-sm-6 col-xs-12">
+												<!-- <div class="col-md-4 col-sm-6 col-xs-12">
 													<select class="form-control" name="select">
 														<option value="" selected="">Color</option>
 														<option value="black">Black</option>
@@ -311,7 +320,7 @@ $(function(){
 														<option value="rose gold">Rose Gold</option>
 													</select>
 												</div>
-												<!-- end col -->
+												end col
 												<div class="col-md-4 col-sm-6 col-xs-12">
 													<select class="form-control" name="select">
 														<option value="">Capacity</option>
@@ -321,7 +330,7 @@ $(function(){
 														<option value="">128GB</option>
 													</select>
 												</div>
-												<!-- end col -->
+												end col
 												<div class="col-md-4 col-sm-12">
 													<select class="form-control" name="select">
 														<option value="" selected="">QTY</option>
@@ -329,7 +338,7 @@ $(function(){
 														<option value="">2</option>
 														<option value="">3</option>
 													</select>
-												</div>
+												</div> -->
 												<!-- end col -->
 											</div>
 										</div>
@@ -362,8 +371,8 @@ $(function(){
 		<!-- /.container -->
 	</section>
 	<!-- Bootstrap core JavaScript -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

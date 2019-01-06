@@ -37,9 +37,14 @@ $(function(){
 	var money = $("#itemPrice").text();
 	console.log(money);
 	var money2 = money.toLocaleString();
-	$("#itemPrice").text('');
-	$("#itemPrice").text('￦' + money2);
-	});
+		$("#itemPrice").text('');
+		$("#itemPrice").text('￦' + money2);
+	 //카트안에 내용있을때
+console.log($(".cartId").text());
+	 if($(".cartId").text() != ''){
+	 	$(".nothing").hide();
+	 }
+});
 </script>
 <script>
 $(function(){
@@ -62,13 +67,15 @@ $(function(){
 </script>
 <script>
 $(function(){
-	 $(".go_update").on('click', function(){
+	$("#notice_ea").hide();
+	$(".go_update").on('click', function(){
 		 var new_ea = $(".new_itemEa").val();
 		 var cartid = $(".cartId").attr("id").substr("6");
 		 //조건 : itemt에서 itemea에서 받아와서 비교
 		 //var real_ea = $(".itemIteaEa").val();
 		 var button = $(this).attr("id").substr(6);
 		 console.log(button);
+		 
 		 $.ajax({
 			 type:"GET",
 			url:"updateCart",
@@ -78,6 +85,9 @@ $(function(){
 			},
 			datatype: "text",
 			success:function(data){
+				$("#notice_ea").show().text("수정완료");
+				$("#notice_ea").fadeIn(3000);
+				$("#notice_ea").fadeOut();
 			}		 
 		 });
 
@@ -90,7 +100,7 @@ $(function(){
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="py-5 text-center">
-				<h2>너의 장바구니(찜리스트)</h2>
+				<h2>너의 장바구니</h2>
 				<p class="lead">
 					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
 				</p>
@@ -105,10 +115,16 @@ $(function(){
 					<!-- 내가 사려고 선택한 물건 목록들 c:forEach -->
 
 					<ul class="list-group mb-3">
+						<li>
+							<div class="nothing card">
+								<div class="card-body row mx-auto">
+									장바구니에 상품이 없어요								
+								</div>
+							</div>
+						</li>
 						<c:forEach items="${cartList}" var="cart" varStatus="status">
-
 							<li class="list-group-item d-flex justify-content-between lh-condensed">
-								<div id="cartinfo">
+								<div id="cartinfo col-4">
 									<!-- <label class='col-sm-2 control-label'> 정렬하게 해주는거 -->
 									<h3 class="my-0"><a href="getProduct?itemId=${cart.itemId}">${cart.itemName}</a></h3>
 									<small class="text-muted">${cart.itemCategory}</small> <br>
@@ -116,10 +132,15 @@ $(function(){
 									<small class="text-muted cartId" id="cartId${cart.cartId}">${cart.cartId}</small> <br>
 									
 								</div> 
-								<span class="text-muted" id="itemPrice">${cart.itemPrice}</span> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
+								<div class="font-weight-bold col-2" id="itemPrice">${cart.itemPrice}</div> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<%-- <span class="text-muted old_itemEa">${cart.itemEa}</span> --%>
 								
-								<span><input type="text" name="itemEa" class="new_itemEa" id="new_itemEa${cart.cartId}" value="${cart.itemEa}"/></span>
+								<div class="cartinfo col-2">
+									<input type="text" name="itemEa" class="form-control new_itemEa" id="new_itemEa${cart.cartId}" value="${cart.itemEa}"/>
+									<br>
+									<button type="button" class="btn go_update col-12" id="update${cart.cartId}">수정</button>
+								</div>
+								<div class="text-muted col-2" id="notice_ea"> </div>
 						<%-- <c:set value="${cart}" var="cartonly" />
 						<input type="hidden" class="itemIteaEa" value="${cartonly.itemEa}"> --%>		
 <!-- dfjsldjfasdlf -->
@@ -130,9 +151,6 @@ ${item.itemId}
 </c:forEach>
 </select> --%>
 <!-- <form action="./updateCart"> --> 
-							<div>
-								<button type="button" class="btn go_update" id="update${cart.cartId}">수정</button> <!-- </form> -->
-							</div>
 								<div>
 									<c:choose>
 										<c:when test="${cart.itemOrderdetail eq '구매가능'}">
@@ -171,6 +189,7 @@ ${item.itemId}
 						</li>
 						<li class="list-group-item d-flex justify-content-between"><span>최종금액
 								(WON)</span> <strong>이부분은 필요할지 모르겠네...</strong></li> -->
+						
 					</ul>
 
 					<!-- <form class="card p-2">

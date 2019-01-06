@@ -120,6 +120,11 @@
                             <li><a href="logout">logout</a></li>
                             <c:if test="${sessionScope.login.userGrant ne 'admin'}">
                             	<li><a href="./getMyInfo?userId=${sessionScope.login.userId}">${sessionScope.login.userId}</a></li>
+                            	
+                            	<a href="./getCartList?userId=${sessionScope.login.userId}">
+                            		<i class="fa fa-shopping-cart" 
+                            		style="padding: 14px 0px 0px 10px; text-align: center; color:#f9bf3b"></i>
+                            	</a>
                             </c:if>
                             <c:if test="${sessionScope.login.userGrant eq 'admin'}">
                             	<li><a href="./admin">${sessionScope.login.userId}</a></li>

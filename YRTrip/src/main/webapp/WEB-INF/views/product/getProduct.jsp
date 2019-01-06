@@ -341,14 +341,14 @@ $(function(){
 										<!-- </form> -->
 										<div class="order-buton align-content-sm-center">
 											<!-- 테스터 -->
-											<a role="button" class="col btn btn-lg btn-block btn-light"
+											<%-- <a role="button" class="col btn btn-lg btn-block btn-light"
 												href="./getCartList?myId=${sessionScope.login.userId}">
-												전체 장바구니 보기${sessionScope.login.userId}</a>
+												전체 장바구니 보기${sessionScope.login.userId}</a> --%>
 											<button class="col btn btn-lg btn-block" type="submit"
 												id="insertcart">장바구니담기</button>
-											<a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
+											<!-- <a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
 												role="button" class="btn btn-lg btn-block btn-light"
-												href="./purchasingProduct">구매하기</a>
+												href="./purchasingProduct">구매하기</a> -->
 										</div>
 									</form>
 								</div>
