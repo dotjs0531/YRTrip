@@ -20,6 +20,7 @@ public class ProductVO extends LikeVO{
 	private String itemDate;
 	private String itemCondition;
 	private int itemLike;
+	private String userName;
 	
 	//private String sortCol; // 정렬
 
@@ -36,6 +37,12 @@ public class ProductVO extends LikeVO{
 	//deleteinfo 삭제를 위해가져오는 정보들이 몇개있는지 넣는 주머니
 	private int deleteinfo;
 		
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getDeleteinfo() {
 		return deleteinfo;
 	}

@@ -69,6 +69,9 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 
 	<select id="getProduct" resultType="product">
 		 SELECT ITEM_ID,
+		 		u.USER_ID,
+		 		u.USER_NAME as USER_NAME,
+		 		USER_NAME,
 				ITEM_NAME,
 				ITEM_PRICE,
 				ITEM_EA,
@@ -82,8 +85,9 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
 				ITEM_CONDITION,
 				ITEM_LIKE
-		FROM ITEMT
-		WHERE ITEM_ID = #{itemId}	
+		FROM ITEMT, USERT u
+		WHERE ITEM_ID = #{itemId}
+		 and seller_id = u.user_id	
 	</select>
 	<select id="getOrderConditionforDelete" resultType="int">
 		select count(*)

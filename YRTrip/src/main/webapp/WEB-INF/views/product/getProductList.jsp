@@ -231,7 +231,8 @@ a#warn:hover{
 										<c:set var="productPicFile"
 											value="${fn:split(product.itemPic, ',')[0]}" />
 										<c:set var="pic" value="${productPicFile}" />
-										<img src="./images/product/${pic}" alt="" class="img-fluid" style="max-height:140px; min-height: 140px;">
+										<a href="getProduct?itemId=${product.itemId}">
+										<img src="./images/product/${pic}" alt="" class="img-fluid" style="max-height:140px; min-height: 140px;"></a>
 										<div class="caption">
 
 											<h4 class="pull-right" id="itemPrice">${product.itemPrice}</h4>

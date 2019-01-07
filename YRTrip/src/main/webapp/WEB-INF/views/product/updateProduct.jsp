@@ -322,28 +322,34 @@ $(function(){
 										<h4>상품상태</h4>
 									</div>
 									<div class="col-12 col-md-8 input-lg">
+									
+									
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="새상품" required> 새상품
+												value="새상품" <c:if test=${product.itemCondition eq '새상품'}>checked</c:if> 
+												required> 새상품
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="약간중고" required> 약간중고
+												value="약간중고" <c:if test=${product.itemCondition eq '약간중고'}>checked</c:if>
+												 required> 약간중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="조금중고" required> 조금중고
+												value="조금중고" <c:if test=${product.itemCondition eq '조금중고'}>checked</c:if> 
+												 required> 조금중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="완전중고" required> 완전중고
+												value="완전중고" <c:if test=${product.itemCondition eq '완전중고'}>checked</c:if> 
+												required> 완전중고
 											</label>
 										</div>
 									</div>

@@ -325,9 +325,7 @@ $(function(){
 								<!-- 오른쪽 아래 -->
 								<div class="product-payment-details">
 									<form action="./insertCart">
-										<p class="last-sold text-muted">
-											<small>몇개팔렸을까여?</small> <small class="pull-right">작성일</small>
-										</p>
+									
 										<div class="row">
 											<h1 class="col-md-8 product-title display-1">${product.itemName}</h1>
 											<h1 class="col-md-4 product-price display-1">￦${product.itemPrice}</h1>
@@ -360,7 +358,7 @@ $(function(){
 									</form>
 								</div>
 								<div class="product-seller-recommended">
-									<h3 class="mb-5">${product.sellerId} 판매자의 다른 상품</h3>
+									<h3 class="mb-5">${product.userName}의 다른 상품</h3>
 									<!-- 상품이 없으면 아무것도 안 뜨게 -->
 									<div class="row seller-list">
 										<div class="col-md-12 no-list-product">
@@ -409,7 +407,7 @@ $(function(){
 											<dt class="col-sm-4">작성일</dt>
 											<dd class="col-sm-8">${product.itemDate}</dd>
 											<dt class="col-sm-4">판매자명</dt>
-											<dd class="col-sm-8">${product.sellerId}</dd>
+											<dd class="col-sm-8">${product.userName}</dd>
 										</dl>
 										<h2 class="mb-5">제품 상세 설명</h2>
 										<div class="card">
@@ -420,7 +418,7 @@ $(function(){
 										</div>
 									</div>
 									<div class="product-comments">
-										<h2 class="mb-2">판매자와 거래 후 남긴 후기들</h2>
+										<h2 class="mb-2">REVIEW</h2>
 										<div class="card default_review">
 										 	<div class="card-body row">
 											 	아직 등록된 상품평이 없습니다
