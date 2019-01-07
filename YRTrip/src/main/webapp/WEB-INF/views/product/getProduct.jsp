@@ -176,6 +176,12 @@ $(function(){
 			
 		});	
 	});
+	$("#insertcart").click(function(e){
+		if ("${sessionScope.login.userId}" == '') {
+			 e.preventDefault();
+	         alert("로그인이 필요한 서비스입니다");
+		 }
+	});
 	
 	$(".insertbtn").click(function(e){
 		 if ("${sessionScope.login.userId}" == '') {
@@ -346,7 +352,7 @@ $(function(){
 												href="./getCartList?myId=${sessionScope.login.userId}">
 												전체 장바구니 보기${sessionScope.login.userId}</a> --%>
 											<button class="col btn btn-lg btn-block" type="submit"
-												id="insertcart" style="background-color: #f9bf3b;">장바구니담기</button>
+												id="insertcart" style="background-color: #f9bf3b;">장바구니</button>
 											<!-- <a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
 												role="button" class="btn btn-lg btn-block btn-light"
 												href="./purchasingProduct">구매하기</a> -->

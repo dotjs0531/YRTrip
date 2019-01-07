@@ -215,7 +215,7 @@
 								<li><a href="logout">logout</a></li>
 								<c:if test="${sessionScope.login.userGrant ne 'admin'}">
 									<li><a
-										href="./getMyInfo?userId=${sessionScope.login.userId}">${sessionScope.login.userId}</a></li>
+										href="./getMyInfo?userId=${sessionScope.login.userId}">My Page</a></li>
 								</c:if>
 								<c:if test="${sessionScope.login.userGrant eq 'admin'}">
 									<li><a href="./admin">${sessionScope.login.userId}</a></li>
@@ -326,7 +326,9 @@
 							<div class="item active">
 								<div class="row">
 									<div class="col-12">
-										<img src="./images/product/공지.png">
+										<a href="./getNotice?noticeId=1">
+											<img src="./images/product/공지.png">
+										</a>
 									</div>
 								</div>
 							</div>
@@ -334,7 +336,9 @@
 							<div class="item">
 								<div class="row">
 									<div class="col-12">
-										<img src="./images/product/공지2.png">
+										<a href="#">
+											<img src="./images/product/공지2.png">
+										</a>
 									</div>
 								</div>
 							</div>
@@ -342,7 +346,9 @@
 							<div class="item">
 								<div class="row">
 									<div class="col-12">
-										<img src="./images/product/공지3.png">
+										<a href="getNotice?noticeId=1">
+											<img src="./images/product/공지3.png">
+										</a>
 									</div>
 								</div>
 							</div>
@@ -358,19 +364,28 @@
 			<div class="col-lg-4" style="padding: 30px">
 				<h3 style="padding: 10px 0px">동행구하기</h3>
 				<table>
+				 <colgroup>
+			       <col span="1" style="width: 15%;">
+			       <col span="1" style="width: 70%;">
+			       <col span="1" style="width: 15%;">
+			   	 </colgroup>
 					<thead>
 						<tr style="line-height: 3;" >
 							<th>no.</th>
-							<th style="text-align: center">글제목</th>
+							
+							<th style="text-align: center;">글제목</th>
+			
+							
 							<th>작성자</th>
 							<!-- <th style="text-align: center">작성일</th> -->
-							<th style="text-align: center">조회수</th>
-							<th style="text-align: center">진행상태</th>
+							<!-- <th style="text-align: center">조회수</th>
+							<th style="text-align: center">진행상태</th> -->
 						</tr>
 					</thead>
 					<c:forEach items="${partnerList}" var="partner">
 						<tr style="line-height: 3;" >
 							<td>${partner.partnerId}</td>
+						
 							<td><a
 								style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; vertical-align: middle"
 								href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
@@ -384,10 +399,11 @@
 										class="goToUserPage">${partner.userName}</a>
 								</c:if></td>
 							<%-- <td style="text-align: center">${partner.partnerDate} --%>
-							<td style="text-align: center">${partner.partnerHit}</td>
-							<td style="text-align: center">${partner.partnerCondition}</td>
+					<%-- 		<td style="text-align: center">${partner.partnerHit}</td>
+							<td style="text-align: center">${partner.partnerCondition}</td> --%>
 						</tr>
 					</c:forEach>
+					
 				</table>
 
 			</div>

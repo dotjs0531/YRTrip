@@ -227,11 +227,11 @@ a#warn:hover{
 							<c:forEach items="${productList}" var="product">
 
 								<div class="col-4">
-									<div class="thumbnail">
+									<div class="thumbnail" style="max-height:300px; min-height:300px">
 										<c:set var="productPicFile"
 											value="${fn:split(product.itemPic, ',')[0]}" />
 										<c:set var="pic" value="${productPicFile}" />
-										<img src="./images/product/${pic}" alt="" class="img-fluid">
+										<img src="./images/product/${pic}" alt="" class="img-fluid" style="max-height:140px; min-height: 140px;">
 										<div class="caption">
 
 											<h4 class="pull-right" id="itemPrice">${product.itemPrice}</h4>
@@ -269,11 +269,11 @@ a#warn:hover{
 												<i class="fa fa-search"> Quick View</i>
 											</button>
 										</div>
-											<c:forEach items="${order}" var="review">
+											<%-- <c:forEach items="${order}" var="review">
 												<p>
 													<a href="#">${review.reviewName}</a>
 												</p>
-											</c:forEach>
+											</c:forEach> --%>
 										
 										<div class="space-five"></div>
 

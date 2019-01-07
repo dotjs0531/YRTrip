@@ -33,21 +33,40 @@
 }
 </style>
 <script>
-$(function(){
-	var money = $("#itemPrice").text();
-	console.log(money);
-	var money2 = money.toLocaleString();
-		$("#itemPrice").text('');
-		$("#itemPrice").text('￦' + money2);
-	 //카트안에 내용있을때
-console.log($(".cartId").text());
-	 if($(".cartId").text() != ''){
-	 	$(".nothing").hide();
-	 }
-});
+var data_value = 12000;
+function AddComma(data_value) {
+	return Number(data_value).toLocaleString('en');
+}
 </script>
+<!-- <script>
+$(function(){
+	//가격
+	var money = $(".itemPrice").text();
+	//원 짜르기 - 리스트만듬
+	var eachMoney = money.split('원');	
+	//해당 cartId의 위치 뽑아내기
+	var eachThem = $(".itemPrice").attr("id").substr(9)+' ';
+	//리스트 만들기
+	var each =eachThem.split(' ');
+	for(var i in eachMoney){
+		for(var j in each){
+		var money2 = eachMoney[i].toLocaleString('en');
+		console.log(money2);
+		
+		$("#itemPrice"+[j]).text(money2);
+		console.log($("#itemPrice"+[j]));
+		}
+	}
+});
+</script> -->
 <script>
 $(function(){
+	//카트안에 내용있을때
+	console.log($(".cartId").text());
+		 if($(".cartId").text() != ''){
+		 	$(".nothing").hide();
+		 }
+	
     var productMenu = document.getElementById("productMenu");
     productMenu.className='current-menu-item';
 });
@@ -67,32 +86,31 @@ $(function(){
 </script>
 <script>
 $(function(){
-	$("#notice_ea").hide();
-	$(".go_update").on('click', function(){
-		 var new_ea = $(".new_itemEa").val();
-		 var cartid = $(".cartId").attr("id").substr("6");
-		 //조건 : itemt에서 itemea에서 받아와서 비교
-		 //var real_ea = $(".itemIteaEa").val();
-		 var button = $(this).attr("id").substr(6);
-		 console.log(button);
-		 
-		 $.ajax({
-			 type:"GET",
-			url:"updateCart",
-			data:{
-				itemEa : new_ea,
-		 		cartId : button
-			},
-			datatype: "text",
-			success:function(data){
-				$("#notice_ea").show().text("수정완료");
-				$("#notice_ea").fadeIn(3000);
-				$("#notice_ea").fadeOut();
-			}		 
-		 });
-
+	   $("#notice_ea").hide();
+	   $(".go_update").on('click', function(){
+	       var new_ea = $(".new_itemEa").val();
+	       var cartid = $(".cartId").attr("id").substr("6");
+	       var button = $(this).attr("id").substr(6);
+	       console.log(button);
+	       
+	       $.ajax({
+	          type:"GET",
+	         url:"updateCart",
+	         data:{
+	            itemEa : new_ea,
+	             cartId : button
+	         },
+	         datatype: "text",
+	         success:function(data){
+	        	var ea = data.itemEa;
+	        	var price = $("#itemPrice").text();
+	            $("#notice_ea").show().text("수정완료");
+	            $("#notice_ea").fadeIn(3000);
+	            $("#notice_ea").fadeOut();
+	         }       
+	       });
+	    });
 	 });
- });
 </script>
 </head>
 
@@ -102,7 +120,7 @@ $(function(){
 			<div class="py-5 text-center">
 				<h2>너의 장바구니</h2>
 				<p class="lead">
-					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동
+					중고 거래는 신중하게 해주시길 부탁드립니다.<br> -유어레알트립전직원일동d
 				</p>
 			</div>
 			<div class="row" id="cartList">
@@ -130,9 +148,10 @@ $(function(){
 									<small class="text-muted">${cart.itemCategory}</small> <br>
 									<small class="text-muted">${cart.itemCondition}</small> <br>
 									<small class="text-muted cartId" id="cartId${cart.cartId}">${cart.cartId}</small> <br>
+									<%-- <small class="text-muted cartId">${cart.totalItemEa}</small> --%>
 									
 								</div> 
-								<div class="font-weight-bold col-2" id="itemPrice">${cart.itemPrice}</div> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
+								<div class="font-weight-bold col-2 itemPrice" id="itemPrice${cart.cartId}">${cart.itemPrice}원</div> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<%-- <span class="text-muted old_itemEa">${cart.itemEa}</span> --%>
 								
 								<div class="cartinfo col-2">
@@ -140,7 +159,7 @@ $(function(){
 									<br>
 									<button type="button" class="btn go_update col-12" id="update${cart.cartId}">수정</button>
 								</div>
-								<div class="text-muted col-2" id="notice_ea"> </div>
+								<div class="text-muted col-2 text-center" id="notice_ea"></div>
 						<%-- <c:set value="${cart}" var="cartonly" />
 						<input type="hidden" class="itemIteaEa" value="${cartonly.itemEa}"> --%>		
 <!-- dfjsldjfasdlf -->
@@ -175,6 +194,14 @@ ${item.itemId}
 									<button class="btn btn-light btn-link btn-block">삭제</button></a>
 								</div>
 							</li>
+							<li
+							class="list-group-item d-flex justify-content-between bg-light">
+							<div class="text-success">
+								<h6 class="my-0">${cart.itemName}총액</h6>
+								<small>d</small>
+							</div> 
+							<span class="text-success total_price"></span>
+						</li>
 						</c:forEach>
 						<!-- 내가 사려고 선택한 물건 목록들 c:forEach 끝-->
 
