@@ -249,7 +249,7 @@ $(function(){
 					<div class="card mb-10">
 						<div class="card-header">
 							<nav class="header-navigation">
-								<a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a>
+								<!-- <a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a> -->
 								<c:choose>
 									<c:when test="${not empty sessionScope.login}">
 										<div id="LikeCondition" style="float: right"></div>
@@ -284,16 +284,17 @@ $(function(){
 										<div id="myCarousel" class="carousel slide"
 											data-ride="carousel">
 											<!-- Indicators -->
+											<c:set var="productPicFile"
+													value="${fn:split(product.itemPic, ',')}" />
+													
 											<ol class="carousel-indicators">
-												<li data-target="#myCarousel" data-slide-to="0"
-													class="active"></li>
-												<li data-target="#myCarousel" data-slide-to="1"></li>
-												<li data-target="#myCarousel" data-slide-to="2"></li>
+												<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+													<c:forEach begin="1" end="${fn:length(productPicFile)-1}" var="num">
+														<li data-target="#myCarousel" data-slide-to="${num}"></li>
+													</c:forEach>
 											</ol>
 											<!-- 사진넣는부분 -->
-											<div class="carousel-inner">
-												<c:set var="productPicFile"
-													value="${fn:split(product.itemPic, ',')}" />
+											<div class="carousel-inner">												
 												<c:forEach items="${productPicFile}" var="pic">
 													<div id="itemC" class="item">
 														<img class="img-responsive center-block" id="img"
@@ -345,7 +346,7 @@ $(function(){
 												href="./getCartList?myId=${sessionScope.login.userId}">
 												전체 장바구니 보기${sessionScope.login.userId}</a> --%>
 											<button class="col btn btn-lg btn-block" type="submit"
-												id="insertcart">장바구니담기</button>
+												id="insertcart" style="background-color: #f9bf3b;">장바구니담기</button>
 											<!-- <a role="button" class="col btn btn-lg btn-block">대화하기</a> <a
 												role="button" class="btn btn-lg btn-block btn-light"
 												href="./purchasingProduct">구매하기</a> -->
@@ -354,7 +355,7 @@ $(function(){
 								</div>
 								<div class="product-seller-recommended">
 									<h3 class="mb-5">${product.sellerId} 판매자의 다른 상품</h3>
-									<!-- 상품이 없으면 어떻하지? 아무것도 안 뜨게 해야하나???-->
+									<!-- 상품이 없으면 아무것도 안 뜨게 -->
 									<div class="row seller-list">
 										<div class="col-md-12 no-list-product">
 											<div class="card no-list-product">
