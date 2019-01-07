@@ -135,7 +135,7 @@ $("#autocompleteTinfoList").change(function(){
                   <!-- 검색 창 & 페이징 처리 -->
                      <div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
 								
-								<!-- 검색 내용 -->
+								<!-- 장소 검색 -->
 								<form class="form-inline">
 								<div style="padding-bottom:5px; padding-left:17%;">
 									<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
@@ -144,11 +144,19 @@ $("#autocompleteTinfoList").change(function(){
 									<label for="overseas">해외</label>
 								</div>
 								<div style="padding-bottom:5px">
-									<label class="col-sm-2 control-label"></label>
+									<label class="col-sm-2 control-label">장소명</label>
 									<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" style="width:350px;" name="searchTinfoListbox">
 									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 									<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
 								</div>
+								<!-- 문의날짜 검색 -->
+								<div style="padding-bottom:5px">
+								<label class="col-sm-2 control-label">출발일</label>
+								<input type="date" name="searchPartnerStart" class="form-control"><br>
+								<label class="col-sm-2 control-label">도착일</label>
+								<input type="date" name="searchPartnerEnd" class="form-control">
+								</div> 
+								<input type="hidden" name="page" />
 								</form>
 							</div>
                      <!-- 동행 게시판 리스트 -->
@@ -182,17 +190,6 @@ $("#autocompleteTinfoList").change(function(){
                      </tbody>
                   </table>
                </div>
-                                                   <form name="frm" class="form-inline">
-                     <div class="form-group"
-                        style="padding-bottom: 10px; float: right">
-                        <select name="searchCondition" class="form-control">
-                           <option value="userId">글쓴이
-                           <option value="partnerTitle">제목
-                        </select> <input type="text" name="searchKeyword" class="form-control">
-                        <button class="btn btn-warning signupbtn">검색</button>
-                        <input type="hidden" name="page" />
-                     </div>
-                  </form>
                   <p style="clear: both">
                <!-- 페이지 번호 -->
                <div style="padding-top: 50px;">

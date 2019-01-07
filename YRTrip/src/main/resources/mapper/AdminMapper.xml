@@ -4,25 +4,25 @@
 <mapper namespace="admin">
 
 <!-- 메인 : 총 거래액 -->
-<select id="totalOrderPrice" resultType="map" parameterType="map">
+<select id="totalOrderPrice" resultType="int">
 SELECT SUM(ORDER_PRICE)
 FROM ORDERT
 </select>
 
 <!-- 메인 : 총 거래량 -->
-<select id="countOrderAmount" resultType="map" parameterType="map">
+<select id="countOrderAmount" resultType="int">
 SELECT COUNT(ORDER_ID)
 FROM ORDERT
 </select>
 
 <!-- 메인 : 총 여행기 수 -->
-<select id="countTravelAmount" resultType="map" parameterType="map">
+<select id="countTravelAmount" resultType="int">
 SELECT COUNT(TRAVEL_NO)
 FROM TRAVELBOARDT
 </select>
 
 <!-- 메인 : 총 회원수 -->
-<select id="countUserAmount" resultType="map" parameterType="map">
+<select id="countUserAmount" resultType="int">
 SELECT COUNT(USER_ID)-1
 FROM USERT
 </select>
@@ -39,10 +39,9 @@ ORDER BY 2 DESC
 
 <!-- 차트 : 월별 최다 판매자-->
 <select id="getSellerChart" resultType="map" parameterType="map">
-SELECT SELLER_ID "rankseller", COUNT(SELLER_ID) "countseller"
-FROM ITEMT
-WHERE ITEM_ID IN (SELECT ITEM_ID FROM ORDERT)
-<!-- 월별...? -->
+SELECT SELLER_ID "rankseller", COUNT(ORDER_ID) "countseller"
+FROM ORDERT
+WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
 GROUP BY SELLER_ID
 ORDER BY 2 DESC
 </select>
@@ -65,18 +64,22 @@ GROUP BY ORDER_DATE
 ORDER BY 2 DESC
 </select>
 
-<!-- 차트 : 월별 총 거래액-->
+<!-- 차트 : 일별 총 거래액-->
 <select id="getOrderPriceChart" resultType="map" parameterType="map">
-SELECT SUM(ORDER_PRICE) "sumorder"
+SELECT SUM(ORDER_PRICE) "totalprice", TO_CHAR(ORDER_DATE, 'MM/DD') "perday"
 FROM ORDERT
 WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
+GROUP BY ORDER_DATE
+ORDER BY 2 DESC
 </select>
 
-<!-- 차트 : 월별 총 거래량-->
+<!-- 차트 : 일별 총 거래량-->
 <select id="getOrderIdChart" resultType="map" parameterType="map">
-SELECT COUNT(ORDER_ID) "countorder"
+SELECT COUNT(ORDER_ID) "totalamount", TO_CHAR(ORDER_DATE, 'MM/DD') "perday"
 FROM ORDERT
 WHERE TO_CHAR(ORDER_DATE, 'YYYY/MM') = #{day}
+GROUP BY ORDER_DATE
+ORDER BY 2 DESC
 </select>
 
 <!-- 각 페이지 select -->
@@ -165,6 +168,21 @@ SELECT	PARTNER_ID,
 			USER_ID,
 			QNA_ANSWER
 	  FROM  QNAT
+	  			  <where>
+		<if test="searchCondition != null and searchCondition == 'qnaTitle'">
+			AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'qnaContent'">
+			 AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="qnaAnswer != null and qnaAnswer != ''">
+			AND QNA_ANSWER = #{qnaAnswer}
+		</if>
+		<if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
+    		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
+    						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
+		</if>
+	  </where>
 	  ORDER BY QNA_ID DESC
 </select>
 </mapper>

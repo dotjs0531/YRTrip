@@ -7,13 +7,9 @@
 <head>
 <title>여행게시판 글 상세보기</title>
 
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="resources/vender/css/Travel.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 
 <style>
@@ -200,7 +196,6 @@ background-color:#22313F;
 }
 </style>
 <script>
-
 $(function(){
     var travelMenu = document.getElementById("travelMenu");
     travelMenu.className='current-menu-item';
@@ -222,6 +217,9 @@ jQuery( document ).ready(function( $ ) {
 			} else {
 		   $("#insertTravelBoardButton").click(function(){
 		    	$('div#insertTravelBoard').modal(true);
+			});
+		   $("#mapBtn").click(function(){
+		    	$('div#mapModal').modal(true);
 			});
 		};
 	});
@@ -261,11 +259,10 @@ function del(travelNo){
 		 				+"<p style=\"margin:-15px;background-color:#fff;\">" + month +"</p>"
 						+"<p style=\"background-color:#fff;\">" + day +"</p>"
 						+"</div>"
-					
 						+"<div class=\"panel-heading\">"
 						+"<h2 class=\"panel-title\" style=\"display: inline;\">" + travelPlace.placeTitle + "</h2>"
+						+"<button type=\"button\" class=\"btn btn-sm btn-default\" style=\"float:right;\" onclick=\"location.href='./getTravelPlace?placeNo="+travelPlace.placeNo+"'\">상세보기</button>"
 						+"</div>"
-					
 						+"<div class=\"panel-body\">"
 						+ travelPlace.placeName + "<br>"
 						+"<small>" + travelPlace.placeAddress + "</small><br>"
@@ -452,7 +449,7 @@ function selectTravelWith(ele){
 							
 							<p class="son-text">
 								<span class="son-span">${travelBoard.travelTitle}</span><br/><br/>
-								<span class="text-span">여행지 : ${travelBoard.tinfoId}</span>
+								<span class="text-span">여행지 : ${travelBoard.tinfoCity}</span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	나홀로 여행
 																</c:if>
@@ -489,7 +486,9 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-heading">
-											<c:if test="${sessionScope.login.userId eq travelBoard.userId}"><strong>${travelBoard.userId}</strong></c:if>
+											<c:if test="${sessionScope.login.userId eq travelBoard.userId}"><strong>${travelBoard.userId}</strong>
+											
+											</c:if>
 				                            <c:if test="${sessionScope.login.userId ne travelBoard.userId}">
 												<h2 class="panel-title"><a href="getYourTravelList?userId=${travelBoard.userId}" class="goToUserPage" style="text-decoration:none;"><strong>${travelBoard.userId}</strong></a></h2>
 											</c:if>
@@ -525,9 +524,9 @@ function selectTravelWith(ele){
 							</div>
 								 </c:if>
 							</div>
-						</div>	<!-- end of table-responsive -->
-				
-<!-- modal -->			
+						</div>	<!-- end of table-responsive -->					
+						
+<!-- 여행 등록 modal -->			
 <div class="modal fade" id="insertTravelBoard">
 	<div class="modal-dialog" style="padding: 20px 0 0 0;">
 		<div class="modal-content">
@@ -618,9 +617,9 @@ function selectTravelWith(ele){
 		</div> <!-- end of row -->
 	</div>	<!-- end of container -->
 </section>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-	<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-	<script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script>
 $(function() {
     $( ".datePicker" ).datepicker({   
     	changeMonth: true, 

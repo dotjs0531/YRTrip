@@ -31,6 +31,8 @@ public class PartnerVO extends TravelInfoVO {
 	private String searchKeyword; // 검색키워드
 	private String selectedTinfoModal;
 	private String searchTinfo;
+	private String searchPartnerStart;
+	private String searchPartnerEnd;
 	
 	private String sortCol; // 정렬
 
@@ -135,7 +137,18 @@ public class PartnerVO extends TravelInfoVO {
 	public void setSearchClass(String searchClass) {
 		this.searchClass = searchClass;
 	}
-
+	public String getSearchPartnerStart() {
+		return searchPartnerStart;
+	}
+	public void setSearchPartnerStart(String searchPartnerStart) {
+		this.searchPartnerStart = searchPartnerStart;
+	}
+	public String getSearchPartnerEnd() {
+		return searchPartnerEnd;
+	}
+	public void setSearchPartnerEnd(String searchPartnerEnd) {
+		this.searchPartnerEnd = searchPartnerEnd;
+	}
 	public int getJoinerCnt() {
 		return joinerCnt;
 	}

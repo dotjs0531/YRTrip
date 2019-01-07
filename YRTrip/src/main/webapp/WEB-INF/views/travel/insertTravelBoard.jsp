@@ -480,7 +480,7 @@ function loadTravelPlaceList(){
 
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
-								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
+								<span class="text-span">여행지 : ${travelBoard.tinfoCity}</span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;" required>
 																		  <option value="alone" selected>나홀로 여행</option>
@@ -937,6 +937,7 @@ $(function() {
     }); 
 /* 지도 */
 function initMap() {
+		/* 장소 등록 modal 부분 */
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 37.565598, lng: 126.978031},
           zoom: 13
@@ -986,6 +987,55 @@ function initMap() {
           $("#insertTravelPlaceAjaxData [name=placeName]").val(place.name);
           $("#insertTravelPlaceAjaxData [name=placeAddress]").val(place.formatted_address);
         });
+        
+        /* 장소 수정 modal부분 */
+        var map1 = new google.maps.Map(document.getElementById('map1'), {
+            center: {lat: 37.565598, lng: 126.978031},
+            zoom: 13
+          });
+        var input1 = document.getElementById('pac-input1');
+        var autocomplete1 = new google.maps.places.Autocomplete(input1);
+        autocomplete1.bindTo('bounds', map1);
+        
+        map1.controls[google.maps.ControlPosition.TOP_LEFT].push(input1);
+        
+        var infowindow1 = new google.maps.InfoWindow();
+        var infowindowContent1 = document.getElementById('infowindow-content1');
+        infowindow1.setContent(infowindowContent1);
+        
+        var marker1 = new google.maps.Marker({
+          map: map1
+        });
+        marker1.addListener('click', function() {
+          infowindow1.open(map1, marker1);
+        });
+        autocomplete1.addListener('place_changed', function() {
+            infowindow1.close();
+            var place1 = autocomplete1.getPlace();
+            if (!place1.geometry) {
+              return;
+            }
+            
+            if (place1.geometry.viewport) {
+              map1.fitBounds(place1.geometry.viewport);
+            } else {
+              map1.setCenter(place1.geometry.location);
+              map1.setZoom(17);
+            }
+
+            marker1.setPlace({
+              placeId: place1.place_id,
+              location: place1.geometry.location
+            });
+            marker1.setVisible(true);
+
+            infowindowContent1.children['place-name1'].textContent = place1.name;
+            infowindowContent1.children['place-address1'].textContent = place1.formatted_address;
+            infowindow1.open(map1, marker1);
+  			
+            $("#updateTravelPlaceAjaxData [name=placeName]").val(place1.name);
+            $("#updateTravelPlaceAjaxData [name=placeAddress]").val(place1.formatted_address);
+          });
       }
 </script>
 </body>

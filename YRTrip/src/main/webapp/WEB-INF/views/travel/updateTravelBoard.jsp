@@ -10,7 +10,8 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+<script src="resources/vender/jquery.form.js"></script>
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -235,6 +236,25 @@ background-color:#22313F;
 .pac-container{
 	z-index:1051;
 }
+#map1 {
+	height: 400px;
+}
+
+.controls:focus {
+	border-color: #4d90fe;
+}
+
+.title {
+	font-weight: bold;
+}
+
+#infowindow-content1 {
+	display: none;
+}
+
+#map1 #infowindow-content1 {
+	display: inline;
+}
 </style>
 
 <script>
@@ -279,25 +299,15 @@ jQuery( document ).ready(function( $ ) {
 			}
 			$("#userfile").val(filename);
 		});
-	   
-		/* 사진 업로드 Place */
-		$("#placefileInput").on('change', function(){
+	    
+	    /* 사진 업로드 insert place */
+		$("#placefileInput").on('change', function(){ 
 			if(window.FileReader){
 				var filename = $(this)[0].files[0].name;
 			} else {
 				var filename = $(this).val().split('/').pop().split('\\').pop();
 			}
 			$("#placefile").val(filename);
-		});
-		
-		/* 사진 업로드 Place update */
-		$("#updateplacefileInput").on('change', function(){
-			if(window.FileReader){
-				var filename = $(this)[0].files[0].name;
-			} else {
-				var filename = $(this).val().split('/').pop().split('\\').pop();
-			}
-			$("#updateplacefile").val(filename);
 		});
 	   
 }); 
@@ -420,15 +430,27 @@ function loadTravelPlaceList(){
 	return div;
 } 	// end of makeTravelPlaceView
 
-//장소 등록
+	//장소 등록
 	$("#insertTravelPlaceBtn").click(function(){
-		var params = $("#insertTravelPlaceAjaxData").serialize();
+		 $("#insertTravelPlaceAjaxData").ajaxForm({
+	            url : "/insertTravelPlaceAjax",
+	            enctype : "multipart/form-data",
+	            dataType : "json",
+	            error : function(){
+	                alert("에러") ;
+	            },
+	            success : function(result){
+	                alert("성공") ;
+	            }
+	        });
+		
+/* 		var params = $("#insertTravelPlaceAjaxData").serialize();
 	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
 			var div = makeTravelPlaceView(datas);
 			$(div).prependTo("#travelPlaceList");
 			jQuery.noConflict();
 			$('#insertTravelPlace').modal("hide");
-		}); 
+		});  */
 	});
 	//장소 삭제
 	$("#travelPlaceList").on("click", ".btnDel", function(){
@@ -501,7 +523,7 @@ function loadTravelPlaceList(){
 
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
-								<span class="text-span">여행지 : <input type="text" value="${travelBoard.tinfoId}" class="update-input" name="tinfoId"></span>
+								<span class="text-span">여행지 : ${travelBoard.tinfoCity}</span>
 								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
 																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
 																		  <option value="alone" selected>나홀로 여행</option>
@@ -752,19 +774,19 @@ function loadTravelPlaceList(){
 												</div>
 												<div class="form-group">
 													<input type="file" name="placePicFile"
-							 							id="placefileInput" data-class-button="btn btn-default"
-														data-class-input="form-control" data-icon-name="fa fa-upload"
-														class="form-control" tabindex="-1" style="position: absolute;
-														clip: rect(0px, 0px, 0px, 0px);">
-													<div class="bootstrap-filestyle input-group">
-														<input type="text" id="placefile" class="form-control"
-															name="placefile" disabled="">
-														<span class="group-span-filestyle input-group-btn" tabindex="0">
-															<label for="placefileInput" class="btn btn-default ">
-																<span class="glyphicon fa fa-upload"></span>
-															</label>
-														</span>
-													</div>
+						 							id="placefileInput" data-class-button="btn btn-default"
+													data-class-input="form-control" data-icon-name="fa fa-upload"
+													class="form-control" tabindex="-1" style="position: absolute;
+													clip: rect(0px, 0px, 0px, 0px);">
+												<div class="bootstrap-filestyle input-group">
+													<input type="text" id="placefile" class="form-control"
+														name="placefile" disabled="">
+													<span class="group-span-filestyle input-group-btn" tabindex="0">
+														<label for="placefileInput" class="btn btn-default ">
+															<span class="glyphicon fa fa-upload"></span>
+														</label>
+													</span>
+												</div>
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
@@ -807,13 +829,17 @@ function loadTravelPlaceList(){
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
 									<form action="./updateTravelPlaceform" id="updateTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
-									<div id="map"></div>
-								<input id="pac-input-update" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
-								<div id="infowindow-content">
-									<span id="place-name" class="title"></span>
-									<span id="place-address"></span>
+									<div id="map1"></div>
+								<input id="pac-input1" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
+								<div id="infowindow-content1">
+									<span id="place-name1" class="title"></span>
+									<span id="place-address1"></span>
 									</div>
 										<div class="panel-body">
+												<div class="form-group">
+													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
+													<input type="text" name="placeTitle" class="form-control">
+												</div>
 												<div class="form-group">
 													<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeName" class="form-control">
@@ -821,10 +847,6 @@ function loadTravelPlaceList(){
 												<div class="form-group">
 													<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
 													<input type="text" name="placeAddress" class="form-control">
-												</div>
-												<div class="form-group">
-													<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeTitle" class="form-control">
 												</div>
 													<input type="file" name="placePicFile"
 						 							id="updateplacefileInput" data-class-button="btn btn-default"
@@ -866,7 +888,6 @@ function loadTravelPlaceList(){
 </div> <!-- end of modal -->							
 						
 <!-- 여행 등록 modal -->			
-<!-- modal -->			
 <div class="modal fade" id="insertTravelBoard">
 	<div class="modal-dialog" style="padding: 20px 0 0 0;">
 		<div class="modal-content">
@@ -983,6 +1004,7 @@ $(function() {
     }); 
 /* 지도 */
 function initMap() {
+		/* 장소 등록 modal부분 */
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 37.565598, lng: 126.978031},
           zoom: 13
@@ -993,9 +1015,9 @@ function initMap() {
         autocomplete.bindTo('bounds', map);
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        
 
         var infowindow = new google.maps.InfoWindow();
+        
         var infowindowContent = document.getElementById('infowindow-content');
         infowindow.setContent(infowindowContent);
         var marker = new google.maps.Marker({
@@ -1004,7 +1026,7 @@ function initMap() {
         marker.addListener('click', function() {
           infowindow.open(map, marker);
         });
-
+        
         autocomplete.addListener('place_changed', function() {
           infowindow.close();
           var place = autocomplete.getPlace();
@@ -1032,6 +1054,55 @@ function initMap() {
           $("#insertTravelPlaceAjaxData [name=placeName]").val(place.name);
           $("#insertTravelPlaceAjaxData [name=placeAddress]").val(place.formatted_address);
         });
+        
+        /* 장소 수정 modal부분 */
+        var map1 = new google.maps.Map(document.getElementById('map1'), {
+            center: {lat: 37.565598, lng: 126.978031},
+            zoom: 13
+          });
+        var input1 = document.getElementById('pac-input1');
+        var autocomplete1 = new google.maps.places.Autocomplete(input1);
+        autocomplete1.bindTo('bounds', map1);
+        
+        map1.controls[google.maps.ControlPosition.TOP_LEFT].push(input1);
+        
+        var infowindow1 = new google.maps.InfoWindow();
+        var infowindowContent1 = document.getElementById('infowindow-content1');
+        infowindow1.setContent(infowindowContent1);
+        
+        var marker1 = new google.maps.Marker({
+          map: map1
+        });
+        marker1.addListener('click', function() {
+          infowindow1.open(map1, marker1);
+        });
+        autocomplete1.addListener('place_changed', function() {
+            infowindow1.close();
+            var place1 = autocomplete1.getPlace();
+            if (!place1.geometry) {
+              return;
+            }
+            
+            if (place1.geometry.viewport) {
+              map1.fitBounds(place1.geometry.viewport);
+            } else {
+              map1.setCenter(place1.geometry.location);
+              map1.setZoom(17);
+            }
+
+            marker1.setPlace({
+              placeId: place1.place_id,
+              location: place1.geometry.location
+            });
+            marker1.setVisible(true);
+
+            infowindowContent1.children['place-name1'].textContent = place1.name;
+            infowindowContent1.children['place-address1'].textContent = place1.formatted_address;
+            infowindow1.open(map1, marker1);
+  			
+            $("#updateTravelPlaceAjaxData [name=placeName]").val(place1.name);
+            $("#updateTravelPlaceAjaxData [name=placeAddress]").val(place1.formatted_address);
+          });
       }
 </script>
 </body>

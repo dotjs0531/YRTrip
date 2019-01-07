@@ -94,8 +94,9 @@ public class TravelBoardController {
 
 	//등록처리
 	@RequestMapping(value = { "/insertTravelBoardform" }, method = RequestMethod.POST)
-	public String insertTravelBoardform(@ModelAttribute("travelBoard") TravelBoardVO vo) {
+	public String insertTravelBoardform(@ModelAttribute("travelBoard") TravelBoardVO vo, Model model) {
 		travelBoardService.insertTravelBoard(vo);
+		model.addAttribute("travelBoard", travelBoardService.getTravelBoard(vo));
 		return "travel/insertTravelBoard";
 	}
 

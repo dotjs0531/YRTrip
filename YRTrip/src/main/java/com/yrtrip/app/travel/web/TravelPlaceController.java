@@ -78,7 +78,6 @@ public class TravelPlaceController {
 			placePicFile.transferTo(new File(path, filename));
 
 		vo.setPlacePic(filename);
-		System.out.println("=================================================================="+filename);
 	}
 		travelPlaceService.insertTravelPlace(vo);
 		return "redirect:getTravelPlaceList";
@@ -133,6 +132,7 @@ public class TravelPlaceController {
 	@ResponseBody
 	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
 		travelPlaceService.insertTravelPlace(vo);
+		System.out.println("--------------------------------------------------ajax탄다");
 		return travelPlaceService.getTravelPlace(vo);
 	}
 

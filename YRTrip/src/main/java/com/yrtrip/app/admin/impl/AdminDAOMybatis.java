@@ -13,6 +13,7 @@ import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.qna.QnaVO;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.user.UserVO;
 
 @Repository
 public class AdminDAOMybatis {
@@ -20,7 +21,18 @@ public class AdminDAOMybatis {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	
+	public int totalOrderPrice(OrderVO vo) {
+		return sqlSession.selectOne("admin.totalOrderPrice", vo);
+	}
+	public int countOrderAmount(OrderVO vo) {
+		return sqlSession.selectOne("admin.countOrderAmount", vo);
+	}
+	public int countTravelAmount(TravelBoardVO vo) {
+		return sqlSession.selectOne("admin.countTravelAmount", vo);
+	}
+	public int countUserAmount(UserVO vo) {
+		return sqlSession.selectOne("admin.countUserAmount", vo);
+	}
 	public List<Map> getTinfoChart(String day) {
 		return sqlSession.selectList("admin.getTinfoChart", day);
 	}

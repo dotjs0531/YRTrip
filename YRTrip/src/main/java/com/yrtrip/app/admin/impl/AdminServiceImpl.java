@@ -13,12 +13,30 @@ import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.qna.QnaVO;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.user.UserVO;
 
 
 @Service
 public class AdminServiceImpl implements AdminService {
 
 	@Autowired AdminDAOMybatis dao;
+	
+	@Override
+	public int totalOrderPrice(OrderVO vo) {
+		return dao.totalOrderPrice(vo);
+	}
+	@Override
+	public int countOrderAmount(OrderVO vo) {
+		return dao.countOrderAmount(vo);
+	}
+	@Override
+	public int countTravelAmount(TravelBoardVO vo) {
+		return dao.countTravelAmount(vo);
+	}
+	@Override
+	public int countUserAmount(UserVO vo) {
+		return dao.countUserAmount(vo);
+	}
 	
 	@Override
 	public List<Map> getTinfoChart(String day) {

@@ -20,9 +20,6 @@
 	FROM TRAVEL_PLACET
  	<where>
 	<choose>
-		<when test="searchCondition != null and searchCondition == 'placeTitle'">
-			AND PLACE_TITLE LIKE '%' || #{searchKeyword} || '%'
-		</when>	
 		<when test="searchCondition != null and searchCondition == 'placeName'">
 			AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
 		</when>	

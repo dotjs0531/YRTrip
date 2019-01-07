@@ -168,10 +168,23 @@ jQuery( document ).ready(function( $ ) {
 			<div>
 				<div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive" style="min-height:450px;">
-            <form name="frm" class="form-inline">
-				<input type="hidden" name="page" />
-			</form>
-						
+                	<div class="form-group single-pricing-table" style="width:670px; color:black;">
+                	<form name="frm" class="form-inline">
+                     <div class="form-group"
+                        style="padding-bottom: 10px; float: center">
+                        <select name="searchCondition" class="form-control">
+                           <option value="placeName">장소명
+                           <option value="userId">글쓴이
+                        </select> <input type="text" name="searchKeyword" class="form-control">
+                        <button class="btn btn-warning signupbtn">검색</button>
+                     </div>
+                  </form>
+                  </div>
+                  <div>
+		            <form name="frm" class="form-inline">
+						<input type="hidden" name="page" />
+					</form>
+				</div>		
 <!-- 여행기 리스트 -->
 
    			<c:forEach items="${travelPlaceList}" var="board">

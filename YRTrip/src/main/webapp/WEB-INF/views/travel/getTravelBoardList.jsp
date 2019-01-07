@@ -222,6 +222,7 @@ $("#autocompleteTinfoList").change(function(){
 						
 <!-- 여행기 리스트 -->
    			<c:forEach items="${travelBoardList}" var="board">
+   			<c:if test="${board.travelNo != '0'}">
 				<div class="content-box">
 							<div style="width:140px; height:80px;">
 							<c:if test="${board.travelPic != null}">
@@ -253,12 +254,9 @@ $("#autocompleteTinfoList").change(function(){
 								<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userId}</a>
 							</c:if>
 							</span>
-							<span class="pull-right">
-								<a data-placement="right" title="Like" style="padding-top:25px;">
-								<i class="fa fa-heart"></i> ${board.travelLike}</a>
-							</span>
 						</div>
 					</div>
+					</c:if>
 				</c:forEach>
 
 				<!-- 페이징처리 -->

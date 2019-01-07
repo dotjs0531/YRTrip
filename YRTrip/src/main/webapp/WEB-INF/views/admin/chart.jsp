@@ -167,7 +167,7 @@ function ajaxData4() {
 			var chartData = [];
 			chartData.push([ '시간대', '거래량', {type: 'string', role: 'tooltip'} ])
 			for (i = 0; i < data.length; i++) {
-				var tooltip = data[i].ranktime+ " : " +data[i].counttime
+				var tooltip = data[i].ranktime+ "시 : " +data[i].counttime
 				var subarr = [ data[i].ranktime, parseInt(data[i].counttime), tooltip ];
 				chartData.push(subarr);
 			}
@@ -179,7 +179,7 @@ function ajaxData4() {
 		
 	});
 }
-/* var options5 = {
+ var options5 = {
 		width : 590,
 		height : 250,
 		colors: ['#e0440e', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6']
@@ -202,10 +202,10 @@ function ajaxData5() {
 		dataType : 'json',
 		success : function(data) {
 			var chartData = [];
-			chartData.push([ '사원명', '사원수', {type: 'string', role: 'tooltip'} ])
+			chartData.push([ '날짜', '총 거래액', {type: 'string', role: 'tooltip'} ])
 			for (i = 0; i < data.length; i++) {
-				var tooltip = data[i].ranktinfoid+ " : " +data[i].counttinfoid
-				var subarr = [ data[i].ranktinfoid, parseInt(data[i].counttinfoid), tooltip ];
+				var tooltip = data[i].perday+ " : " +data[i].totalprice
+				var subarr = [ data[i].perday, parseInt(data[i].totalprice), tooltip ];
 				chartData.push(subarr);
 			}
 			//챠트 그리기
@@ -239,10 +239,10 @@ function ajaxData6() {
 		dataType : 'json',
 		success : function(data) {
 			var chartData = [];
-			chartData.push([ '사원명', '사원수', {type: 'string', role: 'tooltip'} ])
+			chartData.push([ '날짜', '총 거래량', {type: 'string', role: 'tooltip'} ])
 			for (i = 0; i < data.length; i++) {
-				var tooltip = data[i].ranktinfoid+ " : " +data[i].counttinfoid
-				var subarr = [ data[i].ranktinfoid, parseInt(data[i].counttinfoid), tooltip ];
+				var tooltip = data[i].perday+ " : " +data[i].totalamount
+				var subarr = [ data[i].perday, parseInt(data[i].totalamount), tooltip ];
 				chartData.push(subarr);
 			}
 			//챠트 그리기
@@ -253,7 +253,7 @@ function ajaxData6() {
 		}
 		
 	});
-} */
+}
 </script>
 </head>
 

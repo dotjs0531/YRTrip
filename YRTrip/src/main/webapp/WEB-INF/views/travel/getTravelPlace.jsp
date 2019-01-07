@@ -23,9 +23,6 @@
 	background-color: white;
 }
 
-#map {
-	height: 400px;
-}
 body { padding-top: 20px; }
 #myCarousel .nav a small {
     display:block;
@@ -88,7 +85,7 @@ function del(placeNo){
 	});
 </script>
 </head>
-<body>
+<body style="font-family:"NanumSquareRoundR">
 
 	<section class="about_us_area" id="about">
 		<div class="container">
@@ -122,17 +119,26 @@ function del(placeNo){
 				  <div class="carousel-inner">
 				    <div class="active item">
 				    	<blockquote>
+				    	<!-- 카톡 공유하기 버튼 -->
+				    	<a id="kakao-link-btn" href="javascript:;" style="float:right; color:#f9bf3b;">
+							<i class="fas fa-comment"></i>
+						</a>
+
+				    	<div style="display:inline-block">
+				    	<h3>${travelPlace.placeTitle}</h3> 
+						</div>
+						<hr />
 				    	<div style="float:right;">
 				    		${fn:substring(travelPlace.placeVisitDate, 0, 10)}
 				    		</div>
-				    		<h3>${travelPlace.placeTitle}</h3> 
 				    		<p> ${travelPlace.placeContent}</p>
 				    	<div style="float:right;">
-					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}">${travelPlace.userId}</c:if>
+					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}"><br><br>작성자 | ${travelPlace.userId}</c:if>
 					        <c:if test="${sessionScope.login.userId ne travelPlace.userId}">
-							<a href="getYourTravelList?userId=${travelPlace.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">- ${travelPlace.userId}</a>
+							<a href="getYourTravelList?userId=${travelPlace.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;"><br><br>작성자 | ${travelPlace.userId}</a>
 							</c:if>
-				    	</div>
+				    	</div><br><br>
+				    	<i class="fa fa-heart"></i> ${travelPlace.placeLike}
 				    	</blockquote>
 				    	<div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>
 				    </div>
@@ -145,10 +151,10 @@ function del(placeNo){
        <div class="item active" style="height:300px;">
         <div style="min-height: 300px;">
 							<c:if test="${travelPlace.placePic ne null}">
-								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" style="background-size: cover;" />
+								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" style="width:100%"/>
 							</c:if>
 							<c:if test="${travelPlace.placePic eq null}">
-							<img src="./images/travel/placenoimage.jpg" class="img-responsive" style="background-size: cover;" >
+							<img src="./images/travel/placenoimage.jpg" style="width:100%" >
 							</c:if>
 	</div>
           <div class="carousel-caption">
@@ -158,9 +164,8 @@ function del(placeNo){
         </div>
  
          <div class="item" style="height:300px;">
-                    <div id="map"></div>
+                    <div id="map-canvas" style="width: 100%; height: 340px" title="${travelPlace.userId}님이 방문한 장소입니다."></div>
            <div class="carousel-caption">
-			<p>크게보기</p>
           </div>
         </div>
         <ul class="nav nav-pills nav-justified">
@@ -189,5 +194,81 @@ function del(placeNo){
 			</div>
 
 	</section>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script>
+<script>
+function initMap() {
+    
+    var mapOptions = {
+                        zoom: 18,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+    var map = new google.maps.Map(document.getElementById("map-canvas"),
+                                mapOptions);
+     
+    var size_x = 40;
+    var size_y = 40;
+ 
+    var image = new google.maps.MarkerImage( '',
+                                                new google.maps.Size(size_x, size_y),
+                                                '',
+                                                '',
+                                                new google.maps.Size(size_x, size_y));
+     
+    var address = '${travelPlace.placeAddress}';
+    var marker = null;
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            marker = new google.maps.Marker({
+                            map: map,
+                            icon: image,
+                            title: '${travelPlace.placeName}',
+                            position: results[0].geometry.location
+                        });
+
+            var content = "${travelPlace.placeName}<br>${travelPlace.placeAddress}";
+         
+            var infowindow = new google.maps.InfoWindow({ content: content});
+            google.maps.event.addListener(marker, "click", function() {infowindow.open(map,marker);});
+        } else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+    });
+     
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+	  
+	// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('4115609fb50877ceef895d9a2db54237');
+	// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+	Kakao.Link.createDefaultButton({
+		container : '#kakao-link-btn',
+		objectType : 'feed',
+		content : {
+			title : '${travelPlace.placeTitle}',
+			description : '${travelPlace.placeContent}',
+			imageUrl: 'https://postfiles.pstatic.net/MjAxODEyMjlfNiAg/MDAxNTQ2MDE0ODM1ODk5.VlG0P4NPq3mfRH0WkShxFV1TQFTrxJzDCSrkglA9g-kg.ClRMBKh_OXXzAFp7xDzEwlTzFCH1sb0ZCrFiOLMCDcMg.PNG.dotjs0531/%EB%8F%84%EC%8B%9C+%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4+(1).png?type=w773',
+			link : {
+				mobileWebUrl : document.location.href,
+				webUrl : document.location.href
+			}
+		},
+		social : {
+		},
+		buttons : [ {
+			title : '웹으로 보기',
+			link : {
+				mobileWebUrl : document.location.href,
+				webUrl : document.location.href
+			}
+		} ]
+	});
+	//]]>
+</script>
 </body>
 </html>

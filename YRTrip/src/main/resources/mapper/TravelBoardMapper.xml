@@ -127,7 +127,6 @@
 		TRAVEL_END = TO_DATE(#{travelEnd}, 'yyyy-mm-dd hh24:mi:ss'),
 		TRAVEL_TITLE = #{travelTitle},
 		TRAVEL_CONTENT = #{travelContent},
-		TINFO_ID = #{tinfoId},
 		TRAVEL_WITH = #{travelWith}
 		<if test="travelPic != null and travelPic != ''">
 		,TRAVEL_PIC = #{travelPic}
@@ -167,12 +166,14 @@
 			TRAVEL_DATE,
 			TRAVEL_HIT,
 			TRAVEL_LIKE,
-			TINFO_ID,
+			B.TINFO_ID,
+			TINFO_CITY,
 			USER_ID,
 			TRAVEL_WITH,
 			TRAVEL_PIC
-	FROM TRAVELBOARDT
+	FROM TRAVELBOARDT B, TRAVELINFOT I
 	WHERE TRAVEL_NO = #{travelNo}
+		  AND B.TINFO_ID = I.TINFO_ID
 </select>
 <select id="getTravelPlaceList" parameterType="travelPlace" resultType="travelPlace">
 SELECT PLACE_NO,

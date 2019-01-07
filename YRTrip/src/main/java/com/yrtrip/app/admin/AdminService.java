@@ -9,9 +9,14 @@ import com.yrtrip.app.partner.PartnerVO;
 import com.yrtrip.app.product.ProductVO;
 import com.yrtrip.app.qna.QnaVO;
 import com.yrtrip.app.travel.TravelBoardVO;
+import com.yrtrip.app.user.UserVO;
 
 public interface AdminService {
 	
+	public int totalOrderPrice(OrderVO vo);
+	public int countOrderAmount(OrderVO vo);
+	public int countTravelAmount(TravelBoardVO vo);
+	public int countUserAmount(UserVO vo);
 	public List<Map> getTinfoChart(String day);	
 	public List<Map> getSellerChart(String day);	
 	public List<Map> getDayChart(String day);	
