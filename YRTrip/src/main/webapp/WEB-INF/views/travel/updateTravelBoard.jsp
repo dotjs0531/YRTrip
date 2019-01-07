@@ -279,6 +279,7 @@ $(function(){
 	
    /* 장소 추가 modal */
    $("#insertTravelPlaceButton").click(function(){
+	   jQuery.noConflict();
     	$('div#insertTravelPlace').modal(true);
     	$('.modal').on('hidden.bs.modal', function (e) {
 	    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
@@ -295,7 +296,8 @@ $(function(){
  		$("#updateTravelPlaceAjaxData [name=placePic]").val(div[0].data.placePic);
  		$("#updateTravelPlaceAjaxData [name=placeContent]").val(div[0].data.placeContent);
  		$("#updateTravelPlaceAjaxData [name=placeVisitDate]").val((div[0].data.placeVisitDate).substring(0,10));
-    	$('div#updateTravelPlace').modal(true);
+ 		jQuery.noConflict();
+ 		$('div#updateTravelPlace').modal(true);
 	});	
    
     /* 사진 업로드 Board */
@@ -380,29 +382,39 @@ $(function(){
 
 
 	//장소 등록
-	$("#insertTravelPlaceBtn").click(function(test2){
+ 	$("#insertTravelPlaceBtn").click(function(){
+		jQuery.noConflict();
+		var form = $("#insertTravelPlaceAjaxData")[0];        
+        var formData = new FormData(form);
 
-		
-		/* 		 $("#insertTravelPlaceAjaxData").ajaxForm({
-	            url : "/insertTravelPlaceAjax",
-	            enctype : "multipart/form-data",
-	            dataType : "json",
-	            success : function(result){
-	            	var div = makeTravelPlaceView(result);
-	    			$(div).prependTo("#travelPlaceList");
-	    			jQuery.noConflict();
-	    			$('#insertTravelPlace').modal("hide");
-	            };
-		 $("#insertTravelPlaceAjaxData").submit();
-	        }); */
-		
-/* 		var params = $("#insertTravelPlaceAjaxData").serialize();
+        $.ajax({
+            cache : false,
+            url : "insertTravelPlaceAjax",
+            processData: false,
+            contentType: false,
+            type : 'POST', 
+            data : formData, 
+            success : function(data) {
+            	var div = makeTravelPlaceView(data);
+    			$(div).prependTo("#travelPlaceList");
+    			jQuery.noConflict();
+    			$('#insertTravelPlace').modal("hide");
+            }, 
+    
+            error : function(xhr, status) {
+                alert(xhr + " : " + status);
+            }
+        }); 
+        // $.ajax */    }
+		/* 
+ 		var params = $("#insertTravelPlaceAjaxData").serialize();
 	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
+	 		
 			var div = makeTravelPlaceView(datas);
 			$(div).prependTo("#travelPlaceList");
 			jQuery.noConflict();
 			$('#insertTravelPlace').modal("hide");
-		});  */
+		}); */
 	});
 	
 	//장소 삭제

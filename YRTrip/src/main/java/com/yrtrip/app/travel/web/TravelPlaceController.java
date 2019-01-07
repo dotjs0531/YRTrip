@@ -130,9 +130,17 @@ public class TravelPlaceController {
 // 등록Ajax
 	@RequestMapping("/insertTravelPlaceAjax")
 	@ResponseBody
-	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo) {
+	public TravelPlaceVO insertTravelPlaceAjax(TravelPlaceVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/travel");
+
+		MultipartFile placePicFile = vo.getPlacePicFile();
+		if (!placePicFile.isEmpty() && placePicFile.getSize() > 0) {
+			String filename = placePicFile.getOriginalFilename();
+			placePicFile.transferTo(new File(path, filename));
+
+		vo.setPlacePic(filename);
+	}
 		travelPlaceService.insertTravelPlace(vo);
-		System.out.println("--------------------------------------------------ajax탄다");
 		return travelPlaceService.getTravelPlace(vo);
 	}
 
