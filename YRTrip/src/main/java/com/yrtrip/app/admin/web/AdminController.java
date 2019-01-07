@@ -42,10 +42,13 @@ public class AdminController {
 	
 	//관리자 첫화면
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
-	public String getLikeList(Model model) {
+	public String getLikeList(Model model, OrderVO ovo, TravelBoardVO tvo, UserVO uvo) {
+		model.addAttribute("totalOrderPrice", adminService.totalOrderPrice(ovo));
+		model.addAttribute("countOrderAmount", adminService.countOrderAmount(ovo));
+		model.addAttribute("countTravelAmount", adminService.countTravelAmount(tvo));
+		model.addAttribute("countUserAmount", adminService.countUserAmount(uvo));
 		return "admin/admin";
 	}
-	
 	
 	//회원관리
 	@RequestMapping(value = "/manageUser", method = RequestMethod.GET)

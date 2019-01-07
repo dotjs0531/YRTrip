@@ -155,7 +155,16 @@ public class TravelPlaceController {
 // 수정Ajax
 	@RequestMapping("/updateTravelPlaceAjax")
 	@ResponseBody
-	public TravelPlaceVO updateTravelPlaceAjax(TravelPlaceVO vo) {
+	public TravelPlaceVO updateTravelPlaceAjax(TravelPlaceVO vo, HttpServletRequest request) throws IllegalStateException, IOException {
+		String path = request.getSession().getServletContext().getRealPath("/images/travel");
+
+		MultipartFile placePicFile = vo.getPlacePicFile();
+		if (!placePicFile.isEmpty() && placePicFile.getSize() > 0) {
+			String filename = placePicFile.getOriginalFilename();
+			placePicFile.transferTo(new File(path, filename));
+
+		vo.setPlacePic(filename);
+	}
 		travelPlaceService.updateTravelPlace(vo);
 		return travelPlaceService.getTravelPlace(vo);
 	}

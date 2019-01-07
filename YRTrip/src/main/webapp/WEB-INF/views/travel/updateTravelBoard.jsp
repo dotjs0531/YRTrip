@@ -293,7 +293,7 @@ $(function(){
  		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
  		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
  		$("#updateTravelPlaceAjaxData [name=placeTitle]").val(div[0].data.placeTitle);
- 		$("#updateTravelPlaceAjaxData [name=placePic]").val(div[0].data.placePic);
+ 		$("#updateTravelPlaceAjaxData [name=placefile]").val(div[0].data.placePic);
  		$("#updateTravelPlaceAjaxData [name=placeContent]").val(div[0].data.placeContent);
  		$("#updateTravelPlaceAjaxData [name=placeVisitDate]").val((div[0].data.placeVisitDate).substring(0,10));
  		jQuery.noConflict();
@@ -318,6 +318,16 @@ $(function(){
 			var filename = $(this).val().split('/').pop().split('\\').pop();
 		}
 		$("#placefile").val(filename);
+	});
+    
+    /* 사진 업로드 insert place */
+	$("#updateplacefileInput").on('change', function(){ 
+		if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$("#updateplacefile").val(filename);
 	});
    
 
@@ -405,16 +415,6 @@ $(function(){
                 alert(xhr + " : " + status);
             }
         }); 
-        // $.ajax */    }
-		/* 
- 		var params = $("#insertTravelPlaceAjaxData").serialize();
-	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
-	 		
-			var div = makeTravelPlaceView(datas);
-			$(div).prependTo("#travelPlaceList");
-			jQuery.noConflict();
-			$('#insertTravelPlace').modal("hide");
-		}); */
 	});
 	
 	//장소 삭제
@@ -430,14 +430,37 @@ $(function(){
 	});
 	//장소 수정
 	$("#updateTravelPlaceBtn").click(function(){
-		var params = $("#updateTravelPlaceAjaxData").serialize();
+		jQuery.noConflict();
+		var form = $("#updateTravelPlaceAjaxData")[0];        
+        var formData = new FormData(form);
+        $.ajax({
+            cache : false,
+            url : "updateTravelPlaceAjax",
+            processData: false,
+            contentType: false,
+            type : 'POST', 
+            data : formData, 
+            success : function(data) {
+            	var div = makeTravelPlaceView(data);
+    			$(div).prependTo("#travelPlaceList");
+    			jQuery.noConflict();
+    			$('#updateTravelPlace').modal("hide");
+    			$("#c"+placeNo).remove();
+    			loadTravelPlaceList();
+            }, 
+    
+            error : function(xhr, status) {
+                alert(xhr + " : " + status);
+            }
+        }); 
+		/* var params = $("#updateTravelPlaceAjaxData").serialize();
  		var placeNo = $("#updateTravelPlaceAjaxData [name=placeNo]").val();
 		$.getJSON("updateTravelPlaceAjax", params, function(datas){
 			jQuery.noConflict();
 			$('#updateTravelPlace').modal("hide");
 			$("#c"+placeNo).remove();
 			loadTravelPlaceList();
-		});
+		}); */
 	});
     
 	loadTravelPlaceList();

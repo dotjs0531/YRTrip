@@ -53,11 +53,11 @@
            <div class="card-body">
              <h4 class="card-title">1:1문의글 관리</h4>
              <div class="input-group col-xs-12" style="float:right;">
-                   <!-- 검색 창 & 페이징 처리 -->
-                		<form name="frm" class="form-inline">
+                   <!-- 검색 창 -->
+                	<!-- 	<form name="frm" class="form-inline">
                 			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 								
-								<!-- 검색 내용 -->
+								검색 내용
 								<div style="padding-bottom:5px">
 								<label class="col-sm-2 control-label">검색어</label>
 								<select name="searchCondition" class="form-control">
@@ -67,14 +67,14 @@
 								<input type="text" name="searchKeyword" class="form-control">
 								</div>
 								
-								<!-- 문의날짜 -->
+								문의날짜
 								<div style="padding-bottom:5px">
 								<label class="col-sm-2 control-label">문의일</label>
 								<input type="date" name="searchDateStart" class="form-control">
 								<input type="date" name="searchDateEnd" class="form-control">
 								</div> 
 								
-								<!-- 답변여부 -->
+								답변여부
 								<div>
 								<label class="col-sm-2 control-label">답변여부</label>
 								<input type="radio" name="qnaAnswer" value="" class="form-control" checked>전체&nbsp;
@@ -83,7 +83,7 @@
 								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 								</div>
          					</div>
-						</form>
+						</form> -->
                  </div>
              <div class="table-responsive">
                <table class="table table-striped" style="text-align: center;">

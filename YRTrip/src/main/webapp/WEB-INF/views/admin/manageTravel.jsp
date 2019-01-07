@@ -52,11 +52,18 @@
          <div class="card">
            <div class="card-body">
              <h4 class="card-title">여행관리</h4>
-             <div class="input-group col-xs-12" style="width:300px; float:right;">
-                   <input type="text" class="form-control file-upload-info" style="width:200px;">
-                  <span class="input-group-append">
-                     <button class="file-upload-browse btn" type="button">검색</button>
+             <div class="input-group col-xs-12" style="width:450px; float:right;">
+             <form name="./getManageTravelList" class="form-inline">
+		           <select name="searchCondition" class="form-control" id="searchCondition">
+							<option value="travelTitle">제목</option>
+							<option value="travelContent">내용</option>
+							<option value="userId">작성자</option>
+				   </select>
+                   <input type="text" class="form-control file-upload-info" name="searchKeyword" style="width:200px;" placeholder="검색할 내용을 입력하세요.">
+                   <span class="input-group-append">
+                     <button class="file-upload-browse btn" type="submit">검색</button>
                    </span>
+             </form>
                  </div>
              <div class="table-responsive">
                <table class="table table-striped" style="text-align: center;">

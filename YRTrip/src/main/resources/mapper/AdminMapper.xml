@@ -149,6 +149,17 @@ SELECT	PARTNER_ID,
 			TINFO_ID,
 			USER_ID
 	FROM TRAVELBOARDT
+		  <where>
+		<if test="searchCondition != null and searchCondition == 'travelTitle'">
+			AND TRAVEL_TITLE LIKE '%' || #{searchKeyword} || '%'
+		</if>	
+		<if test="searchCondition != null and searchCondition == 'travelContent'">
+			 AND TRAVEL_CONTENT LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition != null and searchCondition == 'userId'">
+			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+		</if>
+	</where>
 	ORDER BY TRAVEL_NO DESC
 </select>
 

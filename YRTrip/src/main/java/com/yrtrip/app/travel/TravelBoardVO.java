@@ -28,7 +28,8 @@ public class TravelBoardVO  extends LikeVO {
 	private String selectedTinfoModal;
 	private String searchTinfo;
 	
-	private String sortCol;
+	private String searchCondition;
+	private String searchKeyword;
 	private int first;
 	private int last;
 	
@@ -137,16 +138,20 @@ public class TravelBoardVO  extends LikeVO {
 		this.travelPicFile = travelPicFile;
 	}
 	@JsonIgnore
-	public String getSortCol() {
-		return sortCol;
-	}
-
-	public void setSortCol(String sortCol) {
-		this.sortCol = sortCol;
-	}
-	@JsonIgnore
 	public int getFirst() {
 		return first;
+	}
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
 	}
 	public void setFirst(int first) {
 		this.first = first;
@@ -190,6 +195,6 @@ public class TravelBoardVO  extends LikeVO {
 				+ ", travelContent=" + travelContent + ", travelDate=" + travelDate + ", travelHit=" + travelHit
 				+ ", travelLike=" + travelLike + ", tinfoId=" + tinfoId + ", userId=" + userId + ", travelWith="
 				+ travelWith + ", travelPic=" + travelPic + ", selectedTinfoModal=" + selectedTinfoModal
-				+ ", searchTinfo=" + searchTinfo + ", sortCol=" + sortCol + ", first=" + first + ", last=" + last + "]";
+				+ ", searchTinfo=" + searchTinfo + ", first=" + first + ", last=" + last + "]";
 	}
 }
