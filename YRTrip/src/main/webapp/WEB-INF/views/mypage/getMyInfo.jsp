@@ -548,7 +548,7 @@ function ck_phone(){
 							
 							비밀번호 확인 *
 							<div>
-							<input type="password" id="userPw_ck" name="userPw_ck" oninput="ck_signup()">
+							<input type="password" id="userPw_ck" name="userPw_ck" oninput="ck_signup()" required>
 							<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 							</div>
 							
@@ -585,12 +585,12 @@ function ck_phone(){
 							성별 * 
 							<div id="wrap_gender">
 								<span id="wrap_man" class="gender">
-								<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '남'}">checked</c:if> required>
+								<input type="radio" id="man" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '남'}">checked</c:if> required disabled>
 								<label for="man"> 남자 </label>
 								</span>
 					
 								<span id="wrap_woman" class="gender no_line">
-								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '여'}">checked</c:if> required>
+								<input type="radio" id="woman" name="userGen" onclick="ck_gender()" oninput="ck_signup()" value="${user.userGen}" <c:if test="${user.userGen eq '여'}">checked</c:if> required disabled>
 								<label for="woman" onclick="ck_gender()"> 여자 </label>
 								</span>
 							</div>
@@ -598,7 +598,7 @@ function ck_phone(){
 							<br/>
 							계좌
 							<div class="form-inline">
-							<select name="userBankSelect" id="userBankSelect" class="form-control" oninput="ck_signup()">
+							<select name="userBankSelect" id="userBankSelect" class="form-control">
 								<option value="" <c:if test="${empty user.userBank}">selected</c:if> disabled="disabled">은행 선택</option>
 								<option value="SC제일" >SC제일
 								<option value="KEB하나" >KEB하나
@@ -624,7 +624,7 @@ function ck_phone(){
 								<option value="상호저축" >상호저축
 								<option value="산림조합" >산림조합
 							</select>
-							<input type="hidden" id="userBank" name="userBank" value="${user.userBank}" oninput="ck_signup()">
+							<input type="hidden" id="userBank" name="userBank" value="${user.userBank}">
 							&nbsp;<input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌 번호를 입력해주세요." size="54">
 							</div>
 							

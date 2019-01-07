@@ -37,66 +37,6 @@ $(function(){
 		}
 	});
 });
-/* autocomplete */
-$(document).ready(function(){ 
-   //input id autocomplete
-   var selectedLocation = document.getElementsByName('searchCheck');
-	var searchCheckVal;
-	for(var i=0; i<selectedLocation.length; i++) {
- 	  if(selectedLocation[i].checked) {
-  		 	searchCheckVal = selectedLocation[i].value;
-  		 }
-	}
-    var context = '${pageContext.request.contextPath}';
-    $( "#autocompleteTinfoList").autocomplete({
-     source : function(request, response){
-      $.ajax({
-          type:"post",
-          dataType:"json",
-          url:context + "/getTravelInfoListData",
-          data:{"tinfoList":$("#autocompleteTinfoList").val(), "searchCheck":$("[name='searchCheck']:checked").val()},
-          success:function(data){
-           response($.map(data, function(item){
-            return{
-             label:item.tinfoCountry + " " + item.tinfoState + " " + item.tinfoCity,
-             value:item.tinfoCity,
-             tinfoId:item.tinfoId
-            }
-           }));
-          }
-         })
-     },
-     autoFocus:true,
-     matchContains:true,
-     minLength:0,
-     delay:0,
-     select:function(event, ui){
-    	 $("#tinfoList").val(ui.item.value);
-         selectedList = ui.item.tinfoId;
-     	 $("#tinfoListDisp").val(selectedList);
-         var flag = false;
-         $("#autocompleteTinfoList").keydown(function(e){
-          if(e.keyCode == 13){
-           if(!flag){
-             fn_regist();
-            flag = true;
-           }
-          }
-         }); 
-          
-        },
-        focus:function(event, ui){return false;}
-       });
-});
-
-$(function initSelectdList() {
-$("#autocompleteTinfoList").change(function(){
-	selectedList = "";
-  $("#tinfoList").val("");
-  $("#tinfoListDisp").val("");
-  $('[name=searchTinfoListbox]').val("");
-});
-});
 </script>
 <style>
 input[type=submit] {

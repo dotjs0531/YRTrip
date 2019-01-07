@@ -13,6 +13,9 @@
       <if test="searchTinfo != null">
          AND TINFO_ID = #{searchTinfo}
       </if>
+      <if test="partnerClass != null">
+      	 AND PARTNER_CLASS LIKE '%' || #{partnerClass} || '%'
+      </if>
    </where>
    ORDER BY PARTNER_ID DESC
 </select>
@@ -39,8 +42,11 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
           AND PARTNER_START BETWEEN TO_DATE(#{searchPartnerStart}, 'YYYY-MM-DD' )
                        AND TO_DATE(#{searchPartnerEnd}, 'YYYY-MM-DD')
       </if>
-      <if test="searchTinfo != null">
+      <if test="searchTinfo != null and searchTinfo != ''">
          AND TINFO_ID = #{searchTinfo}
+      </if>
+      <if test="partnerClass != null and partnerClass != ''">
+      	 AND PARTNER_CLASS LIKE '%' || #{partnerClass} || '%'
       </if>
       AND P.USER_ID = U.USER_ID
    </where>
@@ -129,8 +135,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
                   PARTNER_CLASS   = #{partnerClass},
                   PARTNER_PERS   = #{partnerPers},
                   PARTNER_START   = #{partnerStart},
-                  PARTNER_END      = #{partnerEnd},
-                  TINFO_ID      = #{searchTinfo}
+                  PARTNER_END      = #{partnerEnd}
             WHERE   PARTNER_ID = #{partnerId}
 </update>
 <delete id="deletePartner" parameterType="int">

@@ -69,7 +69,6 @@
 <update id="updateUser" parameterType="user">
 	UPDATE USERT SET USER_PW = #{userPw},
 					 USER_NAME = #{userName},
-					 USER_GEN = #{userGen},
 					 USER_PHONE = #{userPhone},
 					 USER_BIRTH = #{userBirth},
 					 USER_EMAIL = #{userEmail}

@@ -120,11 +120,11 @@ $("#autocompleteTinfoList").change(function(){
                   </div>
                   <ul class=price-list>
                      <li><a href="getPartnerList" style="color: black">전체보기</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=여행" style="color: black">여행</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=문화" style="color: black">문화</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=맛집" style="color: black">맛집</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=교통" style="color: black">교통</a></li>
-                     <li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=숙소" style="color: black">숙소</a></li>
+                     <li><a href="getPartnerList?partnerClass=여행" style="color: black">여행</a></li>
+                     <li><a href="getPartnerList?partnerClass=문화" style="color: black">문화</a></li>
+                     <li><a href="getPartnerList?partnerClass=맛집" style="color: black">맛집</a></li>
+                     <li><a href="getPartnerList?partnerClass=교통" style="color: black">교통</a></li>
+                     <li><a href="getPartnerList?partnerClass=숙소" style="color: black">숙소</a></li>
                   </ul>
                   <div class="order-buton" style="padding-bottom: 1px;">
                      <a href="${pageContext.request.contextPath}/insertPartnerForm" class="insertPartner">글쓰기</a>
@@ -141,17 +141,28 @@ $("#autocompleteTinfoList").change(function(){
 						
 						<!-- 여행지 -->
 						<div style="padding-bottom:10px">
-							<div style="float:left" class="radio icheck-primary">
+						
+							<div class="radio icheck-primary">
 								<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
 								<label for="domestic">국내</label>
 							</div>
-							<div style="float:left; margin-right:10px" class="radio icheck-primary">
+							<div style="margin-right:10px" class="radio icheck-primary">
 								&nbsp;<input type="radio" id="overseas" name="searchCheck" value="overseas">
 								<label for="overseas">해외</label>
 							</div>
 							
-							<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListbox" style="width:63%;">
+							<select id="partnerClass" name="partnerClass" class="form-control" style="display:inline; width:18%; margin-right:10px">
+								<option value="" disabled="disabled" selected>카테고리</option>
+								<option value="여행">여행</option>
+								<option value="문화">문화</option>
+								<option value="맛집">맛집</option>
+								<option value="교통">교통</option>
+								<option value="숙소">숙소</option>
+							</select>
+							
+							<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListbox" style="width:43%;">
 							<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
+							
 						</div>
 						
 						<!-- <div style="padding-bottom:5px; padding-left:17%;">

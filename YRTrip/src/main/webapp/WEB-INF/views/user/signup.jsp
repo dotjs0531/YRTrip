@@ -449,7 +449,7 @@ input[type=radio]{
 				</div>
 				
 				<div>
-				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" oninput="ck_signup()">
+				<input type="password" id="userPw_ck" name="userPw_ck" placeholder="비밀번호 확인" oninput="ck_signup()" required>
 				<span id="MsgPwck" class="none" style="margin-left: auto; margin-right: auto;">유효성체크</span>
 				</div>
 				
