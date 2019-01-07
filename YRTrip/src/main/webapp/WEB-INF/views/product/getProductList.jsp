@@ -26,7 +26,7 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-	$(function(){
+	$(function() {
 		var productMenu = document.getElementById("productMenu");
 		productMenu.className = 'current-menu-item';
 		//가격 천단위 
@@ -35,7 +35,7 @@
 		var money2 = money.toLocaleString();
 		$("#itemPrice").text('');
 		$("#itemPrice").text('￦' + money2);
-		
+
 		//
 		function go_page(page) {
 			document.frm.page.value = page;
@@ -43,83 +43,103 @@
 		}
 	});
 </script>
-<script>		
-$(function(){
-	$('#product_view').on('show.bs.modal', function(e) {
-		var button = $(event.target) // Button that triggered the modal
-		var buttonstr = button.attr("id").substr(5);
- 		var param = {
-			itemId : buttonstr
-		}
-		$.getJSON("getProductAjax", param, function(data) {
-			var itemId = data.itemId;
-			var itemName = data.itemName;
-			var itemContent = data.itemContent;
-			var itemImgList = data.itemPic;
-			var itemImgSlipt = itemImgList.split(',');
-			
-			$("#modal-title").html(itemName);
-			$("#popup_itemId").html(itemId);
-			$("#popup_itemContent").html(itemContent);
-			for(var i in itemImgSlipt){
-			console.log(itemImgSlipt[0]);
-				$("#itemImg").attr("src", "./images/product/itemImgSlipt[i]");	
-			}
-			
-		});
+<script>
+	$(function() {
+		$('#product_view')
+				.on(
+						'show.bs.modal',
+						function(e) {
+							var button = $(event.target) // Button that triggered the modal
+							console.log(button);
+							var buttonstr = button.attr("id").substr(5);
+							var param = {
+								itemId : buttonstr
+							}
+							$
+									.getJSON(
+											"getProductAjax",
+											param,
+											function(data) {
+												var itemId = data.itemId;
+												var itemName = data.itemName;
+												var itemContent = data.itemContent;
+												var itemImgList = data.itemPic;
+												console.log(itemImgList);
+												var itemImgSlipt = itemImgList
+														.split(',');
+												console.log(itemImgSlipt);
+												var itemStar = data.itemStar;
+												var num = itemImgSlipt.length;
+												console.log(num);
+												$("#modal-title")
+														.html(itemName);
+												$("#popup_itemId").html(itemId);
+												$("#popup_itemContent").html(
+														itemContent);
+												$("div#itemStar").find("span").html(itemStar);
+												
+												//캐러셀
+												$("#item0").find("img").attr("src", "./images/product/"+ itemImgSlipt[0]);
+												
+												for (var i = 1; i < itemImgSlipt.length; i++) { //1, 2 ...
+													$(".carousel-indicators").append("<li data-target=\"#quote-carousel\" data-slide-to="+ i +"></li>");
+													$(".imgplus").append("<div class=\"item\" id=\"item"+i+"\"><div class=\"row\"><div class=\"col-12\"><img></div></div></div>");
+													$("#item"+i).find("img").attr("src","./images/product/"+ itemImgSlipt[i]);
+												}
+
+											});
+						});
 	});
-});
 </script>
 <script>
-$(function(){
-	 $(".insertbtn").click(function(e){
-		 if ("${sessionScope.login.userId}" == '') {
-			 e.preventDefault();
-	         alert("로그인이 필요한 서비스입니다");
-		 }
-		 else{
-			 $.ajax({
-				type:"GET",
-				url:"travelCountForInfo",
-				data:{userId : "${sessionScope.login.userId}"},
-				datatype : "integer",
-				success : function(data){
-					console.log(data);	
-					if(data == 0){
-						alert("여행글 하나 이상 작성후 물품판매 가능합니다");
+	$(function() {
+		$(".insertbtn").click(function(e) {
+			if ("${sessionScope.login.userId}" == '') {
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			} else {
+				$.ajax({
+					type : "GET",
+					url : "travelCountForInfo",
+					data : {
+						userId : "${sessionScope.login.userId}"
+					},
+					datatype : "integer",
+					success : function(data) {
+						console.log(data);
+						if (data == 0) {
+							alert("여행글 하나 이상 작성후 물품판매 가능합니다");
+						} else {
+							window.location = "./insertProduct";
+						}
 					}
-					else{
-						window.location = "./insertProduct";
-					}
-				}
-			});
-		 }
-      });
-	 $('[data-toggle="tooltip"]').tooltip(); 
-	 $(".loginRequired").click(function(e){
-		 if ("${sessionScope.login.userId}" == '') {
-			 e.preventDefault();
-	         alert("로그인이 필요한 서비스입니다");
-		 }
-	 })
-});
-	
+				});
+			}
+		});
+		$('[data-toggle="tooltip"]').tooltip();
+		$(".loginRequired").click(function(e) {
+			if ("${sessionScope.login.userId}" == '') {
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			}
+		})
+	});
 </script>
 <style>
-a#warn:hover{
+a#warn:hover {
 	
 }
 
-#btn-custom
-{
-    background: #f9bf3b none repeat scroll 0 0;
-    border-radius: 3px;
-    color: #fff;
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 40px;
-    text-transform: uppercase;
- }
+#btn-custom {
+	background: #f9bf3b none repeat scroll 0 0;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	margin-top: 20px;
+	padding: 10px 40px;
+	text-transform: uppercase;
+}
+
 #login-column {
 	width: 100%;
 	margin: 0 10px;
@@ -227,12 +247,14 @@ a#warn:hover{
 							<c:forEach items="${productList}" var="product">
 
 								<div class="col-4">
-									<div class="thumbnail" style="max-height:300px; min-height:300px">
+									<div class="thumbnail"
+										style="max-height: 300px; min-height: 300px">
 										<c:set var="productPicFile"
 											value="${fn:split(product.itemPic, ',')[0]}" />
 										<c:set var="pic" value="${productPicFile}" />
-										<a href="getProduct?itemId=${product.itemId}">
-										<img src="./images/product/${pic}" alt="" class="img-fluid" style="max-height:140px; min-height: 140px;"></a>
+										<a href="getProduct?itemId=${product.itemId}"> <img
+											src="./images/product/${pic}" alt="" class="img-fluid"
+											style="max-height: 140px; min-height: 140px;"></a>
 										<div class="caption">
 
 											<h4 class="pull-right" id="itemPrice">${product.itemPrice}</h4>
@@ -259,23 +281,25 @@ a#warn:hover{
 										<div class="space-five"></div>
 										<div class="btn-ground text-center">
 											<!-- <button> -->
-												<a class="loginRequired" data-toggle="tooltip" data-placement="bottom" title="상세페이지에서 수량결정하세요" href="./getProduct?itemId=${product.itemId}#quant">
-												<i class="fa fa-shopping-cart"> Cart</i></a>
-											
-											
+											<a class="loginRequired" data-toggle="tooltip"
+												data-placement="bottom" title="상세페이지에서 수량결정하세요"
+												href="./getProduct?itemId=${product.itemId}#quant"> <i
+												class="fa fa-shopping-cart"></i> Cart
+											</a>
+
+
 											<!-- </button> -->
-											<button id="item+${product.itemId}" type="button" 
-												class="btn btn-link" data-toggle="modal" 
-												data-target="#product_view" >
-												<i class="fa fa-search"> Quick View</i>
+											<button id="item+${product.itemId}" class="btn btn-link"
+												data-toggle="modal" data-target="#product_view">
+												<i class="fa fa-search"></i> Quick View
 											</button>
 										</div>
-											<%-- <c:forEach items="${order}" var="review">
+										<%-- <c:forEach items="${order}" var="review">
 												<p>
 													<a href="#">${review.reviewName}</a>
 												</p>
 											</c:forEach> --%>
-										
+
 										<div class="space-five"></div>
 
 									</div>
@@ -298,19 +322,47 @@ a#warn:hover{
 								<div class="modal-body">
 									<div class="row">
 										<div class="col-md-6 product_img">
-											<img src="#" id="itemImg">	
+											<div class="carousel slide" data-ride="carousel"
+												id="quote-carousel">
+												<!-- Bottom Carousel Indicators -->
+												<ol class="carousel-indicators">
+												<!-- 타켓0 -->
+													<li data-target="#quote-carousel" data-slide-to="0"
+														class="active"></li>
+												</ol>
+
+												<!-- Carousel Slides / Quotes -->
+												<div class="carousel-inner text-center imgplus">
+													<!-- 사진 0 -->
+													<div class="item active" id="item0">
+														<div class="row">
+															<div class="col-12">
+																<img src="">
+															</div>
+														</div>
+													</div>
+													
+												</div>
+
+												<!-- Carousel Buttons Next/Prev -->
+												<a data-slide="prev" href="#quote-carousel"
+													class="left carousel-control"></a> <a data-slide="next"
+													href="#quote-carousel" class="right carousel-control"></a>
+											</div>
 										</div>
 										<div class="col-md-6 product_content">
 											<h4>
 												<span class="pull-right" id="popup_itemId"></span>
 											</h4>
-											<div class="rating">
-												<span class="glyphicon glyphicon-star"></span> 
+											<div class="rating" id="itemStar">
+												<span class="glyphicon glyphicon-star"></span>
 												<!-- rating  -->
 											</div>
 											<p></p>
-											<h3>상세설명</h3>
-											<div id="popup_itemContent" class="pull-right"></div>
+											<div class="card">
+												<h3>상세설명</h3>
+												<div id="popup_itemContent" class="pull-right "></div>
+											</div>
 											<div class="row">
 												<!-- <div class="col-md-4 col-sm-6 col-xs-12">
 													<select class="form-control" name="select">

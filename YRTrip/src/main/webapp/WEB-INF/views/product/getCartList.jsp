@@ -86,31 +86,27 @@ $(function(){
 </script>
 <script>
 $(function(){
-	   $("#notice_ea").hide();
-	   $(".go_update").on('click', function(){
-	       var new_ea = $(".new_itemEa").val();
-	       var cartid = $(".cartId").attr("id").substr("6");
-	       var button = $(this).attr("id").substr(6);
-	       console.log(button);
-	       
-	       $.ajax({
-	          type:"GET",
+	$(".updatebutton").on('click', function(e){
+		var button = $(event.target);					//선택된 버튼
+		var buttonstr = button.attr("id").substr(12);	//해당 cartId찾아내기
+		var input =$("input#inputea"+buttonstr).val(); //해당 ea값 찾아내기
+		
+		$.ajax({
+	         type:"GET",
 	         url:"updateCart",
 	         data:{
-	            itemEa : new_ea,
-	             cartId : button
+	         		itemEa : input,
+	         		cartId : buttonstr
 	         },
 	         datatype: "text",
 	         success:function(data){
-	        	var ea = data.itemEa;
-	        	var price = $("#itemPrice").text();
-	            $("#notice_ea").show().text("수정완료");
-	            $("#notice_ea").fadeIn(3000);
-	            $("#notice_ea").fadeOut();
-	         }       
-	       });
-	    });
-	 });
+	        	 $("div#notice"+buttonstr).text("수량변경");
+	        	 $("div#notice"+buttonstr).fadeIn(3000);
+	        	 $("div#notice"+buttonstr).fadeOut();       	 
+	         }
+		});
+	});
+ });
 </script>
 </head>
 
@@ -149,17 +145,15 @@ $(function(){
 									<small class="text-muted">${cart.itemCondition}</small> <br>
 									<small class="text-muted cartId" id="cartId${cart.cartId}">${cart.cartId}</small> <br>
 									<%-- <small class="text-muted cartId">${cart.totalItemEa}</small> --%>
-									
 								</div> 
 								<div class="font-weight-bold col-2 itemPrice" id="itemPrice${cart.cartId}">${cart.itemPrice}원</div> <!-- 수정클릭하면 itemEa창 input창으로 바뀌게 -->
 								<%-- <span class="text-muted old_itemEa">${cart.itemEa}</span> --%>
-								
 								<div class="cartinfo col-2">
-									<input type="text" name="itemEa" class="form-control new_itemEa" id="new_itemEa${cart.cartId}" value="${cart.itemEa}"/>
+									<input type="text" name="itemEa" class="form-control inputea" id="inputea${cart.cartId}" value="${cart.itemEa}"/>
 									<br>
-									<button type="button" class="btn go_update col-12" id="update${cart.cartId}">수정</button>
+									<button type="button" class="btn col-12 updatebutton" id="updatebutton${cart.cartId}">수정</button>
 								</div>
-								<div class="text-muted col-2 text-center" id="notice_ea"></div>
+								<div class="text-muted col-2 text-center notice" id="notice${cart.cartId}"></div>
 						<%-- <c:set value="${cart}" var="cartonly" />
 						<input type="hidden" class="itemIteaEa" value="${cartonly.itemEa}"> --%>		
 <!-- dfjsldjfasdlf -->
