@@ -191,8 +191,8 @@ jQuery( document ).ready(function( $ ) {
 			
 					<div class="wrap">
 					<div class="tile"> 
-					  <c:if test="${not empty travelPlace.placePic}">
-								<img id="travelPic" src="./images/travel/${travelPlace.placePic}" />
+					  <c:if test="${travelPlace.placePic != null}">
+								<img src="./images/travel/${travelPlace.placePic}" />
 							</c:if>
 							<c:if test="${travelPlace.placePic == null}">
 							<img src="./images/travel/placenoimage.jpg" class="img-responsive">

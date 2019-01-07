@@ -11,7 +11,7 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script src="resources/vender/jquery.form.js"></script>
+<script src="resources/vender/jquery.form.min.js" type="text/javascript"></script>
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -259,61 +259,67 @@ background-color:#22313F;
 
 <script>
 
+/* Modal 여행테마 select */      
+function selectTravelWith(ele){
+  	 if(ele.value=='alone'){
+  	travelBoardModalfrm.travelPerson.disabled=true;
+   } else {
+	travelBoardModalfrm.travelPerson.disabled=false;	   
+   }   
+} 
+
 $(function(){
     var travelMenu = document.getElementById("travelMenu");
     travelMenu.className='current-menu-item';
-});
-jQuery( document ).ready(function( $ ) {
-		/* 여행등록 modal */
-	   $("#insertTravelBoardButton").click(function(){
-	    	$('div#insertTravelBoard').modal(true);
-		});
-		
-	   /* 장소 추가 modal */
-	   $("#insertTravelPlaceButton").click(function(){
-	    	$('div#insertTravelPlace').modal(true);
-	    	$('.modal').on('hidden.bs.modal', function (e) {
-		    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
-		    	});
-		});	 
-	   
-	   /* 장소 수정 modal */
-	   $("#travelPlaceList").on("click", ".btnUpd", function(){
-	 		var div = $(this).closest('.travelPlace');
-	 		$("#updateTravelPlaceAjaxData [name=placeNo]").val(div[0].data.placeNo);
-	 		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
-	 		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
-	 		$("#updateTravelPlaceAjaxData [name=placeTitle]").val(div[0].data.placeTitle);
-	 		$("#updateTravelPlaceAjaxData [name=placePic]").val(div[0].data.placePic);
-	 		$("#updateTravelPlaceAjaxData [name=placeContent]").val(div[0].data.placeContent);
-	 		$("#updateTravelPlaceAjaxData [name=placeVisitDate]").val((div[0].data.placeVisitDate).substring(0,10));
-	    	$('div#updateTravelPlace').modal(true);
-		});	
-	   
-	    /* 사진 업로드 Board */
-		$("#fileInput").on('change', function(){ 
-			if(window.FileReader){
-				var filename = $(this)[0].files[0].name;
-			} else {
-				var filename = $(this).val().split('/').pop().split('\\').pop();
-			}
-			$("#userfile").val(filename);
-		});
-	    
-	    /* 사진 업로드 insert place */
-		$("#placefileInput").on('change', function(){ 
-			if(window.FileReader){
-				var filename = $(this)[0].files[0].name;
-			} else {
-				var filename = $(this).val().split('/').pop().split('\\').pop();
-			}
-			$("#placefile").val(filename);
-		});
-	   
-}); 
-/* modal 자동완성 */
 
-$(function() {
+	/* 여행등록 modal */
+   $("#insertTravelBoardButton").click(function(){
+    	$('div#insertTravelBoard').modal(true);
+	});
+	
+   /* 장소 추가 modal */
+   $("#insertTravelPlaceButton").click(function(){
+    	$('div#insertTravelPlace').modal(true);
+    	$('.modal').on('hidden.bs.modal', function (e) {
+	    	  $(this).find('#insertTravelPlaceAjaxData')[0].reset();
+	    	});
+	});	 
+   
+   /* 장소 수정 modal */
+   $("#travelPlaceList").on("click", ".btnUpd", function(){
+ 		var div = $(this).closest('.travelPlace');
+ 		$("#updateTravelPlaceAjaxData [name=placeNo]").val(div[0].data.placeNo);
+ 		$("#updateTravelPlaceAjaxData [name=placeName]").val(div[0].data.placeName);
+ 		$("#updateTravelPlaceAjaxData [name=placeAddress]").val(div[0].data.placeAddress);
+ 		$("#updateTravelPlaceAjaxData [name=placeTitle]").val(div[0].data.placeTitle);
+ 		$("#updateTravelPlaceAjaxData [name=placePic]").val(div[0].data.placePic);
+ 		$("#updateTravelPlaceAjaxData [name=placeContent]").val(div[0].data.placeContent);
+ 		$("#updateTravelPlaceAjaxData [name=placeVisitDate]").val((div[0].data.placeVisitDate).substring(0,10));
+    	$('div#updateTravelPlace').modal(true);
+	});	
+   
+    /* 사진 업로드 Board */
+	$("#fileInput").on('change', function(){ 
+		if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$("#userfile").val(filename);
+	});
+    
+    /* 사진 업로드 insert place */
+	$("#placefileInput").on('change', function(){ 
+		if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$("#placefile").val(filename);
+	});
+   
+
+	/* modal 자동완성 시작 */
     //input id autocomplete
     var context = '${pageContext.request.contextPath}';
     $( "#autocompleteTinfoListModal").autocomplete({
@@ -360,26 +366,71 @@ $(function() {
           
         },
         focus:function(event, ui){return false;}
-       });
-     });
-$("#autocompleteTinfoListModal").change(function(){
+    });
+    /* modal 자동완성 끝 */
+    
+    
+    
+    $("#autocompleteTinfoListModal").change(function(){
 		selectedListModal = "";
 	   $("#tinfoListModal").val("");
 	   $("#tinfoListDispModal").val("");
 	   $('[name=searchTinfoListboxModal]').val("");
 	});
 
-/* Modal 여행테마 select */      
-function selectTravelWith(ele){
-  	 if(ele.value=='alone'){
-  	travelBoardModalfrm.travelPerson.disabled=true;
-   } else {
-	travelBoardModalfrm.travelPerson.disabled=false;	   
-   }   
-} 
 
-$(function(){
+	//장소 등록
+	$("#insertTravelPlaceBtn").click(function(test2){
+
+		
+		/* 		 $("#insertTravelPlaceAjaxData").ajaxForm({
+	            url : "/insertTravelPlaceAjax",
+	            enctype : "multipart/form-data",
+	            dataType : "json",
+	            success : function(result){
+	            	var div = makeTravelPlaceView(result);
+	    			$(div).prependTo("#travelPlaceList");
+	    			jQuery.noConflict();
+	    			$('#insertTravelPlace').modal("hide");
+	            };
+		 $("#insertTravelPlaceAjaxData").submit();
+	        }); */
+		
+/* 		var params = $("#insertTravelPlaceAjaxData").serialize();
+	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
+			var div = makeTravelPlaceView(datas);
+			$(div).prependTo("#travelPlaceList");
+			jQuery.noConflict();
+			$('#insertTravelPlace').modal("hide");
+		});  */
+	});
+	
+	//장소 삭제
+	$("#travelPlaceList").on("click", ".btnDel", function(){
+ 		var placeNo = $(this).closest('.travelPlace').attr("id").substr(1);
+		if(confirm("삭제할까요?")) {
+			var params = "placeNo=" + placeNo;
+			var url = "deleteTravelPlaceAjax";
+			$.getJSON(url, params, function(datas){
+				$('#c'+placeNo).remove();
+			});
+		}
+	});
+	//장소 수정
+	$("#updateTravelPlaceBtn").click(function(){
+		var params = $("#updateTravelPlaceAjaxData").serialize();
+ 		var placeNo = $("#updateTravelPlaceAjaxData [name=placeNo]").val();
+		$.getJSON("updateTravelPlaceAjax", params, function(datas){
+			jQuery.noConflict();
+			$('#updateTravelPlace').modal("hide");
+			$("#c"+placeNo).remove();
+			loadTravelPlaceList();
+		});
+	});
+    
 	loadTravelPlaceList();
+
+});
 
 //장소리스트 조회 요청	
 function loadTravelPlaceList(){
@@ -391,8 +442,10 @@ function loadTravelPlaceList(){
 		}
 	});
 } 	// end of loadTravelPlaceList
+
+
 //장소리스트 조회 뷰
-	function makeTravelPlaceView(travelPlace){
+function makeTravelPlaceView(travelPlace){
 	var div = $("<div>"); 
 	div[0].data = travelPlace;
  	div.attr("id", "c"+travelPlace.placeNo);
@@ -430,51 +483,6 @@ function loadTravelPlaceList(){
 	return div;
 } 	// end of makeTravelPlaceView
 
-	//장소 등록
-	$("#insertTravelPlaceBtn").click(function(){
-		 $("#insertTravelPlaceAjaxData").ajaxForm({
-	            url : "/insertTravelPlaceAjax",
-	            enctype : "multipart/form-data",
-	            dataType : "json",
-	            error : function(){
-	                alert("에러") ;
-	            },
-	            success : function(result){
-	                alert("성공") ;
-	            }
-	        });
-		
-/* 		var params = $("#insertTravelPlaceAjaxData").serialize();
-	 	$.getJSON("insertTravelPlaceAjax", params, function(datas){
-			var div = makeTravelPlaceView(datas);
-			$(div).prependTo("#travelPlaceList");
-			jQuery.noConflict();
-			$('#insertTravelPlace').modal("hide");
-		});  */
-	});
-	//장소 삭제
-	$("#travelPlaceList").on("click", ".btnDel", function(){
- 		var placeNo = $(this).closest('.travelPlace').attr("id").substr(1);
-		if(confirm("삭제할까요?")) {
-			var params = "placeNo=" + placeNo;
-			var url = "deleteTravelPlaceAjax";
-			$.getJSON(url, params, function(datas){
-				$('#c'+placeNo).remove();
-			});
-		}
-	});
-	//장소 수정
-	$("#updateTravelPlaceBtn").click(function(){
-		var params = $("#updateTravelPlaceAjaxData").serialize();
- 		var placeNo = $("#updateTravelPlaceAjaxData [name=placeNo]").val();
-		$.getJSON("updateTravelPlaceAjax", params, function(datas){
-			jQuery.noConflict();
-			$('#updateTravelPlace').modal("hide");
-			$("#c"+placeNo).remove();
-			loadTravelPlaceList();
-		});
-	});
-});	
 
 
 </script>
@@ -506,7 +514,7 @@ function loadTravelPlaceList(){
 				<div>
 					<div class="col-sm-6" style="min-width: 700px">
 						<div class="table-responsive" style="min-height: 450px;">
-						<form action="./updateTravelBoard" enctype="multipart/form-data" method="post">
+						<form action="./updateTravelBoard"enctype="multipart/form-data" method="post">
 						<!-- 여행기 정보 -->				
 						<div class="container dad">
 							<div class="son-1">
@@ -524,145 +532,31 @@ function loadTravelPlaceList(){
 							<p class="son-text">
 								<span class="son-span"><input type="text" value="${travelBoard.travelTitle}" name="travelTitle"></span><br/><br/>
 								<span class="text-span">여행지 : ${travelBoard.tinfoCity}</span>
-								<span class="text-span">여행테마 : <c:if test="${travelBoard.travelWith == 'alone'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
-																		  <option value="alone" selected>나홀로 여행</option>
+								<span class="text-span">여행테마 : <select name="travelWith" style="background-color:#22313F;">
+																		  <option value="alone">나홀로 여행</option>
 																		  <option value="friend">친구와 함께</option>
 																		  <option value="family">가족과 함께</option>
 																		  <option value="couple">연인과 함께</option>
 																		  <option value="group">단체여행</option>
 																		  <option value="package">패키지여행</option>
 																		</select>
-																</c:if>
-																<c:if test="${travelBoard.travelWith == 'friend'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
-																		  <option value="alone">나홀로 여행</option>
-																		  <option value="friend" selected>친구와 함께</option>
-																		  <option value="family">가족과 함께</option>
-																		  <option value="couple">연인과 함께</option>
-																		  <option value="group">단체여행</option>
-																		  <option value="package">패키지여행</option>
-																		</select>
-																</c:if>
-																<c:if test="${travelBoard.travelWith == 'family'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
-																		  <option value="alone">나홀로 여행</option>
-																		  <option value="friend">친구와 함께</option>
-																		  <option value="family" selected>가족과 함께</option>
-																		  <option value="couple">연인과 함께</option>
-																		  <option value="group">단체여행</option>
-																		  <option value="package">패키지여행</option>
-																		</select>
-																</c:if>
-																<c:if test="${travelBoard.travelWith == 'couple'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
-																		  <option value="alone">나홀로 여행</option>
-																		  <option value="friend">친구와 함께</option>
-																		  <option value="family">가족과 함께</option>
-																		  <option value="couple" selected>연인과 함께</option>
-																		  <option value="group">단체여행</option>
-																		  <option value="package">패키지여행</option>
-																		</select>
-																</c:if>
-																<c:if test="${travelBoard.travelWith == 'group'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
-																		  <option value="alone">나홀로 여행</option>
-																		  <option value="friend">친구와 함께</option>
-																		  <option value="family">가족과 함께</option>
-																		  <option value="couple">연인과 함께</option>
-																		  <option value="group" selected>단체여행</option>
-																		  <option value="package">패키지여행</option>
-																		</select>
-																</c:if>
-																<c:if test="${travelBoard.travelWith == 'package'}">
-																	 <select id="travelWith" name="travelWith" style="background-color:#22313F;">
-																		  <option value="alone">나홀로 여행</option>
-																		  <option value="friend">친구와 함께</option>
-																		  <option value="family">가족과 함께</option>
-																		  <option value="couple">연인과 함께</option>
-																		  <option value="group">단체여행</option>
-																		  <option value="package" selected>패키지여행</option>
-																		</select>
-																</c:if>
+								<script>
+								$('[name="travelWith"]').val("${travelBoard.travelWith}");
+								</script>
 								</span> <br>
-								<span class="text-span"> ${sessionScope.login.userName}님과 함께한 여행인원 : 
-									 <c:if test="${travelBoard.travelPerson == '0'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
-											  <option value="0" selected>0명</option>
-											  <option value="1">1명</option>
-											  <option value="2">2명</option>
-											  <option value="3">3명</option>
-											  <option value="4">4명</option>
-											  <option value="5">5명</option>
-											  <option value="6">6명 이상</option>
-										</select>
-									</c:if>	
-									<c:if test="${travelBoard.travelPerson == '1'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
-											  <option value="0">0명</option>
-											  <option value="1" selected>1명</option>
-											  <option value="2">2명</option>
-											  <option value="3">3명</option>
-											  <option value="4">4명</option>
-											  <option value="5">5명</option>
-											  <option value="6">6명 이상</option>
-										</select>
-									</c:if>	
-									<c:if test="${travelBoard.travelPerson == '2'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
-											  <option value="0">0명</option>
-											  <option value="1">1명</option>
-											  <option value="2" selected>2명</option>
-											  <option value="3">3명</option>
-											  <option value="4">4명</option>
-											  <option value="5">5명</option>
-											  <option value="6">6명 이상</option>
-										</select>
-									</c:if>	
-									<c:if test="${travelBoard.travelPerson == '3'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
-											  <option value="0">0명</option>
-											  <option value="1">1명</option>
-											  <option value="2" >2명</option>
-											  <option value="3" selected>3명</option>
-											  <option value="4">4명</option>
-											  <option value="5">5명</option>
-											  <option value="6">6명 이상</option>
-										</select>
-									</c:if>	
-									<c:if test="${travelBoard.travelPerson == '4'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
-											  <option value="0" >0명</option>
-											  <option value="1">1명</option>
-											  <option value="2">2명</option>
-											  <option value="3">3명</option>
-											  <option value="4" selected>4명</option>
-											  <option value="5">5명</option>
-											  <option value="6">6명 이상</option>
-										</select>
-									</c:if>	
-									<c:if test="${travelBoard.travelPerson == '5'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
-											  <option value="0">0명</option>
-											  <option value="1">1명</option>
-											  <option value="2">2명</option>
-											  <option value="3">3명</option>
-											  <option value="4">4명</option>
-											  <option value="5" selected>5명</option>
-											  <option value="6">6명 이상</option>
-										</select>
-									</c:if>	
-									<c:if test="${travelBoard.travelPerson == '6'}">
-										<select id="travelPerson" name="travelPerson" style="background-color:#22313F;">
+								<span class="text-span"> ${sessionScope.login.userName}님과 함께한 여행인원 
+										<select name="travelPerson" style="background-color:#22313F;">
 											  <option value="0">0명</option>
 											  <option value="1">1명</option>
 											  <option value="2">2명</option>
 											  <option value="3">3명</option>
 											  <option value="4">4명</option>
 											  <option value="5">5명</option>
-											  <option value="6" selected>6명 이상</option>
+											  <option value="6">6명 이상</option>
 										</select>
-									</c:if>
+								<script>
+								$('[name="travelPerson"]').val("${travelBoard.travelPerson}");
+								</script>
 								</span><br>
 								<span class="text-span">여행경비 : <input type="text" value="${travelBoard.travelPay}" class="update-input" name="travelPay">원</span>
 								<span class="text-span">여행일정 : <input type="text" value="${travelBoard.travelSche}" class="update-input" name="travelSche"></span>
@@ -752,7 +646,7 @@ function loadTravelPlaceList(){
 					<div id="login-row" class="row justify-content-center align-items-center">
 						<div id="login-column" class="col-md-6">
 							<div id="login-box" class="col-md-12">
-									<form action="./insertTravelPlace" id="insertTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
+									<form action="./insertTravelPlaceAjax" id="insertTravelPlaceAjaxData" method="post" enctype="multipart/form-data">
 									<div id="map"></div>
 								<input id="pac-input" class="controls" type="text" placeholder="다녀온 장소를 입력해주세요.">
 								<div id="infowindow-content">
