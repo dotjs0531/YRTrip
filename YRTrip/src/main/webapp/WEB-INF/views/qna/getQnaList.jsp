@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 라디오버튼 -->
+<link href="resources/css/icheck-bootstrap.css" rel="stylesheet">
+
 <style>
 a { text-decoration:none !important; }
 a:hover { color:white }
@@ -72,27 +75,38 @@ a:hover { color:white }
 								
 								<!-- 검색 내용 -->
 								<div style="padding-bottom:5px">
-								<label class="col-sm-2 control-label">검색어</label>
+								<label style="width:70px">검색어</label>
 								<select name="searchCondition" class="form-control">
 									<option value="qnaTitle">제목
 									<option value="qnaContent">내용
 								</select>
-								<input type="text" name="searchKeyword" class="form-control">
+								<input type="text" name="searchKeyword" class="form-control" style="width:60%">
 								</div>
 								
 								<!-- 문의날짜 -->
 								<div style="padding-bottom:5px">
-								<label class="col-sm-2 control-label">문의일</label>
-								<input type="date" name="searchDateStart" class="form-control">
-								<input type="date" name="searchDateEnd" class="form-control">
+								<label style="width:70px">문의일</label>
+								<input type="date" name="searchDateStart" class="form-control" style="width:36%">
+								<input type="date" name="searchDateEnd" class="form-control" style="width:36%">
 								</div> 
 								
 								<!-- 답변여부 -->
 								<div>
-								<label class="col-sm-2 control-label">답변여부</label>
-								<input type="radio" name="qnaAnswer" value="" class="form-control" checked>전체&nbsp;
-								<input type="radio" name="qnaAnswer" id="complete" value="완료" class="form-control">완료 &nbsp;
-								<input type="radio" name="qnaAnswer" id="incomplete" value="미완료" class="form-control">미완료
+								<label style="width:70px">답변여부</label>
+								
+								<div class="radio icheck-primary">
+									<input type="radio" id="qnaAnswer" name="qnaAnswer" value="" class="form-control" checked>
+									<label for="qnaAnswer">전체</label>
+								</div>
+								<div class="radio icheck-primary">
+									&nbsp;<input type="radio" name="qnaAnswer" id="complete" value="완료" class="form-control">
+									<label for="complete">완료</label>
+								</div>
+								<div class="radio icheck-primary">
+									&nbsp;<input type="radio" name="qnaAnswer" id="incomplete" value="미완료" class="form-control">
+									<label for="incomplete">미완료</label>
+								</div>
+								
 								<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
 								</div>
 								

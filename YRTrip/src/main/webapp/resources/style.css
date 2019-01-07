@@ -884,7 +884,7 @@ li.slides {
     margin: 38px 0;
     position: absolute;
 }
-
+/* 
 .main-pos {
     margin-left: 2em !important;
     z-index: 3000;
@@ -906,7 +906,7 @@ li.slides {
     -ms-transform: scale(.75);
     transform: scale(.75);
 }
-
+ */
 .back-pos {
     margin-left: 2em !important;
     opacity: .05;
@@ -916,7 +916,7 @@ li.slides {
     transform: scale(.5);
 }
 
-.right-pos {
+/* .right-pos {
     opacity: .3;
     filter: alpha(opacity=30);
     margin-left: 21em !important;
@@ -924,7 +924,7 @@ li.slides {
     -webkit-transform: scale(.75);
     -ms-transform: scale(.75);
     transform: scale(.75);
-}
+} */
 
 div.slider-navs {
     left: 50%;

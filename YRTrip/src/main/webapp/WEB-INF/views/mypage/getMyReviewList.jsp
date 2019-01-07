@@ -161,6 +161,23 @@ $(function() {
 			//$("input[name=reviewPicFile]").val(reviewPic);
 		});
 	});
+	
+	$(".getProduct").click(function(){
+		var id = $(this).attr("id").substr(3);
+		
+		$.ajax({
+	        type: "GET",
+	        url: "getProductAjax",
+	        data: { itemId : id } ,
+	        success: function (data){
+	        	if(!data) { 
+					alert("삭제된 상품입니다.");
+	            } else{
+					location.href = "getProduct?itemId=" + id;
+	        	}
+	        }
+	      });   
+	});
 });
 </script>
 
@@ -261,7 +278,7 @@ $(function() {
 										<p class="control-label" style="font-family: 'NanumSquareRoundR'; margin-left:190px;
 											overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:7;
 											-webkit-box-orient:vertical; word-wrap:break-word; height:10em; white-space: pre-line; word-break: break-word;">
-										<a href="getProduct?itemId=${review.itemId}" style="color:black; text-decoration:none">${review.reviewContent}</a></p>
+										<a href="#" style="color:black; text-decoration:none" id="pic${review.itemId}" class="getProduct">${review.reviewContent}</a></p>
 										
 										<!-- 수정/삭제 버튼 -->
 										<form <%-- action="./deleteMyReview" --%> id="reviewDel">

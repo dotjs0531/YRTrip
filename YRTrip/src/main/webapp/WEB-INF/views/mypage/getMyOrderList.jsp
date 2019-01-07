@@ -203,30 +203,6 @@ $(function() {
 	        }
 	      });   
 	});
-/* 	function getProduct(order_itemId){
-		console.log(order_itemId); */
-		//var param = { itemId : order_itemId }
-		/* $.getJSON("getProductAjax", param, function(data) {
-			if(data){
-				location.href = "getProduct?itemId" + data.itemId;
-			} else {
-				alert("삭제된 상품입니다.");
-				return;
-			}
-		}); */
-		
-/* 		  $.ajax({
-		        type: "GET",
-		        url: "getProductAjax",
-		        data: "itemId=" + order_itemId,
-		        success: function (data){
-					location.href = "getProduct?itemId" + data.itemId;
-		        },
-		        error: function (jqXHR, textStatus, errorThrown) {
-					alert("삭제된 상품입니다.");
-		           }
-		      });    
-	}; */
 	
 	$('#getMyOrder').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal

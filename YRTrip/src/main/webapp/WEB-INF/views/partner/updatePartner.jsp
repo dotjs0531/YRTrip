@@ -194,18 +194,7 @@ input[type=submit] {
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2" style="width:30%">
-											<div style="float:left">
-												<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
-												<label for="domestic">국내</label>
-												<input type="radio" id="overseas" name="searchCheck" value="overseas">
-												<label for="overseas">해외</label>
-											</div>
-												<label class="col-sm-2 control-label"></label>
-												<input type="text" class="form-control" id="autocompleteTinfoList" value="${partner.tinfoId}" autocomplete="on" style="width:350px;" name="searchTinfoListbox">
-												<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
-										</td>
-										<td colspan="2" style="width:50%">
+										<td colspan="2" style="width:60%">
 											<select id="selpartnerPay" class="form-control" style="width:42%; display:inline" onChange="selectPay(this)" required>
 												<option value="other">직접입력</option>
 												<option value="100,000원대">100,000원대</option>
@@ -215,7 +204,7 @@ input[type=submit] {
 											</select>
 											<input class="form-control" type="text" id="partnerPay" name="partnerPay" value="${partner.partnerPay}" style="width:55%; display:inline" placeholder="비용" required/>
 										</td>
-										<td colspan="2" style="width:20%">
+										<td colspan="2" style="width:40%">
 											<select id="partnerPers" name="partnerPers" class="form-control" required>
 												<option value="" disabled="disabled">인원</option>
 												<option value="2명">2명</option>

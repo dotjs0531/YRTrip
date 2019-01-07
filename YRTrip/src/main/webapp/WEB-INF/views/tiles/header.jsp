@@ -119,7 +119,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="logout">logout</a></li>
                             <c:if test="${sessionScope.login.userGrant ne 'admin'}">
-                            	<li><a href="./getMyInfo?userId=${sessionScope.login.userId}">${sessionScope.login.userId}</a></li>
+                            	<li><a href="./getMyInfo?userId=${sessionScope.login.userId}">My Page</a></li>
                             	
                             	<a href="./getCartList?userId=${sessionScope.login.userId}">
                             		<i class="fa fa-shopping-cart" 

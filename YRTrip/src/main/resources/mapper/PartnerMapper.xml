@@ -3,160 +3,153 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="partner">
 <select id="getCount" resultType="int">
-	SELECT COUNT(*)
-	  FROM PARTNERT
-	  <where>
-		<if test="searchClass != null and searchClass== 'partnerClass'">
-			AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
-		</if>
-		<if test="searchCondition != null and searchCondition == 'userId'">
-			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-		</if>	
-		<if test="searchCondition != null and searchCondition == 'partnerTitle'">
-		 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
-		</if>
-	</where>
-	ORDER BY PARTNER_ID DESC
+   SELECT COUNT(*)
+     FROM PARTNERT
+   <where>
+      <if test="searchPartnerStart != null and searchPartnerStart != '' and searchPartnerEnd != null and searchPartnerEnd != ''">
+          AND PARTNER_START BETWEEN TO_DATE(#{searchPartnerStart}, 'YYYY-MM-DD' )
+                       AND TO_DATE(#{searchPartnerEnd}, 'YYYY-MM-DD')
+      </if>
+      <if test="searchTinfo != null">
+         AND TINFO_ID = #{searchTinfo}
+      </if>
+   </where>
+   ORDER BY PARTNER_ID DESC
 </select>
 <select id="getPartnerList" resultType="partner">
 SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
-	SELECT	PARTNER_ID,
-			PARTNER_TITLE,    
-			PARTNER_CONTENT,  
-			PARTNER_HIT, 
-			TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,    
-			U.USER_ID,    
-			USER_NAME,
-			(SELECT COUNT(*) FROM JOINERT WHERE PARTNER_ID = P.PARTNER_ID) AS JOINER_CNT,
-			TINFO_ID
-			PARTNER_PAY,      
-			PARTNER_CLASS,    
-			PARTNER_PERS,   
-			TO_CHAR(PARTNER_START, 'MM/DD') PARTNER_START,    
-			TO_CHAR(PARTNER_END, 'MM/DD') PARTNER_END,
-			PARTNER_CONDITION
-	FROM	PARTNERT P, USERT U
-	<where>
-		<if test="searchClass != null and searchClass == 'partnerClass'">
-			AND PARTNER_CLASS LIKE '%' || #{searchKeyword} || '%'
-		</if>
-		<if test="searchCondition != null and searchCondition == 'userId'">
-			AND U.USER_ID LIKE '%' || #{searchKeyword} || '%'
-		</if>	
-		<if test="searchCondition != null and searchCondition == 'partnerTitle'">
-		 	AND PARTNER_TITLE LIKE '%' || #{searchKeyword} || '%'
-		</if>
-		<if test="searchTinfo != null">
-			tinfo_id = #{searchTinfo}
-		</if>
-		AND P.USER_ID = U.USER_ID
-	</where>
-	ORDER BY PARTNER_ID DESC
+   SELECT   PARTNER_ID,
+         PARTNER_TITLE,    
+         PARTNER_CONTENT,  
+         PARTNER_HIT, 
+         TO_CHAR(PARTNER_DATE, 'MM/DD') PARTNER_DATE,    
+         U.USER_ID,    
+         USER_NAME,
+         (SELECT COUNT(*) FROM JOINERT WHERE PARTNER_ID = P.PARTNER_ID) AS JOINER_CNT,
+         TINFO_ID
+         PARTNER_PAY,      
+         PARTNER_CLASS,    
+         PARTNER_PERS,   
+         TO_CHAR(PARTNER_START, 'MM/DD') PARTNER_START,    
+         TO_CHAR(PARTNER_END, 'MM/DD') PARTNER_END,
+         PARTNER_CONDITION
+   FROM   PARTNERT P, USERT U
+   <where>
+      <if test="searchPartnerStart != null and searchPartnerStart != '' and searchPartnerEnd != null and searchPartnerEnd != ''">
+          AND PARTNER_START BETWEEN TO_DATE(#{searchPartnerStart}, 'YYYY-MM-DD' )
+                       AND TO_DATE(#{searchPartnerEnd}, 'YYYY-MM-DD')
+      </if>
+      <if test="searchTinfo != null">
+         AND TINFO_ID = #{searchTinfo}
+      </if>
+      AND P.USER_ID = U.USER_ID
+   </where>
+   ORDER BY PARTNER_ID DESC
 ) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
 <!-- 검색 select -->
 <select id="getTravelInfoList" resultType="travelInfo" parameterType="travelInfo">
-		SELECT NVL(TINFO_COUNTRY, ' ') TINFO_COUNTRY, 
-				NVL(TINFO_STATE, ' ') TINFO_STATE, 
-				TINFO_CITY, 
-				TINFO_ID,
-				TINFO_LOCATION
-		FROM TRAVELINFOT
-		<if test="searchCheck == 'overseas'">
-		 WHERE TINFO_LOCATION = 'overseas'
- 				and (TINFO_COUNTRY LIKE '%' ||#{tinfoList}|| '%' 
- 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
-		</if>
-		<if test="searchCheck == 'domestic'">
-		 WHERE TINFO_LOCATION = 'domestic'
- 				and (TINFO_STATE LIKE '%' ||#{tinfoList}|| '%' 
- 			 	 OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
-		</if>
+      SELECT NVL(TINFO_COUNTRY, ' ') TINFO_COUNTRY, 
+            NVL(TINFO_STATE, ' ') TINFO_STATE, 
+            TINFO_CITY, 
+            TINFO_ID,
+            TINFO_LOCATION
+      FROM TRAVELINFOT
+      <if test="searchCheck == 'overseas'">
+       WHERE TINFO_LOCATION = 'overseas'
+             and (TINFO_COUNTRY LIKE '%' ||#{tinfoList}|| '%' 
+               OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
+      </if>
+      <if test="searchCheck == 'domestic'">
+       WHERE TINFO_LOCATION = 'domestic'
+             and (TINFO_STATE LIKE '%' ||#{tinfoList}|| '%' 
+               OR TINFO_CITY LIKE '%' ||#{tinfoList}|| '%')
+      </if>
 </select>
 
 <select id="getPartner" parameterType="partner" resultType="partner">
-	SELECT	PARTNER_ID,
-			PARTNER_TITLE,    
-			PARTNER_CONTENT,  
-			PARTNER_HIT, 
-			TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_DATE,    
-			U.USER_ID,    
-			USER_NAME,
-			USER_GEN,
-			P.TINFO_ID,
-			TINFO_COUNTRY,
-			TINFO_STATE,
-			TINFO_CITY,        
-			PARTNER_PAY,      
-			PARTNER_CLASS,    
-			PARTNER_PERS,   
-			TO_CHAR(PARTNER_START, 'YYYY-MM-DD') PARTNER_START,    
-			TO_CHAR(PARTNER_END, 'YYYY-MM-DD') PARTNER_END,   
-			PARTNER_CONDITION
-	FROM	PARTNERT P, TRAVELINFOT T, USERT U
-	WHERE	P.TINFO_ID = T.TINFO_ID
-	  		AND P.USER_ID = U.USER_ID
-	  		AND PARTNER_ID = #{partnerId}
+   SELECT   PARTNER_ID,
+         PARTNER_TITLE,    
+         PARTNER_CONTENT,  
+         PARTNER_HIT, 
+         TO_CHAR(PARTNER_DATE, 'YYYY.MM.DD') PARTNER_DATE,    
+         U.USER_ID,    
+         USER_NAME,
+         USER_GEN,
+         P.TINFO_ID,
+         TINFO_COUNTRY,
+         TINFO_STATE,
+         TINFO_CITY,        
+         PARTNER_PAY,      
+         PARTNER_CLASS,    
+         PARTNER_PERS,   
+         TO_CHAR(PARTNER_START, 'YYYY-MM-DD') PARTNER_START,    
+         TO_CHAR(PARTNER_END, 'YYYY-MM-DD') PARTNER_END,   
+         PARTNER_CONDITION
+   FROM   PARTNERT P, TRAVELINFOT T, USERT U
+   WHERE   P.TINFO_ID = T.TINFO_ID
+           AND P.USER_ID = U.USER_ID
+           AND PARTNER_ID = #{partnerId}
 </select>
 
 <insert id="insertPartner" parameterType="partner">
-	<selectKey keyProperty="partnerId"	resultType="integer" order="BEFORE">
-		SELECT NVL(MAX(PARTNER_ID),0)+1 FROM PARTNERT
-	</selectKey>
-	INSERT INTO PARTNERT (
-			PARTNER_ID,
-			PARTNER_TITLE,    
-			PARTNER_CONTENT,   
-			USER_ID,    
-			TINFO_ID,
-			PARTNER_PAY,      
-			PARTNER_CLASS,    
-			PARTNER_PERS,   
-			PARTNER_START,    
-			PARTNER_END
-			)
-	VALUES (
-			#{partnerId},
-			#{partnerTitle},
-			#{partnerContent},
-			#{userId},
-			#{searchTinfo},
-			#{partnerPay},
-			#{partnerClass},
-			#{partnerPers},
-			#{partnerStart},
-			#{partnerEnd}
-		)
+   <selectKey keyProperty="partnerId"   resultType="integer" order="BEFORE">
+      SELECT NVL(MAX(PARTNER_ID),0)+1 FROM PARTNERT
+   </selectKey>
+   INSERT INTO PARTNERT (
+         PARTNER_ID,
+         PARTNER_TITLE,    
+         PARTNER_CONTENT,   
+         USER_ID,    
+         TINFO_ID,
+         PARTNER_PAY,      
+         PARTNER_CLASS,    
+         PARTNER_PERS,   
+         PARTNER_START,    
+         PARTNER_END
+         )
+   VALUES (
+         #{partnerId},
+         #{partnerTitle},
+         #{partnerContent},
+         #{userId},
+         #{searchTinfo},
+         #{partnerPay},
+         #{partnerClass},
+         #{partnerPers},
+         #{partnerStart},
+         #{partnerEnd}
+      )
 </insert>
 <update id="updatePartner" parameterType="partner">
-	UPDATE PARTNERT SET PARTNER_TITLE	= #{partnerTitle},
-						PARTNER_CONTENT	= #{partnerContent},
-						PARTNER_PAY		= #{partnerPay},
-						PARTNER_CLASS	= #{partnerClass},
-						PARTNER_PERS	= #{partnerPers},
-						PARTNER_START	= #{partnerStart},
-						PARTNER_END		= #{partnerEnd},
-						TINFO_ID		= #{searchTinfo}
-				WHERE	PARTNER_ID = #{partnerId}
+   UPDATE PARTNERT SET PARTNER_TITLE   = #{partnerTitle},
+                  PARTNER_CONTENT   = #{partnerContent},
+                  PARTNER_PAY      = #{partnerPay},
+                  PARTNER_CLASS   = #{partnerClass},
+                  PARTNER_PERS   = #{partnerPers},
+                  PARTNER_START   = #{partnerStart},
+                  PARTNER_END      = #{partnerEnd},
+                  TINFO_ID      = #{searchTinfo}
+            WHERE   PARTNER_ID = #{partnerId}
 </update>
 <delete id="deletePartner" parameterType="int">
-	DELETE	FROM PARTNERT
-			WHERE PARTNER_ID = #{partnerId}
+   DELETE   FROM PARTNERT
+         WHERE PARTNER_ID = #{partnerId}
 </delete>
 
 <update id="updateViewCnt" parameterType="partner">
-	UPDATE PARTNERT SET PARTNER_HIT = PARTNER_HIT + 1
-					WHERE PARTNER_ID = #{partnerId}
+   UPDATE PARTNERT SET PARTNER_HIT = PARTNER_HIT + 1
+               WHERE PARTNER_ID = #{partnerId}
 </update>
 <update id="closePartner" parameterType="partner">
-	UPDATE PARTNERT SET PARTNER_CONDITION = '완료'
-				WHERE	PARTNER_ID = #{partnerId}
+   UPDATE PARTNERT SET PARTNER_CONDITION = '완료'
+            WHERE   PARTNER_ID = #{partnerId}
 </update>
 
 <select id="getJoinerCount" resultType="int">
-	SELECT COUNT(*)
-	  FROM PARTNERT
-	 WHERE PARTNER_ID = #{partnerId}
+   SELECT COUNT(*)
+     FROM PARTNERT
+    WHERE PARTNER_ID = #{partnerId}
 </select>
 </mapper> 

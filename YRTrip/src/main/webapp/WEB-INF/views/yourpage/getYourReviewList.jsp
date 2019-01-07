@@ -110,6 +110,23 @@ $(function() {
 			$("#myCarousel").carousel();
 		});
 	});
+	
+	$(".getProduct").click(function(){
+		var id = $(this).attr("id").substr(3);
+		
+		$.ajax({
+	        type: "GET",
+	        url: "getProductAjax",
+	        data: { itemId : id } ,
+	        success: function (data){
+	        	if(!data) { 
+					alert("삭제된 상품입니다.");
+	            } else{
+					location.href = "getProduct?itemId=" + id;
+	        	}
+	        }
+	      });   
+	});
 });
 </script>
 <script src="//use.typekit.net/xyl8bgh.js"></script>
@@ -175,7 +192,7 @@ $(function() {
 			            			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
 			            				<h4 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left"><strong>${review.itemCategory} ></strong></h4>
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left"><strong>
-											<a href="getProduct?itemId=${review.itemId}" id="itemId" style="color:black; text-decoration:none !important;">&nbsp;&nbsp;${review.itemName}</a></strong></h5>
+											<a href="#" id="pro${review.itemId}" class="getProduct" style="color:black; text-decoration:none !important;">&nbsp;&nbsp;${review.itemName}</a></strong></h5>
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right">${review.reviewDate}</h5>
 										<p style="clear:both"/>
 										

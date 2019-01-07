@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<!-- 라디오버튼 -->
+<link href="resources/css/icheck-bootstrap.css" rel="stylesheet">
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script>
@@ -169,26 +172,27 @@ input[type=submit] {
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2" style="width:47%">
-											<div style="float:left" style="width:30%">
+										<td colspan="2" style="width:40%">
+											<div style="float:left" class="radio icheck-primary">
 												<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
 												<label for="domestic">국내</label>
-												<input type="radio" id="overseas" name="searchCheck" value="overseas">
+											</div>
+											<div style="float:left; margin-right:10px" class="radio icheck-primary">
+												&nbsp;<input type="radio" id="overseas" name="searchCheck" value="overseas">
 												<label for="overseas">해외</label>
 											</div>
-												<label class="col-sm-2 control-label"></label>
-												<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="여행지" autocomplete="on" name="searchTinfoListbox" style="width:70%;">
+												<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="여행지" autocomplete="on" name="searchTinfoListbox" style="width:50%;">
 												<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
 										</td>
-										<td colspan="2" style="width:38%">
-											<select id="selpartnerPay" class="form-control" style="width:42%; display:inline" onChange="selectPay(this)" required>
+										<td colspan="2" style="width:40%">
+											<select id="selpartnerPay" class="form-control" style="width:50%; display:inline" onChange="selectPay(this)" required>
 												<option value="other" selected>직접입력</option>
 												<option value="100,000원대">100,000원대</option>
 												<option value="200,000원대">200,000원대</option>
 												<option value="300,000원대">300,000원대</option>
 												<option value="400,000원대">400,000원대</option>
 											</select>
-											<input class="form-control" type="text" id="partnerPay" name="partnerPay" style="width:55%; display:inline" placeholder="비용" required/>
+											<input class="form-control" type="text" id="partnerPay" name="partnerPay" style="width:45%; display:inline" placeholder="비용" required/>
 										</td>
 										<td colspan="2" style="width:15%">
 											<select name="partnerPers" class="form-control" required>

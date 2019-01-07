@@ -235,8 +235,9 @@ $(function(){
 
 	//댓글 삭제
 	$("#partnerComment").on("click", ".btnCommentDel", function(){
-		var commentId = $(this).closest('.btnCommentDel').val();
-		//var commentId_str = $(this).parent().attr("id").substr(3);
+		//var commentId = $(this).closest('.btnCommentDel').val();
+		var commentId_str = ''+ $(this).closest(".partnerCommentList").attr("id").substr(3);
+		var commentId = Number(commentId_str);
 		if(confirm("삭제할까요?")) {
 			var params = "commentId=" + commentId;  // { seq : seq };
 			var url = "deletePartnerComment";
