@@ -7,6 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- 라디오버튼 -->
+<link href="resources/css/icheck-bootstrap.css" rel="stylesheet">
+
 <style>
 a { text-decoration:none !important; }
 a:hover { color:white }
@@ -129,37 +132,56 @@ $("#autocompleteTinfoList").change(function(){
                </div>
             </div>
 
-            <!-- 검색 창 -->
             <div class="col-sm-6" style="min-width: 700px">
                <div class="table-responsive" style="min-height: 450px;">
-                  <!-- 검색 창 & 페이징 처리 -->
-                     <div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
-								
-								<!-- 장소 검색 -->
-								<form class="form-inline">
-								<div style="padding-bottom:5px; padding-left:17%;">
-									<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
-									<label for="domestic">국내</label>
-									<input type="radio" id="overseas" name="searchCheck" value="overseas">
-									<label for="overseas">해외</label>
-								</div>
-								<div style="padding-bottom:5px">
-									<label class="col-sm-2 control-label">장소명</label>
-									<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" style="width:350px;" name="searchTinfoListbox">
-									<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
-									<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
-								</div>
-								<!-- 문의날짜 검색 -->
-								<div style="padding-bottom:5px">
-								<label class="col-sm-2 control-label">출발일</label>
-								<input type="date" name="searchPartnerStart" class="form-control"><br>
-								<label class="col-sm-2 control-label">도착일</label>
-								<input type="date" name="searchPartnerEnd" class="form-control">
-								</div> 
-								<input type="hidden" name="page" />
-								</form>
+               
+				<!-- 검색 창 & 페이징 처리 -->
+				<form class="form-inline">
+					<div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
+						
+						<!-- 여행지 -->
+						<div style="padding-bottom:10px">
+							<div style="float:left" class="radio icheck-primary">
+								<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+								<label for="domestic">국내</label>
 							</div>
-                     <!-- 동행 게시판 리스트 -->
+							<div style="float:left; margin-right:10px" class="radio icheck-primary">
+								&nbsp;<input type="radio" id="overseas" name="searchCheck" value="overseas">
+								<label for="overseas">해외</label>
+							</div>
+							
+							<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" name="searchTinfoListbox" style="width:63%;">
+							<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
+						</div>
+						
+						<!-- <div style="padding-bottom:5px; padding-left:17%;">
+							<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+							<label for="domestic">국내</label>
+							<input type="radio" id="overseas" name="searchCheck" value="overseas">
+							<label for="overseas">해외</label>
+						</div>
+						<div style="padding-bottom:5px">
+							<label class="col-sm-2 control-label">장소명</label>
+							<input type="text" class="form-control" id="autocompleteTinfoList" placeholder="떠나고 싶은 여행지를 검색해주세요." autocomplete="on" style="width:350px;" name="searchTinfoListbox">
+							<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
+						</div> -->
+						
+						<!-- 여행기간 -->
+						<div style="padding-bottom:5px">
+							<label style="padding-right:10px">출발일</label>
+							<input type="date" name="searchPartnerStart" class="form-control" style="margin-right:10px; width:32%">
+							<label style="padding-right:10px">도착일</label>
+							<input type="date" name="searchPartnerEnd" class="form-control" style="width:32%">
+						
+							<button class="btn btn-warning signupbtn" style="float:right; margin-right:10px">검색</button>
+						</div> 
+					</div>
+					
+					<input type="hidden" name="page" />
+				</form>
+						<p style="clear:both">
+						
+                  <!-- 동행 게시판 리스트 -->
                   <table class="table table-hover">
                      <!-- 동행구하기 테이블 헤더부분 -->
                      <thead>
@@ -190,7 +212,8 @@ $("#autocompleteTinfoList").change(function(){
                      </tbody>
                   </table>
                </div>
-                  <p style="clear: both">
+               <p style="clear: both">
+               
                <!-- 페이지 번호 -->
                <div style="padding-top: 50px;">
                   <my:paging paging="${paging}" jsFunc="go_page" />

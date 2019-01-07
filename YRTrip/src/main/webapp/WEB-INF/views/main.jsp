@@ -663,6 +663,10 @@
 
 	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
+
+<!-- 추가한 파일 -->
+<!-- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+
 	<script type="text/javascript">
 		$(function() {
 			$("#popbutton").click(function() {

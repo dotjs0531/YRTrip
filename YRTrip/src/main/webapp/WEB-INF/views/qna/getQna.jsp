@@ -102,10 +102,10 @@
 			div[0].qnaCommentList = qnaComment;  //{id:1,.... }
 			
 			if(qnaComment.userId == userId){
-				var str ="<p/><label class='col-sm-2 control-label' name='comLabel'>" + qnaComment.userId + "</label>" 
-		        +"<span class='col-lg-8 qnaContent' name='comContent'>" + qnaComment.commentContent +"</span>"
-				+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\" name='comUpd'>수정</button>"
-				+"<button type=\"button\" class=\"btn btn-default btnDel\" name='comDel'>삭제</button>"
+				var str ="<p/><label class='col-sm-2 control-label'>" + qnaComment.userId + "</label>" 
+		        +"<span class='col-lg-8 qnaContent'>" + qnaComment.commentContent +"</span>"
+				+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">수정</button>"
+				+"<button type=\"button\" class=\"btn btn-default btnDel\">삭제</button>"
 			} else {
 				var str ="<p/><label class='col-sm-2 control-label' name='comLabel'>" + qnaComment.userId + "</label>" 
 		        +"<span class='col-lg-8 qnaContent' name='comContent'>" + qnaComment.commentContent +"</span><br/>"
