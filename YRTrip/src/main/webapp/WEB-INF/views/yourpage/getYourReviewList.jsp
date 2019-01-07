@@ -173,7 +173,7 @@ $(function() {
 							<c:forEach items="${YourReviewList}" var="review">
 								<c:if test="${not empty review.reviewContent}">
 			            			<div class="form-group single-pricing-table" style="width:100%; text-align:left; padding: 20px; color:black;">
-			            				<h4 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left"><strong><%-- ${review.itemCategory} --%>카테고리 ></strong></h4>
+			            				<h4 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left"><strong>${review.itemCategory} ></strong></h4>
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:left"><strong>
 											<a href="getProduct?itemId=${review.itemId}" id="itemId" style="color:black; text-decoration:none !important;">&nbsp;&nbsp;${review.itemName}</a></strong></h5>
 										<h5 class="control-label" style="font-family: 'NanumSquareRoundR'; display: inline; float:right">${review.reviewDate}</h5>

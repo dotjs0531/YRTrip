@@ -49,4 +49,11 @@
 	UPDATE JOINERT SET JOINER_CONDITION = 'N'
 				 WHERE JOINER_ID = #{joinerId}
 </update>
+<select id="getJoinerUser" resultType="int"> 
+      SELECT COUNT(*)
+        FROM JOINERT
+       WHERE USER_ID = #{userId}
+       		 AND PARTNER_ID = #{partnerId}
+       		 AND JOINER_CONDITION = 'Y'
+</select>
 </mapper>

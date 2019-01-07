@@ -40,4 +40,9 @@ public class JoinerDAOMybatis {
    public void cancleJoiner(JoinerVO vo) {
 	   mybatis.update("joiner.cancleJoiner", vo);
    }
+   
+	//동행 수락 여부 판단
+	public int getJoinerUser(JoinerVO vo) {
+		return mybatis.selectOne("joiner.getJoinerUser", vo);
+	}
 }

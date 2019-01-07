@@ -33,5 +33,9 @@ public class JoinerServiceImpl implements JoinerService {
    public void cancleJoiner(JoinerVO vo) {
 	   dao.cancleJoiner(vo);
    }
+
+	public int getJoinerUser(JoinerVO vo) {
+		return dao.getJoinerUser(vo);
+	}
    
 }

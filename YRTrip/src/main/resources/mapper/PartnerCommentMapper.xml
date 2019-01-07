@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="partnerComment">
+<select id="getPartnerCommentList" resultType="partnerComment" parameterType="partnerComment">
+	SELECT  COMMENT_ID
+ 			,C.USER_ID
+ 			,USER_NAME
+ 			,USER_GEN
+ 			,COMMENT_CONTENT
+ 			,TO_CHAR(COMMENT_DATE, 'MM/DD HH24:MI') COMMENT_DATE
+ 			,COMMENT_PARTNERID
+ 	   FROM PARTNER_COMMENTT C, USERT U
+ 	  WHERE C.USER_ID = U.USER_ID
+ 	  		AND COMMENT_PARTNERID = #{commentPartnerid}
+ 	  ORDER BY COMMENT_ID
+</select>
+<select id="getPartnerComment" resultType="partnerComment" parameterType="partnerComment">
+	SELECT  COMMENT_ID
+ 			,C.USER_ID
+ 			,USER_NAME
+ 			,USER_GEN
+ 			,COMMENT_CONTENT
+ 			,TO_CHAR(COMMENT_DATE, 'MM/DD HH24:MI') COMMENT_DATE
+ 			,COMMENT_PARTNERID
+ 	   FROM PARTNER_COMMENTT C, USERT U
+ 	  WHERE C.USER_ID = U.USER_ID
+ 	  		AND COMMENT_ID = #{commentId}
+</select>
+
+<insert id="insertPartnerComment" parameterType="partnerComment">
+	<selectKey keyProperty="commentId" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(COMMENT_ID), 0)+1 FROM PARTNER_COMMENTT
+	</selectKey>
+	INSERT INTO PARTNER_COMMENTT ( COMMENT_ID
+ 								   ,USER_ID
+ 								   ,COMMENT_CONTENT
+ 								   ,COMMENT_PARTNERID )
+ 						  VALUES ( #{commentId}
+ 					  			   ,#{userId}
+ 					  			   ,#{commentContent}
+ 					  			   ,#{commentPartnerid} )
+</insert>
+<delete id="deletePartnerComment" parameterType="partnerComment">
+	DELETE PARTNER_COMMENTT
+		 <where> 
+		 	<choose>
+		 		<when test="commentPartnerid != null and commentPartnerid != ''">
+		 			COMMENT_PARTNERID = #{commentPartnerid}	
+		 		</when>
+		 		<otherwise>
+		 			COMMENT_ID = #{commentId}
+		 		</otherwise>
+		 	</choose>
+		 </where>
+</delete>
+</mapper>

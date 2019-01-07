@@ -75,5 +75,12 @@ public class JoinerController {
 
       return "ajax/partner/testpage";
    }*/
+   
+	//동행 수락 여부 판단
+	@RequestMapping("getJoinerUser")
+	@ResponseBody
+	public int getJoinerUser(JoinerVO vo) {
+		return joinerService.getJoinerUser(vo);
+	}
 
 }

@@ -165,13 +165,12 @@ function productDel() { //거래완료되지 않은 구매자가 있을 경우�
 	  		});
 	      	return cnt;
 		});
-		alert(cnt);
-		/* if(cnt == 0){
+		if(cnt == 0){
     	   $('#productDel').attr('action', 'deleteMyProductList');
        } else {
 			alert("선택하신 제품 중 진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
 			return false;
-       } */
+       }
 	} else {
 		return false;
 	}

@@ -90,7 +90,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		from ORDERT o, ITEMT i
 		where o.item_id = i.item_id
 			and o.item_id = #{itemId}
-			and o.order_condition = '거래완료'
+			and o.order_condition != '거래완료'
 	</select>
 	<select id="getProductbySeller" resultType="product">
 		SELECT ITEM_ID,

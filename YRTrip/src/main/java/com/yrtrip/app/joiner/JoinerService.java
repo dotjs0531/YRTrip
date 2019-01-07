@@ -11,4 +11,6 @@ public interface JoinerService {
 	
 	public void acceptJoiner(JoinerVO vo);
 	public void cancleJoiner(JoinerVO vo);
+	
+	public int getJoinerUser(JoinerVO vo);
 }

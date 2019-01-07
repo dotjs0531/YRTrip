@@ -184,6 +184,107 @@ jQuery( document ).ready(function( $ ) {
 		});
 	});
 </script>
+<script>
+$(function(){
+	//동행 수락 여부 판단
+	function getJoinerUser(){
+		var result = 0;
+		$.ajax({
+  			type : "GET",
+  			url : "getJoinerUser",
+  			async: false,
+  			data : { userId : '${sessionScope.login.userId}',
+		   	  	  	 partnerId : '${partner.partnerId}' },
+  			datatype : "integer",
+  			success : function(data){
+					if(data != 0){	//동행 수락된 회원일 경우
+						result = 1;
+					}
+  			}
+  		});
+      	return result;
+	};
+	
+	//댓글 목록 조회
+	function loadCommentList() {
+		var params = { commentPartnerid : '${partner.partnerId}' };
+		$.getJSON("getPartnerCommentList", params, function(datas){
+			for(i=0; i<datas.length; i++) {
+				var div = makeCommentView(datas[i]);
+				$(div).appendTo("#partnerCommentList");
+			}
+		});
+	}	//end loadCommentList event
+	
+	//댓글 등록
+	$("#btnCommentAdd").click(function(){
+		var partnerUid = '${partner.userId}';
+		var userId = '${sessionScope.login.userId}';
+		
+		if(partnerUid == userId || getJoinerUser() == 1) {
+			var params = $("#commentAddForm").serialize();
+			$.getJSON("insertPartnerComment", params, function(datas){
+				var div = makeCommentView(datas);
+				$(div).appendTo("#partnerCommentList");
+				$("#commentAddForm")[0].reset(); //등록후에 입력폼 리셋
+			});
+		} else {
+			alert("동행 수락된 회원만 댓글을 등록할 수 있습니다.");
+		}
+	});	// end btnAdd click event
+
+	//댓글 삭제
+	$("#partnerComment").on("click", ".btnCommentDel", function(){
+		var commentId = $(this).closest('.btnCommentDel').val();
+		//var commentId_str = $(this).parent().attr("id").substr(3);
+		if(confirm("삭제할까요?")) {
+			var params = "commentId=" + commentId;  // { seq : seq };
+			var url = "deletePartnerComment";
+			$.getJSON(url, params, function(datas){
+				$('#com'+commentId).remove();
+			});
+		}
+	});	// end btnDel click event
+
+	function makeCommentView(partnerComment){
+		var userId = '${sessionScope.login.userId}';
+		var div = $("<div>"); 
+		div.attr("id", "com"+partnerComment.commentId);
+		div.addClass('partnerCommentList');
+		div[0].partnerCommentList = partnerComment;  //{id:1,.... }
+
+		var partnerUid = '${partner.userId}';
+		var userId = '${sessionScope.login.userId}';
+		
+		if(partnerUid == userId || getJoinerUser() == 1) {	//동행 수락자 or 동행글 작성자
+			if(partnerComment.userId == userId){	//댓글 작성자가 본인일 때
+				$("#partnerView").hide();
+				var str = "<span style=\"float:right;\">"
+						+ "<label class='control-label' style=\"font-size:15px; color:black; padding:0 10px 0 0\">"
+						+ "<i class=\"far fa-user-circle\"></i><strong> "+partnerComment.userName+"</strong></label>"
+						+ "<span class='commentContent' style=\"margin-right:10px; color:black\"> "+partnerComment.commentContent+"</span>"
+						+ "<span class='commentDate' style=\"margin-right:10px; color:black\">"+partnerComment.commentDate+"</span>"
+						+ "<button type=\"button\" class=\"btn btn-default btn-sm btnCommentDel\">삭제</button>"
+						+ "</span><p style=\"clear:both\"/>"
+			} else {
+				$("#partnerView").hide();
+				var str = "<span style=\"float:left\">"
+						+ "<label class='control-label' style=\"font-size:15px; color:black; padding:0 10px 0 0\">"
+						+ "<i class=\"fas fa-user-circle\"></i><strong> "+partnerComment.userName+"("+partnerComment.userGen+")</strong></label>"
+						+ "<span class='commentContent' style=\"margin-right:10px; color:black\"> "+partnerComment.commentContent+"</span>"
+						+ "<span class='commentDate' style=\"margin-right:10px; color:black\">"+partnerComment.commentDate+"</span>"
+						+ "</span><p style=\"clear:both\"/>"
+			}
+		} else{
+			$("#partnerView").show();
+		}
+		div.html(str);
+		return div;
+	}
+
+	loadCommentList();
+});	//$() end ready event 
+</script>
 <style>
 @font-face {
  font-family: 'NanumSquareRoundEB';
@@ -254,8 +355,8 @@ jQuery( document ).ready(function( $ ) {
                			<table style="width:100%">
 							<tr>
 								<td style="width:33%">
-									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>여행지 : </strong> ${partner.tinfoId}
-										<%-- <c:if test="${partner.tinfoCountry ne null}">${partner.tinfoCountry}</c:if><c:if test="${partner.tinfoState ne null}"> ${partner.tinfoState}</c:if> ${partner.tinfoCity} --%>
+									<h5 class="control-label" style="font-family: 'NanumSquareRoundR';"><strong>여행지 : </strong>
+										<c:if test="${partner.tinfoCountry ne null}">${partner.tinfoCountry}</c:if><c:if test="${partner.tinfoState ne null}"> ${partner.tinfoState}</c:if> ${partner.tinfoCity}
 									</h5>
 								</td>
 								<td style="width:33%">
@@ -319,38 +420,24 @@ jQuery( document ).ready(function( $ ) {
 					<div class="about_car" id="joinerList" style="min-height:50px; padding-bottom:20px"></div>
 					
 					<!-- 동행 신청자들끼리 대화창 -->
-					<div style="border-style: solid; border-radius: 15px; border-width: thin; padding:20px">
+					<div style="border-style: solid; border-radius: 15px; border-width: thin; padding:20px" id="partnerComment">
 					<h4 class="control-label" style="font-family: 'NanumSquareRoundB'; color: #666666;"><i class="far fa-comments"></i> 대화하기</h4><br>
 						
-						<span style="float:left">
-							<label class='control-label' style="font-size:15px; color:black; padding:0 10px 0 0">
-								<i class="fas fa-user-circle"></i><strong> 상대방</strong>
-							</label>
-			        		<span class='commentContent' style="margin-right:10px; color:black">대구에서 만나요</span>
-			        		<span class='commentDate' style="margin-right:10px; color:black">2019-01-06</span>
-						</span>
-						<p style="clear:both"/>
-						
-						<span style="float:right;">
-							<label class='control-label' style="font-size:15px; color:black; padding:0 10px 0 0">
-								<i class="far fa-user-circle"></i><strong> 나</strong>
-							</label>
-			        		<span class='commentContent' style="margin-right:10px; color:black">좋습니다</span>
-			        		<span class='commentDate' style="margin-right:10px; color:black">2019-01-06</span>
-							<button type="button" class="btn btn-default btn-sm">삭제</button>
-						</span>
-						<p style="clear:both"/>
+						<!-- 대화 내용 -->
+						<div id="partnerCommentList">
+							<span style="text-align:center" id="partnerView">동행 수락자들만 대화 내용을 확인하실 수 있습니다.</span>
+						</div>
 
 						<!-- 댓글등록시작 -->
 						<br>
 						<div id="commentAdd">
-							<form>
+							<form id="commentAddForm" name="commentAddForm">
 							<div class="input-group">
-								<input type="hidden" name="partnerId" value="${partner.partnerId}">
+								<input type="hidden" name="commentPartnerid" value="${partner.partnerId}">
 								<input type="hidden" name="userId" value="${sessionScope.login.userId}">
 								<input type="text" class="form-control" id="commentContent" name="commentContent" placeholder="내용을 입력하세요">
 								<span class="input-group-btn">
-								<button type="button" class="btn btn-default">등록</button>
+								<button type="button" class="btn btn-default" id="btnCommentAdd">등록</button>
 								</span>
 							</div>
 							</form>
