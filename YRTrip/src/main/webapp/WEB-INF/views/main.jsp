@@ -62,7 +62,9 @@
 	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
 	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+	type="text/css" />
 
 <script>
 	/*  $(function() {
@@ -172,7 +174,6 @@
 	z-index: 1;
 	color: #4f5b66;
 }
-
 </style>
 </head>
 <body>
@@ -215,7 +216,8 @@
 								<li><a href="logout">logout</a></li>
 								<c:if test="${sessionScope.login.userGrant ne 'admin'}">
 									<li><a
-										href="./getMyInfo?userId=${sessionScope.login.userId}">My Page</a></li>
+										href="./getMyInfo?userId=${sessionScope.login.userId}">My
+											Page</a></li>
 								</c:if>
 								<c:if test="${sessionScope.login.userGrant eq 'admin'}">
 									<li><a href="./admin">${sessionScope.login.userId}</a></li>
@@ -240,20 +242,23 @@
 									<p>YOU ONLY LIVE ONCE, FOR YOUR DREAM TRIP</p>
 									<p>인생은 한번뿐이니까, 당신이 꿈꾸는 여행을 위해</p>
 								</div>
-									<form action="./getTravelBoardList">
-											<div style="margin-left:-550px; color:#fff;">
-												<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
-												<label for="domestic">국내</label>
-												<input type="radio" id="overseas" name="searchCheck" value="overseas">
-												<label for="overseas">해외</label>
-											</div>
-																			<div class="welcome_form">
-											<input id="autocompleteTinfoList" name="searchTinfoListbox" class="form-control" type="text"
-														placeholder="떠나고 싶은 여행지를 검색해주세요:-)"> 
-											<input type="hidden" class="form-control" id="tinfoListDisp" name="searchTinfo">
-											<input class="submit" type="submit" value="검색">
-																	</div>
-									</form>
+								<form action="./getTravelBoardList">
+									<div style="margin-left: -550px; color: #fff;">
+										<input type="radio" id="domestic" name="searchCheck"
+											checked="checked" value="domestic"> <label
+											for="domestic">국내</label> <input type="radio" id="overseas"
+											name="searchCheck" value="overseas"> <label
+											for="overseas">해외</label>
+									</div>
+									<div class="welcome_form">
+										<input id="autocompleteTinfoList" name="searchTinfoListbox"
+											class="form-control" type="text"
+											placeholder="떠나고 싶은 여행지를 검색해주세요:-)"> <input
+											type="hidden" class="form-control" id="tinfoListDisp"
+											name="searchTinfo"> <input class="submit"
+											type="submit" value="검색">
+									</div>
+								</form>
 
 								<section id="section05" class="demo">
 									<a href="#about_top"><span></span></a>
@@ -268,8 +273,144 @@
 		<!-- end of welcome text markup-->
 	</section>
 	<!--end of header area-->
+
+	<!-- 공지사항창 -->
+	
+	<section class="container" id="service">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="col-md-12" data-wow-delay="0.2s">
+					<div class="carousel slide" data-ride="carousel"
+						id="quote-carousel">
+						<!-- Bottom Carousel Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#quote-carousel" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#quote-carousel" data-slide-to="1"></li>
+							<li data-target="#quote-carousel" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Carousel Slides / Quotes -->
+						<div class="carousel-inner text-center">
+
+							<!-- Quote 1 -->
+							<div class="item active">
+								<div class="row">
+									<div class="col-12">
+										<a href="./getNotice?noticeId=1"> <img
+											src="./images/product/공지.png">
+										</a>
+									</div>
+								</div>
+							</div>
+							<!-- Quote 2 -->
+							<div class="item">
+								<div class="row">
+									<div class="col-12">
+										<a href="#"> <img src="./images/product/공지2.png">
+										</a>
+									</div>
+								</div>
+							</div>
+							<!-- Quote 3 -->
+							<div class="item">
+								<div class="row">
+									<div class="col-12">
+										<a href="getNotice?noticeId=1"> <img
+											src="./images/product/공지3.png">
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Carousel Buttons Next/Prev -->
+						<a data-slide="prev" href="#quote-carousel"
+							class="left carousel-control"></a> <a data-slide="next"
+							href="#quote-carousel" class="right carousel-control"></a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4" style="padding: 30px">
+				<h3 style="padding: 10px 0px">동행구하기</h3>
+				<table>
+					<colgroup>
+						<col span="1" style="width: 15%;">
+						<col span="1" style="width: 70%;">
+						<col span="1" style="width: 15%;">
+					</colgroup>
+					<thead>
+						<tr style="line-height: 3;">
+							<th>no.</th>
+
+							<th style="text-align: center;">글제목</th>
+
+
+							<th>작성자</th>
+							<!-- <th style="text-align: center">작성일</th> -->
+							<!-- <th style="text-align: center">조회수</th>
+							<th style="text-align: center">진행상태</th> -->
+						</tr>
+					</thead>
+					<c:forEach items="${partnerList}" var="partner">
+						<tr style="line-height: 3;">
+							<td>${partner.partnerId}</td>
+
+							<td><a
+								style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; vertical-align: middle"
+								href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
+									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if>
+							</a></td>
+							<td style="color: black;"><c:if
+									test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
+								<c:if test="${sessionScope.login.userId ne partner.userId}">
+									<a style="color: black;"
+										href="./getYourTravelList?userId=${partner.userId}"
+										class="goToUserPage">${partner.userName}</a>
+								</c:if></td>
+							<%-- <td style="text-align: center">${partner.partnerDate} --%>
+							<%-- 		<td style="text-align: center">${partner.partnerHit}</td>
+							<td style="text-align: center">${partner.partnerCondition}</td> --%>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
+	</section>
+	<!--    end 공지사항창-->
+	<!--    베스트 여행기 -->
+	<section class="about_us_area" id="about">
+		<div class="container">
+			<div class="row">
+				<c:forEach items="${bestTravelList}" var="board">
+					<div class="col-md-2 col-sm-2 col-xs-12">
+						<div class="about_single_item">
+							<div class="about_single_item_content">
+								<c:if test="${board.travelPic != null}">
+									<img src="./images/travel/${travelBoard.travelPic}"
+										class="img-responsive">
+								</c:if>
+								<c:if test="${board.travelPic == null}">
+									<img src="./images/travel/noimage.jpg" class="img-responsive">
+								</c:if>
+								<br>
+								<h4>
+									<a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a>
+								</h4>
+								<h2>${board.userId}</h2>
+								<a href="#" data-placement="right" title="Like"> <i
+									class="fa fa-heart"></i> ${board.travelLike}
+								</a>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+	<!--   end 베스트여행기-->
 	<!-- 상품 판매자 1,2,3위  올리기-->
-	<section class="about_top" id="about_top" style="border-bottom:none;">
+	<section class="about_top" id="about_top" style="border-bottom: none;">
 		<div class="container">
 			<div class="row">
 				<div class="container card">
@@ -304,144 +445,6 @@
 		</div>
 	</section>
 	<!--    end 상품 판매자 1,2,3위  올리기-->
-	<!--이벤트 창? 공지사항창 -->
-	<section class="container" id="service">
-		<div class="row">
-			<div class="col-lg-8">
-				<div class="col-md-12" data-wow-delay="0.2s">
-					<div class="carousel slide" data-ride="carousel"
-						id="quote-carousel">
-						<!-- Bottom Carousel Indicators -->
-						<ol class="carousel-indicators">
-							<li data-target="#quote-carousel" data-slide-to="0"
-								class="active"></li>
-							<li data-target="#quote-carousel" data-slide-to="1"></li>
-							<li data-target="#quote-carousel" data-slide-to="2"></li>
-						</ol>
-
-						<!-- Carousel Slides / Quotes -->
-						<div class="carousel-inner text-center">
-
-							<!-- Quote 1 -->
-							<div class="item active">
-								<div class="row">
-									<div class="col-12">
-										<a href="./getNotice?noticeId=1">
-											<img src="./images/product/공지.png">
-										</a>
-									</div>
-								</div>
-							</div>
-							<!-- Quote 2 -->
-							<div class="item">
-								<div class="row">
-									<div class="col-12">
-										<a href="#">
-											<img src="./images/product/공지2.png">
-										</a>
-									</div>
-								</div>
-							</div>
-							<!-- Quote 3 -->
-							<div class="item">
-								<div class="row">
-									<div class="col-12">
-										<a href="getNotice?noticeId=1">
-											<img src="./images/product/공지3.png">
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- Carousel Buttons Next/Prev -->
-						<a data-slide="prev" href="#quote-carousel"
-							class="left carousel-control"></a> <a data-slide="next"
-							href="#quote-carousel" class="right carousel-control"></a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4" style="padding: 30px">
-				<h3 style="padding: 10px 0px">동행구하기</h3>
-				<table>
-				 <colgroup>
-			       <col span="1" style="width: 15%;">
-			       <col span="1" style="width: 70%;">
-			       <col span="1" style="width: 15%;">
-			   	 </colgroup>
-					<thead>
-						<tr style="line-height: 3;" >
-							<th>no.</th>
-							
-							<th style="text-align: center;">글제목</th>
-			
-							
-							<th>작성자</th>
-							<!-- <th style="text-align: center">작성일</th> -->
-							<!-- <th style="text-align: center">조회수</th>
-							<th style="text-align: center">진행상태</th> -->
-						</tr>
-					</thead>
-					<c:forEach items="${partnerList}" var="partner">
-						<tr style="line-height: 3;" >
-							<td>${partner.partnerId}</td>
-						
-							<td><a
-								style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; vertical-align: middle"
-								href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
-									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if>
-							</a></td>
-							<td style="color: black;"><c:if
-									test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
-								<c:if test="${sessionScope.login.userId ne partner.userId}">
-									<a style="color: black;"
-										href="./getYourTravelList?userId=${partner.userId}"
-										class="goToUserPage">${partner.userName}</a>
-								</c:if></td>
-							<%-- <td style="text-align: center">${partner.partnerDate} --%>
-					<%-- 		<td style="text-align: center">${partner.partnerHit}</td>
-							<td style="text-align: center">${partner.partnerCondition}</td> --%>
-						</tr>
-					</c:forEach>
-					
-				</table>
-
-			</div>
-		</div>
-	</section>
-	<!--    end 이벤트 창? 공지사항창-->
-	<!--    베스트 여행기 -->
-	<section class="about_us_area" id="about">
-		<div class="container">
-			<div class="row">
-				<c:forEach items="${bestTravelList}" var="board">
-					<div class="col-md-2 col-sm-2 col-xs-12">
-						<div class="about_single_item">
-							<div class="about_single_item_content">
-								<c:if test="${board.travelPic != null}">
-									<img src="./images/travel/${travelBoard.travelPic}"
-										class="img-responsive">
-								</c:if>
-								<c:if test="${board.travelPic == null}">
-									<img src="./images/travel/noimage.jpg" class="img-responsive">
-								</c:if>
-								<br>
-								<h4>
-									<a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a>
-								</h4>
-								<h2>${board.userId}</h2>
-								<a href="#" data-placement="right" title="Like"> <i
-									class="fa fa-heart"></i> ${board.travelLike}
-								</a>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-		</div>
-	</section>
-	<!--   end 베스트여행기-->
-
 
 
 
@@ -658,7 +661,7 @@
 	<!--    main.js-->
 	<script src="resources/js/main.js"></script>
 
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
 	<script type="text/javascript">
 		$(function() {
