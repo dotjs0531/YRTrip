@@ -19,7 +19,15 @@
 			PLACE_TITLE,
 			PLACE_VISITDATE
 	FROM TRAVEL_PLACET P, USERT U
-	WHERE P.USER_ID = U.USER_ID
+	<where>
+		AND P.USER_ID = U.USER_ID
+	<if test="searchCondition != null and searchCondition == 'placeName'">
+		AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
+	</if>
+	<if test="searchCondition != null and searchCondition == 'userName'">
+		AND USER_NAME LIKE '%' || #{searchKeyword} || '%'
+	</if>
+	</where>
 			ORDER BY PLACE_NO DESC
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
@@ -46,7 +54,16 @@
 <!-- 페이징 : 전체 건수 조회 -->
 <select id="getCount" resultType="int">
 	SELECT COUNT(*)
-	FROM TRAVEL_PLACET
+	FROM TRAVEL_PLACET P, USERT U
+	<where>
+		AND P.USER_ID = U.USER_ID
+	<if test="searchCondition != null and searchCondition == 'placeName'">
+		AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
+	</if>
+	<if test="searchCondition != null and searchCondition == 'userName'">
+		AND USER_NAME LIKE '%' || #{searchKeyword} || '%'
+	</if>
+	</where>
 	ORDER BY PLACE_NO DESC
 </select>
 
