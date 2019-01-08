@@ -123,7 +123,7 @@
                             	
                             	<a href="./getCartList?userId=${sessionScope.login.userId}">
                             		<i class="fa fa-shopping-cart" 
-                            		style="padding: 14px 0px 0px 10px; text-align: center; color:#f9bf3b"></i>
+                            		style="padding: 19px 0px 0px 3px; text-align: center; color:#f9bf3b"></i>
                             	</a>
                             </c:if>
                             <c:if test="${sessionScope.login.userGrant eq 'admin'}">

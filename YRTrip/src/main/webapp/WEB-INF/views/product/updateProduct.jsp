@@ -42,6 +42,7 @@
 <script src="resources/js/fileinput.js" type="text/javascript"></script>
 
 <style>
+
 #login-column {
    width:100%;
    margin: 0 10px;
