@@ -54,21 +54,21 @@ function go_page(page) {
          console.log(data.mqnaList);
          for (i = 0; i < data.mqnaList.length; i++) {
               var tr ="<tr id=\"QA"+data.mqnaList[i].qnaId+"\"><td>"
-				 +"<strong>QA"+ data.mqnaList[i].qnaId +"</strong>"
-				 +"</td><td>"
-				 +"<strong>" + data.mqnaList[i].qnaTitle +"</strong>"
-				 +"</td><td>"
-					 + data.mqnaList[i].qnaContent
-				 +"</td><td>"
-				 	+ data.mqnaList[i].userId
-				 +"</td><td>"
-					+ data.mqnaList[i].qnaAnswer
-				 +"</td><td>"
-				 	+ data.mqnaList[i].qnaDate
-				 +"</td><td>"
-				 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getQna?qnaId="+ data.mqnaList[i].qnaId +"'\">상세보기</button>"
-				 + "<button type=\"button\" value='"+data.mqnaList[i].qnaId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-				 +"</td></tr>"
+					 +"<strong>QA"+ data.mqnaList[i].qnaId +"</strong>"
+					 +"</td><td>"
+					 +"<strong>" + data.mqnaList[i].qnaTitle +"</strong>"
+					 +"</td><td>"
+						 + data.mqnaList[i].qnaContent
+					 +"</td><td>"
+					 	+ data.mqnaList[i].userId
+					 +"</td><td>"
+						+ data.mqnaList[i].qnaAnswer
+					 +"</td><td>"
+					 	+ data.mqnaList[i].qnaDate
+					 +"</td><td>"
+					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getQna?qnaId="+ data.mqnaList[i].qnaId +"'\">상세보기</button>"
+					 + "<button type=\"button\" value='"+data.mqnaList[i].qnaId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+					 +"</td></tr>"
               $(tr).appendTo("#qnaList");
          }
             
@@ -96,31 +96,6 @@ function go_page(page) {
 </script>
 <script>
  $(function(){
-	/* $(function() {
-		$.getJSON("getManageQnaListAjax", null, function(datas){	
-		for(i=0; i<datas.length; i++){
-			
-			var str = "<tr id=\"QA"+datas[i].qnaId+"\"><td>"
-					 +"<strong>QA"+ datas[i].qnaId +"</strong>"
-					 +"</td><td>"
-					 +"<strong>" + datas[i].qnaTitle +"</strong>"
-					 +"</td><td>"
-						 + datas[i].qnaContent
-					 +"</td><td>"
-					 	+ datas[i].userId
-					 +"</td><td>"
-						+ datas[i].qnaAnswer
-					 +"</td><td>"
-					 	+ datas[i].qnaDate
-					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getQna?qnaId="+ datas[i].qnaId +"'\">상세보기</button>"
-					 + "<button type=\"button\" value='"+datas[i].qnaId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-					 +"</td></tr>"
-					$(str).appendTo("#qnaList");
-		}
-		});	
-	}); */
-	
 	$("#qnaList").on("click", ".btnDel", function() {
 		var qnaId = $(this).closest('.btnDel').val();	
 		if (confirm("삭제하시겠습니까?")) {
@@ -131,7 +106,6 @@ function go_page(page) {
 			});
 		}
 	});
-
 });	 
 </script>
 </head>

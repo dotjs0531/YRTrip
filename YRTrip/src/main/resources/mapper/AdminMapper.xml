@@ -113,6 +113,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <select id="getManageOrderList" resultType="order">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		SELECT  ORDER_ID, 
 				ORDER_CONDITION, 
 				ORDER_EA,
@@ -122,6 +123,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		   FROM ORDERT
 	  	  WHERE BUYER_ID LIKE '%' || #{searchKeyword} || '%'
 	 	  ORDER BY ORDER_DATE DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getManageOrder" resultType="order">
 	SELECT  ORDER_ID, 
@@ -148,6 +150,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <select id="getManagePartnerList" resultType="partner">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT	PARTNER_ID,
 			PARTNER_TITLE,      
 			TO_CHAR(PARTNER_DATE, 'YYYY/MM/DD') PARTNER_DATE,    
@@ -157,6 +160,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM	PARTNERT
 	 WHERE  USER_ID LIKE '%' || #{searchKeyword} || '%'
 	 ORDER  BY PARTNER_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getManagePartnerCount" resultType="int">
       SELECT COUNT(*)
@@ -187,12 +191,14 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <select id="getManageNoticeList" resultType="notice">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	SELECT  NOTICE_ID,
 			NOTICE_TITLE,
 			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE
 	  FROM  NOTICET
 	 WHERE  NOTICE_TITLE LIKE '%' || #{searchKeyword} || '%'
 	  ORDER BY NOTICE_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getManageNoticeCount" resultType="int">
       SELECT COUNT(*)
@@ -203,6 +209,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 </select>
 
 <select id="getManageQnaList" resultType="qna">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	SELECT  QNA_ID,
 			QNA_TITLE,
 			QNA_CONTENT,
@@ -212,6 +219,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 	  FROM  QNAT
 	 WHERE  USER_ID LIKE '%' || #{searchKeyword} || '%'
 	  ORDER BY QNA_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getManageQnaCount" resultType="int">
       SELECT COUNT(*)

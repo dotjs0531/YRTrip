@@ -55,18 +55,18 @@ function go_page(page) {
          console.log(data.morderList);
          for (i = 0; i < data.morderList.length; i++) {
               var tr = "<tr id=\"OR"+data.morderList[i].orderId+"\"><td>"
-				 +"<strong>OR"+ data.morderList[i].orderId +"</strong>"
-				 +"</td><td>"
-				 +"<strong>" + data.morderList[i].itemId +"</strong>"
-				 +"</td><td>"
-					 + data.morderList[i].orderEa
-				 +"</td><td>"
-					 + data.morderList[i].buyerId
-				 +"</td><td>"
-					 + data.morderList[i].orderCondition
-				 +"</td><td>"
-				 +"<button type=\"button\" class=\"btn btn-success mr-2\" id=\"order" + data.morderList[i].orderId + "\" data-toggle=\"modal\" data-target=\"#getOrder\">상세보기</button>"
-				 +"</td></tr>"
+					 +"<strong>OR"+ data.morderList[i].orderId +"</strong>"
+					 +"</td><td>"
+					 +"<strong>" + data.morderList[i].itemId +"</strong>"
+					 +"</td><td>"
+						 + data.morderList[i].orderEa
+					 +"</td><td>"
+						 + data.morderList[i].buyerId
+					 +"</td><td>"
+						 + data.morderList[i].orderCondition
+					 +"</td><td>"
+					 +"<button type=\"button\" class=\"btn btn-success mr-2\" id=\"order" + data.morderList[i].orderId + "\" data-toggle=\"modal\" data-target=\"#getOrder\">상세보기</button>"
+					 +"</td></tr>"
               $(tr).appendTo("#orderList");
          }
             
@@ -94,28 +94,6 @@ function go_page(page) {
 </script>
 <script>
  $(function(){
-	/* $(function() {
-		$.getJSON("getManageOrderListAjax", null, function(datas){	
-		for(i=0; i<datas.length; i++){
-			
-			var str = "<tr id=\"OR"+datas[i].orderId+"\"><td>"
-					 +"<strong>OR"+ datas[i].orderId +"</strong>"
-					 +"</td><td>"
-					 +"<strong>" + datas[i].itemId +"</strong>"
-					 +"</td><td>"
-						 + datas[i].orderEa
-					 +"</td><td>"
-						 + datas[i].buyerId
-					 +"</td><td>"
-						 + datas[i].orderCondition
-					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\" id=\"order" + datas[i].orderId + "\" data-toggle=\"modal\" data-target=\"#getOrder\">상세보기</button>"
-					 +"</td></tr>"
-			$(str).appendTo("#orderList");
-			}
-		});	
-	}); */
-	
 	$('#getOrder').on('show.bs.modal', function(e) {
 		var button = $(event.target) // Button that triggered the modal
 		console.log(event);
@@ -152,7 +130,6 @@ function go_page(page) {
 			$("#userAddress").html(userAddress);
 		})
 	});
-	
 });	 
 </script>
 <style>

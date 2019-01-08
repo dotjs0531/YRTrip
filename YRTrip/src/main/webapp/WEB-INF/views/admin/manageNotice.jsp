@@ -54,15 +54,15 @@ function go_page(page) {
          console.log(data.mnoticeList);
          for (i = 0; i < data.mnoticeList.length; i++) {
               var tr ="<tr id=\"NT"+data.mnoticeList[i].noticeId+"\"><td>"
-				 +"<strong>NT"+ data.mnoticeList[i].noticeId +"</strong>"
-				 +"</td><td>"
-				 +"<strong>" + data.mnoticeList[i].noticeTitle +"</strong>"
-				 +"</td><td>"
-					 + data.mnoticeList[i].noticeDate
-				 +"</td><td>"
-				 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getNotice?noticeId="+ data.mnoticeList[i].noticeId +"'\">상세보기</button>"
-				 + "<button type=\"button\" value='"+data.mnoticeList[i].noticeId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-				 +"</td></tr>"
+					 +"<strong>NT"+ data.mnoticeList[i].noticeId +"</strong>"
+					 +"</td><td>"
+					 +"<strong>" + data.mnoticeList[i].noticeTitle +"</strong>"
+					 +"</td><td>"
+						 + data.mnoticeList[i].noticeDate
+					 +"</td><td>"
+					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getNotice?noticeId="+ data.mnoticeList[i].noticeId +"'\">상세보기</button>"
+					 + "<button type=\"button\" value='"+data.mnoticeList[i].noticeId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+					 +"</td></tr>"
               $(tr).appendTo("#noticeList");
          }
             
@@ -90,25 +90,6 @@ function go_page(page) {
 </script>
 <script>
  $(function(){
-	/* $(function() {
-		$.getJSON("getManageNoticeListAjax", null, function(datas){	
-		for(i=0; i<datas.length; i++){
-			
-			var str = "<tr id=\"NT"+datas[i].noticeId+"\"><td>"
-					 +"<strong>NT"+ datas[i].noticeId +"</strong>"
-					 +"</td><td>"
-					 +"<strong>" + datas[i].noticeTitle +"</strong>"
-					 +"</td><td>"
-						 + datas[i].noticeDate
-					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getNotice?noticeId="+ datas[i].noticeId +"'\">상세보기</button>"
-					 + "<button type=\"button\" value='"+datas[i].noticeId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-					 +"</td></tr>"
-					$(str).appendTo("#noticeList");
-		}
-		});	
-	}); */
-	
 	$("#noticeList").on("click", ".btnDel", function() {
 		var noticeId = $(this).closest('.btnDel').val();
 		if (confirm("삭제하시겠습니까?")) {
@@ -119,7 +100,6 @@ function go_page(page) {
 			});
 		}
 	});
-
 });	 
 </script>
 </head>

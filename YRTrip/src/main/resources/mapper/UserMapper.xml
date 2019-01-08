@@ -4,6 +4,7 @@
 <mapper namespace="user">
 
 <select id="getUserList" resultType="user">
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
 	SELECT  USER_ID,
 			USER_PW,
 			USER_NAME,
@@ -21,6 +22,7 @@
 	  FROM  USERT
 	  WHERE USER_ID LIKE '%' || #{searchKeyword} || '%'
 	  ORDER BY USER_DATE DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 <select id="getUser" parameterType="user" resultType="user">
 	SELECT  USER_ID,

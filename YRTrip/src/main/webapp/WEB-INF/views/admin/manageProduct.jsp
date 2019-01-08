@@ -56,21 +56,21 @@ function go_page(page) {
          console.log(data.mproductList);
          for (i = 0; i < data.mproductList.length; i++) {
               var tr = "<tr id=\"PR"+data.mproductList[i].itemId+"\"><td>"
-				+ "<strong>PR"+ data.mproductList[i].itemId+ "</strong>"
-				+ "</td><td>"
-				+ "<strong>"+ data.mproductList[i].itemName+ "</strong>"
-				+ "</td><td>"
-				  + data.mproductList[i].itemEa
-				+ "Ea</td><td>"
-				  + data.mproductList[i].itemMethod
-				+ "</td><td>"
-				  + data.mproductList[i].sellerId
-				+ "</td><td>"
-				  + data.mproductList[i].itemCondition
-				+ "</td><td>"
-				+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getProduct?itemId="+ data.mproductList[i].itemId +"'\">상세보기</button>"
-				+ "<button type=\"button\" value='"+data.mproductList[i].itemId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-				+ "</td></tr>"
+					+ "<strong>PR"+ data.mproductList[i].itemId+ "</strong>"
+					+ "</td><td>"
+					+ "<strong>"+ data.mproductList[i].itemName+ "</strong>"
+					+ "</td><td>"
+					  + data.mproductList[i].itemEa
+					+ "Ea</td><td>"
+					  + data.mproductList[i].itemMethod
+					+ "</td><td>"
+					  + data.mproductList[i].sellerId
+					+ "</td><td>"
+					  + data.mproductList[i].itemCondition
+					+ "</td><td>"
+					+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getProduct?itemId="+ data.mproductList[i].itemId +"'\">상세보기</button>"
+					+ "<button type=\"button\" value='"+data.mproductList[i].itemId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+					+ "</td></tr>"
               $(tr).appendTo("#productList");
          }
             
@@ -97,31 +97,7 @@ function go_page(page) {
 };
 </script>
 <script>
-	$(function() {/* 
-		$(function() {
-			$.getJSON("getManageProductListAjax", null, function(datas) {
-					for (i = 0; i < datas.length; i++) {
-						var str = "<tr id=\"PR"+datas[i].itemId+"\"><td>"
-								+ "<strong>PR"+ datas[i].itemId+ "</strong>"
-								+ "</td><td>"
-								+ "<strong>"+ datas[i].itemName+ "</strong>"
-								+ "</td><td>"
-								  + datas[i].itemEa
-								+ "Ea</td><td>"
-								  + datas[i].itemMethod
-								+ "</td><td>"
-								  + datas[i].sellerId
-								+ "</td><td>"
-								  + datas[i].itemCondition
-								+ "</td><td>"
-								+ "<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getProduct?itemId="+ datas[i].itemId +"'\">상세보기</button>"
-								+ "<button type=\"button\" value='"+datas[i].itemId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-								+ "</td></tr>"
-									$(str).appendTo("#productList");
-								}
-							});
-		});
- */
+	$(function() {
 		$("#productList").on("click", ".btnDel", function() {
 			var itemId = $(this).closest('.btnDel').val();
 			if (confirm("삭제하시겠습니까?")) {
@@ -132,7 +108,6 @@ function go_page(page) {
 				});
 			}
 		});
-
 	});
 </script>
 </head>
@@ -144,10 +119,6 @@ function go_page(page) {
 					<strong>상품내역관리</strong>
 				</h4>
 				<div class="input-group col-xs-12" style="width: 300px; float: right;">
-					<!-- <input type="text" class="form-control file-upload-info"
-						style="width: 200px;"> <span class="input-group-append">
-						<button class="file-upload-browse btn" type="button">검색</button>
-					</span> -->
 					<form name="frm" id="frm" class="form-inline">
 		                <input type="text" class="form-control file-upload-info" name="searchKeyword" style="width:200px;" placeholder="회원ID를 입력해주세요.">
 		                <span class="input-group-append">

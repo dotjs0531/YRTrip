@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script> -->
 <style>
 .pagination {
   display: inline-block;
@@ -55,21 +54,21 @@ function go_page(page) {
          console.log(data.mpartnerList);
          for (i = 0; i < data.mpartnerList.length; i++) {
               var tr = "<tr id=\"PT"+data.mpartnerList[i].partnerId+"\"><td>"
-				 +"<strong>PT"+ data.mpartnerList[i].partnerId +"</strong>"
-				 +"</td><td>"
-				 +"<strong>" + data.mpartnerList[i].partnerTitle +"</strong>"
-				 +"</td><td>"
-					 + data.mpartnerList[i].tinfoId
-				 +"</td><td>"
-					 + data.mpartnerList[i].partnerCondition
-				 +"</td><td>"
-					 + data.mpartnerList[i].userId
-				 +"</td><td>"
-					 + data.mpartnerList[i].partnerDate
-				 +"</td><td>"
-				 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getPartner?partnerId="+ data.mpartnerList[i].partnerId +"'\">상세보기</button>"
-				 + "<button type=\"button\" value='"+data.mpartnerList[i].partnerId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-				 +"</td></tr>"
+					 +"<strong>PT"+ data.mpartnerList[i].partnerId +"</strong>"
+					 +"</td><td>"
+					 +"<strong>" + data.mpartnerList[i].partnerTitle +"</strong>"
+					 +"</td><td>"
+						 + data.mpartnerList[i].tinfoId
+					 +"</td><td>"
+						 + data.mpartnerList[i].partnerCondition
+					 +"</td><td>"
+						 + data.mpartnerList[i].userId
+					 +"</td><td>"
+						 + data.mpartnerList[i].partnerDate
+					 +"</td><td>"
+					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getPartner?partnerId="+ data.mpartnerList[i].partnerId +"'\">상세보기</button>"
+					 + "<button type=\"button\" value='"+data.mpartnerList[i].partnerId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+					 +"</td></tr>"
               $(tr).appendTo("#partnerList");
          }
             
@@ -97,31 +96,6 @@ function go_page(page) {
 </script>
 <script>
  $(function(){
-	/* $(function() {
-		$.getJSON("getManagePartnerListAjax", null, function(datas){	
-		for(i=0; i<datas.length; i++){
-			
-			var str = "<tr id=\"PT"+datas[i].partnerId+"\"><td>"
-					 +"<strong>PT"+ datas[i].partnerId +"</strong>"
-					 +"</td><td>"
-					 +"<strong>" + datas[i].partnerTitle +"</strong>"
-					 +"</td><td>"
-						 + datas[i].tinfoId
-					 +"</td><td>"
-						 + datas[i].partnerCondition
-					 +"</td><td>"
-						 + datas[i].userId
-					 +"</td><td>"
-						 + datas[i].partnerDate
-					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getPartner?partnerId="+ datas[i].partnerId +"'\">상세보기</button>"
-					 + "<button type=\"button\" value='"+datas[i].partnerId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-					 +"</td></tr>"
-					$(str).appendTo("#partnerList");
-		}
-		});	
-	}); */
-	
 	$("#partnerList").on("click", ".btnDel", function() {
 		var partnerId = $(this).closest('.btnDel').val();
 		if (confirm("삭제하시겠습니까?")) {
@@ -132,7 +106,6 @@ function go_page(page) {
 			});
 		}
 	});
-
 });	 
 </script>
 </head>
@@ -142,18 +115,14 @@ function go_page(page) {
            <div class="card-body">
              <h4 class="card-title">동행관리</h4>
              <div class="input-group col-xs-12" style="width:300px; float:right;">
-                   <!-- <input type="text" class="form-control file-upload-info" style="width:200px;">
-                  <span class="input-group-append">
-                     <button class="file-upload-browse btn" type="button">검색</button>
-                   </span> -->
-                   <form name="frm" id="frm" class="form-inline">
+             <form name="frm" id="frm" class="form-inline">
                 <input type="text" class="form-control file-upload-info" name="searchKeyword" style="width:200px;" placeholder="회원ID를 입력해주세요.">
                 <span class="input-group-append">
                   <button type="button" class="file-upload-browse btn" onclick='go_page(1)'>검색</button>
                 </span>
             	<input type="hidden" name="page" id="page" >
          	</form>
-                 </div>
+            </div>
              <div class="table-responsive">
                <table class="table table-striped" style="text-align: center;">
                  <thead>

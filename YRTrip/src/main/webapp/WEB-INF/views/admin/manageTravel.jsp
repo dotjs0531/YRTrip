@@ -102,7 +102,6 @@ function go_page(page) {
 			var url = "deleteTravelAjax";
 			$.getJSON(url, params, function(datas) {
 				$("#TB" + travelNo).remove();
-
 			});
 		}
 	});
