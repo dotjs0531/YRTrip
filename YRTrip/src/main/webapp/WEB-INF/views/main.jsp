@@ -79,6 +79,12 @@
 </script>
 
 <style>
+h3 {
+color: black;
+}
+hr{
+color: #3537356b;
+}
 #quote-carousel {
 	padding: 0 10px 30px 10px;
 	margin-top: 30px;
@@ -279,12 +285,12 @@
 	<section class="about_top" id="about_top" style="border-bottom: none;">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-8">
-			<h3 style="padding: 0 0 10px 21px;">공지사항</h3>
+			<div class="col-lg-7" style="padding:10px 0">
 				<div class="col-md-12" data-wow-delay="0.2s">
-				
 					<div class="carousel slide" data-ride="carousel"
 						id="quote-carousel">
+						<h3 style="padding: 0 0 10px 5px;">공지사항</h3>
+						<hr>
 						<!-- Bottom Carousel Indicators -->
 						<ol class="carousel-indicators">
 							<li data-target="#quote-carousel" data-slide-to="0"
@@ -336,8 +342,9 @@
 				</div>
 			</div>
 			
-			<div class="col-lg-4" style="padding: 30px">
+			<div class="col-lg-5" style="padding: 30px">
 				<h3 style="padding: 10px 0px">동행구하기</h3>
+				<hr>
 				<table>
 					<colgroup>
 						<col span="1" style="width: 15%;">
@@ -361,9 +368,8 @@
 						<tr style="line-height: 3;">
 							<td>${partner.partnerId}</td>
 
-							<td><a
-								style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; vertical-align: middle"
-								href="./getPartner?partnerId=${partner.partnerId}">${partner.partnerTitle}
+							<td style="display: inline-block; color:black; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;  width: 300px; text-decoration: none !important"><a
+								href="./getPartner?partnerId=${partner.partnerId}" style="color:black;">${partner.partnerTitle}
 									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if>
 							</a></td>
 							<td style="color: black;"><c:if
@@ -373,10 +379,6 @@
 										href="./getYourTravelList?userId=${partner.userId}"
 										class="goToUserPage">${partner.userName}</a>
 								</c:if></td>
-								<!-- ㅇ러ㅏㅣㅁㄴ -->
-							<%-- <td style="text-align: center">${partner.partnerDate} --%>
-							<%-- 		<td style="text-align: center">${partner.partnerHit}</td>
-							<td style="text-align: center">${partner.partnerCondition}</td> --%>
 						</tr>
 					</c:forEach>
 				</table>
@@ -390,11 +392,11 @@
 	<section class="container" id="about">
 		<!-- <div class="container"> -->
 			<div class="row">
-			<h3>너만의 여행기 </h3>
+			<h3 style="padding: 0px 0px 8px 0px;">너만의 여행기 </h3>
 				<h5>당신의 추억, 당신의 일정을 기록하세요 !</h5>
 				<hr>
 				<c:forEach items="${bestTravelList}" var="board">
-					<div class="col-md-2 col-sm-2 col-xs-12">
+					<div class="col-md-2 col-sm-2 col-xs-12 col-lg-2">
 						<div class="about_single_item">
 							<div class="about_single_item_content">
 								<c:if test="${board.travelPic != null}">
@@ -424,7 +426,7 @@
 		<section class="container">
 			<div class="row">
 				<div class="container card" style="padding: 0 0 30px 0;">
-				<h3>여행 중고 물품 </h3>
+				<h3 style="padding: 0px 0px 8px 0px;">여행 중고 물품 </h3>
 				<h5>여행하면서 도움이 됐지만 더이상 쟁여둘수 없는 물품들을 올려보세요!</h5>
 				<hr>
 					<c:forEach items="${productList}" var="product">
