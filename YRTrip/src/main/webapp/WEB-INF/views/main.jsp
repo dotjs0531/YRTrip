@@ -499,6 +499,7 @@ color: #3537356b;
 						영업시간 : 09:00-18:00
 						<br>
 						(점심시간 : 13:00-14:00)</p>
+					</div>
 				</div>
 				<!-- <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
 					<div class="single-footer clearfix">
