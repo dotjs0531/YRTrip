@@ -312,7 +312,7 @@ color: #3537356b;
 								<div class="row">
 									<div class="col-12">
 										<a href="./getNotice?noticeId=1"> <img
-											src="./images/product/공지.png">
+											src="./images/notice/공지.png">
 										</a>
 									</div>
 								</div>
@@ -322,7 +322,7 @@ color: #3537356b;
 								<div class="row">
 									<div class="col-12">
 										<a href="./getNotice?noticeId=1"> <img
-											src="./images/product/공지2.png">
+											src="./images/notice/공지2.png">
 										</a>
 									</div>
 								</div>
@@ -332,7 +332,7 @@ color: #3537356b;
 								<div class="row">
 									<div class="col-12">
 										<a href="getNotice?noticeId=1"> <img
-											src="./images/product/공지3.png">
+											src="./images/notice/공지3.png">
 										</a>
 									</div>
 								</div>
