@@ -85,6 +85,27 @@ input[type=radio]{
     background-color: #f2f2f2;
     padding: 20px;
 } */
+@font-face {
+ font-family: 'NanumSquareRoundEB';
+ src: url(resources/fonts/NanumSquareRoundEB.eot);
+ src: url(resources/fonts/NanumSquareRoundEB.eot?#iefix) format('embedded-opentype'),
+      url(resources/fonts/NanumSquareRoundEB.woff) format('woff'),
+      url(resources/fonts/NanumSquareRoundEB.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'NanumSquareRoundB';
+ src: url(resources/fonts/NanumSquareRoundB.eot);
+ src: url(resources/fonts/NanumSquareRoundB.eot?#iefix) format('embedded-opentype'),
+      url(resources/fonts/NanumSquareRoundB.woff) format('woff'),
+      url(resources/fonts/NanumSquareRoundB.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'NanumSquareRoundR';
+ src: url(resources/fonts/NanumSquareRoundR.eot);
+ src: url(resources/fonts/NanumSquareRoundR.eot?#iefix) format('embedded-opentype'),
+      url(resources/fonts/NanumSquareRoundR.woff) format('woff'),
+      url(resources/fonts/NanumSquareRoundR.ttf) format('truetype');
+}
 </style>
 <script>
 /* $(function(){
@@ -511,8 +532,8 @@ function ck_phone(){
             <div class="row">
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
-                        <div class="pricing-title">
-                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black">마이페이지</a></h2>
+                        <div class="pricing-title" style="padding:30px">
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; font-family: 'NanumSquareRoundEB';">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"

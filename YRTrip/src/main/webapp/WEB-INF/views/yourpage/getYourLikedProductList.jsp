@@ -72,7 +72,7 @@ a:hover { color:white }
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title" style="padding-bottom:10px">
-                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; text-decoration:none !important">${user.userId}</a></h2>
+                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; font-family: 'NanumSquareRoundEB'; text-decoration:none !important">${user.userName}</a></h2>
                             <!-- 별점 표시 부분 -->
 							<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="${user.userStar}" disabled>
                         </div>

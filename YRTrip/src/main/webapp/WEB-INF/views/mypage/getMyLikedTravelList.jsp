@@ -75,7 +75,7 @@ function del() {
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; font-family: 'NanumSquareRoundEB'; text-decoration:none !important">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
@@ -120,7 +120,7 @@ function del() {
 							<!-- Normal Demo-->
 							<c:forEach items="${MyLikedTravelList}" var="travel" varStatus="status">
 								
-								<div class="content-box" style="width:180px; margin-top:10px">
+								<div class="content-box" style="width:180px; margin:10px 15px">
 									<div style="height:130px;">
 										<c:if test="${travel.travelPic != null}">
 											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:180px; height:150px">
@@ -147,9 +147,9 @@ function del() {
 									<div class="content-footer">
 									<hr style="margin-bottom:-3px;">
 										<span class="user-info">
-											<c:if test="${sessionScope.login.userId eq travel.userId}"><a>${travel.userId}</a></c:if>
+											<c:if test="${sessionScope.login.userId eq travel.userId}"><a>${travel.userName}</a></c:if>
 				                            <c:if test="${sessionScope.login.userId ne travel.userId}">
-												<a href="getYourTravelList?userId=${travel.userId}" class="goToUserPage">${travel.userId}</a>
+												<a href="getYourTravelList?userId=${travel.userId}" class="goToUserPage">${travel.userName}</a>
 											</c:if>
 										</span>
 										<span class="pull-right">

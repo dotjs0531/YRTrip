@@ -177,7 +177,7 @@ a:hover { color:white }
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title" style="padding-bottom:10px">
-                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; text-decoration:none !important">${user.userId}</a></h2>
+                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; font-family: 'NanumSquareRoundEB'; text-decoration:none !important">${user.userName}</a></h2>
                             <!-- 별점 표시 부분 -->
 							<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="${user.userStar}" disabled>
                         </div>
@@ -223,18 +223,13 @@ a:hover { color:white }
 							<c:forEach items="${YourLikedPlaceList}" var="place">
 								<div class="wrap">
 									<div class="tile">
-										<%-- <c:if test="${place.placePic ne null}">
-											<img id="travelPic" src="./images/travel/${place.placePic}" />
-										</c:if>
-										<c:if test="${place.placePic eq null}"> --%>
 											<img src="./images/travel/placenoimage.jpg" class="img-responsive">
-										<%-- </c:if> --%>
 										<div class="text">
 											<h2 class="animate-text">
 												<a href="getTravelPlace?PlaceNo=${place.placeNo}" style="text-decoration: none; color: #34495E;">${place.placeName}</a>
 											</h2>
 											<p class="animate-text">${place.placeName}</p>
-											<h3 class="animate-text">${place.userId}</h3>
+											<h3 class="animate-text">${place.userName}</h3>
 										</div>
 									</div>
 								</div>

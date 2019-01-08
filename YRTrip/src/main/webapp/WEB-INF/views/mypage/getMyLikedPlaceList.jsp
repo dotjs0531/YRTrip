@@ -176,7 +176,7 @@ function del() {
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title">
-                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; text-decoration:none !important">마이페이지</a></h2>
+                            <h2><a href="./getMyInfo?userId=${sessionScope.login.userId}" style="color:black; font-family: 'NanumSquareRoundEB'; text-decoration:none !important">마이페이지</a></h2>
                         </div>
                         <ul class=price-list>
                             <li><a href="./getMyTravelList?userId=${sessionScope.login.userId}"
@@ -221,18 +221,13 @@ function del() {
 							<c:forEach items="${MyLikedPlaceList}" var="place">
 								<div class="wrap">
 									<div class="tile">
-										<%-- <c:if test="${place.placePic ne null}">
-											<img id="travelPic" src="./images/travel/${place.placePic}" />
-										</c:if>
-										<c:if test="${place.placePic eq null}"> --%>
 											<img src="./images/travel/placenoimage.jpg" class="img-responsive">
-										<%-- </c:if> --%>
 										<div class="text">
 											<h2 class="animate-text">
 												<a href="getTravelPlace?PlaceNo=${place.placeNo}" style="text-decoration: none; color: #34495E;">${place.placeName}</a>
 											</h2>
 											<p class="animate-text">${place.placeName}</p>
-											<h3 class="animate-text">${place.userId}</h3>
+											<h3 class="animate-text">${place.userName}</h3>
 										</div>
 									</div>
 								</div>

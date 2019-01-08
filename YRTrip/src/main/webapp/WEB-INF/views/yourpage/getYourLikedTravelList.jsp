@@ -76,7 +76,7 @@ a:hover { color:white }
                 <div class="col-md-4 col-lg-4 col-sm-4 col-xs-12 text-center">
                     <div class="single-pricing-table">
                         <div class="pricing-title" style="padding-bottom:10px">
-                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; text-decoration:none !important">${user.userId}</a></h2>
+                            <h2><a href="./getYourTravelList?userId=${user.userId}" style="color:black; font-family: 'NanumSquareRoundEB'; text-decoration:none !important">${user.userName}</a></h2>
                             <!-- 별점 표시 부분 -->
 							<input id="reviewStar" name="reviewStar" class="rating rating-loading" data-min="0" data-max="5" data-step="0.1" value="${user.userStar}" disabled>
                         </div>
@@ -121,36 +121,9 @@ a:hover { color:white }
 					
                 	<div>
 						<div class="container card" style="width:100%; min-height:420px">
-							<!-- Normal Demo-->
-							<%-- <c:forEach items="${YourLikedTravelList}" var="travel">
-								<div class="column" style="padding-bottom:20px;">
-									<div class="demo-title">&nbsp;&nbsp;No. ${travel.travelNo}</div>
-									<!-- Post-->
-									<div class="post-module">
-										<!-- Thumbnail-->
-										<div class="thumbnail">
-											<a href="getTravelBoard?travelNo=${travel.travelNo}"><img src="./images/notice/1.jpg" style="height:200px" /></a>
-										</div>
-										<!-- Post Content-->
-										<div class="post-content">
-											<div class="category">Photos</div>
-											<h1 class="title"><a href="getTravelBoard?travelNo=${travel.travelNo}" style="color:black; display: inline-block; 
-												text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width:220px; text-decoration:none !important;">${travel.travelTitle}</a></h1>
-											<h2 class="sub_title">${travel.travelDate}</h2>
-											<p class="description">${travel.travelContent}</p>
-											<div class="post-meta">
-												<span class="timestamp"><i class="fa fa-gratipay"></i>&nbsp;${travel.travelLike}</span>
-												<span class="comments"><i class="fa fa-eye"></i>&nbsp;${travel.travelHit}</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:forEach> --%>
-							
-							
 							<c:forEach items="${YourLikedTravelList}" var="travel" varStatus="status">
 								
-								<div class="content-box" style="width:180px; margin-top:10px">
+								<div class="content-box" style="width:180px; margin:10px 15px">
 									<div style="height:130px;">
 										<c:if test="${travel.travelPic != null}">
 											<img src="./images/travel/${travel.travelPic}" class="img-responsive" style="width:180px; height:150px">
@@ -177,9 +150,9 @@ a:hover { color:white }
 									<div class="content-footer">
 									<hr style="margin-bottom:-3px;">
 										<span class="user-info">
-											<c:if test="${sessionScope.login.userId eq travel.userId}"><a>${travel.userId}</a></c:if>
+											<c:if test="${sessionScope.login.userId eq travel.userId}"><a>${travel.userName}</a></c:if>
 				                            <c:if test="${sessionScope.login.userId ne travel.userId}">
-												<a href="getYourTravelList?userId=${travel.userId}" class="goToUserPage">${travel.userId}</a>
+												<a href="getYourTravelList?userId=${travel.userId}" class="goToUserPage">${travel.userName}</a>
 											</c:if>
 										</span>
 										<span class="pull-right">
