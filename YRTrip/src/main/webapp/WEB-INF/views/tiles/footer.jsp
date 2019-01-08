@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
 						<h2>고객센터</h2>
 						<ul class="list">
 							<li><a href="getNoticeList">공지사항</a></li>
-							<li><a href="getNoticeList">1:1문의</a></li>
+							<li><a href="getQnaList">1:1문의</a></li>
 						</ul>
 					</div>
 				</div>
