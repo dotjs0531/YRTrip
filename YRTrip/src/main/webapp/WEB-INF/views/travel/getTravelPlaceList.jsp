@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
@@ -191,14 +192,23 @@ jQuery( document ).ready(function( $ ) {
 			
 					<div class="wrap">
 					<div class="tile"> 
-					  <c:if test="${travelPlace.placePic != null}">
-								<img src="./images/travel/${travelPlace.placePic}" />
+					  <c:if test="${board.placePic != null}">
+								<img src="./images/travel/${board.placePic}" />
 							</c:if>
-							<c:if test="${travelPlace.placePic == null}">
+							<c:if test="${board.placePic == null}">
 							<img src="./images/travel/placenoimage.jpg" class="img-responsive">
 							</c:if>
 					  <div class="text">
-					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">${board.placeTitle}</a></h2>
+					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">
+					   <c:choose>
+						           <c:when test="${fn:length(board.placeTitle) > 9}">
+						           		<c:out value="${fn:substring(board.placeTitle,0,8)}"/>..
+									</c:when>
+						           <c:otherwise>
+						            <c:out value="${board.travelTitle}"/>
+						           </c:otherwise> 
+						          </c:choose>
+					 </a></h2>
 					  <p class="animate-text">${board.placeName}</p>
 					  <c:if test="${sessionScope.login.userId eq board.userId}"><h3 class="animate-text" style="text-decoration: none; color:#34495E;">${board.userName}</h3></c:if>
 				      <c:if test="${sessionScope.login.userId ne board.userId}">
