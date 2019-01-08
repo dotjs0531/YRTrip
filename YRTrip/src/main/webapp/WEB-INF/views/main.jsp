@@ -428,7 +428,7 @@ color: #3537356b;
 			<div class="row">
 				<div class="container card" style="padding: 0 0 30px 0;">
 				<h3 style="padding: 0px 0px 8px 0px;">여행 중고 물품 </h3>
-				<h5>여행하면서 도움이 됐지만 더이상 쟁여둘수 없는 물품들을 올려보세요!</h5>
+				<h5>여행하면서 나에게 도움이 된 물품들을 판매해보세요!</h5>
 				<hr>
 					<c:forEach items="${productList}" var="product">
 						<div class="column col-md-4 col-sm-4 col-xs-12"
@@ -491,7 +491,7 @@ color: #3537356b;
 						<h2>고객센터</h2>
 						<ul class="list">
 							<li><a href="getNoticeList">공지사항</a></li>
-							<li><a href="getNoticeList">1:1문의</a></li>
+							<li><a href="getQnaList">1:1문의</a></li>
 						</ul>
 						<br>
 						<p>|☎ 전화번호 : 053-421-2460
