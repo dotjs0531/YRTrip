@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,23 +14,7 @@
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
-<script>
-$(function(){
-    var travelMenu = document.getElementById("travelMenu");
-    travelMenu.className='current-menu-item';
-});
-/* 파일업로드 */
-$(document).ready(function(){
-	$("#updateplacefileInput").on('change', function(){
-		if(window.FileReader){
-			var filename = $(this)[0].files[0].name;
-		} else {
-			var filename = $(this).val().split('/').pop().split('\\').pop();
-		}
-		$("#updateplacefile").val(filename);
-	});
-	});
-</script>
+
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -79,6 +63,10 @@ $(document).ready(function(){
 }
 </style>
 <script>
+$(function(){
+    var travelMenu = document.getElementById("travelMenu");
+    travelMenu.className='current-menu-item';
+});
 $(document).ready(function(){
 	/* 파일업로드 */
 	$("#fileInput").on('change', function(){ 
@@ -119,10 +107,10 @@ $(document).ready(function(){
 			<div>
 				<div class="col-sm-6" style="min-width:700px">
                 	<div class="table-responsive" style="min-height:450px;">		
-<!-- 수정 폼 -->
+<!-- 등록폼 -->
  <form class="form" action="./updateTravelPlace" method="post" enctype="multipart/form-data">
 								<input id="pac-input" class="controls" type="text"
-									placeholder="Enter a location">
+									placeholder="다녀온 장소를 검색하세요.">
 								<div id="map"></div>
 								<div id="infowindow-content">
 									<span id="place-name" class="title"></span>
@@ -130,19 +118,19 @@ $(document).ready(function(){
 								</div>
 									<div class="form-group">
 										<label for="placeTitle" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeTitle" class="form-control" value="${travelPlace.placeTitle}">
+										<input type="text" name="placeTitle" class="form-control" value="${travelPlace.placeTitle}" required>
 									</div>
 									<div class="form-group">
 										<label for="placeName" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" id="placeName" name="placeName" class="form-control"  value="${travelPlace.placeName}">
+										<input type="text" id="placeName" name="placeName" class="form-control" value="${travelPlace.placeName}" required>
 									</div>
 									<div class="form-group">
 										<label for="placeAddress" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" id="placeAddress" name="placeAddress" class="form-control" value="${travelPlace.placeAddress}">
+										<input type="text" id="placeAddress" name="placeAddress" class="form-control" value="${travelPlace.placeAddress}" required>
 									</div>
 									<div class="form-group">
 										<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-										<textarea class="form-control" rows="3" name="placeContent">${travelPlace.placeContent}</textarea>
+										<textarea class="form-control" rows="3" name="placeContent" required>${travelPlace.placeContent}</textarea>
 									</div>
 									<input type="file" name="placePicFile"
 						 							id="fileInput" data-class-button="btn btn-default"
@@ -160,16 +148,16 @@ $(document).ready(function(){
 												</div>
 									<div class="form-group">
 										<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
-										<input type="text" name="placeVisitDate" class="form-control datePicker"  value="${fn:substring(travelPlace.placeVisitDate, 0, 10)}">
+										<input type="text" name="placeVisitDate" class="form-control datePicker" value="${fn:substring(travelPlace.placeVisitDate, 0, 10)}" required>
 									</div>
 									<div class="form-group">
-										<label for="submit" class="text-info"></label>
-										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="수정완료">
+										<label for="remember-me" class="text-info"></label>
+										<input type="submit" name="submit" class="btn btn-info btn-md"  style="background-color:#f9bf3b; border:#f9bf3b; float:right;" value="등록">
 									</div>
-
+									<input type="hidden" name="placeNo" value="${travelPlace.placeNo}">
 									<input type="hidden" name="travelNo" value="0">
 									<input type="hidden" name="userId" value="${sessionScope.login.userId}">
-									<input type="hidden" name="placeMapId" value="${travelPlace.placeMapId}">
+									
 									
  			</form>
 
@@ -177,8 +165,8 @@ $(document).ready(function(){
 				</div></div></div></div></section>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script> 
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script>
 <script>
 /* datepicker */
 $(function() {

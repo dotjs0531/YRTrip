@@ -268,7 +268,7 @@ function del(travelNo){
 						+"<strong>"+travelPlace.placeName + "</strong><br>"
 						+"<small>" + travelPlace.placeAddress + "</small><br><br>"
 						+"<img class=\"img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
-						+"<pre style=\"background-color:white; border:0; font-size: 12px; font-family: 'Noto Sans KR', sans-serif;\">"+travelPlace.placeContent+"</pre>"
+						+"<pre style=\"background-color:white; border:0; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; white-space: pre-wrap;\">"+travelPlace.placeContent+"</pre>"
 						+"</div>"
 					
 						+"<div id=\"footer\" class=\"panel-footer\">"
@@ -496,7 +496,7 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-body">
-												<pre style="background-color:white; font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">${travelBoard.travelContent}</pre>
+												<pre style="background-color:white; font-size: 12px; font-family: 'Noto Sans KR', sans-serif; white-space: pre-wrap;">${travelBoard.travelContent}</pre>
 											</div>
 											
 											<div class="panel-footer">

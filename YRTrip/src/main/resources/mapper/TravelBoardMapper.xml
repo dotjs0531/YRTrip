@@ -52,6 +52,7 @@
 									TRAVEL_PIC 
 							FROM TRAVELBOARDT T, USERT U
 							WHERE T.USER_ID = U.USER_ID
+								  AND TRAVEL_NO != '0'
 							ORDER BY TRAVEL_LIKE DESC)
 			WHERE ROWNUM <![CDATA[<]]>= 120
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
@@ -179,6 +180,34 @@ SELECT PLACE_NO,
 <select id="getCount" resultType="int">
 	SELECT COUNT(*)
 	FROM TRAVELBOARDT
+<where>
+		<if test="searchTinfo != null">
+			tinfo_id = #{searchTinfo}
+		</if>
+	</where>  
+</select>
+
+<!-- 페이징 : 베스트여행기 전체 건수 조회 -->
+<select id="getCountB" resultType="int">
+			SELECT COUNT(*) FROM(
+							SELECT  TRAVEL_NO,
+									TRAVEL_PERSON,
+									TRAVEL_PAY,
+									TRAVEL_SCHE,
+									TRAVEL_START,
+									TRAVEL_END,
+									TRAVEL_TITLE,
+									TRAVEL_CONTENT,
+									TRAVEL_DATE,
+									TRAVEL_HIT,
+									TRAVEL_LIKE,
+									TINFO_ID,
+									USER_ID,
+									TRAVEL_WITH,
+									TRAVEL_PIC 
+							FROM TRAVELBOARDT
+							ORDER BY TRAVEL_LIKE DESC)
+			WHERE ROWNUM <![CDATA[<]]>= 120
 <where>
 		<if test="searchTinfo != null">
 			tinfo_id = #{searchTinfo}

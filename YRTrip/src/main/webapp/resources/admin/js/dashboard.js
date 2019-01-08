@@ -4,7 +4,7 @@
     if ($('#dashboard-area-chart').length) {
       var lineChartCanvas = $("#dashboard-area-chart").get(0).getContext("2d");
       var data = {
-        labels: ["2013", "2014", "2014", "2015", "2016", "2017"],
+        labels: ["8월", "9월", "10월", "11월", "12월", "1월"],
         datasets: [{
             label: 'Product',
             data: [0, 11, 6, 10, 8, 0],

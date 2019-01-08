@@ -492,7 +492,7 @@ function makeTravelPlaceView(travelPlace){
 				+"<strong>"+travelPlace.placeName + "</strong><br>"
 				+"<small>" + travelPlace.placeAddress + "</small>"
 				+"<img class=\"img-responsive img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
-				+"<pre style=\"background-color:#fff; border-style:none;\">"+travelPlace.placeContent+"</pre>"
+				+"<pre style=\"background-color:#fff; border-style:none; white-space: pre-wrap;\">"+travelPlace.placeContent+"</pre>"
 				+"</div>"
 			
 				+"<div id=\"footer\" class=\"panel-footer\">"

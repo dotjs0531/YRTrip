@@ -12,6 +12,7 @@ public interface TravelBoardService {
 	public void deleteTravelBoardList(TravelBoardVO vo);
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo);
 	public int getCount(TravelBoardVO vo);
+	public int getCountB(TravelBoardVO vo);
 	public List<TravelBoardVO> getTravelBoardList(TravelBoardVO vo);
 	public List<TravelBoardVO> getBestTravelList(TravelBoardVO vo);
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo);

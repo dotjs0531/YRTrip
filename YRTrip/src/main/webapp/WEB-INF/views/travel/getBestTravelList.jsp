@@ -235,20 +235,21 @@ $("#autocompleteTinfoList").change(function(){
 						
 <!-- 여행기 리스트 -->
    			<c:forEach items="${bestTravelList}" var="board">
-   			<c:if test="${board.travelNo != '0'}">
 				<div class="content-box">
+														<div style="width:140px; height:80px;">
 							<c:if test="${board.travelPic != null}">
-							<img src="./images/travel/${board.travelPic}" style="display:inline-block;">
+							<img src="./images/travel/${board.travelPic}" style="width:100%; height:100px;">
 							</c:if>
 							<c:if test="${board.travelPic == null}">
-							<img src="./images/travel/noimage.jpg" >
+							<img src="./images/travel/noimage.jpg" style="width:100%; height:100px;">
 							</c:if>
+							</div>
 						<div class="content-title">
-							<div class="text-center">
-								<h3><a href="getTravelBoard?travelNo=${board.travelNo}">
+							<div class="text-center" style="height:60px;">
+								<h3><a href="getTravelBoard?travelNo=${board.travelNo}" class="getTravelBoard">
 								 <c:choose>
-						           <c:when test="${fn:length(board.travelTitle) > 9}">
-						           		<c:out value="${fn:substring(board.travelTitle,0,8)}"/>..
+						           <c:when test="${fn:length(board.travelTitle) > 20}">
+						           		<c:out value="${fn:substring(board.travelTitle,0,19)}"/>..
 									</c:when>
 						           <c:otherwise>
 						            <c:out value="${board.travelTitle}"/>
@@ -260,29 +261,13 @@ $("#autocompleteTinfoList").change(function(){
 						<div class="content-footer">
 						<hr style="margin-bottom:-3px;">
 							<span class="user-info">
-							<c:if test="${sessionScope.login.userId eq board.userId}">${board.userName}</c:if>
-				            <c:if test="${sessionScope.login.userId ne board.userId}">
-							<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userName}</a>
+							<c:if test="${sessionScope.login.userId eq board.userId}"><a>${board.userName}</a></c:if>
+                            <c:if test="${sessionScope.login.userId ne board.userId}">
+								<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userName}</a>
 							</c:if>
 							</span>
-							<span class="pull-right">
-								<a href="#" data-placement="right" title="Like">
-								<i class="fa fa-heart"></i> ${board.travelLike}</a>
-							</span>
-							<div class="user-ditels">
-								<div class="user-img">
-									<img src="resources/media/users.png" class="img-responsive">
-								</div>
-								<div class="social-icon">
-									<a href="#"><i class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="bottom" title="유저정보"></i></a> 
-									<a href="#"><i class="glyphicon glyphicon-usd" data-toggle="tooltip" data-placement="bottom" title="판매상품"></i></a><br> 
-									<a href="#"><i class="glyphicon glyphicon-edit" data-toggle="tooltip" data-placement="bottom" title="리뷰"></i></a> 
-									<a href="#"><i class="glyphicon glyphicon-globe" data-toggle="tooltip" data-placement="bottom" title="여행글"></i></a> 
-								</div>
-							</div>
 						</div>
 					</div>
-					</c:if>
 				</c:forEach>
 
 				<!-- 페이징처리 -->

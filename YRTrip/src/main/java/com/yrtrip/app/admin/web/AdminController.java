@@ -248,25 +248,45 @@ public class AdminController {
 	public List<Map> getTinfoChart(@RequestParam String day) {
 		return adminService.getTinfoChart(day);
 	}
+	@RequestMapping(value = "/manageChart2", method = RequestMethod.GET)
+	public String manageChart2(Model model) {
+		return "admin/chart2";
+	}
 	@RequestMapping(value = "/getSellerChart", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map> getSellerChart(@RequestParam String day) {
 		return adminService.getSellerChart(day);
+	}
+	@RequestMapping(value = "/manageChart3", method = RequestMethod.GET)
+	public String manageChart3(Model model) {
+		return "admin/chart3";
 	}
 	@RequestMapping(value = "/getDayChart", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map> getDayChart(@RequestParam String day) {
 		return adminService.getDayChart(day);
 	}
+	@RequestMapping(value = "/manageChart4", method = RequestMethod.GET)
+	public String manageChart4(Model model) {
+		return "admin/chart4";
+	}
 	@RequestMapping(value = "/getTimeChart", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map> getTimeChart(@RequestParam String day) {
 		return adminService.getTimeChart(day);
 	}
+	@RequestMapping(value = "/manageChart5", method = RequestMethod.GET)
+	public String manageChart5(Model model) {
+		return "admin/chart5";
+	}
 	@RequestMapping(value = "/getOrderPriceChart", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Map> getOrderPriceChart(@RequestParam String day) {
 		return adminService.getOrderPriceChart(day);
+	}
+	@RequestMapping(value = "/manageChart6", method = RequestMethod.GET)
+	public String manageChart6(Model model) {
+		return "admin/chart6";
 	}
 	@RequestMapping(value = "/getOrderIdChart", method = RequestMethod.GET)
 	@ResponseBody

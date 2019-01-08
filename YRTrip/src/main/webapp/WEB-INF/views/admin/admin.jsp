@@ -103,16 +103,16 @@
                 <div class="card-body">
                   <div class="row d-none d-sm-flex mb-4">
                     <div class="col-4">
-                      <h5 class="text-primary">월간 방문자 수</h5>
-                      <p>34657</p>
+                      <h5 class="text-primary">월간 여행기 등록수</h5>
+                      <p>57</p>
                     </div>
                     <div class="col-4">
-                      <h5 class="text-primary">월간 회원 탈퇴 수</h5>
-                      <p>45673</p>
+                      <h5 class="text-primary">월간 상품 등록수</h5>
+                      <p>73</p>
                     </div>
                     <div class="col-4">
-                      <h5 class="text-primary">월간 회원 가입 수</h5>
-                      <p>45673</p>
+                      <h5 class="text-primary">월간 동행 등록수</h5>
+                      <p>73</p>
                     </div>
                   </div>
                   <div class="chart-container">

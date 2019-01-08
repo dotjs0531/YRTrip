@@ -76,7 +76,7 @@ public class TravelBoardController {
 				vo.setFirst(paging.getFirst());
 				vo.setLast(paging.getLast());
 				// 전체 건수
-				paging.setTotalRecord(travelBoardService.getCount(vo));
+				paging.setTotalRecord(travelBoardService.getCountB(vo));
 				
 				mv.addObject("paging", paging);
 				

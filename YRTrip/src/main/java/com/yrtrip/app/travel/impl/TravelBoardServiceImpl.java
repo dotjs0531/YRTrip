@@ -50,6 +50,10 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 	public int getCount(TravelBoardVO vo) {
 		return dao.getCount(vo);
 	}
+	@Override
+	public int getCountB(TravelBoardVO vo) {
+		return dao.getCountB(vo);
+	}
 
 	@Override
 	public List<TravelBoardVO> getTravelBoardList(TravelBoardVO vo) {

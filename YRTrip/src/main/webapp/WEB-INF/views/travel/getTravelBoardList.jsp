@@ -230,18 +230,18 @@ $("#autocompleteTinfoList").change(function(){
 				<div class="content-box">
 							<div style="width:140px; height:80px;">
 							<c:if test="${board.travelPic != null}">
-							<img src="./images/travel/${board.travelPic}" style="display:inline-block;">
+							<img src="./images/travel/${board.travelPic}" style="width:100%; height:100px;">
 							</c:if>
 							<c:if test="${board.travelPic == null}">
-							<img src="./images/travel/noimage.jpg" >
+							<img src="./images/travel/noimage.jpg" style="width:100%; height:100px;">
 							</c:if>
 							</div>
 						<div class="content-title">
-							<div class="text-center">
+							<div class="text-center" style="height:60px;">
 								<h3><a href="getTravelBoard?travelNo=${board.travelNo}" class="getTravelBoard">
 								 <c:choose>
-						           <c:when test="${fn:length(board.travelTitle) > 9}">
-						           		<c:out value="${fn:substring(board.travelTitle,0,8)}"/>..
+						           <c:when test="${fn:length(board.travelTitle) > 20}">
+						           		<c:out value="${fn:substring(board.travelTitle,0,19)}"/>..
 									</c:when>
 						           <c:otherwise>
 						            <c:out value="${board.travelTitle}"/>

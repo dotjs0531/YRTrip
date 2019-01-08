@@ -492,7 +492,7 @@ function makeTravelPlaceView(travelPlace){
 				+"<strong>"+travelPlace.placeName + "</strong><br>"
 				+"<small>" + travelPlace.placeAddress + "</small>"
 				+"<img class=\"img-responsive img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
-				+"<pre style=\"background-color:#fff; border-style:none;\">"+travelPlace.placeContent+"</pre>"
+				+"<pre style=\"background-color:#fff; border-style:none; white-space: pre-wrap;\">"+travelPlace.placeContent+"</pre>"
 				+"</div>"
 			
 				+"<div id=\"footer\" class=\"panel-footer\">"
@@ -703,7 +703,7 @@ function makeTravelPlaceView(travelPlace){
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control" placeholder="방문했던 장소에 대한 후기를 입력해주세요.">
+													<textarea class="form-control" rows="3" name="placeContent" placeholder="방문했던 장소에 대한 후기를 입력해주세요."></textarea>
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>
@@ -777,7 +777,7 @@ function makeTravelPlaceView(travelPlace){
 												</div>
 												<div class="form-group">
 													<label for="placeContent" class="text-info" style="color:#5f768b;"></label><br>
-													<input type="text" name="placeContent" class="form-control">
+													<textarea class="form-control" rows="3" name="placeContent"></textarea>
 												</div>
 												<div class="form-group">
 													<label for="placeVisitDate" class="text-info" style="color:#5f768b;"></label><br>

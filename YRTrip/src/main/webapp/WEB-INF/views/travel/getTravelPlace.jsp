@@ -174,8 +174,8 @@ $(function(){
 						<hr />
 				    	<div style="float:right;">
 				    		${fn:substring(travelPlace.placeVisitDate, 0, 10)}
-				    		</div>
-				    		<pre style="background-color:#fff; border:none; font-size:16px;"> ${travelPlace.placeContent}</pre>
+				    		</div><br><br>
+				    		<pre style="background-color:#fff; border:none; font-size:16px; font-family: 'Jua', sans-serif; white-space: pre-wrap;"> ${travelPlace.placeContent}</pre>
 				    		<hr>
 				    	<div style="float:right;">
 					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}">작성자 | ${travelPlace.userName}</c:if>

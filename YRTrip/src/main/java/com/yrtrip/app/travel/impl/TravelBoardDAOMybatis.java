@@ -63,6 +63,10 @@ public class TravelBoardDAOMybatis {
 	public int getCount(TravelBoardVO vo) {
 		return sqlSession.selectOne("travelBoard.getCount", vo);
 	}
+	//베스트여행기 건수조회
+	public int getCountB(TravelBoardVO vo) {
+		return sqlSession.selectOne("travelBoard.getCountB", vo);
+	}
 	
 	//단건조회
 	public TravelBoardVO getTravelBoard(TravelBoardVO vo) {
