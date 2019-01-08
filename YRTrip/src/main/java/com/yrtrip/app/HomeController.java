@@ -63,7 +63,7 @@ public class HomeController {
 		ptvo.setLast(6);
 		//최신 여행기 목록
 		tbvo.setFirst(1);
-		tbvo.setLast(5);
+		tbvo.setLast(4);
 		//정보 뿌리기
 		
 		model.addAttribute("partnerList", partnerService.getPartnerList(ptvo));
