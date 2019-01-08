@@ -1,5 +1,6 @@
 package com.yrtrip.app.admin.web;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.yrtrip.app.Paging;
 import com.yrtrip.app.admin.AdminService;
 import com.yrtrip.app.notice.NoticeService;
 import com.yrtrip.app.notice.NoticeVO;
@@ -55,78 +57,148 @@ public class AdminController {
 	public String manageUser(Model model) {
 		return "admin/manageUser";
 	}
-	//회원 삭제Ajax
 	@RequestMapping("/deleteUserAjax")
 	@ResponseBody
-	public UserVO deleteUserAjax(UserVO vo) {
+	public UserVO deleteUserAjax(UserVO vo) { //회원 삭제Ajax
 		userService.deleteUser(vo);
 		return vo;
 	}
-	//회원 조회Ajax
-		@RequestMapping("/getUserListAjax")
-		@ResponseBody
-		public List<UserVO> getUserList(UserVO vo) {
-			return userService.getUserList(vo);
+	@RequestMapping("/getUserListAjax")
+	@ResponseBody
+	public List<UserVO> getUserList(UserVO vo) { //회원 조회Ajax
+		return userService.getUserList(vo);
+	}
+	@RequestMapping(value="/getUserListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getUserListPaging(UserVO vo, Paging paging) { //거래관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
 		}
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(userService.getUserCount(vo));
+
+		map.put("paging", paging);
+		map.put("muserList", userService.getUserList(vo));
+
+		return map;
+	}
 		
 	//거래관리
-		@RequestMapping(value = "/manageProduct", method = RequestMethod.GET)
-		public String manageProduct(Model model) {
-			return "admin/manageProduct";
+	@RequestMapping(value = "/manageProduct", method = RequestMethod.GET)
+	public String manageProduct(Model model) {
+		return "admin/manageProduct";
+	}
+	@RequestMapping("/getManageProductListAjax")
+	@ResponseBody
+	public List<ProductVO> getManageProductListAjax(ProductVO vo) { //거래관리 - 상품관리 조회Ajax
+		vo.setFirst(1);
+		vo.setLast(10);
+		return adminService.getManageProductList(vo);
+	}
+	@RequestMapping("/deleteProductAjax")
+	@ResponseBody
+	public ProductVO deleteProductAjax(ProductVO vo) { //거래관리 - 상품관리 삭제Ajax
+		productService.deleteProduct(vo);
+		return vo;
+	}
+	@RequestMapping(value="/getManageProductListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getManageProductListPaging(ProductVO vo, Paging paging) { //거래관리 - 상품관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
 		}
-	//거래관리 - 상품관리 조회Ajax
-		@RequestMapping("/getManageProductListAjax")
-		@ResponseBody
-		public List<ProductVO> getManageProductListAjax(ProductVO vo) {
-			vo.setFirst(1);
-			vo.setLast(10);
-			return adminService.getManageProductList(vo);
-		}
-		
-		//거래관리 - 상품관리 삭제Ajax
-		@RequestMapping("/deleteProductAjax")
-		@ResponseBody
-		public ProductVO deleteProductAjax(ProductVO vo) {
-			productService.deleteProduct(vo);
-			return vo;
-		}
-		
-	//거래관리 - 주문내역관리
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(adminService.getManageProductCount(vo));
+
+		map.put("paging", paging);
+		map.put("mproductList", adminService.getManageProductList(vo));
+
+		return map;
+	}
+	
 	@RequestMapping(value = "/manageOrder", method = RequestMethod.GET)
-	public String manageOrder(Model model, OrderVO vo) {
+	public String manageOrder(Model model, OrderVO vo) { //거래관리 - 주문내역관리
 		model.addAttribute("manageOrder", orderService.getOrderList(vo));
 		return "admin/manageOrder";
 	}
-	//거래관리 - 주문내역관리 조회Ajax
-			@RequestMapping("/getManageOrderListAjax")
-			@ResponseBody
-			public List<OrderVO> getManageOrderListAjax(OrderVO vo) {
-				return adminService.getManageOrderList(vo);
-			}
-	//거래관리 - 주문내역 상세보기
-			@RequestMapping("getManageOrder")
-			@ResponseBody
-			public OrderVO getManageOrder(OrderVO vo) {
-				return adminService.getManageOrder(vo);
-			}
+	@RequestMapping("/getManageOrderListAjax")
+	@ResponseBody
+	public List<OrderVO> getManageOrderListAjax(OrderVO vo) { //거래관리 - 주문내역관리 조회Ajax
+		return adminService.getManageOrderList(vo);
+	}
+	@RequestMapping("getManageOrder")
+	@ResponseBody
+	public OrderVO getManageOrder(OrderVO vo) { //거래관리 - 주문내역 상세보기
+		return adminService.getManageOrder(vo);
+	}
+	@RequestMapping(value="/getManageOrderListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getManageOrderListPaging(OrderVO vo, Paging paging) { //거래관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(adminService.getManageOrderCount(vo));
+
+		map.put("paging", paging);
+		map.put("morderList", adminService.getManageOrderList(vo));
+
+		return map;
+	}
 	
 	//동행관리
 	@RequestMapping(value = "/managePartner", method = RequestMethod.GET)
 	public String managePartner(Model model) {
 		return "admin/managePartner";
 	}
-	//동행관리  조회Ajax
 	@RequestMapping("/getManagePartnerListAjax")
 	@ResponseBody
-	public List<PartnerVO> getManagePartnerListAjax(PartnerVO vo) {
+	public List<PartnerVO> getManagePartnerListAjax(PartnerVO vo) { //동행관리  조회Ajax
 		return adminService.getManagePartnerList(vo);
 	}
-	//동행관리 삭제Ajax
 	@RequestMapping("/deletePartnerAjax")
 	@ResponseBody
-	public PartnerVO deletePartnerAjax(PartnerVO vo) {
+	public PartnerVO deletePartnerAjax(PartnerVO vo) { //동행관리 삭제Ajax
 		partnerService.deletePartner(vo);
 		return vo;
+	}
+	@RequestMapping(value="/getManagePartnerListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getManagePartnerListPaging(PartnerVO vo, Paging paging) { //동행관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(adminService.getManagePartnerCount(vo));
+
+		map.put("paging", paging);
+		map.put("mpartnerList", adminService.getManagePartnerList(vo));
+
+		return map;
 	}
 	
 	//여행관리
@@ -134,18 +206,36 @@ public class AdminController {
 	public String manageTravel(Model model) {
 		return "admin/manageTravel";
 	}
-	//여행관리  조회Ajax
 	@RequestMapping("/getManageTravelListAjax")
 	@ResponseBody
-	public List<TravelBoardVO> getManageTravelListAjax(TravelBoardVO vo) {
+	public List<TravelBoardVO> getManageTravelListAjax(TravelBoardVO vo) { //여행관리  조회Ajax
 		return adminService.getManageTravelList(vo);
 	}
-	//여행관리 삭제Ajax
 	@RequestMapping("/deleteTravelAjax")
 	@ResponseBody
-	public TravelBoardVO deleteTravelAjax(TravelBoardVO vo) {
+	public TravelBoardVO deleteTravelAjax(TravelBoardVO vo) { //여행관리 삭제Ajax
 		travelBoardService.deleteTravelBoard(vo);
 		return vo;
+	}
+	@RequestMapping(value="/getManageTravelListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getManageTravelListPaging(TravelBoardVO vo, Paging paging) { //여행관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(adminService.getManageTravelCount(vo));
+
+		map.put("paging", paging);
+		map.put("mtravelList", adminService.getManageTravelList(vo));
+
+		return map;
 	}
 	
 	//통계관리
@@ -189,18 +279,36 @@ public class AdminController {
 	public String manageNotice(Model model) {
 		return "admin/manageNotice";
 	}
-	//공지사항관리  조회Ajax
 	@RequestMapping("/getManageNoticeListAjax")
 	@ResponseBody
-	public List<NoticeVO> getManageNoticeListAjax(NoticeVO vo) {
+	public List<NoticeVO> getManageNoticeListAjax(NoticeVO vo) { //공지사항관리  조회Ajax
 		return adminService.getManageNoticeList(vo);
 	}
-	//공지사항관리 삭제Ajax
 	@RequestMapping("/deleteNoticeAjax")
 	@ResponseBody
-	public NoticeVO deleteNoticeAjax(NoticeVO vo) {
+	public NoticeVO deleteNoticeAjax(NoticeVO vo) { //공지사항관리 삭제Ajax
 		noticeService.deleteNotice(vo);
 		return vo;
+	}
+	@RequestMapping(value="/getManageNoticeListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getManageNoticeListPaging(NoticeVO vo, Paging paging) { //공지사항관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(adminService.getManageNoticeCount(vo));
+
+		map.put("paging", paging);
+		map.put("mnoticeList", adminService.getManageNoticeList(vo));
+
+		return map;
 	}
 	
 	//1:1문의글 관리
@@ -208,18 +316,36 @@ public class AdminController {
 	public String manageQna(Model model) {
 		return "admin/manageQna";
 	}
-	//공지사항관리  조회Ajax
 	@RequestMapping("/getManageQnaListAjax")
 	@ResponseBody
-	public List<QnaVO> getManageQnaListAjax(QnaVO vo) {
+	public List<QnaVO> getManageQnaListAjax(QnaVO vo) { //1:1문의글 관리  조회Ajax
 		return adminService.getManageQnaList(vo);
 	}
-	//공지사항관리 삭제Ajax
 	@RequestMapping("/deleteQnaAjax")
 	@ResponseBody
-	public QnaVO deleteQnaAjax(QnaVO vo) {
+	public QnaVO deleteQnaAjax(QnaVO vo) { //1:1문의글 관리 삭제Ajax
 		qnaService.deleteQna(vo);
 		return vo;
+	}
+	@RequestMapping(value="/getManageQnaListPaging", method = RequestMethod.POST)
+	@ResponseBody
+	public Map getManageQnaListPaging(QnaVO vo, Paging paging) { //1:1문의글 관리 페이징처리
+		HashMap map = new HashMap();
+		if (paging.getPage() == null) {
+			paging.setPage(1);
+		}
+      
+		paging.setPageUnit(10);
+      
+		vo.setFirst(paging.getFirst());
+		vo.setLast(paging.getLast());
+      
+		paging.setTotalRecord(adminService.getManageQnaCount(vo));
+
+		map.put("paging", paging);
+		map.put("mqnaList", adminService.getManageQnaList(vo));
+
+		return map;
 	}
 
 }

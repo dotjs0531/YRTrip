@@ -23,11 +23,23 @@ public interface AdminService {
 	public List<Map> getTimeChart(String day);	
 	public List<Map> getOrderPriceChart(String day);	
 	public List<Map> getOrderIdChart(String day);	
+	
 	public List<ProductVO> getManageProductList(ProductVO vo);
+	public int getManageProductCount(ProductVO vo);
+	
 	public List<OrderVO> getManageOrderList(OrderVO vo);
 	public OrderVO getManageOrder(OrderVO vo);
+	public int getManageOrderCount(OrderVO vo);
+	
 	public List<PartnerVO> getManagePartnerList(PartnerVO vo);
+	public int getManagePartnerCount(PartnerVO vo);
+	
 	public List<TravelBoardVO> getManageTravelList(TravelBoardVO vo);
+	public int getManageTravelCount(TravelBoardVO vo);
+	
 	public List<NoticeVO> getManageNoticeList(NoticeVO vo);
+	public int getManageNoticeCount(NoticeVO vo);
+	
 	public List<QnaVO> getManageQnaList(QnaVO vo);
+	public int getManageQnaCount(QnaVO vo);
 }

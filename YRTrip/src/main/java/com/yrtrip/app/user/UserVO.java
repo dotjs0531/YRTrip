@@ -16,6 +16,11 @@ public class UserVO {
 	private String userBank;	//은행정보(생략가능-판매자일 경우 입력)
 	private String userDate;	//가입일 -> default:sysdate
 
+	private int first;
+	private int last;
+	
+	private String searchKeyword;
+	
 	//선택삭제
 	private String[] userNoList;
 	
@@ -111,6 +116,24 @@ public class UserVO {
 		this.userNoList = userNoList;
 	}
 	
+	public int getFirst() {
+		return first;
+	}
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 	@Override
 	public String toString() {
 		return "UserVO [userId=" + userId + ", userPw=" + userPw + ", userName=" + userName + ", userGen=" + userGen

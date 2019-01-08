@@ -84,24 +84,32 @@ ORDER BY 2 DESC
 
 <!-- 각 페이지 select -->
 <select id="getManageProductList" resultType="product">
-		SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
-		 SELECT ITEM_ID,
-				ITEM_NAME,
-				ITEM_PRICE,
-				ITEM_EA,
-				ITEM_CONTENT,
-				ITEM_METHOD,
-				ITEM_CATEGORY,
-				SELLER_ID,
-				ITEM_ORDERDETAIL,
-				ITEM_STAR,
-				ITEM_PIC,
-				TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
-				ITEM_CONDITION,
-				ITEM_LIKE
-		FROM ITEMT
-		ORDER BY ITEM_ID DESC
-		) A ) B WHERE RN BETWEEN #{first} AND #{last}
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
+	SELECT  ITEM_ID,
+			ITEM_NAME,
+			ITEM_PRICE,
+			ITEM_EA,
+			ITEM_CONTENT,
+			ITEM_METHOD,
+			ITEM_CATEGORY,
+			SELLER_ID,
+			ITEM_ORDERDETAIL,
+			ITEM_STAR,
+			ITEM_PIC,
+			TO_CHAR(ITEM_DATE, 'RR/MM/DD') ITEM_DATE,
+			ITEM_CONDITION,
+			ITEM_LIKE
+	   FROM ITEMT
+	  WHERE SELLER_ID LIKE '%' || #{searchKeyword} || '%'
+	  ORDER BY ITEM_ID DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+<select id="getManageProductCount" resultType="int">
+      SELECT COUNT(*)
+        FROM ITEMT
+       WHERE 1=1
+			 AND SELLER_ID LIKE '%' || #{searchKeyword} || '%'
+       ORDER BY 1
 </select>
 
 <select id="getManageOrderList" resultType="order">
@@ -111,8 +119,9 @@ ORDER BY 2 DESC
 				ITEM_ID,
 				BUYER_ID,
 				ORDER_DATE
-			FROM ORDERT
-	 	    ORDER BY ORDER_DATE DESC
+		   FROM ORDERT
+	  	  WHERE BUYER_ID LIKE '%' || #{searchKeyword} || '%'
+	 	  ORDER BY ORDER_DATE DESC
 </select>
 <select id="getManageOrder" resultType="order">
 	SELECT  ORDER_ID, 
@@ -130,37 +139,51 @@ ORDER BY 2 DESC
 	  WHERE O.BUYER_ID = U.USER_ID
 	  		AND O.ORDER_ID = #{orderId}
 </select>
+<select id="getManageOrderCount" resultType="int">
+      SELECT COUNT(*)
+      FROM ORDERT
+      WHERE 1=1
+	  	    AND BUYER_ID LIKE '%' || #{searchKeyword} || '%'
+      ORDER BY 1
+</select>
 
 <select id="getManagePartnerList" resultType="partner">
-SELECT	PARTNER_ID,
+	SELECT	PARTNER_ID,
 			PARTNER_TITLE,      
 			TO_CHAR(PARTNER_DATE, 'YYYY/MM/DD') PARTNER_DATE,    
 			USER_ID,    
 			TINFO_ID,
 			PARTNER_CONDITION
-	FROM	PARTNERT
-	ORDER BY PARTNER_ID DESC
+	  FROM	PARTNERT
+	 WHERE  USER_ID LIKE '%' || #{searchKeyword} || '%'
+	 ORDER  BY PARTNER_ID DESC
+</select>
+<select id="getManagePartnerCount" resultType="int">
+      SELECT COUNT(*)
+       FROM PARTNERT
+      WHERE 1=1
+	 		AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+      ORDER BY 1
 </select>
 
 <select id="getManageTravelList" resultType="travelBoard">
-	SELECT TRAVEL_NO,
+SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM ( 
+	SELECT  TRAVEL_NO,
 			TRAVEL_TITLE,
 			TRAVEL_DATE,
 			TINFO_ID,
 			USER_ID
-	FROM TRAVELBOARDT
-		  <where>
-		<if test="searchCondition != null and searchCondition == 'travelTitle'">
-			AND TRAVEL_TITLE LIKE '%' || #{searchKeyword} || '%'
-		</if>	
-		<if test="searchCondition != null and searchCondition == 'travelContent'">
-			 AND TRAVEL_CONTENT LIKE '%' || #{searchKeyword} || '%'
-		</if>
-		<if test="searchCondition != null and searchCondition == 'userId'">
-			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-		</if>
-	</where>
+	  FROM  TRAVELBOARDT
+	 WHERE  USER_ID LIKE '%' || #{searchKeyword} || '%'
 	ORDER BY TRAVEL_NO DESC
+) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+<select id="getManageTravelCount" resultType="int">
+      SELECT COUNT(*)
+      FROM TRAVELBOARDT
+      WHERE 1=1
+		    AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+      ORDER BY 1
 </select>
 
 <select id="getManageNoticeList" resultType="notice">
@@ -169,6 +192,12 @@ SELECT	PARTNER_ID,
 			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE
 	  FROM  NOTICET
 	  ORDER BY NOTICE_ID DESC
+</select>
+<select id="getManageNoticeCount" resultType="int">
+      SELECT COUNT(*)
+      FROM NOTICET
+      WHERE 1=1
+      ORDER BY 1
 </select>
 
 <select id="getManageQnaList" resultType="qna">
@@ -179,21 +208,12 @@ SELECT	PARTNER_ID,
 			USER_ID,
 			QNA_ANSWER
 	  FROM  QNAT
-	  			  <where>
-		<if test="searchCondition != null and searchCondition == 'qnaTitle'">
-			AND QNA_TITLE LIKE '%' || #{searchKeyword} || '%'
-		</if>	
-		<if test="searchCondition != null and searchCondition == 'qnaContent'">
-			 AND QNA_CONTENT LIKE '%' || #{searchKeyword} || '%'
-		</if>
-		<if test="qnaAnswer != null and qnaAnswer != ''">
-			AND QNA_ANSWER = #{qnaAnswer}
-		</if>
-		<if test="searchDateStart != null and searchDateStart != '' and searchDateEnd != null and searchDateEnd != ''">
-    		AND QNA_DATE BETWEEN TO_DATE(#{searchDateStart}, 'YYYY-MM-DD' )
-    						 AND TO_DATE(#{searchDateEnd}, 'YYYY-MM-DD')
-		</if>
-	  </where>
 	  ORDER BY QNA_ID DESC
+</select>
+<select id="getManageQnaCount" resultType="int">
+      SELECT COUNT(*)
+      FROM QNAT
+      WHERE 1=1
+      ORDER BY 1
 </select>
 </mapper>

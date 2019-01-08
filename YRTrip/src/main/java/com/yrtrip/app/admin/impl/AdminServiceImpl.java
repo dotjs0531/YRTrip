@@ -21,74 +21,80 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired AdminDAOMybatis dao;
 	
-	@Override
 	public int totalOrderPrice(OrderVO vo) {
 		return dao.totalOrderPrice(vo);
 	}
-	@Override
 	public int countOrderAmount(OrderVO vo) {
 		return dao.countOrderAmount(vo);
 	}
-	@Override
 	public int countTravelAmount(TravelBoardVO vo) {
 		return dao.countTravelAmount(vo);
 	}
-	@Override
 	public int countUserAmount(UserVO vo) {
 		return dao.countUserAmount(vo);
 	}
 	
-	@Override
 	public List<Map> getTinfoChart(String day) {
 		return dao.getTinfoChart(day);
 	}
-	@Override
 	public List<Map> getSellerChart(String day) {
 		return dao.getSellerChart(day);
 	}
-	@Override
 	public List<Map> getDayChart(String day) {
 		return dao.getDayChart(day);
 	}
-	@Override
 	public List<Map> getTimeChart(String day) {
 		return dao.getTimeChart(day);
 	}
-	@Override
 	public List<Map> getOrderPriceChart(String day) {
 		return dao.getOrderPriceChart(day);
 	}
-	@Override
 	public List<Map> getOrderIdChart(String day) {
 		return dao.getOrderIdChart(day);
 	}
-	@Override
+	
 	public List<ProductVO> getManageProductList(ProductVO vo) {
 		return dao.getManageProductList(vo);
 	}
+	public int getManageProductCount(ProductVO vo) {
+		return dao.getManageProductCount(vo);
+	}
 	
-	@Override
 	public List<OrderVO> getManageOrderList(OrderVO vo) {
 		return dao.getManageOrderList(vo);
 	}
 	public OrderVO getManageOrder(OrderVO vo) {
 		return dao.getManageOrder(vo);
 	}
+	public int getManageOrderCount(OrderVO vo) {
+		return dao.getManageOrderCount(vo);
+	}
 	
-	@Override
 	public List<PartnerVO> getManagePartnerList(PartnerVO vo) {
 		return dao.getManagePartnerList(vo);
 	}
-	@Override
+	public int getManagePartnerCount(PartnerVO vo) {
+		return dao.getManagePartnerCount(vo);
+	}
+	
 	public List<TravelBoardVO> getManageTravelList(TravelBoardVO vo) {
 		return dao.getManageTravelList(vo);
 	}
-	@Override
+	public int getManageTravelCount(TravelBoardVO vo) {
+		return dao.getManageTravelCount(vo);
+	}
+	
 	public List<NoticeVO> getManageNoticeList(NoticeVO vo) {
 		return dao.getManageNoticeList(vo);
 	}
-	@Override
+	public int getManageNoticeCount(NoticeVO vo) {
+		return dao.getManageNoticeCount(vo);
+	}
+	
 	public List<QnaVO> getManageQnaList(QnaVO vo) {
 		return dao.getManageQnaList(vo);
+	}
+	public int getManageQnaCount(QnaVO vo) {
+		return dao.getManageQnaCount(vo);
 	}
 }

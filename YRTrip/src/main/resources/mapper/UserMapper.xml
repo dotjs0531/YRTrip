@@ -19,6 +19,7 @@
 			USER_BANK,
 			USER_DATE
 	  FROM  USERT
+	  WHERE USER_ID LIKE '%' || #{searchKeyword} || '%'
 	  ORDER BY USER_DATE DESC
 </select>
 <select id="getUser" parameterType="user" resultType="user">
@@ -39,6 +40,14 @@
 	  FROM  USERT
 	 WHERE  USER_ID = #{userId}
 </select>
+<select id="getUserCount" resultType="int">
+      SELECT COUNT(*)
+      FROM USERT
+      WHERE 1=1
+		    AND USER_ID LIKE '%' || #{searchKeyword} || '%'
+      ORDER BY 1
+</select>
+
 <select id="getUserEmail" parameterType="user" resultType="user">
 	SELECT  USER_EMAIL
 	  FROM  USERT

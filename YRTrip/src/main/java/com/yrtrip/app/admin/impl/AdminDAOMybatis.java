@@ -55,6 +55,9 @@ public class AdminDAOMybatis {
 	public List<ProductVO> getManageProductList(ProductVO vo) {
 		return sqlSession.selectList("admin.getManageProductList", vo);
 	}
+	public int getManageProductCount(ProductVO vo) {
+		return sqlSession.selectOne("admin.getManageProductCount", vo);
+	}
 	
 	public List<OrderVO> getManageOrderList(OrderVO vo) {
 		return sqlSession.selectList("admin.getManageOrderList", vo);
@@ -62,18 +65,35 @@ public class AdminDAOMybatis {
 	public OrderVO getManageOrder(OrderVO vo) {
 		return sqlSession.selectOne("admin.getManageOrder",vo);
 	}
+	public int getManageOrderCount(OrderVO vo) {
+		return sqlSession.selectOne("admin.getManageOrderCount", vo);
+	}
 	
 	public List<PartnerVO> getManagePartnerList(PartnerVO vo) {
 		return sqlSession.selectList("admin.getManagePartnerList", vo);
+	}
+	public int getManagePartnerCount(PartnerVO vo) {
+		return sqlSession.selectOne("admin.getManagePartnerCount", vo);
 	}
 	
 	public List<TravelBoardVO> getManageTravelList(TravelBoardVO vo){
 		return sqlSession.selectList("admin.getManageTravelList", vo);
 	}
+	public int getManageTravelCount(TravelBoardVO vo) {
+		return sqlSession.selectOne("admin.getManageTravelCount", vo);
+	}
+	
 	public List<NoticeVO> getManageNoticeList(NoticeVO vo){
 		return sqlSession.selectList("admin.getManageNoticeList", vo);
 	}
+	public int getManageNoticeCount(NoticeVO vo) {
+		return sqlSession.selectOne("admin.getManageNoticeCount", vo);
+	}
+	
 	public List<QnaVO> getManageQnaList(QnaVO vo){
 		return sqlSession.selectList("admin.getManageQnaList", vo);
+	}
+	public int getManageQnaCount(QnaVO vo) {
+		return sqlSession.selectOne("admin.getManageQnaCount", vo);
 	}
 }

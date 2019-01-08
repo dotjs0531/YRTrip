@@ -132,11 +132,11 @@ input[type=submit] {
 						</div>
 						<ul class=price-list>
 							<li><a href="getPartnerList" style="color: black">전체보기</a></li>
-							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=여행" style="color: black">여행</a></li>
-							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=문화" style="color: black">문화</a></li>
-							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=맛집" style="color: black">맛집</a></li>
-							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=교통" style="color: black">교통</a></li>
-							<li><a href="getPartnerList?searchClass=partnerClass&searchKeyword=숙소" style="color: black">숙소</a></li>
+							<li><a href="getPartnerList?partnerClass=여행" style="color: black">여행</a></li>
+							<li><a href="getPartnerList?partnerClass=문화" style="color: black">문화</a></li>
+							<li><a href="getPartnerList?partnerClass=맛집" style="color: black">맛집</a></li>
+							<li><a href="getPartnerList?partnerClass=교통" style="color: black">교통</a></li>
+							<li><a href="getPartnerList?partnerClass=숙소" style="color: black">숙소</a></li>
 						</ul>
 						<div class="order-buton" style="padding-bottom: 1px;">
 							<a href="${pageContext.request.contextPath}/insertPartnerForm">글쓰기</a>

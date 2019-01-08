@@ -63,6 +63,10 @@ public class UserServiceImpl implements UserService {
 		return dao.getUserList(vo);
 	}
 
+	public int getUserCount(UserVO vo) {
+		return dao.getUserCount(vo);
+	}
+
 	public UserVO findUserPw(UserVO vo) {
 		return dao.findUserPw(vo);
 	}

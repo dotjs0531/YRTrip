@@ -12,6 +12,8 @@ public interface UserService {
 	public UserVO getUserEmail(UserVO vo);
 	public List<String> getUserEmailList();
 	public List<UserVO> getUserList(UserVO vo);
+
+	public int getUserCount(UserVO vo);
 	
 	public UserVO findUserPw(UserVO vo);
 	public void updateUserPw(UserVO vo);
