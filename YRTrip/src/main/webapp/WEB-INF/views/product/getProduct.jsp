@@ -208,6 +208,10 @@ $(function(){
      });
 });
 </script>
+<script>
+var comma =  (".product-price").text() 
+$(".product-price").html(comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+</script>
 <style>
 #btn-custom
 {
@@ -255,7 +259,10 @@ $(function(){
 					<div class="card mb-10">
 						<div class="card-header">
 							<nav class="header-navigation">
-								<!-- <a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a> -->
+							<!-- 카톡 공유하기 버튼 -->
+						<a id="kakao-link-btn" href="javascript:;" style="color:#f9bf3b; margin:0 0 0 20px">
+							<i class="fas fa-comment"></i> 카톡 공유
+						</a>
 								<c:choose>
 									<c:when test="${not empty sessionScope.login}">
 										<div id="LikeCondition" style="float: right"></div>
@@ -454,10 +461,43 @@ $(function(){
 				<!-- 끝 : 내용 : 9-->
 			</div>
 			<!-- /.row -->
-		</div>
 		<!-- /.container 전체 바디끝-->
 	</section>
-
+<!-- 카카오톡 공유하기 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+	  
+	// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('4115609fb50877ceef895d9a2db54237');
+	// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+	Kakao.Link.createDefaultButton({
+		container : '#kakao-link-btn',
+		objectType : 'feed',
+		content : {
+			title : '${partner.partnerTitle}',
+			description : '${partner.partnerContent}',
+			imageUrl: 'https://postfiles.pstatic.net/MjAxODEyMjlfNiAg/MDAxNTQ2MDE0ODM1ODk5.VlG0P4NPq3mfRH0WkShxFV1TQFTrxJzDCSrkglA9g-kg.ClRMBKh_OXXzAFp7xDzEwlTzFCH1sb0ZCrFiOLMCDcMg.PNG.dotjs0531/%EB%8F%84%EC%8B%9C+%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4+(1).png?type=w773',
+			link : {
+				mobileWebUrl : document.location.href,
+				webUrl : document.location.href
+			}
+		},
+		social : {
+			//likeCount : 286,  //좋아요수(여행정보, 여행지, 상품)
+			commentCount : Number('${joinerCnt}'),  //댓글수(동행글)
+			viewCount  : Number('${partner.partnerHit}')  //조회수(여행정보, 여행지, 동행글)
+		},
+		buttons : [ {
+			title : '웹으로 보기',
+			link : {
+				mobileWebUrl : document.location.href,
+				webUrl : document.location.href
+			}
+		} ]
+	});
+	//]]>
+</script>
 	<!-- Bootstrap core JavaScript -->
 
 	<script

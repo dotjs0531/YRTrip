@@ -37,6 +37,7 @@ var data_value = 12000;
 function AddComma(data_value) {
 	return Number(data_value).toLocaleString('en');
 }
+console.log(AddComma(data_value));
 </script>
 <!-- <script>
 $(function(){

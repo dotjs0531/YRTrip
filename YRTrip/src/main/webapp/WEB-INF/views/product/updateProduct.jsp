@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -250,7 +252,7 @@ $(function(){
 										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
 									</ol>
 									<div class="pull-left">
-										<h4>${sessionScope.login.userId}님의 {product.itemName}제품 수 정 중 ...</h4>
+										<h4>${product.sellerId}님의 '${product.itemName}'제품 수 정 중 ...</h4>
 									</div>
 									<div class="pull-right">
 										<button onclick="insert_reset();" class="btn btn-link" type="reset">초기화</button> <input
@@ -328,29 +330,38 @@ $(function(){
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="새상품" <c:if test=${product.itemCondition eq '새상품'}>checked</c:if> 
-												required> 새상품
+												value="새상품"   
+												<c:if test="${product.itemCondition eq '새상품'}">
+												checked 
+												</c:if> 
+												 required> 새상품
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="약간중고" <c:if test=${product.itemCondition eq '약간중고'}>checked</c:if>
-												 required> 약간중고
+												value="약간중고" required 
+												<c:if test="${product.itemCondition eq '약간중고'}">
+												checked
+												</c:if>
+												> 약간중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="조금중고" <c:if test=${product.itemCondition eq '조금중고'}>checked</c:if> 
-												 required> 조금중고
+												value="조금중고" required <c:if test="${product.itemCondition eq '조금중고'}">checked</c:if> 
+												 > 조금중고
 											</label>
 										</div>
 										<div class="form-check form-check-inline">
 											<label class="form-check-label"> <input
 												class="form-check-input" type="radio" name="itemCondition"
-												value="완전중고" <c:if test=${product.itemCondition eq '완전중고'}>checked</c:if> 
+												value="완전중고" <c:if test="${product.itemCondition eq '완전중고'}">
+												checked
+												</c:if> 
 												required> 완전중고
+												
 											</label>
 										</div>
 									</div>
