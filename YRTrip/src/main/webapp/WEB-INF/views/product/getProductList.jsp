@@ -15,7 +15,8 @@
 <meta name="author" content="">
 
 <title>상품</title>
-
+<!-- 라디오버튼 -->
+<link href="resources/css/icheck-bootstrap.css" rel="stylesheet">
 <link href="./resources/css/product.bootstrap.min.css" rel="stylesheet">
 <!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
@@ -29,19 +30,24 @@
 	$(function() {
 		var productMenu = document.getElementById("productMenu");
 		productMenu.className = 'current-menu-item';
-		//가격 천단위 
-		var money = $("#itemPrice").text();
-		console.log(money);
-		var money2 = money.toLocaleString();
-		$("#itemPrice").text('');
-		$("#itemPrice").text('￦' + money2);
-
-		//
+		
 		function go_page(page) {
 			document.frm.page.value = page;
 			document.frm.submit();
 		}
 	});
+</script>
+<script>
+/* 	$(function(){
+		itemIdeach = $(item)
+		$(".itemPrice").each(function(index, item){
+			var money = $(item).text();
+			console.log(money);
+			var money2 = money.toLocaleString();
+			console.log(money);
+			$(item).text(money2);
+		});
+	}); */
 </script>
 <script>
 	$(function() {
@@ -222,20 +228,26 @@
 									<option value="itemName">제품명</option>
 									<option value="itemContent">내용</option>
 								</select> <input type="text" name="searchKeyword" class="form-control"
-									placeholder="검색할 내용을 입력하세요">
+									placeholder="검색할 내용을 입력하세요" style="width:450px">
 							</div>
 							<!-- 가격 -->
 							<!--  -->
 							<!-- 구매가능여부 -->
-							<div class="row">
-								<label class="col-sm-2 control-label">구매가능여부</label>
+							<div class="row" >
+							<div class="col-2">
+								<label class="control-label">구매가능여부</label>
+							</div>
+							<div style="word-spacing:10px" class="col-6">
+								<input type="radio" name="itemOrderdetail" value=""
+								class="vertical" checked style="">모두보기  
+						
+							<input
+								type="radio" name="itemOrderdetail" value="구매가능"
+								class="">구매가능 <input type="radio"
+								name="itemOrderdetail" value="구매불가" class="">구매불가							
+							</div>
 							</div>
 							<div>
-								<input type="radio" name="itemOrderdetail" value=""
-									class="form-control vertical" checked>모두보기 <input
-									type="radio" name="itemOrderdetail" value="구매가능"
-									class="form-control">구매가능 <input type="radio"
-									name="itemOrderdetail" value="구매불가" class="form-control">구매불가
 								<button class="btn btn-warning signupbtn"
 									style="float: right; margin-right: 10px">검색</button>
 							</div>
@@ -261,7 +273,7 @@
 											style="max-height: 140px; min-height: 140px;"></a>
 										<div class="caption">
 
-											<h4 class="pull-right" id="itemPrice">${product.itemPrice}</h4>
+											<h4 class="pull-right" id="itemPrice${product.itemId}" class="itemPrice">${product.itemPrice}</h4>
 											<h4 class="text-truncate">
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
