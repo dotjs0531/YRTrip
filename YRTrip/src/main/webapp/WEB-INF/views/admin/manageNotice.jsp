@@ -32,7 +32,7 @@
 <script>
 function go_page(page) {
    
-   $("#travelList").empty();
+   $("#noticeList").empty();
    $("#pagination").html("");
 
    if(page == undefined || page == ""){
@@ -43,7 +43,7 @@ function go_page(page) {
    
    $.ajax({
       
-      url : "getManageTravelListPaging",
+      url : "getManageNoticeListPaging",
       data : $("#frm").serialize(),
       type : "POST",
       dataType : "json",
@@ -51,23 +51,19 @@ function go_page(page) {
          alert("상태값 :" + status + "Http에러메시지 :" + msg);
       },
       success : function(data) {
-         console.log(data.mtravelList);
-         for (i = 0; i < data.mtravelList.length; i++) {
-              var tr = "<tr id=\"TB"+data.mtravelList[i].travelNo+"\"><td>"
-					 +"<strong>TB"+ data.mtravelList[i].travelNo +"</strong>"
-					 +"</td><td>"
-					 +"<strong>" + data.mtravelList[i].travelTitle +"</strong>"
-					 +"</td><td>"
-						 + data.mtravelList[i].tinfoId
-					 +"</td><td>"
-						 + data.mtravelList[i].userId
-					 +"</td><td>"
-						 + data.mtravelList[i].travelDate
-					 +"</td><td>"
-					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getTravelBoard?travelNo="+ data.mtravelList[i].travelNo +"'\">상세보기</button>"
-					 + "<button type=\"button\" value='"+data.mtravelList[i].travelNo+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-					 +"</td></tr>"
-              $(tr).appendTo("#travelList");
+         console.log(data.mnoticeList);
+         for (i = 0; i < data.mnoticeList.length; i++) {
+              var tr ="<tr id=\"NT"+data.mnoticeList[i].noticeId+"\"><td>"
+				 +"<strong>NT"+ data.mnoticeList[i].noticeId +"</strong>"
+				 +"</td><td>"
+				 +"<strong>" + data.mnoticeList[i].noticeTitle +"</strong>"
+				 +"</td><td>"
+					 + data.mnoticeList[i].noticeDate
+				 +"</td><td>"
+				 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getNotice?noticeId="+ data.mnoticeList[i].noticeId +"'\">상세보기</button>"
+				 + "<button type=\"button\" value='"+data.mnoticeList[i].noticeId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
+				 +"</td></tr>"
+              $(tr).appendTo("#noticeList");
          }
             
          var dd = "<a href='#' onclick='go_page(1)' >&laquo;</a>";
@@ -94,7 +90,7 @@ function go_page(page) {
 </script>
 <script>
  $(function(){
-	$(function() {
+	/* $(function() {
 		$.getJSON("getManageNoticeListAjax", null, function(datas){	
 		for(i=0; i<datas.length; i++){
 			
@@ -107,12 +103,11 @@ function go_page(page) {
 					 +"</td><td>"
 					 +"<button type=\"button\" class=\"btn btn-success mr-2\" onclick=\"location.href='getNotice?noticeId="+ datas[i].noticeId +"'\">상세보기</button>"
 					 + "<button type=\"button\" value='"+datas[i].noticeId+"' class=\"btn btn-danger mr-2 btnDel\">삭제</button>"
-					
 					 +"</td></tr>"
 					$(str).appendTo("#noticeList");
 		}
 		});	
-	});
+	}); */
 	
 	$("#noticeList").on("click", ".btnDel", function() {
 		var noticeId = $(this).closest('.btnDel').val();
@@ -134,35 +129,42 @@ function go_page(page) {
            <div class="card-body">
              <h4 class="card-title">공지사항 관리</h4>
              <div class="input-group col-xs-12" style="width:300px; float:right;">
-                   <input type="text" class="form-control file-upload-info" style="width:200px;">
-                  <span class="input-group-append">
-                     <button class="file-upload-browse btn" type="button">검색</button>
-                   </span>
-                 </div>
+                   <form name="frm" id="frm" class="form-inline">
+	                <input type="text" class="form-control file-upload-info" name="searchKeyword" style="width:200px;" placeholder="제목을 입력해주세요.">
+	                <span class="input-group-append">
+	                  <button type="button" class="file-upload-browse btn" onclick='go_page(1)'>검색</button>
+	                </span>
+	            	<input type="hidden" name="page" id="page" >
+	         	</form>
+              </div>
              <div class="table-responsive">
                <table class="table table-striped" style="text-align: center;">
                  <thead>
                    <tr>
-                     <th>
-                  	  	 공지번호
-                     </th>
-                     <th>
-                       	제목
-                     </th>
-                     <th>
-                       	작성일자
-                     </th>
-                     <th>
-              		         관리
-                     </th>
+                     <th>공지번호</th>
+                     <th>제목</th>
+                     <th>작성일자</th>
+                     <th>관리</th>
                    </tr>
                  </thead>
-                 <tbody id="noticeList">
-                 </tbody>
+                 
+                 <tbody id="noticeList"></tbody>
+                 
                </table>
              </div>
+             
+             <!-- 페이징 처리 -->
+		     <div align="center">
+		     	<div id="pagination" class="pagination"></div>
+		     </div>
+		     
            </div>
          </div>
        </div>
+       
+<script>
+go_page(1);
+</script>
+       
 </body>
 </html> 

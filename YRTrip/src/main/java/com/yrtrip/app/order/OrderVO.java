@@ -31,6 +31,9 @@ public class OrderVO extends ProductVO {
 	private String reviewPic;				//리뷰 사진
 	private MultipartFile[] reviewPicFile;	//실제 이미지 파일(다중파일 업로드)
 	
+	private int first;
+	private int last;
+	
 	public String getOrderMethod() {
 		return orderMethod;
 	}
@@ -158,5 +161,18 @@ public class OrderVO extends ProductVO {
 	public void setReviewPicFile(MultipartFile[] reviewPicFile) {
 		this.reviewPicFile = reviewPicFile;
 	}
+	public int getFirst() {
+		return first;
+	}
+	public void setFirst(int first) {
+		this.first = first;
+	}
+	public int getLast() {
+		return last;
+	}
+	public void setLast(int last) {
+		this.last = last;
+	}
+	
 	
 }

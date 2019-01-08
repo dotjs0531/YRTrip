@@ -191,12 +191,14 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			NOTICE_TITLE,
 			TO_CHAR(NOTICE_DATE, 'MM/DD') NOTICE_DATE
 	  FROM  NOTICET
+	 WHERE  NOTICE_TITLE LIKE '%' || #{searchKeyword} || '%'
 	  ORDER BY NOTICE_ID DESC
 </select>
 <select id="getManageNoticeCount" resultType="int">
       SELECT COUNT(*)
       FROM NOTICET
       WHERE 1=1
+			AND NOTICE_TITLE LIKE '%' || #{searchKeyword} || '%'
       ORDER BY 1
 </select>
 
@@ -208,12 +210,14 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 			USER_ID,
 			QNA_ANSWER
 	  FROM  QNAT
+	 WHERE  USER_ID LIKE '%' || #{searchKeyword} || '%'
 	  ORDER BY QNA_ID DESC
 </select>
 <select id="getManageQnaCount" resultType="int">
       SELECT COUNT(*)
       FROM QNAT
       WHERE 1=1
+			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
       ORDER BY 1
 </select>
 </mapper>
