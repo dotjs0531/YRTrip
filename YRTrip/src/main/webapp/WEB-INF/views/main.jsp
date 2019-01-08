@@ -373,6 +373,7 @@
 										href="./getYourTravelList?userId=${partner.userId}"
 										class="goToUserPage">${partner.userName}</a>
 								</c:if></td>
+								<!-- ㅇ러ㅏㅣㅁㄴ -->
 							<%-- <td style="text-align: center">${partner.partnerDate} --%>
 							<%-- 		<td style="text-align: center">${partner.partnerHit}</td>
 							<td style="text-align: center">${partner.partnerCondition}</td> --%>

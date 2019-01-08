@@ -72,5 +72,6 @@ public class HomeController {
 		model.addAttribute("bestTravelList", travelBoardService.getBestTravelList(tbvo));
 		return "main";
 	}
+	//어라ㅣㄴㅇ
 	
 }
