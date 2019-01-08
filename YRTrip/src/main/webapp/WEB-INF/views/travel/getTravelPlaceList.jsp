@@ -174,17 +174,13 @@ jQuery( document ).ready(function( $ ) {
                         style="padding-bottom: 10px; float: center">
                         <select name="searchCondition" class="form-control">
                            <option value="placeName">장소명
-                           <option value="userId">글쓴이
+                           <option value="userName">글쓴이
                         </select> <input type="text" name="searchKeyword" class="form-control">
                         <button class="btn btn-warning signupbtn">검색</button>
                      </div>
-                  </form>
-                  </div>
-                  <div>
-		            <form name="frm" class="form-inline">
 						<input type="hidden" name="page" />
-					</form>
-				</div>		
+                  </form>
+                  </div>		
 <!-- 여행기 리스트 -->
 
    			<c:forEach items="${travelPlaceList}" var="board">
