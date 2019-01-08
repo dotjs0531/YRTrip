@@ -130,15 +130,20 @@ jQuery( document ).ready(function( $ ) {
 		$("#btnAdd").click(function() {
 			var partnerId = '${partner.userId}';
 			var userId =  '${sessionScope.login.userId}';
+			var condition = '${partner.partnerCondition}';
 			
-			if(userId==partnerId){
-				alert("글쓴이는 동행 신청을 할 수 없습니다.")
+			if(condition == '미완료'){
+				if(userId==partnerId){
+					alert("글쓴이는 동행 신청을 할 수 없습니다.")
+				} else{
+					var params = $("#addForm").serialize();
+					$.getJSON("insertJoiner", params, function(datas) {
+						var div = JoinerView(datas);
+						$(div).appendTo("#joinerList");
+					});
+				}
 			} else{
-				var params = $("#addForm").serialize();
-				$.getJSON("insertJoiner", params, function(datas) {
-					var div = JoinerView(datas);
-					$(div).appendTo("#joinerList");
-				});
+				alert("동행구하기가 완료되어 더이상 신청하실 수 없습니다.")
 			}
 		}); //end btnAdd clcic event
 		
@@ -391,7 +396,7 @@ $(function(){
 									</c:if>
 								</form>
 							</div>
-							<p style="clear:both">
+							<p style="clear:both"/>
 						</c:if>
 						
 						<c:if test="${sessionScope.login.userId eq partner.userId}">
