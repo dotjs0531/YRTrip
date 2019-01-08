@@ -17,8 +17,8 @@
 <title>상품</title>
 
 <link href="./resources/css/product.bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -126,10 +126,14 @@
 	});
 </script>
 <style>
-a#warn:hover {
+#login-column {
+   width:100% !important ;
+   margin: 0 10px !important;
+}
+/* a#warn:hover {
 	
 }
-
+ */
 #btn-custom {
 	background: #f9bf3b none repeat scroll 0 0;
 	border-radius: 3px;
@@ -154,7 +158,7 @@ a#warn:hover {
 	<form name="frm" class="form-inline">
 		<input type="hidden" name="page" />
 	</form>
-	<section class="about_us_area" id="about">
+	<section class="about_us_area" id="about" style="background-color:white;">
 		<!-- Page Content -->
 		<div class="container">
 			<div class="row justify-content-between">
