@@ -186,11 +186,10 @@ a:hover { color:white }
                             	   style="color:black; text-decoration:none !important;">여행정보</a></li>
                             <li><a href="./getYourLikedTravelList?userId=${user.userId}"
                             	   style="color:black; text-decoration:none !important;"><strong>좋아요</strong></a></li>
-                            <li><a href="./getYourProductList?sellerId=${user.userId}"
-                            	   style="color:black; text-decoration:none !important;">상품</a></li>
                         </ul>
-                        <div class="order-buton">
-                            <a href="#" style="text-decoration:none !important;">대화하기</a>
+                        <div style="padding-bottom:20px">
+                            <a href="./getYourProductList?sellerId=${user.userId}"
+                            	   style="color:black; text-decoration:none !important;">상품</a>
                         </div>
                     </div>
                 </div>
