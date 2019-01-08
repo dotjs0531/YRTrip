@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,6 +181,27 @@ color: #3537356b;
 	z-index: 1;
 	color: #4f5b66;
 }
+@font-face {
+ font-family: 'NanumSquareRoundEB';
+ src: url(resources/fonts/NanumSquareRoundEB.eot);
+ src: url(resources/fonts/NanumSquareRoundEB.eot?#iefix) format('embedded-opentype'),
+      url(resources/fonts/NanumSquareRoundEB.woff) format('woff'),
+      url(resources/fonts/NanumSquareRoundEB.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'NanumSquareRoundB';
+ src: url(resources/fonts/NanumSquareRoundB.eot);
+ src: url(resources/fonts/NanumSquareRoundB.eot?#iefix) format('embedded-opentype'),
+      url(resources/fonts/NanumSquareRoundB.woff) format('woff'),
+      url(resources/fonts/NanumSquareRoundB.ttf) format('truetype');
+}
+@font-face {
+ font-family: 'NanumSquareRoundR';
+ src: url(resources/fonts/NanumSquareRoundR.eot);
+ src: url(resources/fonts/NanumSquareRoundR.eot?#iefix) format('embedded-opentype'),
+      url(resources/fonts/NanumSquareRoundR.woff) format('woff'),
+      url(resources/fonts/NanumSquareRoundR.ttf) format('truetype');
+}
 </style>
 </head>
 <body>
@@ -294,7 +316,7 @@ color: #3537356b;
 				<div class="col-md-12" data-wow-delay="0.2s">
 					<div class="carousel slide" data-ride="carousel"
 						id="quote-carousel">
-						<h3 style="padding: 0 0 10px 5px;">공지사항</h3>
+						<h3 style="padding: 0 0 10px 5px; font-family: 'NanumSquareRoundEB'">공지사항</h3>
 						<hr>
 						<!-- Bottom Carousel Indicators -->
 						<ol class="carousel-indicators">
@@ -348,9 +370,9 @@ color: #3537356b;
 			</div>
 			
 			<div class="col-lg-5" style="padding: 30px">
-				<h3 style="padding: 10px 0px">동행구하기</h3>
+				<h3 style="padding: 10px 0px; font-family: 'NanumSquareRoundEB'">동행구하기</h3>
 				<hr>
-				<table>
+				<table style="font-family: 'NanumSquareRoundB'">
 					<colgroup>
 						<col span="1" style="width: 15%;">
 						<col span="1" style="width: 70%;">
@@ -359,10 +381,7 @@ color: #3537356b;
 					<thead>
 						<tr style="line-height: 3;">
 							<th>no.</th>
-
 							<th style="text-align: center;">글제목</th>
-
-
 							<th>작성자</th>
 							<!-- <th style="text-align: center">작성일</th> -->
 							<!-- <th style="text-align: center">조회수</th>
@@ -377,13 +396,7 @@ color: #3537356b;
 								href="./getPartner?partnerId=${partner.partnerId}" style="color:black;">${partner.partnerTitle}
 									<c:if test="${partner.joinerCnt != '0'}"> [${partner.joinerCnt}]</c:if>
 							</a></td>
-							<td style="color: black;"><c:if
-									test="${sessionScope.login.userId eq partner.userId}">${partner.userName}</c:if>
-								<c:if test="${sessionScope.login.userId ne partner.userId}">
-									<a style="color: black;"
-										href="./getYourTravelList?userId=${partner.userId}"
-										class="goToUserPage">${partner.userName}</a>
-								</c:if></td>
+							<td style="color: black;">${partner.userName}</td>
 						</tr>
 					</c:forEach>
 				</table>
@@ -397,8 +410,8 @@ color: #3537356b;
 			<section class="container">
 			<div class="row">
 				<div class="container card" style="padding: 0 0 30px 0;">
-				<h3 style="padding: 0px 0px 8px 0px;">너만의 여행기</h3>
-				<h5>당신의 추억, 당신의 일정을 기록하세요 !</h5>
+				<h3 style="padding: 0px 0px 8px 0px; font-family: 'NanumSquareRoundEB'">너만의 여행기</h3>
+				<h5 style="font-family: 'NanumSquareRoundR'">당신의 추억, 당신의 일정을 기록하세요 !</h5>
 				<hr>
 					<c:forEach items="${bestTravelList}" var="board">
 					<c:if test="${board.travelNo != '0'}">
@@ -415,10 +428,10 @@ color: #3537356b;
 								</div>
 								<!-- Post Content-->
 								<div class="post-content" style="width:250px;">
-									<h4 class="pull-right">${board.userId}</h4>
+									<h4 class="pull-right" style="font-family: 'NanumSquareRoundB'">${board.userName}</h4>
 									<h1 class="title" style="font-size:20px;">
 										<a href="getTravelBoard?travelNo=${board.travelNo}"
-											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 200px; text-decoration: none !important;">${board.travelTitle}</a>
+											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 200px; text-decoration: none !important; font-family: 'NanumSquareRoundEB'">${board.travelTitle}</a>
 									</h1>
 								</div>
 							</div>
@@ -434,8 +447,8 @@ color: #3537356b;
 		<section class="container">
 			<div class="row">
 				<div class="container card" style="padding: 0 0 30px 0;">
-				<h3 style="padding: 0px 0px 8px 0px;">여행 중고 물품 </h3>
-				<h5>여행하면서 도움이 됐지만 더이상 쟁여둘수 없는 물품들을 올려보세요!</h5>
+				<h3 style="padding: 0px 0px 8px 0px; font-family: 'NanumSquareRoundEB'">여행 중고 물품 </h3>
+				<h5 style="font-family: 'NanumSquareRoundR'">여행하면서 도움이 됐지만 더이상 쟁여둘수 없는 물품들을 올려보세요!</h5>
 				<hr>
 					<c:forEach items="${productList}" var="product">
 						<div class="column col-md-4 col-sm-4 col-xs-12"
@@ -453,11 +466,11 @@ color: #3537356b;
 								</div>
 								<!-- Post Content-->
 								<div class="post-content">
-									<h4 class="pull-right">￦${product.itemPrice}</h4>
-									<h1 class="title">
+									<h4 class="pull-right" style="font-family: 'NanumSquareRoundB'">￦<fmt:formatNumber value="${product.itemPrice}" pattern="#,###"/></h4>
+									<h2 class="title">
 										<a href="./getProduct?itemId=${product.itemId}"
-											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 130px; text-decoration: none !important;">${product.itemName}</a>
-									</h1>
+											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 250px; text-decoration: none !important; font-family: 'NanumSquareRoundEB'">${product.itemName}</a>
+									</h2>
 								</div>
 							</div>
 						</div>
