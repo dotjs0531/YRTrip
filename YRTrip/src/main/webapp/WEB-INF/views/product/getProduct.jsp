@@ -337,11 +337,12 @@ $(function(){
 										<div class="text-muted mb-2">
 											<small>약간의 사용감이 있습니다!</small>
 										</div>
-										<label for="quant">수량</label> <input type="number"
-											name="itemEa" min="1" max="${product.itemEa}" id="quant"
-											value="" class="form-control mb-5 input-lg"
-											placeholder="1개 이상 선택하세요"> <input type="hidden"
-											value="${sessionScope.login.userId}" name="myId"> <input
+										<label for="quant">수량</label> 
+										<input type="number"
+											name="itemEa" min="1" max="${product.itemEa}" id="quant" class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요" required> 
+											<input type="hidden"
+											value="${sessionScope.login.userId}" name="myId"> 
+											<input
 											type="hidden" value="${product.itemId}" name="itemId">
 										<!-- </form> -->
 										<div class="order-buton align-content-sm-center">
@@ -358,7 +359,7 @@ $(function(){
 									</form>
 								</div>
 								<div class="product-seller-recommended">
-									<h3 class="mb-5">${product.userName}의 다른 상품</h3>
+									<h3 class="mb-5">${product.userName}님의 다른 상품</h3>
 									<!-- 상품이 없으면 아무것도 안 뜨게 -->
 									<div class="row seller-list">
 										<div class="col-md-12 no-list-product">

@@ -245,7 +245,6 @@ $(function(){
 					</div>
 					<hr class="mb-4">
 					<h4 class="mb-3">상품정보</h4>
-					상품이미지 작게 넣기 60*60정도?
 					<div class="row">
 						<div class="col-md-3 mb-3">
 							<label for="orderPriceSingle">상품가격</label>
@@ -313,9 +312,9 @@ $(function(){
 								class="custom-control-label" for="paypal">직거래</label>
 						</div> 
 					</div>-->
-				<input type="text" value="${cart.itemId}" id="itemId" name="itemId">
-				<input type="text" value="${cart.cartId}" name="cartId">
-				<input type="text" value="${cart.itemEa}" name="orderEa">
+				<input type="hidden" value="${cart.itemId}" id="itemId" name="itemId">
+				<input type="hidden" value="${cart.cartId}" name="cartId">
+				<input type="hidden" value="${cart.itemEa}" name="orderEa">
 				<%-- <input type="text" value="${cart.itemPrice}" name="itemPrice"> --%>
 				
 				<hr class="mb-4">
