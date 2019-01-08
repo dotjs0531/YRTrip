@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="kor">
 
@@ -273,7 +274,7 @@
 											style="max-height: 140px; min-height: 140px;"></a>
 										<div class="caption">
 
-											<h4 class="pull-right" id="itemPrice${product.itemId}" class="itemPrice">${product.itemPrice}</h4>
+											<h4 class="pull-right" id="itemPrice${product.itemId}" class="itemPrice">￦<fmt:formatNumber value="${product.itemPrice}" pattern="#,###"/></h4>
 											<h4 class="text-truncate">
 												<a href="getProduct?itemId=${product.itemId}">${product.itemName}</a>
 											</h4>
