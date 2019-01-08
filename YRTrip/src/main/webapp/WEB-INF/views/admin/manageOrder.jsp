@@ -226,6 +226,12 @@ function go_page(page) {
 						</tbody>
 					</table>
 				</div>
+				
+             <!-- 페이징 처리 -->
+		     <div align="center">
+		     	<div id="pagination" class="pagination"></div>
+		     </div>
+		     
 			</div>
 		</div>
 	</div>
