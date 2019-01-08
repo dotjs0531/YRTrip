@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.yrtrip.app.notice.NoticeVO;
 import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.travel.TravelInfoVO;
 import com.yrtrip.app.travel.TravelPlaceVO;
@@ -81,5 +82,10 @@ public class TravelBoardDAOMybatis {
 	//모달 등록시 조회
 	public List<TravelBoardVO> getTravelInfoListModal(TravelInfoVO vo) {
 		return sqlSession.selectList("travelBoard.getTravelInfoListModal", vo);
+	}
+	
+	//조회수 증가
+	public void updateViewCnt(TravelBoardVO vo) {
+		sqlSession.update("travelBoard.updateViewCnt", vo);
 	}
 }

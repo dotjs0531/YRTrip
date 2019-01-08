@@ -17,5 +17,6 @@ public interface TravelBoardService {
 	public List<TravelPlaceVO> getTravelPlaceList(TravelPlaceVO vo);
 	public List<TravelBoardVO> getTravelInfoList(TravelInfoVO vo);
 	public List<TravelBoardVO> getTravelInfoListModal(TravelInfoVO vo);
+	public void updateViewCnt(TravelBoardVO vo);
 	
 }

@@ -200,9 +200,9 @@ jQuery( document ).ready(function( $ ) {
 					  <div class="text">
 					  <h2 class="animate-text"><a href="getTravelPlace?PlaceNo=${board.placeNo}" style="text-decoration: none; color:#34495E;">${board.placeTitle}</a></h2>
 					  <p class="animate-text">${board.placeName}</p>
-					  <c:if test="${sessionScope.login.userId eq board.userId}"><h3 class="animate-text" style="text-decoration: none; color:#34495E;">${board.userId}</h3></c:if>
+					  <c:if test="${sessionScope.login.userId eq board.userId}"><h3 class="animate-text" style="text-decoration: none; color:#34495E;">${board.userName}</h3></c:if>
 				      <c:if test="${sessionScope.login.userId ne board.userId}">
-			   	      <h3 class="animate-text"><a href="getYourTravelList?userId=${board.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">${board.userId}</a></h3>
+			   	      <h3 class="animate-text"><a href="getYourTravelList?userId=${board.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">${board.userName}</a></h3>
 					  </c:if>
 					  
 					  </div>

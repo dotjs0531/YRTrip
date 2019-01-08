@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.yrtrip.app.notice.NoticeVO;
 import com.yrtrip.app.travel.TravelBoardService;
 import com.yrtrip.app.travel.TravelBoardVO;
 import com.yrtrip.app.travel.TravelInfoVO;
@@ -75,4 +76,8 @@ public class TravelBoardServiceImpl implements TravelBoardService {
 		return dao.getTravelInfoListModal(vo);
 	}
 	
+	@Override
+	public void updateViewCnt(TravelBoardVO vo) {
+		dao.updateViewCnt(vo);
+	}
 }

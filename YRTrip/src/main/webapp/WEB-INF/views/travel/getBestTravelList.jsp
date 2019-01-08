@@ -232,11 +232,11 @@ $("#autocompleteTinfoList").change(function(){
 <!-- 여행기 리스트 -->
    			<c:forEach items="${bestTravelList}" var="board">
 				<div class="content-box">
-							<c:if test="${travelBoard.travelPic != null}">
-							<img src="./images/travel/${travelBoard.travelPic}" class="img-responsive">
+							<c:if test="${board.travelPic != null}">
+							<img src="./images/travel/${board.travelPic}" style="display:inline-block;">
 							</c:if>
-							<c:if test="${travelBoard.travelPic == null}">
-							<img src="./images/travel/noimage.jpg" class="img-responsive">
+							<c:if test="${board.travelPic == null}">
+							<img src="./images/travel/noimage.jpg" >
 							</c:if>
 						<div class="content-title">
 							<div class="text-center">
@@ -255,9 +255,9 @@ $("#autocompleteTinfoList").change(function(){
 						<div class="content-footer">
 						<hr style="margin-bottom:-3px;">
 							<span class="user-info">
-							<c:if test="${sessionScope.login.userId eq board.userId}">${board.userId}</c:if>
+							<c:if test="${sessionScope.login.userId eq board.userId}">${board.userName}</c:if>
 				            <c:if test="${sessionScope.login.userId ne board.userId}">
-							<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userId}</a>
+							<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userName}</a>
 							</c:if>
 							</span>
 							<span class="pull-right">

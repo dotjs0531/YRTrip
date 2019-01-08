@@ -249,9 +249,9 @@ $("#autocompleteTinfoList").change(function(){
 						<div class="content-footer">
 						<hr style="margin-bottom:-3px;">
 							<span class="user-info">
-							<c:if test="${sessionScope.login.userId eq board.userId}"><a>${board.userId}</a></c:if>
+							<c:if test="${sessionScope.login.userId eq board.userId}"><a>${board.userName}</a></c:if>
                             <c:if test="${sessionScope.login.userId ne board.userId}">
-								<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userId}</a>
+								<a href="getYourTravelList?userId=${board.userId}" class="goToUserPage">${board.userName}</a>
 							</c:if>
 							</span>
 						</div>

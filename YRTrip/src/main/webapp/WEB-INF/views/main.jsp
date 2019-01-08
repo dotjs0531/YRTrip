@@ -389,37 +389,38 @@ color: #3537356b;
 	</section>
 	<!--    end 공지사항창-->
 	<!--    베스트 여행기 -->
-	<section class="container" id="about">
-		<!-- <div class="container"> -->
+			<section class="container">
 			<div class="row">
-			<h3 style="padding: 0px 0px 8px 0px;">너만의 여행기 </h3>
+				<div class="container card" style="padding: 0 0 30px 0;">
+				<h3 style="padding: 0px 0px 8px 0px;">너만의 여행기</h3>
 				<h5>당신의 추억, 당신의 일정을 기록하세요 !</h5>
 				<hr>
-				<c:forEach items="${bestTravelList}" var="board">
-					<div class="col-md-2 col-sm-2 col-xs-12 col-lg-2">
-						<div class="about_single_item">
-							<div class="about_single_item_content">
-								<c:if test="${board.travelPic != null}">
-									<img src="./images/travel/${travelBoard.travelPic}"
-										class="img-responsive">
-								</c:if>
-								<c:if test="${board.travelPic == null}">
-									<img src="./images/travel/noimage.jpg" class="img-responsive">
-								</c:if>
-								<br>
-								<h4 style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 130px; text-decoration: none !important;">
-									<a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a>
-								</h4>
-								<h2>${board.userId}</h2>
-								<a href="#" data-placement="right" title="Like"> <i
-									class="fa fa-heart"></i> ${board.travelLike}
-								</a>
+					<c:forEach items="${bestTravelList}" var="board">
+						<div class="column col-md-3 col-sm-3 col-xs-10" style="padding-bottom:20px">
+							<!-- Post-->
+							<div class="post-module" style="width:210px; heigh:200px;">
+								<!-- Thumbnail-->
+								<div class="thumbnail" style="width:250px;">
+									<c:set var="travelPicFile" value="${fn:split(board.travelPic, ',')[0]}" />
+									<c:set var="pic" value="${travelPicFile}" />
+
+									<img class="card-img-top" src="./images/travel/${pic}"
+										alt="item" style="height: 200px;">
+								</div>
+								<!-- Post Content-->
+								<div class="post-content" style="width:250px;">
+									<h4 class="pull-right">${board.userId}</h4>
+									<h1 class="title" style="font-size:20px;">
+										<a href="getTravelBoard?travelNo=${board.travelNo}"
+											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 200px; text-decoration: none !important;">${board.travelTitle}</a>
+									</h1>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
+				<!-- foreach 끝 -->
 			</div>
-		<!-- </div> -->
 	</section>
 	<!--   end 베스트여행기-->
 	<!-- 상품 판매자 1,2,3위  올리기-->

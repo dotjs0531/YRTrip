@@ -17,24 +17,173 @@
 			TRAVEL_HIT,
 			TRAVEL_LIKE,
 			TINFO_ID,
-			USER_ID,
+			T.USER_ID,
+			USER_NAME,
 			TRAVEL_WITH,
 			TRAVEL_PIC
+	FROM TRAVELBOARDT T, USERT U
+	WHERE T.USER_ID = U.USER_ID
+		<if test="searchTinfo != null">
+			AND TINFO_ID = #{searchTinfo}
+		</if>
+			ORDER BY TRAVEL_NO DESC
+			) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 베스트 여행기 전체 조회 -->
+<select id="getBestTravelList" parameterType="travelBoard" resultType="travelBoard">
+	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
+			SELECT * FROM(
+							SELECT  TRAVEL_NO,
+									TRAVEL_PERSON,
+									TRAVEL_PAY,
+									TRAVEL_SCHE,
+									TRAVEL_START,
+									TRAVEL_END,
+									TRAVEL_TITLE,
+									TRAVEL_CONTENT,
+									TRAVEL_DATE,
+									TRAVEL_HIT,
+									TRAVEL_LIKE,
+									TINFO_ID,
+									T.USER_ID,
+									USER_NAME,
+									TRAVEL_WITH,
+									TRAVEL_PIC 
+							FROM TRAVELBOARDT T, USERT U
+							WHERE T.USER_ID = U.USER_ID
+							ORDER BY TRAVEL_LIKE DESC)
+			WHERE ROWNUM <![CDATA[<]]>= 120
+			) A ) B WHERE RN BETWEEN #{first} AND #{last}
+</select>
+
+<!-- 단건조회 -->
+<select id="getTravelBoard" parameterType="travelBoard" resultType="travelBoard">
+	SELECT TRAVEL_NO,
+			TRAVEL_PERSON,
+			TRAVEL_PAY,
+			TRAVEL_SCHE,
+			TRAVEL_START,
+			TRAVEL_END,
+			TRAVEL_TITLE,
+			TRAVEL_CONTENT,
+			TRAVEL_DATE,
+			TRAVEL_HIT,
+			TRAVEL_LIKE,
+			B.TINFO_ID,
+			TINFO_CITY,
+			B.USER_ID,
+			USER_NAME,
+			TRAVEL_WITH,
+			TRAVEL_PIC
+	FROM TRAVELBOARDT B, TRAVELINFOT I, USERT U
+	WHERE TRAVEL_NO = #{travelNo}
+		  AND B.TINFO_ID = I.TINFO_ID
+		  AND B.USER_ID = U.USER_ID
+</select>
+
+<!-- 해당 글 장소 조회 -->
+<select id="getTravelPlaceList" parameterType="travelPlace" resultType="travelPlace">
+SELECT PLACE_NO,
+			PLACE_NAME,
+			PLACE_ADDRESS,
+			PLACE_LIKE,
+			PLACE_DATE,
+			PLACE_CONTENT,
+			P.PLACE_TRAVELBOARDNO,
+			PLACE_PIC,
+			P.USER_ID,
+			PLACE_TITLE,
+			PLACE_VISITDATE
+	FROM TRAVEL_PLACET P, TRAVELBOARDT B
+	WHERE P.PLACE_TRAVELBOARDNO = B.TRAVEL_NO
+ 		  AND B.TRAVEL_NO = #{travelNo}
+	ORDER BY PLACE_NO DESC
+</select>
+
+<!-- 글 등록(Modal) -->
+<insert id="insertTravelBoard" parameterType="travelBoard">
+	<selectKey keyProperty="travelNo" resultType="integer" order="BEFORE">
+		SELECT NVL(MAX(TRAVEL_NO),0)+1 FROM TRAVELBOARDT
+	</selectKey>
+		INSERT INTO TRAVELBOARDT(TRAVEL_NO,
+								TRAVEL_PERSON,
+								TRAVEL_SCHE,
+								TRAVEL_START,
+								TRAVEL_END,
+								TRAVEL_TITLE,
+								TRAVEL_DATE,
+								TINFO_ID,
+								USER_ID,
+								TRAVEL_WITH,
+								TRAVEL_HIT 
+								)
+		VALUES (#{travelNo}, 
+				#{travelPerson},
+				#{travelSche}, 
+				#{travelStart},
+				#{travelEnd},
+				#{travelTitle},  
+				sysdate, 
+				#{selectedTinfoModal},
+				#{userId}, 
+				#{travelWith},
+				0 
+				)
+</insert>
+
+<!-- 글 수정(getTravelBoardList에서) -->
+<update id="updateTravelBoard" parameterType="travelBoard">
+	UPDATE TRAVELBOARDT 
+	SET TRAVEL_PERSON = #{travelPerson}, 
+		TRAVEL_PAY = #{travelPay},
+		TRAVEL_SCHE = #{travelSche},
+		TRAVEL_START = TO_DATE(#{travelStart}, 'yyyy-mm-dd hh24:mi:ss'),
+		TRAVEL_END = TO_DATE(#{travelEnd}, 'yyyy-mm-dd hh24:mi:ss'),
+		TRAVEL_TITLE = #{travelTitle},
+		TRAVEL_CONTENT = #{travelContent},
+		TRAVEL_WITH = #{travelWith}
+		<if test="travelPic != null and travelPic != ''">
+		,TRAVEL_PIC = #{travelPic}
+		</if>
+	WHERE TRAVEL_NO = #{travelNo}
+</update>
+
+<!-- 글 삭제(getTravelBoardList에서) -->
+<delete id="deleteTravelBoard" parameterType="int">
+	DELETE FROM TRAVELBOARDT 
+	WHERE TRAVEL_NO = #{travelNo}
+</delete>
+
+<!-- 선택삭제(마이페이지에서) -->
+<delete id="deleteTravelBoardList" parameterType="list">
+	DELETE FROM TRAVELBOARDT 
+	<if test="seqList != null and seqList.length>0">
+	WHERE TRAVEL_NO in
+	<foreach collection="TravelNoList" item="item" open="(" close=")" separator=",">
+		#{item}
+	</foreach>
+	</if>
+	<if test="TravelNoList == null or not TravelNoList.length>0">
+		WHERE TRAVEL_NO = -1
+	</if>
+</delete>
+
+<!-- 조회수 증가 -->
+<update id="updateViewCnt" parameterType="travelBoard">
+	UPDATE TRAVELBOARDT  SET   TRAVEL_HIT = TRAVEL_HIT + 1
+					WHERE TRAVEL_NO = #{travelNo}
+</update>
+
+<!-- 페이징 : 전체 건수 조회 -->
+<select id="getCount" resultType="int">
+	SELECT COUNT(*)
 	FROM TRAVELBOARDT
-   	<where>
+<where>
 		<if test="searchTinfo != null">
 			tinfo_id = #{searchTinfo}
 		</if>
-	</where> 
-	<choose>
-		<when test="sortCol != null and sortCol != ''">
-			ORDER BY ${sortCol}
-		</when>
-		<otherwise>
-			ORDER BY TRAVEL_NO DESC
-		</otherwise>
-	</choose>
-			) A ) B WHERE RN BETWEEN #{first} AND #{last}
+	</where>  
 </select>
 
 <!-- 검색 select -->
@@ -77,128 +226,4 @@
 		</if>
 </select>
 
-<!-- 페이징 : 전체 건수 조회 -->
-<select id="getCount" resultType="int">
-	SELECT COUNT(*)
-	FROM TRAVELBOARDT
-<where>
-		<if test="searchTinfo != null">
-			tinfo_id = #{searchTinfo}
-		</if>
-	</where>  
-</select>
-
-<!-- 글 등록(Modal) -->
-<insert id="insertTravelBoard" parameterType="travelBoard">
-	<selectKey keyProperty="travelNo" resultType="integer" order="BEFORE">
-		SELECT NVL(MAX(TRAVEL_NO),0)+1 FROM TRAVELBOARDT
-	</selectKey>
-		INSERT INTO TRAVELBOARDT(TRAVEL_NO,
-								TRAVEL_PERSON,
-								TRAVEL_SCHE,
-								TRAVEL_START,
-								TRAVEL_END,
-								TRAVEL_TITLE,
-								TRAVEL_DATE,
-								TINFO_ID,
-								USER_ID,
-								TRAVEL_WITH 
-								)
-		VALUES (#{travelNo}, 
-				#{travelPerson},
-				#{travelSche}, 
-				#{travelStart},
-				#{travelEnd},
-				#{travelTitle},  
-				sysdate, 
-				#{selectedTinfoModal},
-				#{userId}, 
-				#{travelWith} 
-				)
-</insert>
-
-<!-- 글 수정(getTravelBoardList에서) -->
-<update id="updateTravelBoard" parameterType="travelBoard">
-	UPDATE TRAVELBOARDT 
-	SET TRAVEL_PERSON = #{travelPerson}, 
-		TRAVEL_PAY = #{travelPay},
-		TRAVEL_SCHE = #{travelSche},
-		TRAVEL_START = TO_DATE(#{travelStart}, 'yyyy-mm-dd hh24:mi:ss'),
-		TRAVEL_END = TO_DATE(#{travelEnd}, 'yyyy-mm-dd hh24:mi:ss'),
-		TRAVEL_TITLE = #{travelTitle},
-		TRAVEL_CONTENT = #{travelContent},
-		TRAVEL_WITH = #{travelWith}
-		<if test="travelPic != null and travelPic != ''">
-		,TRAVEL_PIC = #{travelPic}
-		</if>
-	WHERE TRAVEL_NO = #{travelNo}
-</update>
-
-<!-- 글 삭제(getTravelBoardList에서) -->
-<delete id="deleteTravelBoard" parameterType="int">
-	DELETE FROM TRAVELBOARDT 
-	WHERE TRAVEL_NO = #{travelNo}
-</delete>
-
-<!-- 선택삭제(마이페이지에서) -->
-<delete id="deleteTravelBoardList" parameterType="list">
-	DELETE FROM TRAVELBOARDT 
-	<if test="seqList != null and seqList.length>0">
-	WHERE TRAVEL_NO in
-	<foreach collection="TravelNoList" item="item" open="(" close=")" separator=",">
-		#{item}
-	</foreach>
-	</if>
-	<if test="TravelNoList == null or not TravelNoList.length>0">
-		WHERE TRAVEL_NO = -1
-	</if>
-</delete>
-
-<select id="getTravelBoard" parameterType="travelBoard" resultType="travelBoard">
-	SELECT TRAVEL_NO,
-			TRAVEL_PERSON,
-			TRAVEL_PAY,
-			TRAVEL_SCHE,
-			TRAVEL_START,
-			TRAVEL_END,
-			TRAVEL_TITLE,
-			TRAVEL_CONTENT,
-			TRAVEL_DATE,
-			TRAVEL_HIT,
-			TRAVEL_LIKE,
-			B.TINFO_ID,
-			TINFO_CITY,
-			USER_ID,
-			TRAVEL_WITH,
-			TRAVEL_PIC
-	FROM TRAVELBOARDT B, TRAVELINFOT I
-	WHERE TRAVEL_NO = #{travelNo}
-		  AND B.TINFO_ID = I.TINFO_ID
-</select>
-<select id="getTravelPlaceList" parameterType="travelPlace" resultType="travelPlace">
-SELECT PLACE_NO,
-			PLACE_NAME,
-			PLACE_ADDRESS,
-			PLACE_LIKE,
-			PLACE_DATE,
-			PLACE_CONTENT,
-			P.PLACE_TRAVELBOARDNO,
-			PLACE_PIC,
-			P.USER_ID,
-			PLACE_TITLE,
-			PLACE_VISITDATE
-	FROM TRAVEL_PLACET P, TRAVELBOARDT B
-	WHERE P.PLACE_TRAVELBOARDNO = B.TRAVEL_NO
- 		  AND B.TRAVEL_NO = #{travelNo}
-	ORDER BY PLACE_NO DESC
-</select>
-
-<select id="getBestTravelList" parameterType="travelBoard" resultType="travelBoard">
-	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
-			SELECT * FROM(
-			SELECT * FROM TRAVELBOARDT
-			ORDER BY TRAVEL_LIKE DESC)
-			WHERE ROWNUM <![CDATA[<]]>= 120
-			) A ) B WHERE RN BETWEEN #{first} AND #{last}
-</select>
 </mapper> 

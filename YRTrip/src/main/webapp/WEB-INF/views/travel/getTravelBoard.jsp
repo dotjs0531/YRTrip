@@ -486,11 +486,11 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-heading">
-											<c:if test="${sessionScope.login.userId eq travelBoard.userId}"><strong>${travelBoard.userId}</strong>
+											<c:if test="${sessionScope.login.userId eq travelBoard.userId}"><strong>${travelBoard.userName}</strong>
 											
 											</c:if>
 				                            <c:if test="${sessionScope.login.userId ne travelBoard.userId}">
-												<h2 class="panel-title"><a href="getYourTravelList?userId=${travelBoard.userId}" class="goToUserPage" style="text-decoration:none;"><strong>${travelBoard.userId}</strong></a></h2>
+												<h2 class="panel-title"><a href="getYourTravelList?userId=${travelBoard.userId}" class="goToUserPage" style="text-decoration:none;"><strong>${travelBoard.userName}</strong></a></h2>
 											</c:if>
 											</div>
 	

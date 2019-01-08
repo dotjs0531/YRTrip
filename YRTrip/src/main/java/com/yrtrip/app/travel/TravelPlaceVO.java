@@ -16,9 +16,9 @@ public class TravelPlaceVO extends LikeVO {
 	private String placePic;
 	private MultipartFile placePicFile;
 	private String userId;
+	private String userName;
 	private String placeTitle;
 	private String placeVisitDate;
-	private String placeMapId;
 	
 	private String TravelNo;
 	private String searchKeyword;
@@ -87,6 +87,13 @@ public class TravelPlaceVO extends LikeVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getPlaceTitle() {
 		return placeTitle;
 	}
@@ -98,12 +105,6 @@ public class TravelPlaceVO extends LikeVO {
 	}
 	public void setPlaceVisitDate(String placeVisitDate) {
 		this.placeVisitDate = placeVisitDate;
-	}
-	public String getPlaceMapId() {
-		return placeMapId;
-	}
-	public void setPlaceMapId(String placeMapId) {
-		this.placeMapId = placeMapId;
 	}
 	public String getSearchKeyword() {
 		return searchKeyword;
@@ -140,6 +141,15 @@ public class TravelPlaceVO extends LikeVO {
 	}
 	public void setTravelNo(String travelNo) {
 		TravelNo = travelNo;
+	}
+	@Override
+	public String toString() {
+		return "TravelPlaceVO [placeNo=" + placeNo + ", placeName=" + placeName + ", placeAddress=" + placeAddress
+				+ ", placeLike=" + placeLike + ", placeDate=" + placeDate + ", placeContent=" + placeContent
+				+ ", placeTravelBoardNo=" + placeTravelBoardNo + ", placePic=" + placePic + ", placePicFile="
+				+ placePicFile + ", userId=" + userId + ", placeTitle=" + placeTitle + ", placeVisitDate="
+				+ placeVisitDate + ", TravelNo=" + TravelNo + ", searchKeyword=" + searchKeyword + ", searchCondition="
+				+ searchCondition + ", sortCol=" + sortCol + ", first=" + first + ", last=" + last + "]";
 	}
 		
 }

@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -57,7 +59,7 @@ public class TravelBoardController {
 				return mv;
 			}
 	
-	//베스트여행기 조회
+	//베스트여행기 전체조회
 	@RequestMapping(value = { "/getBestTravelList"}, method = RequestMethod.GET)
 	public ModelAndView getBestTravelList(TravelBoardVO vo, Paging paging) {
 		
@@ -86,7 +88,30 @@ public class TravelBoardController {
 
 	//상세조회
 	@RequestMapping("/getTravelBoard")
-	public String getTravelBoard(Model model, TravelBoardVO vo, TravelPlaceVO pvo) {
+	public String getTravelBoard(Model model, TravelBoardVO vo, TravelPlaceVO pvo, HttpServletRequest req, HttpServletResponse res) {
+	int countCheck = 0;
+		
+		//저장된 쿠키 불러오기
+		Cookie[] cookies = req.getCookies();
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
+				if(cookies[i].getName().equals("travelNo"+vo.getTravelNo())){
+					countCheck = 0;
+					break;
+				}else{
+					Cookie cookie = new Cookie("travelNo"+vo.getTravelNo(), String.valueOf(vo.getTravelNo()));
+					cookie.setMaxAge(60*60*24);	//하루동안 조회수 중복 증가 방지
+					cookie.setPath("/");
+					res.addCookie(cookie);
+					countCheck += 1;
+				}
+			}
+		}
+		//상세정보 조회시 카운트 증가
+		if(countCheck > 0){
+			travelBoardService.updateViewCnt(vo);
+		}
+		
 		model.addAttribute("travelBoard", travelBoardService.getTravelBoard(vo));
 		model.addAttribute("travelPlace", travelBoardService.getTravelPlaceList(pvo));
 		return "travel/getTravelBoard";

@@ -1,5 +1,7 @@
 package com.yrtrip.app.travel;
 
+import java.util.Arrays;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,6 +23,7 @@ public class TravelBoardVO  extends LikeVO {
 	private int tinfoId;
 	private String tinfoCity;
 	private String userId;
+	private String userName;
 	private String travelWith;
 	private String travelPic;
 	private MultipartFile travelPicFile;
@@ -119,6 +122,12 @@ public class TravelBoardVO  extends LikeVO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public String getTravelWith() {
 		return travelWith;
 	}
@@ -137,7 +146,6 @@ public class TravelBoardVO  extends LikeVO {
 	public void setTravelPicFile(MultipartFile travelPicFile) {
 		this.travelPicFile = travelPicFile;
 	}
-	@JsonIgnore
 	public int getFirst() {
 		return first;
 	}
@@ -156,32 +164,24 @@ public class TravelBoardVO  extends LikeVO {
 	public void setFirst(int first) {
 		this.first = first;
 	}
-	
-	@JsonIgnore
 	public int getLast() {
 		return last;
 	}
 	public void setLast(int last) {
 		this.last = last;
 	}
-	
-	@JsonIgnore
 	public String getSelectedTinfoModal() {
 		return selectedTinfoModal;
 	}
 	public void setSelectedTinfoModal(String selectedTinfoModal) {
 		this.selectedTinfoModal = selectedTinfoModal;
 	}
-	
-	@JsonIgnore
 	public String getSearchTinfo() {
 		return searchTinfo;
 	}
-	
 	public void setSearchTinfo(String searchTinfo) {
 		this.searchTinfo = searchTinfo;
-	}
-	
+	}	
 	public String[] getTravelNoList() {
 		return travelNoList;
 	}
@@ -191,10 +191,28 @@ public class TravelBoardVO  extends LikeVO {
 	@Override
 	public String toString() {
 		return "TravelBoardVO [travelNo=" + travelNo + ", travelPerson=" + travelPerson + ", travelPay=" + travelPay
-				+ ", travelSche=" + travelSche + ", travelStart=" + travelStart + ", travelTitle=" + travelTitle
-				+ ", travelContent=" + travelContent + ", travelDate=" + travelDate + ", travelHit=" + travelHit
-				+ ", travelLike=" + travelLike + ", tinfoId=" + tinfoId + ", userId=" + userId + ", travelWith="
-				+ travelWith + ", travelPic=" + travelPic + ", selectedTinfoModal=" + selectedTinfoModal
-				+ ", searchTinfo=" + searchTinfo + ", first=" + first + ", last=" + last + "]";
+				+ ", travelSche=" + travelSche + ", travelStart=" + travelStart + ", travelEnd=" + travelEnd
+				+ ", travelTitle=" + travelTitle + ", travelContent=" + travelContent + ", travelDate=" + travelDate
+				+ ", travelHit=" + travelHit + ", travelLike=" + travelLike + ", tinfoId=" + tinfoId + ", tinfoCity="
+				+ tinfoCity + ", userId=" + userId + ", travelWith=" + travelWith + ", travelPic=" + travelPic
+				+ ", travelPicFile=" + travelPicFile + ", selectedTinfoModal=" + selectedTinfoModal + ", searchTinfo="
+				+ searchTinfo + ", searchCondition=" + searchCondition + ", searchKeyword=" + searchKeyword + ", first="
+				+ first + ", last=" + last + ", travelNoList=" + Arrays.toString(travelNoList) + ", getTravelNo()="
+				+ getTravelNo() + ", getTravelPerson()=" + getTravelPerson() + ", getTravelPay()=" + getTravelPay()
+				+ ", getTravelSche()=" + getTravelSche() + ", getTravelStart()=" + getTravelStart()
+				+ ", getTravelEnd()=" + getTravelEnd() + ", getTravelTitle()=" + getTravelTitle()
+				+ ", getTravelContent()=" + getTravelContent() + ", getTravelDate()=" + getTravelDate()
+				+ ", getTravelHit()=" + getTravelHit() + ", getTravelLike()=" + getTravelLike() + ", getTinfoId()="
+				+ getTinfoId() + ", getTinfoCity()=" + getTinfoCity() + ", getUserId()=" + getUserId()
+				+ ", getTravelWith()=" + getTravelWith() + ", getTravelPic()=" + getTravelPic()
+				+ ", getTravelPicFile()=" + getTravelPicFile() + ", getFirst()=" + getFirst()
+				+ ", getSearchCondition()=" + getSearchCondition() + ", getSearchKeyword()=" + getSearchKeyword()
+				+ ", getLast()=" + getLast() + ", getSelectedTinfoModal()=" + getSelectedTinfoModal()
+				+ ", getSearchTinfo()=" + getSearchTinfo() + ", getTravelNoList()=" + Arrays.toString(getTravelNoList())
+				+ ", getLikeNo()=" + getLikeNo() + ", getLikeCategory()=" + getLikeCategory() + ", getLikeBoardid()="
+				+ getLikeBoardid() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+	
 }

@@ -14,28 +14,13 @@
 			PLACE_CONTENT,
 			PLACE_TRAVELBOARDNO,
 			PLACE_PIC,
-			USER_ID,
+			P.USER_ID,
+			USER_NAME,
 			PLACE_TITLE,
 			PLACE_VISITDATE
-	FROM TRAVEL_PLACET
- 	<where>
-	<choose>
-		<when test="searchCondition != null and searchCondition == 'placeName'">
-			AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
-		</when>	
-		<when test="searchCondition != null and searchCondition == 'userId'">
-			AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-		</when>
-	</choose>
-	</where>
-	<choose>
-		<when test="sortCol != null and sortCol != ''">
-			ORDER BY ${sortCol}
-		</when>
-		<otherwise>
+	FROM TRAVEL_PLACET P, USERT U
+	WHERE P.USER_ID = U.USER_ID
 			ORDER BY PLACE_NO DESC
-		</otherwise>
-	</choose>
 			) A ) B WHERE RN BETWEEN #{first} AND #{last}
 </select>
 
@@ -62,27 +47,7 @@
 <select id="getCount" resultType="int">
 	SELECT COUNT(*)
 	FROM TRAVEL_PLACET
-	<where>
-		<choose>
-			<when test="searchCondition != null and searchCondition == 'placeTitle'">
-				AND PLACE_TITLE LIKE '%' || #{searchKeyword} || '%'
-			</when>	
-			<when test="searchCondition != null and searchCondition == 'placeName'">
-				AND PLACE_NAME LIKE '%' || #{searchKeyword} || '%'
-			</when>	
-			<when test="searchCondition != null and searchCondition == 'userId'">
-				AND USER_ID LIKE '%' || #{searchKeyword} || '%'
-			</when>
-		</choose>
-		</where>
-		<choose>
-			<when test="sortCol != null and sortCol != ''">
-				ORDER BY ${sortCol}
-			</when>
-			<otherwise>
-				ORDER BY PLACE_NO DESC
-			</otherwise>
-		</choose>
+	ORDER BY PLACE_NO DESC
 </select>
 
 <insert id="insertTravelPlace" parameterType="travelPlace">
@@ -157,11 +122,13 @@
 			PLACE_CONTENT,
 			PLACE_TRAVELBOARDNO,
 			PLACE_PIC,
-			USER_ID,
+			P.USER_ID,
+			USER_NAME,
 			PLACE_TITLE,
 			PLACE_VISITDATE
-	FROM TRAVEL_PLACET 
+	FROM TRAVEL_PLACET P, USERT U
 	WHERE PLACE_NO = #{placeNo}
+		  AND P.USER_ID = U.USER_ID
 </select>
 
 </mapper> 

@@ -83,9 +83,52 @@ function del(placeNo){
 			});
 		};
 	});
+ /* 여행지 좋아요 */
+ 	function disLike(uId, lC, lBid){
+		   location.href = "./deleteLike?userId=" + uId + "&likeCategory=" + lC + "&likeBoardid=" + lBid;
+	};
+$(function(){
+ function likeCondition() {
+	   var params = { userId : '${sessionScope.login.userId}',
+			   		 likeCategory : 'P',
+			   		 likeBoardid :'${travelPlace.placeNo}'
+	   				}
+	   $.getJSON("getLike", params, function(data){
+		   if (!data) {
+			   var div = makeDisLikeBtn('P','${travelPlace.placeNo}');
+				$(div).appendTo("#LikeConditionP"+'${travelPlace.placeNo}');
+		   }
+		   else {
+			   var div = makeLikeBtn('P','${travelPlace.placeNo}');
+				$(div).appendTo("#LikeConditionP"+'${travelPlace.placeNo}');
+		   }
+	   });
+ }
+ function makeDisLikeBtn(likeCategory,likeBoardid) {
+		var div =$("<div>");
+		div.addClass('LikeCondition'+likeCategory+likeBoardid);
+		var str = "<form action='./insertLike' method='post'>"
+					+ "<input type='hidden' name='likeCategory' value="+likeCategory+">"
+					+ "<input type='hidden' name='likeBoardid' value="+likeBoardid+">"
+					+ "<input type='hidden' name='userId' value='${sessionScope.login.userId}'>"
+					+ "<button type='submit' style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+					+ "<img src='./images/dislike.png'></button></form>"
+		div.html(str);
+		return div;
+ }
+ function makeLikeBtn(likeCategory,likeBoardid) {
+		var div =$("<div>");
+		div.addClass('LikeCondition'+likeCategory+likeBoardid);
+		var str = "<button onclick=\"disLike('${sessionScope.login.userId}','"+likeCategory+"','"+likeBoardid+"')\" style='border:0; outline:0; background-color: transparent !important; width:20px; height:20px;'>"
+				+ "<img src='./images/like.png'></button>"
+		div.html(str);
+		return div;
+ }
+ likeCondition();
+});
 </script>
 </head>
-<body style="font-family:"NanumSquareRoundR">
+<body>
 
 	<section class="about_us_area" id="about">
 		<div class="container">
@@ -133,12 +176,22 @@ function del(placeNo){
 				    		</div>
 				    		<p> ${travelPlace.placeContent}</p>
 				    	<div style="float:right;">
-					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}"><br><br>작성자 | ${travelPlace.userId}</c:if>
+					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}"><br><br>작성자 | ${travelPlace.userName}</c:if>
 					        <c:if test="${sessionScope.login.userId ne travelPlace.userId}">
-							<a href="getYourTravelList?userId=${travelPlace.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;"><br><br>작성자 | ${travelPlace.userId}</a>
+							<br><br>작성자 | <a href="getYourTravelList?userId=${travelPlace.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">${travelPlace.userName}</a>
 							</c:if>
 				    	</div><br><br>
-				    	<i class="fa fa-heart"></i> ${travelPlace.placeLike}
+				    	<div>
+											<c:choose>
+												<c:when test="${not empty sessionScope.login}">
+													<div id="LikeConditionP${travelPlace.placeNo}"></div>
+												</c:when>
+												<c:otherwise>
+													<img src="./images/dislike.png" width="20px" style="display:inline-block">
+												</c:otherwise>
+											</c:choose>
+											 ${travelPlace.placeLike}
+											</div>
 				    	</blockquote>
 				    	<div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>
 				    </div>
@@ -196,6 +249,7 @@ function del(placeNo){
 	</section>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script>
 <script>
+
 function initMap() {
     
     var mapOptions = {
