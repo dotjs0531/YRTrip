@@ -13,6 +13,7 @@
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
+<link href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean" rel="stylesheet">
 
 <style>
 .modal-backdrop {
@@ -158,7 +159,7 @@ $(function(){
 
 							<!-- 장소글 -->
                 <div class="quote"><i class="fa fa-quote-left fa-4x"></i></div>
-				<div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000">
+				<div class="carousel slide" id="fade-quote-carousel" data-ride="carousel" data-interval="3000"  style="font-family: 'Jua', sans-serif;">
 				  <div class="carousel-inner">
 				    <div class="active item">
 				    	<blockquote>
@@ -174,13 +175,14 @@ $(function(){
 				    	<div style="float:right;">
 				    		${fn:substring(travelPlace.placeVisitDate, 0, 10)}
 				    		</div>
-				    		<p> ${travelPlace.placeContent}</p>
+				    		<pre style="background-color:#fff; border:none; font-size:16px;"> ${travelPlace.placeContent}</pre>
+				    		<hr>
 				    	<div style="float:right;">
-					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}"><br><br>작성자 | ${travelPlace.userName}</c:if>
+					    	<c:if test="${sessionScope.login.userId eq travelPlace.userId}">작성자 | ${travelPlace.userName}</c:if>
 					        <c:if test="${sessionScope.login.userId ne travelPlace.userId}">
 							<br><br>작성자 | <a href="getYourTravelList?userId=${travelPlace.userId}" class="goToUserPage" style="text-decoration: none; color:#34495E;">${travelPlace.userName}</a>
 							</c:if>
-				    	</div><br><br>
+				    	</div>
 				    	<div>
 											<c:choose>
 												<c:when test="${not empty sessionScope.login}">
@@ -190,7 +192,6 @@ $(function(){
 													<img src="./images/dislike.png" width="20px" style="display:inline-block">
 												</c:otherwise>
 											</c:choose>
-											 ${travelPlace.placeLike}
 											</div>
 				    	</blockquote>
 				    	<div class="profile-circle" style="background-color: rgba(0,0,0,.2);"></div>
@@ -198,7 +199,7 @@ $(function(){
 				  </div>
 				</div>
 				<hr>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="font-family: 'Jua', sans-serif;">
      <div class="carousel-inner">
      
        <div class="item active" style="height:300px;">

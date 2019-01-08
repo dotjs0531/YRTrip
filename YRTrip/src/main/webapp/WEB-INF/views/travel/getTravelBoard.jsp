@@ -11,7 +11,8 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-
+<link href="https://fonts.googleapis.com/css?family=Song+Myung&amp;subset=korean" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR|Song+Myung&amp;subset=korean" rel="stylesheet">
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -163,7 +164,7 @@
 	background: #22313F;
 	color: #fcfcfc;
 	padding: 15px 45px;
-	font-family: 'Josefin Slab', serif;
+	font-family: 'Song Myung', serif;
 	font-style: italic;
 	opacity: 0.6;
 	border-radius: 30px;
@@ -172,17 +173,17 @@
 	background: #22313F;
 	padding:5px;
 	color: #fcfcfc;
-	font-family: 'Josefin Slab', serif;
+	font-family: 'Song Myung', serif;
 	opacity: 0.6;
 	display:inline;
-	font-size: 0.5em;
+	font-size: 0.6em;
 }
 .top-span {
 	padding:5px;
-	color: #22313F;
-	font-family: 'Josefin Slab', serif;
+	color: #fff;
+font-family: 'Song Myung', serif;
 	display:inline;
-	font-size: 0.6em;
+	font-size: 1.2em;
 }
 .update-input{
 width:50px; 
@@ -264,10 +265,10 @@ function del(travelNo){
 						+"<button type=\"button\" class=\"btn btn-sm btn-default\" style=\"float:right;\" onclick=\"location.href='./getTravelPlace?placeNo="+travelPlace.placeNo+"'\">상세보기</button>"
 						+"</div>"
 						+"<div class=\"panel-body\">"
-						+ travelPlace.placeName + "<br>"
-						+"<small>" + travelPlace.placeAddress + "</small><br>"
+						+"<strong>"+travelPlace.placeName + "</strong><br>"
+						+"<small>" + travelPlace.placeAddress + "</small><br><br>"
 						+"<img class=\"img-rounded\" src=\"./images/travel/"+ travelPlace.placePic+"\" /><br>"
-						+"<pre style=\"background-color:white; font-size: 12px;\">"+travelPlace.placeContent+"</pre>"
+						+"<pre style=\"background-color:white; border:0; font-size: 12px; font-family: 'Noto Sans KR', sans-serif;\">"+travelPlace.placeContent+"</pre>"
 						+"</div>"
 					
 						+"<div id=\"footer\" class=\"panel-footer\">"
@@ -480,7 +481,7 @@ function selectTravelWith(ele){
 						<div style="padding:10px;">
 							<div class="timeline">
 								<div class="line text-muted"></div>
-								<article class="panel panel-default">
+								<article class="panel panel-default" style="font-family: 'Noto Sans KR', sans-serif;">
 											<div class="panel-heading icon">
 												<i class="glyphicon glyphicon glyphicon glyphicon-user"></i>
 											</div>
@@ -495,7 +496,7 @@ function selectTravelWith(ele){
 											</div>
 	
 											<div class="panel-body">
-												<pre style="background-color:white; font-size: 12px; ">${travelBoard.travelContent}</pre>
+												<pre style="background-color:white; font-size: 12px; font-family: 'Noto Sans KR', sans-serif;">${travelBoard.travelContent}</pre>
 											</div>
 											
 											<div class="panel-footer">
@@ -510,7 +511,7 @@ function selectTravelWith(ele){
 											</div>
 								</article>
 								
-								<div id="travelPlaceList"></div>
+								<div id="travelPlaceList" style="font-family: 'Noto Sans KR', sans-serif;"></div>
 								</div>
 								<c:if test="${sessionScope.login.userId eq travelBoard.userId}">
 								

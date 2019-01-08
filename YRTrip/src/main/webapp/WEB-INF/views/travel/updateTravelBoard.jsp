@@ -320,7 +320,7 @@ $(function(){
 		$("#placefile").val(filename);
 	});
     
-    /* 사진 업로드 insert place */
+    /* 사진 업로드 update place */
 	$("#updateplacefileInput").on('change', function(){ 
 		if(window.FileReader){
 			var filename = $(this)[0].files[0].name;
@@ -409,10 +409,6 @@ $(function(){
     			$(div).prependTo("#travelPlaceList");
     			jQuery.noConflict();
     			$('#insertTravelPlace').modal("hide");
-            }, 
-    
-            error : function(xhr, status) {
-                alert(xhr + " : " + status);
             }
         }); 
 	});
@@ -447,20 +443,8 @@ $(function(){
     			$('#updateTravelPlace').modal("hide");
     			$("#c"+placeNo).remove();
     			loadTravelPlaceList();
-            }, 
-    
-            error : function(xhr, status) {
-                alert(xhr + " : " + status);
             }
         }); 
-		/* var params = $("#updateTravelPlaceAjaxData").serialize();
- 		var placeNo = $("#updateTravelPlaceAjaxData [name=placeNo]").val();
-		$.getJSON("updateTravelPlaceAjax", params, function(datas){
-			jQuery.noConflict();
-			$('#updateTravelPlace').modal("hide");
-			$("#c"+placeNo).remove();
-			loadTravelPlaceList();
-		}); */
 	});
     
 	loadTravelPlaceList();
