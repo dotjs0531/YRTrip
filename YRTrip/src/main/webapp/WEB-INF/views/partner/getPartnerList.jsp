@@ -26,10 +26,7 @@ $(function(){
     var partnerMenu = document.getElementById("partnerMenu");
     partnerMenu.className='current-menu-item';
 });
-   function go_sort(sortCol) {
-      document.frm.sortCol.value = sortCol;
-      document.frm.submit();
-   }
+
    function go_page(page) {
       document.frm.page.value = page;
       document.frm.submit();
@@ -136,7 +133,7 @@ $("#autocompleteTinfoList").change(function(){
                <div class="table-responsive" style="min-height: 450px;">
                
 				<!-- 검색 창 & 페이징 처리 -->
-				<form class="form-inline">
+				<form class="form-inline" name="frm">
 					<div class="form-group single-pricing-table" style="width:670px; text-align:left; padding: 20px; color:black;">
 						
 						<!-- 여행지 -->
@@ -226,7 +223,7 @@ $("#autocompleteTinfoList").change(function(){
                <p style="clear: both">
                
                <!-- 페이지 번호 -->
-               <div style="padding-top: 50px;">
+               <div style="padding-top: 100px;">
                   <my:paging paging="${paging}" jsFunc="go_page" />
                </div>
             </div>

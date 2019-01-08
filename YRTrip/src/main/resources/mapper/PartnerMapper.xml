@@ -4,18 +4,19 @@
 <mapper namespace="partner">
 <select id="getCount" resultType="int">
    SELECT COUNT(*)
-     FROM PARTNERT
+     FROM PARTNERT P, USERT U
    <where>
       <if test="searchPartnerStart != null and searchPartnerStart != '' and searchPartnerEnd != null and searchPartnerEnd != ''">
           AND PARTNER_START BETWEEN TO_DATE(#{searchPartnerStart}, 'YYYY-MM-DD' )
                        AND TO_DATE(#{searchPartnerEnd}, 'YYYY-MM-DD')
       </if>
-      <if test="searchTinfo != null">
+      <if test="searchTinfo != null and searchTinfo != ''">
          AND TINFO_ID = #{searchTinfo}
       </if>
-      <if test="partnerClass != null">
+      <if test="partnerClass != null and partnerClass != ''">
       	 AND PARTNER_CLASS LIKE '%' || #{partnerClass} || '%'
       </if>
+      AND P.USER_ID = U.USER_ID
    </where>
    ORDER BY PARTNER_ID DESC
 </select>
