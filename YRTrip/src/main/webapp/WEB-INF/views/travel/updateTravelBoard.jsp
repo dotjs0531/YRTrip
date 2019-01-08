@@ -595,7 +595,7 @@ function makeTravelPlaceView(travelPlace){
 											</div>
 	
 											<div class="panel-heading">
-												<h2 class="panel-title">${travelBoard.userId}</h2>
+												<h2 class="panel-title">${travelBoard.userName}</h2>
 											</div>
 	
 											<div class="panel-body">
