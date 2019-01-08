@@ -209,8 +209,10 @@ $(function(){
 });
 </script>
 <script>
-var comma =  (".product-price").text() 
-$(".product-price").html(comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+$(function(){
+	var comma = '${product.itemPrice}'; 
+	$(".product-price").html("￦"+comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+})
 </script>
 <style>
 #btn-custom
@@ -475,8 +477,8 @@ $(".product-price").html(comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+
 		container : '#kakao-link-btn',
 		objectType : 'feed',
 		content : {
-			title : '${partner.partnerTitle}',
-			description : '${partner.partnerContent}',
+			title : '${product.itemName}',
+			description : "￦"+('${product.itemPrice}').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
 			imageUrl: 'https://postfiles.pstatic.net/MjAxODEyMjlfNiAg/MDAxNTQ2MDE0ODM1ODk5.VlG0P4NPq3mfRH0WkShxFV1TQFTrxJzDCSrkglA9g-kg.ClRMBKh_OXXzAFp7xDzEwlTzFCH1sb0ZCrFiOLMCDcMg.PNG.dotjs0531/%EB%8F%84%EC%8B%9C+%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4+(1).png?type=w773',
 			link : {
 				mobileWebUrl : document.location.href,
@@ -484,9 +486,9 @@ $(".product-price").html(comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+
 			}
 		},
 		social : {
-			//likeCount : 286,  //좋아요수(여행정보, 여행지, 상품)
-			commentCount : Number('${joinerCnt}'),  //댓글수(동행글)
-			viewCount  : Number('${partner.partnerHit}')  //조회수(여행정보, 여행지, 동행글)
+			likeCount : Number('${product.itemLike}'),  //좋아요수(여행정보, 여행지, 상품)
+			//commentCount : Number('${joinerCnt}'),  //댓글수(동행글)
+			//viewCount  : Number('${partner.partnerHit}')  //조회수(여행정보, 여행지, 동행글)
 		},
 		buttons : [ {
 			title : '웹으로 보기',
