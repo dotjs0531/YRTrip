@@ -275,11 +275,14 @@
 	<!--end of header area-->
 
 	<!-- 공지사항창 -->
-	
-	<section class="container" id="service">
+
+	<section class="about_top" id="about_top" style="border-bottom: none;">
+	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
+			<h3 style="padding: 0 0 10px 21px;">공지사항</h3>
 				<div class="col-md-12" data-wow-delay="0.2s">
+				
 					<div class="carousel slide" data-ride="carousel"
 						id="quote-carousel">
 						<!-- Bottom Carousel Indicators -->
@@ -307,7 +310,8 @@
 							<div class="item">
 								<div class="row">
 									<div class="col-12">
-										<a href="#"> <img src="./images/product/공지2.png">
+										<a href="./getNotice?noticeId=1"> <img
+											src="./images/product/공지2.png">
 										</a>
 									</div>
 								</div>
@@ -331,6 +335,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="col-lg-4" style="padding: 30px">
 				<h3 style="padding: 10px 0px">동행구하기</h3>
 				<table>
@@ -374,14 +379,19 @@
 						</tr>
 					</c:forEach>
 				</table>
+				<hr>
 			</div>
 		</div>
+		</div>	
 	</section>
 	<!--    end 공지사항창-->
 	<!--    베스트 여행기 -->
-	<section class="about_us_area" id="about">
-		<div class="container">
+	<section class="container" id="about">
+		<!-- <div class="container"> -->
 			<div class="row">
+			<h3>너만의 여행기 </h3>
+				<h5>당신의 추억, 당신의 일정을 기록하세요 !</h5>
+				<hr>
 				<c:forEach items="${bestTravelList}" var="board">
 					<div class="col-md-2 col-sm-2 col-xs-12">
 						<div class="about_single_item">
@@ -394,7 +404,7 @@
 									<img src="./images/travel/noimage.jpg" class="img-responsive">
 								</c:if>
 								<br>
-								<h4>
+								<h4 style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 130px; text-decoration: none !important;">
 									<a href="getTravelBoard?travelNo=${board.travelNo}">${board.travelTitle}</a>
 								</h4>
 								<h2>${board.userId}</h2>
@@ -406,14 +416,16 @@
 					</div>
 				</c:forEach>
 			</div>
-		</div>
+		<!-- </div> -->
 	</section>
 	<!--   end 베스트여행기-->
 	<!-- 상품 판매자 1,2,3위  올리기-->
-	<section class="about_top" id="about_top" style="border-bottom: none;">
-		<div class="container">
+		<section class="container">
 			<div class="row">
-				<div class="container card">
+				<div class="container card" style="padding: 0 0 30px 0;">
+				<h3>여행 중고 물품 </h3>
+				<h5>여행하면서 도움이 됐지만 더이상 쟁여둘수 없는 물품들을 올려보세요!</h5>
+				<hr>
 					<c:forEach items="${productList}" var="product">
 						<div class="column col-md-4 col-sm-4 col-xs-12"
 							style="padding-bottom: 20px;">
@@ -442,7 +454,6 @@
 				</div>
 				<!-- foreach 끝 -->
 			</div>
-		</div>
 	</section>
 	<!--    end 상품 판매자 1,2,3위  올리기-->
 
@@ -452,16 +463,24 @@
 	<section class="footer-area" id="contact">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-4">
+				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-6">
 					<div class="single-footer">
-						<h2>사이트맵</h2>
-						<ul class="list">
-							<li><a href=""></a></li>
-							<li><a href=""></a></li>
-						</ul>
+						<h2>Company Info</h2>
+						<p>상호명 : (주)유어레알트립|대표 : 손애선|개인정보책임자 : 양은정
+							<br>
+							사업자등록번호 : 212-86-*****
+							<br>|통신판매업신고번호 : 제 2014-****-00910 호
+							<br>
+							주소: 서울특별시 용산구 한강대로 324, 7층 (갈월동, 시가이아빌딩)
+							<br>|광고 및 제휴 : yrtrip@yedam.com
+							<br>
+							<Br>
+							유어레알트립은 통신판매중개자이며 통신판매의 당사자가 아닙니다.
+							<br> 
+						따라서 유어레알트립은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-4">
+				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-6">
 					<div class="single-footer">
 						<h2>고객센터</h2>
 						<ul class="list">
@@ -470,13 +489,15 @@
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
+				<!-- <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
 					<div class="single-footer clearfix">
+						<p>유어레알트립은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 
+						따라서 유어레알트립은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p>
 						<h2>여긴뭐하지...</h2>
 						<input type="text" class="form-control"> <input
 							type="submit" class="submt-button" value="submit">
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</section>
