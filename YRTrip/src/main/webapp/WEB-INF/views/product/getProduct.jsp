@@ -336,8 +336,8 @@ $(function(){
 									<form action="./insertCart">
 									
 										<div class="row">
-											<h1 class="col-md-8 product-title display-1">${product.itemName}</h1>
-											<h1 class="col-md-4 product-price display-1">￦${product.itemPrice}</h1>
+											<h1 class="col-md-7 product-title display-1">${product.itemName}</h1>
+											<h1 class="col-md-5 product-price display-1">￦${product.itemPrice}</h1>
 										</div>
 										<p class="mb-0">
 											<i class="fa fa-truck"></i>${product.itemCondition} <small
