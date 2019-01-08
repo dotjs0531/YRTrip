@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="resources/vender/css/Travel.css">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
 <link href="https://fonts.googleapis.com/css?family=East+Sea+Dokdo&amp;subset=korean" rel="stylesheet">
-
+<link href="resources/css/icheck-bootstrap.css" rel="stylesheet">
 <style>
 .modal-backdrop {
 	z-index: -1;
@@ -202,10 +202,14 @@ $("#autocompleteTinfoList").change(function(){
 								<!-- 검색 내용 -->
 								<form class="form-inline">
 								<div style="padding-bottom:5px; padding-left:17%;">
-									<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
-									<label for="domestic">국내</label>
-									<input type="radio" id="overseas" name="searchCheck" value="overseas">
-									<label for="overseas">해외</label>
+									<div class="radio icheck-primary">
+										<input type="radio" id="domestic" name="searchCheck" checked="checked" value="domestic">
+										<label for="domestic">국내</label>
+									</div>
+									<div style="margin-right:10px" class="radio icheck-primary">
+										&nbsp;<input type="radio" id="overseas" name="searchCheck" value="overseas">
+										<label for="overseas">해외</label>
+									</div>
 								</div>
 								<div style="padding-bottom:5px">
 									<label class="col-sm-2 control-label"></label>

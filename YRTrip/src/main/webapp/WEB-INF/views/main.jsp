@@ -65,7 +65,7 @@
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
 	type="text/css" />
-
+<link href="resources/css/icheck-bootstrap.css" rel="stylesheet">
 <script>
 	/*  $(function() {
 	 	  $('a[href*=#]').animate({
@@ -249,13 +249,18 @@ color: #3537356b;
 									<p>인생은 한번뿐이니까, 당신이 꿈꾸는 여행을 위해</p>
 								</div>
 								<form action="./getTravelBoardList">
-									<div style="margin-left: -550px; color: #fff;">
+								<div style="margin-left:-550px; color:#fff;">
+									<div class="radio icheck-primary">
 										<input type="radio" id="domestic" name="searchCheck"
 											checked="checked" value="domestic"> <label
-											for="domestic">국내</label> <input type="radio" id="overseas"
+											for="domestic">국내</label> 
+									</div>
+									<div class="radio icheck-primary">		
+											<input type="radio" id="overseas"
 											name="searchCheck" value="overseas"> <label
 											for="overseas">해외</label>
 									</div>
+								</div>
 									<div class="welcome_form">
 										<input id="autocompleteTinfoList" name="searchTinfoListbox"
 											class="form-control" type="text"
@@ -307,7 +312,7 @@ color: #3537356b;
 								<div class="row">
 									<div class="col-12">
 										<a href="./getNotice?noticeId=1"> <img
-											src="./images/notice/공지.png">
+											src="./images/product/공지.png">
 										</a>
 									</div>
 								</div>
@@ -316,8 +321,8 @@ color: #3537356b;
 							<div class="item">
 								<div class="row">
 									<div class="col-12">
-										<a href="./getNotice?noticeId=2"> <img
-											src="./images/notice/공지2.png">
+										<a href="./getNotice?noticeId=1"> <img
+											src="./images/product/공지2.png">
 										</a>
 									</div>
 								</div>
@@ -326,8 +331,8 @@ color: #3537356b;
 							<div class="item">
 								<div class="row">
 									<div class="col-12">
-										<a href="getNotice?noticeId=3"> <img
-											src="./images/notice/공지3.png">
+										<a href="getNotice?noticeId=1"> <img
+											src="./images/product/공지3.png">
 										</a>
 									</div>
 								</div>
@@ -396,6 +401,7 @@ color: #3537356b;
 				<h5>당신의 추억, 당신의 일정을 기록하세요 !</h5>
 				<hr>
 					<c:forEach items="${bestTravelList}" var="board">
+					<c:if test="${board.travelNo != '0'}">
 						<div class="column col-md-3 col-sm-3 col-xs-10" style="padding-bottom:20px">
 							<!-- Post-->
 							<div class="post-module" style="width:210px; heigh:200px;">
@@ -417,6 +423,7 @@ color: #3537356b;
 								</div>
 							</div>
 						</div>
+					</c:if>
 					</c:forEach>
 				</div>
 				<!-- foreach 끝 -->
@@ -428,7 +435,7 @@ color: #3537356b;
 			<div class="row">
 				<div class="container card" style="padding: 0 0 30px 0;">
 				<h3 style="padding: 0px 0px 8px 0px;">여행 중고 물품 </h3>
-				<h5>여행하면서 나에게 도움이 된 물품들을 판매해보세요!</h5>
+				<h5>여행하면서 도움이 됐지만 더이상 쟁여둘수 없는 물품들을 올려보세요!</h5>
 				<hr>
 					<c:forEach items="${productList}" var="product">
 						<div class="column col-md-4 col-sm-4 col-xs-12"
@@ -467,12 +474,10 @@ color: #3537356b;
 	<section class="footer-area" id="contact">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-8">
+				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-6">
 					<div class="single-footer">
 						<h2>Company Info</h2>
-						<p>상호명 : (주)유어레알트립
-						<br>|대표 : 손애선
-						<br>|개인정보책임자 : 양은정
+						<p>상호명 : (주)유어레알트립|대표 : 손애선|개인정보책임자 : 양은정
 							<br>
 							사업자등록번호 : 212-86-*****
 							<br>|통신판매업신고번호 : 제 2014-****-00910 호
@@ -482,34 +487,19 @@ color: #3537356b;
 							<br>
 							<Br>
 							유어레알트립은 통신판매중개자이며 통신판매의 당사자가 아닙니다.
-							<br>
-						따라서 유어레알트립은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.
+							<br> 
+						따라서 유어레알트립은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p>
 					</div>
 				</div>
-				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-4">
+				<div class="col-md-4 col-sm-3 col-xs-12 col-lg-6">
 					<div class="single-footer">
 						<h2>고객센터</h2>
 						<ul class="list">
 							<li><a href="getNoticeList">공지사항</a></li>
-							<li><a href="getQnaList">1:1문의</a></li>
+							<li><a href="getNoticeList">1:1문의</a></li>
 						</ul>
-						<br>
-						<p>|☎ 전화번호 : 053-421-2460
-						<br>
-						영업시간 : 09:00-18:00
-						<br>
-						(점심시간 : 13:00-14:00)</p>
 					</div>
 				</div>
-				<!-- <div class="col-md-3 col-sm-3 col-xs-12 col-lg-3">
-					<div class="single-footer clearfix">
-						<p>유어레알트립은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 
-						따라서 유어레알트립은 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.</p>
-						<h2>여긴뭐하지...</h2>
-						<input type="text" class="form-control"> <input
-							type="submit" class="submt-button" value="submit">
-					</div>
-				</div> -->
 			</div>
 		</div>
 	</section>
@@ -694,11 +684,8 @@ color: #3537356b;
 	<!--    main.js-->
 	<script src="resources/js/main.js"></script>
 
-	<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
 
-<!-- 추가한 파일 -->
-<!-- <script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script> -->
+<script src="http://code.jquery.com/ui/1.8.22/jquery-ui.min.js"></script>
 
 	<script type="text/javascript">
 		$(function() {
@@ -712,7 +699,7 @@ color: #3537356b;
 			});
 		})
 	/* autocomplete */
-/* 	$(document).ready(function(){ 
+ 	$(document).ready(function(){ 
 	   //input id autocomplete
 	   var selectedLocation = document.getElementsByName('searchCheck');
 		var searchCheckVal;
@@ -761,6 +748,9 @@ color: #3537356b;
 	        },
 	        focus:function(event, ui){return false;}
 	       });
+	    jQuery.curCSS = function(element, prop, val) {
+	        return jQuery(element).css(prop, val);
+	    };
 	});
 
 	$(function initSelectdList() {
@@ -770,7 +760,7 @@ color: #3537356b;
 	  $("#tinfoListDisp").val("");
 	  $('[name=searchTinfoListbox]').val("");
 	});
-	});	 */
+	});
 </script>
 	</ body>
 </html>
