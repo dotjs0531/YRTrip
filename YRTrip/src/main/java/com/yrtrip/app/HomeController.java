@@ -60,7 +60,7 @@ public class HomeController {
 		pvo.setLast(3);
 		//특정 동행자 ...?
 		ptvo.setFirst(1);
-		ptvo.setLast(6);
+		ptvo.setLast(5);
 		//최신 여행기 목록
 		tbvo.setFirst(1);
 		tbvo.setLast(5);
