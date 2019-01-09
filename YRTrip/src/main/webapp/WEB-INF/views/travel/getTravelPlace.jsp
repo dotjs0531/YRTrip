@@ -248,7 +248,6 @@ $(function(){
 			</div>
 
 	</section>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7TwRGWpLz6wVhQ537n2nMcDGO5wKa_Jw&libraries=places&callback=initMap" async defer></script>
 <script>
 
 function initMap() {
