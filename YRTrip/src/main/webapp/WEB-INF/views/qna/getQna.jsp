@@ -59,12 +59,6 @@
 		//수정폼 이벤트(수정할 댓글밑에 수정폼 보이게 함)
 		$("#qnaComment").on("click", ".btnUpdFrm", function(){
 			var commentId = $(this).parent().attr("id").substring(1);
-			//원래 댓글  내용 안보이게
-			/* $("#c"+commentId+" [name=comLabel]").css("display","none");
-			$("#c"+commentId+" [name=comContent]").css("display","none");
-			$("#c"+commentId+" [name=comUpd]").css("display","none");
-			$("#c"+commentId+" [name=comDel]").css("display","none"); */
-			
 			//수정할 데이터 입력필드에 셋팅
 			$("#updateForm [name=commentId]").val(commentId);    
 			$("#updateForm [name=userId]").val($("#c"+commentId+" [name=comLabel]").text());
@@ -107,8 +101,8 @@
 				+"<button type=\"button\" class=\"btn btn-default btnUpdFrm\">수정</button>"
 				+"<button type=\"button\" class=\"btn btn-default btnDel\">삭제</button>"
 			} else {
-				var str ="<p/><label class='col-sm-2 control-label' name='comLabel'>" + qnaComment.userId + "</label>" 
-		        +"<span class='col-lg-8 qnaContent' name='comContent'>" + qnaComment.commentContent +"</span><br/>"
+				var str ="<p/><label class='col-sm-2 control-label'>" + qnaComment.userId + "</label>" 
+		        +"<span class='col-lg-8 qnaContent'>" + qnaComment.commentContent +"</span><br/>"
 			}
 			div.html(str);
 			return div;

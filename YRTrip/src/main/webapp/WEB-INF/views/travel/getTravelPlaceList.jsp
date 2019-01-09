@@ -201,7 +201,7 @@ jQuery( document ).ready(function( $ ) {
 						           		<c:out value="${fn:substring(board.placeTitle,0,8)}"/>..
 									</c:when>
 						           <c:otherwise>
-						            <c:out value="${board.travelTitle}"/>
+						            <c:out value="${board.placeTitle}"/>
 						           </c:otherwise> 
 						          </c:choose>
 					 </a></h2>
