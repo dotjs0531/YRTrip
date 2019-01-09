@@ -223,7 +223,14 @@ a:hover { color:white }
 							<c:forEach items="${YourLikedPlaceList}" var="place">
 								<div class="wrap">
 									<div class="tile">
+
+								  		<c:if test="${place.placePic != null}">
+											<img src="./images/travel/${place.placePic}" />
+										</c:if>
+										<c:if test="${place.placePic == null}">
 											<img src="./images/travel/placenoimage.jpg" class="img-responsive">
+										</c:if>
+										
 										<div class="text">
 											<h2 class="animate-text">
 												<a href="getTravelPlace?PlaceNo=${place.placeNo}" style="text-decoration: none; color: #34495E;">${place.placeName}</a>

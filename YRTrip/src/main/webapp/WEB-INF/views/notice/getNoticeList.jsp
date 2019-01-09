@@ -102,15 +102,6 @@ a:hover { color:white }
                     	</table>
                     </div>
                     
-                    <!-- 글 등록 버튼 -->
-                    <c:if test="${sessionScope.login.userGrant eq 'admin'}">
-                    <section >
-                        <div class="order-buton" style="float:right; padding-top:15px;">
-                            <a href="${pageContext.request.contextPath}/insertNotice">등록</a>
-                        </div>
-                    </section>
-                    </c:if>
-                    
                     <!-- 페이지 번호 -->
                     <div style="padding-top:50px;">
 						<my:paging paging="${paging}" jsFunc="go_page" />
