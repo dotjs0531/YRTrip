@@ -31,12 +31,11 @@
 	$(function() {
 		var productMenu = document.getElementById("productMenu");
 		productMenu.className = 'current-menu-item';
-		
-		function go_page(page) {
-			document.frm.page.value = page;
-			document.frm.submit();
-		}
 	});
+	function go_page(page) {
+		document.frm.page.value = page;
+		document.frm.submit();
+	}
 </script>
 <script>
 /* 	$(function(){
@@ -162,9 +161,6 @@
 </style>
 </head>
 <body>
-	<form name="frm" class="form-inline">
-		<input type="hidden" name="page" />
-	</form>
 	<section class="about_us_area" id="about" style="background-color:white;">
 		<!-- Page Content -->
 		<div class="container">
@@ -199,7 +195,7 @@
 				<!-- 여기서 부터 가운데 창! -->
 				<!-- 검색시작 -->
 				<div class="col-8">
-					<form name="./getProductList" class="form-inline">
+					<form name="frm" class="form-inline">
 						<div class="form-group single-pricing-table"
 							style="width: 100%; text-align: left; padding: 20px; color: black;">
 
@@ -253,7 +249,7 @@
 									style="float: right; margin-right: 10px">검색</button>
 							</div>
 
-							<input type="hidden" name="page">
+							<input type="hidden" name="page" />
 						</div>
 					</form>
 
