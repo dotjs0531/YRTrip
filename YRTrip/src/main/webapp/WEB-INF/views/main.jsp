@@ -419,19 +419,19 @@ color: #3537356b;
 							<!-- Post-->
 							<div class="post-module" style="width:210px; heigh:200px;">
 								<!-- Thumbnail-->
-								<div class="thumbnail" style="width:250px;">
+								<div class="thumbnail" style="display: block; overflow: hidden; width:250px; height: 200px; position: relative;">
 									<c:set var="travelPicFile" value="${fn:split(board.travelPic, ',')[0]}" />
 									<c:set var="pic" value="${travelPicFile}" />
 
 									<img class="card-img-top" src="./images/travel/${pic}"
-										alt="item" style="height: 200px;">
+										alt="item" style="position: absolute; top: -9999px; left: -9999px; right: -9999px; bottom: -9999px; margin: auto;">
 								</div>
 								<!-- Post Content-->
 								<div class="post-content" style="width:250px;">
-									<h4 class="pull-right" style="font-family: 'NanumSquareRoundB'">${board.userName}</h4>
+									<h4 class="pull-right" style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 70px;font-family: 'NanumSquareRoundB'; text-align: right;">${board.userName}</h4>
 									<h1 class="title" style="font-size:20px;">
 										<a href="getTravelBoard?travelNo=${board.travelNo}"
-											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 200px; text-decoration: none !important; font-family: 'NanumSquareRoundEB'">${board.travelTitle}</a>
+											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 180px; text-decoration: none !important; font-family: 'NanumSquareRoundEB'">${board.travelTitle}</a>
 									</h1>
 								</div>
 							</div>
@@ -456,13 +456,13 @@ color: #3537356b;
 							<!-- Post-->
 							<div class="post-module">
 								<!-- Thumbnail-->
-								<div class="thumbnail">
+								<div class="thumbnail"  style="display: block; overflow: hidden; width:370px; height: 200px; position: relative;">
 									<c:set var="productPicFile"
 										value="${fn:split(product.itemPic, ',')[0]}" />
 									<c:set var="pic" value="${productPicFile}" />
 
 									<img class="card-img-top" src="./images/product/${pic}"
-										alt="item" style="height: 200px;">
+										alt="item" style="position: absolute; top: -9999px; left: -9999px; right: -9999px; bottom: -9999px; margin: auto;">
 								</div>
 								<!-- Post Content-->
 								<div class="post-content">
