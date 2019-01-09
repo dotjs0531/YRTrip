@@ -37,6 +37,13 @@ public class ProductController {
 	@Autowired OrderService orderService;
 	@Autowired UserService userService;
 	@Autowired MyPageService mypageService;
+	
+	@RequestMapping("getMyReview") //리뷰 조회
+	@ResponseBody
+	public OrderVO getMyReview(OrderVO vo) {
+		return mypageService.getMyReview(vo);
+	}
+	
 	//전체조회(폼)
 	@RequestMapping("/getProductList")
 	public ModelAndView getProductList(Paging paging, ProductVO vo, OrderVO voo) {

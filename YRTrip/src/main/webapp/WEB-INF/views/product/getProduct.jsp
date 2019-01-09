@@ -75,7 +75,8 @@
 		}
 
 		if ($("#itemOrderdetail_class").text() == '구매불가') {
-			$("#itemOrderdetail_class").removeClass("text-success").addClass("text-danger");
+			$("#itemOrderdetail_class").removeClass("text-success").addClass(
+					"text-danger");
 		}
 
 		function likeCondition() {
@@ -119,6 +120,51 @@
 </script>
 <script>
 	$(function() {
+		var carousel_class_init = "active";
+		var carousel_ea = $("div#itemC").length;
+		console.log(carousel_ea);
+		for (i = 0; i < 1; i++) {
+			$("#itemC").addClass(carousel_class_init);
+		}
+
+		$('#myModal')
+				.on(
+						'show.bs.modal',
+						function(e) {
+							var a = $(event.target);
+							console.log(event);
+							var param = {
+								orderId : a.attr("id").substr(3)
+							};
+							$
+									.getJSON(
+											"getMyReview",
+											param,
+											function(data) {
+												console.log(data.orderId);
+												var orderId = data.orderId;
+												var reviewPic = data.reviewPic;
+												var picName = reviewPic
+														.split(',');
+
+												var str = '';
+
+												for ( var i in picName) {
+													//$(".modalImg").attr("src", "./images/review/"+picName[i]);
+													str += "<div id='itemC' class='item'><img src='./images/review/"+picName[i]+"' class=\"img-responsive modalImg\" /></div>";
+												}
+
+												$(str).appendTo(
+														".carousel-inner");
+												$(".item").first().addClass(
+														'active');
+												$("#myCarousel").carousel();
+											});
+						});
+	});
+</script>
+<script>
+	$(function() {
 		/* 구매불가로 만들기 */
 		if ($("#item_ea_js").text() == 0
 				|| "${sessionScope.login.userId}" == "${product.sellerId}") {
@@ -129,20 +175,20 @@
 		if ("${sessionScope.login.userId}" != "${product.sellerId}") {
 			$("#seller-only").hide();
 		}
-		
+
 		/* 상품평 안보이게 만들기 */
 		/* 상품평 내용 있는지 없는지 확인하기 위한 값 : 
 			console.log($(".review_show_content").prev().text()); */
-		if($(".review_show_content").prev().text() != '' ){
+		if ($(".review_show_content").prev().text() != '') {
 			$(".default_review").hide();
 		}
-			console.log($(".seller-list").children(".some-list-product").html());
-		if($(".seller-list").children(".seller-list").text() != '' ){
+		console.log($(".seller-list").children(".some-list-product").html());
+		if ($(".seller-list").children(".seller-list").text() != '') {
 			$(".no-list-product").hide();
 		}
-		
-		if("${sessionScope.login.userId}" == ''){
-			$(".more-product-list").click(function(e){
+
+		if ("${sessionScope.login.userId}" == '') {
+			$(".more-product-list").click(function(e) {
 				e.preventDefault();
 				alert("로그인이 필요한 서비스입니다");
 			});
@@ -150,81 +196,85 @@
 	});
 </script>
 <script>
-$(function(){
-	$('#deleteProduct').on("click", function(){
-		$.ajax({
-			type:"GET",
-			url:"infofordelete",
-			data:{itemId : "${product.itemId}"},
-			datatype : "integer",
-			success : function(data){
-				console.log(data);	
-				if(confirm("삭제하시겠습니까? 복구는 불가합니다.")==true){
-					if(data == 0){
-						/* alert("삭제합니다"); */
-						window.location = "deleteProduct?itemId=${product.itemId}";
-					}
-					else{
-						alert("진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
-						return false;
-					}
-				}
-				else{
-					return false;
-				}
+	$(function() {
+		$('#deleteProduct')
+				.on(
+						"click",
+						function() {
+							$
+									.ajax({
+										type : "GET",
+										url : "infofordelete",
+										data : {
+											itemId : "${product.itemId}"
+										},
+										datatype : "integer",
+										success : function(data) {
+											console.log(data);
+											if (confirm("삭제하시겠습니까? 복구는 불가합니다.") == true) {
+												if (data == 0) {
+													/* alert("삭제합니다"); */
+													window.location = "deleteProduct?itemId=${product.itemId}";
+												} else {
+													alert("진행중인 구매내역이 있습니다\n해당제품의 구매내역을 확인하세요");
+													return false;
+												}
+											} else {
+												return false;
+											}
+										}
+
+									});
+						});
+		$("#insertcart").click(function(e) {
+			if ("${sessionScope.login.userId}" == '') {
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
 			}
-			
-		});	
-	});
-	$("#insertcart").click(function(e){
-		if ("${sessionScope.login.userId}" == '') {
-			 e.preventDefault();
-	         alert("로그인이 필요한 서비스입니다");
-		 }
-	});
-	
-	$(".insertbtn").click(function(e){
-		 if ("${sessionScope.login.userId}" == '') {
-			 e.preventDefault();
-	         alert("로그인이 필요한 서비스입니다");
-		 }
-		 else{
-			 $.ajax({
-				type:"GET",
-				url:"travelCountForInfo",
-				data:{userId : "${sessionScope.login.userId}"},
-				datatype : "integer",
-				success : function(data){
-					console.log(data);	
-					if(data == 0){
-						alert("여행글 하나 이상 작성후 물품판매 가능합니다");
+		});
+
+		$(".insertbtn").click(function(e) {
+			if ("${sessionScope.login.userId}" == '') {
+				e.preventDefault();
+				alert("로그인이 필요한 서비스입니다");
+			} else {
+				$.ajax({
+					type : "GET",
+					url : "travelCountForInfo",
+					data : {
+						userId : "${sessionScope.login.userId}"
+					},
+					datatype : "integer",
+					success : function(data) {
+						console.log(data);
+						if (data == 0) {
+							alert("여행글 하나 이상 작성후 물품판매 가능합니다");
+						} else {
+							window.location = "./insertProduct";
+						}
 					}
-					else{
-						window.location = "./insertProduct";
-					}
-				}
-			});
-		 }
-     });
-});
+				});
+			}
+		});
+	});
 </script>
 <script>
-$(function(){
-	var comma = '${product.itemPrice}'; 
-	$(".product-price").html("￦"+comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-})
+	$(function() {
+		var comma = '${product.itemPrice}';
+		$(".product-price").html(
+				"￦" + comma.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	})
 </script>
 <style>
-#btn-custom
-{
-    background: #f9bf3b none repeat scroll 0 0;
-    border-radius: 3px;
-    color: #fff;
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 40px;
-    text-transform: uppercase;
- }
+#btn-custom {
+	background: #f9bf3b none repeat scroll 0 0;
+	border-radius: 3px;
+	color: #fff;
+	display: inline-block;
+	margin-top: 20px;
+	padding: 10px 40px;
+	text-transform: uppercase;
+}
 </style>
 </head>
 <body>
@@ -261,10 +311,11 @@ $(function(){
 					<div class="card mb-10">
 						<div class="card-header">
 							<nav class="header-navigation">
-							<!-- 카톡 공유하기 버튼 -->
-						<a id="kakao-link-btn" href="javascript:;" style="color:#f9bf3b; margin:0 0 0 20px">
-							<i class="fas fa-comment"></i> 카톡 공유
-						</a>
+								<!-- 카톡 공유하기 버튼 -->
+								<a id="kakao-link-btn" href="javascript:;"
+									style="color: #f9bf3b; margin: 0 0 0 20px"> <i
+									class="fas fa-comment"></i> 카톡 공유
+								</a>
 								<c:choose>
 									<c:when test="${not empty sessionScope.login}">
 										<div id="LikeCondition" style="float: right"></div>
@@ -282,10 +333,9 @@ $(function(){
 
 								<div class="btn-group pull-right" id="seller-only">
 									<a href="updateProduct?itemId=${product.itemId}"
-										class="btn btn-link btn-share">수정하기</a> 
-										<a id="deleteProduct"
-										 class="btn btn-link btn-share">삭제하기</a>
-										 <!-- onclick="deleteinfo();" -->
+										class="btn btn-link btn-share">수정하기</a> <a id="deleteProduct"
+										class="btn btn-link btn-share">삭제하기</a>
+									<!-- onclick="deleteinfo();" -->
 								</div>
 							</nav>
 						</div>
@@ -300,16 +350,18 @@ $(function(){
 											data-ride="carousel">
 											<!-- Indicators -->
 											<c:set var="productPicFile"
-													value="${fn:split(product.itemPic, ',')}" />
-													
+												value="${fn:split(product.itemPic, ',')}" />
+
 											<ol class="carousel-indicators">
-												<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-													<c:forEach begin="1" end="${fn:length(productPicFile)-1}" var="num">
-														<li data-target="#myCarousel" data-slide-to="${num}"></li>
-													</c:forEach>
+												<li data-target="#myCarousel" data-slide-to="0"
+													class="active"></li>
+												<c:forEach begin="1" end="${fn:length(productPicFile)-1}"
+													var="num">
+													<li data-target="#myCarousel" data-slide-to="${num}"></li>
+												</c:forEach>
 											</ol>
 											<!-- 사진넣는부분 -->
-											<div class="carousel-inner">												
+											<div class="carousel-inner">
 												<c:forEach items="${productPicFile}" var="pic">
 													<div id="itemC" class="item">
 														<img class="img-responsive center-block" id="img"
@@ -334,7 +386,7 @@ $(function(){
 								<!-- 오른쪽 아래 -->
 								<div class="product-payment-details">
 									<form action="./insertCart">
-									
+
 										<div class="row">
 											<h1 class="col-md-7 product-title display-1">${product.itemName}</h1>
 											<h1 class="col-md-5 product-price display-1">￦${product.itemPrice}</h1>
@@ -346,12 +398,11 @@ $(function(){
 										<div class="text-muted mb-2">
 											<small>약간의 사용감이 있습니다!</small>
 										</div>
-										<label for="quant">수량</label> 
-										<input type="number"
-											name="itemEa" min="1" max="${product.itemEa}" id="quant" class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요" required> 
-											<input type="hidden"
-											value="${sessionScope.login.userId}" name="myId"> 
-											<input
+										<label for="quant">수량</label> <input type="number"
+											name="itemEa" min="1" max="${product.itemEa}" id="quant"
+											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요"
+											required> <input type="hidden"
+											value="${sessionScope.login.userId}" name="myId"> <input
 											type="hidden" value="${product.itemId}" name="itemId">
 										<!-- </form> -->
 										<div class="order-buton align-content-sm-center">
@@ -368,138 +419,170 @@ $(function(){
 									</form>
 								</div>
 								<div class="product-seller-recommended">
-									<h3 class="mb-5">${product.userName}님의 다른 상품</h3>
+									<h3 class="mb-5">${product.userName}님의다른상품</h3>
 									<!-- 상품이 없으면 아무것도 안 뜨게 -->
 									<div class="row seller-list">
 										<div class="col-md-12 no-list-product">
 											<div class="card no-list-product">
-											 	<div class="card-body mx-auto">
-												 	더 이상의 상품은 없어요 ㅠㅠ
-												</div>
+												<div class="card-body mx-auto">더 이상의 상품은 없어요 ㅠㅠ</div>
 											</div>
 										</div>
-	 									 <c:forEach items="${getSellerList}" var="sellerP"> 
-	 									 	<div class="col-md-4 some-list-product">
+										<c:forEach items="${getSellerList}" var="sellerP">
+											<div class="col-md-4 some-list-product">
 												<div class="card">
 													<img src="https://via.placeholder.com/157x157"
 														class="card-img-top">
 													<div class="card-body">
 														<h5 class="card-title seller-list">
-															<a href="./getProduct?itemId=${sellerP.itemId}" class="seller-list">${sellerP.itemName}</a>
+															<a href="./getProduct?itemId=${sellerP.itemId}"
+																class="seller-list">${sellerP.itemName}</a>
 														</h5>
-														<span class="text-muted">${sellerP.itemPrice}</span>
-														<span class="text-muted">${sellerP.itemCategory}</span>
+														<span class="text-muted">${sellerP.itemPrice}</span> <span
+															class="text-muted">${sellerP.itemCategory}</span>
 													</div>
 												</div>
 											</div>
 										</c:forEach>
 									</div>
 								</div>
-									<!-- /.recommended-items-->
-									<p class="mb-1 mt-9">
-										<a class="pull-right more-product-list" href="./getYourProductList?sellerId=${product.sellerId}">판매자의 모든 상품 보러가기!</a>
-									</p>
-									<div class="product-description mb-5">
-										<h2 class="mb-5">제품 기본정보</h2>
-										<dl class="row mb-5">
-											<dt class="col-sm-4">상품명</dt>
-											<dd class="col-sm-8">${product.itemName}</dd>
-											<dt class="col-sm-4">가격</dt>
-											<dd class="col-sm-8">${product.itemPrice}</dd>
-											<dt class="col-sm-4">수량</dt>
-											<dd class="col-sm-8" id="item_ea_js">${product.itemEa}</dd>
-											<dt class="col-sm-4">선호결제방법</dt>
-											<dd class="col-sm-8">${product.itemMethod}</dd>
-											<dt class="col-sm-4">구매가능여부</dt>
-											<dd class="col-sm-8">${product.itemOrderdetail}</dd>
-											<dt class="col-sm-4">상품상태</dt>
-											<dd class="col-sm-8">${product.itemCondition}</dd>
-											<dt class="col-sm-4">작성일</dt>
-											<dd class="col-sm-8">${product.itemDate}</dd>
-											<dt class="col-sm-4">판매자명</dt>
-											<dd class="col-sm-8">${product.userName}</dd>
-										</dl>
-										<h2 class="mb-5">제품 상세 설명</h2>
-										<div class="card">
-											<p class="m-4" style="white-space: pre-line;
-    word-break: break-word;">
-												${product.itemContent}
-											</p>
-										</div>
-									</div>
-									<div class="product-comments">
-										<h2 class="mb-2">REVIEW</h2>
-										<div class="card default_review">
-										 	<div class="card-body row">
-											 	아직 등록된 상품평이 없습니다
-										 	</div>
-										</div>										
-										<c:forEach items="${order}" var="review">
-											<c:if test="${review.reviewContent ne null}">
-												 	<div class="card review_show">
-												 	<div class="card-body row">
-													 	<c:set var="reviewPicname" value="${fn:split(review.reviewPic, ',')[0]}"/>
-															<c:set var="pic" value="${reviewPicname}"/>
-													 	<div class="col-6">													 	
-													 		<img class="card-img-top" src="./images/review/${pic}" alt="Card image cap">
-													 	</div>
-													 	<div class="col-6 review_show_content">
-													 		<h5 class="card-title">${review.reviewStar}</h5>
-															<h6 class="card-subtitle mb-2 text-muted">${review.buyerId}</h6>
-															<p class="card-text">${review.reviewContent}</p>
-															<span>${review.reviewDate}</span></div>
-													 	</div>
-												 	</div>
-											</c:if>
-										</c:forEach>
+								<!-- /.recommended-items-->
+								<p class="mb-1 mt-9">
+									<a class="pull-right more-product-list"
+										href="./getYourProductList?sellerId=${product.sellerId}">판매자의
+										모든 상품 보러가기!</a>
+								</p>
+								<div class="product-description mb-5">
+									<h2 class="mb-5">제품 기본정보</h2>
+									<dl class="row mb-5">
+										<dt class="col-sm-4">상품명</dt>
+										<dd class="col-sm-8">${product.itemName}</dd>
+										<dt class="col-sm-4">가격</dt>
+										<dd class="col-sm-8">${product.itemPrice}</dd>
+										<dt class="col-sm-4">수량</dt>
+										<dd class="col-sm-8" id="item_ea_js">${product.itemEa}</dd>
+										<dt class="col-sm-4">선호결제방법</dt>
+										<dd class="col-sm-8">${product.itemMethod}</dd>
+										<dt class="col-sm-4">구매가능여부</dt>
+										<dd class="col-sm-8">${product.itemOrderdetail}</dd>
+										<dt class="col-sm-4">상품상태</dt>
+										<dd class="col-sm-8">${product.itemCondition}</dd>
+										<dt class="col-sm-4">작성일</dt>
+										<dd class="col-sm-8">${product.itemDate}</dd>
+										<dt class="col-sm-4">판매자명</dt>
+										<dd class="col-sm-8">${product.userName}</dd>
+									</dl>
+									<h2 class="mb-5">제품 상세 설명</h2>
+									<div class="card">
+										<p class="m-4"
+											style="white-space: pre-line; word-break: break-word;">
+											${product.itemContent}</p>
 									</div>
 								</div>
+								<div class="product-comments" >
+									<h2 class="mb-2">REVIEW</h2>
+									<div class="card default_review">
+										<div class="card-body row">아직 등록된 상품평이 없습니다</div>
+									</div>
+									<c:forEach items="${order}" var="review">
+										<c:if test="${review.reviewContent ne null}">
+											<div class="card review_show" id="hi">
+												<div class="card-body row">
+													<c:set var="reviewPicname"
+														value="${fn:split(review.reviewPic, ',')[0]}" />
+													<c:set var="pic" value="${reviewPicname}" />
+													<div class="col-6">
+														<a href="#hi" data-toggle="modal"
+															data-target="#myModal"> <img
+															id="pic${review.orderId}" class="img"
+															src="./images/review/${pic}" style="height: 180px"
+															data-toggle="tooltip" data-placement="bottom"
+															title="클릭시 여러개의 사진을 보세요!" />
+														</a>
+													</div>
+													<div class="col-6 review_show_content">
+														<h5 class="card-title">${review.reviewStar}</h5>
+														<h6 class="card-subtitle mb-2 text-muted">${review.buyerId}</h6>
+														<p class="card-text">${review.reviewContent}</p>
+														<span>${review.reviewDate}</span>
+													</div>
+												</div>
+											</div>
+										</c:if>
+									</c:forEach>
+									<!-- 이미지 팝업 -->
+									<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									  <div class="modal-dialog">
+									    <div class="modal-content">
+									        <div class="modal-body">
+									            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+													<!-- 사진넣는부분 -->
+													<div class="carousel-inner">
+													</div>
+													<!-- 왼쪽 / 오른쪽 화살표 -->
+													<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+														<span class="glyphicon glyphicon-chevron-left"></span>
+														<span class="sr-only">Previous</span>
+													</a>
+													<a class="right carousel-control" href="#myCarousel" data-slide="next">
+													<span class="glyphicon glyphicon-chevron-right"></span>
+													<span class="sr-only">Next</span>
+													</a>
+												</div>
+									            
+									        </div>	<!-- end of modal-body -->
+									    </div> <!-- end of modal-content -->
+									  </div>
+									</div> <!-- end of modal -->
+								</div>
 							</div>
-
 						</div>
 					</div>
-
+					
 				</div>
-				<!-- 끝 : 내용 : 9-->
 			</div>
-			<!-- /.row -->
+			<!-- 끝 : 내용 : 9-->
+		</div>
+		<!-- /.row -->
 		<!-- /.container 전체 바디끝-->
 	</section>
-<!-- 카카오톡 공유하기 -->
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script type='text/javascript'>
-  //<![CDATA[
-	  
-	// // 사용할 앱의 JavaScript 키를 설정해 주세요.
-	Kakao.init('4115609fb50877ceef895d9a2db54237');
-	// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
-	Kakao.Link.createDefaultButton({
-		container : '#kakao-link-btn',
-		objectType : 'feed',
-		content : {
-			title : '${product.itemName}',
-			description : "￦"+('${product.itemPrice}').toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-			imageUrl: 'https://postfiles.pstatic.net/MjAxODEyMjlfNiAg/MDAxNTQ2MDE0ODM1ODk5.VlG0P4NPq3mfRH0WkShxFV1TQFTrxJzDCSrkglA9g-kg.ClRMBKh_OXXzAFp7xDzEwlTzFCH1sb0ZCrFiOLMCDcMg.PNG.dotjs0531/%EB%8F%84%EC%8B%9C+%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4+(1).png?type=w773',
-			link : {
-				mobileWebUrl : document.location.href,
-				webUrl : document.location.href
-			}
-		},
-		social : {
-			likeCount : Number('${product.itemLike}'),  //좋아요수(여행정보, 여행지, 상품)
-			//commentCount : Number('${joinerCnt}'),  //댓글수(동행글)
-			//viewCount  : Number('${partner.partnerHit}')  //조회수(여행정보, 여행지, 동행글)
-		},
-		buttons : [ {
-			title : '웹으로 보기',
-			link : {
-				mobileWebUrl : document.location.href,
-				webUrl : document.location.href
-			}
-		} ]
-	});
-	//]]>
-</script>
+	<!-- 카카오톡 공유하기 -->
+	<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+	<script type='text/javascript'>
+		//<![CDATA[
+
+		// // 사용할 앱의 JavaScript 키를 설정해 주세요.
+		Kakao.init('4115609fb50877ceef895d9a2db54237');
+		// // 카카오링크 버튼을 생성합니다. 처음 한번만 호출하면 됩니다.
+		Kakao.Link
+				.createDefaultButton({
+					container : '#kakao-link-btn',
+					objectType : 'feed',
+					content : {
+						title : '${product.itemName}',
+						description : "￦"
+								+ ('${product.itemPrice}').toString().replace(
+										/\B(?=(\d{3})+(?!\d))/g, ","),
+						imageUrl : 'https://postfiles.pstatic.net/MjAxODEyMjlfNiAg/MDAxNTQ2MDE0ODM1ODk5.VlG0P4NPq3mfRH0WkShxFV1TQFTrxJzDCSrkglA9g-kg.ClRMBKh_OXXzAFp7xDzEwlTzFCH1sb0ZCrFiOLMCDcMg.PNG.dotjs0531/%EB%8F%84%EC%8B%9C+%EB%B0%94%ED%83%95%ED%99%94%EB%A9%B4+(1).png?type=w773',
+						link : {
+							mobileWebUrl : document.location.href,
+							webUrl : document.location.href
+						}
+					},
+					social : {
+						likeCount : Number('${product.itemLike}'), //좋아요수(여행정보, 여행지, 상품)
+					//commentCount : Number('${joinerCnt}'),  //댓글수(동행글)
+					//viewCount  : Number('${partner.partnerHit}')  //조회수(여행정보, 여행지, 동행글)
+					},
+					buttons : [ {
+						title : '웹으로 보기',
+						link : {
+							mobileWebUrl : document.location.href,
+							webUrl : document.location.href
+						}
+					} ]
+				});
+		//]]>
+	</script>
 	<!-- Bootstrap core JavaScript -->
 
 	<script
