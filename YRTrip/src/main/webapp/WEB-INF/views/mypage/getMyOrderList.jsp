@@ -340,7 +340,7 @@ $(function() {
 										<div class="post-module">
 											<!-- Thumbnail-->
 											<div class="thumbnail" style="background-color:white">
-												<c:set var="productPicFile" value="${fn:split(product.itemPic, ',')[0]}" />
+												<c:set var="productPicFile" value="${fn:split(order.itemPic, ',')[0]}" />
 												<a href="#" id="pic${order.itemId}" class="getProduct">
 													<img class="img-responsive center-block" id="img" src="./images/product/${productPicFile}" style="height: 200px;" />
 												</a>
