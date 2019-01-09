@@ -47,6 +47,7 @@ ORDER BY ORDER_DATE DESC -->
 	<select id="getOrder" resultType="order">
 		SELECT
 			buyer_id,
+			ORDER_ID,
 			o.ITEM_ID as ITEM_ID,
 			ORDER_DATE,
 			review_star,
