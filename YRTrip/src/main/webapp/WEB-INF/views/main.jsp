@@ -428,7 +428,7 @@ color: #3537356b;
 								</div>
 								<!-- Post Content-->
 								<div class="post-content" style="width:250px;">
-									<h4 class="pull-right" style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 70px;font-family: 'NanumSquareRoundB'; text-align: right;">${board.userName}</h4>
+									<h5 class="pull-right" style="display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 70px;font-family: 'NanumSquareRoundEB'; text-align: right;"><img src='./images/like.png' width='20px'>&nbsp;${board.travelLike}</h5>
 									<h1 class="title" style="font-size:20px;">
 										<a href="getTravelBoard?travelNo=${board.travelNo}"
 											style="color: black; display: inline-block; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; width: 180px; text-decoration: none !important; font-family: 'NanumSquareRoundEB'">${board.travelTitle}</a>
