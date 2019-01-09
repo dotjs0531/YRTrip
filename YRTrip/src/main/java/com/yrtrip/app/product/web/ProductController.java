@@ -38,9 +38,9 @@ public class ProductController {
 	@Autowired UserService userService;
 	@Autowired MyPageService mypageService;
 	
-	@RequestMapping("getMyReview") //리뷰 조회
+	@RequestMapping("getMyReview1") //리뷰 조회
 	@ResponseBody
-	public OrderVO getMyReview(OrderVO vo) {
+	public OrderVO getMyReview111(OrderVO vo) {
 		return mypageService.getMyReview(vo);
 	}
 	

@@ -138,7 +138,7 @@
 							};
 							$
 									.getJSON(
-											"getMyReview",
+											"getMyReview1",
 											param,
 											function(data) {
 												console.log(data.orderId);
@@ -158,7 +158,7 @@
 														".carousel-inner");
 												$(".item").first().addClass(
 														'active');
-												$("#myCarousel").carousel();
+												$("#reviewCarousel").carousel();
 											});
 						});
 	});
@@ -491,12 +491,10 @@
 														value="${fn:split(review.reviewPic, ',')[0]}" />
 													<c:set var="pic" value="${reviewPicname}" />
 													<div class="col-6">
-														<a href="#hi" data-toggle="modal"
+														<a href="#" data-toggle="modal"
 															data-target="#myModal"> <img
 															id="pic${review.orderId}" class="img"
-															src="./images/review/${pic}" style="height: 180px"
-															data-toggle="tooltip" data-placement="bottom"
-															title="클릭시 여러개의 사진을 보세요!" />
+															src="./images/review/${pic}" style="height: 180px" />
 														</a>
 													</div>
 													<div class="col-6 review_show_content">
@@ -511,19 +509,19 @@
 									</c:forEach>
 									<!-- 이미지 팝업 -->
 									<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									  <div class="modal-dialog">
+									  <div class="modal-dialog" style=" bottom: -50%; outline: none;">
 									    <div class="modal-content">
 									        <div class="modal-body">
-									            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+									            <div id="reviewCarousel" class="carousel slide" data-ride="carousel">
 													<!-- 사진넣는부분 -->
 													<div class="carousel-inner">
 													</div>
 													<!-- 왼쪽 / 오른쪽 화살표 -->
-													<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+													<a class="left carousel-control" href="#reviewCarousel" data-slide="prev">
 														<span class="glyphicon glyphicon-chevron-left"></span>
 														<span class="sr-only">Previous</span>
 													</a>
-													<a class="right carousel-control" href="#myCarousel" data-slide="next">
+													<a class="right carousel-control" href="#reviewCarousel" data-slide="next">
 													<span class="glyphicon glyphicon-chevron-right"></span>
 													<span class="sr-only">Next</span>
 													</a>

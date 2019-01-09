@@ -429,9 +429,11 @@
 												<i class="fa fa-search"></i>&nbsp; 퀵 뷰
 											</button>
 										</div> --%>
+				<c:if test="${not empty productList}">
 					<div style="padding-top: 50px;">
 						<my:paging paging="${paging}" jsFunc="go_page" />
 					</div>
+				</c:if>
 
 				</div>
 				<!-- /.col-lg-9 -->
