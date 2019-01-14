@@ -646,7 +646,7 @@ function ck_phone(){
 								<option value="산림조합" >산림조합
 							</select>
 							<input type="hidden" id="userBank" name="userBank" value="${user.userBank}">
-							&nbsp;<input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌 번호를 입력해주세요." size="54">
+							&nbsp;<input type="text" class="form-control" id="userAccount" name="userAccount" value="${user.userAccount}" placeholder="계좌 번호를 입력해주세요." size="48">
 							</div>
 							
 							<br><strong><input type="submit" class="btn btn-warning signupbtn" disabled="disabled" value="회원정보 수정"
