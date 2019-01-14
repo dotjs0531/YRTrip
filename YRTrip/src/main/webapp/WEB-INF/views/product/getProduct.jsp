@@ -175,6 +175,7 @@
 		if ("${sessionScope.login.userId}" != "${product.sellerId}") {
 			$("#seller-only").hide();
 		}
+		
 
 		/* 상품평 안보이게 만들기 */
 		/* 상품평 내용 있는지 없는지 확인하기 위한 값 : 
@@ -430,14 +431,18 @@
 										<c:forEach items="${getSellerList}" var="sellerP">
 											<div class="col-md-4 some-list-product">
 												<div class="card">
-													<img src="https://via.placeholder.com/157x157"
-														class="card-img-top">
+												<c:set var="productPicFile"
+												value="${fn:split(sellerP.itemPic, ',')[0]}" />
+													<img src="./images/product/${productPicFile}"
+														class="card-img-top relative">
 													<div class="card-body">
 														<h5 class="card-title seller-list">
 															<a href="./getProduct?itemId=${sellerP.itemId}"
 																class="seller-list">${sellerP.itemName}</a>
 														</h5>
-														<span class="text-muted">${sellerP.itemPrice}</span> <span
+														<span class="text-muted">${sellerP.itemPrice}원</span>
+														<br>
+														<span
 															class="text-muted">${sellerP.itemCategory}</span>
 													</div>
 												</div>

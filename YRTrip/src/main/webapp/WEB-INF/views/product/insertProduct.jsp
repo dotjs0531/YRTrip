@@ -8,47 +8,25 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- 제품명들어갈듯 -->
-<title>prototype of insertProduct(view)</title>
-<!-- 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link href="resources/css/product.bootstrap.min.css" rel="stylesheet"> -->
+<title></title>
 
 <link href="resources/css/product.bootstrap.min.css" rel="stylesheet">
-<link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
-<!-- <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"> -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <!-- 다중파일 업로드 -->
-<link href="resources/css/fileinput.css" media="all" rel="stylesheet"
-	type="text/css" />
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-	crossorigin="anonymous"></script>
+<link href="resources/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="resources/js/fileinput.js" type="text/javascript"></script>
 
 <style>
 #login-column {
-   width:100%;
-   margin: 0 10px;
+	width: 100%;
+	margin: 0 10px;
 }
-.nav>li>a:focus,
-.nav>li>a:hover{
-   background-color:white;
+
+.nav>li>a:focus, .nav>li>a:hover {
+	background-color: white;
 }
 
 .carousel-control.left, .carousel-control.right {
@@ -150,30 +128,28 @@
 	margin-right: 440px;
 }
 </style>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-$(function(){
-    var productMenu = document.getElementById("productMenu");
-    productMenu.className='current-menu-item';
-});
+	$(function() {
+		var productMenu = document.getElementById("productMenu");
+		productMenu.className = 'current-menu-item';
+	});
 </script>
 <script>
-$(function(){
-	$('#product_cart_insert').on("click", "li", function(){
-		$("#itemCategory").val($(this).find("a").text());
-	});	
-	
-	
-});
+/* 왼쪽 카테고리 클릭시 바로 카테고리 입력란에 입력되도록 */
+	$(function() {
+		$('#product_cart_insert').on("click", "li", function() {
+			$("#itemCategory").val($(this).find("a").text());
+		});
 
-	/* 버튼 클릭시 reset */
-	function insert_reset(){
-		$( "form" ).submit(function( event ) {
-			  event.preventDefault();
+	});
+
+	/* 버튼 클릭시 내용초기화 */
+	function insert_reset() {
+		$("form").submit(function(event) {
+			event.preventDefault();
 		});
 	}
-
 </script>
 </head>
 
@@ -181,6 +157,7 @@ $(function(){
 	<section class="about_us_area" id="about">
 		<div class="container">
 			<div class="row">
+			<!-- 시작 : 왼쪽사이드 : 3-->
 				<div class="container col-lg-3">
 					<div class="single-pricing-table">
 						<div class="pricing-title">
@@ -190,8 +167,8 @@ $(function(){
 						<ul class="price-list" id="product_cart_insert">
 							<li><a href="getProductList" style="color: blue">선택하세요</a></li>
 							<li><a href="#" style="color: black">의류</a></li>
-							<li><a href="#"	style="color: black">티켓/쿠폰</a></li>
-							<li><a href="#"	style="color: black">전자기기</a></li>
+							<li><a href="#" style="color: black">티켓/쿠폰</a></li>
+							<li><a href="#" style="color: black">전자기기</a></li>
 							<li><a href="#" style="color: black">여행도서</a></li>
 							<li><a href="#" style="color: black">USIM</a></li>
 							<li><a href="#" style="color: black">기타</a></li>
@@ -199,27 +176,22 @@ $(function(){
 					</div>
 				</div>
 
-				<!-- 끝 : 사이드 : 3-->
+				<!-- 끝 : 왼쪽사이드 : 3-->
 				<!-- 시작 : 내용 : 9-->
 
 				<div class="container col-lg-9">
-					<form action="./insertProduct" method="post" enctype="multipart/form-data">
+					<form action="./insertProduct" method="post"
+						enctype="multipart/form-data">
 						<div class="card mb-10">
 							<div class="card-header">
 								<nav class="header-navigation">
-									<!-- <div>
-										<a href="#" class="btn btn-link"> ← 이전으로 돌아가기 </a>
-									</div> -->
-									<!-- <ol class="breadcrumb">
-										<li class="breadcrumb-item"><a href="#">카테고리를 설정하세요</a></li>
-										<li class="breadcrumb-item active" aria-current="page">카테고리선택</li>
-									</ol> -->
 									<div class="pull-left">
-										<h4>${sessionScope.login.userId}만의상품을공유해보입시더</h4>
+										<h4>${sessionScope.login.userId}만의 상품을 공유하는 중...</h4>
 									</div>
 									<div class="pull-right">
-										<button onclick="insert_reset();" class="btn btn-link" type="reset" >초기화
-										</button> <button type="submit" class="btn">등록</button>
+										<button onclick="insert_reset();" class="btn btn-link"
+											type="reset">초기화</button>
+										<button type="submit" class="btn">등록</button>
 									</div>
 								</nav>
 							</div>
@@ -234,11 +206,12 @@ $(function(){
 								<div class="space-five"></div>
 								<!-- Carousel -->
 								<div class="row">
-											<!-- 다중파일 업로드 -->
+									<!-- 다중파일 업로드 -->
 									<div class="container my-4" style="width: 100%; padding: 0">
 										<div class="form-group">
 											<div class="file-loading">
-												<input multiple="multiple" id="file-5" name="productPicFile" class="file" type="file" multiple
+												<input multiple="multiple" id="file-5" name="productPicFile"
+													class="file" type="file" multiple
 													data-preview-file-type="any" data-upload-url="#"
 													data-theme="fas" required>
 											</div>
@@ -276,12 +249,13 @@ $(function(){
 										<h4>수량</h4>
 									</div>
 									<div class="col-12 col-md-8">
-<!-- 수량 : 0 막아놓기 -->
+										<!-- 수량 : 0 막아놓기 -->
 										<input type="number" min="1" name="itemEa"
-											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요" required>
+											class="form-control mb-5 input-lg" placeholder="1개 이상 선택하세요"
+											required>
 									</div>
 								</div>
-<!-- 상품상태 : 하나만 체크 되도록 -->
+								<!-- 상품상태 : 하나만 체크 되도록 -->
 								<div class="row">
 									<div class="col-6 col-md-4">
 										<h4>상품상태</h4>
@@ -314,35 +288,17 @@ $(function(){
 									</div>
 								</div>
 								<div class="space-five"></div>
-<!-- 결제방법 : 1.값 두개다 db에 들어갈 수 있도록  -->
-								<!-- <div class="row price_list">
-									<div class="col-6 col-md-4">
-										<h4>선호결제방법</h4>
-									</div>
-									<div class="col-12 col-md-8 input-lg">
-										<div class="form-check form-check-inline">
-											<label class="form-check-label"> -->
-											<input type="hidden" value="카드결제" name="itemMethod"/>
-											<!--</label>
-										</div>
-										<div class="form-check form-check-inline">
-											<label class="form-check-label"> <input
-												class="form-check-input" type="checkbox" name="itemMethod"
-												value="카드결제"> 카드결제
-											</label>
-										</div>
-									</div>
-								</div> -->
+								<input type="hidden" value="카드결제" name="itemMethod" />
 								<div>
 									<div class="spcae-five"></div>
 									<h4>제품설명</h4>
 									<textarea name="itemContent" class="form-control col-sm-12"
-										rows="5"></textarea>
+										rows="5" required></textarea>
 								</div>
-<!-- 판매자 아이디 : sessionScope session값들고오기 -->
+								<!-- 판매자 아이디 : sessionScope session값들고오기 -->
 								<input type="hidden" name="sellerId"
 									value="${sessionScope.login.userId}">
-<!--  구매가능 여부 : 구매가능(defalut)  -->
+								<!--  구매가능 여부 : 구매가능(default)  -->
 							</div>
 						</div>
 					</form>
