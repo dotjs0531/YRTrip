@@ -100,7 +100,7 @@
 <script>
 	$(function() {
 		$(".insertbtn").click(function(e) {
-			if ("${sessionScope.login.userId}" == '') {
+		 if ("${sessionScope.login.userId}" == '') {
 				e.preventDefault();
 				alert("로그인이 필요한 서비스입니다");
 			} else {

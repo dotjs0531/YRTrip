@@ -25,7 +25,7 @@
 	ORDER BY ITEM_ID DESC
 </select>
 	<select id="getProductList" resultType="product">
-SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
+	SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		 SELECT ITEM_ID,
 				ITEM_NAME,
 				ITEM_PRICE,
@@ -60,7 +60,7 @@ SELECT B.* FROM ( SELECT A.*, ROWNUM RN FROM (
 		</if>	
 	</where>
 		ORDER BY ITEM_ID DESC
-) A ) B WHERE RN BETWEEN #{first} AND #{last}
+	) A ) B WHERE RN BETWEEN #{first} AND #{last}
 	</select>
 
 	<select id="getProduct" resultType="product">
