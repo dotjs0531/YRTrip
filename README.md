@@ -20,6 +20,9 @@
 ###### 정보 수정
 <img src="YRTrip/src/test/Screenshot/mypage_modifyInfo.png" height="550px" width="530px">
 
+###### 선택삭제
+<img src="YRTrip/src/test/Screenshot/mypage_selectDel.png" height="420px" width="530px">
+
 ##### 나의 상품
 <img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px"> <img src="YRTrip/src/test/Screenshot/mypage_product2.png" height="110px" width="330px">
 
@@ -27,7 +30,14 @@
 <img src="YRTrip/src/test/Screenshot/mypage_product4.png" height="350px" width="220px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="YRTrip/src/test/Screenshot/mypage_product5.png" height="400px" width="300px">
 
 ##### 나의 리뷰
-<img src="YRTrip/src/test/Screenshot/mypage_review2.png" height="400px" width="300px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="YRTrip/src/test/Screenshot/mypage_review4.png" height="300px" width="450px">
+<img src="YRTrip/src/test/Screenshot/mypage_review2.png" height="400px" width="300px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="YRTrip/src/test/Screenshot/mypage_review4.png" height="300px" width="500px">
 
 ###### 삭제된 상품 선택 시
 <img src="YRTrip/src/test/Screenshot/mypage_review5.png" height="450px" width="400px">
+
+##### 유어페이지
+###### 너의 상품
+<img src="YRTrip/src/test/Screenshot/yourpage_product.png" height="300px" width="470px">
+
+###### 너의 리뷰
+<img src="YRTrip/src/test/Screenshot/yourpage_review.png" height="300px" width="530px">
