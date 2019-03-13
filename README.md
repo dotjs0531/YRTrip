@@ -21,7 +21,7 @@
 <img src="YRTrip/src/test/Screenshot/mypage_modifyInfo.png" height="550px" width="530px">
 
 ###### 나의 상품
-<img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px">
+<img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px"> <img src="YRTrip/src/test/Screenshot/mypage_product2.png" height="110px" width="330px">
 
-###### 나의 상품_구매자 목록
-<img src="YRTrip/src/test/Screenshot/mypage_product2.png" height="130px" width="420px">
+###### 주문 정보
+<img src="YRTrip/src/test/Screenshot/mypage_product3.png" height="400px" width="300px">
