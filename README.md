@@ -41,7 +41,8 @@
 <img src="YRTrip/src/test/Screenshot/travelBoard.png" height="360px" width="530px"> <img src="YRTrip/src/test/Screenshot/travelBoard_search.png" height="100px" width="300px">
 
 ###### 여행정보 상세보기
-<img src="YRTrip/src/test/Screenshot/travelBoard_detail.png" height="400px" width="450px"> <img src="YRTrip/src/test/Screenshot/travelBoard_detail2.png" height="550px" width="450px">
+<img src="YRTrip/src/test/Screenshot/travelBoard_detail.png" height="400px" width="450px">
+<br> &nbsp;&nbsp;<img src="YRTrip/src/test/Screenshot/travelBoard_detail2.png" height="550px" width="450px">
 
 ###### 여행지 정보 상세보기
 <img src="YRTrip/src/test/Screenshot/travelPlace.png" height="550px" width="450px">
