@@ -11,7 +11,7 @@
 - Git(with SourceTree)
 
 ### 역할분담
-![part](YRTrip/src/test/Screenshot/part.png)
+![part](YRTrip/src/test/Screenshot/part.PNG)
 
 ### 구현 화면
 ##### 메인
