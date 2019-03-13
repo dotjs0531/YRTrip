@@ -13,6 +13,6 @@
 ### 역할분담
 ![part](YRTrip/src/test/Screenshot/역할분담.png)
 
-### <a href="YRTrip/src/test/Screenshot">구현화면</a>
+### <a href="YRTrip/src/test/Screenshot" style="color:black">구현화면</a>
 ##### 메인
 ![main](YRTrip/src/test/Screenshot/main.png)
