@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-</head>
-<body>
-
 # 여행 정보 공유 시스템
 ##### - 여행정보 공유, 동행구하기 및 중고상품 거래를 중심으로
 ### 개요
@@ -23,7 +16,4 @@
 ### 구현화면
 ##### 메인
 ![main](YRTrip/src/test/Screenshot/main.png)
-###### <a href="YRTrip/src/test/Screenshot">더보기<i class="fas fa-search-plus"></i></a>
-
-</body>
-</html>
+###### <a href="YRTrip/src/test/Screenshot">더보기</a>
