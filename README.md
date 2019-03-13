@@ -8,11 +8,11 @@
 - 이번 여행 정보 공유 시스템 ‘유어 레알 트립’ 에서는 회원이 여행기록, 동행찾기/구하기, 여행 중고물품을 이용할 수 있도록 구성하였다. 여행정보 사이트가 공통적으로 가지고 있는 여행기록을 할 수 있는 기능을 유지하면서 부가적으로 동행찾기에서 성별구별이 확실치 않았던 부분을 보완하였다. 또한 현재 여행정보를 제공하는 웹페이지 중에서 여행중고물품시장을 제공하는 곳이 없기에 이러한 기능을 추가하여 회원의 유입성을 높였다. 
 
 ### 주요기술
-##### - 개발언어 : Java 10.0.1, JSTL, JSP, HTML5, CSS3, Javascript, jQuery, Ajax, JSON, Oracle SQL, PL/SQL
-##### - DataBase : Oracle 11g Express Edition
-##### - Web Application Server : Apache Tomcat v8.5
-##### - Application Framework : Spring Framework, MyBatis(DB)
-##### - UI Framework : Bootstrap 4
-##### - 개발 도구 : Eclipse, SQL Plus, SQL Developer
-##### - 형상 관리 도구 : Git(with SourceTree)
+- 개발언어 : Java 10.0.1, JSTL, JSP, HTML5, CSS3, Javascript, jQuery, Ajax, JSON, Oracle SQL, PL/SQL
+- DataBase : Oracle 11g Express Edition
+- Web Application Server : Apache Tomcat v8.5
+- Application Framework : Spring Framework, MyBatis(DB)
+- UI Framework : Bootstrap 4
+- 개발 도구 : Eclipse, SQL Plus, SQL Developer
+- 형상 관리 도구 : Git(with SourceTree)
 
