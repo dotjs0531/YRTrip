@@ -13,15 +13,13 @@
 ### 구현 화면
 ##### 1. 메인
 ![main](YRTrip/src/test/Screenshot/main.png)
->##### 로그인
-<img src="YRTrip/src/test/Screenshot/login.png" height="300px" width="400px">
 
 ##### 2. 마이페이지
 >###### 정보 수정
 <img src="YRTrip/src/test/Screenshot/mypage_modifyInfo.png" height="550px" width="530px">
 
 >###### 나의 상품
-<img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px"> <img src="YRTrip/src/test/Screenshot/mypage_product2.png" height="110px" width="330px">
+<img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px">
 
 >###### 나의 구매내역 - 주문 정보
 <img src="YRTrip/src/test/Screenshot/mypage_product4.png" height="350px" width="220px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="YRTrip/src/test/Screenshot/mypage_product5.png" height="400px" width="300px">
@@ -54,9 +52,6 @@
 >###### 동행자들끼리 대화하기 (신청자/동행글 작성자)
 <img src="YRTrip/src/test/Screenshot/partner3.png" height="470px" width="380px"> <img src="YRTrip/src/test/Screenshot/partner5.png" height="470px" width="380px">
 
->###### 동행구하기 상태 '완료' 시
-<img src="YRTrip/src/test/Screenshot/partner4.png" height="470px" width="400px">
-
 ##### 6. 상품 게시판
 >###### 상품 목록
 <img src="YRTrip/src/test/Screenshot/product.png">
@@ -77,10 +72,7 @@
 >###### 좋아요한 글은 마이페이지에서 확인 가능함
 <img src="YRTrip/src/test/Screenshot/like3.png" height="350px" width="500px">
 
-##### 8. 카카오톡 공유하기
-<img src="YRTrip/src/test/Screenshot/kakaotalk.png" height="400px" width="530px">
-
-##### 9. 관리자 페이지
+##### 8. 관리자 페이지
 <img src="YRTrip/src/test/Screenshot/admin.png">
 
 >###### 월별 통계 차트
