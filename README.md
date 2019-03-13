@@ -31,18 +31,22 @@
 
 ##### 유어페이지
 ###### 너의 상품
-<img src="YRTrip/src/test/Screenshot/yourpage_product.png" height="300px" width="470px">
+<img src="YRTrip/src/test/Screenshot/yourpage_product.png" height="280px" width="430px"> <img src="YRTrip/src/test/Screenshot/yourpage_review.png" height="220px" width="420px">
 
-###### 너가 받은 리뷰
-<img src="YRTrip/src/test/Screenshot/yourpage_review.png" height="300px" width="530px">
-
-##### 여행정보 페이지
+##### 여행정보 게시판
 ###### 여행정보 목록
 <img src="YRTrip/src/test/Screenshot/travelBoard.png" height="360px" width="530px"> <img src="YRTrip/src/test/Screenshot/travelBoard_search.png" height="100px" width="300px">
 
 ###### 여행정보 상세보기
 <img src="YRTrip/src/test/Screenshot/travelBoard_detail.png" height="400px" width="450px">
-<br> &nbsp;&nbsp;<img src="YRTrip/src/test/Screenshot/travelBoard_detail2.png" height="550px" width="450px">
+<img src="YRTrip/src/test/Screenshot/travelBoard_detail2.png" height="550px" width="450px">
 
 ###### 여행지 정보 상세보기
 <img src="YRTrip/src/test/Screenshot/travelPlace.png" height="550px" width="450px">
+
+###### 여행정보 글 작성
+<img src="YRTrip/src/test/Screenshot/travelBoard_write.png" height="350px" width="280px"> <img src="YRTrip/src/test/Screenshot/travelBoard_write2.png" height="350px" width="300px"> <img src="YRTrip/src/test/Screenshot/travelBoard_write3.png" height="350px" width="280px">
+
+##### 동행구하기 게시판
+###### 동행 신청자 (신청전/후)
+<img src="YRTrip/src/test/Screenshot/partner1.png" height="500px" width="350px"> <img src="YRTrip/src/test/Screenshot/partner2.png" height="500px" width="350px">
