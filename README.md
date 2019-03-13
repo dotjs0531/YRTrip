@@ -12,4 +12,16 @@
 
 ### 구현 화면
 ##### 메인
-![main](YRTrip/src/test/Screenshot/main.jpg)
+![main](YRTrip/src/test/Screenshot/main.png)
+##### 로그인
+<img src="YRTrip/src/test/Screenshot/login.png" height="300px" width="400px">
+
+##### 마이페이지
+###### 정보 수정
+<img src="YRTrip/src/test/Screenshot/mypage_modifyInfo.png" height="550px" width="530px">
+
+###### 나의 상품
+<img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px">
+
+###### 나의 상품_구매자 목록
+<img src="YRTrip/src/test/Screenshot/mypage_product2.png" height="130px" width="420px">
