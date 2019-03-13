@@ -13,6 +13,6 @@
 ### 역할분담
 ![part](YRTrip/src/test/Screenshot/역할분담.png)
 
-### 구현 화면
+### <a href="YRTrip/src/test/Screenshot">구현화면</a>
 ##### 메인
 ![main](YRTrip/src/test/Screenshot/main.png)
