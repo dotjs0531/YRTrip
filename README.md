@@ -13,7 +13,7 @@
 ### 구현 화면
 ##### 1. 메인
 ![main](YRTrip/src/test/Screenshot/main.png)
-##### 로그인
+>##### 로그인
 <img src="YRTrip/src/test/Screenshot/login.png" height="300px" width="400px">
 
 ##### 2. 마이페이지
