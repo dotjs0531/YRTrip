@@ -20,8 +20,15 @@
 ###### 정보 수정
 <img src="YRTrip/src/test/Screenshot/mypage_modifyInfo.png" height="550px" width="530px">
 
-###### 나의 상품
+##### 나의 상품
 <img src="YRTrip/src/test/Screenshot/mypage_product1.png" height="300px" width="530px"> <img src="YRTrip/src/test/Screenshot/mypage_product2.png" height="110px" width="330px">
 
 ###### 주문 정보
-<img src="YRTrip/src/test/Screenshot/mypage_product3.png" height="400px" width="300px">
+<img src="YRTrip/src/test/Screenshot/mypage_product4.png" height="350px" width="220px"> 
+<img src="YRTrip/src/test/Screenshot/mypage_product5.png" height="400px" width="300px">
+
+##### 나의 리뷰
+<img src="YRTrip/src/test/Screenshot/mypage_review2.png" height="400px" width="300px"> <img src="YRTrip/src/test/Screenshot/mypage_review4.png" height="300px" width="450px">
+
+###### 삭제된 상품 선택 시
+<img src="YRTrip/src/test/Screenshot/mypage_review5.png" height="450px" width="400px">
