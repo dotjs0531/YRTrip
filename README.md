@@ -39,5 +39,8 @@
 ###### 너의 상품
 <img src="YRTrip/src/test/Screenshot/yourpage_product.png" height="300px" width="470px">
 
-###### 너의 리뷰
+###### 너가 받은 리뷰
 <img src="YRTrip/src/test/Screenshot/yourpage_review.png" height="300px" width="530px">
+
+##### 여행정보 페이지
+<img src="YRTrip/src/test/Screenshot/travelBoard.png" height="360px" width="530px"> <img src="YRTrip/src/test/Screenshot/travelBoard_search.png" height="100px" width="300px">
