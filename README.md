@@ -15,5 +15,5 @@
 
 ### 구현화면
 ##### 메인
-![main](YRTrip/src/test/Screenshot/main.png)
+![main](YRTrip/src/test/Screenshot/[1]메인.png)
 ###### <a href="YRTrip/src/test/Screenshot">더보기</a>
